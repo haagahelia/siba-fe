@@ -2,15 +2,8 @@ import { useState } from "react";
 import testData from "../testData";
 import Grid2 from "@mui/material/Unstable_Grid2";
 import ProgressBar from "@ramonak/react-progress-bar";
-import { borderColor, width } from "@mui/system";
 
 export default function () {
-  const styles = {
-    section: {
-      backgroundColor: "blue",
-    },
-  };
-
   return (
     <>
       <Grid2
