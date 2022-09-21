@@ -6,9 +6,18 @@ import ProgressBar from "@ramonak/react-progress-bar";
 
 export default function() {
 
+  
+
+
     return (
         <>
-        <Grid2 container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }} spacing={2} border={2} style={{padding:2, margin: 'auto', width: '80%', marginTop: 20 }}>
+        <Grid2 
+        container 
+        rowSpacing={1} 
+        columnSpacing={{ xs: 1, sm: 2, md: 3 }} 
+        spacing={2} 
+        border={2} 
+        style={{padding:2, margin: 'auto', width: '80%', marginTop: 20,backgroundColor: "#919189", padding:10,borderRadius:20 }}>
             
             {
                 testData.map(prog => {
@@ -24,8 +33,11 @@ export default function() {
                         </Grid2>
                         <Grid2 xs={3}>
                          <ProgressBar
+                            style= {styles.section}
+                            baseBgColor={"black"}
                             labelColor={"black"}
                             bgColor={color}
+                            padding={"3px"}
                          completed={progress}/>
                         </Grid2>
                         </>
@@ -37,5 +49,6 @@ export default function() {
     </>
     )
 }
+
 
 
