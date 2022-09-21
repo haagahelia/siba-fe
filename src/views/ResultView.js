@@ -12,7 +12,15 @@ export default function () {
         columnSpacing={{ xs: 1, sm: 2, md: 3 }}
         spacing={2}
         border={2}
-        style={{ padding: 2, margin: "auto", width: "80%", marginTop: 20 }}
+        style={{
+          padding: 2,
+          margin: "auto",
+          width: "80%",
+          marginTop: 20,
+          backgroundColor: "#919189",
+          padding: 10,
+          borderRadius: 20,
+        }}
       >
         {testData.map((prog) => {
           const progress = (prog.allocatedHours / prog.requiredHours) * 100;
@@ -24,8 +32,11 @@ export default function () {
               <Grid2 xs={3}>{prog.name}</Grid2>
               <Grid2 xs={3}>
                 <ProgressBar
+                  style={styles.section}
+                  baseBgColor={"black"}
                   labelColor={"black"}
                   bgColor={color}
+                  padding={"3px"}
                   completed={progress}
                 />
               </Grid2>
