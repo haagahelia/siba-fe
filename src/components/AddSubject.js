@@ -1,18 +1,23 @@
 import React, { useState, useEffect } from "react";
 import TextField from "@mui/material/TextField";
-import { Button, Grid } from "@mui/material";
+import { Alert, Button, Grid, Snackbar } from "@mui/material";
 import { Box, Container } from "@mui/system";
 import Select from "@mui/material/Select";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import Axios from "axios";
 import FormControl from "@mui/material/FormControl";
-import { styled } from "@mui/material/styles";
-import Paper from "@mui/material/Paper";
 import axios from "axios";
+import AlertBox from "../components/AlertBox";
 
 export default function AddSubject() {
   const [programNameList, setProgramNameList] = useState([]);
+  const [alertOpen, setAlertOpen] = useState(false);
+  const [alertOptions, setAlertOptions] = useState({
+    message: "This is an error alert — check it out!",
+    severity: "error",
+  });
+
   const [newSubject, setNewSubject] = useState({
     name: "",
     groupSize: 0,
@@ -29,13 +34,24 @@ export default function AddSubject() {
   };
 
   useEffect(() => {
-    Axios.get("http://localhost:3001/api/program/getNames").then((response) => {
-      setProgramNameList(response.data);
-    });
+    Axios.get("http://localhost:3001/api/program/getNames")
+      .then((response) => {
+        setProgramNameList(response.data);
+      })
+      .catch((error) => {
+        if (error.response.status === 500) {
+          setAlertOptions({
+            severity: "error",
+            message:
+              "Oho! Jotain meni pieleen palvelimella. Pääaineita ei löytynyt",
+          });
+          setAlertOpen(true);
+          return;
+        }
+      });
   }, []);
 
   const addSubject = () => {
-    console.log("tämä on subjectio jota yritetään lähettää ", newSubject);
     axios
       .post("http://localhost:3001/api/subject/post", {
         name: newSubject.name,
@@ -46,6 +62,7 @@ export default function AddSubject() {
         area: newSubject.area,
         programId: newSubject.programId,
       })
+
       .then((response) => {
         const { data } = response;
         console.log(response);
@@ -53,11 +70,39 @@ export default function AddSubject() {
       })
       .catch((error) => {
         console.log(error);
+        if (error.response.status === 400) {
+          setAlertOptions({
+            severity: "error",
+            message: "Oho! Jotain meni pieleen lisäyksessä",
+          });
+          setAlertOpen(true);
+          return;
+        }
+        if (error.response.status === 500) {
+          setAlertOptions({
+            severity: "error",
+            message:
+              "Oho! Jotain meni pieleen palvelimella. Ainetta ei lisätty",
+          });
+          setAlertOpen(true);
+          return;
+        }
       });
+
+    setAlertOptions({
+      severity: "success",
+      message: "Aine lisätty",
+    });
+    setAlertOpen(true);
   };
 
   return (
     <div>
+      <AlertBox
+        alertOpen={alertOpen}
+        alertOptions={alertOptions}
+        setAlertOpen={setAlertOpen}
+      ></AlertBox>
       <Container style={{ width: "50%", marginTop: "50px" }}>
         <Box style={{ backgroundColor: "rgba(52, 139, 147, 0.5 )" }}>
           <div id="input-container">
@@ -128,6 +173,7 @@ export default function AddSubject() {
             <Grid item xs={4}>
               <FormControl sx={{ m: 4, minWidth: 120 }}>
                 <InputLabel>Pääaine</InputLabel>
+
                 <Select
                   name="programId"
                   onChange={(e) => handleChange(e)}
@@ -145,7 +191,7 @@ export default function AddSubject() {
             </Grid>
           </div>
           <Grid item xs={3}>
-            <Button onClick={addSubject}>Add</Button>
+            <Button onClick={addSubject}>Lisää</Button>
           </Grid>
         </Box>
       </Container>
