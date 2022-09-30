@@ -70,5 +70,101 @@ export default [
         ],
         allocatedHours : 60,
         requiredHours : 80
+    },
+    {
+        id: 4,
+        name: 'Viulistit',
+        rooms: [
+            {
+                id: 2,
+                allocatedHours: 30
+            },
+            {
+                id: 3,
+                allocatedHours: 10
+            },
+            {
+                id: 4,
+                allocatedHours: 10
+            },
+            {
+                id: 5,
+                allocatedHours: 10
+            },
+        ],
+        allocatedHours : 95,
+        requiredHours : 100
+    },
+    {
+        id: 5,
+        name: 'Pohjoismainen nokkahuilu',
+        rooms: [
+            {
+                id: 2,
+                allocatedHours: 30
+            },
+            {
+                id: 3,
+                allocatedHours: 10
+            },
+            {
+                id: 4,
+                allocatedHours: 10
+            },
+            {
+                id: 5,
+                allocatedHours: 10
+            },
+        ],
+        allocatedHours : 90,
+        requiredHours : 100
+    },
+    {
+        id: 6,
+        name: 'Espanjalainen jazz',
+        rooms: [
+            {
+                id: 2,
+                allocatedHours: 30
+            },
+            {
+                id: 3,
+                allocatedHours: 10
+            },
+            {
+                id: 4,
+                allocatedHours: 10
+            },
+            {
+                id: 5,
+                allocatedHours: 10
+            },
+        ],
+        allocatedHours : 100,
+        requiredHours : 80
+    },
+    {
+        id: 7,
+        name: 'Trumpetti solistit',
+        rooms: [
+            {
+                id: 2,
+                allocatedHours: 30
+            },
+            {
+                id: 3,
+                allocatedHours: 10
+            },
+            {
+                id: 4,
+                allocatedHours: 10
+            },
+            {
+                id: 5,
+                allocatedHours: 10
+            },
+        ],
+        allocatedHours : 60,
+        requiredHours : 100
     }
 ]
