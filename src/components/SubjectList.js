@@ -10,6 +10,7 @@ import Paper from "@mui/material/Paper";
 import { Button, Typography } from "@mui/material";
 import axios from "axios";
 import AlertBox from "./AlertBox";
+import ConfirmationDialog from "./ConfirmationDialog";
 
 export default function SubjectList() {
   const [subjectList, setSubjectList] = useState([]);
@@ -18,6 +19,12 @@ export default function SubjectList() {
     message: "This is an error alert — check it out!",
     severity: "error",
   });
+  const [dialogOpen, setDialogOpen] = useState(false);
+  const [dialogOptions, setDialogOptions] = useState({
+    title: "this is dialog",
+    content: "Something here",
+  });
+  const [deleteId, setDeleteId] = useState("");
 
   const getAllSubjects = () => {
     Axios.get("http://localhost:3001/api/subject/getAll")
@@ -63,6 +70,16 @@ export default function SubjectList() {
       });
   };
 
+  const submitDelete = (id) => {
+    setDialogOptions({
+      title: "Haluatko varmasti jatkaa?",
+      content: "Painamalla jatka poistat opetuksen listauksesta",
+    });
+    setDialogOpen(true);
+    setDeleteId(id);
+    return;
+  };
+
   // STYLES
   const Box = styled(Paper)(({ theme }) => ({
     overflow: "auto",
@@ -75,6 +92,13 @@ export default function SubjectList() {
         alertOptions={alertOptions}
         setAlertOpen={setAlertOpen}
       ></AlertBox>
+      <ConfirmationDialog
+        dialogOpen={dialogOpen}
+        dialogOptions={dialogOptions}
+        setDialogOpen={setDialogOpen}
+        confirmfunction={deleteSubject}
+        functionparam={deleteId}
+      ></ConfirmationDialog>
       <Box>
         <nav>
           {subjectList.map((value) => {
@@ -195,15 +219,9 @@ export default function SubjectList() {
                       }}
                     ></ListItemText>
                   </Grid>
-                  {/*HUOM! Delete toimii, mutta sivu pitää refreshaa jotta näkyy.
-                     Lisäks delete buttonin sijainti voi aiheuttaa ongelmia dialogin kanssa kun/ jos tulee kaksi hover päälleikkäin. Sama juttu update */}
                   <Grid item md={3} xs={7} padding={2}>
                     <ListItemText>
-                      <Button
-                        onClick={() => {
-                          deleteSubject(value.id);
-                        }}
-                      >
+                      <Button autoFocus onClick={() => submitDelete(value.id)}>
                         Poista
                       </Button>
                     </ListItemText>
