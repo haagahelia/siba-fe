@@ -5,7 +5,6 @@ import ProgressBar from "@ramonak/react-progress-bar";
 export default function Result(props) {
 
     const testData = props.data;
-
     return (
         <>
           <Grid2
@@ -13,11 +12,10 @@ export default function Result(props) {
             rowSpacing={1}
             columnSpacing={{ xs: 1, sm: 2, md: 3 }}
             spacing={2}
-            border={2}
+
             style={{
-              padding: 2,
+
               margin: "auto",
-              width: "80%",
               marginTop: 20,
               backgroundColor: "#919189",
               padding: 10,

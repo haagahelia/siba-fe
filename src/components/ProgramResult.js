@@ -5,15 +5,19 @@ import Modal from '@mui/material/Modal';
 import { Box } from '@mui/material';
 import Result from './Result';
 import testData from '../testData';
+import Typography from '@mui/material/Typography';
+  
 
 export default function ProgramResult(props) {
 
     const programs = props.data;
     const [open, setOpen] = React.useState(false);
-    const [subjectId, setSubjectId] = React.useState(0);
-    const handleOpen = (id) => {
-        setSubjectId(id);
+    const [programId, setProgramId] = React.useState(0);
+    const [programName, setProgramName] = React.useState('');
+    const handleOpen = (id,name) => {
+        setProgramId(id);
         setOpen(true);
+        setProgramName(name);
     }
     const handleClose = () => setOpen(false);
 
@@ -24,15 +28,17 @@ export default function ProgramResult(props) {
         open={open}
         onClose={handleClose}
 
-        >
-           <Result data={testData.subjects[subjectId]}/>
-            </Modal>
+        >  
+            <Box style={{width:'80%', margin:'auto', borderRadius: 20, backgroundColor: "#919189", marginTop:'10%'}}>
+            <Typography style={{textAlign:'center', marginTop:'5%'}}>{programName} -subjects</Typography>
+                <Result data={testData.subjects[programId]}/>
+            </Box>
+        </Modal>
           <Grid2
             container
             rowSpacing={1}
             columnSpacing={{ xs: 1, sm: 2, md: 3 }}
             spacing={2}
-            border={2}
             style={{
               padding: 2,
               margin: "auto",
@@ -51,7 +57,7 @@ export default function ProgramResult(props) {
               return (
                 <>   
                 <Grid2 xs={3}>
-                    <Box onClick={() => handleOpen(prog.id)}>
+                    <Box onClick={() => handleOpen(prog.id, prog.name)}>
                     {prog.name}
                     </Box>
                 </Grid2>

@@ -5,7 +5,9 @@ export default function () {
   return(
     <>
       <ProgramResult data = {testData.programs}/>
-      <Result data = {testData.rooms}/>
+      <div style={{width:'80%', margin:'auto'}}>
+        <Result data = {testData.rooms}/>
+      </div>
     </>
   )
 }
