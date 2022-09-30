@@ -10,6 +10,7 @@ import FormControl from "@mui/material/FormControl";
 import axios from "axios";
 import AlertBox from "../components/AlertBox";
 import { Formik, useFormik } from "formik";
+import ConfirmationDialog from "./ConfirmationDialog";
 
 export default function AddSubject() {
   const [programNameList, setProgramNameList] = useState([]);
@@ -17,6 +18,11 @@ export default function AddSubject() {
   const [alertOptions, setAlertOptions] = useState({
     message: "This is an error alert — check it out!",
     severity: "error",
+  });
+  const [dialogOpen, setDialogOpen] = useState(false);
+  const [dialogOptions, setDialogOptions] = useState({
+    title: "this is dialog",
+    content: "Something here",
   });
 
   const formik = useFormik({
@@ -32,7 +38,8 @@ export default function AddSubject() {
     validate,
     onSubmit: (values) => {
       //alert(JSON.stringify(values, null, 2));
-      addSubject(values);
+      setDialogOpen(true);
+      // addSubject(values)
     },
   });
 
@@ -100,6 +107,15 @@ export default function AddSubject() {
     setAlertOpen(true);
   };
 
+  const submitSubject = () => {
+    setDialogOptions({
+      title: "Haluatko varmasti lisätä uuden opetuksen?",
+      content: "Painamalla jatka lisäät opetuksen ",
+    });
+    setDialogOpen(true);
+    return;
+  };
+
   return (
     <div>
       <AlertBox
@@ -107,6 +123,13 @@ export default function AddSubject() {
         alertOptions={alertOptions}
         setAlertOpen={setAlertOpen}
       ></AlertBox>
+      <ConfirmationDialog
+        dialogOpen={dialogOpen}
+        dialogOptions={dialogOptions}
+        setDialogOpen={setDialogOpen}
+        confirmfunction={addSubject}
+        functionparam={formik.values}
+      ></ConfirmationDialog>
       <Container style={{ width: "50%", marginTop: "50px" }}>
         <Box style={{ backgroundColor: "rgba(52, 139, 147, 0.5 )" }}>
           <form onSubmit={formik.handleSubmit}>
