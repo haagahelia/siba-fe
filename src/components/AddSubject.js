@@ -1,21 +1,22 @@
 import React, { useState, useEffect } from "react";
 import TextField from "@mui/material/TextField";
-import { Alert, Button, Grid, Snackbar } from "@mui/material";
+import { Button, Grid, FormHelperText } from "@mui/material";
 import { Box, Container } from "@mui/system";
 import Select from "@mui/material/Select";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import Axios from "axios";
 import FormControl from "@mui/material/FormControl";
-import axios from "axios";
 import AlertBox from "../components/AlertBox";
 import { Formik, useFormik } from "formik";
 import ConfirmationDialog from "./ConfirmationDialog";
+import { validate, capitalizeFirstLetter } from "../validation/ValidateSubject";
 
 export default function AddSubject() {
   const [programNameList, setProgramNameList] = useState([]);
   const [alertOpen, setAlertOpen] = useState(false);
   const [alertOptions, setAlertOptions] = useState({
+    title: "This is title",
     message: "This is an error alert — check it out!",
     severity: "error",
   });
@@ -38,8 +39,12 @@ export default function AddSubject() {
     validate,
     onSubmit: (values) => {
       //alert(JSON.stringify(values, null, 2));
-      setDialogOpen(true);
-      // addSubject(values)
+       setDialogOptions({
+      title: "Haluatko varmasti lisätä uuden opetuksen?",
+      content: "Painamalla jatka lisäät opetuksen ",
+    });
+    setDialogOpen(true);
+    return;
     },
   });
 
@@ -52,6 +57,7 @@ export default function AddSubject() {
         if (error.response.status === 500) {
           setAlertOptions({
             severity: "error",
+            title: "Virhe",
             message:
               "Oho! Jotain meni pieleen palvelimella. Pääaineita ei löytynyt",
           });
@@ -62,28 +68,25 @@ export default function AddSubject() {
   }, []);
 
   const addSubject = (values) => {
-    let capitalName = capitalizeFirstLetter(values.name); // ????
+    let capitalName = capitalizeFirstLetter(values.name);
 
-    axios
-      .post("http://localhost:3001/api/subject/post", {
-        name: capitalName,
-        groupSize: values.groupSize,
-        groupCount: values.groupCount,
-        sessionLength: values.sessionLength,
-        sessionCount: values.sessionCount,
-        area: values.area,
-        programId: values.programId,
-      })
-
+    Axios.post("http://localhost:3001/api/subject/post", {
+      name: capitalName,
+      groupSize: values.groupSize,
+      groupCount: values.groupCount,
+      sessionLength: values.sessionLength,
+      sessionCount: values.sessionCount,
+      area: values.area,
+      programId: values.programId,
+    })
       .then((response) => {
         console.log(response);
       })
       .catch((error) => {
-        console.log(error);
-
         if (error.response.status === 400) {
           setAlertOptions({
             severity: "error",
+            title: "Virhe",
             message: "Oho! Jotain meni pieleen lisäyksessä",
           });
           setAlertOpen(true);
@@ -92,28 +95,28 @@ export default function AddSubject() {
         if (error.response.status === 500) {
           setAlertOptions({
             severity: "error",
+            title: "Virhe",
             message:
-              "Oho! Jotain meni pieleen palvelimella. Ainetta ei lisätty",
+              "Oho! Jotain meni pieleen palvelimella. Opetusta ei lisätty",
           });
           setAlertOpen(true);
           return;
         }
+        setAlertOptions({
+          severity: "error",
+          title: "Virhe",
+          message: "Oho! Jotain meni pieleen lisäyksessä",
+        });
+        setAlertOpen(true);
+        return;
       });
 
     setAlertOptions({
       severity: "success",
-      message: "Aine lisätty",
+      title: "Onnistui!",
+      message: "Opetus lisätty",
     });
     setAlertOpen(true);
-  };
-
-  const submitSubject = () => {
-    setDialogOptions({
-      title: "Haluatko varmasti lisätä uuden opetuksen?",
-      content: "Painamalla jatka lisäät opetuksen ",
-    });
-    setDialogOpen(true);
-    return;
   };
 
   return (
@@ -260,6 +263,12 @@ export default function AddSubject() {
                     name="programId"
                     onChange={formik.handleChange}
                     value={formik.values.programId}
+                    error={
+                      formik.touched.programId && formik.errors.programId
+                        ? true
+                        : false
+                    }
+                    onBlur={formik.handleBlur}
                   >
                     {programNameList.map((value) => {
                       return (
@@ -269,6 +278,9 @@ export default function AddSubject() {
                       );
                     })}
                   </Select>
+                  <FormHelperText>
+                    {formik.touched.programId && formik.errors.programId}
+                  </FormHelperText>
                 </FormControl>
               </Grid>
             </div>
@@ -282,63 +294,3 @@ export default function AddSubject() {
   );
 }
 
-function capitalizeFirstLetter(string) {
-  return string.charAt(0).toUpperCase() + string.slice(1);
-}
-
-function validate(values) {
-  const errors = {};
-  const regName = new RegExp("^[a-zA-Z][a-zA-Z ]+[a-zA-Z]$");
-  const regNumber = new RegExp("[0-9]+");
-  const regTime = new RegExp("^([0-1][0-9]|[2][0-3]):([0-5][0-9])$");
-  const regArea = new RegExp("[0-9]{0,2}(.[0-9]{1,2})?");
-  if (!values.name) {
-    errors.name = "Pakollinen kenttä";
-  } else if (values.name.length < 1 || values.name.length > 255) {
-    errors.name = "Nimen pitää olla 1-255 merkkiä pitkä";
-  } else if (!regName.test(values.name)) {
-    errors.name = "Vain kirjaimet sallittu";
-  }
-  if (!values.groupSize) {
-    errors.groupSize = "Pakollinen kenttä";
-  } else if (values.groupSize <= 0) {
-    errors.groupSize = "Ryhmän koko ei voi olla 0";
-  } else if (!regNumber.test(values.groupSize)) {
-    errors.groupSize = "Vain numerot sallittu";
-  }
-
-  if (!values.groupCount) {
-    errors.groupCount = "Pakollinen kenttä";
-  } else if (values.groupCount <= 0) {
-    errors.groupCount = "Ryhmien määrä ei voi olla 0";
-  } else if (!regNumber.test(values.groupCount)) {
-    errors.groupCount = "Vain numerot sallittu";
-  }
-
-  if (!values.sessionLength) {
-    errors.sessionLength = "Pakollinen kenttä";
-  } else if (!regTime.test(values.sessionLength)) {
-    errors.sessionLength = "Sallittu muoto on 00:00";
-  }
-
-  if (!values.sessionCount) {
-    errors.sessionCount = "Pakollinen kenttä";
-  } else if (values.sessionCount <= 0) {
-    errors.sessionCount = "Opetuksien määrä ei voi olla 0";
-  } else if (!regNumber.test(values.sessionCount)) {
-    errors.sessionCount = "Vain numerot sallittu";
-  }
-
-  if (!values.area) {
-    errors.area = "Pakollinen kenttä";
-  } else if (values.area <= 0) {
-    errors.area = "Vaadittu määrä ei voi olla 0";
-  } else if (!regArea.test(values.area)) {
-    errors.area = "Vain numerot sallittu";
-  }
-
-  if (!values.programId) {
-    errors.programId = "Pakollinen kenttä";
-  }
-  return errors;
-}

@@ -1,7 +1,6 @@
 import React from "react";
 import IconButton from "@mui/material/IconButton";
-import { Alert, Snackbar } from "@mui/material";
-
+import { Alert, AlertTitle, Snackbar } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 
 export default function AlertBox(props) {
@@ -17,20 +16,33 @@ export default function AlertBox(props) {
       >
         <Alert
           severity={alertOptions.severity}
-          style={{ width: "350px" }}
+          sx={{
+            "& .MuiAlert-icon": {
+              fontSize: "50px",
+            },
+            "& 	.MuiAlert-message": {
+              alignSelf: "center",
+              width: "350px",
+            },
+          }}
+          elevation={24}
           action={
             <IconButton
+              sx={{ alignSelf: "center" }}
               aria-label="sulje"
               color="inherit"
-              size="small"
+              // size="large"
               onClick={() => {
                 setAlertOpen(false);
               }}
             >
-              <CloseIcon />
+              <CloseIcon sx={{ fontSize: "30px" }} />
             </IconButton>
           }
         >
+          <AlertTitle>
+            <strong>{alertOptions.title}</strong>
+          </AlertTitle>
           {alertOptions.message}
         </Alert>
       </Snackbar>
