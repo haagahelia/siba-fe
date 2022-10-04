@@ -35,8 +35,9 @@ export default function SubjectList() {
         if (error.response.status === 500) {
           setAlertOptions({
             severity: "error",
+            title: "Virhe",
             message:
-              "Oho! Jotain meni pieleen palvelimella. Aineita ei löytynyt",
+              "Oho! Jotain meni pieleen palvelimella. Opetuksia ei löytynyt",
           });
           setAlertOpen(true);
           return;
@@ -54,7 +55,8 @@ export default function SubjectList() {
         getAllSubjects();
         setAlertOptions({
           severity: "success",
-          message: "Aine poistettu",
+          title: "Onnistui",
+          message: "Opetus poistettu",
         });
         setAlertOpen(true);
       })
@@ -62,11 +64,19 @@ export default function SubjectList() {
         if (error.response.status === 400) {
           setAlertOptions({
             severity: "error",
-            message: "Oho! Aineen poisto epäonnistui",
+            title: "Virhe",
+            message: "Oho! Opetuksen poisto epäonnistui",
           });
           setAlertOpen(true);
           return;
         }
+        setAlertOptions({
+          severity: "error",
+          title: "Virhe",
+          message: "Oho! Opetuksen poisto epäonnistui",
+        });
+        setAlertOpen(true);
+        return;
       });
   };
 
@@ -221,7 +231,7 @@ export default function SubjectList() {
                   </Grid>
                   <Grid item md={3} xs={7} padding={2}>
                     <ListItemText>
-                      <Button autoFocus onClick={() => submitDelete(value.id)}>
+                      <Button onClick={() => submitDelete(value.id)}>
                         Poista
                       </Button>
                     </ListItemText>
