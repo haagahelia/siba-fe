@@ -34,22 +34,25 @@ export default {
     programs : [
         {
             id: 1,
-            name: 'HUILU',
+            name: 'Huilu soittajat',
             rooms: [
                 {
-                    id: 2,
+                    name: "n-2222",
                     allocatedHours: 20
                 },
                 {
                     id: 3,
+                    name: "n-41312",
                     allocatedHours: 5
                 },
                 {
                     id: 4,
+                    name: "n-890",
                     allocatedHours: 8
                 },
                 {
                     id: 5,
+                    name: "n-62728",
                     allocatedHours: 10
                 },
             ],
@@ -58,22 +61,26 @@ export default {
         },
         {
             id: 2,
-            name: 'BONGO',
+            name: 'Bongo soittajat',
             rooms: [
                 {
                     id: 2,
+                    name: "n-2222",
                     allocatedHours: 20
                 },
                 {
                     id: 3,
+                    name: "n-41312",
                     allocatedHours: 5
                 },
                 {
                     id: 4,
+                    name: "n-890",
                     allocatedHours: 8
                 },
                 {
                     id: 5,
+                    name: "n-62728",
                     allocatedHours: 12
                 },
             ],
@@ -82,22 +89,26 @@ export default {
         },
         {
             id: 3,
-            name: 'JAZZ MUSIIKKI JA TÄLLEE',
+            name: 'Jazz klarinetistit',
             rooms: [
                 {
                     id: 2,
+                    name: "n-2222",
                     allocatedHours: 30
                 },
                 {
                     id: 3,
+                    name: "n-41312",
                     allocatedHours: 10
                 },
                 {
                     id: 4,
+                    name: "n-890",
                     allocatedHours: 10
                 },
                 {
                     id: 5,
+                    name: "n-62728",
                     allocatedHours: 10
                 },
             ],
@@ -110,18 +121,22 @@ export default {
             rooms: [
                 {
                     id: 2,
+                    name: "n-2222",
                     allocatedHours: 30
                 },
                 {
                     id: 3,
+                    name: "n-41312",
                     allocatedHours: 10
                 },
                 {
                     id: 4,
+                    name: "n-890",
                     allocatedHours: 10
                 },
                 {
                     id: 5,
+                    name: "n-62728",
                     allocatedHours: 10
                 },
             ],
@@ -134,18 +149,22 @@ export default {
             rooms: [
                 {
                     id: 2,
+                    name: "n-2222",
                     allocatedHours: 30
                 },
                 {
                     id: 3,
+                    name: "n-41312",
                     allocatedHours: 10
                 },
                 {
                     id: 4,
+                    name: "n-890",
                     allocatedHours: 10
                 },
                 {
                     id: 5,
+                    name: "n-62728",
                     allocatedHours: 10
                 },
             ],
@@ -158,18 +177,22 @@ export default {
             rooms: [
                 {
                     id: 2,
+                    name: "n-2222",
                     allocatedHours: 30
                 },
                 {
                     id: 3,
+                    name: "n-41312",
                     allocatedHours: 10
                 },
                 {
                     id: 4,
+                    name: "n-890",
                     allocatedHours: 10
                 },
                 {
                     id: 5,
+                    name: "n-62728",
                     allocatedHours: 10
                 },
             ],
@@ -182,18 +205,22 @@ export default {
             rooms: [
                 {
                     id: 2,
+                    name: "n-2222",
                     allocatedHours: 30
                 },
                 {
                     id: 3,
+                    name: "n-41312",
                     allocatedHours: 10
                 },
                 {
                     id: 4,
+                    name: "n-890",
                     allocatedHours: 10
                 },
                 {
                     id: 5,
+                    name: "n-62728",
                     allocatedHours: 10
                 },
             ],
