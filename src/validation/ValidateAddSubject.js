@@ -1,9 +1,11 @@
 export function validate(values) {
   const errors = {};
   const regName = new RegExp(/^[A-Za-zäöåÄÖÅ-\s]*$/);
-  const regNumber = new RegExp(/^[0-9]+$/); 
-  const regTime = new RegExp(/^([0-1][0-9]|[2][0-3]):([0-5][0-9])$/);
-  const regArea = new RegExp(/^[0-9]{0,2}(.[0-9]{1,2})?$/);
+  const regNumber = new RegExp(/^[0-9]+$/);
+  const regTime = new RegExp(
+    /^([0-1][0-9]|[2][0-3]):([0-5][0-9]):([0-5][0-9])$/
+  );
+  const regArea = new RegExp(/^[0-9]*(.[0-9]{1,2})?$/); //  (/^[0-9]{0,2}(.[0-9]{1,2})?$/);
   if (!values.name) {
     errors.name = "Pakollinen kenttä";
   } else if (values.name.length < 2 || values.name.length > 255) {
@@ -11,6 +13,14 @@ export function validate(values) {
   } else if (!regName.test(values.name)) {
     errors.name = "Vain kirjaimet sallittu";
   }
+  // EDIT NAME
+  // if (!values.subjectName) {
+  //   errors.subjectName = "Pakollinen kenttä";
+  // } else if (values.subjectName.length < 2 || values.subjectName.length > 255) {
+  //   errors.name = "Nimen pitää olla 2-255 merkkiä pitkä";
+  // } else if (!regName.test(values.subjectName)) {
+  //   errors.subjectName = "Vain kirjaimet sallittu";
+  // }
   if (!values.groupSize) {
     errors.groupSize = "Pakollinen kenttä";
   } else if (values.groupSize <= 0) {
@@ -30,7 +40,7 @@ export function validate(values) {
   if (!values.sessionLength) {
     errors.sessionLength = "Pakollinen kenttä";
   } else if (!regTime.test(values.sessionLength)) {
-    errors.sessionLength = "Sallittu muoto on 00:00";
+    errors.sessionLength = "Sallittu muoto on 00:00:00";
   }
 
   if (!values.sessionCount) {
@@ -46,7 +56,7 @@ export function validate(values) {
   } else if (values.area <= 0) {
     errors.area = "Vaadittu määrä ei voi olla 0";
   } else if (!regArea.test(values.area)) {
-    errors.area = "Vain numerot sallittu";
+    errors.area = "Vain numerot sallittu & sallittu muoto .00";
   }
 
   if (!values.programId) {
