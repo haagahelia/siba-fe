@@ -1,23 +1,32 @@
 import React, { useState, useEffect } from "react";
 import TextField from "@mui/material/TextField";
 import { Button, Grid, FormHelperText } from "@mui/material";
-import { Box, Container } from "@mui/system";
 import Select from "@mui/material/Select";
-import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import Axios from "axios";
 import FormControl from "@mui/material/FormControl";
-import AlertBox from "../components/AlertBox";
 import { Formik, useFormik } from "formik";
 import ConfirmationDialog from "./ConfirmationDialog";
 import {
   validate,
   capitalizeFirstLetter,
-} from "../validation/ValidateAddSubject";
+} from "../validation/ValidateEditSubject";
+import DialogTitle from "@mui/material/DialogTitle";
+import Dialog from "@mui/material/Dialog";
+import { DialogActions, DialogContent, DialogContentText } from "@mui/material";
 
-export default function AddSubject(props) {
-  const { getAllSubjects } = props;
+export default function EditSubject(props) {
+  // Aina kun editSubject muuttuu subjectList.js filussa ne tiedot tulee tähän nimellä data
+  const {
+    editDialogOpen,
+    setEditDialogOpen,
+    data,
+    getAllSubjects,
+    setEditSubject,
+  } = props;
   const [programNameList, setProgramNameList] = useState([]);
+  // const [sub, setSub] = useState({});
+
   const [alertOpen, setAlertOpen] = useState(false);
   const [alertOptions, setAlertOptions] = useState({
     title: "This is title",
@@ -30,28 +39,107 @@ export default function AddSubject(props) {
     content: "Something here",
   });
 
+  // useEffect(() => {
+  //   if (data) {
+  //     console.log(data);
+  //     let newSubjectObject = Object.create(data);
+  //     console.log("newSubjectObject", newSubjectObject);
+  //     setSub(newSubjectObject);
+  //   }
+  // }, [data]);
+
+  // const handleChange = (event) => {
+  //   console.log(event.target.name, event.target.value);
+  //   setSub({ ...sub, [event.target.name]: event.target.value });
+  // };
+
+  // Object.create(data);
   const formik = useFormik({
-    initialValues: {
-      name: "",
-      groupSize: 0,
-      groupCount: 0,
-      sessionLength: "",
-      sessionCount: 0,
-      area: 0,
-      programId: 0,
-    },
+    // Katsoo pitääkö Formikin nollata lomake, jos aloitusarvot muuttuvat
+    enableReinitialize: true,
+    initialValues: data,
     validate,
     onSubmit: (values) => {
-      console.log("aaaaaa");
-      //alert(JSON.stringify(values, null, 2));
+      //  editSubject(values);
+      setEditDialogOpen(false);
+
       setDialogOptions({
-        title: "Haluatko varmasti lisätä uuden opetuksen?",
-        content: "Painamalla jatka lisäät opetuksen ",
+        title: "Haluatko varmasti muokata opetuksen?",
+        content: "Painamalla jatka, tallennat uudet muutokset ",
       });
       setDialogOpen(true);
       return;
     },
   });
+
+  function editSubject(values) {
+    // console.log(values);
+    let capitalName = capitalizeFirstLetter(values.subjectName);
+    Axios.put("http://localhost:3001/api/subject/update", {
+      name: capitalName,
+      groupSize: values.groupSize,
+      groupCount: values.groupCount,
+      sessionLength: values.sessionLength,
+      sessionCount: values.sessionCount,
+      area: values.area,
+      programId: values.programId,
+      id: values.id,
+    })
+      .then((response) => {
+        getAllSubjects();
+        // console.log("Response: ", response);
+      })
+      .catch((error) => {
+        if (error.response.status === 400) {
+          setAlertOptions({
+            severity: "error",
+            title: "Virhe",
+            message: "Oho! Jotain meni pieleen muokkauksessa",
+          });
+          setAlertOpen(true);
+          return;
+        }
+        if (error.response.status === 500) {
+          setAlertOptions({
+            severity: "error",
+            title: "Virhe",
+            message:
+              "Oho! Jotain meni pieleen palvelimella. Opetusta ei muokattu",
+          });
+          setAlertOpen(true);
+          return;
+        }
+        setAlertOptions({
+          severity: "error",
+          title: "Virhe",
+          message: "Oho! Jotain meni pieleen muokkauksessa",
+        });
+        setAlertOpen(true);
+        return;
+      });
+
+    setAlertOptions({
+      severity: "success",
+      title: "Onnistui!",
+      message: "Opetus muokattu",
+    });
+    setAlertOpen(true);
+  }
+
+  const handleClose = () => {
+    setEditSubject({
+      id: null,
+      name: null,
+      groupSize: null,
+      groupCount: null,
+      sessionLength: null,
+      sessionCount: null,
+      area: null,
+      programId: null,
+      subjectName: null,
+    });
+    setEditDialogOpen(false);
+  };
 
   useEffect(() => {
     Axios.get("http://localhost:3001/api/program/getNames")
@@ -72,105 +160,51 @@ export default function AddSubject(props) {
       });
   }, []);
 
-  const addSubject = (values) => {
-    let capitalName = capitalizeFirstLetter(values.name);
-
-    Axios.post("http://localhost:3001/api/subject/post", {
-      name: capitalName,
-      groupSize: values.groupSize,
-      groupCount: values.groupCount,
-      sessionLength: values.sessionLength,
-      sessionCount: values.sessionCount,
-      area: values.area,
-      programId: values.programId,
-    })
-      .then((response) => {
-        getAllSubjects();
-        console.log(response);
-      })
-      .catch((error) => {
-        if (error.response.status === 400) {
-          setAlertOptions({
-            severity: "error",
-            title: "Virhe",
-            message: "Oho! Jotain meni pieleen lisäyksessä",
-          });
-          setAlertOpen(true);
-          return;
-        }
-        if (error.response.status === 500) {
-          setAlertOptions({
-            severity: "error",
-            title: "Virhe",
-            message:
-              "Oho! Jotain meni pieleen palvelimella. Opetusta ei lisätty",
-          });
-          setAlertOpen(true);
-          return;
-        }
-        setAlertOptions({
-          severity: "error",
-          title: "Virhe",
-          message: "Oho! Jotain meni pieleen lisäyksessä",
-        });
-        setAlertOpen(true);
-        return;
-      });
-
-    setAlertOptions({
-      severity: "success",
-      title: "Onnistui!",
-      message: "Opetus lisätty",
-    });
-    setAlertOpen(true);
-  };
-
   return (
     <div>
-      <AlertBox
-        alertOpen={alertOpen}
-        alertOptions={alertOptions}
-        setAlertOpen={setAlertOpen}
-      ></AlertBox>
       <ConfirmationDialog
         dialogOpen={dialogOpen}
         dialogOptions={dialogOptions}
         setDialogOpen={setDialogOpen}
-        confirmfunction={addSubject}
+        confirmfunction={editSubject}
         functionparam={formik.values}
       ></ConfirmationDialog>
-      <Container style={{ width: "50%", marginTop: "50px" }}>
-        <Box style={{ backgroundColor: "rgba(52, 139, 147, 0.5 )" }}>
-          <form onSubmit={formik.handleSubmit}>
-            <div id="input-container">
+      {/* {data?.subjectName} Tässä ? katsoo löytyykö data objektista attribuuttia subjectName, jos ei löydy palauttaa arvon null eikä kaadu */}
+      <Dialog open={editDialogOpen}>
+        <form onSubmit={formik.handleSubmit}>
+          <DialogTitle>Muokkaa: {data?.subjectName}</DialogTitle>
+          <DialogContent>
+            <DialogContentText>
               <Grid
                 container
-                rowSpacing={2}
-                columnSpacing={1}
-                column={6}
-                justifyContent="space-evenly"
+                spacing={2}
+                column={7}
+                direction="column"
+                justifyContent="center"
                 alignItems="center"
-                padding={1}
+                padding={2}
               >
-                <Grid item xs={4}>
+                <Grid item xs={12}>
                   <TextField
                     error={
-                      formik.touched.name && formik.errors.name ? true : false
+                      formik.touched.subjectName && formik.errors.subjectName
+                        ? true
+                        : false
                     }
-                    name="name"
-                    label="Aineen nimi"
+                    name="subjectName"
+                    label="Opetuksen nimi"
                     variant="outlined"
-                    value={formik.values.name}
+                    value={formik.values?.subjectName}
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
                     helperText={
-                      formik.touched.name && formik.errors.name
-                        ? formik.errors.name
+                      formik.touched.subjectName && formik.errors.subjectName
+                        ? formik.errors.subjectName
                         : null
                     }
                   ></TextField>
                 </Grid>
-                <Grid item xs={4}>
+                <Grid item xs={12}>
                   <TextField
                     error={
                       formik.touched.groupSize && formik.errors.groupSize
@@ -180,7 +214,7 @@ export default function AddSubject(props) {
                     name="groupSize"
                     label="Ryhmän koko"
                     variant="outlined"
-                    value={formik.values.groupSize}
+                    value={formik.values?.groupSize}
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
                     helperText={
@@ -190,7 +224,7 @@ export default function AddSubject(props) {
                     }
                   ></TextField>
                 </Grid>
-                <Grid item xs={4}>
+                <Grid item xs={12}>
                   <TextField
                     error={
                       formik.touched.groupCount && formik.errors.groupCount
@@ -200,7 +234,7 @@ export default function AddSubject(props) {
                     name="groupCount"
                     label="Ryhmien määrä"
                     variant="outlined"
-                    value={formik.values.groupCount}
+                    value={formik.values?.groupCount}
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
                     helperText={
@@ -208,7 +242,7 @@ export default function AddSubject(props) {
                     }
                   ></TextField>
                 </Grid>
-                <Grid item xs={4}>
+                <Grid item xs={12}>
                   <TextField
                     error={
                       formik.touched.sessionLength &&
@@ -219,7 +253,7 @@ export default function AddSubject(props) {
                     name="sessionLength"
                     label="Opetuksen pituus(hh:mm:ss)"
                     variant="outlined"
-                    value={formik.values.sessionLength}
+                    value={formik.values?.sessionLength}
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
                     helperText={
@@ -228,7 +262,7 @@ export default function AddSubject(props) {
                     }
                   ></TextField>
                 </Grid>
-                <Grid item xs={4}>
+                <Grid item xs={12}>
                   <TextField
                     error={
                       formik.touched.sessionCount && formik.errors.sessionCount
@@ -238,7 +272,7 @@ export default function AddSubject(props) {
                     name="sessionCount"
                     label="Opetuksien määrä"
                     variant="outlined"
-                    value={formik.values.sessionCount}
+                    value={formik.values?.sessionCount}
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
                     helperText={
@@ -246,7 +280,7 @@ export default function AddSubject(props) {
                     }
                   ></TextField>
                 </Grid>
-                <Grid item xs={4}>
+                <Grid item xs={12}>
                   <TextField
                     error={
                       formik.touched.area && formik.errors.area ? true : false
@@ -254,48 +288,50 @@ export default function AddSubject(props) {
                     name="area"
                     label="Vaaditut neliömetrit"
                     variant="outlined"
-                    value={formik.values.area}
+                    value={formik.values?.area}
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
                     helperText={formik.touched.area && formik.errors.area}
                   ></TextField>
                 </Grid>
+                <Grid item xs={12}>
+                  <FormControl sx={{ minWidth: 225 }}>
+                    {/* <InputLabel>Pääaine</InputLabel> */}
+                    <Select
+                      error={
+                        formik.touched.programId && formik.errors.programId
+                          ? true
+                          : false
+                      }
+                      name="programId"
+                      onChange={formik.handleChange}
+                      value={formik.values?.programId}
+                      onBlur={formik.handleBlur}
+                    >
+                      {programNameList.map((value) => {
+                        return (
+                          <MenuItem key={value.id} value={value.id}>
+                            {value.name}
+                          </MenuItem>
+                        );
+                      })}
+                    </Select>
+                    <FormHelperText>
+                      {formik.touched.programId && formik.errors.programId}
+                    </FormHelperText>
+                  </FormControl>
+                </Grid>
               </Grid>
-              <Grid item xs={4}>
-                <FormControl sx={{ m: 4, minWidth: 120 }}>
-                  <InputLabel>Pääaine</InputLabel>
-
-                  <Select
-                    name="programId"
-                    onChange={formik.handleChange}
-                    value={formik.values.programId}
-                    error={
-                      formik.touched.programId && formik.errors.programId
-                        ? true
-                        : false
-                    }
-                    onBlur={formik.handleBlur}
-                  >
-                    {programNameList.map((value) => {
-                      return (
-                        <MenuItem key={value.id} value={value.id}>
-                          {value.name}
-                        </MenuItem>
-                      );
-                    })}
-                  </Select>
-                  <FormHelperText>
-                    {formik.touched.programId && formik.errors.programId}
-                  </FormHelperText>
-                </FormControl>
-              </Grid>
-            </div>
-            <Grid item xs={3}>
-              <Button type="submit">Lisää</Button>
-            </Grid>
-          </form>
-        </Box>
-      </Container>
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions
+            sx={{ justifyContent: "space-evenly", padding: "16px" }}
+          >
+            <Button onClick={handleClose}>Peruuta</Button>
+            <Button type="submit">Jatka</Button>
+          </DialogActions>
+        </form>
+      </Dialog>
     </div>
   );
 }
