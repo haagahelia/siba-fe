@@ -1,12 +1,9 @@
 import "./App.css";
-import ResultView from "./views/ResultView";
-import SubjectView from "./views/SubjectView";
-
+import Nav from './components/Nav'
 function App() {
   return (
     <div className="App">
-      <SubjectView />
-      <ResultView /> 
+      <Nav/>
     </div>
   );
 }
