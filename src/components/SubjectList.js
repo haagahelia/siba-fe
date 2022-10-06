@@ -11,42 +11,54 @@ import { Button, Typography } from "@mui/material";
 import axios from "axios";
 import AlertBox from "./AlertBox";
 import ConfirmationDialog from "./ConfirmationDialog";
+import EditSubject from "./EditSubject";
 
-export default function SubjectList() {
-  const [subjectList, setSubjectList] = useState([]);
+export default function SubjectList(props) {
+  // const [subjectList, setSubjectList] = useState([]);
+  const { getAllSubjects, subjectList } = props;
   const [alertOpen, setAlertOpen] = useState(false);
   const [alertOptions, setAlertOptions] = useState({
     message: "This is an error alert — check it out!",
     severity: "error",
   });
   const [dialogOpen, setDialogOpen] = useState(false);
+  const [editDialogOpen, setEditDialogOpen] = useState(false);
+  // Tähän tallennetaan muokattavan subjectin tiedot, null kunnes muokkausnappia painaa
+  const [editSubject, setEditSubject] = useState({
+    id: null,
+    name: null,
+    groupSize: null,
+    groupCount: null,
+    sessionLength: null,
+    sessionCount: null,
+    area: null,
+    programId: null,
+    subjectName: null,
+  });
   const [dialogOptions, setDialogOptions] = useState({
     title: "this is dialog",
     content: "Something here",
   });
   const [deleteId, setDeleteId] = useState("");
 
-  const getAllSubjects = () => {
-    Axios.get("http://localhost:3001/api/subject/getAll")
-      .then((response) => {
-        setSubjectList(response.data);
-      })
-      .catch((error) => {
-        if (error.response.status === 500) {
-          setAlertOptions({
-            severity: "error",
-            title: "Virhe",
-            message:
-              "Oho! Jotain meni pieleen palvelimella. Opetuksia ei löytynyt",
-          });
-          setAlertOpen(true);
-          return;
-        }
-      });
-  };
-  useEffect(() => {
-    getAllSubjects();
-  }, []);
+  // const getAllSubjects = () => {
+  //   Axios.get("http://localhost:3001/api/subject/getAll")
+  //     .then((response) => {
+  //       setSubjectList(response.data);
+  //     })
+  //     .catch((error) => {
+  //       if (error.response.status === 500) {
+  //         setAlertOptions({
+  //           severity: "error",
+  //           title: "Virhe",
+  //           message:
+  //             "Oho! Jotain meni pieleen palvelimella. Opetuksia ei löytynyt",
+  //         });
+  //         setAlertOpen(true);
+  //         return;
+  //       }
+  //     });
+  // };
 
   const deleteSubject = (id) => {
     axios
@@ -109,6 +121,13 @@ export default function SubjectList() {
         confirmfunction={deleteSubject}
         functionparam={deleteId}
       ></ConfirmationDialog>
+      <EditSubject
+        editDialogOpen={editDialogOpen}
+        setEditDialogOpen={setEditDialogOpen}
+        data={editSubject}
+        getAllSubjects={getAllSubjects}
+        setEditSubject={setEditSubject}
+      ></EditSubject>
       <Box>
         <nav>
           {subjectList.map((value) => {
@@ -229,10 +248,23 @@ export default function SubjectList() {
                       }}
                     ></ListItemText>
                   </Grid>
-                  <Grid item md={3} xs={7} padding={2}>
+                  <Grid item md={1.5} xs={7} padding={2}>
                     <ListItemText>
                       <Button onClick={() => submitDelete(value.id)}>
                         Poista
+                      </Button>
+                    </ListItemText>
+                  </Grid>
+                  <Grid item md={1.5} xs={7} padding={2}>
+                    <ListItemText>
+                      <Button
+                        onClick={() => {
+                          // Tallentaa editSubjectiin tiedot joita halutaan muokata
+                          setEditSubject(value);
+                          setEditDialogOpen(true);
+                        }}
+                      >
+                        Muokkaa
                       </Button>
                     </ListItemText>
                   </Grid>
