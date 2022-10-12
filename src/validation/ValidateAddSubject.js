@@ -1,6 +1,6 @@
 export function validate(values) {
   const errors = {};
-  const regName = new RegExp(/^[A-Za-zäöåÄÖÅ-\s]*$/);
+  const regName = new RegExp(/[A-Za-zäöåÄÖÅ0-9-\s]*$/); //  ^[A-Za-zäöåÄÖÅ-\s]*$/, [0-9]+[A-Za-zäöåÄÖÅ-\s]*$/
   const regNumber = new RegExp(/^[0-9]+$/);
   const regTime = new RegExp(
     /^([0-1][0-9]|[2][0-3]):([0-5][0-9]):([0-5][0-9])$/
@@ -11,7 +11,7 @@ export function validate(values) {
   } else if (values.name.length < 2 || values.name.length > 255) {
     errors.name = "Nimen pitää olla 2-255 merkkiä pitkä";
   } else if (!regName.test(values.name)) {
-    errors.name = "Vain kirjaimet sallittu";
+    errors.name = "Vain kirjaimet, numerot ja '-' sallittu";
   }
   // EDIT NAME
   // if (!values.subjectName) {

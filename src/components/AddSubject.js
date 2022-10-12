@@ -42,11 +42,11 @@ export default function AddSubject(props) {
     },
     validate,
     onSubmit: (values) => {
-      console.log("aaaaaa");
       //alert(JSON.stringify(values, null, 2));
       setDialogOptions({
-        title: "Haluatko varmasti lisätä uuden opetuksen?",
-        content: "Painamalla jatka lisäät opetuksen ",
+        title: "Haluatko varmasti lisätä " + values.name + "?",
+        content:
+          "Painamalla jatka, " + values.name + " lisätään opetuslistaukseen",
       });
       setDialogOpen(true);
       return;
@@ -63,8 +63,7 @@ export default function AddSubject(props) {
           setAlertOptions({
             severity: "error",
             title: "Virhe",
-            message:
-              "Oho! Jotain meni pieleen palvelimella. Pääaineita ei löytynyt",
+            message: "Jokin meni pieleen palvelimella. Pääaineita ei löytynyt.",
           });
           setAlertOpen(true);
           return;
@@ -93,7 +92,7 @@ export default function AddSubject(props) {
           setAlertOptions({
             severity: "error",
             title: "Virhe",
-            message: "Oho! Jotain meni pieleen lisäyksessä",
+            message: "Jokin meni pieleen - yritä hetken kuluttua uudestaan.",
           });
           setAlertOpen(true);
           return;
@@ -103,7 +102,7 @@ export default function AddSubject(props) {
             severity: "error",
             title: "Virhe",
             message:
-              "Oho! Jotain meni pieleen palvelimella. Opetusta ei lisätty",
+              "Jokin meni pieleen palvelimella - yritä hetken kuluttua uudestaan.",
           });
           setAlertOpen(true);
           return;
@@ -111,7 +110,7 @@ export default function AddSubject(props) {
         setAlertOptions({
           severity: "error",
           title: "Virhe",
-          message: "Oho! Jotain meni pieleen lisäyksessä",
+          message: "Jokin meni pieleen - yritä hetken kuluttua uudestaan.",
         });
         setAlertOpen(true);
         return;
@@ -120,7 +119,7 @@ export default function AddSubject(props) {
     setAlertOptions({
       severity: "success",
       title: "Onnistui!",
-      message: "Opetus lisätty",
+      message: values.name + " lisätty.",
     });
     setAlertOpen(true);
   };
@@ -158,7 +157,7 @@ export default function AddSubject(props) {
                       formik.touched.name && formik.errors.name ? true : false
                     }
                     name="name"
-                    label="Aineen nimi"
+                    label="Opetuksen nimi"
                     variant="outlined"
                     value={formik.values.name}
                     onChange={formik.handleChange}
@@ -217,7 +216,7 @@ export default function AddSubject(props) {
                         : false
                     }
                     name="sessionLength"
-                    label="Opetuksen pituus(hh:mm:ss)"
+                    label="Opetuskerran pituus(hh:mm:ss)"
                     variant="outlined"
                     value={formik.values.sessionLength}
                     onChange={formik.handleChange}
@@ -236,7 +235,7 @@ export default function AddSubject(props) {
                         : false
                     }
                     name="sessionCount"
-                    label="Opetuksien määrä"
+                    label="Opetuksien määrä viikossa"
                     variant="outlined"
                     value={formik.values.sessionCount}
                     onChange={formik.handleChange}
