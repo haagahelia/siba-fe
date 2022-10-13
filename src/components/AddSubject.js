@@ -139,7 +139,7 @@ export default function AddSubject(props) {
         confirmfunction={addSubject}
         functionparam={formik.values}
       ></ConfirmationDialog>
-     <Container style={{ width: "85%", marginTop: "50px" }}>
+      <Container style={{ width: "85%", marginTop: "50px" }}>
         <Box style={{ backgroundColor: "rgba(52, 139, 147, 0.5 )" }}>
           <form onSubmit={formik.handleSubmit}>
             <div id="input-container">

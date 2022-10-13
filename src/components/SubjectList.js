@@ -12,7 +12,7 @@ import axios from "axios";
 import AlertBox from "./AlertBox";
 import ConfirmationDialog from "./ConfirmationDialog";
 import EditSubject from "./EditSubject";
-import CButton from "../styles/SpecialButton";
+import PopUpDialog from "./PopDialog";
 
 export default function SubjectList(props) {
   // const [subjectList, setSubjectList] = useState([]);
@@ -104,8 +104,20 @@ export default function SubjectList(props) {
     return;
   };
 
-//  const [open, setOpen] = useState(false);
-//  const [hoverColor, sethoverColor] = useState("#CFD6D5  ");
+  const [open, setOpen] = useState(false);
+  const [hoverColor, sethoverColor] = useState("#CFD6D5  ");
+
+  const [singelSubject, setSingleSubject] = useState({
+    id: null,
+    name: null,
+    groupSize: null,
+    groupCount: null,
+    sessionLength: null,
+    sessionCount: null,
+    area: null,
+    programId: null,
+    subjectName: null,
+  });
 
   // STYLES
   const Box = styled(Paper)(({ theme }) => ({
@@ -121,9 +133,8 @@ export default function SubjectList(props) {
   return (
     <div>
       
-    
-
-
+      
+  
       <AlertBox
         alertOpen={alertOpen}
         alertOptions={alertOptions}
@@ -143,16 +154,31 @@ export default function SubjectList(props) {
         getAllSubjects={getAllSubjects}
         setEditSubject={setEditSubject}
       ></EditSubject>
+      <PopUpDialog
+        open={open}
+        setOpen={setOpen}
+        data={singelSubject}
+        setSingleSubject={setSingleSubject}
+        submitDelete={submitDelete}
+        setEditDialogOpen={setEditDialogOpen}
+        setEditSubject={setEditSubject}
+      ></PopUpDialog>
       <Box>
         <nav>
           {subjectList.map((value) => {
             return (
               <List key={value.id}>
                 <ListItem disablePadding
-                /* button
-                 onClick={() => setOpen(true)}
+                button
+                onClick={() => {
+
+                  setSingleSubject(value);
+
+                  setOpen(true);
+
+                }}
                  onMouseEnter={() => sethoverColor("#CFD6D5  ")}
-                 onMouseLeave={() => sethoverColor("#FFFFFF ")}*/
+                 onMouseLeave={() => sethoverColor("#FFFFFF ")}
                  >
                   <Grid item md={3} xs={7} padding={2}>
                     <Typography
@@ -268,7 +294,7 @@ export default function SubjectList(props) {
                       }}
                     ></ListItemText>
                   </Grid>
-                  <Grid item md={1.5} xs={7} padding={2}>
+                  {/* <Grid item md={1.5} xs={7} padding={2}>
                     <ListItemText>
                       <Button onClick={() => submitDelete(value.id)}>
                         Poista
@@ -277,7 +303,7 @@ export default function SubjectList(props) {
                   </Grid>
                   <Grid item md={1.5} xs={7} padding={2}>
                     <ListItemText>
-                      <CButton
+                      <Button
                         onClick={() => {
                           // Tallentaa editSubjectiin tiedot joita halutaan muokata
                           setEditSubject(value);
@@ -285,9 +311,9 @@ export default function SubjectList(props) {
                         }}
                       >
                         Muokkaa
-                      </CButton>
+                      </Button>
                     </ListItemText>
-                  </Grid>
+                  </Grid> */}
                 </ListItem>
                 <Divider />
               </List>
