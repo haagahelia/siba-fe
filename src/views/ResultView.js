@@ -2,6 +2,7 @@ import Result from "../components/Result";
 import ProgramResult from "../components/ProgramResult";
 import testData from "../testData";
 import ProgramsRooms from "../components/ProgramsRooms"
+import "../styles/ResultView.css"
 export default function () {
   return(
     <>

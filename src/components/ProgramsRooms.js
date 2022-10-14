@@ -3,14 +3,7 @@ import Grid2 from "@mui/material/Unstable_Grid2";
 import React from "react";
 
 export default function ProgramsRooms(props) {
-
-
- 
-
- 
-
-
-
+    
     const testData = props.data;
     return (
         <>
@@ -24,7 +17,7 @@ export default function ProgramsRooms(props) {
 
               margin: "auto",
               marginTop: 20,
-              backgroundColor: "#919189",
+              backgroundColor: "rgb(54, 51, 51)",
               padding: 10,
               borderRadius: 20,
             }}

@@ -17,7 +17,7 @@ export default function Result(props) {
 
               margin: "auto",
               marginTop: 20,
-              backgroundColor: "#919189",
+              backgroundColor: "rgb(54, 51, 51)",
               padding: 10,
               borderRadius: 20,
             }}
@@ -29,7 +29,7 @@ export default function Result(props) {
     
               return (
                 <>
-                  <Grid2 xs={3}>{prog.name}</Grid2>
+                  <Grid2 xs={3} style={{color:"rgb(246, 233, 233)"}}>{prog.name}</Grid2>
                   <Grid2 xs={3}>
                     <ProgressBar
                       // Jouduin kommentoimaan pois muutoin appi ei toiminut

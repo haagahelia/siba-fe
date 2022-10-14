@@ -30,7 +30,7 @@ export default function ProgramResult(props) {
 
         >  
             <Box style={{width:'80%', margin:'auto', borderRadius: 20, backgroundColor: "#919189", marginTop:'10%'}}>
-            <Typography style={{textAlign:'center', marginTop:'5%'}}>{programName} -subjects</Typography>
+            <Typography style={{textAlign:'center', marginTop:'5%', color: 'rgb(246, 233, 233)'}}>{programName} -subjects</Typography>
                 <Result data={testData.subjects[programId]}/>
             </Box>
         </Modal>
@@ -44,7 +44,7 @@ export default function ProgramResult(props) {
               margin: "auto",
               width: "80%",
               marginTop: 20,
-              backgroundColor: "#919189",
+              backgroundColor: "rgb(54, 51, 51)",
               padding: 10,
               borderRadius: 20,
             }}
@@ -57,7 +57,8 @@ export default function ProgramResult(props) {
               return (
                 <>   
                 <Grid2 xs={3}>
-                    <Box onClick={() => handleOpen(prog.id, prog.name)}>
+                    <Box style={{color:'rgb(246, 233, 233)'}} onClick={() => handleOpen(prog.id, prog.name)}>
+                    
                     {prog.name}
                     </Box>
                 </Grid2>
