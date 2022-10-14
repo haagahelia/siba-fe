@@ -60,24 +60,18 @@ export default function SubjectList(props) {
   //     });
   // };
 
-  const deleteSubject = (id) => {
+  const deleteSubject = (value) => {
     axios
-      .delete(`http://localhost:3001/api/subject/delete/${id}`)
+      .delete(`http://localhost:3001/api/subject/delete/${value.id}`)
       .then((_) => {
         getAllSubjects();
-        setAlertOptions({
-          severity: "success",
-          title: "Onnistui",
-          message: "Opetus poistettu",
-        });
-        setAlertOpen(true);
       })
       .catch((error) => {
         if (error.response.status === 400) {
           setAlertOptions({
             severity: "error",
             title: "Virhe",
-            message: "Oho! Opetuksen poisto epäonnistui",
+            message: "Jokin meni pieleen - yritä hetken kuluttua uudestaan.",
           });
           setAlertOpen(true);
           return;
@@ -85,20 +79,28 @@ export default function SubjectList(props) {
         setAlertOptions({
           severity: "error",
           title: "Virhe",
-          message: "Oho! Opetuksen poisto epäonnistui",
+          message:
+            "Jokin meni pieleen, opetuksen poisto epäonnistui - yritä hetken kuluttua uudestaan.",
         });
         setAlertOpen(true);
         return;
       });
+    setAlertOptions({
+      severity: "success",
+      title: "Onnistui!",
+      message: value.subjectName + " poistettu.",
+    });
+    setAlertOpen(true);
   };
 
-  const submitDelete = (id) => {
+  const submitDelete = (value) => {
     setDialogOptions({
-      title: "Haluatko varmasti jatkaa?",
-      content: "Painamalla jatka poistat opetuksen listauksesta",
+      title: "Haluatko varmasti poistaa " + value.subjectName + "?",
+      content:
+        "Painamalla jatka poistat " + value.subjectName + " listauksesta.",
     });
     setDialogOpen(true);
-    setDeleteId(id);
+    setDeleteId(value);
     return;
   };
 
@@ -181,7 +183,7 @@ export default function SubjectList(props) {
                       variant="caption"
                       style={{ fontWeight: "bold" }}
                     >
-                      Tuntien pituus:
+                      Opetuskerran pituus:
                     </Typography>
                     <ListItemText
                       primary={value.sessionLength}
@@ -190,12 +192,12 @@ export default function SubjectList(props) {
                       }}
                     ></ListItemText>
                   </Grid>
-                  <Grid item md={2} xs={2} padding={3}>
+                  {/* <Grid item md={2} xs={2} padding={3}>
                     <Typography
                       variant="caption"
                       style={{ fontWeight: "bold" }}
                     >
-                      Tuntien määrä:
+                      Opetuksien määrä viikossa:
                     </Typography>
                     <ListItemText
                       primary={value.sessionCount}
@@ -203,8 +205,8 @@ export default function SubjectList(props) {
                         variant: "body2",
                       }}
                     ></ListItemText>
-                  </Grid>
-                  <Grid item md={2} xs={2} padding={3}>
+                  </Grid> */}
+                  {/* <Grid item md={2} xs={2} padding={3}>
                     <Typography
                       variant="caption"
                       style={{ fontWeight: "bold" }}
@@ -217,7 +219,7 @@ export default function SubjectList(props) {
                         variant: "body2",
                       }}
                     ></ListItemText>
-                  </Grid>
+                  </Grid> */}
                   {/*
                   <Grid item md={2} xs={2} padding={3}>
                     <Typography
@@ -250,7 +252,11 @@ export default function SubjectList(props) {
                   </Grid>
                   <Grid item md={1.5} xs={7} padding={2}>
                     <ListItemText>
-                      <Button onClick={() => submitDelete(value.id)}>
+                      <Button
+                        onClick={() => {
+                          submitDelete(value);
+                        }}
+                      >
                         Poista
                       </Button>
                     </ListItemText>
