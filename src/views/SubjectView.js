@@ -46,7 +46,7 @@ export default function SubjectView() {
   return (
     <div>
       <Container maxWidth="100%">
-        <AddSubject getAllSubjects={getAllSubjects} />
+        <AddSubject getAllSubjects={getAllSubjects} subjectList={subjectList} />
         <Grid
           container
           rowSpacing={0.5}
