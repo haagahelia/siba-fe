@@ -17,7 +17,7 @@ export default function Result(props) {
 
               margin: "auto",
               marginTop: 20,
-              backgroundColor: "rgb(54, 51, 51)",
+              backgroundColor: "#363333",
               padding: 10,
               borderRadius: 20,
             }}
@@ -25,7 +25,7 @@ export default function Result(props) {
             {testData.map((prog) => {
               const progress = (prog.allocatedHours / prog.requiredHours) * 100;
               const color =
-                progress > 100 ? "red" : progress < 80 ? "yellow" : "green";
+                progress > 100 ? "#FF1700" : progress < 80 ? "#FFE400" : "#06FF00";
     
               return (
                 <>
@@ -34,7 +34,7 @@ export default function Result(props) {
                     <ProgressBar
                       // Jouduin kommentoimaan pois muutoin appi ei toiminut
                       // style= {styles.section}
-                      baseBgColor={"black"}
+                      baseBgColor={"#272121"}
                       labelColor={"black"}
                       bgColor={color}
                       padding={"3px"}
