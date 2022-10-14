@@ -16,7 +16,7 @@ import {
 } from "../validation/ValidateAddSubject";
 
 export default function AddSubject(props) {
-  const { getAllSubjects } = props;
+  const { getAllSubjects, subjectList } = props;
   const [programNameList, setProgramNameList] = useState([]);
   const [alertOpen, setAlertOpen] = useState(false);
   const [alertOptions, setAlertOptions] = useState({
@@ -29,20 +29,23 @@ export default function AddSubject(props) {
     title: "this is dialog",
     content: "Something here",
   });
+  // Tässä fromikin initialvalues tallennetaan stateen
+  const [copySubjectData, setCopySubjectData] = useState({
+    name: "",
+    groupSize: 0,
+    groupCount: 0,
+    sessionLength: "",
+    sessionCount: 0,
+    area: 0,
+    programId: 0,
+  });
 
   const formik = useFormik({
-    initialValues: {
-      name: "",
-      groupSize: 0,
-      groupCount: 0,
-      sessionLength: "",
-      sessionCount: 0,
-      area: 0,
-      programId: 0,
-    },
+    enableReinitialize: true,
+    initialValues: copySubjectData,
     validate,
     onSubmit: (values) => {
-      console.log("aaaaaa");
+      //  console.log("aaaaaa");
       //alert(JSON.stringify(values, null, 2));
       setDialogOptions({
         title: "Haluatko varmasti lisätä uuden opetuksen?",
@@ -123,6 +126,21 @@ export default function AddSubject(props) {
       message: "Opetus lisätty",
     });
     setAlertOpen(true);
+  };
+  // Tässä tulee lista opetuksia
+  // Kun opetuksen valitsee menee tiedot formikin initialvaluesiin
+  const handleChange = (e) => {
+    // console.log(e.target.value);
+    let selected = e.target.value;
+    setCopySubjectData({
+      name: formik.values.name, // Tämä, jotta syötetty nimi ei vaihdu vaikka valitsisi olemassa olevan opetuksen tiedot
+      groupSize: selected.groupSize,
+      groupCount: selected.groupCount,
+      sessionLength: selected.sessionLength,
+      sessionCount: selected.sessionCount,
+      area: selected.area,
+      programId: selected.programId,
+    });
   };
 
   return (
@@ -289,10 +307,26 @@ export default function AddSubject(props) {
                   </FormHelperText>
                 </FormControl>
               </Grid>
+              <Grid item xs={4}>
+                <FormControl sx={{ minWidth: 340 }}>
+                  <InputLabel>
+                    Kopioi olemsssa olevan opetuksen tiedot
+                  </InputLabel>
+                  <Select onChange={handleChange}>
+                    {subjectList.map((value) => {
+                      return (
+                        <MenuItem key={value.id} value={value}>
+                          {value.subjectName}
+                        </MenuItem>
+                      );
+                    })}
+                  </Select>
+                </FormControl>
+              </Grid>
+              <Grid item xs={3} padding={2}>
+                <Button type="submit">Lisää</Button>
+              </Grid>
             </div>
-            <Grid item xs={3}>
-              <Button type="submit">Lisää</Button>
-            </Grid>
           </form>
         </Box>
       </Container>
