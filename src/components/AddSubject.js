@@ -138,20 +138,20 @@ export default function AddSubject(props) {
         confirmfunction={addSubject}
         functionparam={formik.values}
       ></ConfirmationDialog>
-      <Container style={{ width: "50%", marginTop: "50px" }}>
+      <Container style={{ width: "85%", marginTop: "50px" }}>
         <Box style={{ backgroundColor: "rgba(52, 139, 147, 0.5 )" }}>
           <form onSubmit={formik.handleSubmit}>
             <div id="input-container">
               <Grid
                 container
-                rowSpacing={2}
-                columnSpacing={1}
+                rowSpacing={4}
+                columnSpacing={5}
                 column={6}
                 justifyContent="space-evenly"
                 alignItems="center"
                 padding={1}
               >
-                <Grid item xs={4}>
+                <Grid item xs={12} sm={6} md={4}>
                   <TextField
                     error={
                       formik.touched.name && formik.errors.name ? true : false
@@ -169,7 +169,7 @@ export default function AddSubject(props) {
                     }
                   ></TextField>
                 </Grid>
-                <Grid item xs={4}>
+                <Grid item xs={12} sm={6} md={4}>
                   <TextField
                     error={
                       formik.touched.groupSize && formik.errors.groupSize
@@ -189,7 +189,7 @@ export default function AddSubject(props) {
                     }
                   ></TextField>
                 </Grid>
-                <Grid item xs={4}>
+                <Grid item xs={12} sm={6} md={4}>
                   <TextField
                     error={
                       formik.touched.groupCount && formik.errors.groupCount
@@ -207,7 +207,7 @@ export default function AddSubject(props) {
                     }
                   ></TextField>
                 </Grid>
-                <Grid item xs={4}>
+                <Grid item xs={12} sm={6} md={4}>
                   <TextField
                     error={
                       formik.touched.sessionLength &&
@@ -227,7 +227,7 @@ export default function AddSubject(props) {
                     }
                   ></TextField>
                 </Grid>
-                <Grid item xs={4}>
+                <Grid item xs={12} sm={6} md={4}>
                   <TextField
                     error={
                       formik.touched.sessionCount && formik.errors.sessionCount
@@ -245,7 +245,7 @@ export default function AddSubject(props) {
                     }
                   ></TextField>
                 </Grid>
-                <Grid item xs={4}>
+                <Grid item xs={12} sm={6} md={4}>
                   <TextField
                     error={
                       formik.touched.area && formik.errors.area ? true : false
@@ -260,7 +260,7 @@ export default function AddSubject(props) {
                   ></TextField>
                 </Grid>
               </Grid>
-              <Grid item xs={4}>
+              <Grid item xs={12} sm={6} md={4}>
                 <FormControl sx={{ m: 4, minWidth: 120 }}>
                   <InputLabel>Pääaine</InputLabel>
 

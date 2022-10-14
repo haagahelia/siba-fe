@@ -7,11 +7,12 @@ import Divider from "@mui/material/Divider";
 import Grid from "@mui/material/Grid";
 import { styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
-import { Button, Typography } from "@mui/material";
+import { Button, Dialog, DialogContent, DialogContentText, DialogTitle, Typography } from "@mui/material";
 import axios from "axios";
 import AlertBox from "./AlertBox";
 import ConfirmationDialog from "./ConfirmationDialog";
 import EditSubject from "./EditSubject";
+import PopUpDialog from "./PopDialog";
 
 export default function SubjectList(props) {
   // const [subjectList, setSubjectList] = useState([]);
@@ -35,6 +36,7 @@ export default function SubjectList(props) {
     programId: null,
     subjectName: null,
   });
+
   const [dialogOptions, setDialogOptions] = useState({
     title: "this is dialog",
     content: "Something here",
@@ -104,13 +106,37 @@ export default function SubjectList(props) {
     return;
   };
 
+  const [open, setOpen] = useState(false);
+  const [hoverColor, sethoverColor] = useState("#CFD6D5  ");
+
+  const [singelSubject, setSingleSubject] = useState({
+    id: null,
+    name: null,
+    groupSize: null,
+    groupCount: null,
+    sessionLength: null,
+    sessionCount: null,
+    area: null,
+    programId: null,
+    subjectName: null,
+  });
+
   // STYLES
   const Box = styled(Paper)(({ theme }) => ({
     overflow: "auto",
   }));
-
+  /*
+  <Dialog open={open} onClose={() => setOpen(false)} width="400px">
+        <DialogTitle id="dialog-title">Dialogin otsikko</DialogTitle>
+        <DialogContent>
+          <PopUpDialog></PopUpDialog>
+        </DialogContent>
+      </Dialog>*/ //DIALOGI DIVIN JÄLKEEN, EI ANTANUT KOMMENTOIDA SIINÄ KOHTAA
   return (
     <div>
+      
+      
+  
       <AlertBox
         alertOpen={alertOpen}
         alertOptions={alertOptions}
@@ -130,12 +156,32 @@ export default function SubjectList(props) {
         getAllSubjects={getAllSubjects}
         setEditSubject={setEditSubject}
       ></EditSubject>
+      <PopUpDialog
+        open={open}
+        setOpen={setOpen}
+        data={singelSubject}
+        setSingleSubject={setSingleSubject}
+        submitDelete={submitDelete}
+        setEditDialogOpen={setEditDialogOpen}
+        setEditSubject={setEditSubject}
+      ></PopUpDialog>
       <Box>
         <nav>
           {subjectList.map((value) => {
             return (
               <List key={value.id}>
-                <ListItem disablePadding>
+                <ListItem disablePadding
+                button
+                onClick={() => {
+
+                  setSingleSubject(value);
+
+                  setOpen(true);
+
+                }}
+                 onMouseEnter={() => sethoverColor("#CFD6D5  ")}
+                 onMouseLeave={() => sethoverColor("#FFFFFF ")}
+                 >
                   <Grid item md={3} xs={7} padding={2}>
                     <Typography
                       variant="caption"
@@ -250,7 +296,7 @@ export default function SubjectList(props) {
                       }}
                     ></ListItemText>
                   </Grid>
-                  <Grid item md={1.5} xs={7} padding={2}>
+                  {/* <Grid item md={1.5} xs={7} padding={2}>
                     <ListItemText>
                       <Button
                         onClick={() => {
@@ -273,7 +319,7 @@ export default function SubjectList(props) {
                         Muokkaa
                       </Button>
                     </ListItemText>
-                  </Grid>
+                  </Grid> */}
                 </ListItem>
                 <Divider />
               </List>
