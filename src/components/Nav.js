@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { NavLink, BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "../styles/NavBar.css";
-import logo from '../styles/SIBA_LOGO.png'
+import logo from '../styles/SIBA_LOGO_WHITE.png'
 import ResultView from "../views/ResultView";
 import SubjectView from "../views/SubjectView";
 import MenuIcon from '@mui/icons-material/Menu';
@@ -22,8 +22,8 @@ function NavBar() {
           <ul className={click ? "nav-menu active" : "nav-menu"}>
             <li className="nav-item">
               <NavLink
-                exact
-                to="/"
+                to="/" end
+                exact={true}
                 activeClassName="active"
                 className="nav-links"
                 onClick={handleClick}
@@ -62,7 +62,7 @@ function NavBar() {
       </nav>
 
       <Routes>
-          <Route path="/subject" element={<><SubjectView/><ResultView/></>} />
+          <Route path="/subject" element={<><SubjectView/></>} />
           <Route path="/onlyresult" element={<ResultView/>}/>
         </Routes>
     </Router>

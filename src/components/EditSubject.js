@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useTimeout } from "react";
 import TextField from "@mui/material/TextField";
 import { Button, Grid, FormHelperText } from "@mui/material";
 import Select from "@mui/material/Select";
@@ -14,6 +14,7 @@ import {
 import DialogTitle from "@mui/material/DialogTitle";
 import Dialog from "@mui/material/Dialog";
 import { DialogActions, DialogContent, DialogContentText } from "@mui/material";
+import AlertBox from "../components/AlertBox";
 
 export default function EditSubject(props) {
   // Aina kun editSubject muuttuu subjectList.js filussa ne tiedot tulee tähän nimellä data
@@ -26,7 +27,6 @@ export default function EditSubject(props) {
   } = props;
   const [programNameList, setProgramNameList] = useState([]);
   // const [sub, setSub] = useState({});
-
   const [alertOpen, setAlertOpen] = useState(false);
   const [alertOptions, setAlertOptions] = useState({
     title: "This is title",
@@ -64,8 +64,11 @@ export default function EditSubject(props) {
       setEditDialogOpen(false);
 
       setDialogOptions({
-        title: "Haluatko varmasti muokata opetuksen?",
-        content: "Painamalla jatka, tallennat uudet muutokset ",
+        title: "Haluatko varmasti muuttaa " + values.subjectName + " tietoja?",
+        content:
+          "Painamalla jatka, tallennat " +
+          values.subjectName +
+          " uudet tiedot. ",
       });
       setDialogOpen(true);
       return;
@@ -87,14 +90,13 @@ export default function EditSubject(props) {
     })
       .then((response) => {
         getAllSubjects();
-        // console.log("Response: ", response);
       })
       .catch((error) => {
         if (error.response.status === 400) {
           setAlertOptions({
             severity: "error",
             title: "Virhe",
-            message: "Oho! Jotain meni pieleen muokkauksessa",
+            message: "Jokin meni pieleen - yritä hetken kuluttua uudestaan.",
           });
           setAlertOpen(true);
           return;
@@ -104,7 +106,7 @@ export default function EditSubject(props) {
             severity: "error",
             title: "Virhe",
             message:
-              "Oho! Jotain meni pieleen palvelimella. Opetusta ei muokattu",
+              "Jokin meni pieleen palvelimella - yritä hetken kuluttua uudestaan.",
           });
           setAlertOpen(true);
           return;
@@ -112,7 +114,7 @@ export default function EditSubject(props) {
         setAlertOptions({
           severity: "error",
           title: "Virhe",
-          message: "Oho! Jotain meni pieleen muokkauksessa",
+          message: "Jokin meni pieleen - yritä hetken kuluttua uudestaan.",
         });
         setAlertOpen(true);
         return;
@@ -121,9 +123,10 @@ export default function EditSubject(props) {
     setAlertOptions({
       severity: "success",
       title: "Onnistui!",
-      message: "Opetus muokattu",
+      message: values.subjectName + " uudet tiedot lisätty.",
     });
     setAlertOpen(true);
+    setTimeout(() => setAlertOpen(false), 6000);
   }
 
   const handleClose = () => {
@@ -151,8 +154,7 @@ export default function EditSubject(props) {
           setAlertOptions({
             severity: "error",
             title: "Virhe",
-            message:
-              "Oho! Jotain meni pieleen palvelimella. Pääaineita ei löytynyt",
+            message: "Jokin meni pieleen palvelimella. Pääaineita ei löytynyt.",
           });
           setAlertOpen(true);
           return;
@@ -162,6 +164,11 @@ export default function EditSubject(props) {
 
   return (
     <div>
+      <AlertBox
+        alertOpen={alertOpen}
+        alertOptions={alertOptions}
+        setAlertOpen={setAlertOpen}
+      ></AlertBox>
       <ConfirmationDialog
         dialogOpen={dialogOpen}
         dialogOptions={dialogOptions}
@@ -251,7 +258,7 @@ export default function EditSubject(props) {
                         : false
                     }
                     name="sessionLength"
-                    label="Opetuksen pituus(hh:mm:ss)"
+                    label="Opetuskerran pituus(hh:mm:ss)"
                     variant="outlined"
                     value={formik.values?.sessionLength}
                     onChange={formik.handleChange}
@@ -270,7 +277,7 @@ export default function EditSubject(props) {
                         : false
                     }
                     name="sessionCount"
-                    label="Opetuksien määrä"
+                    label="Opetuksien määrä viikossa"
                     variant="outlined"
                     value={formik.values?.sessionCount}
                     onChange={formik.handleChange}

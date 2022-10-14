@@ -1,6 +1,6 @@
 export function validate(values) {
   const errors = {};
-  const regName = new RegExp(/^[A-Za-zäöåÄÖÅ-\s]*$/);
+  const regName = new RegExp(/[A-Za-zäöåÄÖÅ0-9-\s]*$/);
   const regNumber = new RegExp(/^[0-9]+$/);
   const regTime = new RegExp(
     /^([0-1][0-9]|[2][0-3]):([0-5][0-9]):([0-5][0-9])$/

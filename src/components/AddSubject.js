@@ -48,8 +48,9 @@ export default function AddSubject(props) {
       //  console.log("aaaaaa");
       //alert(JSON.stringify(values, null, 2));
       setDialogOptions({
-        title: "Haluatko varmasti lisätä uuden opetuksen?",
-        content: "Painamalla jatka lisäät opetuksen ",
+        title: "Haluatko varmasti lisätä " + values.name + "?",
+        content:
+          "Painamalla jatka, " + values.name + " lisätään opetuslistaukseen",
       });
       setDialogOpen(true);
       return;
@@ -66,8 +67,7 @@ export default function AddSubject(props) {
           setAlertOptions({
             severity: "error",
             title: "Virhe",
-            message:
-              "Oho! Jotain meni pieleen palvelimella. Pääaineita ei löytynyt",
+            message: "Jokin meni pieleen palvelimella. Pääaineita ei löytynyt.",
           });
           setAlertOpen(true);
           return;
@@ -96,7 +96,7 @@ export default function AddSubject(props) {
           setAlertOptions({
             severity: "error",
             title: "Virhe",
-            message: "Oho! Jotain meni pieleen lisäyksessä",
+            message: "Jokin meni pieleen - yritä hetken kuluttua uudestaan.",
           });
           setAlertOpen(true);
           return;
@@ -106,7 +106,7 @@ export default function AddSubject(props) {
             severity: "error",
             title: "Virhe",
             message:
-              "Oho! Jotain meni pieleen palvelimella. Opetusta ei lisätty",
+              "Jokin meni pieleen palvelimella - yritä hetken kuluttua uudestaan.",
           });
           setAlertOpen(true);
           return;
@@ -114,7 +114,7 @@ export default function AddSubject(props) {
         setAlertOptions({
           severity: "error",
           title: "Virhe",
-          message: "Oho! Jotain meni pieleen lisäyksessä",
+          message: "Jokin meni pieleen - yritä hetken kuluttua uudestaan.",
         });
         setAlertOpen(true);
         return;
@@ -123,7 +123,7 @@ export default function AddSubject(props) {
     setAlertOptions({
       severity: "success",
       title: "Onnistui!",
-      message: "Opetus lisätty",
+      message: values.name + " lisätty.",
     });
     setAlertOpen(true);
   };
@@ -157,26 +157,26 @@ export default function AddSubject(props) {
         confirmfunction={addSubject}
         functionparam={formik.values}
       ></ConfirmationDialog>
-      <Container style={{ width: "50%", marginTop: "50px" }}>
+      <Container style={{ width: "85%", marginTop: "50px" }}>
         <Box style={{ backgroundColor: "rgba(52, 139, 147, 0.5 )" }}>
           <form onSubmit={formik.handleSubmit}>
             <div id="input-container">
               <Grid
                 container
-                rowSpacing={2}
-                columnSpacing={1}
+                rowSpacing={4}
+                columnSpacing={5}
                 column={6}
                 justifyContent="space-evenly"
                 alignItems="center"
                 padding={1}
               >
-                <Grid item xs={4}>
+                <Grid item xs={12} sm={6} md={4}>
                   <TextField
                     error={
                       formik.touched.name && formik.errors.name ? true : false
                     }
                     name="name"
-                    label="Aineen nimi"
+                    label="Opetuksen nimi"
                     variant="outlined"
                     value={formik.values.name}
                     onChange={formik.handleChange}
@@ -188,7 +188,7 @@ export default function AddSubject(props) {
                     }
                   ></TextField>
                 </Grid>
-                <Grid item xs={4}>
+                <Grid item xs={12} sm={6} md={4}>
                   <TextField
                     error={
                       formik.touched.groupSize && formik.errors.groupSize
@@ -208,7 +208,7 @@ export default function AddSubject(props) {
                     }
                   ></TextField>
                 </Grid>
-                <Grid item xs={4}>
+                <Grid item xs={12} sm={6} md={4}>
                   <TextField
                     error={
                       formik.touched.groupCount && formik.errors.groupCount
@@ -226,7 +226,7 @@ export default function AddSubject(props) {
                     }
                   ></TextField>
                 </Grid>
-                <Grid item xs={4}>
+                <Grid item xs={12} sm={6} md={4}>
                   <TextField
                     error={
                       formik.touched.sessionLength &&
@@ -235,7 +235,7 @@ export default function AddSubject(props) {
                         : false
                     }
                     name="sessionLength"
-                    label="Opetuksen pituus(hh:mm:ss)"
+                    label="Opetuskerran pituus(hh:mm:ss)"
                     variant="outlined"
                     value={formik.values.sessionLength}
                     onChange={formik.handleChange}
@@ -246,7 +246,7 @@ export default function AddSubject(props) {
                     }
                   ></TextField>
                 </Grid>
-                <Grid item xs={4}>
+                <Grid item xs={12} sm={6} md={4}>
                   <TextField
                     error={
                       formik.touched.sessionCount && formik.errors.sessionCount
@@ -254,7 +254,7 @@ export default function AddSubject(props) {
                         : false
                     }
                     name="sessionCount"
-                    label="Opetuksien määrä"
+                    label="Opetuksien määrä viikossa"
                     variant="outlined"
                     value={formik.values.sessionCount}
                     onChange={formik.handleChange}
@@ -264,7 +264,7 @@ export default function AddSubject(props) {
                     }
                   ></TextField>
                 </Grid>
-                <Grid item xs={4}>
+                <Grid item xs={12} sm={6} md={4}>
                   <TextField
                     error={
                       formik.touched.area && formik.errors.area ? true : false
@@ -279,7 +279,7 @@ export default function AddSubject(props) {
                   ></TextField>
                 </Grid>
               </Grid>
-              <Grid item xs={4}>
+              <Grid item xs={12} sm={6} md={4}>
                 <FormControl sx={{ m: 4, minWidth: 120 }}>
                   <InputLabel>Pääaine</InputLabel>
 
