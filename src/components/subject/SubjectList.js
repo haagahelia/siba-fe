@@ -1,27 +1,43 @@
 import React, { useEffect, useState } from "react";
-import Axios from "axios";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import Divider from "@mui/material/Divider";
 import Grid from "@mui/material/Grid";
-import Box from "@mui/material/Box";
+//import Box from "@mui/material/Box";
 import { styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
 import { Button, Typography } from "@mui/material";
-import axios from "axios";
+//import axios from "axios";
+
+import dao from "../../ajax/dao";
+
+//const baseUrl = process.env.REACT_APP_BE_SERVER_BASE_URL;
+//import {BASEURL} from "../config/consts.js";
+//const baseUrl = BASEURL;
 
 export default function SubjectList() {
   const [subjectList, setSubjectList] = useState([]);
 
+  const refreshSubjects = async function  () {
+    const data = await dao.fetchSubjects();
+    setSubjectList(data);
+  }
+
   useEffect(() => {
-    Axios.get("http://localhost:3001/api/subject/getAll").then((response) => {
-      setSubjectList(response.data);
-    });
+        // ...do something ONLY when component did mount
+        // Notice: even if categories state change => not fired
+      refreshSubjects();
   }, []);
 
   const deleteSubject = (id) => {
-    axios.delete(`http://localhost:3001/api/subject/delete/${id}`);
+    if( dao.deleteOneSubjectById(id) )
+    {
+      //console.log("Delete Subject succesful!"); // Toimii...
+      refreshSubjects();  // ...tämäkin toimii, muttei johda heti refreshiin.
+    } else {
+      //console.log("Delete Subject failed!");
+    }
   };
 
   // STYLES
@@ -29,6 +45,9 @@ export default function SubjectList() {
     overflow: "auto",
   }));
 
+  // Tämän componentin voinee jakaa muutamaan alikomponenttiin, 
+  // että tiedoston pituus lyhenisi.
+  // TODO
   return (
     <div>
       <Box>

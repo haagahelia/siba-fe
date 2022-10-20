@@ -1,13 +1,13 @@
 import React from "react";
-import SubjectList from "../components/SubjectList";
+import SubjectList from "../components/subject/SubjectList";
 import CardContent from "@mui/material/CardContent";
-import { CardHeader, Card, Container } from "@mui/material";
+import { CardHeader, Container } from "@mui/material";
 import Grid from "@mui/material/Grid";
 import { styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
-import AddSubject from "../components/AddSubject";
+import AddSubject from "../components/subject/AddSubject";
 
-export default function SubjectView() {
+const SubjectView = () => {
   const Card = styled(Paper)(({ theme }) => ({
     backgroundColor: "rgba(52, 139, 147, 0.5 )",
     width: "75%",
@@ -40,3 +40,5 @@ export default function SubjectView() {
     </div>
   );
 }
+
+export default SubjectView;

@@ -41,6 +41,9 @@ build/Release
 node_modules/
 jspm_packages/
 
+# Opionions differ, but I cannot see why not ignoring this generated file:
+package-lock.json
+
 # TypeScript v1 declaration files
 typings/
 

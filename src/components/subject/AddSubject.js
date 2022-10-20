@@ -5,55 +5,68 @@ import { Box, Container } from "@mui/system";
 import Select from "@mui/material/Select";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
-import Axios from "axios";
 import FormControl from "@mui/material/FormControl";
-import { styled } from "@mui/material/styles";
-import Paper from "@mui/material/Paper";
-import axios from "axios";
+//import { styled } from "@mui/material/styles";
+//import Paper from "@mui/material/Paper";
+//import axios from "axios";
+import dao from "../../ajax/dao";
+
+//const baseUrl = process.env.REACT_APP_BE_SERVER_BASE_URL;
+//import {BASEURL} from "../config/consts.js";
+//const baseUrl = BASEURL;
+
+const emptySubject = {
+  name: "",
+  groupSize: 0,
+  groupCount: 0,
+  sessionLength: "",
+  sessionCount: 0,
+  area: 0,
+  programId: 3001, // TODO: Tää ei paras ratkaisu, mitä jos lista tyhjä, tai 3001 poistettu
+}
 
 export default function AddSubject() {
   const [programNameList, setProgramNameList] = useState([]);
-  const [newSubject, setNewSubject] = useState({
-    name: "",
-    groupSize: 0,
-    groupCount: 0,
-    sessionLength: "",
-    sessionCount: 0,
-    area: 0,
-    programId: 0,
-  });
+  const [newSubject, setNewSubject] = useState({...emptySubject});
 
   const handleChange = (event) => {
     const { name, value } = event.target;
     setNewSubject({ ...newSubject, [name]: value });
   };
 
+
+
   useEffect(() => {
-    Axios.get("http://localhost:3001/api/program/getNames").then((response) => {
-      setProgramNameList(response.data);
-    });
+
+    const getProgramNames = async () => {
+      let data = await dao.getProgramNames();
+      setProgramNameList(data);
+    }
+    
+    getProgramNames();
   }, []);
 
-  const addSubject = () => {
+  const addSubject = async () => {
     console.log("tämä on subjectio jota yritetään lähettää ", newSubject);
-    axios
-      .post("http://localhost:3001/api/subject/post", {
-        name: newSubject.name,
-        groupSize: newSubject.groupSize,
-        groupCount: newSubject.groupCount,
-        sessionLength: newSubject.sessionLength,
-        sessionCount: newSubject.sessionCount,
-        area: newSubject.area,
-        programId: newSubject.programId,
-      })
-      .then((response) => {
-        const { data } = response;
-        console.log(response);
-        setNewSubject([...newSubject, data.result]);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+  /*
+       {
+          name: newSubject.name,
+          groupSize: newSubject.groupSize,
+          groupCount: newSubject.groupCount,
+          sessionLength: newSubject.sessionLength,
+          sessionCount: newSubject.sessionCount,
+          area: newSubject.area,
+          programId: newSubject.programId,
+        }
+  */
+    let insertId = await dao.postNewSubject(newSubject);
+    if(insertId && !isNaN(insertId) ) {
+      // const { data } = response;
+      console.log("Id of newly added subject in an array: " + insertId);
+      setNewSubject({...emptySubject});
+    } else {
+      console.log("Adding Subject failed");
+    }
   };
 
   return (
