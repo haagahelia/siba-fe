@@ -1,3 +1,8 @@
+This is the FRONTEND repo.
+
+Backend repo at: https://github.com/haagahelia/Siba_be
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

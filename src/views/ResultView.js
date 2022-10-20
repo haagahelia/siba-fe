@@ -1,9 +1,9 @@
-import { useState } from "react";
-import testData from "../testData";
+import React from "react";
+import testData from "../data/testData.js";
 import Grid2 from "@mui/material/Unstable_Grid2";
 import ProgressBar from "@ramonak/react-progress-bar";
 
-export default function () {
+const ResultView = () => {
   return (
     <>
       <Grid2
@@ -13,12 +13,11 @@ export default function () {
         spacing={2}
         border={2}
         style={{
-          padding: 2,
+          padding: 10,
           margin: "auto",
           width: "80%",
           marginTop: 20,
           backgroundColor: "#919189",
-          padding: 10,
           borderRadius: 20,
         }}
       >
@@ -28,11 +27,10 @@ export default function () {
             progress > 100 ? "red" : progress < 80 ? "yellow" : "green";
 
           return (
-            <>
+            <React.Fragment key={prog.id}>
               <Grid2 xs={3}>{prog.name}</Grid2>
               <Grid2 xs={3}>
                 <ProgressBar
-                  style={styles.section}
                   baseBgColor={"black"}
                   labelColor={"black"}
                   bgColor={color}
@@ -40,10 +38,12 @@ export default function () {
                   completed={progress}
                 />
               </Grid2>
-            </>
+            </React.Fragment>
           );
         })}
       </Grid2>
     </>
   );
-}
+};
+
+export default ResultView;

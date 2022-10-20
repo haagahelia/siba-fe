@@ -1,4 +1,4 @@
-export default [
+const testData = [
   {
     id: 1,
     name: "HUILU",
@@ -49,7 +49,7 @@ export default [
   },
   {
     id: 3,
-    name: "JAZZ MUSIIKKI JA TÄLLEE",
+    name: "JAZZ-MUSIIKKIA JA SILLEE",
     rooms: [
       {
         id: 2,
@@ -72,3 +72,5 @@ export default [
     requiredHours: 80,
   },
 ];
+
+export default testData;
