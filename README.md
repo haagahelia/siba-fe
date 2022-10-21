@@ -2,6 +2,14 @@ This is the FRONTEND repo.
 
 Backend repo at: https://github.com/haagahelia/Siba_be
 
+## Note: The frontend needs a .env.local file in the repo root folder
+
+Here is a sample content for that file. Make sure just non-empty lines ended with Enter:  (second line here just helping the first line to be correct :D )
+
+```
+REACT_APP_BE_SERVER_BASE_URL=http://localhost:3001/api
+REACT_APP_BE_SERVER_BASE_URL2=http://jokutoinenpalvelin:3001/api
+```
 
 # Getting Started with Create React App
 
