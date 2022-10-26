@@ -4,64 +4,163 @@ import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import Divider from "@mui/material/Divider";
 import Grid from "@mui/material/Grid";
-//import Box from "@mui/material/Box";
 import { styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
-import { Button, Typography } from "@mui/material";
-//import axios from "axios";
-
+import { Typography } from "@mui/material";
+import AlertBox from "../common/AlertBox";
+import ConfirmationDialog from "../common/ConfirmationDialog";
+import EditSubject from "./EditSubject";
+import PopUpDialog from "./PopDialog";
 import dao from "../../ajax/dao";
 
 //const baseUrl = process.env.REACT_APP_BE_SERVER_BASE_URL;
 //import {BASEURL} from "../config/consts.js";
 //const baseUrl = BASEURL;
 
-export default function SubjectList() {
-  const [subjectList, setSubjectList] = useState([]);
+export default function SubjectList(props) {
+  const { subjectList, refreshSubjects } = props;
+  const [alertOpen, setAlertOpen] = useState(false);
+  const [alertOptions, setAlertOptions] = useState({
+    message: "This is an error alert — check it out!",
+    severity: "error",
+  });
+  const [dialogOpen, setDialogOpen] = useState(false);
+  const [editDialogOpen, setEditDialogOpen] = useState(false);
+  // Tähän tallennetaan muokattavan subjectin tiedot, null kunnes muokkausnappia painaa
+  const [editSubject, setEditSubject] = useState({
+    id: null,
+    name: null,
+    groupSize: null,
+    groupCount: null,
+    sessionLength: null,
+    sessionCount: null,
+    area: null,
+    programId: null,
+    subjectName: null,
+  });
 
-  const refreshSubjects = async function  () {
-    const data = await dao.fetchSubjects();
-    setSubjectList(data);
-  }
+  const [dialogOptions, setDialogOptions] = useState({
+    title: "this is dialog",
+    content: "Something here",
+  });
+  const [deleteId, setDeleteId] = useState("");
 
-  useEffect(() => {
-        // ...do something ONLY when component did mount
-        // Notice: even if categories state change => not fired
-      refreshSubjects();
-  }, []);
-
-  const deleteSubject = (id) => {
-    if( dao.deleteOneSubjectById(id) )
-    {
-      //console.log("Delete Subject succesful!"); // Toimii...
-      refreshSubjects();  // ...tämäkin toimii, muttei johda heti refreshiin.
-    } else {
-      //console.log("Delete Subject failed!");
+  const deleteSubject = async (value) => {
+    let result = await dao.deleteSingleSubject(value);
+    if (result === 400) {
+      setAlertOptions({
+        severity: "error",
+        title: "Virhe",
+        message: "Jokin meni pieleen - yritä hetken kuluttua uudestaan.",
+      });
+      setAlertOpen(true);
+      return;
     }
+
+    if (result === "error") {
+      setAlertOptions({
+        severity: "error",
+        title: "Virhe",
+        message:
+          "Jokin meni pieleen, opetuksen poisto epäonnistui - yritä hetken kuluttua uudestaan.",
+      });
+      setAlertOpen(true);
+      return;
+    }
+
+    setAlertOptions({
+      severity: "success",
+      title: "Onnistui!",
+      message: value.subjectName + " poistettu.",
+    });
+    setAlertOpen(true);
+
+    refreshSubjects();
   };
+
+  const submitDelete = (value) => {
+    setDialogOptions({
+      title: "Haluatko varmasti poistaa " + value.subjectName + "?",
+      content:
+        "Painamalla jatka poistat " + value.subjectName + " listauksesta.",
+    });
+    setDialogOpen(true);
+    setDeleteId(value.id);
+    return;
+  };
+
+  const [open, setOpen] = useState(false);
+  const [hoverColor, sethoverColor] = useState("#CFD6D5  ");
+
+  const [singelSubject, setSingleSubject] = useState({
+    id: null,
+    name: null,
+    groupSize: null,
+    groupCount: null,
+    sessionLength: null,
+    sessionCount: null,
+    area: null,
+    programId: null,
+    subjectName: null,
+  });
 
   // STYLES
   const Box = styled(Paper)(({ theme }) => ({
     overflow: "auto",
   }));
 
-  // Tämän componentin voinee jakaa muutamaan alikomponenttiin, 
-  // että tiedoston pituus lyhenisi.
-  // TODO
   return (
     <div>
+      <AlertBox
+        alertOpen={alertOpen}
+        alertOptions={alertOptions}
+        setAlertOpen={setAlertOpen}
+      ></AlertBox>
+      <ConfirmationDialog
+        dialogOpen={dialogOpen}
+        dialogOptions={dialogOptions}
+        setDialogOpen={setDialogOpen}
+        confirmfunction={deleteSubject}
+        functionparam={deleteId}
+      ></ConfirmationDialog>
+      <EditSubject
+        editDialogOpen={editDialogOpen}
+        setEditDialogOpen={setEditDialogOpen}
+        data={editSubject}
+        refreshSubjects={refreshSubjects}
+        setEditSubject={setEditSubject}
+      ></EditSubject>
+      <PopUpDialog
+        open={open}
+        setOpen={setOpen}
+        data={singelSubject}
+        setSingleSubject={setSingleSubject}
+        submitDelete={submitDelete}
+        setEditDialogOpen={setEditDialogOpen}
+        setEditSubject={setEditSubject}
+      ></PopUpDialog>
       <Box>
         <nav>
           {subjectList.map((value) => {
             return (
               <List key={value.id}>
-                <ListItem disablePadding>
+                <ListItem
+                  disablePadding
+                  button
+                  onClick={() => {
+                    setSingleSubject(value);
+
+                    setOpen(true);
+                  }}
+                  onMouseEnter={() => sethoverColor("#CFD6D5  ")}
+                  onMouseLeave={() => sethoverColor("#FFFFFF ")}
+                >
                   <Grid item md={3} xs={7} padding={2}>
                     <Typography
                       variant="caption"
                       style={{ fontWeight: "bold" }}
                     >
-                      Name:
+                      Nimi:
                     </Typography>
                     <ListItemText
                       primary={value.subjectName}
@@ -75,7 +174,7 @@ export default function SubjectList() {
                       variant="caption"
                       style={{ fontWeight: "bold" }}
                     >
-                      Group size:
+                      Ryhmän koko:
                     </Typography>
                     <ListItemText
                       primary={value.groupSize}
@@ -89,7 +188,7 @@ export default function SubjectList() {
                       variant="caption"
                       style={{ fontWeight: "bold" }}
                     >
-                      Group count:
+                      Ryhmien määrä:
                     </Typography>
                     <ListItemText
                       primary={value.groupCount}
@@ -103,7 +202,7 @@ export default function SubjectList() {
                       variant="caption"
                       style={{ fontWeight: "bold" }}
                     >
-                      Session length:
+                      Opetuskerran pituus:
                     </Typography>
                     <ListItemText
                       primary={value.sessionLength}
@@ -112,56 +211,12 @@ export default function SubjectList() {
                       }}
                     ></ListItemText>
                   </Grid>
-                  <Grid item md={2} xs={2} padding={3}>
-                    <Typography
-                      variant="caption"
-                      style={{ fontWeight: "bold" }}
-                    >
-                      Session count:
-                    </Typography>
-                    <ListItemText
-                      primary={value.sessionCount}
-                      primaryTypographyProps={{
-                        variant: "body2",
-                      }}
-                    ></ListItemText>
-                  </Grid>
-                  <Grid item md={2} xs={2} padding={3}>
-                    <Typography
-                      variant="caption"
-                      style={{ fontWeight: "bold" }}
-                    >
-                      Area:
-                    </Typography>
-                    <ListItemText
-                      primary={value.area}
-                      primaryTypographyProps={{
-                        variant: "body2",
-                      }}
-                    ></ListItemText>
-                  </Grid>
-                  {/*
-                  <Grid item md={2} xs={2} padding={3}>
-                    <Typography
-                      variant="caption"
-                      style={{ fontWeight: "bold" }}
-                    >
-                      Program id:
-                    </Typography>
-                    <ListItemText
-                      primary={value.programId}
-                      primaryTypographyProps={{
-                        variant: "body2",
-                      }}
-                    ></ListItemText>
-                  </Grid>
-                 */}
                   <Grid item md={3} xs={7} padding={2}>
                     <Typography
                       variant="caption"
                       style={{ fontWeight: "bold" }}
                     >
-                      Program name:
+                      Pääaine:
                     </Typography>
                     <ListItemText
                       primary={value.name}
@@ -169,20 +224,6 @@ export default function SubjectList() {
                         variant: "body2",
                       }}
                     ></ListItemText>
-                  </Grid>
-                  {/*HUOM! Delete toimii, mutta sivu pitää refreshaa jotta näkyy.
-                     Lisäks delete buttonin sijainti voi aiheuttaa ongelmia dialogin kanssa kun/ jos tulee kaksi hover päälleikkäin. Sama juttu update */}
-                  <Grid item md={3} xs={7} padding={2}>
-                    <ListItemText>
-                      {" "}
-                      <Button
-                        onClick={() => {
-                          deleteSubject(value.id);
-                        }}
-                      >
-                        Delete
-                      </Button>
-                    </ListItemText>
                   </Grid>
                 </ListItem>
                 <Divider />

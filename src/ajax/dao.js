@@ -11,52 +11,103 @@ const baseUrl = process.env.REACT_APP_BE_SERVER_BASE_URL;
 // getSubjects, getAllSubjects?
 
 const fetchSubjects = async () => {
-    console.log("baseUrl :" +baseUrl);
-    const request = new Request(`${baseUrl}/subject/getAll`,{
-        method: 'GET',  
-    });
+  const request = new Request("http://localhost:3001/api/subject/getAll", {
+    method: "GET",
+  });
+  const response = await fetch(request);
 
-    const response = await fetch(request);
-    const data = await response.json();
-    //console.log("Data: "+data);
-    return data;
+  if (response.status === 500) {
+    return 500;
+  }
+
+  const data = await response.json();
+  console.log("Data: ", data);
+  return data;
 };
-const deleteOneSubjectById = async (subjectId) => {
-    const request = new Request(`${baseUrl}/subject/delete/${subjectId}`,{
-        method: 'DELETE',  
-    });
 
+const deleteSingleSubject = async (subjectId) => {
+  try {
+    const request = new Request(
+      `http://localhost:3001/api/subject/delete/${subjectId}`,
+      {
+        method: "DELETE",
+      }
+    );
     const response = await fetch(request);
-    const data = await response.json();
+    if (response.status === 400) {
+      return 400;
+    }
 
-    const result = data && data.returnValue===1 ? true : false;
+    const data = await response.json();
+    const result = data && data.affectedRows === 1 ? true : false;
     return result;
+  } catch (error) {
+    return "error";
+  }
 };
-const postNewSubject = async (newSubject) => {
-    const request = new Request(`${baseUrl}/subject/post`,{
-        method: 'POST',
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        }, 
-        body: JSON.stringify(newSubject),
-    });
 
+const postNewSubject = async (newSubject) => {
+  try {
+    const request = new Request("http://localhost:3001/api/subject/post", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newSubject),
+    });
     const response = await fetch(request);
+    if (response.status === 400) {
+      return 400;
+    }
+
+    if (response.status === 500) {
+      return 500;
+    }
     const data = await response.json();
-    return data.insertId;
-}
+    return data;
+  } catch (error) {
+    return "error";
+  }
+};
+
+const editSubject = async (editedSubject) => {
+  try {
+    const request = new Request("http://localhost:3001/api/subject/update", {
+      method: "PUT",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(editedSubject),
+    });
+    const response = await fetch(request);
+    if (response.status === 400) {
+      return 400;
+    }
+
+    if (response.status === 500) {
+      return 500;
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    return "error";
+  }
+};
 
 const getProgramNames = async () => {
-    const request = new Request(`${baseUrl}/program/getNames`,{
-        method: 'GET',  
-    });
+  const request = new Request("http://localhost:3001/api/program/getNames", {
+    method: "GET",
+  });
 
-    const response = await fetch(request);
-    const data = await response.json();
-    return data;
+  const response = await fetch(request);
+  if (response.status === 500) {
+    return 500;
+  }
+  const data = await response.json();
+  return data;
 };
-
 
 /*
 const fetchCategories = async () => {
@@ -93,14 +144,14 @@ const deleteOneCategoryById = async (categoryId) => {
 */
 
 const dao = {
-    fetchSubjects,
-    deleteOneSubjectById,
-    postNewSubject,
+  fetchSubjects,
+  deleteSingleSubject,
+  postNewSubject,
+  getProgramNames,
+  editSubject,
 
-    getProgramNames,
-    
-    // fetchCategories,
-    // fetchOneCategoryById,
-    // deleteOneCategoryById,
+  // fetchCategories,
+  // fetchOneCategoryById,
+  // deleteOneCategoryById,
 };
 export default dao;
