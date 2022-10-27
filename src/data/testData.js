@@ -168,8 +168,18 @@ export default {
           name: "n-62728",
           allocatedHours: 20,
         },
+        {
+          id: 6,
+          name: "n-420",
+          allocatedHours: 30,
+        },
+        {
+          id: 7,
+          name: "n-123469",
+          allocatedHours: 69,
+        },
       ],
-      allocatedHours: 81,
+      allocatedHours: 180,
       requiredHours: 90,
     },
     {
