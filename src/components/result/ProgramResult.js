@@ -87,7 +87,7 @@ export default function ProgramResult(props) {
                   labelColor={"black"}
                   bgColor={color}
                   padding={"3px"}
-                  completed={progress}
+                  completed={progress.toFixed(2) + '%'}
                 />
                 {CollapsedRow(prog)}
               </Grid2>
@@ -132,7 +132,7 @@ export default function ProgramResult(props) {
                       color: "#F6E9E9",
                     }}
                   >
-                    {room.name} -subjects
+                     {room.name} 
                   </Typography>
                 </Grid2>
                 <Grid2 xs={4}>
@@ -143,7 +143,7 @@ export default function ProgramResult(props) {
                       color: "#F6E9E9",
                     }}
                   >
-                    {room.allocatedHours} -subjects
+                    {room.allocatedHours} - tuntia
                   </Typography>
                 </Grid2>
               </Grid2>
