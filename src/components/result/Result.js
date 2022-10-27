@@ -20,6 +20,7 @@ export default function Result(props) {
       >
         {testData.map((prog) => {
           const progress = (prog.allocatedHours / prog.requiredHours) * 100;
+
           const color =
             progress > 100 ? "#FF1700" : progress < 80 ? "#FFE400" : "#06FF00";
 
@@ -36,7 +37,7 @@ export default function Result(props) {
                   labelColor={"black"}
                   bgColor={color}
                   padding={"3px"}
-                  completed={progress}
+                  completed={`${progress.toFixed(2)}%`}
                 />
               </Grid2>
             </>
