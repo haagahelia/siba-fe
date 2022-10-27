@@ -58,7 +58,7 @@ export default {
         },
       ],
       allocatedHours: 43,
-      requiredHours: 40,
+      requiredHours: 50,
     },
     {
       id: 2,
@@ -100,12 +100,12 @@ export default {
         {
           id: 3,
           name: "n-41312",
-          allocatedHours: 10,
+          allocatedHours: 30,
         },
         {
           id: 4,
           name: "n-890",
-          allocatedHours: 10,
+          allocatedHours: 20,
         },
         {
           id: 5,
@@ -113,8 +113,8 @@ export default {
           allocatedHours: 10,
         },
       ],
-      allocatedHours: 60,
-      requiredHours: 80,
+      allocatedHours: 90,
+      requiredHours: 60,
     },
     {
       id: 4,
@@ -128,21 +128,21 @@ export default {
         {
           id: 3,
           name: "n-41312",
-          allocatedHours: 10,
+          allocatedHours: 40,
         },
         {
           id: 4,
           name: "n-890",
-          allocatedHours: 10,
+          allocatedHours: 20,
         },
         {
           id: 5,
           name: "n-62728",
-          allocatedHours: 10,
+          allocatedHours: 20,
         },
       ],
-      allocatedHours: 95,
-      requiredHours: 100,
+      allocatedHours: 110,
+      requiredHours: 130,
     },
     {
       id: 5,
@@ -151,26 +151,26 @@ export default {
         {
           id: 2,
           name: "n-2222",
-          allocatedHours: 30,
+          allocatedHours: 11,
         },
         {
           id: 3,
           name: "n-41312",
-          allocatedHours: 10,
+          allocatedHours: 30,
         },
         {
           id: 4,
           name: "n-890",
-          allocatedHours: 10,
+          allocatedHours: 20,
         },
         {
           id: 5,
           name: "n-62728",
-          allocatedHours: 10,
+          allocatedHours: 20,
         },
       ],
-      allocatedHours: 90,
-      requiredHours: 100,
+      allocatedHours: 81,
+      requiredHours: 90,
     },
     {
       id: 6,
@@ -179,7 +179,7 @@ export default {
         {
           id: 2,
           name: "n-2222",
-          allocatedHours: 30,
+          allocatedHours: 35,
         },
         {
           id: 3,
@@ -189,16 +189,16 @@ export default {
         {
           id: 4,
           name: "n-890",
-          allocatedHours: 10,
+          allocatedHours: 30,
         },
         {
           id: 5,
           name: "n-62728",
-          allocatedHours: 10,
+          allocatedHours: 40,
         },
       ],
-      allocatedHours: 100,
-      requiredHours: 80,
+      allocatedHours: 115,
+      requiredHours: 90,
     },
     {
       id: 7,
@@ -207,7 +207,7 @@ export default {
         {
           id: 2,
           name: "n-2222",
-          allocatedHours: 30,
+          allocatedHours: 25,
         },
         {
           id: 3,
@@ -217,16 +217,16 @@ export default {
         {
           id: 4,
           name: "n-890",
-          allocatedHours: 10,
+          allocatedHours: 30,
         },
         {
           id: 5,
           name: "n-62728",
-          allocatedHours: 10,
+          allocatedHours: 15,
         },
       ],
-      allocatedHours: 60,
-      requiredHours: 100,
+      allocatedHours: 80,
+      requiredHours: 155,
     },
   ],
   subjects: {
