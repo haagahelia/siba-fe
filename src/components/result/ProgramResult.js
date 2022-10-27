@@ -119,7 +119,15 @@ export default function ProgramResult(props) {
           </KeyboardArrowDownIcon>
         )}
 
-        <Collapse in={expand}>
+        <Collapse in={expand} style={{width:"100%"}}>
+          <Grid2 container>
+            <Grid2 xs={8}>
+              <Typography style={{ color: "#F6E9E9" ,fontSize: 20}} >Rooms</Typography>
+            </Grid2>
+            <Grid2 xs={4}>
+              <Typography style={{ color: "#F6E9E9" ,fontSize: 20}} >Hours</Typography>
+            </Grid2>
+          </Grid2>
           {prog1.rooms.map((room) => {
             return (
               <Grid2 container>
@@ -128,7 +136,7 @@ export default function ProgramResult(props) {
                   <Typography
                     style={{
                       textAlign: "center",
-                      marginTop: "5%",
+                      marginTop: 20,
                       color: "#F6E9E9",
                     }}
                   >
@@ -139,11 +147,11 @@ export default function ProgramResult(props) {
                   <Typography
                     style={{
                       textAlign: "center",
-                      marginTop: "5%",
+                      marginTop: 20,
                       color: "#F6E9E9",
                     }}
                   >
-                    {room.allocatedHours} - tuntia
+                    {room.allocatedHours} h
                   </Typography>
                 </Grid2>
               </Grid2>
