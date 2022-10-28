@@ -37,7 +37,7 @@ export default function Result(props) {
                   labelColor={"black"}
                   bgColor={color}
                   padding={"3px"}
-                  completed={`${progress.toFixed(2)}%`}
+                  completed={progress.toFixed(2)}
                 />
               </Grid2>
             </>
