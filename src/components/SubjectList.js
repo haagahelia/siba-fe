@@ -125,13 +125,7 @@ export default function SubjectList(props) {
   const Box = styled(Paper)(({ theme }) => ({
     overflow: "auto",
   }));
-  /*
-  <Dialog open={open} onClose={() => setOpen(false)} width="400px">
-        <DialogTitle id="dialog-title">Dialogin otsikko</DialogTitle>
-        <DialogContent>
-          <PopUpDialog></PopUpDialog>
-        </DialogContent>
-      </Dialog>*/ //DIALOGI DIVIN JÄLKEEN, EI ANTANUT KOMMENTOIDA SIINÄ KOHTAA
+  
   return (
     <div>
       
