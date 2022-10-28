@@ -1,6 +1,14 @@
 import React, { useState, useEffect } from "react";
 import TextField from "@mui/material/TextField";
-import { Button, Grid, FormHelperText } from "@mui/material";
+import {
+  Button,
+  Grid,
+  FormHelperText,
+  CardHeader,
+  Card,
+  CardContent,
+  Typography,
+} from "@mui/material";
 import { Box, Container } from "@mui/system";
 import Select from "@mui/material/Select";
 import InputLabel from "@mui/material/InputLabel";
@@ -159,8 +167,29 @@ export default function AddSubject(props) {
         confirmfunction={addSubject}
         functionparam={formik.values}
       ></ConfirmationDialog>
-      <Container style={{ width: "85%", marginTop: "50px" }}>
-        <Box style={{ backgroundColor: "rgba(52, 139, 147, 0.5 )" }}>
+      {/* <Container
+        sx={{
+          width: "85%",
+          marginTop: "50px",
+        }}
+      >
+        <Box
+          sx={{ backgroundColor: "#272121", borderColor: "#E16428", boder: 1 }}
+        > */}
+      <Card
+        variant="outlined"
+        sx={{
+          width: "70%",
+          padding: 1,
+          margin: "auto",
+          marginTop: "20px",
+        }}
+      >
+        <CardContent>
+          <CardHeader
+            title="Lisää opetus"
+            sx={{ marginBottom: "30px" }}
+          ></CardHeader>
           <form onSubmit={formik.handleSubmit}>
             <div id="input-container">
               <Grid
@@ -309,6 +338,9 @@ export default function AddSubject(props) {
                   </FormHelperText>
                 </FormControl>
               </Grid>
+              <Typography variant="h6" sx={{ color: "#F6E9E9" }}>
+                Kopioi tiedot toisesta opetuksesta
+              </Typography>
               <Grid item xs={4}>
                 <FormControl sx={{ minWidth: 340 }}>
                   <InputLabel>
@@ -330,8 +362,10 @@ export default function AddSubject(props) {
               </Grid>
             </div>
           </form>
-        </Box>
-      </Container>
+        </CardContent>
+      </Card>
+      {/* </Box>
+      </Container> */}
     </div>
   );
 }
