@@ -87,7 +87,7 @@ export default function ProgramResult(props) {
                   labelColor={"black"}
                   bgColor={color}
                   padding={"3px"}
-                  completed={progress.toFixed(2) + '%'}
+                  completed={progress.toFixed(2) }
                 />
                 {CollapsedRow(prog)}
               </Grid2>
@@ -122,10 +122,10 @@ export default function ProgramResult(props) {
         <Collapse in={expand} style={{width:"100%"}}>
           <Grid2 container>
             <Grid2 xs={8}>
-              <Typography style={{ color: "#F6E9E9" ,fontSize: 20}} >Rooms</Typography>
+              <Typography style={{ color: "#F6E9E9" ,fontSize: 20}} >Huoneet</Typography>
             </Grid2>
             <Grid2 xs={4}>
-              <Typography style={{ color: "#F6E9E9" ,fontSize: 20}} >Hours</Typography>
+              <Typography style={{ color: "#F6E9E9" ,fontSize: 20}} >Tunnit</Typography>
             </Grid2>
           </Grid2>
           {prog1.rooms.map((room) => {
