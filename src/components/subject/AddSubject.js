@@ -344,7 +344,7 @@ export default function AddSubject(props) {
               <Grid item xs={4}>
                 <FormControl sx={{ minWidth: 340 }}>
                   <InputLabel>
-                    Kopioi olemsssa olevan opetuksen tiedot
+                    Kopioi olemassa olevan opetuksen tiedot
                   </InputLabel>
                   <Select onChange={handleChange}>
                     {subjectList.map((value) => {
@@ -358,7 +358,7 @@ export default function AddSubject(props) {
                 </FormControl>
               </Grid>
               <Grid item xs={3} padding={2}>
-                <Button type="submit">Lisää</Button>
+                <Button variant="contained" color="success" type="submit">Lisää</Button>
               </Grid>
             </div>
           </form>

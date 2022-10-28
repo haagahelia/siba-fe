@@ -31,9 +31,10 @@ export default function PopUpDialog(props) {
       <Dialog open={open} onClose={() => setOpen(false)} width="400px">
         <DialogTitle id="dialog-title">{data?.subjectName}</DialogTitle>
         <DialogContent>
-          <DialogActions>
-            <Button onClick={() => submitDelete(data)}>Poista</Button>
+          <DialogActions sx={{ justifyContent: "space-evenly", padding: "16px" }}>
+            <Button variant="contained" color="error" onClick={() => submitDelete(data)}>Poista</Button>
             <Button
+              variant="contained" color="warning"
               onClick={() => {
                 // Tallentaa editSubjectiin tiedot joita halutaan muokata
                 setEditSubject(data);
@@ -54,44 +55,44 @@ export default function PopUpDialog(props) {
               padding={2}
             >
               <Grid item s={6}>
-                <Typography variant="subtitle1">
-                  Nimi:
+                <Typography variant="subtitle1" color="black">
+                  Nimi:&nbsp;
                   {data?.subjectName}
                 </Typography>
               </Grid>
               <Grid item s={6}>
-                <Typography variant="subtitle1">
-                  Ryhmän koko:
+                <Typography variant="subtitle1" color="black">
+                  Ryhmän koko:&nbsp;
                   {data?.groupSize}
                 </Typography>
               </Grid>
               <Grid item s={6}>
-                <Typography variant="subtitle1">
-                  Ryhmien määrä:
+                <Typography variant="subtitle1" color="black">
+                  Ryhmien määrä:&nbsp;
                   {data?.groupCount}
                 </Typography>
               </Grid>
               <Grid item s={6}>
-                <Typography variant="subtitle1">
-                  Tuntien pituus:
+                <Typography variant="subtitle1" color="black">
+                  Tuntien pituus:&nbsp;
                   {data?.sessionLength}
                 </Typography>
               </Grid>
               <Grid item s={6}>
-                <Typography variant="subtitle1">
-                  Tuntien määrä:
+                <Typography variant="subtitle1" color="black">
+                  Tuntien määrä:&nbsp;
                   {data?.sessionCount}
                 </Typography>
               </Grid>
               <Grid item s={6}>
-                <Typography variant="subtitle1">
-                  Pinta-ala(m2):
+                <Typography variant="subtitle1" color="black">
+                  Pinta-ala(m2):&nbsp;
                   {data?.area}
                 </Typography>
               </Grid>
               <Grid item s={6}>
-                <Typography variant="subtitle1">
-                  Pääaine:
+                <Typography variant="subtitle1" color="black">
+                  Pääaine:&nbsp;
                   {data?.name}
                 </Typography>
               </Grid>
