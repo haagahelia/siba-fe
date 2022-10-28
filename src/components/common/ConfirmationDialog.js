@@ -29,9 +29,13 @@ export default function ConfirmationDialog(props) {
         </DialogContent>
         <DialogActions>
           {" "}
-          <Button onClick={handleClose}>Peruuta</Button>
+          <Button variant="contained" color="error" onClick={handleClose}>
+            Peruuta
+          </Button>
           <Button
             autoFocus
+            variant="contained"
+            color="success"
             onClick={() => {
               // console.log(functionparam);
               if (functionparam) {
