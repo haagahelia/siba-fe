@@ -1,18 +1,10 @@
-import React, { useState, useEffect, useTimeout } from "react";
-import TextField from "@mui/material/TextField";
-import { Button, Grid, FormHelperText } from "@mui/material";
-import Select from "@mui/material/Select";
-import MenuItem from "@mui/material/MenuItem";
-import FormControl from "@mui/material/FormControl";
-import { Formik, useFormik } from "formik";
+import React, { useState, useEffect } from "react";
+import { useFormik } from "formik";
 import ConfirmationDialog from "../common/ConfirmationDialog";
 import {
   validate,
   capitalizeFirstLetter,
 } from "../../validation/ValidateEditSubject";
-import DialogTitle from "@mui/material/DialogTitle";
-import Dialog from "@mui/material/Dialog";
-import { DialogActions, DialogContent, DialogContentText } from "@mui/material";
 import AlertBox from "../common/AlertBox";
 import dao from "../../ajax/dao";
 import EditSubjectDialog from "./EditSubjectDialog";

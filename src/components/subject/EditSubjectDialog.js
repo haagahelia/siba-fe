@@ -9,8 +9,7 @@ import Dialog from "@mui/material/Dialog";
 import { DialogActions, DialogContent, DialogContentText } from "@mui/material";
 
 export default function EditSubjectDialog(props) {
-  const { programNameList, formik, values, editSubject, setEditSubject } =
-    props;
+  const { programNameList, formik, values, setEditSubject } = props;
 
   const [open, setOpen] = useState(false);
   const handleClose = () => {
