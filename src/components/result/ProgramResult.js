@@ -87,7 +87,8 @@ export default function ProgramResult(props) {
                   labelColor={"black"}
                   bgColor={color}
                   padding={"3px"}
-                  completed={progress.toFixed(2) }
+                  completed={Math.round( progress) }
+                  maxCompleted={100}
                 />
                 {CollapsedRow(prog)}
               </Grid2>
