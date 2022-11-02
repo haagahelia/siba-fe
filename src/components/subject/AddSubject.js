@@ -167,15 +167,6 @@ export default function AddSubject(props) {
         confirmfunction={addSubject}
         functionparam={formik.values}
       />
-      {/* <Container
-        sx={{
-          width: "85%",
-          marginTop: "50px",
-        }}
-      >
-        <Box
-          sx={{ backgroundColor: "#272121", borderColor: "#E16428", boder: 1 }}
-        > */}
       <Card
         variant="outlined"
         sx={{
@@ -366,8 +357,6 @@ export default function AddSubject(props) {
           </form>
         </CardContent>
       </Card>
-      {/* </Box>
-      </Container> */}
     </div>
   );
 }
