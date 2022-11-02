@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import Grid from "@mui/material/Grid";
-import EditSubject from "./EditSubject";
 import PopUpDialog from "./PopDialog";
 import SubjectList from "./SubjectList";
 import CardContent from "@mui/material/CardContent";

@@ -1,18 +1,15 @@
 import React, { useEffect, useState } from "react";
 import Grid from "@mui/material/Grid";
 import {
-  Button,
   Dialog,
   DialogContent,
   DialogContentText,
   DialogTitle,
   Typography,
-  Box,
   DialogActions,
 } from "@mui/material";
 import DeleteSubject from "./DeleteSubject";
 import EditSubject from "./EditSubject";
-import EditSubjectDialog from "./EditSubjectDialog";
 
 export default function PopUpDialog(props) {
   const { open, setOpen, data, refreshSubjects } = props;
