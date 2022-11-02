@@ -154,7 +154,7 @@ export default function AddSubject(props) {
       <Card
         variant="outlined"
         sx={{
-          width: "70%",
+          width: "65%",
           padding: 1,
           margin: "auto",
           marginTop: "20px",
