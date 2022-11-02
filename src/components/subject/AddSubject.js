@@ -167,15 +167,6 @@ export default function AddSubject(props) {
         confirmfunction={addSubject}
         functionparam={formik.values}
       ></ConfirmationDialog>
-      {/* <Container
-        sx={{
-          width: "85%",
-          marginTop: "50px",
-        }}
-      >
-        <Box
-          sx={{ backgroundColor: "#272121", borderColor: "#E16428", boder: 1 }}
-        > */}
       <Card
         variant="outlined"
         sx={{
@@ -358,14 +349,14 @@ export default function AddSubject(props) {
                 </FormControl>
               </Grid>
               <Grid item xs={3} padding={2}>
-                <Button variant="contained" color="success" type="submit">Lisää</Button>
+                <Button variant="contained" color="success" type="submit">
+                  Lisää
+                </Button>
               </Grid>
             </div>
           </form>
         </CardContent>
       </Card>
-      {/* </Box>
-      </Container> */}
     </div>
   );
 }
