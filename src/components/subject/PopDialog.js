@@ -12,9 +12,17 @@ import {
 } from "@mui/material";
 import DeleteSubject from "./DeleteSubject";
 import EditSubject from "./EditSubject";
+import EditSubjectDialog from "./EditSubjectDialog";
 
 export default function PopUpDialog(props) {
-  const { open, setOpen, data, refreshSubjects } = props;
+  const {
+    open,
+    setOpen,
+    data,
+    refreshSubjects,
+    setEditDialogOpen,
+    setEditSubject,
+  } = props;
 
   const handeClose = () => {
     setOpen = false;
@@ -32,6 +40,19 @@ export default function PopUpDialog(props) {
               data={data}
               refreshSubjects={refreshSubjects}
             ></DeleteSubject>
+            {/* <EditSubjectDialog></EditSubjectDialog> */}
+            <Button
+              variant="contained"
+              color="warning"
+              onClick={() => {
+                // Tallentaa editSubjectiin tiedot joita halutaan muokata
+                setEditSubject(data);
+                console.log("Nykyiset tiedot", data);
+                setOpen(true);
+              }}
+            >
+              Muokkaa
+            </Button>
           </DialogActions>
           <DialogContentText>
             <Grid

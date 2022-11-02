@@ -12,26 +12,26 @@ import { CardHeader, Card, Container } from "@mui/material";
 
 export default function SubjectList(props) {
   const { subjectList, refreshSubjects, setSubjectList } = props;
-  // const [editDialogOpen, setEditDialogOpen] = useState(false);
-  // // Tähän tallennetaan muokattavan subjectin tiedot, null kunnes muokkausnappia painaa
-  // const [editSubject, setEditSubject] = useState({
-  //   id: null,
-  //   name: null,
-  //   groupSize: null,
-  //   groupCount: null,
-  //   sessionLength: null,
-  //   sessionCount: null,
-  //   area: null,
-  //   programId: null,
-  //   subjectName: null,
-  // });
+  const [editDialogOpen, setEditDialogOpen] = useState(false);
+  // Tähän tallennetaan muokattavan subjectin tiedot, null kunnes muokkausnappia painaa
+  const [editSubject, setEditSubject] = useState({
+    id: null,
+    name: null,
+    groupSize: null,
+    groupCount: null,
+    sessionLength: null,
+    sessionCount: null,
+    area: null,
+    programId: null,
+    subjectName: null,
+  });
 
   return (
     <div>
       <PopUpDialog
         refreshSubjects={refreshSubjects}
-        // setEditDialogOpen={setEditDialogOpen}
-        // setEditSubject={setEditSubject}
+        setEditDialogOpen={setEditDialogOpen}
+        setEditSubject={setEditSubject}
       ></PopUpDialog>
       <Grid
         container
