@@ -1,8 +1,13 @@
 import Grid2 from "@mui/material/Unstable_Grid2";
+import React from "react";
 import ProgressBar from "@ramonak/react-progress-bar";
-
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
+import { Collapse, Typography, Box } from "@mui/material";
 export default function Result(props) {
+
   const testData = props.data;
+ 
   return (
     <>
       <Grid2
@@ -30,16 +35,15 @@ export default function Result(props) {
               <Grid2 xs={3} style={{ color: "rgb(246, 233, 233)" }}>
                 {prog.name}
               </Grid2>
-              <Grid2 xs={3}>
+              <Grid2 xs={3}> 
                 <ProgressBar
-                  // Jouduin kommentoimaan pois muutoin appi ei toiminut
-                  // style= {styles.section}
                   baseBgColor={"#272121"}
                   labelColor={"black"}
                   bgColor={color}
                   padding={"3px"}
                   completed={Math.round(progress)}
                 />
+                {CollapsedRow(prog)}
               </Grid2>
             </>
           );
@@ -47,4 +51,66 @@ export default function Result(props) {
       </Grid2>
     </>
   );
+
+
+  function CollapsedRow(prog1) {
+    const [expand, setExpand] = React.useState(false);
+
+    return (
+      <Grid2 container>
+        {expand ? (
+          <KeyboardArrowUpIcon
+            sx={{ color: "white", fontSize: 24 }}
+            onClick={() => setExpand(!expand)}
+          >
+            {" "}
+          </KeyboardArrowUpIcon>
+        ) : (
+          <KeyboardArrowDownIcon
+            sx={{ color: "white", fontSize: 24 }}
+            onClick={() => setExpand(!expand)}
+          >
+            {" "}
+          </KeyboardArrowDownIcon>
+        )}
+
+        <Collapse in={expand} style={{width:"100%"}}>
+          <Grid2 container>
+            <Grid2 xs={8}>
+              <Typography style={{ color: "#F6E9E9" ,fontSize: 18}} >Aineryhmät</Typography>
+            </Grid2>
+
+          </Grid2>
+          {prog1.programs.map((roomprog) => {
+            return (
+              <Grid2 container>
+                <Grid2 xs={8}>
+                  {" "}
+                  <Typography
+                    style={{
+                      textAlign: "center",
+                      marginTop: 1,
+                      color: "#F6E9E9",
+                    }}
+                  >
+                     {roomprog.name} 
+                  </Typography>
+                </Grid2>
+                <Grid2 xs={4}>
+                  <Typography
+                    style={{
+                      textAlign: "center",
+                      marginTop: 10,
+                      color: "#F6E9E9",
+                    }}
+                  >
+                  </Typography>
+                </Grid2>
+              </Grid2>
+            );
+          })}
+        </Collapse>
+      </Grid2>
+    );
+  }
 }
