@@ -41,7 +41,6 @@ export default function Result(props) {
                   padding={"3px"}
                   completed={Math.round(progress)}
                 />
-                {CollapsedRow(prog)}
               </Grid2>
             </>
           );
@@ -49,65 +48,4 @@ export default function Result(props) {
       </Grid2>
     </>
   );
-
-  function CollapsedRow(prog1) {
-    const [expand, setExpand] = React.useState(false);
-
-    return (
-      <Grid2 container>
-        {expand ? (
-          <KeyboardArrowUpIcon
-            sx={{ color: "white", fontSize: 24 }}
-            onClick={() => setExpand(!expand)}
-          >
-            {" "}
-          </KeyboardArrowUpIcon>
-        ) : (
-          <KeyboardArrowDownIcon
-            sx={{ color: "white", fontSize: 24 }}
-            onClick={() => setExpand(!expand)}
-          >
-            {" "}
-          </KeyboardArrowDownIcon>
-        )}
-
-        <Collapse in={expand} style={{ width: "100%" }}>
-          <Grid2 container>
-            <Grid2 xs={8}>
-              <Typography style={{ color: "#F6E9E9", fontSize: 18 }}>
-                Aineryhmät
-              </Typography>
-            </Grid2>
-          </Grid2>
-          {prog1.programs.map((roomprog) => {
-            return (
-              <Grid2 container>
-                <Grid2 xs={8}>
-                  {" "}
-                  <Typography
-                    style={{
-                      textAlign: "center",
-                      marginTop: 1,
-                      color: "#F6E9E9",
-                    }}
-                  >
-                    {roomprog.name}
-                  </Typography>
-                </Grid2>
-                <Grid2 xs={4}>
-                  <Typography
-                    style={{
-                      textAlign: "center",
-                      marginTop: 10,
-                      color: "#F6E9E9",
-                    }}
-                  />
-                </Grid2>
-              </Grid2>
-            );
-          })}
-        </Collapse>
-      </Grid2>
-    );
-  }
 }
