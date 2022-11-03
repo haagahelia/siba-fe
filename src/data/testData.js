@@ -6,16 +6,6 @@ export default {
       name: "n-1234",
       allocatedHours: 50,
       requiredHours: 60,
-      programs: [
-        {
-          id: 1,
-          name: "Huilu soittajat",
-        },
-        {
-          id: 2,
-          name: "Bongo soittajat",
-        },
-      ],
     },
     {
       id: 2,
