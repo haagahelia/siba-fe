@@ -24,7 +24,7 @@ export default function () {
       <ProgramResult data={testData.programs} />
       <div style={{ width: "80%", margin: "auto" }}>
         <Typography style={{ color: "#F6E9E9" }}>Huoneet</Typography>
-        <Result data={testData.rooms} />
+        <Result data={testData.rooms} dropdownData={testData.programs} />
       </div>
     </>
   );
