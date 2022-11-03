@@ -6,80 +6,30 @@ export default {
       name: "n-1234",
       allocatedHours: 50,
       requiredHours: 60,
-      programs: [
-        {
-          id: 1,
-          name: "Huilu soittajat",
-        }, 
-        {
-          id: 2,
-          name: "Bongo soittajat",
-        },
-      ]
     },
     {
       id: 2,
       name: "n-2222",
       allocatedHours: 15,
       requiredHours: 60,
-      programs: [
-        {
-          id: 1,
-          name: "Huilu soittajat",
-        }, 
-        {
-          id: 2,
-          name: "Bongo soittajat",
-        },
-      ]
     },
     {
       id: 3,
       name: "n-41312",
       allocatedHours: 50,
       requiredHours: 60,
-      programs: [
-        {
-          id: 1,
-          name: "Huilu soittajat",
-        }, 
-        {
-          id: 2,
-          name: "Bongo soittajat",
-        },
-      ]
     },
     {
       id: 4,
       name: "n-890",
       allocatedHours: 60,
       requiredHours: 60,
-      programs: [
-        {
-          id: 1,
-          name: "Huilu soittajat",
-        }, 
-        {
-          id: 2,
-          name: "Bongo soittajat",
-        },
-      ]
     },
     {
       id: 5,
       name: "n-62728",
       allocatedHours: 50,
       requiredHours: 100,
-      programs: [
-        {
-          id: 1,
-          name: "Huilu soittajat",
-        }, 
-        {
-          id: 2,
-          name: "Bongo soittajat",
-        },
-      ]
     },
   ],
   programs: [
