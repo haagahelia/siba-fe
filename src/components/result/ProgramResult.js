@@ -39,7 +39,10 @@ export default function ProgramResult(props) {
           >
             {programName} -subjects
           </Typography>
-          <Result data={testData.subjects[programId]} />
+          <Result
+            data={testData.subjects[programId]}
+            dropdownData={testData.rooms}
+          />
         </Box>
       </Modal>
       <Grid2
