@@ -81,7 +81,13 @@ export default function PopUpDialog(props) {
               <Grid item s={6}>
                 <Typography variant="subtitle1" color="black">
                   Pääaine:&nbsp;
-                  {data?.name}
+                  {data?.programName}
+                </Typography>
+              </Grid>
+              <Grid item s={6}>
+                <Typography variant="subtitle1" color="black">
+                  Huoneen tyyppi:&nbsp;
+                  {data?.spaceTypeName}
                 </Typography>
               </Grid>
             </Grid>

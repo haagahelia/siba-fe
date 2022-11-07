@@ -17,6 +17,7 @@ import AddSubjectForm from "./AddSubjectForm";
 export default function AddSubject(props) {
   const { refreshSubjects, subjectList } = props;
   const [programNameList, setProgramNameList] = useState([]);
+  const [spaceTypeNameList, setSpaceTypeNameList] = useState([]);
   const [alertOpen, setAlertOpen] = useState(false);
   const [alertOptions, setAlertOptions] = useState({
     title: "This is title",
@@ -72,6 +73,25 @@ export default function AddSubject(props) {
     programs();
   }, []);
 
+  const spaceType = async function () {
+    const data = await dao.getSpaceTypeNames();
+    console.log("Niin...", data);
+    if (data === 500) {
+      setAlertOptions({
+        severity: "error",
+        title: "Virhe",
+        message: "Jokin meni pieleen palvelimella. Huonetyyppejä ei löytynyt.",
+      });
+      setAlertOpen(true);
+      return;
+    } else {
+      setSpaceTypeNameList(data);
+    }
+  };
+  useEffect(() => {
+    spaceType();
+  }, []);
+
   const addSubject = async (values) => {
     let capitalName = capitalizeFirstLetter(values.name);
     let newSubject = {
@@ -82,6 +102,7 @@ export default function AddSubject(props) {
       sessionCount: values.sessionCount,
       area: values.area,
       programId: values.programId,
+      spaceTypeId: values.spaceTypeId,
     };
     let result = await dao.postNewSubject(newSubject);
     if (result === 400) {
@@ -134,6 +155,7 @@ export default function AddSubject(props) {
       sessionCount: selected.sessionCount,
       area: selected.area,
       programId: selected.programId,
+      spaceTypeId: selected.spaceTypeId,
     });
   };
 
@@ -173,6 +195,7 @@ export default function AddSubject(props) {
             setCopySubjectData={setCopySubjectData}
             subjectList={subjectList}
             copySubjectData={copySubjectData}
+            spaceTypeNameList={spaceTypeNameList}
           />
         </CardContent>
       </Card>
