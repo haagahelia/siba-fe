@@ -13,6 +13,7 @@ export default function EditSubject(props) {
   // Aina kun editSubject muuttuu subjectList.js filussa ne tiedot tulee tähän nimellä data
   const { data, refreshSubjects } = props;
   const [programNameList, setProgramNameList] = useState([]);
+  const [spaceTypeNameList, setSpaceTypeNameList] = useState([]);
   const [alertOpen, setAlertOpen] = useState(false);
   const [alertOptions, setAlertOptions] = useState({
     title: "This is title",
@@ -34,6 +35,7 @@ export default function EditSubject(props) {
     area: null,
     programId: null,
     subjectName: null,
+    spaceTypeId: null,
   });
 
   const formik = useFormik({
@@ -62,6 +64,7 @@ export default function EditSubject(props) {
       sessionCount: values.sessionCount,
       area: values.area,
       programId: values.programId,
+      spaceTypeId: values.spaceTypeId,
       id: values.id,
     };
     let result = await dao.editSubject(editedSubject);
@@ -123,6 +126,25 @@ export default function EditSubject(props) {
     programs();
   }, []);
 
+  const spaceType = async function () {
+    const data = await dao.getSpaceTypeNames();
+    console.log("Niin...", data);
+    if (data === 500) {
+      setAlertOptions({
+        severity: "error",
+        title: "Virhe",
+        message: "Jokin meni pieleen palvelimella. Huonetyyppejä ei löytynyt.",
+      });
+      setAlertOpen(true);
+      return;
+    } else {
+      setSpaceTypeNameList(data);
+    }
+  };
+  useEffect(() => {
+    spaceType();
+  }, []);
+
   return (
     <div>
       <AlertBox
@@ -139,6 +161,7 @@ export default function EditSubject(props) {
       />
       <EditSubjectDialog
         programNameList={programNameList}
+        spaceTypeNameList={spaceTypeNameList}
         data={data}
         formik={formik}
         values={formik.values}
