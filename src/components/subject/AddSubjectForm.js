@@ -15,6 +15,7 @@ export default function AddSubjectForm(props) {
     setCopySubjectData,
     subjectList,
     copySubjectData,
+    spaceTypeNameList,
   } = props;
 
   return (
@@ -22,14 +23,14 @@ export default function AddSubjectForm(props) {
       <form onSubmit={formik.handleSubmit}>
         <Grid
           container
-          rowSpacing={4}
-          columnSpacing={5}
-          column={6}
+          rowSpacing={3}
+          columnSpacing={1}
+          column={8}
           justifyContent="space-evenly"
           alignItems="center"
           padding={1}
         >
-          <Grid item xs={12} sm={6} md={4}>
+          <Grid item xs={12} sm={6} md={3}>
             <TextField
               error={formik.touched.name && formik.errors.name ? true : false}
               name="name"
@@ -45,7 +46,7 @@ export default function AddSubjectForm(props) {
               }
             />
           </Grid>
-          <Grid item xs={12} sm={6} md={4}>
+          <Grid item xs={12} sm={6} md={3}>
             <TextField
               error={
                 formik.touched.groupSize && formik.errors.groupSize
@@ -65,7 +66,7 @@ export default function AddSubjectForm(props) {
               }
             />
           </Grid>
-          <Grid item xs={12} sm={6} md={4}>
+          <Grid item xs={12} sm={6} md={3}>
             <TextField
               error={
                 formik.touched.groupCount && formik.errors.groupCount
@@ -81,7 +82,7 @@ export default function AddSubjectForm(props) {
               helperText={formik.touched.groupCount && formik.errors.groupCount}
             />
           </Grid>
-          <Grid item xs={12} sm={6} md={4}>
+          <Grid item xs={12} sm={6} md={3}>
             <TextField
               error={
                 formik.touched.sessionLength && formik.errors.sessionLength
@@ -99,7 +100,7 @@ export default function AddSubjectForm(props) {
               }
             />
           </Grid>
-          <Grid item xs={12} sm={6} md={4}>
+          <Grid item xs={12} sm={6} md={3}>
             <TextField
               error={
                 formik.touched.sessionCount && formik.errors.sessionCount
@@ -117,7 +118,7 @@ export default function AddSubjectForm(props) {
               }
             />
           </Grid>
-          <Grid item xs={12} sm={6} md={4}>
+          <Grid item xs={12} sm={6} md={3}>
             <TextField
               error={formik.touched.area && formik.errors.area ? true : false}
               name="area"
@@ -129,8 +130,8 @@ export default function AddSubjectForm(props) {
               helperText={formik.touched.area && formik.errors.area}
             />
           </Grid>
-          <Grid item xs={12}>
-            <FormControl sx={{ m: 4, minWidth: 120 }}>
+          <Grid item xs={12} sm={12} md={3}>
+            <FormControl sx={{ maxWidth: 220, maxHeight: 58, minWidth: 120 }}>
               <InputLabel>Pääaine</InputLabel>
 
               <Select
@@ -157,7 +158,35 @@ export default function AddSubjectForm(props) {
               </FormHelperText>
             </FormControl>
           </Grid>
-          <Grid item xs={12} sm={6} md={4}>
+          <Grid item xs={12} sm={12} md={3}>
+            <FormControl sx={{ maxWidth: 220, maxHeight: 58, minWidth: 120 }}>
+              <InputLabel>Huoneen tyyppi</InputLabel>
+
+              <Select
+                name="spaceTypeId"
+                onChange={formik.handleChange("spaceTypeId")}
+                value={formik.values.spaceTypeId}
+                error={
+                  formik.touched.spaceTypeId && formik.errors.spaceTypeId
+                    ? true
+                    : false
+                }
+                onBlur={formik.handleBlur("spaceTypeId")}
+              >
+                {spaceTypeNameList.map((value) => {
+                  return (
+                    <MenuItem key={value.id} value={value.id}>
+                      {value.name}
+                    </MenuItem>
+                  );
+                })}
+              </Select>
+              <FormHelperText>
+                {formik.touched.spaceTypeId && formik.errors.spaceTypeId}
+              </FormHelperText>
+            </FormControl>
+          </Grid>
+          <Grid item xs={12}>
             <Typography variant="h6" sx={{ color: "#F6E9E9" }}>
               Kopioi tiedot toisesta opetuksesta
             </Typography>
@@ -183,9 +212,7 @@ export default function AddSubjectForm(props) {
             variant="contained"
             color="success"
             onClick={() => {
-              console.log("Values", values);
               setCopySubjectData(values);
-              console.log("Well??", copySubjectData);
             }}
           >
             Lisää
