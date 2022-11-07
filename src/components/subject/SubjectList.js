@@ -117,7 +117,7 @@ export default function SubjectListItems(props) {
                       Pääaine:
                     </Typography>
                     <ListItemText
-                      primary={value.name}
+                      primary={value.programName}
                       primaryTypographyProps={{
                         variant: "body2",
                       }}

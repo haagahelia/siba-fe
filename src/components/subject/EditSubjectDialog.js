@@ -9,7 +9,8 @@ import Dialog from "@mui/material/Dialog";
 import { DialogActions, DialogContent, DialogContentText } from "@mui/material";
 
 export default function EditSubjectDialog(props) {
-  const { programNameList, formik, values, setEditSubject } = props;
+  const { programNameList, formik, values, setEditSubject, spaceTypeNameList } =
+    props;
 
   const [open, setOpen] = useState(false);
   const handleClose = () => {
@@ -22,6 +23,7 @@ export default function EditSubjectDialog(props) {
       sessionCount: null,
       area: null,
       programId: null,
+      spaceTypeId: null,
       subjectName: null,
     });
     setOpen(false);
@@ -196,6 +198,33 @@ export default function EditSubjectDialog(props) {
                     </Select>
                     <FormHelperText>
                       {formik.touched.programId && formik.errors.programId}
+                    </FormHelperText>
+                  </FormControl>
+                </Grid>
+                <Grid item xs={12}>
+                  <FormControl sx={{ minWidth: 225 }}>
+                    <Select
+                      error={
+                        formik.touched.spaceTypeId && formik.errors.spaceTypeId
+                          ? true
+                          : false
+                      }
+                      name="spaceTypeId"
+                      defaultValue={formik.initialValues?.spaceTypeId}
+                      onChange={formik.handleChange("spaceTypeId")}
+                      value={formik.values?.spaceTypeId}
+                      onBlur={formik.handleBlur("spaceTypeId")}
+                    >
+                      {spaceTypeNameList.map((value) => {
+                        return (
+                          <MenuItem key={value.id} value={value.id}>
+                            {value.name}
+                          </MenuItem>
+                        );
+                      })}
+                    </Select>
+                    <FormHelperText>
+                      {formik.touched.spaceTypeId && formik.errors.spaceTypeId}
                     </FormHelperText>
                   </FormControl>
                 </Grid>
