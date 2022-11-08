@@ -64,43 +64,43 @@ export default function PopUpDialog(props) {
               padding={2}
             >
               <Grid item s={6}>
-                <Typography variant="subtitle1" color="black">
+                <Typography variant="subtitle1">
                   Nimi:&nbsp;
                   {data?.subjectName}
                 </Typography>
               </Grid>
               <Grid item s={6}>
-                <Typography variant="subtitle1" color="black">
+                <Typography variant="subtitle1">
                   Ryhmän koko:&nbsp;
                   {data?.groupSize}
                 </Typography>
               </Grid>
               <Grid item s={6}>
-                <Typography variant="subtitle1" color="black">
+                <Typography variant="subtitle1">
                   Ryhmien määrä:&nbsp;
                   {data?.groupCount}
                 </Typography>
               </Grid>
               <Grid item s={6}>
-                <Typography variant="subtitle1" color="black">
+                <Typography variant="subtitle1">
                   Tuntien pituus:&nbsp;
                   {data?.sessionLength}
                 </Typography>
               </Grid>
               <Grid item s={6}>
-                <Typography variant="subtitle1" color="black">
+                <Typography variant="subtitle1">
                   Tuntien määrä:&nbsp;
                   {data?.sessionCount}
                 </Typography>
               </Grid>
               <Grid item s={6}>
-                <Typography variant="subtitle1" color="black">
+                <Typography variant="subtitle1">
                   Pinta-ala(m2):&nbsp;
                   {data?.area}
                 </Typography>
               </Grid>
               <Grid item s={6}>
-                <Typography variant="subtitle1" color="black">
+                <Typography variant="subtitle1">
                   Pääaine:&nbsp;
                   {data?.name}
                 </Typography>
