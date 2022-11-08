@@ -204,11 +204,6 @@ export default function EditSubjectDialog(props) {
                 <Grid item xs={12}>
                   <FormControl sx={{ minWidth: 225 }}>
                     <Select
-                      error={
-                        formik.touched.spaceTypeId && formik.errors.spaceTypeId
-                          ? true
-                          : false
-                      }
                       name="spaceTypeId"
                       defaultValue={formik.initialValues?.spaceTypeId}
                       onChange={formik.handleChange("spaceTypeId")}
@@ -223,9 +218,6 @@ export default function EditSubjectDialog(props) {
                         );
                       })}
                     </Select>
-                    <FormHelperText>
-                      {formik.touched.spaceTypeId && formik.errors.spaceTypeId}
-                    </FormHelperText>
                   </FormControl>
                 </Grid>
               </Grid>
