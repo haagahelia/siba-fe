@@ -312,8 +312,9 @@ export default function AddSubject(props) {
               </Grid>
               <Grid item xs={12} sm={6} md={4}>
                 <FormControl sx={{ m: 4, minWidth: 120 }}>
-                  <InputLabel>Pääaine</InputLabel>
-
+                <InputLabel>
+                    Pääaine
+                  </InputLabel>
                   <Select
                     name="programId"
                     onChange={formik.handleChange}
@@ -338,9 +339,6 @@ export default function AddSubject(props) {
                   </FormHelperText>
                 </FormControl>
               </Grid>
-              <Typography variant="h6" sx={{ color: "#F6E9E9" }}>
-                Kopioi tiedot toisesta opetuksesta
-              </Typography>
               <Grid item xs={4}>
                 <FormControl sx={{ minWidth: 340 }}>
                   <InputLabel>
