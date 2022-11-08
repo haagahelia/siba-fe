@@ -102,8 +102,9 @@ export default function AddSubject(props) {
       sessionCount: values.sessionCount,
       area: values.area,
       programId: values.programId,
-      spaceTypeId: values.spaceTypeId,
+      spaceTypeId: values.spaceTypeId ? values.spaceTypeId : null,
     };
+
     let result = await dao.postNewSubject(newSubject);
     if (result === 400) {
       setAlertOptions({

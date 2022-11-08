@@ -166,11 +166,6 @@ export default function AddSubjectForm(props) {
                 name="spaceTypeId"
                 onChange={formik.handleChange("spaceTypeId")}
                 value={formik.values.spaceTypeId}
-                error={
-                  formik.touched.spaceTypeId && formik.errors.spaceTypeId
-                    ? true
-                    : false
-                }
                 onBlur={formik.handleBlur("spaceTypeId")}
               >
                 {spaceTypeNameList.map((value) => {
@@ -181,9 +176,6 @@ export default function AddSubjectForm(props) {
                   );
                 })}
               </Select>
-              <FormHelperText>
-                {formik.touched.spaceTypeId && formik.errors.spaceTypeId}
-              </FormHelperText>
             </FormControl>
           </Grid>
           <Grid item xs={12}>

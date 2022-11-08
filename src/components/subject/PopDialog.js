@@ -90,6 +90,12 @@ export default function PopUpDialog(props) {
                   {data?.spaceTypeName}
                 </Typography>
               </Grid>
+              <Grid item s={6}>
+                <Typography variant="subtitle1" color="black">
+                  Varuste tarve:&nbsp;
+                  {data?.equipmentName}
+                </Typography>
+              </Grid>
             </Grid>
           </DialogContentText>
         </DialogContent>
