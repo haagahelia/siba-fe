@@ -39,7 +39,7 @@ export default function ProgramResult(props) {
           >
             {programName} -subjects
           </Typography>
-          <Result data={testData.subjects[programId]} />
+          <Result data={testData.subjects[programId]} dropdownData={testData.rooms}/>
         </Box>
       </Modal>
       <Grid2
@@ -87,7 +87,8 @@ export default function ProgramResult(props) {
                   labelColor={"black"}
                   bgColor={color}
                   padding={"3px"}
-                  completed={progress.toFixed(2) }
+                  completed={Math.round( progress) }
+                  maxCompleted={100}
                 />
                 {CollapsedRow(prog)}
               </Grid2>

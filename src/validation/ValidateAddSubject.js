@@ -53,8 +53,13 @@ export function validate(values) {
 
   if (!values.programId) {
     errors.programId = "Pakollinen kenttä";
+    return errors;
   }
-  return errors;
+
+  if (!values.spaceTypeId) {
+    errors.spaceTypeId = "Pakollinen kenttä";
+    return errors;
+  }
 }
 
 export function capitalizeFirstLetter(string) {

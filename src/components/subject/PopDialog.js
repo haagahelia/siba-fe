@@ -1,26 +1,18 @@
 import React, { useEffect, useState } from "react";
 import Grid from "@mui/material/Grid";
 import {
-  Button,
   Dialog,
   DialogContent,
   DialogContentText,
   DialogTitle,
   Typography,
-  Box,
   DialogActions,
 } from "@mui/material";
+import DeleteSubject from "./DeleteSubject";
+import EditSubject from "./EditSubject";
 
 export default function PopUpDialog(props) {
-  const {
-    open,
-    setOpen,
-    data,
-    setSingleSubject,
-    submitDelete,
-    setEditDialogOpen,
-    setEditSubject,
-  } = props;
+  const { open, setOpen, data, refreshSubjects } = props;
 
   const handeClose = () => {
     setOpen = false;
@@ -31,18 +23,14 @@ export default function PopUpDialog(props) {
       <Dialog open={open} onClose={() => setOpen(false)} width="400px">
         <DialogTitle id="dialog-title">{data?.subjectName}</DialogTitle>
         <DialogContent>
-          <DialogActions sx={{ justifyContent: "space-evenly", padding: "16px" }}>
-            <Button variant="contained" color="error" onClick={() => submitDelete(data)}>Poista</Button>
-            <Button
-              variant="contained" color="warning"
-              onClick={() => {
-                // Tallentaa editSubjectiin tiedot joita halutaan muokata
-                setEditSubject(data);
-                setEditDialogOpen(true);
-              }}
-            >
-              Muokkaa
-            </Button>
+          <DialogActions
+            sx={{ justifyContent: "space-evenly", padding: "16px" }}
+          >
+            <DeleteSubject
+              data={data}
+              refreshSubjects={refreshSubjects}
+            ></DeleteSubject>
+            <EditSubject data={data} refreshSubjects={refreshSubjects} />
           </DialogActions>
           <DialogContentText>
             <Grid
@@ -93,7 +81,13 @@ export default function PopUpDialog(props) {
               <Grid item s={6}>
                 <Typography variant="subtitle1">
                   Pääaine:&nbsp;
-                  {data?.name}
+                  {data?.programName}
+                </Typography>
+              </Grid>
+              <Grid item s={6}>
+                <Typography variant="subtitle1">
+                  Huoneen tyyppi:&nbsp;
+                  {data?.spaceTypeName}
                 </Typography>
               </Grid>
             </Grid>
