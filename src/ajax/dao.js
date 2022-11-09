@@ -21,7 +21,7 @@ const fetchSubjects = async () => {
   }
 
   const data = await response.json();
-  console.log("Data: ", data);
+  // console.log("Data: ", data);
   return data;
 };
 
@@ -109,6 +109,19 @@ const getProgramNames = async () => {
   return data;
 };
 
+const getSpaceTypeNames = async () => {
+  const request = new Request("http://localhost:3001/api/spaceType/getNames", {
+    method: "GET",
+  });
+
+  const response = await fetch(request);
+  if (response.status === 500) {
+    return 500;
+  }
+  const data = await response.json();
+  console.log("spacetype data: ", data);
+  return data;
+};
 /*
 const fetchCategories = async () => {
     const request = new Request(`${baseUrl}/category/`,{
@@ -149,7 +162,7 @@ const dao = {
   postNewSubject,
   getProgramNames,
   editSubject,
-
+  getSpaceTypeNames,
   // fetchCategories,
   // fetchOneCategoryById,
   // deleteOneCategoryById,
