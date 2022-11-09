@@ -46,10 +46,73 @@ const theme = createTheme({
         },
       },
     },
-  },
-  MuiSelect: {
-    root: {},
-  },
-});
+    MuiMenuItem: {
+      styleOverrides: {
+        root: {
+          color: "#F6E9E9"
+        }
+      }
+    },
+      MuiFormControl: {
+        styleOverrides: {
+          root: {
+            "& label": {
+              color: "white",
+            },
+            "& label.Mui-focused": {
+              color: "#E16428",
+            },
+            "& .MuiFormHelperText-root": {
+              color: "red",
+            },
+            "& .MuiOutlinedInput-root": {
+              color: "#F6E9E9",
+              "& fieldset": {
+                borderColor: "#E16428",
+              },
+              "&:hover fieldset": {
+                borderColor: "#F6E9E9",
+              },
+              "&.Mui-focused fieldset": {
+                borderColor: "#F6E9E9",
+              },
+            },
+          },
+        }, 
+      },
+      MuiList:{
+        styleOverrides: {
+          root: {
+            backgroundColor: "#272121",
+          }
+        }
+      },
+      MuiListItem:{
+        styleOverrides: {
+          root: {
+            backgroundColor: "#272121",
+            color: "#F6E9E9",
+            border: "1px solid #E16428"
+          },
+        }
+      },
+      MuiDialog:{
+        styleOverrides: {
+          paper:{
+            backgroundColor: "#272121",
+            color: "#F6E9E9",
+          }
+        }
+      },
+      MuiDialogContentText: {
+        styleOverrides: {
+          root: {
+            color: "#F6E9E9"
+          }
+        }
+      }
+    },
+},
+);
 
 export default theme;
