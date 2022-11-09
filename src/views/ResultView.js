@@ -23,7 +23,7 @@ export default function () {
   
 
 
-  useEffect(() => setRooms(store.getRooms()),[store.fetchRooms(10002)])
+  useEffect(() => setRooms(store.getRooms()),[store.fetchRooms(10002), store.rooms])
 
   return (
     <>
@@ -31,8 +31,8 @@ export default function () {
       <Typography style={{color: "#F6E9E9", margin: 20}}>Aineryhmä</Typography>
       <ProgramResult data={testData.programs} />
       <div style={{ width: "80%", margin: "auto" }}>
-        <Typography style={{color: "#F6E9E9"}}>Huoneet</Typography>
-        {rooms && <Result data={rooms} dropdownData={testData.programs}/>}
+      <Typography style={{color: "#F6E9E9"}}>Huoneet</Typography>
+       <Result data={rooms} dropdownData={testData.programs}/>
       </div>
     </>
   );
