@@ -20,7 +20,10 @@ export default function () {
   const store = ResultRoomsStore;
   const [rooms, setRooms] = useState([]);
 
-  useEffect(() => setRooms(store.getRooms()), [store.fetchRooms(10002)]);
+  useEffect(
+    () => setRooms(store.getRooms()),
+    [store.fetchRooms(10002), store.rooms],
+  );
 
   return (
     <>
@@ -30,7 +33,7 @@ export default function () {
       <ProgramResult data={testData.programs} />
       <div style={{ width: "80%", margin: "auto" }}>
         <Typography style={{ color: "#F6E9E9" }}>Huoneet</Typography>
-        {rooms && <Result data={rooms} dropdownData={testData.programs} />}
+        <Result data={rooms} dropdownData={testData.programs} />
       </div>
     </>
   );

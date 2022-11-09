@@ -3,11 +3,11 @@ import React from "react";
 
 class ResultRoomsStore {
   getRooms() {
-    return this.rooms;
+    return this.rooms ? this.rooms : [];
   }
 
-  fetchRooms(id) {
-    axios
+  async fetchRooms(id) {
+    await axios
       .get(`http://localhost:3001/api/allocation/${id}/rooms`)
       .then((data) => (this.rooms = data.data))
       .catch((e) => console.error(e));
