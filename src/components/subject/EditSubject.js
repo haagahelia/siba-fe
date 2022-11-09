@@ -128,7 +128,6 @@ export default function EditSubject(props) {
 
   const spaceType = async function () {
     const data = await dao.getSpaceTypeNames();
-    console.log("Niin...", data);
     if (data === 500) {
       setAlertOptions({
         severity: "error",
