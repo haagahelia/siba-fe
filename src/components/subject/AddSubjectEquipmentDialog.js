@@ -3,7 +3,6 @@ import {
   Button,
   Grid,
   FormHelperText,
-  Typography,
   Dialog,
   DialogTitle,
   DialogContent,
@@ -18,23 +17,10 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Radio from "@mui/material/Radio";
 import FormControlLabel from "@mui/material/FormControlLabel";
-import { useFormik } from "formik";
-import dao from "../../ajax/dao";
 import FormLabel from "@mui/material/FormLabel";
 
-export default function AddSubjectEquipmentForm(props) {
-  const {
-    equipmentList,
-    data,
-    addSubjectEquipment,
-    handleChange,
-    formik,
-    values,
-    setInitialSubEquip,
-    initialSubEquip,
-  } = props;
-  //console.log("equipProps", props);
-
+export default function AddSubjectEquipmentDialog(props) {
+  const { equipmentList, data, formik, values, setInitialSubEquip } = props;
   const [open, setOpen] = useState(false);
 
   return (
@@ -66,9 +52,14 @@ export default function AddSubjectEquipmentForm(props) {
                   <FormControl sx={{ minWidth: 225 }}>
                     <InputLabel>Varuste</InputLabel>
                     <Select
+                      error={
+                        formik.touched.equipmentId && formik.errors.equipmentId
+                          ? true
+                          : false
+                      }
                       name="equipmentId"
                       onChange={formik.handleChange("equipmentId")}
-                      value={formik.values.equipmentId}
+                      value={formik.values?.equipmentId}
                       onBlur={formik.handleBlur("equipmentId")}
                     >
                       {equipmentList.map((value) => {
@@ -79,16 +70,30 @@ export default function AddSubjectEquipmentForm(props) {
                         );
                       })}
                     </Select>
+                    <FormHelperText>
+                      {formik.touched.equipmentId && formik.errors.equipmentId}
+                    </FormHelperText>
                   </FormControl>
                 </Grid>
                 <Grid item sx={12}>
                   <TextField
+                    error={
+                      formik.touched.priority && formik.errors.priority
+                        ? true
+                        : false
+                    }
                     name="priority"
                     label="Prioriteetti"
                     variant="outlined"
+                    type="number"
                     value={formik.values.priority}
                     onChange={formik.handleChange("priority")}
                     onBlur={formik.handleBlur("priority")}
+                    helperText={
+                      formik.touched.priority && formik.errors.priority
+                        ? formik.errors.priority
+                        : null
+                    }
                   />
                 </Grid>
                 <Grid item sx={12}>
@@ -131,7 +136,6 @@ export default function AddSubjectEquipmentForm(props) {
               color="success"
               onClick={() => {
                 setInitialSubEquip(values);
-                console.log("Any values on submit", initialSubEquip);
                 setOpen(false);
               }}
             >

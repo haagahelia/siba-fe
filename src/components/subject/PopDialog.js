@@ -32,7 +32,10 @@ export default function PopUpDialog(props) {
               refreshSubjects={refreshSubjects}
             />
             <EditSubject data={data} refreshSubjects={refreshSubjects} />
-            <AddSubjectEquipment data={data} />
+            <AddSubjectEquipment
+              data={data}
+              refreshSubjects={refreshSubjects}
+            />
           </DialogActions>
           <DialogContentText>
             <Grid
