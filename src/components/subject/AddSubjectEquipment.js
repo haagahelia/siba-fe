@@ -1,18 +1,18 @@
-import { Button } from "@mui/material";
 import React, { useState, useEffect } from "react";
 import dao from "../../ajax/dao";
 import AddSubjectEquipmentDialog from "./AddSubjectEquipmentDialog";
 import { useFormik } from "formik";
 import ConfirmationDialog from "../common/ConfirmationDialog";
+import { validate } from "../../validation/ValidateAddSubjectEquipment";
 
 export default function AddSubjectEquipment(props) {
-  const { data } = props;
+  const { data, refreshSubjects } = props;
   const [equipmentList, setEquipmentList] = useState([]);
   const [initialSubEquip, setInitialSubEquip] = useState({
     subjectId: data?.id,
-    equipmentId: null,
-    priority: null,
-    obligatory: null,
+    equipmentId: 0,
+    priority: 0,
+    obligatory: 0,
   });
   const [alertOpen, setAlertOpen] = useState(false);
   const [alertOptions, setAlertOptions] = useState({
@@ -46,10 +46,8 @@ export default function AddSubjectEquipment(props) {
 
   const formik = useFormik({
     initialValues: initialSubEquip,
-    // validate,
+    validate,
     onSubmit: (values) => {
-      console.log("values after submit", values); //Tähän tulee kaikki tiedot
-      //  addSubjectEquipment(values);
       setDialogOptions({
         title: "Haluatko varmasti lisätä varusteen?",
         content: "Painamalla jatka, varuste lisätään opetukseen",
@@ -60,59 +58,51 @@ export default function AddSubjectEquipment(props) {
   });
 
   const addSubjectEquipment = async (values) => {
-    console.log("add values", values); // Noniin tulee tännekkin
-    //let subID = data?.id;
     let newSubjectEquipment = {
       subjectId: values.subjectId,
       equipmentId: values.equipmentId,
-      priority: Number.parseInt(values.priority),
+      priority: values.priority,
       obligatory: Number.parseInt(values.obligatory),
     };
-    console.log("addSubNEW", newSubjectEquipment); // so far so good
     let result = await dao.postNewSubjectEquipment(newSubjectEquipment);
-    console.log("result", result); // 404
-    // if (result === 400) {
-    //   setAlertOptions({
-    //     severity: "error",
-    //     title: "Virhe",
-    //     message: "Jokin meni pieleen - yritä hetken kuluttua uudestaan.",
-    //   });
-    //   setAlertOpen(true);
-    //   return;
-    // }
-    // if (result === 500) {
-    //   setAlertOptions({
-    //     severity: "error",
-    //     title: "Virhe",
-    //     message:
-    //       "Jokin meni pieleen palvelimella - yritä hetken kuluttua uudestaan.",
-    //   });
-    //   setAlertOpen(true);
-    //   return;
-    // }
-    // if (result === "error") {
-    //   setAlertOptions({
-    //     severity: "error",
-    //     title: "Virhe",
-    //     message:
-    //       "Jokin meni pieleen palvelimella - yritä hetken kuluttua uudestaan.",
-    //   });
-    //   setAlertOpen(true);
-    //   return;
-    // }
-  };
+    if (result === 400) {
+      setAlertOptions({
+        severity: "error",
+        title: "Virhe",
+        message: "Jokin meni pieleen - yritä hetken kuluttua uudestaan.",
+      });
+      setAlertOpen(true);
+      return;
+    }
+    if (result === 500) {
+      setAlertOptions({
+        severity: "error",
+        title: "Virhe",
+        message:
+          "Jokin meni pieleen palvelimella - yritä hetken kuluttua uudestaan.",
+      });
+      setAlertOpen(true);
+      return;
+    }
+    if (result === "error") {
+      setAlertOptions({
+        severity: "error",
+        title: "Virhe",
+        message:
+          "Jokin meni pieleen palvelimella - yritä hetken kuluttua uudestaan.",
+      });
+      setAlertOpen(true);
+      return;
+    }
+    setAlertOptions({
+      severity: "success",
+      title: "Onnistui!",
+      message: "Varuste lisätty.",
+    });
+    setAlertOpen(true);
 
-  //   const handleChange = (e) => {
-  //     let selected = e.target.value;
-  //     console.log("First select:", selected);
-  //     setNewSubjectEquipment({
-  //       //subjectId: selected.subjectId,
-  //       // ...newSubjectEquipment,
-  //       equipmentId: selected.equipmentId,
-  //       //  priority: selected.priority,
-  //     });
-  //     console.log("selected", selected);
-  //   };
+    refreshSubjects();
+  };
 
   return (
     <div>
@@ -127,11 +117,9 @@ export default function AddSubjectEquipment(props) {
         equipmentList={equipmentList}
         data={data}
         addSubjectEquipment={addSubjectEquipment}
-        // handleChange={handleChange}
         formik={formik}
         values={formik.values}
         setInitialSubEquip={setInitialSubEquip}
-        initialSubEquip={initialSubEquip}
       />
     </div>
   );
