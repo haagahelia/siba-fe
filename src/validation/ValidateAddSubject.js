@@ -55,11 +55,6 @@ export function validate(values) {
     errors.programId = "Pakollinen kenttä";
     return errors;
   }
-
-  if (!values.spaceTypeId) {
-    errors.spaceTypeId = "Pakollinen kenttä";
-    return errors;
-  }
 }
 
 export function capitalizeFirstLetter(string) {

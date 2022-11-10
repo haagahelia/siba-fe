@@ -119,8 +119,50 @@ const getSpaceTypeNames = async () => {
     return 500;
   }
   const data = await response.json();
-  console.log("spacetype data: ", data);
   return data;
+};
+
+const getEquipmentNames = async () => {
+  const request = new Request("http://localhost:3001/api/equipment/getNames", {
+    method: "GET",
+  });
+
+  const response = await fetch(request);
+  if (response.status === 500) {
+    return 500;
+  }
+  const data = await response.json();
+  return data;
+};
+
+const postNewSubjectEquipment = async (newSubjectEquipment) => {
+  try {
+    const request = new Request(
+      "http://localhost:3001/api/subjectequipment/post",
+      {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newSubjectEquipment),
+      },
+    );
+    const response = await fetch(request);
+    console.log("Respomse1", response);
+    if (response.status === 400) {
+      return 400;
+    }
+
+    if (response.status === 500) {
+      return 500;
+    }
+    const data = await response.json();
+    console.log("data", data);
+    return data;
+  } catch (error) {
+    return "error";
+  }
 };
 /*
 const fetchCategories = async () => {
@@ -163,6 +205,8 @@ const dao = {
   getProgramNames,
   editSubject,
   getSpaceTypeNames,
+  getEquipmentNames,
+  postNewSubjectEquipment,
   // fetchCategories,
   // fetchOneCategoryById,
   // deleteOneCategoryById,

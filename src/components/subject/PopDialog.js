@@ -10,6 +10,7 @@ import {
 } from "@mui/material";
 import DeleteSubject from "./DeleteSubject";
 import EditSubject from "./EditSubject";
+import AddSubjectEquipment from "./AddSubjectEquipment";
 
 export default function PopUpDialog(props) {
   const { open, setOpen, data, refreshSubjects } = props;
@@ -31,6 +32,10 @@ export default function PopUpDialog(props) {
               refreshSubjects={refreshSubjects}
             />
             <EditSubject data={data} refreshSubjects={refreshSubjects} />
+            <AddSubjectEquipment
+              data={data}
+              refreshSubjects={refreshSubjects}
+            />
           </DialogActions>
           <DialogContentText>
             <Grid
@@ -88,6 +93,18 @@ export default function PopUpDialog(props) {
                 <Typography variant="subtitle1">
                   Huoneen tyyppi:&nbsp;
                   {data?.spaceTypeName}
+                </Typography>
+              </Grid>
+              <Grid item s={6}>
+                <Typography variant="subtitle1" color="black">
+                  Varuste tarve:&nbsp;
+                  {data?.equipmentName}
+                </Typography>
+              </Grid>
+              <Grid item s={6}>
+                <Typography variant="subtitle1" color="black">
+                  Varusteen tiedot:&nbsp;
+                  {data?.description}
                 </Typography>
               </Grid>
             </Grid>
