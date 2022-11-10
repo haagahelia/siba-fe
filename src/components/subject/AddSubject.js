@@ -75,7 +75,6 @@ export default function AddSubject(props) {
 
   const spaceType = async function () {
     const data = await dao.getSpaceTypeNames();
-    console.log("Niin...", data);
     if (data === 500) {
       setAlertOptions({
         severity: "error",
@@ -102,8 +101,9 @@ export default function AddSubject(props) {
       sessionCount: values.sessionCount,
       area: values.area,
       programId: values.programId,
-      spaceTypeId: values.spaceTypeId,
+      spaceTypeId: values.spaceTypeId ? values.spaceTypeId : null,
     };
+
     let result = await dao.postNewSubject(newSubject);
     if (result === 400) {
       setAlertOptions({

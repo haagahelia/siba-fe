@@ -66,7 +66,7 @@ export default function EditSubject(props) {
       sessionCount: values.sessionCount,
       area: values.area,
       programId: values.programId,
-      spaceTypeId: values.spaceTypeId,
+      spaceTypeId: values.spaceTypeId ? values.spaceTypeId : null,
       id: values.id,
     };
     let result = await dao.editSubject(editedSubject);
@@ -130,7 +130,6 @@ export default function EditSubject(props) {
 
   const spaceType = async function () {
     const data = await dao.getSpaceTypeNames();
-    console.log("Niin...", data);
     if (data === 500) {
       setAlertOptions({
         severity: "error",
