@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, Component } from "react";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
@@ -6,7 +6,7 @@ import Divider from "@mui/material/Divider";
 import Grid from "@mui/material/Grid";
 import { styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
-import { Typography } from "@mui/material";
+import { TextField, Typography } from "@mui/material";
 import AlertBox from "../common/AlertBox";
 import ConfirmationDialog from "../common/ConfirmationDialog";
 import EditSubject from "./EditSubject";
@@ -104,6 +104,21 @@ export default function SubjectList(props) {
     subjectName: null,
   });
 
+  const [subjects, setSubjects] = useState(props);
+  const [searched, setSearched] = useState("");
+
+  const requestSearch = (searchedVal) => {
+    const filteredSubjects = props.filter((subject) => {
+      return subject.toLowerCase().includes(searchedVal.toLowerCase());
+    });
+    setSubjects(filteredSubjects);
+  }
+
+  const cancelSearch = () => {
+    setSearched("");
+    requestSearch(searched);
+  };
+
   // STYLES
   const Box = styled(Paper)(({ theme }) => ({
     overflow: "auto",
@@ -140,6 +155,16 @@ export default function SubjectList(props) {
         setEditSubject={setEditSubject}
       ></PopUpDialog>
       <Box>
+      <TextField
+        placeholder="Search"
+        type="text"
+        variant="outlined"
+        fullWidth
+        size="medium"
+        defaultValue={searched}
+        onChange={(searchVal) => requestSearch(searchVal)}
+        onCancelSearch={() => cancelSearch()}
+        />
         <nav>
           {subjectList.map((value) => {
             return (
