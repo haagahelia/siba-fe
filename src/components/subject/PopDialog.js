@@ -96,13 +96,13 @@ export default function PopUpDialog(props) {
                 </Typography>
               </Grid>
               <Grid item s={6}>
-                <Typography variant="subtitle1" color="black">
+                <Typography variant="subtitle1">
                   Varuste tarve:&nbsp;
                   {data?.equipmentName}
                 </Typography>
               </Grid>
               <Grid item s={6}>
-                <Typography variant="subtitle1" color="black">
+                <Typography variant="subtitle1">
                   Varusteen tiedot:&nbsp;
                   {data?.description}
                 </Typography>

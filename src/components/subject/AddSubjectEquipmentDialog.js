@@ -124,6 +124,8 @@ export default function AddSubjectEquipmentDialog(props) {
           </DialogContent>
           <DialogActions>
             <Button
+              variant="contained"
+              color="error"
               onClick={() => {
                 setOpen(false);
               }}
