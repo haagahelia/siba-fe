@@ -19,6 +19,7 @@ import dao from "../../ajax/dao";
 
 export default function SubjectList(props) {
   const { subjectList, refreshSubjects } = props;
+  const [subjectListState, setSubjectListState] = useState(subjectList)
   const [alertOpen, setAlertOpen] = useState(false);
   const [alertOptions, setAlertOptions] = useState({
     message: "This is an error alert — check it out!",
@@ -44,6 +45,10 @@ export default function SubjectList(props) {
     content: "Something here",
   });
   const [deleteId, setDeleteId] = useState("");
+
+  useEffect(() => {
+    setSubjectListState(subjectList)
+  },[]);
 
   const deleteSubject = async (value) => {
     let result = await dao.deleteSingleSubject(value);
@@ -107,11 +112,14 @@ export default function SubjectList(props) {
   const [subjects, setSubjects] = useState(props);
   const [searched, setSearched] = useState("");
 
-  const requestSearch = (searchedVal) => {
-    const filteredSubjects = props.filter((subject) => {
-      return subject.toLowerCase().includes(searchedVal.toLowerCase());
-    });
-    setSubjects(filteredSubjects);
+  const requestSearch = (e) => {
+    setSearched(e.target.value);
+    const filteredSubjects = props.subjectList.filter(subject)
+    function subject(subject){
+      return subject.subjectName.toLowerCase().includes(e.target.value.toLowerCase());
+    }
+    setSubjectListState(filteredSubjects);
+    console.log(filteredSubjects)
   }
 
   const cancelSearch = () => {
@@ -156,17 +164,18 @@ export default function SubjectList(props) {
       ></PopUpDialog>
       <Box>
       <TextField
+        name="searched"
         placeholder="Search"
         type="text"
         variant="outlined"
         fullWidth
         size="medium"
         defaultValue={searched}
-        onChange={(searchVal) => requestSearch(searchVal)}
+        onBlur={(searchVal) => requestSearch(searchVal)}
         onCancelSearch={() => cancelSearch()}
         />
         <nav>
-          {subjectList.map((value) => {
+          {subjectListState.map((value) => {
             return (
               <List key={value.id}>
                 <ListItem
