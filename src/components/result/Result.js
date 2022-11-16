@@ -86,8 +86,8 @@ export default function Result(props) {
                 {" "}
                 <Typography
                   style={{
-                    textAlign: "center",
-                    marginTop: 20,
+                    textAlign: "left",
+                    marginTop: 10,
                     color: "#F6E9E9",
                   }}
                 >

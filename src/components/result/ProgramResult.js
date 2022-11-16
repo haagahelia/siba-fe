@@ -137,7 +137,7 @@ export default function ProgramResult(props) {
                   <Typography
                     style={{
                       textAlign: "center",
-                      marginTop: 20,
+                      marginTop: 5,
                       color: "#F6E9E9",
                     }}
                   >
@@ -148,7 +148,7 @@ export default function ProgramResult(props) {
                   <Typography
                     style={{
                       textAlign: "center",
-                      marginTop: 20,
+                      marginTop: 5,
                       color: "#F6E9E9",
                     }}
                   >
