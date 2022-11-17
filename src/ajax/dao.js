@@ -181,6 +181,27 @@ const getEquipmentBySubjectId = async (id) => {
   console.log("dataByID ", data);
   return data;
 };
+
+const deleteSingleSubjectEquipment = async (subjectId, equipmentId) => {
+  try {
+    const request = new Request(
+      `http://localhost:3001/api/subjectequipment/delete/${subjectId}/${equipmentId}`,
+      {
+        method: "DELETE",
+      },
+    );
+    const response = await fetch(request);
+    if (response.status === 400) {
+      return 400;
+    }
+
+    const data = await response.json();
+    const result = data && data.affectedRows === 1 ? true : false;
+    return result;
+  } catch (error) {
+    return "error";
+  }
+};
 /*
 const fetchCategories = async () => {
     const request = new Request(`${baseUrl}/category/`,{
@@ -225,6 +246,7 @@ const dao = {
   getEquipmentNames,
   postNewSubjectEquipment,
   getEquipmentBySubjectId,
+  deleteSingleSubjectEquipment,
   // fetchCategories,
   // fetchOneCategoryById,
   // deleteOneCategoryById,
