@@ -149,7 +149,7 @@ const postNewSubjectEquipment = async (newSubjectEquipment) => {
       }
     );
     const response = await fetch(request);
-    console.log("Respomse1", response);
+    //  console.log("Respomse1", response);
     if (response.status === 400) {
       return 400;
     }
@@ -163,6 +163,23 @@ const postNewSubjectEquipment = async (newSubjectEquipment) => {
   } catch (error) {
     return "error";
   }
+};
+
+const getEquipmentBySubjectId = async (id) => {
+  const request = new Request(
+    `http://localhost:3001/api/subjectequipment/getEquipment/${id}`,
+    {
+      method: "GET",
+    }
+  );
+
+  const response = await fetch(request);
+  if (response.status === 500) {
+    return 500;
+  }
+  const data = await response.json();
+  console.log("dataByID ", data);
+  return data;
 };
 /*
 const fetchCategories = async () => {
@@ -207,6 +224,7 @@ const dao = {
   getSpaceTypeNames,
   getEquipmentNames,
   postNewSubjectEquipment,
+  getEquipmentBySubjectId,
   // fetchCategories,
   // fetchOneCategoryById,
   // deleteOneCategoryById,

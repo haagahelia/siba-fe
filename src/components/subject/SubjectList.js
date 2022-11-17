@@ -23,6 +23,7 @@ export default function SubjectListItems(props) {
     area: null,
     programId: null,
     subjectName: null,
+    spaceTypeName: null,
   });
 
   const Box = styled(Paper)(({ theme }) => ({
@@ -36,6 +37,7 @@ export default function SubjectListItems(props) {
         data={singelSubject}
         setSingleSubject={setSingleSubject}
         refreshSubjects={refreshSubjects}
+        subjectList={subjectList}
       ></PopUpDialog>
       <Box>
         <nav>
@@ -118,6 +120,20 @@ export default function SubjectListItems(props) {
                     </Typography>
                     <ListItemText
                       primary={value.programName}
+                      primaryTypographyProps={{
+                        variant: "body2",
+                      }}
+                    ></ListItemText>
+                  </Grid>
+                  <Grid item md={3} xs={7} padding={2}>
+                    <Typography
+                      variant="caption"
+                      style={{ fontWeight: "bold" }}
+                    >
+                      Huoneen tyyppi:
+                    </Typography>
+                    <ListItemText
+                      primary={value.spaceTypeName}
                       primaryTypographyProps={{
                         variant: "body2",
                       }}
