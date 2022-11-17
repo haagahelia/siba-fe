@@ -9,6 +9,7 @@ import {
 import React, { useState } from "react";
 import { useEffect } from "react";
 import dao from "../../ajax/dao";
+import DeleteSubjectEquipment from "./DeleteSubjectEquipment";
 
 export default function SubjectEquipmentList(props) {
   const { subjectList, data } = props;
@@ -19,10 +20,11 @@ export default function SubjectEquipmentList(props) {
     message: "This is an error alert — check it out!",
     severity: "error",
   });
+
   let value = data?.id;
-  const equipmentNames = async function (id) {
-    id = value;
-    const data = await dao.getEquipmentBySubjectId(id);
+  const equipmentNames = async function (subjectId) {
+    subjectId = value;
+    const data = await dao.getEquipmentBySubjectId(subjectId);
     if (data === 500) {
       setAlertOptions({
         severity: "error",
@@ -66,17 +68,21 @@ export default function SubjectEquipmentList(props) {
                   >
                     Muokkaa
                   </Button>
-                  <Button
+                  {/* <Button
                     variant="contained"
                     color="error"
                     sx={{ margin: "5px" }}
                     onClick={() => {
                       console.log("equipment id", value.equipmentId);
-                      console.log("Subject id", value.id);
+                      console.log("Subject id", value.subjectId);
                     }}
                   >
                     Poista
-                  </Button>
+                  </Button> */}
+                  <DeleteSubjectEquipment
+                    values={value}
+                    equipmentNamesList={equipmentNamesList}
+                  />
                 </Grid>
 
                 <Grid item xs={6}>

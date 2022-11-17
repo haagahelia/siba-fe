@@ -1,0 +1,103 @@
+import React, { useState } from "react";
+import dao from "../../ajax/dao";
+import {
+  Button,
+  Grid,
+  List,
+  ListItem,
+  ListItemText,
+  Typography,
+} from "@mui/material";
+import ConfirmationDialog from "../common/ConfirmationDialog";
+
+export default function DeleteSubjectEquipment(props) {
+  const { equipmentNamesList, values } = props;
+  const [alertOpen, setAlertOpen] = useState(false);
+  const [alertOptions, setAlertOptions] = useState({
+    message: "This is an error alert — check it out!",
+    severity: "error",
+  });
+  const [dialogOpen, setDialogOpen] = useState(false);
+  const [dialogOptions, setDialogOptions] = useState({
+    title: "this is dialog",
+    content: "Something here",
+  });
+  const [deleteSubEquip, setDeleteSubEquip] = useState({
+    subjectId: 0,
+    equipmentId: 0,
+  });
+  let id1 = values.subjectId;
+  let id2 = values.equipmentId;
+  let equipmentName = values.name;
+
+  // console.log("nimi", equipmentName);
+  const deleteSubjectEquipment = async (subjectId, equipmentId) => {
+    subjectId = id1;
+    equipmentId = id2;
+    let result = await dao.deleteSingleSubjectEquipment(subjectId, equipmentId);
+    if (result === 400) {
+      setAlertOptions({
+        severity: "error",
+        title: "Virhe",
+        message: "Jokin meni pieleen - yritä hetken kuluttua uudestaan.",
+      });
+      setAlertOpen(true);
+      return;
+    }
+
+    if (result === "error") {
+      setAlertOptions({
+        severity: "error",
+        title: "Virhe",
+        message:
+          "Jokin meni pieleen, opetuksen poisto epäonnistui - yritä hetken kuluttua uudestaan.",
+      });
+      setAlertOpen(true);
+      return;
+    }
+
+    setAlertOptions({
+      severity: "success",
+      title: "Onnistui!",
+      message: equipmentName + " poistettu.",
+    });
+    setAlertOpen(true);
+
+    //refreshSubjects();
+  };
+
+  const submitDelete = (values) => {
+    setDialogOptions({
+      title: "Haluatko varmasti poistaa " + values.name + "?",
+      content: "Painamalla jatka poistat " + values.name + " listauksesta.",
+    });
+    setDialogOpen(true);
+    // setDeleteId(data.id);
+    setDeleteSubEquip(values.subjectId, values.equipmentId);
+    console.log("hmmm", values);
+    return;
+  };
+
+  return (
+    <div>
+      <ConfirmationDialog
+        dialogOpen={dialogOpen}
+        dialogOptions={dialogOptions}
+        setDialogOpen={setDialogOpen}
+        confirmfunction={deleteSubjectEquipment}
+        functionparam={deleteSubEquip}
+      ></ConfirmationDialog>
+      <Button
+        variant="contained"
+        color="error"
+        sx={{ margin: "5px" }}
+        onClick={() => {
+          submitDelete(values);
+          //deleteSubjectEquipment(values.subjectId, values.equipmentId);
+        }}
+      >
+        Poista
+      </Button>
+    </div>
+  );
+}
