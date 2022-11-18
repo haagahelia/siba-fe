@@ -2,8 +2,8 @@ import axios from "axios";
 import React from "react";
 
 class ResultRoomsStore {
-  getRooms() {
-    return this.rooms ? this.rooms : [];
+  constructor(rooms) {
+    this.rooms = rooms;
   }
 
   async fetchRooms(id) {
@@ -14,5 +14,5 @@ class ResultRoomsStore {
   }
 }
 
-const resultRoomsStore = new ResultRoomsStore();
+const resultRoomsStore = new ResultRoomsStore([]);
 export default resultRoomsStore;

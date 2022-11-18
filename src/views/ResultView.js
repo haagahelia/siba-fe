@@ -4,7 +4,7 @@ import testData from "../data/testData";
 import "../styles/ResultView.css";
 import { Typography } from "@mui/material";
 import { useEffect, useState } from "react";
-import ResultRoomsStore from "../data/ResultRoomsStore";
+import resultRoomsStore from "../data/ResultRoomsStore";
 // Tee funktiolle muuttuja
 
 /*
@@ -17,13 +17,15 @@ const ExampleComponent = (props) => {
 export default ExampleComponent; */
 
 export default function () {
-  const store = ResultRoomsStore;
+  const store = resultRoomsStore;
   const [rooms, setRooms] = useState([]);
 
-  useEffect(
-    () => setRooms(store.getRooms()),
-    [store.fetchRooms(10002), store.rooms],
-  );
+  useEffect(() => getResultData, []);
+
+  const getResultData = async () => {
+    await store.fetchRooms(10002);
+    setRooms(store.rooms);
+  };
 
   return (
     <>
