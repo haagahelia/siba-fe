@@ -6,8 +6,6 @@ import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import { Collapse, Typography, Box } from "@mui/material";
 export default function Result(props) {
 
-  const testData = props.data;
- 
   return (
     <>
       <Grid2
@@ -23,7 +21,7 @@ export default function Result(props) {
           borderRadius: 20,
         }}
       >
-        {testData.map((prog) => {
+        {props.data.map((prog) => {
           const progress = (prog.allocatedHours / prog.requiredHours) * 100;
           
           const color =

@@ -4,8 +4,8 @@ import React from 'react'
 
     class ResultRoomsStore {
 
-        getRooms() {
-            return this.rooms ? this.rooms : [];
+        constructor(rooms) {
+            this.rooms = rooms
         }
 
         async fetchRooms(id) {
@@ -15,5 +15,5 @@ import React from 'react'
         }
     }
 
-    const resultRoomsStore = new ResultRoomsStore();
+    const resultRoomsStore = new ResultRoomsStore([]);
     export default resultRoomsStore;
