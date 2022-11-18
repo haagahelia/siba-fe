@@ -9,9 +9,11 @@ import Typography from "@mui/material/Typography";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
+import resultProgramStore from "../../data/ResultProgramStore";
 
 export default function ProgramResult(props) {
   const programs = props.data;
+  const progStore = resultProgramStore;
   const [open, setOpen] = React.useState(false);
   const [programId, setProgramId] = React.useState(0);
   const [programName, setProgramName] = React.useState("");
@@ -21,6 +23,17 @@ export default function ProgramResult(props) {
     setProgramName(name);
   };
   const handleClose = () => setOpen(false);
+
+  const calculateProsent = (array) => {
+    let allocatedHours = 0;
+    let requiredHours = 0;
+    array.forEach(element => {
+      allocatedHours += element.allocatedHours;
+      requiredHours += element.requiredHours;
+    });
+
+    return (requiredHours && allocatedHours !== null) ? Math.round(allocatedHours / requiredHours * 100) : 0
+  }
 
   return (
     <>
@@ -57,10 +70,9 @@ export default function ProgramResult(props) {
           borderRadius: 20,
         }}
       >
-        {programs.map((prog) => {
-          const progress = (prog.allocatedHours / prog.requiredHours) * 100;
-          const color =
-            progress > 100 ? "#FF1700" : progress < 80 ? "#FFE400" : "#06FF00";
+        {props.programs.map((prog) => {
+          const progress = calculateProsent(prog.subjects);
+          const color = progress > 100 ? "#FF1700" : progress < 80 ? "#FFE400" : "#06FF00";
 
           return (
             <>
@@ -87,10 +99,10 @@ export default function ProgramResult(props) {
                   labelColor={"black"}
                   bgColor={color}
                   padding={"3px"}
-                  completed={Math.round( progress) }
+                  completed={progress}
                   maxCompleted={100}
                 />
-                {CollapsedRow(prog)}
+                <CollapsedRow prog1={prog} />
               </Grid2>
             </>
           );
@@ -99,7 +111,8 @@ export default function ProgramResult(props) {
     </>
   );
 
-  function CollapsedRow(prog1) {
+  function CollapsedRow(props) {
+    const prog1 = props.prog1
     const [expand, setExpand] = React.useState(false);
 
     return (
