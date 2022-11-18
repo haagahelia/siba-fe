@@ -4,7 +4,7 @@ import testData from "../data/testData";
 import "../styles/ResultView.css";
 import { Typography } from "@mui/material";
 import { useEffect, useState } from "react";
-import ResultRoomsStore from "../data/ResultRoomsStore";
+import resultRoomsStore from "../data/ResultRoomsStore";
 // Tee funktiolle muuttuja
 
 /*
@@ -18,21 +18,24 @@ export default ExampleComponent; */
 
 export default function () {
 
-  const store = ResultRoomsStore;
+  const store = resultRoomsStore;
   const [rooms, setRooms] = useState([]);
-  
+
+  useEffect(() => getResultData,[])
 
 
-  useEffect(() => setRooms(store.getRooms()),[store.fetchRooms(10002), store.rooms])
+  const getResultData = async () => {
+    await store.fetchRooms(10002);
+    setRooms(store.rooms);
+  }
 
   return (
     <>
-    
       <Typography style={{color: "#F6E9E9", margin: 20}}>Aineryhmä</Typography>
       <ProgramResult data={testData.programs} />
       <div style={{ width: "80%", margin: "auto" }}>
       <Typography style={{color: "#F6E9E9"}}>Huoneet</Typography>
-       <Result data={rooms} dropdownData={testData.programs}/>
+      <Result data={rooms} dropdownData={testData.programs}/>
       </div>
     </>
   );
