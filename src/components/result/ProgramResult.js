@@ -14,13 +14,11 @@ import resultProgramStore from "../../data/ResultProgramStore";
 export default function ProgramResult(props) {
   const programs = props.data;
   const progStore = resultProgramStore;
+  const [subProg, setSubProg] = React.useState({});
   const [open, setOpen] = React.useState(false);
-  const [programId, setProgramId] = React.useState(0);
-  const [programName, setProgramName] = React.useState("");
-  const handleOpen = (id, name) => {
-    setProgramId(id);
+  const handleOpen = (prog) => {
+    setSubProg(prog);
     setOpen(true);
-    setProgramName(name);
   };
   const handleClose = () => setOpen(false);
 
@@ -50,9 +48,9 @@ export default function ProgramResult(props) {
           <Typography
             style={{ textAlign: "center", marginTop: "5%", color: "#F6E9E9" }}
           >
-            {programName} -subjects
+            {subProg.name} -subjects
           </Typography>
-          <Result data={testData.subjects[programId]} dropdownData={testData.rooms}/>
+          <Result data={subProg.subjects} dropdownData={testData.rooms}/>
         </Box>
       </Modal>
       <Grid2
@@ -79,7 +77,7 @@ export default function ProgramResult(props) {
               <Grid2 xs={1.5}>
                 <InfoOutlinedIcon
                   sx={{ color: "white", fontSize: 20 }}
-                  onClick={() => handleOpen(prog.id, prog.name)}
+                  onClick={() => handleOpen(prog)}
                 >
                   {" "}
                 </InfoOutlinedIcon>
