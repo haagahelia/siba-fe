@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
 import TextField from "@mui/material/TextField";
-import { Button, Grid, FormHelperText, Typography } from "@mui/material";
+import { Button, Grid, FormHelperText, Typography, createMuiTheme, ThemeProvider } from "@mui/material";
 import Select from "@mui/material/Select";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
+import { globalTheme } from "../styles/theme";
+
 
 export default function AddSubjectForm(props) {
   const {
@@ -199,16 +201,18 @@ export default function AddSubjectForm(props) {
           </Grid>
         </Grid>
         <Grid item xs={3} padding={2}>
+          <ThemeProvider theme={globalTheme}>
           <Button
             type="submit"
             variant="contained"
-            color="success"
+            style={{color: "white"}}
             onClick={() => {
               setCopySubjectData(values);
             }}
           >
             Lisää
           </Button>
+          </ThemeProvider>
         </Grid>
       </form>
     </div>

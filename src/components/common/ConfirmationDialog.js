@@ -2,7 +2,8 @@ import React from "react";
 import DialogTitle from "@mui/material/DialogTitle";
 import Dialog from "@mui/material/Dialog";
 import Button from "@mui/material/Button";
-import { DialogActions, DialogContent, DialogContentText } from "@mui/material";
+import { DialogActions, DialogContent, DialogContentText, ThemeProvider } from "@mui/material";
+import { globalTheme } from "../styles/theme";
 
 export default function ConfirmationDialog(props) {
   const {
@@ -29,23 +30,33 @@ export default function ConfirmationDialog(props) {
         </DialogContent>
         <DialogActions>
           {" "}
-          <Button variant="contained" color="error" onClick={handleClose}>Peruuta</Button>
-          <Button
-            autoFocus
-            variant="contained"
-            color="success"
-            onClick={() => {
-              // console.log(functionparam);
-              if (functionparam) {
-                confirmfunction(functionparam);
-              } else {
-                confirmfunction();
-              }
-              handleClose();
-            }}
-          >
-            Jatka
-          </Button>
+          <ThemeProvider theme={globalTheme}>
+            <Button
+              variant="contained"
+              color="red"
+              style={{color:"white"}}
+              onClick={handleClose}>
+              Peruuta
+              </Button>
+          </ThemeProvider>
+          <ThemeProvider theme={globalTheme}>
+            <Button
+              autoFocus
+              style={{color:"white"}}
+              variant="contained"
+              onClick={() => {
+                // console.log(functionparam);
+                if (functionparam) {
+                  confirmfunction(functionparam);
+                } else {
+                  confirmfunction();
+                }
+                handleClose();
+              }}
+            >
+              Jatka
+            </Button>
+          </ThemeProvider>
         </DialogActions>
       </Dialog>
     </div>
