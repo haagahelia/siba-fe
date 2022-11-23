@@ -6,7 +6,7 @@ import Divider from "@mui/material/Divider";
 import Grid from "@mui/material/Grid";
 import { styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
-import { TextField, Typography } from "@mui/material";
+import { IconButton, TextField, Typography } from "@mui/material";
 import AlertBox from "../common/AlertBox";
 import ConfirmationDialog from "../common/ConfirmationDialog";
 import EditSubject from "./EditSubject";
@@ -165,14 +165,15 @@ export default function SubjectList(props) {
       <Box>
       <TextField
         name="searched"
-        placeholder="Search"
+        placeholder="Opetusten haku:"
         type="text"
         variant="outlined"
         fullWidth
         size="medium"
         defaultValue={searched}
-        onBlur={(searchVal) => requestSearch(searchVal)}
+        onChange={(searchVal) => requestSearch(searchVal)}
         onCancelSearch={() => cancelSearch()}
+        autoFocus
         />
         <nav>
           {subjectListState.map((value) => {
