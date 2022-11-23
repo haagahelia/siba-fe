@@ -33,6 +33,7 @@ const theme = createTheme({
     MuiTextField: {
       styleOverrides: {
         root: {
+          backgroundColor: darkBrown,
           "& label": {
             color: light,
           },
