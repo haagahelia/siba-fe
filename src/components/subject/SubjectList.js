@@ -1,16 +1,97 @@
-import React, { useState } from "react";
-import PopUpDialog from "./PopDialog";
+import React, { useEffect, useState, Component } from "react";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import Divider from "@mui/material/Divider";
 import Grid from "@mui/material/Grid";
-import { Typography } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
+import { IconButton, TextField, Typography } from "@mui/material";
+import AlertBox from "../common/AlertBox";
+import ConfirmationDialog from "../common/ConfirmationDialog";
+import EditSubject from "./EditSubject";
+import PopUpDialog from "./PopDialog";
+import dao from "../../ajax/dao";
 
 export default function SubjectListItems(props) {
   const { subjectList, refreshSubjects } = props;
+  const [subjectListState, setSubjectListState] = useState(subjectList);
+  const [alertOpen, setAlertOpen] = useState(false);
+  const [alertOptions, setAlertOptions] = useState({
+    message: "This is an error alert — check it out!",
+    severity: "error",
+  });
+  const [dialogOpen, setDialogOpen] = useState(false);
+  const [editDialogOpen, setEditDialogOpen] = useState(false);
+  // Tähän tallennetaan muokattavan subjectin tiedot, null kunnes muokkausnappia painaa
+  const [editSubject, setEditSubject] = useState({
+    id: null,
+    name: null,
+    groupSize: null,
+    groupCount: null,
+    sessionLength: null,
+    sessionCount: null,
+    area: null,
+    programId: null,
+    subjectName: null,
+  });
+
+  const [dialogOptions, setDialogOptions] = useState({
+    title: "this is dialog",
+    content: "Something here",
+  });
+  const [deleteId, setDeleteId] = useState("");
+
+  useEffect(() => {
+    if (!searched) {
+      setSubjectListState(subjectList);
+    }
+  });
+
+  const deleteSubject = async (value) => {
+    let result = await dao.deleteSingleSubject(value);
+    if (result === 400) {
+      setAlertOptions({
+        severity: "error",
+        title: "Virhe",
+        message: "Jokin meni pieleen - yritä hetken kuluttua uudestaan.",
+      });
+      setAlertOpen(true);
+      return;
+    }
+
+    if (result === "error") {
+      setAlertOptions({
+        severity: "error",
+        title: "Virhe",
+        message:
+          "Jokin meni pieleen, opetuksen poisto epäonnistui - yritä hetken kuluttua uudestaan.",
+      });
+      setAlertOpen(true);
+      return;
+    }
+
+    setAlertOptions({
+      severity: "success",
+      title: "Onnistui!",
+      message: `${value.subjectName} poistettu.`,
+    });
+    setAlertOpen(true);
+
+    refreshSubjects();
+  };
+
+  const submitDelete = (value) => {
+    setDialogOptions({
+      title: `Haluatko varmasti poistaa ${value.subjectName}?`,
+      content:
+        `Painamalla jatka poistat ${value.subjectName} listauksesta.`,
+    });
+    setDialogOpen(true);
+    setDeleteId(value.id);
+    return;
+  };
+
   const [open, setOpen] = useState(false);
   const [hoverColor, sethoverColor] = useState("#CFD6D5  ");
   const [singelSubject, setSingleSubject] = useState({
@@ -25,6 +106,21 @@ export default function SubjectListItems(props) {
     subjectName: null,
   });
 
+  const [searched, setSearched] = useState("");
+
+  const requestSearch = (e) => {
+    e.preventDefault();
+    setSearched(e.target.value);
+    const filteredSubjects = props.subjectList.filter(subject);
+    function subject(subject) {
+      return subject.subjectName
+        .toLowerCase()
+        .includes(e.target.value.toLowerCase());
+    }
+    setSubjectListState(filteredSubjects);
+  };
+
+  // STYLES
   const Box = styled(Paper)(({ theme }) => ({
     overflow: "auto",
   }));
@@ -38,8 +134,19 @@ export default function SubjectListItems(props) {
         refreshSubjects={refreshSubjects}
       />
       <Box>
+        <TextField
+          name="searched"
+          placeholder="Opetusten haku:"
+          type="text"
+          variant="outlined"
+          fullWidth
+          size="medium"
+          value={searched}
+          onChange={(e) => requestSearch(e)}
+          autoFocus
+        />
         <nav>
-          {subjectList.map((value) => {
+          {subjectListState.map((value) => {
             return (
               <List key={value.id}>
                 <ListItem
