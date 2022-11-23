@@ -13,11 +13,7 @@ import EditSubject from "./EditSubject";
 import PopUpDialog from "./PopDialog";
 import dao from "../../ajax/dao";
 
-//const baseUrl = process.env.REACT_APP_BE_SERVER_BASE_URL;
-//import {BASEURL} from "../config/consts.js";
-//const baseUrl = BASEURL;
-
-export default function SubjectList(props) {
+export default function SubjectListItems(props) {
   const { subjectList, refreshSubjects } = props;
   const [subjectListState, setSubjectListState] = useState(subjectList);
   const [alertOpen, setAlertOpen] = useState(false);
@@ -47,8 +43,10 @@ export default function SubjectList(props) {
   const [deleteId, setDeleteId] = useState("");
 
   useEffect(() => {
-    setSubjectListState(subjectList);
-  }, []);
+    if (!searched) {
+      setSubjectListState(subjectList);
+    }
+  });
 
   const deleteSubject = async (value) => {
     let result = await dao.deleteSingleSubject(value);
@@ -96,7 +94,6 @@ export default function SubjectList(props) {
 
   const [open, setOpen] = useState(false);
   const [hoverColor, sethoverColor] = useState("#CFD6D5  ");
-
   const [singelSubject, setSingleSubject] = useState({
     id: null,
     name: null,
@@ -109,10 +106,10 @@ export default function SubjectList(props) {
     subjectName: null,
   });
 
-  const [subjects, setSubjects] = useState(props);
   const [searched, setSearched] = useState("");
 
   const requestSearch = (e) => {
+    e.preventDefault();
     setSearched(e.target.value);
     const filteredSubjects = props.subjectList.filter(subject);
     function subject(subject) {
@@ -121,48 +118,20 @@ export default function SubjectList(props) {
         .includes(e.target.value.toLowerCase());
     }
     setSubjectListState(filteredSubjects);
-    console.log(filteredSubjects);
-  };
-
-  const cancelSearch = () => {
-    setSearched("");
-    requestSearch(searched);
   };
 
   // STYLES
   const Box = styled(Paper)(({ theme }) => ({
     overflow: "auto",
   }));
-
   return (
     <div>
-      <AlertBox
-        alertOpen={alertOpen}
-        alertOptions={alertOptions}
-        setAlertOpen={setAlertOpen}
-      />
-      <ConfirmationDialog
-        dialogOpen={dialogOpen}
-        dialogOptions={dialogOptions}
-        setDialogOpen={setDialogOpen}
-        confirmfunction={deleteSubject}
-        functionparam={deleteId}
-      />
-      <EditSubject
-        editDialogOpen={editDialogOpen}
-        setEditDialogOpen={setEditDialogOpen}
-        data={editSubject}
-        refreshSubjects={refreshSubjects}
-        setEditSubject={setEditSubject}
-      />
       <PopUpDialog
         open={open}
         setOpen={setOpen}
         data={singelSubject}
         setSingleSubject={setSingleSubject}
-        submitDelete={submitDelete}
-        setEditDialogOpen={setEditDialogOpen}
-        setEditSubject={setEditSubject}
+        refreshSubjects={refreshSubjects}
       />
       <Box>
         <TextField
@@ -172,9 +141,8 @@ export default function SubjectList(props) {
           variant="outlined"
           fullWidth
           size="medium"
-          defaultValue={searched}
-          onChange={(searchVal) => requestSearch(searchVal)}
-          onCancelSearch={() => cancelSearch()}
+          value={searched}
+          onChange={(e) => requestSearch(e)}
           autoFocus
         />
         <nav>
@@ -256,7 +224,7 @@ export default function SubjectList(props) {
                       Pääaine:
                     </Typography>
                     <ListItemText
-                      primary={value.name}
+                      primary={value.programName}
                       primaryTypographyProps={{
                         variant: "body2",
                       }}

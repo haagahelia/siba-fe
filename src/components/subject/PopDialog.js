@@ -1,26 +1,19 @@
 import React, { useEffect, useState } from "react";
 import Grid from "@mui/material/Grid";
 import {
-  Button,
   Dialog,
   DialogContent,
   DialogContentText,
   DialogTitle,
   Typography,
-  Box,
   DialogActions,
 } from "@mui/material";
+import DeleteSubject from "./DeleteSubject";
+import EditSubject from "./EditSubject";
+import AddSubjectEquipment from "./AddSubjectEquipment";
 
 export default function PopUpDialog(props) {
-  const {
-    open,
-    setOpen,
-    data,
-    setSingleSubject,
-    submitDelete,
-    setEditDialogOpen,
-    setEditSubject,
-  } = props;
+  const { open, setOpen, data, refreshSubjects } = props;
 
   const handeClose = () => {
     setOpen = false;
@@ -34,24 +27,15 @@ export default function PopUpDialog(props) {
           <DialogActions
             sx={{ justifyContent: "space-evenly", padding: "16px" }}
           >
-            <Button
-              variant="contained"
-              color="error"
-              onClick={() => submitDelete(data)}
-            >
-              Poista
-            </Button>
-            <Button
-              variant="contained"
-              color="warning"
-              onClick={() => {
-                // Tallentaa editSubjectiin tiedot joita halutaan muokata
-                setEditSubject(data);
-                setEditDialogOpen(true);
-              }}
-            >
-              Muokkaa
-            </Button>
+            <DeleteSubject
+              data={data}
+              refreshSubjects={refreshSubjects}
+            />
+            <EditSubject data={data} refreshSubjects={refreshSubjects} />
+            <AddSubjectEquipment
+              data={data}
+              refreshSubjects={refreshSubjects}
+            />
           </DialogActions>
           <DialogContentText>
             <Grid
@@ -64,45 +48,63 @@ export default function PopUpDialog(props) {
               padding={2}
             >
               <Grid item s={6}>
-                <Typography variant="subtitle1" color="black">
+                <Typography variant="subtitle1">
                   Nimi:&nbsp;
                   {data?.subjectName}
                 </Typography>
               </Grid>
               <Grid item s={6}>
-                <Typography variant="subtitle1" color="black">
+                <Typography variant="subtitle1">
                   Ryhmän koko:&nbsp;
                   {data?.groupSize}
                 </Typography>
               </Grid>
               <Grid item s={6}>
-                <Typography variant="subtitle1" color="black">
+                <Typography variant="subtitle1">
                   Ryhmien määrä:&nbsp;
                   {data?.groupCount}
                 </Typography>
               </Grid>
               <Grid item s={6}>
-                <Typography variant="subtitle1" color="black">
+                <Typography variant="subtitle1">
                   Tuntien pituus:&nbsp;
                   {data?.sessionLength}
                 </Typography>
               </Grid>
               <Grid item s={6}>
-                <Typography variant="subtitle1" color="black">
+                <Typography variant="subtitle1">
                   Tuntien määrä:&nbsp;
                   {data?.sessionCount}
                 </Typography>
               </Grid>
               <Grid item s={6}>
-                <Typography variant="subtitle1" color="black">
+                <Typography variant="subtitle1">
                   Pinta-ala(m2):&nbsp;
                   {data?.area}
                 </Typography>
               </Grid>
               <Grid item s={6}>
-                <Typography variant="subtitle1" color="black">
+                <Typography variant="subtitle1">
                   Pääaine:&nbsp;
-                  {data?.name}
+                  {data?.programName}
+                </Typography>
+              </Grid>
+              <Grid item s={6}>
+                <Typography variant="subtitle1">
+                  Huoneen tyyppi:&nbsp;
+                  {data?.spaceTypeName}
+                </Typography>
+              </Grid>
+              <Grid item s={6}>
+                <Typography variant="subtitle1">
+                  Varuste tarve:&nbsp;
+                  {data?.equipmentName}
+                </Typography>
+              </Grid>
+              <Grid item s={6}>
+                <Typography variant="subtitle1">
+                  Varusteen tiedot:&nbsp;
+                  {data?.description}
                 </Typography>
               </Grid>
             </Grid>

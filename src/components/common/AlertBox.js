@@ -31,7 +31,6 @@ export default function AlertBox(props) {
               sx={{ alignSelf: "center" }}
               aria-label="sulje"
               color="inherit"
-              // size="large"
               onClick={() => {
                 setAlertOpen(false);
               }}
