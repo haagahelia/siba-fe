@@ -2,10 +2,12 @@ import Result from "../components/result/Result";
 import ProgramResult from "../components/result/ProgramResult";
 import testData from "../data/testData";
 import "../styles/ResultView.css";
-import { Typography } from "@mui/material";
+import { Button, ThemeProvider, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import resultRoomsStore from "../data/ResultRoomsStore";
 import resultProgramStore from "../data/ResultProgramStore";
+import allocationPost from "../data/AllocationPost";
+import theme, { globalTheme } from "../components/styles/theme";
 // Tee funktiolle muuttuja
 
 /*
@@ -28,17 +30,40 @@ export default function () {
   useEffect(() => getProgramData, []);
 
   const getRoomsData = async () => {
-    await roomStore.fetchRooms(10002);
+    await roomStore.fetchRooms(10004);
     setRooms(roomStore.rooms);
   };
 
   const getProgramData = async () => {
-    await progStore.fetchNames(10002);
+    await progStore.fetchNames(10004);
     setProgs(progStore.getNames());
   };
 
   return (
     <>
+      <ThemeProvider theme={globalTheme}>
+        <Button
+          type="submit"
+          variant="contained"
+          style={{ color: "white" }}
+          onClick={() => {
+            allocationPost.startAlloc();
+          }}
+        >
+          Start Allocation
+        </Button>
+        <Button
+          type="submit"
+          variant="contained"
+          color="red"
+          style={{ color: "white" }}
+          onClick={() => {
+            allocationPost.resetAlloc();
+          }}
+        >
+          Reset Allocation
+        </Button>
+      </ThemeProvider>
       <Typography style={{ color: "#F6E9E9", margin: 20 }}>
         Aineryhmä
       </Typography>
