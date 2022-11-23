@@ -57,7 +57,7 @@ function CollapsedRow(id) {
 
   const getRoomsData = async () => {
     console.log(id);
-    await resultRoomsStore.fetchSubRooms(id, 10002);
+    await resultRoomsStore.fetchSubRooms(id, 10004);
     setRooms(resultRoomsStore.subRooms);
   };
 
