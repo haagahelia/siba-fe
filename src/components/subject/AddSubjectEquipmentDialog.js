@@ -18,6 +18,8 @@ import FormControl from "@mui/material/FormControl";
 import Radio from "@mui/material/Radio";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormLabel from "@mui/material/FormLabel";
+import { ThemeProvider } from "@mui/material";
+import { globalTheme } from "../styles/theme";
 
 export default function AddSubjectEquipmentDialog(props) {
   const { equipmentList, data, formik, values, setInitialSubEquip } = props;
@@ -25,15 +27,17 @@ export default function AddSubjectEquipmentDialog(props) {
 
   return (
     <div>
-      <Button
-        variant="contained"
-        color="warning"
-        onClick={() => {
-          setOpen(true);
-        }}
-      >
-        Lisää varuste
-      </Button>
+      <ThemeProvider theme={globalTheme}>
+        <Button
+          variant="contained"
+          color="secondary"
+          onClick={() => {
+            setOpen(true);
+          }}
+        >
+          Lisää varuste
+        </Button>
+      </ThemeProvider>
       <Dialog open={open}>
         <DialogTitle> {data?.subjectName}</DialogTitle>
         <form onSubmit={formik.handleSubmit}>
@@ -123,26 +127,31 @@ export default function AddSubjectEquipmentDialog(props) {
             </DialogContentText>
           </DialogContent>
           <DialogActions>
-            <Button
-              variant="contained"
-              color="error"
-              onClick={() => {
-                setOpen(false);
-              }}
-            >
-              Peruuta
-            </Button>
-            <Button
-              type="submit"
-              variant="contained"
-              color="success"
-              onClick={() => {
-                setInitialSubEquip(values);
-                setOpen(false);
-              }}
-            >
-              Lisää
-            </Button>
+            <ThemeProvider theme={globalTheme}>
+              <Button
+                variant="contained"
+                color="red"
+                style={{ color: "white" }}
+                onClick={() => {
+                  setOpen(false);
+                }}
+              >
+                Peruuta
+              </Button>
+            </ThemeProvider>
+            <ThemeProvider theme={globalTheme}>
+              <Button
+                type="submit"
+                style={{ color: "white" }}
+                variant="contained"
+                onClick={() => {
+                  setInitialSubEquip(values);
+                  setOpen(false);
+                }}
+              >
+                Lisää
+              </Button>
+            </ThemeProvider>
           </DialogActions>
         </form>
       </Dialog>
