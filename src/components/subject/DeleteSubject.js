@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import { Button } from "@mui/material";
+import { Button, ThemeProvider } from "@mui/material";
 import PopUpDialog from "./PopDialog";
 import dao from "../../ajax/dao";
 import AlertBox from "../common/AlertBox";
 import ConfirmationDialog from "../common/ConfirmationDialog";
+import { globalTheme } from "../styles/theme";
 
 export default function DeleteSubject(props) {
   const { data, refreshSubjects } = props;
@@ -72,13 +73,15 @@ export default function DeleteSubject(props) {
         confirmfunction={deleteSubject}
         functionparam={deleteId}
       ></ConfirmationDialog>
-      <Button
-        variant="contained"
-        color="error"
-        onClick={() => submitDelete(data)}
-      >
-        Poista
-      </Button>
+      <ThemeProvider theme={globalTheme}>
+        <Button
+          variant="contained"
+          color="red"
+          onClick={() => submitDelete(data)}
+        >
+          Poista
+        </Button>
+      </ThemeProvider>
     </div>
   );
 }

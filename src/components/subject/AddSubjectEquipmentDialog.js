@@ -18,6 +18,8 @@ import FormControl from "@mui/material/FormControl";
 import Radio from "@mui/material/Radio";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormLabel from "@mui/material/FormLabel";
+import { ThemeProvider } from "@mui/material";
+import { globalTheme } from "../styles/theme";
 
 export default function AddSubjectEquipmentDialog(props) {
   const { equipmentList, data, formik, values, setInitialSubEquip } = props;
@@ -25,15 +27,17 @@ export default function AddSubjectEquipmentDialog(props) {
 
   return (
     <div>
+      <ThemeProvider theme={globalTheme}>
       <Button
         variant="contained"
-        color="warning"
+        color="secondary"
         onClick={() => {
           setOpen(true);
         }}
       >
         Lisää varuste
       </Button>
+      </ThemeProvider>
       <Dialog open={open}>
         <DialogTitle> {data?.subjectName}</DialogTitle>
         <form onSubmit={formik.handleSubmit}>
@@ -123,19 +127,23 @@ export default function AddSubjectEquipmentDialog(props) {
             </DialogContentText>
           </DialogContent>
           <DialogActions>
+            <ThemeProvider theme={globalTheme}>
             <Button
               variant="contained"
-              color="error"
+              color="red"
+              style={{color: "white"}}
               onClick={() => {
                 setOpen(false);
               }}
             >
               Peruuta
             </Button>
+            </ThemeProvider>
+            <ThemeProvider theme={globalTheme}>
             <Button
               type="submit"
+              style={{color: "white"}}
               variant="contained"
-              color="success"
               onClick={() => {
                 setInitialSubEquip(values);
                 setOpen(false);
@@ -143,6 +151,7 @@ export default function AddSubjectEquipmentDialog(props) {
             >
               Lisää
             </Button>
+            </ThemeProvider>
           </DialogActions>
         </form>
       </Dialog>

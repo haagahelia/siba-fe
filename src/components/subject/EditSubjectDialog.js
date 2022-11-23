@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import TextField from "@mui/material/TextField";
-import { Button, Grid, FormHelperText } from "@mui/material";
+import { Button, Grid, FormHelperText, ThemeProvider } from "@mui/material";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import DialogTitle from "@mui/material/DialogTitle";
 import Dialog from "@mui/material/Dialog";
 import { DialogActions, DialogContent, DialogContentText } from "@mui/material";
+import { globalTheme } from "../styles/theme";
 
 export default function EditSubjectDialog(props) {
   const { programNameList, formik, values, setEditSubject, spaceTypeNameList } =
@@ -31,15 +32,18 @@ export default function EditSubjectDialog(props) {
 
   return (
     <div>
+      <ThemeProvider theme={globalTheme}>
       <Button
         variant="contained"
-        color="warning"
+        color="secondary"
+        style={{color: "white"}}
         onClick={() => {
           setOpen(true);
         }}
       >
         Muokkaa
       </Button>
+      </ThemeProvider>
       <Dialog open={open}>
         <form onSubmit={formik.handleSubmit}>
           {/* formik.initialValues?.subjectName} Tässä ? katsoo löytyykö data objektista attribuuttia subjectName, jos ei löydy palauttaa arvon null eikä kaadu */}
@@ -226,20 +230,27 @@ export default function EditSubjectDialog(props) {
           <DialogActions
             sx={{ justifyContent: "space-evenly", padding: "16px" }}
           >
-            <Button onClick={handleClose} variant="contained" color="error">
-              Peruuta
-            </Button>
-            <Button
-              type="submit"
-              variant="contained"
-              color="success"
-              onClick={() => {
-                setEditSubject(values);
-                setOpen(false);
-              }}
-            >
-              Jatka
-            </Button>
+            <ThemeProvider theme={globalTheme}>
+              <Button
+                onClick={handleClose}
+                variant="contained"
+                color="red">
+                Peruuta
+              </Button>
+            </ThemeProvider>
+            <ThemeProvider theme={globalTheme}>
+              <Button
+                type="submit"
+                variant="contained"
+                style={{color: "white"}}
+                onClick={() => {
+                  setEditSubject(values);
+                  setOpen(false);
+                }}
+              >
+                Jatka
+              </Button>
+            </ThemeProvider>
           </DialogActions>
         </form>
       </Dialog>
