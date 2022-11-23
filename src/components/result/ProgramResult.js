@@ -3,7 +3,7 @@ import Grid2 from "@mui/material/Unstable_Grid2";
 import ProgressBar from "@ramonak/react-progress-bar";
 import Modal from "@mui/material/Modal";
 import { Box, Button, Collapse } from "@mui/material";
-import Result from "./Result";
+import SubjectResult from "./SubjectResult";
 import testData from "../../data/testData";
 import Typography from "@mui/material/Typography";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
@@ -50,7 +50,7 @@ export default function ProgramResult(props) {
           >
             {subProg.name} -subjects
           </Typography>
-          <Result data={subProg.subjects} dropdownData={testData.rooms}/>
+          <SubjectResult data={subProg.subjects} dropdownData={testData.rooms}/>
         </Box>
       </Modal>
       <Grid2
