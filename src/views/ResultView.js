@@ -24,6 +24,7 @@ export default function () {
   const roomStore = resultRoomsStore;
   const progStore = resultProgramStore;
 
+  const [isClicked, setIsClicked] = useState(false);
   const [rooms, setRooms] = useState([]);
   const [progs, setProgs] = useState([]);
 
@@ -50,7 +51,9 @@ export default function () {
         style={{color: "white",}}
         onClick= {() => {
           allocationPost.startAlloc();
+          if(!isClicked) setIsClicked(true);
         }}
+        disabled = {isClicked}
         >
         Start Allocation
         </Button>
@@ -61,6 +64,7 @@ export default function () {
         style={{color:"white"}}
         onClick={() => {
           allocationPost.resetAlloc();
+          if(isClicked) setIsClicked(false);
         }}
         >
           Reset Allocation
