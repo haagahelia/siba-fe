@@ -149,7 +149,7 @@ const postNewSubjectEquipment = async (newSubjectEquipment) => {
       }
     );
     const response = await fetch(request);
-    console.log("Respomse1", response);
+    //  console.log("Respomse1", response);
     if (response.status === 400) {
       return 400;
     }
@@ -160,6 +160,44 @@ const postNewSubjectEquipment = async (newSubjectEquipment) => {
     const data = await response.json();
     console.log("data", data);
     return data;
+  } catch (error) {
+    return "error";
+  }
+};
+
+const getEquipmentBySubjectId = async (id) => {
+  const request = new Request(
+    `http://localhost:3001/api/subjectequipment/getEquipment/${id}`,
+    {
+      method: "GET",
+    }
+  );
+
+  const response = await fetch(request);
+  if (response.status === 500) {
+    return 500;
+  }
+  const data = await response.json();
+  console.log("dataByID ", data);
+  return data;
+};
+
+const deleteSingleSubjectEquipment = async (subjectId, equipmentId) => {
+  try {
+    const request = new Request(
+      `http://localhost:3001/api/subjectequipment/delete/${subjectId}/${equipmentId}`,
+      {
+        method: "DELETE",
+      }
+    );
+    const response = await fetch(request);
+    if (response.status === 400) {
+      return 400;
+    }
+
+    const data = await response.json();
+    const result = data && data.affectedRows === 1 ? true : false;
+    return result;
   } catch (error) {
     return "error";
   }
@@ -207,6 +245,8 @@ const dao = {
   getSpaceTypeNames,
   getEquipmentNames,
   postNewSubjectEquipment,
+  getEquipmentBySubjectId,
+  deleteSingleSubjectEquipment,
   // fetchCategories,
   // fetchOneCategoryById,
   // deleteOneCategoryById,
