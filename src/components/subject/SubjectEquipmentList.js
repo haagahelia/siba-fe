@@ -12,7 +12,7 @@ import dao from "../../ajax/dao";
 import DeleteSubjectEquipment from "./DeleteSubjectEquipment";
 
 export default function SubjectEquipmentList(props) {
-  const { subjectList, data } = props;
+  const { data, refreshSubjects } = props;
   const [equipmentNamesList, setEquipmentNamesList] = useState([]);
   const [alertOpen, setAlertOpen] = useState(false);
   const [alertOptions, setAlertOptions] = useState({
@@ -61,27 +61,18 @@ export default function SubjectEquipmentList(props) {
                     alignItems: "center",
                   }}
                 >
-                  <Button
+                  {/* <Button
                     variant="contained"
                     color="warning"
                     sx={{ margin: "5px" }}
                   >
                     Muokkaa
-                  </Button>
-                  {/* <Button
-                    variant="contained"
-                    color="error"
-                    sx={{ margin: "5px" }}
-                    onClick={() => {
-                      console.log("equipment id", value.equipmentId);
-                      console.log("Subject id", value.subjectId);
-                    }}
-                  >
-                    Poista
                   </Button> */}
+
                   <DeleteSubjectEquipment
                     values={value}
                     equipmentNamesList={equipmentNamesList}
+                    refreshSubjects={refreshSubjects}
                   />
                 </Grid>
 

@@ -1,17 +1,10 @@
 import React, { useState } from "react";
 import dao from "../../ajax/dao";
-import {
-  Button,
-  Grid,
-  List,
-  ListItem,
-  ListItemText,
-  Typography,
-} from "@mui/material";
+import { Button } from "@mui/material";
 import ConfirmationDialog from "../common/ConfirmationDialog";
 
 export default function DeleteSubjectEquipment(props) {
-  const { equipmentNamesList, values } = props;
+  const { values, refreshSubjects } = props;
   const [alertOpen, setAlertOpen] = useState(false);
   const [alertOptions, setAlertOptions] = useState({
     message: "This is an error alert — check it out!",
@@ -30,7 +23,6 @@ export default function DeleteSubjectEquipment(props) {
   let id2 = values.equipmentId;
   let equipmentName = values.name;
 
-  // console.log("nimi", equipmentName);
   const deleteSubjectEquipment = async (subjectId, equipmentId) => {
     subjectId = id1;
     equipmentId = id2;
@@ -63,7 +55,7 @@ export default function DeleteSubjectEquipment(props) {
     });
     setAlertOpen(true);
 
-    //refreshSubjects();
+    refreshSubjects();
   };
 
   const submitDelete = (values) => {
@@ -72,9 +64,9 @@ export default function DeleteSubjectEquipment(props) {
       content: "Painamalla jatka poistat " + values.name + " listauksesta.",
     });
     setDialogOpen(true);
-    // setDeleteId(data.id);
+
     setDeleteSubEquip(values.subjectId, values.equipmentId);
-    console.log("hmmm", values);
+
     return;
   };
 
@@ -93,7 +85,6 @@ export default function DeleteSubjectEquipment(props) {
         sx={{ margin: "5px" }}
         onClick={() => {
           submitDelete(values);
-          //deleteSubjectEquipment(values.subjectId, values.equipmentId);
         }}
       >
         Poista

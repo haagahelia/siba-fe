@@ -98,7 +98,11 @@ export default function PopUpDialog(props) {
               </Grid>
               <Grid item s={6}>
                 <Typography variant="subtitle1">Varuste tarpeet:</Typography>
-                <SubjectEquipmentList subjectList={subjectList} data={data} />
+                <SubjectEquipmentList
+                  subjectList={subjectList}
+                  data={data}
+                  refreshSubjects={refreshSubjects}
+                />
               </Grid>
               {/* <Grid item s={6}>
                 <Typography variant="subtitle1">
