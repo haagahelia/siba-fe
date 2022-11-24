@@ -104,6 +104,7 @@ export default function SubjectListItems(props) {
     area: null,
     programId: null,
     subjectName: null,
+    spaceTypeName: null,
   });
 
   const [searched, setSearched] = useState("");
@@ -132,6 +133,7 @@ export default function SubjectListItems(props) {
         data={singelSubject}
         setSingleSubject={setSingleSubject}
         refreshSubjects={refreshSubjects}
+        subjectList={subjectList}
       />
       <Box>
         <TextField
@@ -225,6 +227,20 @@ export default function SubjectListItems(props) {
                     </Typography>
                     <ListItemText
                       primary={value.programName}
+                      primaryTypographyProps={{
+                        variant: "body2",
+                      }}
+                    />
+                  </Grid>
+                  <Grid item md={3} xs={7} padding={2}>
+                    <Typography
+                      variant="caption"
+                      style={{ fontWeight: "bold" }}
+                    >
+                      Huoneen tyyppi:
+                    </Typography>
+                    <ListItemText
+                      primary={value.spaceTypeName}
                       primaryTypographyProps={{
                         variant: "body2",
                       }}

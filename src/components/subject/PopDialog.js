@@ -11,9 +11,10 @@ import {
 import DeleteSubject from "./DeleteSubject";
 import EditSubject from "./EditSubject";
 import AddSubjectEquipment from "./AddSubjectEquipment";
+import SubjectEquipmentList from "./SubjectEquipmentList";
 
 export default function PopUpDialog(props) {
-  const { open, setOpen, data, refreshSubjects } = props;
+  const { open, setOpen, data, refreshSubjects, subjectList } = props;
 
   const handeClose = () => {
     setOpen = false;
@@ -40,7 +41,7 @@ export default function PopUpDialog(props) {
           <DialogContentText>
             <Grid
               container
-              spacing={5}
+              spacing={1}
               column={14}
               direction="column"
               justifyContent="flex-start"
@@ -79,7 +80,7 @@ export default function PopUpDialog(props) {
               </Grid>
               <Grid item s={6}>
                 <Typography variant="subtitle1">
-                  Pinta-ala(m2):&nbsp;
+                  Vaaditut neliömetrit:&nbsp;
                   {data?.area}
                 </Typography>
               </Grid>
@@ -96,17 +97,19 @@ export default function PopUpDialog(props) {
                 </Typography>
               </Grid>
               <Grid item s={6}>
-                <Typography variant="subtitle1">
-                  Varuste tarve:&nbsp;
-                  {data?.equipmentName}
-                </Typography>
+                <Typography variant="subtitle1">Varuste tarpeet:</Typography>
+                <SubjectEquipmentList
+                  subjectList={subjectList}
+                  data={data}
+                  refreshSubjects={refreshSubjects}
+                />
               </Grid>
-              <Grid item s={6}>
+              {/* <Grid item s={6}>
                 <Typography variant="subtitle1">
                   Varusteen tiedot:&nbsp;
                   {data?.description}
                 </Typography>
-              </Grid>
+              </Grid> */}
             </Grid>
           </DialogContentText>
         </DialogContent>
