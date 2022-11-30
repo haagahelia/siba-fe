@@ -26,6 +26,8 @@ export default function Result(props) {
           const color =
             progress > 100 ? "#FF1700" : progress < 80 ? "#FFE400" : "#06FF00";
 
+          const textColor = progress === 0 ? "white" : "black";
+
           return (
             <>
               <Grid2 xs={3} style={{ color: "rgb(246, 233, 233)" }}>
@@ -33,8 +35,9 @@ export default function Result(props) {
               </Grid2>
               <Grid2 xs={3}>
                 <ProgressBar
+                  labelAlignment="left"
                   baseBgColor={"#272121"}
-                  labelColor={"black"}
+                  labelColor={textColor}
                   bgColor={color}
                   padding={"3px"}
                   completed={Math.round(progress)}
