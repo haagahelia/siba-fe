@@ -5,6 +5,7 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import { Collapse, Typography, Box } from "@mui/material";
 import theme from "../styles/theme";
+import resultRoomsStore from "../../data/ResultRoomsStore";
 export default function Result(props) {
   return (
     <>
@@ -54,7 +55,7 @@ export default function Result(props) {
                   padding={"3px"}
                   completed={Math.round(progress)}
                 />
-                {CollapsedRow(props)}
+                {CollapsedRow(prog.id)}
               </Grid2>
             </>
           );
@@ -65,8 +66,15 @@ export default function Result(props) {
 }
 
 //pitää muokata kun tulee oikeaa dataa, nyt havainnollistamis versio.
-function CollapsedRow(props) {
+function CollapsedRow(id) {
   const [expand, setExpand] = React.useState(false);
+  const [subjects, setSubjects] = React.useState([]);
+
+  const getSubjects = async () => {
+    console.log(id);
+    await resultRoomsStore.fetchRoomSubs(id, 10004);
+    setSubjects(resultRoomsStore.roomSubs);
+  };
 
   return (
     <Grid2 container>
@@ -80,33 +88,57 @@ function CollapsedRow(props) {
       ) : (
         <KeyboardArrowDownIcon
           sx={{ color: "white", fontSize: 24 }}
-          onClick={() => setExpand(!expand)}
+          onClick={() => {
+            getSubjects();
+            setExpand(!expand);
+          }}
         >
           {" "}
         </KeyboardArrowDownIcon>
       )}
 
       <Collapse in={expand} style={{ width: "100%" }}>
-        <Grid2 container />
-        {props.dropdownData.map((dropdownItem) => {
-          return (
-            <Grid2 container>
-              <Grid2 xs={8}>
-                {" "}
-                <Typography
-                  style={{
-                    textAlign: "left",
-                    marginTop: 10,
-                    color: "#F6E9E9",
-                  }}
-                >
-                  {dropdownItem.name}
-                </Typography>
+        <Grid2 container>
+          <Grid2 xs={8}>
+            <Typography style={{ color: "#F6E9E9", fontSize: 20 }}>
+              Opetukset
+            </Typography>
+          </Grid2>
+          <Grid2 xs={4}>
+            <Typography style={{ color: "#F6E9E9", fontSize: 20 }}>
+              Tunnit
+            </Typography>
+          </Grid2>
+        </Grid2>
+        {subjects?.map((dropdownItem) => {
+            return (
+              <Grid2 container>
+                <Grid2 xs={8}>
+                  {" "}
+                  <Typography
+                    style={{
+                      textAlign: "left",
+                      marginTop: 10,
+                      color: "#F6E9E9",
+                    }}
+                  >
+                    {dropdownItem.name}
+                  </Typography>
+                </Grid2>
+                <Grid2 xs={4}>
+                  <Typography
+                    style={{
+                      textAlign: "left",
+                      marginTop: 10,
+                      color: "#F6E9E9",
+                    }}
+                  >
+                    {dropdownItem.totalTime}
+                  </Typography>
+                </Grid2>
               </Grid2>
-              <Grid2 xs={4} />
-            </Grid2>
-          );
-        })}
+            );
+          })}
       </Collapse>
     </Grid2>
   );
