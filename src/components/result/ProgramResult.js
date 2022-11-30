@@ -75,8 +75,11 @@ export default function ProgramResult(props) {
       >
         {props.programs.map((prog) => {
           const progress = calculateProsent(prog.subjects);
+
           const color =
             progress > 100 ? "#FF1700" : progress < 80 ? "#FFE400" : "#06FF00";
+
+          const textColor = progress === 0 ? "white" : "black";
 
           return (
             <>
@@ -100,7 +103,8 @@ export default function ProgramResult(props) {
                   // Jouduin kommentoimaan pois muutoin appi ei toiminut
                   // style= {styles.section}
                   baseBgColor={"#272121"}
-                  labelColor={"black"}
+                  labelAlignment={"left"}
+                  labelColor={textColor}
                   bgColor={color}
                   padding={"3px"}
                   completed={progress}
