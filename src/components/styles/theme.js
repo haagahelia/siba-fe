@@ -4,9 +4,14 @@ const darkBrown = "#272121";
 const lightGray = "#363333";
 const light = "#F6E9E9";
 const orange = "#E16428";
+const lightgreen = "#ABFFDD";
+const lightblue = "#73FDFF";
+const lightyellow = "#FFF5AB";
+const lightred = "#FF8585";
 const buttonOrange = "#E16428";
 const buttonGreen = "#54B435";
 const buttonRed = "#FF1E00";
+
 
 const theme = createTheme({
   components: {
@@ -118,6 +123,20 @@ const theme = createTheme({
           root: {
             color: light
           }
+        }
+      },
+      AllocRoom: {
+        studio: {
+          color: lightred
+        },
+        luentoluokka: {
+          color: lightblue
+        },
+        esitystila: {
+          color: lightgreen
+        },
+        musiikkiluokka: {
+          color: lightyellow
         }
       },
       MuiButton: {
