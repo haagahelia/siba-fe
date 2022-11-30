@@ -202,6 +202,57 @@ const deleteSingleSubjectEquipment = async (subjectId, equipmentId) => {
     return "error";
   }
 };
+
+const getUnAllocableSubjects = async (id) => {
+  const request = new Request(
+    `http://localhost:3001/api/allocation/${id}/subject/unallocated`,
+    {
+      method: "GET",
+    }
+  );
+
+  const response = await fetch(request);
+  if (response.status === 500) {
+    return 500;
+  }
+  const data = await response.json();
+  console.log("dataByID ", data);
+  return data;
+};
+
+const getSubjectRooms = async (id) => {
+  const request = new Request(
+    `http://localhost:3001/api/allocation/subject/${id}/rooms`,
+    {
+      method: "GET",
+    }
+  );
+
+  const response = await fetch(request);
+  if (response.status === 500) {
+    return 500;
+  }
+  const data = await response.json();
+  console.log("dataByID ", data);
+  return data;
+};
+
+const getMissingEquipmentForRoom = async (subjectId, roomId) => {
+  const request = new Request(
+    `http://localhost:3001/api/allocation/missingequipment/subject/${subjectId}/room/${roomId}`,
+    {
+      method: "GET",
+    }
+  );
+
+  const response = await fetch(request);
+  if (response.status === 500) {
+    return 500;
+  }
+  const data = await response.json();
+  console.log("dataByID ", data);
+  return data;
+};
 /*
 const fetchCategories = async () => {
     const request = new Request(`${baseUrl}/category/`,{
@@ -247,6 +298,9 @@ const dao = {
   postNewSubjectEquipment,
   getEquipmentBySubjectId,
   deleteSingleSubjectEquipment,
+  getUnAllocableSubjects,
+  getSubjectRooms,
+  getMissingEquipmentForRoom,
   // fetchCategories,
   // fetchOneCategoryById,
   // deleteOneCategoryById,
