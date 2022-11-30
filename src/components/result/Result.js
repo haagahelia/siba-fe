@@ -38,7 +38,7 @@ export default function Result(props) {
               </Grid2>
               <Grid2 xs={3}> 
                 <ProgressBar
-                  labelAlignment="left"
+                  labelAlignment={"left"}
                   baseBgColor={"#272121"}
                   labelColor={textColor}
                   bgColor={color}
