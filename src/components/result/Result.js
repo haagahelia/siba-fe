@@ -4,6 +4,7 @@ import ProgressBar from "@ramonak/react-progress-bar";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import { Collapse, Typography, Box } from "@mui/material";
+import theme from "../styles/theme";
 export default function Result(props) {
 
   return (
@@ -33,7 +34,12 @@ export default function Result(props) {
           return (
             <>
               
-              <Grid2 xs={3} style={{ color: "rgb(246, 233, 233)" }}>
+              <Grid2 xs={3} style={ 
+                prog.spaceTypeId === 5001 ? theme.components.AllocRoom.studio
+                : prog.spaceTypeId === 5002 ? theme.components.AllocRoom.luentoluokka
+                : prog.spaceTypeId === 5003 ? theme.components.AllocRoom.esitystila
+                : theme.components.AllocRoom.musiikkiluokka
+                }>
                 {prog.name}
               </Grid2>
               <Grid2 xs={3}> 
