@@ -104,12 +104,6 @@ export default function PopUpDialog(props) {
                   refreshSubjects={refreshSubjects}
                 />
               </Grid>
-              {/* <Grid item s={6}>
-                <Typography variant="subtitle1">
-                  Varusteen tiedot:&nbsp;
-                  {data?.description}
-                </Typography>
-              </Grid> */}
             </Grid>
           </DialogContentText>
         </DialogContent>

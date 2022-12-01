@@ -51,7 +51,6 @@ export default function ConfirmationDialog(props) {
               style={{ color: "white" }}
               variant="contained"
               onClick={() => {
-                // console.log(functionparam);
                 if (functionparam) {
                   confirmfunction(functionparam);
                 } else {

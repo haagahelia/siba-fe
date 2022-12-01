@@ -1,18 +1,41 @@
-export function validate(values) {
+import dao from "../ajax/dao";
+export async function validate(values) {
   const errors = {};
-  const regName = new RegExp(/[A-Za-zäöåÄÖÅ0-9-\s]*$/);
+  const regName = new RegExp(/^[A-Za-zäöåÄÖÅ0-9\s-]*$/);
   const regNumber = new RegExp(/^[0-9]+$/);
   const regTime = new RegExp(
     /^([0-1][0-9]|[2][0-3]):([0-5][0-9]):([0-5][0-9])$/,
   );
-  const regArea = new RegExp(/^[0-9]*(.[0-9]{1,2})?$/); //  (/^[0-9]{0,2}(.[0-9]{1,2})?$/);
+  const regArea = new RegExp(/^[0-9]*(.[0-9]{1,2})?$/);
+
+  let subjectList = [];
+
+  const getSubjectNames = async function () {
+    const data = await dao.fetchSubjectsNames();
+    subjectList = data;
+    let result;
+    let id;
+    let filteredList = [];
+    let list = subjectList.map((item) => {
+      if (values.id === item.id) {
+        id = item.id;
+        filteredList = subjectList.filter((element) => {
+          return element.id !== id;
+        });
+      }
+    });
+    result = filteredList.some((names) => names.name === values.subjectName);
+    return result;
+  };
 
   if (!values.subjectName) {
     errors.subjectName = "Pakollinen kenttä";
+  } else if (await getSubjectNames()) {
+    errors.subjectName = "Nimi on jo olemassa";
   } else if (values.subjectName.length < 2 || values.subjectName.length > 255) {
-    errors.name = "Nimen pitää olla 2-255 merkkiä pitkä";
+    errors.subjectName = "Nimen pitää olla 2-255 merkkiä pitkä";
   } else if (!regName.test(values.subjectName)) {
-    errors.subjectName = "Vain kirjaimet sallittu";
+    errors.subjectName = "Vain kirjaimet, numerot ja '-' sallittu";
   }
   if (!values.groupSize) {
     errors.groupSize = "Pakollinen kenttä";
