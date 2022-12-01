@@ -21,9 +21,7 @@ export default function SubjectEquipmentList(props) {
     severity: "error",
   });
 
-  let value = data?.id;
   const equipmentNames = async function (subjectId) {
-    subjectId = value;
     const data = await dao.getEquipmentBySubjectId(subjectId);
     if (data === 500) {
       setAlertOptions({
@@ -38,7 +36,7 @@ export default function SubjectEquipmentList(props) {
     }
   };
   useEffect(() => {
-    equipmentNames();
+    equipmentNames(data?.id);
   }, []);
   return (
     <div>
