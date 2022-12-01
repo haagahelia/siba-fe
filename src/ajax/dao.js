@@ -21,7 +21,20 @@ const fetchSubjects = async () => {
   }
 
   const data = await response.json();
-  // console.log("Data: ", data);
+  return data;
+};
+
+const fetchSubjectsNames = async () => {
+  const request = new Request("http://localhost:3001/api/subject/getNames", {
+    method: "GET",
+  });
+  const response = await fetch(request);
+
+  if (response.status === 500) {
+    return 500;
+  }
+
+  const data = await response.json();
   return data;
 };
 
@@ -149,7 +162,6 @@ const postNewSubjectEquipment = async (newSubjectEquipment) => {
       }
     );
     const response = await fetch(request);
-    //  console.log("Respomse1", response);
     if (response.status === 400) {
       return 400;
     }
@@ -178,7 +190,6 @@ const getEquipmentBySubjectId = async (id) => {
     return 500;
   }
   const data = await response.json();
-  console.log("dataByID ", data);
   return data;
 };
 
@@ -238,6 +249,7 @@ const deleteOneCategoryById = async (categoryId) => {
 
 const dao = {
   fetchSubjects,
+  fetchSubjectsNames,
   deleteSingleSubject,
   postNewSubject,
   getProgramNames,
