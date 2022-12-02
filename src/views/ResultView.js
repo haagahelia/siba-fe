@@ -70,21 +70,24 @@ export default function () {
           Reset Allocation
         </Button>
       </ThemeProvider>
-      <Typography style={{color: "#F6E9E9", margin: 20}}>Aineryhmä</Typography>
+      <Typography style={{color: "#F6E9E9", margin: 20, fontSize: 24}}>Aineryhmät</Typography>
       <ProgramResult data={testData.programs} programs={progs}/>
-      <div style={{ width: "80%", margin: "auto" }}>
-      <Typography style={{color: "#F6E9E9"}}>Huoneet</Typography>
+      <div style={{ width: "80%", margin: "auto"}}>
+      <Typography style={{color: "#F6E9E9", marginTop:"5%", fontSize: 24}}>Huoneet</Typography>
+      <div style={{display: "flex", gap: 100, marginTop:"3%", marginBottom: "5%"}}>
       <div style={theme.components.IndexRooms.luentoluokkaindex}>
-      <Typography style={{color: "#F6E9E9"}}> Luento luokka </Typography>
+      <Typography style={{marginLeft:40, color:"#F6E9E9"}}> Luento luokka </Typography>
+      </div>
       <div style={theme.components.IndexRooms.studioindex}>
-      <Typography style={{color: "#F6E9E9"}}> Studio </Typography>
+      <Typography style={{marginLeft:40, color:"#F6E9E9"}}> Studio </Typography>
         </div>
         <div style={theme.components.IndexRooms.esitystilaindex}>
-      <Typography style={{color: "#F6E9E9"}}> Esitystila </Typography>
+      <Typography style={{marginLeft:40, color:"#F6E9E9"}}> Esitystila </Typography>
         </div>
         <div style={theme.components.IndexRooms.musiikkiluokkaindex}>
-      <Typography style={{color: "#F6E9E9"}}> Musiikki luokka </Typography>
+      <Typography style={{marginLeft:40, color:"#F6E9E9"}}> Musiikki luokka </Typography>
         </div>
+        
         </div>
        
         
