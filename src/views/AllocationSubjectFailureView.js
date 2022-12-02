@@ -11,18 +11,58 @@ import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import CheckIcon from '@mui/icons-material/Check';
 import CloseIcon from '@mui/icons-material/Close';
+import Tooltip, { tooltipClasses } from '@mui/material/Tooltip';
+import ClickAwayListener from '@mui/material/ClickAwayListener';
 import dao from "../ajax/dao";
+
+export function GetMissingEquipment(idData) {
+
+    let subjId = idData.subjectId;
+    let roomId = idData.roomId;
+    let item = idData.item;
+
+    const [missingEquipment, setMissingEquipment] = useState("No");
+
+    // lagittaa älyttömästi useEffectissä...
+    const getMissingEquipment = async function () {
+
+        const data = await dao.getMissingEquipmentForRoom(subjId, roomId);
+        if (data === 500) {
+            console.log("Hupsista keikkaa!");
+            return;
+        } else {
+            console.log(data);
+            let itemString = "Test";
+            while (data) {
+                itemString = itemString + ", " + data.name;
+            }
+            console.log(itemString);
+            setMissingEquipment(itemString);
+        }
+    };
+
+    console.log("IDs!")
+    console.log(subjId + " " + roomId + " " + item);
+
+    return (
+        <Tooltip disableFocusListener title="Lagmachine">
+            {item === 0
+                ? <TableCell><CloseIcon color="error"></CloseIcon></TableCell>
+                : <TableCell><CheckIcon color="success"></CheckIcon></TableCell>
+            }
+        </Tooltip>
+    );
+}
 
 export default function AllocationSubjectFailureView() {
 
     const [unAllocableSubjects, setUnAllocableSubjects] = useState([]);
     const [unAllocSubjectRooms, setUnAllocSubjectRooms] = useState([]);
     const [open, setOpen] = React.useState(false);
-    const [scroll, setScroll] = React.useState('paper');
+    const [currSubjId, setCurrSubjId] = useState();
 
     const getUnAlloc = async function (id) {
         const data = await dao.getUnAllocableSubjects(id);
@@ -42,12 +82,12 @@ export default function AllocationSubjectFailureView() {
             return;
         } else {
             setUnAllocSubjectRooms(data);
+            setCurrSubjId(id);
         }
     };
 
     const handleClickOpen = (id) => () => {
         setOpen(true);
-        setScroll("body");
         getUnAllocRooms(id);
     };
 
@@ -70,9 +110,10 @@ export default function AllocationSubjectFailureView() {
         console.log(unAllocableSubjects);
     }, []);
 
+
     return (
         <div>
-            <Typography style={{ color: "#F6E9E9", margin: 20 }}>Opetukset joita ei voinut allokoida</Typography>
+            <Typography style={{ color: "#F6E9E9", margin: 20 }}>Opetukset joita ei voitu allokoida</Typography>
 
             <div style={{ width: "70%", backgroundColor: '#ff1744', margin: "auto" }}>
                 <TableContainer component={Paper}>
@@ -104,13 +145,13 @@ export default function AllocationSubjectFailureView() {
             <Dialog
                 open={open}
                 onClose={handleClose}
-                scroll={scroll}
+                scroll="body"
                 aria-labelledby="scroll-dialog-title"
                 aria-describedby="scroll-dialog-description"
                 maxWidth="70%"
             >
                 <DialogTitle id="scroll-dialog-title">Sopimattomat tilat</DialogTitle>
-                <DialogContent dividers={scroll === 'paper'}>
+                <DialogContent>
                     <TableContainer component={Paper}>
                         <Table sx={{ minWidth: 650 }} aria-label="simple table">
                             <TableHead>
@@ -130,19 +171,18 @@ export default function AllocationSubjectFailureView() {
                                     >
                                         <TableCell>{row.name}</TableCell>
                                         <TableCell>{row.area}</TableCell>
-                                        {row.missingItems > 0
+
+                                        <GetMissingEquipment subjectId={currSubjId} roomId={row.id} item={row.missingItems}></GetMissingEquipment>
+
+                                        {row.areaOk === 0
                                             ? <TableCell><CloseIcon color="error"></CloseIcon></TableCell>
                                             : <TableCell><CheckIcon color="success"></CheckIcon></TableCell>
                                         }
-                                        {row.areaOk == 0
+                                        {row.personLimitOk === 0
                                             ? <TableCell><CloseIcon color="error"></CloseIcon></TableCell>
                                             : <TableCell><CheckIcon color="success"></CheckIcon></TableCell>
                                         }
-                                        {row.personLimitOk == 0
-                                            ? <TableCell><CloseIcon color="error"></CloseIcon></TableCell>
-                                            : <TableCell><CheckIcon color="success"></CheckIcon></TableCell>
-                                        }
-                                        {row.spaceTypeOk == 0
+                                        {row.spaceTypeOk === 0
                                             ? <TableCell><CloseIcon color="error"></CloseIcon></TableCell>
                                             : <TableCell><CheckIcon color="success"></CheckIcon></TableCell>
                                         }
