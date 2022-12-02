@@ -37,7 +37,7 @@ export default function ProgramResult(props) {
 
   return (
     <>
-      <Modal open={open} onClose={handleClose}>
+      <Modal open={open} onClose={handleClose} style={{ overflow: "scroll" }}>
         <Box
           style={{
             width: "80%",
