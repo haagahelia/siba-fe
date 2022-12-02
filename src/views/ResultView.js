@@ -76,19 +76,20 @@ export default function () {
         <Typography style={{ color: "#F6E9E9" }}>Huoneet</Typography>
         <div style={theme.components.IndexRooms.luentoluokkaindex}>
           <Typography style={{ color: "#F6E9E9" }}> Luento luokka </Typography>
+          <div style={theme.components.IndexRooms.studioindex}>
+            <Typography style={{ color: "#F6E9E9" }}> Studio </Typography>
+          </div>
+          <div style={theme.components.IndexRooms.esitystilaindex}>
+            <Typography style={{ color: "#F6E9E9" }}> Esitystila </Typography>
+          </div>
+          <div style={theme.components.IndexRooms.musiikkiluokkaindex}>
+            <Typography style={{ color: "#F6E9E9" }}>
+              {" "}
+              Musiikki luokka{" "}
+            </Typography>
+          </div>
         </div>
-        <div style={theme.components.IndexRooms.studioindex}>
-          <Typography style={{ color: "#F6E9E9" }}> Studio </Typography>
-        </div>
-        <div style={theme.components.IndexRooms.esitystilaindex}>
-          <Typography style={{ color: "#F6E9E9" }}> Esitystila </Typography>
-        </div>
-        <div style={theme.components.IndexRooms.musiikkiluokkaindex}>
-          <Typography style={{ color: "#F6E9E9" }}>
-            {" "}
-            Musiikki luokka{" "}
-          </Typography>
-        </div>
+
         <Result data={rooms} dropdownData={testData.programs} />
       </div>
     </>
