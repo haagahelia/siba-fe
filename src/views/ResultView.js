@@ -76,8 +76,7 @@ export default function () {
       <Typography style={{color: "#F6E9E9"}}>Huoneet</Typography>
       <div style={theme.components.IndexRooms.luentoluokkaindex}>
       <Typography style={{color: "#F6E9E9"}}> Luento luokka </Typography>
-        </div>
-        <div style={theme.components.IndexRooms.studioindex}>
+      <div style={theme.components.IndexRooms.studioindex}>
       <Typography style={{color: "#F6E9E9"}}> Studio </Typography>
         </div>
         <div style={theme.components.IndexRooms.esitystilaindex}>
@@ -86,6 +85,10 @@ export default function () {
         <div style={theme.components.IndexRooms.musiikkiluokkaindex}>
       <Typography style={{color: "#F6E9E9"}}> Musiikki luokka </Typography>
         </div>
+        </div>
+       
+        
+        
       <Result data={rooms} dropdownData={testData.programs}/>
       </div>
     </>
