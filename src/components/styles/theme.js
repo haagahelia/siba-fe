@@ -145,6 +145,7 @@ const theme = createTheme({
         backgroundColor: lightred,
         border: "3px solid",
         borderColor: "black",
+        marginLeft: 60,
       },
       luentoluokkaindex: {
         width: 15,
@@ -152,6 +153,7 @@ const theme = createTheme({
         backgroundColor: lightblue,
         border: "3px solid",
         borderColor: "black",
+        marginLeft: 60,
       },
       esitystilaindex: {
         width: 15,
@@ -159,6 +161,7 @@ const theme = createTheme({
         backgroundColor: lightgreen,
         border: "3px solid",
         borderColor: "black",
+        marginLeft: 60,
       },
       musiikkiluokkaindex: {
         width: 15,
@@ -166,6 +169,7 @@ const theme = createTheme({
         backgroundColor: lightyellow,
         border: "3px solid",
         borderColor: "black",
+        marginLeft: 60,
       },
     },
     MuiButton: {
