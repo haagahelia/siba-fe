@@ -79,7 +79,10 @@ function NavBar() {
           }
         />
         <Route path="/onlyresult" element={<ResultView />} />
-        <Route path="/alloc-fail" element={<AllocationSubjectFailureView />} />
+        <Route
+          path="/alloc-fail/:id"
+          element={<AllocationSubjectFailureView />}
+        />
       </Routes>
     </Router>
   );

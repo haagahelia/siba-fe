@@ -16,6 +16,7 @@ import CheckIcon from "@mui/icons-material/Check";
 import CloseIcon from "@mui/icons-material/Close";
 import Tooltip, { tooltipClasses } from "@mui/material/Tooltip";
 import ClickAwayListener from "@mui/material/ClickAwayListener";
+import { useParams } from "react-router-dom";
 import dao from "../ajax/dao";
 
 export function GetMissingEquipment(idData) {
@@ -60,7 +61,7 @@ export function GetMissingEquipment(idData) {
   );
 }
 
-export default function AllocationSubjectFailureView() {
+export default function AllocationSubjectFailureView(props) {
   const [unAllocableSubjects, setUnAllocableSubjects] = useState([]);
   const [unAllocSubjectRooms, setUnAllocSubjectRooms] = useState([]);
   const [open, setOpen] = React.useState(false);
@@ -111,6 +112,9 @@ export default function AllocationSubjectFailureView() {
     getUnAlloc(10004);
     console.log(unAllocableSubjects);
   }, []);
+
+  let { id } = useParams();
+  console.log(id);
 
   return (
     <div>
