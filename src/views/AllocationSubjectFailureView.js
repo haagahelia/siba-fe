@@ -29,6 +29,9 @@ export function GetMissingEquipment(idData) {
 
     const [missingEquipment, setMissingEquipment] = useState("No");
 
+    let paramId = useParams();
+    console.log(paramId);
+
     // lagittaa älyttömästi useEffectissä...
     const getMissingEquipment = async function () {
 
@@ -52,7 +55,7 @@ export function GetMissingEquipment(idData) {
 
     return (
         <Tooltip disableFocusListener title="Lagmachine">
-            {item === 0
+            {item > 0
                 ? <TableCell><CloseIcon color="error"></CloseIcon></TableCell>
                 : <TableCell><CheckIcon color="success"></CheckIcon></TableCell>
             }
@@ -66,7 +69,9 @@ export default function AllocationSubjectFailureView(props) {
     const [unAllocSubjectRooms, setUnAllocSubjectRooms] = useState([]);
     const [open, setOpen] = React.useState(false);
     const [currSubjId, setCurrSubjId] = useState();
+    const {allocId} = useParams();
 
+    console.log(useParams())
     const getUnAlloc = async function (id) {
         const data = await dao.getUnAllocableSubjects(id);
         if (data === 500) {
@@ -109,12 +114,9 @@ export default function AllocationSubjectFailureView(props) {
     }, [open]);
 
     useEffect(() => {
-        getUnAlloc(10004);
+        getUnAlloc(allocId);
         console.log(unAllocableSubjects);
     }, []);
-
-    let { id } = useParams();
-    console.log(id);
 
 
     return (
@@ -163,7 +165,6 @@ export default function AllocationSubjectFailureView(props) {
                             <TableHead>
                                 <TableRow>
                                     <TableCell>Tilatyyppi</TableCell>
-                                    <TableCell>Tilakoko</TableCell>
                                     <TableCell>Tavarat</TableCell>
                                     <TableCell>Tilakoko</TableCell>
                                     <TableCell>Hlömäärä</TableCell>
@@ -176,22 +177,26 @@ export default function AllocationSubjectFailureView(props) {
                                         key={row.id}
                                     >
                                         <TableCell>{row.name}</TableCell>
-                                        <TableCell>{row.area}</TableCell>
 
                                         <GetMissingEquipment subjectId={currSubjId} roomId={row.id} item={row.missingItems}></GetMissingEquipment>
-
+                                        <Tooltip disableFocusListener title={row.area}>
                                         {row.areaOk === 0
                                             ? <TableCell><CloseIcon color="error"></CloseIcon></TableCell>
                                             : <TableCell><CheckIcon color="success"></CheckIcon></TableCell>
                                         }
+                                        </Tooltip>
+                                        <Tooltip disableFocusListener title={row.personLimit}>
                                         {row.personLimitOk === 0
                                             ? <TableCell><CloseIcon color="error"></CloseIcon></TableCell>
                                             : <TableCell><CheckIcon color="success"></CheckIcon></TableCell>
                                         }
+                                        </Tooltip>
+                                        <Tooltip disableFocusListener title={row.spaceType}>
                                         {row.spaceTypeOk === 0
                                             ? <TableCell><CloseIcon color="error"></CloseIcon></TableCell>
                                             : <TableCell><CheckIcon color="success"></CheckIcon></TableCell>
                                         }
+                                        </Tooltip>
                                     </TableRow>
                                 ))}
                             </TableBody>
