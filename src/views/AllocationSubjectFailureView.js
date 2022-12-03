@@ -14,9 +14,10 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import CheckIcon from "@mui/icons-material/Check";
 import CloseIcon from "@mui/icons-material/Close";
-import Tooltip, { tooltipClasses } from "@mui/material/Tooltip";
+import Tooltip from "@mui/material/Tooltip";
 import ClickAwayListener from "@mui/material/ClickAwayListener";
 import { useParams } from "react-router-dom";
+import "../styles/AllocationFailure.css";
 import dao from "../ajax/dao";
 
 export function GetMissingEquipment(idData) {
@@ -24,43 +25,78 @@ export function GetMissingEquipment(idData) {
   let roomId = idData.roomId;
   let item = idData.item;
 
-  const [missingEquipment, setMissingEquipment] = useState("No");
+  const [missingEquipment, setMissingEquipment] = useState(
+    "Ei puuttuvia tavaroita",
+  );
+  const [tooltipOpen, setTooltipOpen] = React.useState(false);
 
-  let paramId = useParams();
-  console.log(paramId);
+  const handleTooltipClose = () => {
+    setTooltipOpen(false);
+  };
 
-  // lagittaa älyttömästi useEffectissä...
-  const getMissingEquipment = async function () {
-    const data = await dao.getMissingEquipmentForRoom(subjId, roomId);
+  const handleTooltipOpen = () => {
+    if (item > 0) {
+      getMissingEquipment(subjId, roomId);
+    }
+
+    setTooltipOpen(true);
+  };
+
+  const getMissingEquipment = async function (subjectId, spaceId) {
+    const data = await dao.getMissingEquipmentForRoom(subjectId, spaceId);
     if (data === 500) {
       console.log("Hupsista keikkaa!");
       return;
     } else {
-      console.log(data);
-      let itemString = "Test";
-      while (data) {
-        itemString = `${itemString}, ${data.name}`;
+      let i = 0;
+      let resultString = "Puuttuvat tavarat: ";
+      while (data.length > i) {
+        if (i === 0) {
+          resultString = resultString + data[i].name;
+        } else {
+          resultString = `${resultString}, ${data[i].name}`;
+        }
+        i++;
       }
-      console.log(itemString);
-      setMissingEquipment(itemString);
+      setMissingEquipment(resultString);
     }
   };
 
-  console.log("IDs!");
-  console.log(`${subjId} ${roomId} ${item}`);
+  useEffect(() => {
+    console.log("IDs!");
+    console.log(`${subjId} ${roomId} ${item}`);
+  }, []);
 
   return (
-    <Tooltip disableFocusListener title="Lagmachine">
-      {item > 0 ? (
-        <TableCell>
-          <CloseIcon color="error" />
-        </TableCell>
-      ) : (
-        <TableCell>
-          <CheckIcon color="success" />
-        </TableCell>
-      )}
-    </Tooltip>
+    <ClickAwayListener onClickAway={handleTooltipClose}>
+      <Tooltip
+        onClose={handleTooltipClose}
+        open={tooltipOpen}
+        disableFocusListener
+        disableHoverListener
+        disableTouchListener
+        placement="left"
+        title={missingEquipment}
+      >
+        {item > 0 ? (
+          <TableCell>
+            <CloseIcon
+              id="setcursor"
+              onClick={handleTooltipOpen}
+              color="error"
+            />
+          </TableCell>
+        ) : (
+          <TableCell>
+            <CheckIcon
+              id="setcursor"
+              onClick={handleTooltipOpen}
+              color="success"
+            />
+          </TableCell>
+        )}
+      </Tooltip>
+    </ClickAwayListener>
   );
 }
 
@@ -71,7 +107,6 @@ export default function AllocationSubjectFailureView(props) {
   const [currSubjId, setCurrSubjId] = useState();
   const { allocId } = useParams();
 
-  console.log(useParams());
   const getUnAlloc = async function (id) {
     const data = await dao.getUnAllocableSubjects(id);
     if (data === 500) {
@@ -135,7 +170,7 @@ export default function AllocationSubjectFailureView(props) {
                 <TableCell>Tilatyyppi</TableCell>
               </TableRow>
             </TableHead>
-            <TableBody>
+            <TableBody id="setcursor">
               {unAllocableSubjects.map((row) => (
                 <TableRow
                   key={row.name}
@@ -151,21 +186,14 @@ export default function AllocationSubjectFailureView(props) {
           </Table>
         </TableContainer>
       </div>
-      <Dialog
-        open={open}
-        onClose={handleClose}
-        scroll="body"
-        aria-labelledby="scroll-dialog-title"
-        aria-describedby="scroll-dialog-description"
-        maxWidth="70%"
-      >
-        <DialogTitle id="scroll-dialog-title">Sopimattomat tilat</DialogTitle>
+      <Dialog open={open} onClose={handleClose} scroll="body" maxWidth="70%">
+        <DialogTitle>Sopimattomat tilat</DialogTitle>
         <DialogContent>
           <TableContainer component={Paper}>
             <Table sx={{ minWidth: 650 }} aria-label="simple table">
               <TableHead>
                 <TableRow>
-                  <TableCell>Tilatyyppi</TableCell>
+                  <TableCell>Nimi</TableCell>
                   <TableCell>Tavarat</TableCell>
                   <TableCell>Tilakoko</TableCell>
                   <TableCell>Hlömäärä</TableCell>
