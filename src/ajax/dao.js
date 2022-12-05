@@ -145,6 +145,7 @@ const getEquipmentNames = async () => {
     return 500;
   }
   const data = await response.json();
+
   return data;
 };
 
