@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Button,
   Grid,
@@ -10,6 +10,7 @@ import {
   TextField,
   DialogActions,
   RadioGroup,
+  Typography,
 } from "@mui/material";
 import Select from "@mui/material/Select";
 import InputLabel from "@mui/material/InputLabel";
@@ -24,6 +25,16 @@ import { globalTheme } from "../styles/theme";
 export default function AddSubjectEquipmentDialog(props) {
   const { equipmentList, data, formik, values, setInitialSubEquip } = props;
   const [open, setOpen] = useState(false);
+  const [ePriority, setEPriority] = useState(0);
+
+  useEffect(() => {
+    const prio = equipmentList.find((obj) => {
+      return obj.id === formik.values.equipmentId;
+    });
+    if (prio?.equipmentPriority) {
+      setEPriority(prio.equipmentPriority);
+    }
+  }, [formik.values.equipmentId]);
 
   return (
     <div>
@@ -80,6 +91,9 @@ export default function AddSubjectEquipmentDialog(props) {
                   </FormControl>
                 </Grid>
                 <Grid item sx={12}>
+                  <Typography sx={{ marginBottom: 2 }}>
+                    Prioriteetin oletusarvo: {ePriority}
+                  </Typography>
                   <TextField
                     error={
                       formik.touched.priority && formik.errors.priority
@@ -104,7 +118,6 @@ export default function AddSubjectEquipmentDialog(props) {
                   <FormControl>
                     <FormLabel>Varusteen pakollisuus</FormLabel>
                     <RadioGroup
-                      defaultValue="Pakollinen"
                       name="obligatory"
                       value={formik.values.obligatory}
                       onChange={formik.handleChange("obligatory")}
