@@ -15,7 +15,9 @@ export async function validate(values) {
     const data = await dao.fetchSubjectsNames();
     subjectList = data;
 
-    let result = subjectList.some((names) => names.name === values.name);
+    let result = subjectList.some(
+      (names) => names.name.toLowerCase() === values.name.toLowerCase()
+    );
     return result;
   };
 
