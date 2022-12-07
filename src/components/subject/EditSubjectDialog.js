@@ -47,14 +47,14 @@ export default function EditSubjectDialog(props) {
       <Dialog open={open}>
         <form onSubmit={formik.handleSubmit}>
           {/* formik.initialValues?.subjectName} Tässä ? katsoo löytyykö data objektista attribuuttia subjectName, jos ei löydy palauttaa arvon null eikä kaadu */}
-          <DialogTitle>
+          <DialogTitle sx={{ maxWidth: "300px" }}>
             Muokkaa: {formik.initialValues?.subjectName}
           </DialogTitle>
           <DialogContent>
             <DialogContentText>
               <Grid
                 container
-                spacing={2}
+                spacing={3}
                 column={7}
                 direction="column"
                 justifyContent="center"
@@ -241,7 +241,7 @@ export default function EditSubjectDialog(props) {
                 variant="contained"
                 style={{ color: "white" }}
                 onClick={() => {
-                  setEditSubject(values);
+                  // setEditSubject(values);
                   setOpen(false);
                 }}
               >

@@ -1,40 +1,47 @@
-import React, { useState, useEffect } from "react";
 import {
   Button,
-  Grid,
-  FormHelperText,
   Dialog,
-  DialogTitle,
+  DialogActions,
   DialogContent,
   DialogContentText,
-  TextField,
-  DialogActions,
+  DialogTitle,
+  FormControl,
+  FormControlLabel,
+  FormLabel,
+  Grid,
   RadioGroup,
+  TextField,
+  ThemeProvider,
   Typography,
 } from "@mui/material";
-import Select from "@mui/material/Select";
-import InputLabel from "@mui/material/InputLabel";
-import MenuItem from "@mui/material/MenuItem";
-import FormControl from "@mui/material/FormControl";
-import Radio from "@mui/material/Radio";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import FormLabel from "@mui/material/FormLabel";
-import { ThemeProvider } from "@mui/material";
+import React, { useState } from "react";
+import { useEffect } from "react";
 import { globalTheme } from "../styles/theme";
+import Radio from "@mui/material/Radio";
 
-export default function AddSubjectEquipmentDialog(props) {
-  const { equipmentList, data, formik, values, setInitialSubEquip } = props;
+export default function EditSubjectEquipmentDialog(props) {
+  const { formik, values, setEditSubEquip, equipmentList } = props;
   const [open, setOpen] = useState(false);
   const [ePriority, setEPriority] = useState(0);
+  const handleClose = () => {
+    setEditSubEquip({
+      priority: null,
+      obligatory: null,
+      subjectId: null,
+      equipmentId: null,
+    });
+    setOpen(false);
+  };
 
   useEffect(() => {
     const prio = equipmentList.find((obj) => {
       return obj.id === formik.values.equipmentId;
     });
+
     if (prio?.equipmentPriority) {
       setEPriority(prio.equipmentPriority);
     }
-  }, [formik.values.equipmentId]);
+  }, [equipmentList]);
 
   return (
     <div>
@@ -42,18 +49,17 @@ export default function AddSubjectEquipmentDialog(props) {
         <Button
           variant="contained"
           color="secondary"
+          style={{ color: "white", maxWidth: "85px", margin: "5px" }}
           onClick={() => {
             setOpen(true);
           }}
         >
-          Lisää varuste
+          Muokkaa
         </Button>
       </ThemeProvider>
       <Dialog open={open}>
-        <DialogTitle sx={{ maxWidth: "300px" }}>
-          {data?.subjectName}
-        </DialogTitle>
         <form onSubmit={formik.handleSubmit}>
+          <DialogTitle>Muokkaa: {formik.initialValues?.name}</DialogTitle>
           <DialogContent>
             <DialogContentText>
               <Grid
@@ -62,36 +68,9 @@ export default function AddSubjectEquipmentDialog(props) {
                 column={3}
                 direction="column"
                 justifyContent="flex-start"
-                alignItems="flex-center"
+                alignItems="flex-start"
                 padding={2}
               >
-                <Grid item sx={12}>
-                  <FormControl sx={{ minWidth: 225 }}>
-                    <InputLabel>Varuste</InputLabel>
-                    <Select
-                      error={
-                        formik.touched.equipmentId && formik.errors.equipmentId
-                          ? true
-                          : false
-                      }
-                      name="equipmentId"
-                      onChange={formik.handleChange("equipmentId")}
-                      value={formik.values?.equipmentId}
-                      onBlur={formik.handleBlur("equipmentId")}
-                    >
-                      {equipmentList.map((value) => {
-                        return (
-                          <MenuItem key={value.id} value={value.id}>
-                            {value.name}
-                          </MenuItem>
-                        );
-                      })}
-                    </Select>
-                    <FormHelperText>
-                      {formik.touched.equipmentId && formik.errors.equipmentId}
-                    </FormHelperText>
-                  </FormControl>
-                </Grid>
                 <Grid item sx={12}>
                   <Typography sx={{ marginBottom: 2 }}>
                     Prioriteetin oletusarvo: {ePriority}
@@ -151,6 +130,7 @@ export default function AddSubjectEquipmentDialog(props) {
                 style={{ color: "white" }}
                 onClick={() => {
                   setOpen(false);
+                  handleClose();
                 }}
               >
                 Peruuta

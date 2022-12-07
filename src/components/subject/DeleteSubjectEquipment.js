@@ -82,7 +82,7 @@ export default function DeleteSubjectEquipment(props) {
       <Button
         variant="contained"
         color="error"
-        sx={{ margin: "5px" }}
+        sx={{ margin: "5px", maxWidth: "85px" }}
         onClick={() => {
           submitDelete(values);
         }}
