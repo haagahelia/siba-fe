@@ -16,10 +16,6 @@ import SubjectEquipmentList from "./SubjectEquipmentList";
 export default function PopUpDialog(props) {
   const { open, setOpen, data, refreshSubjects, subjectList } = props;
 
-  const handeClose = () => {
-    setOpen = false;
-  };
-
   return (
     <div>
       <Dialog open={open} onClose={() => setOpen(false)} width="400px">

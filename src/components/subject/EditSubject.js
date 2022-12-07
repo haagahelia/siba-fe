@@ -44,6 +44,7 @@ export default function EditSubject(props) {
     initialValues: data,
     validate,
     onSubmit: (values) => {
+      console.log("Sube dhit", values);
       setDialogOptions({
         title: "Haluatko varmasti muuttaa " + values.subjectName + " tietoja?",
         content:

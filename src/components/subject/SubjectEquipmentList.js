@@ -10,6 +10,7 @@ import React, { useState } from "react";
 import { useEffect } from "react";
 import dao from "../../ajax/dao";
 import DeleteSubjectEquipment from "./DeleteSubjectEquipment";
+import EditSubjectEquipment from "./EditSubjectEquipment";
 
 export default function SubjectEquipmentList(props) {
   const { data, refreshSubjects } = props;
@@ -45,35 +46,37 @@ export default function SubjectEquipmentList(props) {
           <List key={data?.id}>
             <ListItem>
               <Grid
+                item
+                xs={3}
+                sx={{
+                  alignItems: "center",
+                  marginRight: "10px",
+                }}
+              >
+                <EditSubjectEquipment
+                  data={value}
+                  subId={value.subjectId}
+                  equipId={value.equipmentId}
+                  prio={value.priority}
+                  obli={value.obligatory}
+                  name={value.name}
+                  refreshSubjects={refreshSubjects}
+                  setEquipmentNamesList={setEquipmentNamesList}
+                />
+                <DeleteSubjectEquipment
+                  values={value}
+                  equipmentNamesList={equipmentNamesList}
+                  refreshSubjects={refreshSubjects}
+                />
+              </Grid>
+              <Grid
                 container
                 column={14}
                 direction="column"
                 justifyContent="flex-start"
                 alignItems="flex-start"
+                padding={0.5}
               >
-                <Grid
-                  item
-                  xs={6}
-                  sx={{
-                    justifyContent: "space-evenly",
-                    alignItems: "center",
-                  }}
-                >
-                  {/* <Button
-                    variant="contained"
-                    color="warning"
-                    sx={{ margin: "5px" }}
-                  >
-                    Muokkaa
-                  </Button> */}
-
-                  <DeleteSubjectEquipment
-                    values={value}
-                    equipmentNamesList={equipmentNamesList}
-                    refreshSubjects={refreshSubjects}
-                  />
-                </Grid>
-
                 <Grid item xs={6}>
                   <ListItemText>
                     <Typography variant="subtitle1">
@@ -85,6 +88,13 @@ export default function SubjectEquipmentList(props) {
                   <ListItemText>
                     <Typography variant="subtitle1">
                       Varusteen tiedot:&nbsp; {value.description}
+                    </Typography>
+                  </ListItemText>
+                </Grid>
+                <Grid item xs={6}>
+                  <ListItemText>
+                    <Typography variant="subtitle1">
+                      Varusteen prioriteetti arvo:&nbsp; {value.priority}
                     </Typography>
                   </ListItemText>
                 </Grid>

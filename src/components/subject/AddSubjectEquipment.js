@@ -12,7 +12,7 @@ export default function AddSubjectEquipment(props) {
     subjectId: data?.id,
     equipmentId: 0,
     priority: 0,
-    obligatory: 0,
+    obligatory: 1,
   });
   const [alertOpen, setAlertOpen] = useState(false);
   const [alertOptions, setAlertOptions] = useState({
