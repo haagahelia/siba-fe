@@ -174,7 +174,7 @@ export default function AllocationSubjectFailureView() {
 
   useEffect(() => {
     getUnAlloc(allocId);
-  }, []);
+  }, [allocId]);
 
   return (
     <div>
