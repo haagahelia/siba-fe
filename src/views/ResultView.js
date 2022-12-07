@@ -75,7 +75,7 @@ export default function () {
         </Typography>
 
         <div style={{ display: "flex", marginLeft: 286.5 }}>
-          <Link to="/subject">
+          <Link to="/alloc-fail/10004">
             <Button
               type="submit"
               variant="outlined"
