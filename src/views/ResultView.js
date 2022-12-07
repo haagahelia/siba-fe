@@ -75,7 +75,7 @@ export default function () {
       <Typography style={{color: "#F6E9E9", margin: 20, fontSize: 24}}>Aineryhmät</Typography>
       
       <div style={{display: "flex", marginLeft: 286.5 }}>
-      <Link to="/subject">
+      <Link to="/alloc-fail/10004">
       <Button
       type="submit"
       variant="outlined"
