@@ -6,7 +6,8 @@ import ConfirmationDialog from "../common/ConfirmationDialog";
 import { validate } from "../../validation/ValidateAddSubjectEquipment";
 
 export default function AddSubjectEquipment(props) {
-  const { data, refreshSubjects } = props;
+  const { data } = props;
+
   const [equipmentList, setEquipmentList] = useState([]);
   const [initialSubEquip, setInitialSubEquip] = useState({
     subjectId: data?.id,
@@ -14,6 +15,7 @@ export default function AddSubjectEquipment(props) {
     priority: 0,
     obligatory: 1,
   });
+
   const [alertOpen, setAlertOpen] = useState(false);
   const [alertOptions, setAlertOptions] = useState({
     title: "This is title",
@@ -26,8 +28,20 @@ export default function AddSubjectEquipment(props) {
     content: "Something here",
   });
 
-  const equipment = async function () {
+  let subId = data?.id;
+
+  const getSubjectEquipment = async function (subId) {
+    const data = await dao.getEquipmentBySubjectId(subId);
+
+    equipment(data);
+  };
+  useEffect(() => {
+    getSubjectEquipment(subId);
+  }, []);
+
+  const equipment = async function (subEquipList) {
     const data = await dao.getEquipmentNames();
+
     if (data === 500) {
       setAlertOptions({
         severity: "error",
@@ -37,12 +51,14 @@ export default function AddSubjectEquipment(props) {
       setAlertOpen(true);
       return;
     } else {
-      setEquipmentList(data);
+      const filteredList = data.filter((item) => {
+        return !subEquipList.some((element) => {
+          return element.equipmentId === item.id;
+        });
+      });
+      setEquipmentList(filteredList);
     }
   };
-  useEffect(() => {
-    equipment();
-  }, []);
 
   const formik = useFormik({
     initialValues: initialSubEquip,
@@ -100,8 +116,6 @@ export default function AddSubjectEquipment(props) {
       message: "Varuste lisätty.",
     });
     setAlertOpen(true);
-
-    refreshSubjects();
   };
 
   return (

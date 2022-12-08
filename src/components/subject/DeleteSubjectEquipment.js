@@ -54,8 +54,6 @@ export default function DeleteSubjectEquipment(props) {
       message: equipmentName + " poistettu.",
     });
     setAlertOpen(true);
-
-    refreshSubjects();
   };
 
   const submitDelete = (values) => {
