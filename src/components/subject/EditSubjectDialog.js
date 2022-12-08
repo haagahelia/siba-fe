@@ -234,14 +234,11 @@ export default function EditSubjectDialog(props) {
               <Button onClick={handleClose} variant="contained" color="red">
                 Peruuta
               </Button>
-            </ThemeProvider>
-            <ThemeProvider theme={globalTheme}>
               <Button
                 type="submit"
                 variant="contained"
                 style={{ color: "white" }}
                 onClick={() => {
-                  // setEditSubject(values);
                   setOpen(false);
                 }}
               >

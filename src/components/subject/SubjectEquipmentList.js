@@ -61,12 +61,10 @@ export default function SubjectEquipmentList(props) {
                   obli={value.obligatory}
                   name={value.name}
                   refreshSubjects={refreshSubjects}
-                  setEquipmentNamesList={setEquipmentNamesList}
                 />
                 <DeleteSubjectEquipment
                   values={value}
                   equipmentNamesList={equipmentNamesList}
-                  refreshSubjects={refreshSubjects}
                 />
               </Grid>
               <Grid

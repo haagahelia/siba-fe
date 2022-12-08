@@ -135,8 +135,7 @@ export default function EditSubjectEquipmentDialog(props) {
               >
                 Peruuta
               </Button>
-            </ThemeProvider>
-            <ThemeProvider theme={globalTheme}>
+
               <Button
                 type="submit"
                 style={{ color: "white" }}
@@ -145,7 +144,7 @@ export default function EditSubjectEquipmentDialog(props) {
                   setOpen(false);
                 }}
               >
-                Lisää
+                Muokkaa
               </Button>
             </ThemeProvider>
           </DialogActions>

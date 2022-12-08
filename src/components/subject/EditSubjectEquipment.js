@@ -11,7 +11,7 @@ import dao from "../../ajax/dao";
 import EditSubjectEquipmentDialog from "./EditSubjectEquipmentDialog";
 
 export default function EditSubjectEquipment(props) {
-  const { data, refreshSubjects, subId, equipId, prio, obli, name } = props;
+  const { subId, equipId, prio, obli, name } = props;
 
   const [equipmentList, setEquipmentList] = useState([]);
   const [alertOpen, setAlertOpen] = useState(false);
@@ -45,7 +45,6 @@ export default function EditSubjectEquipment(props) {
     initialValues: initialEquipValues,
     validate,
     onSubmit: (values) => {
-      console.log("formik tuleekon tämä", values);
       setDialogOptions({
         title:
           `Haluatko varmasti muuttaa ${initialEquipValues.name} tietoja?`,
@@ -67,7 +66,6 @@ export default function EditSubjectEquipment(props) {
 
     let result = await dao.editSubjectEquipment(editedSubEquip);
 
-    console.log("other values", editedSubEquip); // Oikeat valuet
     if (result === 400) {
       setAlertOptions({
         severity: "error",
@@ -103,8 +101,6 @@ export default function EditSubjectEquipment(props) {
       message: `${values.name} uudet tiedot lisätty.`,
     });
     setAlertOpen(true);
-
-    refreshSubjects();
   }
   const equipment = async function () {
     const data = await dao.getEquipmentNames();
