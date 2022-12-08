@@ -24,7 +24,9 @@ export async function validate(values) {
         });
       }
     });
-    result = filteredList.some((names) => names.name === values.subjectName);
+    result = filteredList.some(
+      (names) => names.name.toLowerCase() === values.subjectName.toLowerCase(),
+    );
     return result;
   };
 
