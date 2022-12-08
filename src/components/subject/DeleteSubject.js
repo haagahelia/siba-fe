@@ -7,7 +7,7 @@ import ConfirmationDialog from "../common/ConfirmationDialog";
 import { globalTheme } from "../styles/theme";
 
 export default function DeleteSubject(props) {
-  const { data, refreshSubjects } = props;
+  const { data, refreshSubjects, setOpen } = props;
   const [alertOpen, setAlertOpen] = useState(false);
   const [alertOptions, setAlertOptions] = useState({
     message: "This is an error alert — check it out!",
@@ -49,6 +49,7 @@ export default function DeleteSubject(props) {
       message: value.subjectName + " poistettu.",
     });
     setAlertOpen(true);
+    setOpen(false);
 
     refreshSubjects();
   };
