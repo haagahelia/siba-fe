@@ -1,83 +1,65 @@
-This is the FRONTEND repo.
+<div id="top"></div>
 
-Backend repo at: https://github.com/haagahelia/Siba_be
+<!-- PROJECT LOGO -->
+<br />
+<div align="center">
+  
+<h1 align="center">SIBA22S</h1>
 
-## Note: The frontend needs a .env.local file in the repo root folder
+<h3 align="center">
+    Projekti luotu Softalaprojekti kurssilla <br />
+<br />
+</div>
 
-Here is a sample content for that file. Make sure just non-empty lines ended with Enter:  (second line here just helping the first line to be correct :D )
+## Tekijät
+  <p>SIBA22S</p>
 
-```
-REACT_APP_BE_SERVER_BASE_URL=http://localhost:3001/api
-REACT_APP_BE_SERVER_BASE_URL2=http://jokutoinenpalvelin:3001/api
-```
+<!-- ABOUT THE PROJECT -->
+## Projektista
 
-# Getting Started with Create React App
+Projekti on Haaga-Helian ja Sibelius akatemian yhteistyön pohjalta toteutettava sovellus, jonka tarkoituksena on mahdollistaa Sibelius akatemian opetustilojen ja varusteiden käytön laskenta, sekä optimointi eri opetuksille.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<p align="right">(<a href="#top">back to top</a>)</p>
 
-## Available Scripts
+### Teknologiat ja muut hyödylliset resurssit
 
-In the project directory, you can run:
+* [React](https://reactjs.org/)
+* [Axios](https://www.npmjs.com/package/axios)
+* [Formik](https://formik.org/)
+* [MUI](https://mui.com/)
+* [Colorhunt](https://colorhunt.co/)
 
-### `npm start`
+<p align="right">(<a href="#top">back to top</a>)</p>
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+<!-- GETTING STARTED -->
+## Aloitus
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Fronttipuolen asennusohjeet
 
-### `npm test`
+### Asennus
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+1. Kloonaa repo
+   ```sh
+   git clone https://github.com/haagahelia/siba-fe.git
+   ```
+2. Asenna tarvittavat paketit
+   ```sh
+   npm install
+   ```
 
-### `npm run build`
+3. Sovelluksen käynnistys
+   ```sh
+   npm start
+   ```
+4. Huom! Seuraa [Backend repon](https://github.com/haagahelia/Siba_be) asennusohjetta myös
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+<p align="right">(<a href="#top">back to top</a>)</p>
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Käyttö
+### Opetukset näkymä
+* Millainen kuvaus tähän hyvä? Onko tarpeellinen?
+### Tulos näkymä
+* Millainen kuvaus tähän hyvä? Onko tarpeellinen?
 
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+<p align="right">(<a href="#top">back to top</a>)</p>
