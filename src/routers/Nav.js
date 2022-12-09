@@ -47,7 +47,7 @@ function NavBar() {
                 className="nav-links"
                 onClick={handleClick}
               >
-                Aineryhmänäkymä
+                Opetukset
               </NavLink>
             </li>
             <li className="nav-item">
