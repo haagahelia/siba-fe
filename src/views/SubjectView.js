@@ -6,6 +6,7 @@ import Grid from "@mui/material/Grid";
 import AddSubject from "../components/subject/AddSubject";
 import dao from "../ajax/dao";
 import AlertBox from "../components/common/AlertBox";
+import SubjectFiltering from "../components/subject/SubjectFiltering";
 
 export default function SubjectView() {
   const [subjectList, setSubjectList] = useState([]);
@@ -14,6 +15,8 @@ export default function SubjectView() {
     message: "This is an error alert — check it out!",
     severity: "error",
   });
+  const [searched, setSearched] = useState("");
+  const [filteredSubject, setFilteredSubject] = useState([]);
 
   const refreshSubjects = async function () {
     const data = await dao.fetchSubjects();
@@ -27,6 +30,7 @@ export default function SubjectView() {
       return;
     } else {
       setSubjectList(data);
+      setFilteredSubject(data);
     }
   };
 
@@ -57,6 +61,12 @@ export default function SubjectView() {
           <Card variant="outlined">
             <CardContent>
               <CardHeader title="Opetukset" />
+              <SubjectFiltering
+                setFilteredSubject={setFilteredSubject}
+                filteredSubject={filteredSubject}
+                searched={searched}
+                setSearched={setSearched}
+              />
               <SubjectList
                 refreshSubjects={refreshSubjects}
                 subjectList={subjectList}
