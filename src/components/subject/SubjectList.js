@@ -8,16 +8,14 @@ import { styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
 import { TextField, Typography } from "@mui/material";
 import PopUpDialog from "./PopDialog";
+import SubjectPagination from "./SubjectPagination";
+import SubjectFiltering from "./SubjectFiltering";
 
 export default function SubjectListItems(props) {
   const { subjectList, refreshSubjects } = props;
-  const [subjectListState, setSubjectListState] = useState(subjectList);
+  const [subjectListState, setSubjectListState] = useState(subjectList.slice(0,15));
+  const [initialRender, setInitialRender] = useState(true)
 
-  useEffect(() => {
-    if (!searched) {
-      setSubjectListState(subjectList);
-    }
-  });
 
   const [open, setOpen] = useState(false);
   const [hoverColor, sethoverColor] = useState("#CFD6D5  ");
@@ -34,20 +32,6 @@ export default function SubjectListItems(props) {
     spaceTypeName: null,
   });
 
-  const [searched, setSearched] = useState("");
-
-  const requestSearch = (e) => {
-    e.preventDefault();
-    setSearched(e.target.value);
-    const filteredSubjects = props.subjectList.filter(subject);
-    function subject(subject) {
-      return subject.subjectName
-        .toLowerCase()
-        .includes(e.target.value.toLowerCase());
-    }
-    setSubjectListState(filteredSubjects);
-  };
-
   // STYLES
   const Box = styled(Paper)(({ theme }) => ({
     overflow: "auto",
@@ -63,17 +47,6 @@ export default function SubjectListItems(props) {
         subjectList={subjectList}
       ></PopUpDialog>
       <Box>
-        <TextField
-          name="searched"
-          placeholder="Opetusten haku:"
-          type="text"
-          variant="outlined"
-          fullWidth
-          size="medium"
-          value={searched}
-          onChange={(e) => requestSearch(e)}
-          autoFocus
-        />
         <nav>
           {subjectListState.map((value) => {
             return (
@@ -86,8 +59,8 @@ export default function SubjectListItems(props) {
 
                     setOpen(true);
                   }}
-                  onMouseEnter={() => sethoverColor("#CFD6D5  ")}
-                  onMouseLeave={() => sethoverColor("#FFFFFF ")}
+                  //onMouseEnter={() => sethoverColor("#CFD6D5  ")}
+                  //onMouseLeave={() => sethoverColor("#FFFFFF ")}
                 >
                   <Grid item md={3} xs={7} padding={2}>
                     <Typography
@@ -179,6 +152,10 @@ export default function SubjectListItems(props) {
             );
           })}
         </nav>
+        <SubjectPagination
+          subjectList = {subjectList} 
+          setSubjectListState={setSubjectListState}
+        />
       </Box>
     </div>
   );
