@@ -1,17 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useFormik } from "formik";
 import ConfirmationDialog from "../common/ConfirmationDialog";
-import {
-  validate,
-  capitalizeFirstLetter,
-} from "../../validation/ValidateEditSubjectEquipment";
+import { validate } from "../../validation/ValidateEditSubjectEquipment";
 import AlertBox from "../common/AlertBox";
 import dao from "../../ajax/dao";
-
 import EditSubjectEquipmentDialog from "./EditSubjectEquipmentDialog";
 
 export default function EditSubjectEquipment(props) {
-  const { subId, equipId, prio, obli, name } = props;
+  const { subId, equipId, prio, obli, name, equipmentNames } = props;
 
   const [equipmentList, setEquipmentList] = useState([]);
   const [alertOpen, setAlertOpen] = useState(false);
@@ -101,6 +97,7 @@ export default function EditSubjectEquipment(props) {
       message: `${values.name} uudet tiedot lisätty.`,
     });
     setAlertOpen(true);
+    equipmentNames(subId);
   }
   const equipment = async function () {
     const data = await dao.getEquipmentNames();
@@ -122,6 +119,11 @@ export default function EditSubjectEquipment(props) {
 
   return (
     <div>
+      <AlertBox
+        alertOpen={alertOpen}
+        alertOptions={alertOptions}
+        setAlertOpen={setAlertOpen}
+      />
       <ConfirmationDialog
         dialogOpen={dialogOpen}
         dialogOptions={dialogOptions}
@@ -129,7 +131,6 @@ export default function EditSubjectEquipment(props) {
         confirmfunction={submitEditedSubjectEquip}
         functionparam={formik.values}
       />
-
       <EditSubjectEquipmentDialog
         formik={formik}
         values={formik.values}

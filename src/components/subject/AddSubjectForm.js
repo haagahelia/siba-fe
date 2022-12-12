@@ -22,7 +22,6 @@ export default function AddSubjectForm(props) {
     values,
     setCopySubjectData,
     subjectList,
-    copySubjectData,
     spaceTypeNameList,
   } = props;
 

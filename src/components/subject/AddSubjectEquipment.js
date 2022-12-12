@@ -6,8 +6,8 @@ import ConfirmationDialog from "../common/ConfirmationDialog";
 import { validate } from "../../validation/ValidateAddSubjectEquipment";
 
 export default function AddSubjectEquipment(props) {
-  const { data } = props;
-
+  const { data, equipmentNames } = props;
+  const [subEquipListById, setSubEquipListById] = useState([]);
   const [equipmentList, setEquipmentList] = useState([]);
   const [initialSubEquip, setInitialSubEquip] = useState({
     subjectId: data?.id,
@@ -31,10 +31,10 @@ export default function AddSubjectEquipment(props) {
   let subId = data?.id;
 
   const getSubjectEquipment = async function (subId) {
-    const data = await dao.getEquipmentBySubjectId(subId);
-
-    equipment(data);
+    let result = await equipmentNames(subId);
+    equipment(result);
   };
+
   useEffect(() => {
     getSubjectEquipment(subId);
   }, []);
@@ -116,6 +116,8 @@ export default function AddSubjectEquipment(props) {
       message: "Varuste lisätty.",
     });
     setAlertOpen(true);
+    console.log("tuleeko tänne?");
+    getSubjectEquipment(subId);
   };
 
   return (

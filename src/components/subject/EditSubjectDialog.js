@@ -10,8 +10,7 @@ import { DialogActions, DialogContent, DialogContentText } from "@mui/material";
 import { globalTheme } from "../styles/theme";
 
 export default function EditSubjectDialog(props) {
-  const { programNameList, formik, values, setEditSubject, spaceTypeNameList } =
-    props;
+  const { programNameList, formik, setEditSubject, spaceTypeNameList } = props;
 
   const [open, setOpen] = useState(false);
   const handleClose = () => {
@@ -72,7 +71,7 @@ export default function EditSubjectDialog(props) {
                     label="Opetuksen nimi"
                     defaultValue={formik.initialValues?.subjectName}
                     variant="outlined"
-                    value={formik.formikValues?.subjectName}
+                    value={formik.values?.subjectName}
                     onChange={formik.handleChange("subjectName")}
                     onBlur={formik.handleBlur("subjectName")}
                     helperText={
