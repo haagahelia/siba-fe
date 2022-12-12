@@ -4,10 +4,10 @@ import AddSubjectEquipmentDialog from "./AddSubjectEquipmentDialog";
 import { useFormik } from "formik";
 import ConfirmationDialog from "../common/ConfirmationDialog";
 import { validate } from "../../validation/ValidateAddSubjectEquipment";
+import AlertBox from "../common/AlertBox";
 
 export default function AddSubjectEquipment(props) {
   const { data, equipmentNames } = props;
-  const [subEquipListById, setSubEquipListById] = useState([]);
   const [equipmentList, setEquipmentList] = useState([]);
   const [initialSubEquip, setInitialSubEquip] = useState({
     subjectId: data?.id,
@@ -122,6 +122,11 @@ export default function AddSubjectEquipment(props) {
 
   return (
     <div>
+      <AlertBox
+        alertOpen={alertOpen}
+        alertOptions={alertOptions}
+        setAlertOpen={setAlertOpen}
+      ></AlertBox>
       <ConfirmationDialog
         dialogOpen={dialogOpen}
         dialogOptions={dialogOptions}

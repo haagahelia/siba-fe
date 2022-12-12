@@ -23,7 +23,7 @@ import { ThemeProvider } from "@mui/material";
 import { globalTheme } from "../styles/theme";
 
 export default function AddSubjectEquipmentDialog(props) {
-  const { equipmentList, data, formik, values, setInitialSubEquip } = props;
+  const { equipmentList, data, formik } = props;
   const [open, setOpen] = useState(false);
   const [ePriority, setEPriority] = useState(0);
 
@@ -33,6 +33,7 @@ export default function AddSubjectEquipmentDialog(props) {
     });
     if (prio?.equipmentPriority) {
       setEPriority(prio.equipmentPriority);
+      formik.setValues({ ...formik.values, priority: prio.equipmentPriority });
     }
   }, [formik.values.equipmentId]);
 

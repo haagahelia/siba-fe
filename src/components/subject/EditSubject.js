@@ -11,7 +11,7 @@ import EditSubjectDialog from "./EditSubjectDialog";
 
 export default function EditSubject(props) {
   // Aina kun editSubject muuttuu subjectList.js filussa ne tiedot tulee tähän nimellä data
-  const { data, refreshSubjects } = props;
+  const { data, refreshSubjects, setOpen } = props;
   const [programNameList, setProgramNameList] = useState([]);
   const [spaceTypeNameList, setSpaceTypeNameList] = useState([]);
   const [alertOpen, setAlertOpen] = useState(false);
@@ -44,7 +44,6 @@ export default function EditSubject(props) {
     initialValues: data,
     validate,
     onSubmit: (values) => {
-      console.log("Sube dhit", values);
       setDialogOptions({
         title: "Haluatko varmasti muuttaa " + values.subjectName + " tietoja?",
         content:
@@ -106,7 +105,7 @@ export default function EditSubject(props) {
       message: values.subjectName + " uudet tiedot lisätty.",
     });
     setAlertOpen(true);
-
+    setOpen(false);
     refreshSubjects();
   }
 

@@ -66,7 +66,11 @@ export default function PopUpDialog(props) {
               refreshSubjects={refreshSubjects}
               setOpen={setOpen}
             ></DeleteSubject>
-            <EditSubject data={data} refreshSubjects={refreshSubjects} />
+            <EditSubject
+              data={data}
+              refreshSubjects={refreshSubjects}
+              setOpen={setOpen}
+            />
             <AddSubjectEquipment data={data} equipmentNames={equipmentNames} />
           </DialogActions>
           <DialogContentText>
