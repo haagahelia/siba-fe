@@ -46,11 +46,11 @@ export default function SubjectEquipmentList(props) {
               </Grid>
               <Grid
                 container
-                column={14}
+                column={4}
                 direction="column"
                 justifyContent="flex-start"
                 alignItems="flex-start"
-                padding={0.5}
+                padding={0.2}
               >
                 <Grid item xs={6}>
                   <ListItemText>
@@ -70,6 +70,18 @@ export default function SubjectEquipmentList(props) {
                   <ListItemText>
                     <Typography variant="subtitle1">
                       Varusteen prioriteetti arvo:&nbsp; {value.priority}
+                    </Typography>
+                  </ListItemText>
+                </Grid>
+                <Grid item xs={6}>
+                  <ListItemText>
+                    <Typography variant="subtitle1">
+                      Varuste pakollisuus :&nbsp;{" "}
+                      {value.obligatory === 1
+                        ? "Kyllä"
+                        : value.obligatory === 0
+                        ? "Ei"
+                        : null}
                     </Typography>
                   </ListItemText>
                 </Grid>
