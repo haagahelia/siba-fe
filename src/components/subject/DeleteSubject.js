@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Button, ThemeProvider } from "@mui/material";
-import PopUpDialog from "./PopDialog";
 import dao from "../../ajax/dao";
 import AlertBox from "../common/AlertBox";
 import ConfirmationDialog from "../common/ConfirmationDialog";
@@ -67,6 +66,11 @@ export default function DeleteSubject(props) {
 
   return (
     <div>
+      <AlertBox
+        alertOpen={alertOpen}
+        alertOptions={alertOptions}
+        setAlertOpen={setAlertOpen}
+      ></AlertBox>
       <ConfirmationDialog
         dialogOpen={dialogOpen}
         dialogOptions={dialogOptions}

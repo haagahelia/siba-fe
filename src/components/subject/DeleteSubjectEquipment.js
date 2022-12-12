@@ -2,9 +2,11 @@ import React, { useState } from "react";
 import dao from "../../ajax/dao";
 import { Button } from "@mui/material";
 import ConfirmationDialog from "../common/ConfirmationDialog";
+import AlertBox from "../common/AlertBox";
 
 export default function DeleteSubjectEquipment(props) {
-  const { values, refreshSubjects } = props;
+  const { values, equipmentNames } = props;
+
   const [alertOpen, setAlertOpen] = useState(false);
   const [alertOptions, setAlertOptions] = useState({
     message: "This is an error alert — check it out!",
@@ -54,6 +56,7 @@ export default function DeleteSubjectEquipment(props) {
       message: equipmentName + " poistettu.",
     });
     setAlertOpen(true);
+    equipmentNames(subjectId);
   };
 
   const submitDelete = (values) => {
@@ -70,6 +73,11 @@ export default function DeleteSubjectEquipment(props) {
 
   return (
     <div>
+      <AlertBox
+        alertOpen={alertOpen}
+        alertOptions={alertOptions}
+        setAlertOpen={setAlertOpen}
+      ></AlertBox>
       <ConfirmationDialog
         dialogOpen={dialogOpen}
         dialogOptions={dialogOptions}

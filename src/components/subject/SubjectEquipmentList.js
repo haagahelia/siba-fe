@@ -13,37 +13,13 @@ import DeleteSubjectEquipment from "./DeleteSubjectEquipment";
 import EditSubjectEquipment from "./EditSubjectEquipment";
 
 export default function SubjectEquipmentList(props) {
-  const { data, refreshSubjects } = props;
-  const [equipmentNamesList, setEquipmentNamesList] = useState([]);
-  const [alertOpen, setAlertOpen] = useState(false);
-  const [alertOptions, setAlertOptions] = useState({
-    title: "This is title",
-    message: "This is an error alert — check it out!",
-    severity: "error",
-  });
+  const { equipmentNamesList, equipmentNames } = props;
 
-  const equipmentNames = async function (subjectId) {
-    const data = await dao.getEquipmentBySubjectId(subjectId);
-    if (data === 500) {
-      setAlertOptions({
-        severity: "error",
-        title: "Virhe",
-        message: "Jokin meni pieleen palvelimella. Varusteita ei löytynyt",
-      });
-      setAlertOpen(true);
-      return;
-    } else {
-      setEquipmentNamesList(data);
-    }
-  };
-  useEffect(() => {
-    equipmentNames(data?.id);
-  }, []);
   return (
     <div>
       {equipmentNamesList.map((value) => {
         return (
-          <List key={data?.id}>
+          <List key={value.equipmentId}>
             <ListItem>
               <Grid
                 item
@@ -60,11 +36,12 @@ export default function SubjectEquipmentList(props) {
                   prio={value.priority}
                   obli={value.obligatory}
                   name={value.name}
-                  refreshSubjects={refreshSubjects}
+                  equipmentNames={equipmentNames}
                 />
                 <DeleteSubjectEquipment
                   values={value}
-                  equipmentNamesList={equipmentNamesList}
+                  equipmentNames={equipmentNames}
+                  subId={value.subjectId}
                 />
               </Grid>
               <Grid
