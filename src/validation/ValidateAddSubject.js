@@ -12,7 +12,7 @@ export async function validate(values) {
   const getSubjectNames = async function () {
     const data = await dao.fetchSubjectsNames();
     subjectList = data;
-
+    // Tässä katsotaan ettei käyttäjä syötä jo olemassa olevan opetuksen nimeä.
     let result = subjectList.some(
       (names) => names.name.toLowerCase() === values.name.toLowerCase(),
     );

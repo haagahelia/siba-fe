@@ -20,19 +20,13 @@ import { globalTheme } from "../styles/theme";
 import Radio from "@mui/material/Radio";
 
 export default function EditSubjectEquipmentForm(props) {
-  const { formik, setEditSubEquip, equipmentPriorityList } = props;
+  const { formik, equipmentPriorityList } = props;
+
   const [open, setOpen] = useState(false);
   const [equipPriority, setEquipPriority] = useState(0);
-  const handleClose = () => {
-    setEditSubEquip({
-      priority: null,
-      obligatory: null,
-      subjectId: null,
-      equipmentId: null,
-    });
-    setOpen(false);
-  };
 
+  /* Tässä etsitään selectistä valitun varusteen prioriteettia, 
+  jotta käyttäjä näkee mikä varusteen oletus prioriteetti arvo on */
   useEffect(() => {
     const prio = equipmentPriorityList.find((obj) => {
       return obj.id === formik.values.equipmentId;
@@ -130,12 +124,11 @@ export default function EditSubjectEquipmentForm(props) {
                 style={{ color: "white" }}
                 onClick={() => {
                   setOpen(false);
-                  handleClose();
+                  formik.resetForm();
                 }}
               >
                 Peruuta
               </Button>
-
               <Button
                 type="submit"
                 style={{ color: "white" }}
