@@ -22,17 +22,17 @@ import FormLabel from "@mui/material/FormLabel";
 import { ThemeProvider } from "@mui/material";
 import { globalTheme } from "../styles/theme";
 
-export default function AddSubjectEquipmentDialog(props) {
-  const { equipmentList, data, formik } = props;
+export default function AddSubjectEquipmentForm(props) {
+  const { equipmentSelectList, singleSubject, formik } = props;
   const [open, setOpen] = useState(false);
-  const [ePriority, setEPriority] = useState(0);
+  const [equipPriority, setEquipPriority] = useState(0);
 
   useEffect(() => {
-    const prio = equipmentList.find((obj) => {
+    const prio = equipmentSelectList.find((obj) => {
       return obj.id === formik.values.equipmentId;
     });
     if (prio?.equipmentPriority) {
-      setEPriority(prio.equipmentPriority);
+      setEquipPriority(prio.equipmentPriority);
       formik.setValues({ ...formik.values, priority: prio.equipmentPriority });
     }
   }, [formik.values.equipmentId]);
@@ -52,7 +52,7 @@ export default function AddSubjectEquipmentDialog(props) {
       </ThemeProvider>
       <Dialog open={open}>
         <DialogTitle sx={{ maxWidth: "300px" }}>
-          {data?.subjectName}
+          {singleSubject?.subjectName}
         </DialogTitle>
         <form onSubmit={formik.handleSubmit}>
           <DialogContent>
@@ -80,7 +80,7 @@ export default function AddSubjectEquipmentDialog(props) {
                       value={formik.values?.equipmentId}
                       onBlur={formik.handleBlur("equipmentId")}
                     >
-                      {equipmentList.map((value) => {
+                      {equipmentSelectList.map((value) => {
                         return (
                           <MenuItem key={value.id} value={value.id}>
                             {value.name}
@@ -95,7 +95,7 @@ export default function AddSubjectEquipmentDialog(props) {
                 </Grid>
                 <Grid item sx={12}>
                   <Typography sx={{ marginBottom: 2 }}>
-                    Prioriteetin oletusarvo: {ePriority}
+                    Prioriteetin oletusarvo: {equipPriority}
                   </Typography>
                   <TextField
                     error={

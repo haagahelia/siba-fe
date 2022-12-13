@@ -19,10 +19,10 @@ import { useEffect } from "react";
 import { globalTheme } from "../styles/theme";
 import Radio from "@mui/material/Radio";
 
-export default function EditSubjectEquipmentDialog(props) {
-  const { formik, values, setEditSubEquip, equipmentList } = props;
+export default function EditSubjectEquipmentForm(props) {
+  const { formik, setEditSubEquip, equipmentPriorityList } = props;
   const [open, setOpen] = useState(false);
-  const [ePriority, setEPriority] = useState(0);
+  const [equipPriority, setEquipPriority] = useState(0);
   const handleClose = () => {
     setEditSubEquip({
       priority: null,
@@ -34,14 +34,14 @@ export default function EditSubjectEquipmentDialog(props) {
   };
 
   useEffect(() => {
-    const prio = equipmentList.find((obj) => {
+    const prio = equipmentPriorityList.find((obj) => {
       return obj.id === formik.values.equipmentId;
     });
 
     if (prio?.equipmentPriority) {
-      setEPriority(prio.equipmentPriority);
+      setEquipPriority(prio.equipmentPriority);
     }
-  }, [equipmentList]);
+  }, [equipmentPriorityList]);
 
   return (
     <div>
@@ -73,7 +73,7 @@ export default function EditSubjectEquipmentDialog(props) {
               >
                 <Grid item sx={12}>
                   <Typography sx={{ marginBottom: 2 }}>
-                    Prioriteetin oletusarvo: {ePriority}
+                    Prioriteetin oletusarvo: {equipPriority}
                   </Typography>
                   <TextField
                     error={

@@ -9,7 +9,7 @@ import Dialog from "@mui/material/Dialog";
 import { DialogActions, DialogContent, DialogContentText } from "@mui/material";
 import { globalTheme } from "../styles/theme";
 
-export default function EditSubjectDialog(props) {
+export default function EditSubjectForm(props) {
   const { programNameList, formik, setEditSubject, spaceTypeNameList } = props;
 
   const [open, setOpen] = useState(false);

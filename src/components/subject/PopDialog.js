@@ -16,9 +16,9 @@ import dao from "../../ajax/dao";
 import AlertBox from "../common/AlertBox";
 
 export default function PopUpDialog(props) {
-  const { open, setOpen, data, refreshSubjects } = props;
+  const { open, setOpen, singleSubject, getAllSubjects } = props;
 
-  const [equipmentNamesList, setEquipmentNamesList] = useState([]);
+  const [equipListBySubId, setEquipListBySubId] = useState([]);
   const [alertOpen, setAlertOpen] = useState(false);
   const [alertOptions, setAlertOptions] = useState({
     title: "This is title",
@@ -26,9 +26,9 @@ export default function PopUpDialog(props) {
     severity: "error",
   });
 
-  const equipmentNames = async function (subjectId) {
-    const data = await dao.getEquipmentBySubjectId(subjectId);
-    if (data === 500) {
+  const getEquipmentsBySubId = async function (subjectId) {
+    const result = await dao.fetchEquipmentBySubjectId(subjectId);
+    if (result === 500) {
       setAlertOptions({
         severity: "error",
         title: "Virhe",
@@ -37,14 +37,14 @@ export default function PopUpDialog(props) {
       setAlertOpen(true);
       return;
     } else {
-      setEquipmentNamesList(data);
-      return data;
+      setEquipListBySubId(result);
+      return result;
     }
   };
 
   useEffect(() => {
-    if (data?.id) {
-      equipmentNames(data?.id);
+    if (singleSubject?.id) {
+      getEquipmentsBySubId(singleSubject?.id);
     }
   }, []);
 
@@ -56,22 +56,27 @@ export default function PopUpDialog(props) {
         setAlertOpen={setAlertOpen}
       />
       <Dialog open={open} onClose={() => setOpen(false)} width="400px">
-        <DialogTitle id="dialog-title">{data?.subjectName}</DialogTitle>
+        <DialogTitle id="dialog-title">
+          {singleSubject?.subjectName}
+        </DialogTitle>
         <DialogContent>
           <DialogActions
             sx={{ justifyContent: "space-evenly", padding: "16px" }}
           >
             <DeleteSubject
-              data={data}
-              refreshSubjects={refreshSubjects}
+              singleSubject={singleSubject}
+              getAllSubjects={getAllSubjects}
               setOpen={setOpen}
             />
             <EditSubject
-              data={data}
-              refreshSubjects={refreshSubjects}
+              singleSubject={singleSubject}
+              getAllSubjects={getAllSubjects}
               setOpen={setOpen}
             />
-            <AddSubjectEquipment data={data} equipmentNames={equipmentNames} />
+            <AddSubjectEquipment
+              singleSubject={singleSubject}
+              equipmentsBySubId={getEquipmentsBySubId}
+            />
           </DialogActions>
           <DialogContentText>
             <Grid
@@ -86,56 +91,56 @@ export default function PopUpDialog(props) {
               <Grid item s={6}>
                 <Typography variant="subtitle1">
                   Nimi:&nbsp;
-                  {data?.subjectName}
+                  {singleSubject?.subjectName}
                 </Typography>
               </Grid>
               <Grid item s={6}>
                 <Typography variant="subtitle1">
                   Ryhmän koko:&nbsp;
-                  {data?.groupSize}
+                  {singleSubject?.groupSize}
                 </Typography>
               </Grid>
               <Grid item s={6}>
                 <Typography variant="subtitle1">
                   Ryhmien määrä:&nbsp;
-                  {data?.groupCount}
+                  {singleSubject?.groupCount}
                 </Typography>
               </Grid>
               <Grid item s={6}>
                 <Typography variant="subtitle1">
                   Tuntien pituus:&nbsp;
-                  {data?.sessionLength}
+                  {singleSubject?.sessionLength}
                 </Typography>
               </Grid>
               <Grid item s={6}>
                 <Typography variant="subtitle1">
                   Tuntien määrä:&nbsp;
-                  {data?.sessionCount}
+                  {singleSubject?.sessionCount}
                 </Typography>
               </Grid>
               <Grid item s={6}>
                 <Typography variant="subtitle1">
                   Vaaditut neliömetrit:&nbsp;
-                  {data?.area}
+                  {singleSubject?.area}
                 </Typography>
               </Grid>
               <Grid item s={6}>
                 <Typography variant="subtitle1">
                   Pääaine:&nbsp;
-                  {data?.programName}
+                  {singleSubject?.programName}
                 </Typography>
               </Grid>
               <Grid item s={6}>
                 <Typography variant="subtitle1">
                   Huoneen tyyppi:&nbsp;
-                  {data?.spaceTypeName}
+                  {singleSubject?.spaceTypeName}
                 </Typography>
               </Grid>
               <Grid item s={6}>
                 <Typography variant="subtitle1">Varuste tarpeet:</Typography>
                 <SubjectEquipmentList
-                  equipmentNamesList={equipmentNamesList}
-                  equipmentNames={equipmentNames}
+                  equipListBySubId={equipListBySubId}
+                  getEquipmentsBySubId={getEquipmentsBySubId}
                 />
               </Grid>
             </Grid>
