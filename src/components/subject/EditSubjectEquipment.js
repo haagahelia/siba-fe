@@ -29,13 +29,6 @@ export default function EditSubjectEquipment(props) {
     name: name,
   });
 
-  const [editSubEquip, setEditSubEquip] = useState({
-    priority: null,
-    obligatory: null,
-    subjectId: null,
-    equipmentId: null,
-  });
-
   const formik = useFormik({
     enableReinitialize: true,
     initialValues: initialEquipValues,
@@ -102,8 +95,8 @@ export default function EditSubjectEquipment(props) {
     getEquipmentsBySubId(subId);
   }
   const getEquipmentPriority = async function () {
-    const data = await dao.fetchEquipmentData();
-    if (data === 500) {
+    const result = await dao.fetchEquipmentData();
+    if (result === 500) {
       setAlertOptions({
         severity: "error",
         title: "Virhe",
@@ -112,7 +105,7 @@ export default function EditSubjectEquipment(props) {
       setAlertOpen(true);
       return;
     } else {
-      setEquipmentPriorityList(data);
+      setEquipmentPriorityList(result);
     }
   };
   useEffect(() => {
@@ -135,8 +128,6 @@ export default function EditSubjectEquipment(props) {
       />
       <EditSubjectEquipmentForm
         formik={formik}
-        editSubEquip={editSubEquip}
-        setEditSubEquip={setEditSubEquip}
         equipmentPriorityList={equipmentPriorityList}
       />
     </div>

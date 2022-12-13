@@ -51,6 +51,7 @@ export default function AddSubjectEquipment(props) {
       setAlertOpen(true);
       return;
     } else {
+      // Tässä suodetetaan pois jo olemassa olevat varustukset opetuksessa
       const filteredList = result.filter((item) => {
         return !subEquipList.some((element) => {
           return element.equipmentId === item.id;
@@ -138,6 +139,7 @@ export default function AddSubjectEquipment(props) {
         equipmentSelectList={equipmentSelectList}
         singleSubject={singleSubject}
         formik={formik}
+        submitValues={formik.values}
       />
     </div>
   );

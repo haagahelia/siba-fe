@@ -48,7 +48,7 @@ export default function SubjectList(props) {
     setSubjectListState(filteredSubjects);
   };
 
-  // STYLES
+  // STYLE
   const Box = styled(Paper)(({ theme }) => ({
     overflow: "auto",
   }));

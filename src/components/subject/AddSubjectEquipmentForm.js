@@ -23,10 +23,20 @@ import { ThemeProvider } from "@mui/material";
 import { globalTheme } from "../styles/theme";
 
 export default function AddSubjectEquipmentForm(props) {
-  const { equipmentSelectList, singleSubject, formik } = props;
+  const { equipmentSelectList, singleSubject, formik, submitValues } = props;
+
+  const handleClose = () => {
+    submitValues.subjectId = null;
+    submitValues.equipmentId = null;
+    submitValues.priority = 0;
+    submitValues.obligatory = null;
+    setEquipPriority(null);
+  };
   const [open, setOpen] = useState(false);
   const [equipPriority, setEquipPriority] = useState(0);
 
+  /* Tässä etsitään selectistä valitun varusteen prioriteettia, 
+  jotta käyttäjä näkee mikä varusteen oletus prioriteetti arvo on */
   useEffect(() => {
     const prio = equipmentSelectList.find((obj) => {
       return obj.id === formik.values.equipmentId;
@@ -152,12 +162,11 @@ export default function AddSubjectEquipmentForm(props) {
                 style={{ color: "white" }}
                 onClick={() => {
                   setOpen(false);
+                  handleClose();
                 }}
               >
                 Peruuta
               </Button>
-            </ThemeProvider>
-            <ThemeProvider theme={globalTheme}>
               <Button
                 type="submit"
                 style={{ color: "white" }}

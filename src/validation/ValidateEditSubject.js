@@ -14,14 +14,18 @@ export async function validate(values) {
     let result;
     let id;
     let filteredList = [];
+    // Tässä katsotaan ettei käyttäjä syötä jo olemassa olevan opetuksen nimeä.
+    // Suodatuksessa kuitenkin katsotaan / huomioidaan että nimi voi muokkauksessa olla sama kuin muokkattavan opetuksen nimi
     let list = subjectList.map((item) => {
       if (values.id === item.id) {
         id = item.id;
+        // Tässä suodatetaan pois kaikki opetus id jotka eivät täsmää muokattavan opetuksen id
         filteredList = subjectList.filter((element) => {
           return element.id !== id;
         });
       }
     });
+    // Tässä vertaillaan niitä opetuksia, jotka eivät täsmänneet muokkattavan opetuksen id ja katsotaan vastaako käyttäjän syöte jo olemassa olevan opetuksen nimeä
     result = filteredList.some(
       (names) => names.name.toLowerCase() === values.subjectName.toLowerCase()
     );
