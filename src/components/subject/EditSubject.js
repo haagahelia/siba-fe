@@ -7,11 +7,11 @@ import {
 } from "../../validation/ValidateEditSubject";
 import AlertBox from "../common/AlertBox";
 import dao from "../../ajax/dao";
-import EditSubjectDialog from "./EditSubjectDialog";
+import EditSubjectForm from "./EditSubjectForm";
 
 export default function EditSubject(props) {
   // Aina kun editSubject muuttuu subjectList.js filussa ne tiedot tulee tähän nimellä data
-  const { data, refreshSubjects, setOpen } = props;
+  const { singleSubject, getAllSubjects, setOpen } = props;
   const [programNameList, setProgramNameList] = useState([]);
   const [spaceTypeNameList, setSpaceTypeNameList] = useState([]);
   const [alertOpen, setAlertOpen] = useState(false);
@@ -41,7 +41,7 @@ export default function EditSubject(props) {
   const formik = useFormik({
     // Katsoo pitääkö Formikin nollata lomake, jos aloitusarvot muuttuvat
     enableReinitialize: true,
-    initialValues: data,
+    initialValues: singleSubject,
     validate,
     onSubmit: (values) => {
       setDialogOptions({
@@ -106,12 +106,12 @@ export default function EditSubject(props) {
     });
     setAlertOpen(true);
     setOpen(false);
-    refreshSubjects();
+    getAllSubjects();
   }
 
-  const programs = async function () {
-    const data = await dao.getProgramNames();
-    if (data === 500) {
+  const getProgramNames = async function () {
+    const result = await dao.fetchProgramsForSelect();
+    if (result === 500) {
       setAlertOptions({
         severity: "error",
         title: "Virhe",
@@ -120,17 +120,17 @@ export default function EditSubject(props) {
       setAlertOpen(true);
       return;
     } else {
-      setProgramNameList(data);
+      setProgramNameList(result);
     }
   };
 
   useEffect(() => {
-    programs();
+    getProgramNames();
   }, []);
 
-  const spaceType = async function () {
-    const data = await dao.getSpaceTypeNames();
-    if (data === 500) {
+  const getSpaceTypeNames = async function () {
+    const result = await dao.fetchSpacetypeForSelect();
+    if (result === 500) {
       setAlertOptions({
         severity: "error",
         title: "Virhe",
@@ -139,11 +139,11 @@ export default function EditSubject(props) {
       setAlertOpen(true);
       return;
     } else {
-      setSpaceTypeNameList(data);
+      setSpaceTypeNameList(result);
     }
   };
   useEffect(() => {
-    spaceType();
+    getSpaceTypeNames();
   }, []);
 
   return (
@@ -160,15 +160,12 @@ export default function EditSubject(props) {
         confirmfunction={submitEditedSubject}
         functionparam={formik.values}
       ></ConfirmationDialog>
-      <EditSubjectDialog
+      <EditSubjectForm
         programNameList={programNameList}
         spaceTypeNameList={spaceTypeNameList}
-        data={data}
         formik={formik}
-        values={formik.values}
         setEditSubject={setEditSubject}
-        editSubject={editSubject}
-      ></EditSubjectDialog>
+      ></EditSubjectForm>
     </div>
   );
 }

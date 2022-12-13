@@ -4,12 +4,12 @@ import ConfirmationDialog from "../common/ConfirmationDialog";
 import { validate } from "../../validation/ValidateEditSubjectEquipment";
 import AlertBox from "../common/AlertBox";
 import dao from "../../ajax/dao";
-import EditSubjectEquipmentDialog from "./EditSubjectEquipmentDialog";
+import EditSubjectEquipmentForm from "./EditSubjectEquipmentForm";
 
 export default function EditSubjectEquipment(props) {
-  const { subId, equipId, prio, obli, name, equipmentNames } = props;
+  const { subId, equipId, prio, obli, name, getEquipmentsBySubId } = props;
 
-  const [equipmentList, setEquipmentList] = useState([]);
+  const [equipmentPriorityList, setEquipmentPriorityList] = useState([]);
   const [alertOpen, setAlertOpen] = useState(false);
   const [alertOptions, setAlertOptions] = useState({
     title: "This is title",
@@ -99,10 +99,10 @@ export default function EditSubjectEquipment(props) {
       message: values.name + " uudet tiedot lisätty.",
     });
     setAlertOpen(true);
-    equipmentNames(subId);
+    getEquipmentsBySubId(subId);
   }
-  const equipment = async function () {
-    const data = await dao.getEquipmentNames();
+  const getEquipmentPriority = async function () {
+    const data = await dao.fetchEquipmentData();
     if (data === 500) {
       setAlertOptions({
         severity: "error",
@@ -112,11 +112,11 @@ export default function EditSubjectEquipment(props) {
       setAlertOpen(true);
       return;
     } else {
-      setEquipmentList(data);
+      setEquipmentPriorityList(data);
     }
   };
   useEffect(() => {
-    equipment();
+    getEquipmentPriority();
   }, []);
 
   return (
@@ -133,12 +133,11 @@ export default function EditSubjectEquipment(props) {
         confirmfunction={submitEditedSubjectEquip}
         functionparam={formik.values}
       />
-      <EditSubjectEquipmentDialog
+      <EditSubjectEquipmentForm
         formik={formik}
-        values={formik.values}
         editSubEquip={editSubEquip}
         setEditSubEquip={setEditSubEquip}
-        equipmentList={equipmentList}
+        equipmentPriorityList={equipmentPriorityList}
       />
     </div>
   );

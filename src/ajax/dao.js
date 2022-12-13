@@ -10,7 +10,10 @@ const baseUrl = process.env.REACT_APP_BE_SERVER_BASE_URL;
 // TODO: Mikähän tänne olis hyvä nimeämiskäytäntö? Siis fetchSubjects,
 // getSubjects, getAllSubjects?
 
-const fetchSubjects = async () => {
+/* ---- SUBJECT ---- */
+
+// Subjectview.js
+const fetchAllSubjects = async () => {
   const request = new Request("http://localhost:3001/api/subject/getAll", {
     method: "GET",
   });
@@ -24,6 +27,7 @@ const fetchSubjects = async () => {
   return data;
 };
 
+// ValidateAddSubject / ValidateEditSubject, jossa katsotaan onko opetuksen nimi jo olemassa
 const fetchSubjectsNames = async () => {
   const request = new Request("http://localhost:3001/api/subject/getNames", {
     method: "GET",
@@ -38,6 +42,7 @@ const fetchSubjectsNames = async () => {
   return data;
 };
 
+// DeleteSubject.js
 const deleteSingleSubject = async (subjectId) => {
   try {
     const request = new Request(
@@ -59,6 +64,7 @@ const deleteSingleSubject = async (subjectId) => {
   }
 };
 
+// AddSubject.js
 const postNewSubject = async (newSubject) => {
   try {
     const request = new Request("http://localhost:3001/api/subject/post", {
@@ -84,6 +90,7 @@ const postNewSubject = async (newSubject) => {
   }
 };
 
+// EditSubject.js
 const editSubject = async (editedSubject) => {
   try {
     const request = new Request("http://localhost:3001/api/subject/update", {
@@ -109,7 +116,10 @@ const editSubject = async (editedSubject) => {
   }
 };
 
-const getProgramNames = async () => {
+/* ---- PROGRAM ---- */
+
+// EditSubject.js / AddSubject.js
+const fetchProgramsForSelect = async () => {
   const request = new Request("http://localhost:3001/api/program/getNames", {
     method: "GET",
   });
@@ -122,7 +132,10 @@ const getProgramNames = async () => {
   return data;
 };
 
-const getSpaceTypeNames = async () => {
+/* ---- SPACETYPE ---- */
+
+// EditSubject.js / AddSubject.js
+const fetchSpacetypeForSelect = async () => {
   const request = new Request("http://localhost:3001/api/spaceType/getNames", {
     method: "GET",
   });
@@ -135,7 +148,11 @@ const getSpaceTypeNames = async () => {
   return data;
 };
 
-const getEquipmentNames = async () => {
+/* ---- EQUIPMENT ---- */
+/* 
+EditSubjectEquipment.js jossa haetaan varusteen oletus prioriteetti arvoa
+AddSubjectEquipment.js jossa haetaan varusteet selectiin */
+const fetchEquipmentData = async () => {
   const request = new Request("http://localhost:3001/api/equipment/getNames", {
     method: "GET",
   });
@@ -149,6 +166,9 @@ const getEquipmentNames = async () => {
   return data;
 };
 
+/* ---- SUBJECTEQUIPMENT ---- */
+
+// AddSubjectEquipment.js
 const postNewSubjectEquipment = async (newSubjectEquipment) => {
   try {
     const request = new Request(
@@ -178,7 +198,8 @@ const postNewSubjectEquipment = async (newSubjectEquipment) => {
   }
 };
 
-const getEquipmentBySubjectId = async (id) => {
+// PopDialog.js
+const fetchEquipmentBySubjectId = async (id) => {
   const request = new Request(
     `http://localhost:3001/api/subjectequipment/getEquipment/${id}`,
     {
@@ -194,6 +215,7 @@ const getEquipmentBySubjectId = async (id) => {
   return data;
 };
 
+// DeleteSubjectEquipment.js
 const deleteSingleSubjectEquipment = async (subjectId, equipmentId) => {
   try {
     const request = new Request(
@@ -214,7 +236,7 @@ const deleteSingleSubjectEquipment = async (subjectId, equipmentId) => {
     return "error";
   }
 };
-
+// EditSubjectEquipment.js
 const editSubjectEquipment = async (editedSubjectEquipment) => {
   try {
     const request = new Request(
@@ -237,13 +259,11 @@ const editSubjectEquipment = async (editedSubjectEquipment) => {
       return 500;
     }
     const data = await response.json();
-    console.log("dao data", data);
     return data;
   } catch (error) {
     return "error";
   }
 };
-
 
 const getUnAllocableSubjects = async (id) => {
   try {
@@ -340,16 +360,16 @@ const deleteOneCategoryById = async (categoryId) => {
 */
 
 const dao = {
-  fetchSubjects,
+  fetchAllSubjects,
   fetchSubjectsNames,
   deleteSingleSubject,
   postNewSubject,
-  getProgramNames,
+  fetchProgramsForSelect,
   editSubject,
-  getSpaceTypeNames,
-  getEquipmentNames,
+  fetchSpacetypeForSelect,
+  fetchEquipmentData,
   postNewSubjectEquipment,
-  getEquipmentBySubjectId,
+  fetchEquipmentBySubjectId,
   deleteSingleSubjectEquipment,
   editSubjectEquipment,
   getUnAllocableSubjects,

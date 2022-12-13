@@ -15,7 +15,7 @@ import AddSubjectForm from "./AddSubjectForm";
 //const baseUrl = BASEURL;
 
 export default function AddSubject(props) {
-  const { refreshSubjects, subjectList } = props;
+  const { getAllSubjects, allSubjectsList } = props;
   const [programNameList, setProgramNameList] = useState([]);
   const [spaceTypeNameList, setSpaceTypeNameList] = useState([]);
   const [alertOpen, setAlertOpen] = useState(false);
@@ -55,9 +55,9 @@ export default function AddSubject(props) {
     },
   });
 
-  const programs = async function () {
-    const data = await dao.getProgramNames();
-    if (data === 500) {
+  const getProgramNames = async function () {
+    const result = await dao.fetchProgramsForSelect();
+    if (result === 500) {
       setAlertOptions({
         severity: "error",
         title: "Virhe",
@@ -66,16 +66,16 @@ export default function AddSubject(props) {
       setAlertOpen(true);
       return;
     } else {
-      setProgramNameList(data);
+      setProgramNameList(result);
     }
   };
   useEffect(() => {
-    programs();
+    getProgramNames();
   }, []);
 
-  const spaceType = async function () {
-    const data = await dao.getSpaceTypeNames();
-    if (data === 500) {
+  const getSpaceTypeNames = async function () {
+    const result = await dao.fetchSpacetypeForSelect();
+    if (result === 500) {
       setAlertOptions({
         severity: "error",
         title: "Virhe",
@@ -84,24 +84,24 @@ export default function AddSubject(props) {
       setAlertOpen(true);
       return;
     } else {
-      setSpaceTypeNameList(data);
+      setSpaceTypeNameList(result);
     }
   };
   useEffect(() => {
-    spaceType();
+    getSpaceTypeNames();
   }, []);
 
-  const addSubject = async (values) => {
-    let capitalName = capitalizeFirstLetter(values.name);
+  const addSubject = async (submitValues) => {
+    let capitalName = capitalizeFirstLetter(submitValues.name);
     let newSubject = {
       name: capitalName,
-      groupSize: values.groupSize,
-      groupCount: values.groupCount,
-      sessionLength: values.sessionLength,
-      sessionCount: values.sessionCount,
-      area: values.area,
-      programId: values.programId,
-      spaceTypeId: values.spaceTypeId ? values.spaceTypeId : null,
+      groupSize: submitValues.groupSize,
+      groupCount: submitValues.groupCount,
+      sessionLength: submitValues.sessionLength,
+      sessionCount: submitValues.sessionCount,
+      area: submitValues.area,
+      programId: submitValues.programId,
+      spaceTypeId: submitValues.spaceTypeId ? submitValues.spaceTypeId : null,
     };
 
     let result = await dao.postNewSubject(newSubject);
@@ -137,11 +137,11 @@ export default function AddSubject(props) {
     setAlertOptions({
       severity: "success",
       title: "Onnistui!",
-      message: values.name + " lisätty.",
+      message: submitValues.name + " lisätty.",
     });
     setAlertOpen(true);
 
-    refreshSubjects();
+    getAllSubjects();
   };
   // Tässä tulee lista opetuksia
   // Kun opetuksen valitsee menee tiedot formikin initialvaluesiin
@@ -191,9 +191,9 @@ export default function AddSubject(props) {
             handleChange={handleChange}
             programNameList={programNameList}
             formik={formik}
-            values={formik.values}
+            submitValues={formik.values}
             setCopySubjectData={setCopySubjectData}
-            subjectList={subjectList}
+            allSubjectsList={allSubjectsList}
             copySubjectData={copySubjectData}
             spaceTypeNameList={spaceTypeNameList}
           ></AddSubjectForm>

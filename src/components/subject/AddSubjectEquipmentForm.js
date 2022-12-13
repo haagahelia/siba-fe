@@ -1,47 +1,41 @@
+import React, { useState, useEffect } from "react";
 import {
   Button,
+  Grid,
+  FormHelperText,
   Dialog,
-  DialogActions,
+  DialogTitle,
   DialogContent,
   DialogContentText,
-  DialogTitle,
-  FormControl,
-  FormControlLabel,
-  FormLabel,
-  Grid,
-  RadioGroup,
   TextField,
-  ThemeProvider,
+  DialogActions,
+  RadioGroup,
   Typography,
 } from "@mui/material";
-import React, { useState } from "react";
-import { useEffect } from "react";
-import { globalTheme } from "../styles/theme";
+import Select from "@mui/material/Select";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
 import Radio from "@mui/material/Radio";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import FormLabel from "@mui/material/FormLabel";
+import { ThemeProvider } from "@mui/material";
+import { globalTheme } from "../styles/theme";
 
-export default function EditSubjectEquipmentDialog(props) {
-  const { formik, values, setEditSubEquip, equipmentList } = props;
+export default function AddSubjectEquipmentForm(props) {
+  const { equipmentSelectList, singleSubject, formik } = props;
   const [open, setOpen] = useState(false);
-  const [ePriority, setEPriority] = useState(0);
-  const handleClose = () => {
-    setEditSubEquip({
-      priority: null,
-      obligatory: null,
-      subjectId: null,
-      equipmentId: null,
-    });
-    setOpen(false);
-  };
+  const [equipPriority, setEquipPriority] = useState(0);
 
   useEffect(() => {
-    const prio = equipmentList.find((obj) => {
+    const prio = equipmentSelectList.find((obj) => {
       return obj.id === formik.values.equipmentId;
     });
-
     if (prio?.equipmentPriority) {
-      setEPriority(prio.equipmentPriority);
+      setEquipPriority(prio.equipmentPriority);
+      formik.setValues({ ...formik.values, priority: prio.equipmentPriority });
     }
-  }, [equipmentList]);
+  }, [formik.values.equipmentId]);
 
   return (
     <div>
@@ -49,17 +43,18 @@ export default function EditSubjectEquipmentDialog(props) {
         <Button
           variant="contained"
           color="secondary"
-          style={{ color: "white", maxWidth: "85px", margin: "5px" }}
           onClick={() => {
             setOpen(true);
           }}
         >
-          Muokkaa
+          Lisää varuste
         </Button>
       </ThemeProvider>
       <Dialog open={open}>
+        <DialogTitle sx={{ maxWidth: "300px" }}>
+          {singleSubject?.subjectName}
+        </DialogTitle>
         <form onSubmit={formik.handleSubmit}>
-          <DialogTitle>Muokkaa: {formik.initialValues?.name}</DialogTitle>
           <DialogContent>
             <DialogContentText>
               <Grid
@@ -68,12 +63,39 @@ export default function EditSubjectEquipmentDialog(props) {
                 column={3}
                 direction="column"
                 justifyContent="flex-start"
-                alignItems="flex-start"
+                alignItems="flex-center"
                 padding={2}
               >
                 <Grid item sx={12}>
+                  <FormControl sx={{ minWidth: 225 }}>
+                    <InputLabel>Varuste</InputLabel>
+                    <Select
+                      error={
+                        formik.touched.equipmentId && formik.errors.equipmentId
+                          ? true
+                          : false
+                      }
+                      name="equipmentId"
+                      onChange={formik.handleChange("equipmentId")}
+                      value={formik.values?.equipmentId}
+                      onBlur={formik.handleBlur("equipmentId")}
+                    >
+                      {equipmentSelectList.map((value) => {
+                        return (
+                          <MenuItem key={value.id} value={value.id}>
+                            {value.name}
+                          </MenuItem>
+                        );
+                      })}
+                    </Select>
+                    <FormHelperText>
+                      {formik.touched.equipmentId && formik.errors.equipmentId}
+                    </FormHelperText>
+                  </FormControl>
+                </Grid>
+                <Grid item sx={12}>
                   <Typography sx={{ marginBottom: 2 }}>
-                    Prioriteetin oletusarvo: {ePriority}
+                    Prioriteetin oletusarvo: {equipPriority}
                   </Typography>
                   <TextField
                     error={
@@ -130,12 +152,12 @@ export default function EditSubjectEquipmentDialog(props) {
                 style={{ color: "white" }}
                 onClick={() => {
                   setOpen(false);
-                  handleClose();
                 }}
               >
                 Peruuta
               </Button>
-
+            </ThemeProvider>
+            <ThemeProvider theme={globalTheme}>
               <Button
                 type="submit"
                 style={{ color: "white" }}
@@ -144,7 +166,7 @@ export default function EditSubjectEquipmentDialog(props) {
                   setOpen(false);
                 }}
               >
-                Muokkaa
+                Lisää
               </Button>
             </ThemeProvider>
           </DialogActions>

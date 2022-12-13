@@ -6,7 +6,7 @@ import ConfirmationDialog from "../common/ConfirmationDialog";
 import { globalTheme } from "../styles/theme";
 
 export default function DeleteSubject(props) {
-  const { data, refreshSubjects, setOpen } = props;
+  const { singleSubject, getAllSubjects, setOpen } = props;
   const [alertOpen, setAlertOpen] = useState(false);
   const [alertOptions, setAlertOptions] = useState({
     message: "This is an error alert — check it out!",
@@ -30,7 +30,6 @@ export default function DeleteSubject(props) {
       setAlertOpen(true);
       return;
     }
-
     if (result === "error") {
       setAlertOptions({
         severity: "error",
@@ -41,7 +40,6 @@ export default function DeleteSubject(props) {
       setAlertOpen(true);
       return;
     }
-
     setAlertOptions({
       severity: "success",
       title: "Onnistui!",
@@ -50,7 +48,7 @@ export default function DeleteSubject(props) {
     setAlertOpen(true);
     setOpen(false);
 
-    refreshSubjects();
+    getAllSubjects();
   };
 
   const submitDelete = (data) => {
@@ -82,7 +80,7 @@ export default function DeleteSubject(props) {
         <Button
           variant="contained"
           color="red"
-          onClick={() => submitDelete(data)}
+          onClick={() => submitDelete(singleSubject)}
         >
           Poista
         </Button>

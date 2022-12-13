@@ -19,9 +19,9 @@ export default function AddSubjectForm(props) {
     handleChange,
     programNameList,
     formik,
-    values,
+    submitValues,
     setCopySubjectData,
-    subjectList,
+    allSubjectsList,
     spaceTypeNameList,
   } = props;
 
@@ -194,7 +194,7 @@ export default function AddSubjectForm(props) {
             <FormControl sx={{ maxWidth: 340, minWidth: 200 }}>
               <InputLabel>Kopioi olemassa olevan opetuksen tiedot</InputLabel>
               <Select onChange={handleChange}>
-                {subjectList.map((value) => {
+                {allSubjectsList.map((value) => {
                   return (
                     <MenuItem key={value.id} value={value}>
                       {value.subjectName}
@@ -212,7 +212,7 @@ export default function AddSubjectForm(props) {
               variant="contained"
               style={{ color: "white" }}
               onClick={() => {
-                setCopySubjectData(values);
+                setCopySubjectData(submitValues);
               }}
             >
               Lisää

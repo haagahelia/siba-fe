@@ -1,4 +1,4 @@
-import React, { useEffect, useState, Component } from "react";
+import React, { useEffect, useState } from "react";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
@@ -9,19 +9,19 @@ import Paper from "@mui/material/Paper";
 import { TextField, Typography } from "@mui/material";
 import PopUpDialog from "./PopDialog";
 
-export default function SubjectListItems(props) {
-  const { subjectList, refreshSubjects } = props;
-  const [subjectListState, setSubjectListState] = useState(subjectList);
+export default function SubjectList(props) {
+  const { allSubjectsList, getAllSubjects } = props;
+  const [subjectListState, setSubjectListState] = useState(allSubjectsList);
 
   useEffect(() => {
     if (!searched) {
-      setSubjectListState(subjectList);
+      setSubjectListState(allSubjectsList);
     }
   });
 
   const [open, setOpen] = useState(false);
   const [hoverColor, sethoverColor] = useState("#CFD6D5  ");
-  const [singelSubject, setSingleSubject] = useState({
+  const [singleSubject, setSingleSubject] = useState({
     id: null,
     name: null,
     groupSize: null,
@@ -39,7 +39,7 @@ export default function SubjectListItems(props) {
   const requestSearch = (e) => {
     e.preventDefault();
     setSearched(e.target.value);
-    const filteredSubjects = props.subjectList.filter(subject);
+    const filteredSubjects = props.allSubjectsList.filter(subject);
     function subject(subject) {
       return subject.subjectName
         .toLowerCase()
@@ -57,10 +57,9 @@ export default function SubjectListItems(props) {
       <PopUpDialog
         open={open}
         setOpen={setOpen}
-        data={singelSubject}
+        singleSubject={singleSubject}
         setSingleSubject={setSingleSubject}
-        refreshSubjects={refreshSubjects}
-        subjectList={subjectList}
+        getAllSubjects={getAllSubjects}
       ></PopUpDialog>
       <Box>
         <TextField

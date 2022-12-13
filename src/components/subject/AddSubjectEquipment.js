@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from "react";
 import dao from "../../ajax/dao";
-import AddSubjectEquipmentDialog from "./AddSubjectEquipmentDialog";
+import AddSubjectEquipmentForm from "./AddSubjectEquipmentForm";
 import { useFormik } from "formik";
 import ConfirmationDialog from "../common/ConfirmationDialog";
 import { validate } from "../../validation/ValidateAddSubjectEquipment";
 import AlertBox from "../common/AlertBox";
 
 export default function AddSubjectEquipment(props) {
-  const { data, equipmentNames } = props;
-  const [equipmentList, setEquipmentList] = useState([]);
+  const { singleSubject, equipmentsBySubId } = props;
+  const [equipmentSelectList, setEquipmentSelectList] = useState([]);
   const [initialSubEquip, setInitialSubEquip] = useState({
-    subjectId: data?.id,
+    subjectId: singleSubject?.id,
     equipmentId: 0,
     priority: 0,
     obligatory: 1,
@@ -28,21 +28,21 @@ export default function AddSubjectEquipment(props) {
     content: "Something here",
   });
 
-  let subId = data?.id;
+  let subId = singleSubject?.id;
 
-  const getSubjectEquipment = async function (subId) {
-    let result = await equipmentNames(subId);
-    equipment(result);
+  const getSubEquipBySubId = async function (subId) {
+    let result = await equipmentsBySubId(subId);
+    getEquipmentsForSelect(result);
   };
 
   useEffect(() => {
-    getSubjectEquipment(subId);
+    getSubEquipBySubId(subId);
   }, []);
 
-  const equipment = async function (subEquipList) {
-    const data = await dao.getEquipmentNames();
+  const getEquipmentsForSelect = async function (subEquipList) {
+    const result = await dao.fetchEquipmentData();
 
-    if (data === 500) {
+    if (result === 500) {
       setAlertOptions({
         severity: "error",
         title: "Virhe",
@@ -51,12 +51,12 @@ export default function AddSubjectEquipment(props) {
       setAlertOpen(true);
       return;
     } else {
-      const filteredList = data.filter((item) => {
+      const filteredList = result.filter((item) => {
         return !subEquipList.some((element) => {
           return element.equipmentId === item.id;
         });
       });
-      setEquipmentList(filteredList);
+      setEquipmentSelectList(filteredList);
     }
   };
 
@@ -116,8 +116,8 @@ export default function AddSubjectEquipment(props) {
       message: "Varuste lisätty.",
     });
     setAlertOpen(true);
-    console.log("tuleeko tänne?");
-    getSubjectEquipment(subId);
+
+    getSubEquipBySubId(subId);
   };
 
   return (
@@ -134,13 +134,10 @@ export default function AddSubjectEquipment(props) {
         confirmfunction={addSubjectEquipment}
         functionparam={formik.values}
       />
-      <AddSubjectEquipmentDialog
-        equipmentList={equipmentList}
-        data={data}
-        addSubjectEquipment={addSubjectEquipment}
+      <AddSubjectEquipmentForm
+        equipmentSelectList={equipmentSelectList}
+        singleSubject={singleSubject}
         formik={formik}
-        values={formik.values}
-        setInitialSubEquip={setInitialSubEquip}
       />
     </div>
   );

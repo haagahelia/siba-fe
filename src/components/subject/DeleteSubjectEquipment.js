@@ -5,7 +5,7 @@ import ConfirmationDialog from "../common/ConfirmationDialog";
 import AlertBox from "../common/AlertBox";
 
 export default function DeleteSubjectEquipment(props) {
-  const { values, equipmentNames } = props;
+  const { singleEquipBySubId, getEquipmentsBySubId } = props;
 
   const [alertOpen, setAlertOpen] = useState(false);
   const [alertOptions, setAlertOptions] = useState({
@@ -21,9 +21,9 @@ export default function DeleteSubjectEquipment(props) {
     subjectId: 0,
     equipmentId: 0,
   });
-  let id1 = values.subjectId;
-  let id2 = values.equipmentId;
-  let equipmentName = values.name;
+  let id1 = singleEquipBySubId.subjectId;
+  let id2 = singleEquipBySubId.equipmentId;
+  let equipmentName = singleEquipBySubId.name;
 
   const deleteSubjectEquipment = async (subjectId, equipmentId) => {
     subjectId = id1;
@@ -56,7 +56,7 @@ export default function DeleteSubjectEquipment(props) {
       message: equipmentName + " poistettu.",
     });
     setAlertOpen(true);
-    equipmentNames(subjectId);
+    getEquipmentsBySubId(subjectId);
   };
 
   const submitDelete = (values) => {
@@ -90,7 +90,7 @@ export default function DeleteSubjectEquipment(props) {
         color="error"
         sx={{ margin: "5px", maxWidth: "85px" }}
         onClick={() => {
-          submitDelete(values);
+          submitDelete(singleEquipBySubId);
         }}
       >
         Poista

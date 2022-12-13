@@ -1,23 +1,14 @@
-import {
-  Button,
-  Grid,
-  List,
-  ListItem,
-  ListItemText,
-  Typography,
-} from "@mui/material";
-import React, { useState } from "react";
-import { useEffect } from "react";
-import dao from "../../ajax/dao";
+import { Grid, List, ListItem, ListItemText, Typography } from "@mui/material";
+import React from "react";
 import DeleteSubjectEquipment from "./DeleteSubjectEquipment";
 import EditSubjectEquipment from "./EditSubjectEquipment";
 
 export default function SubjectEquipmentList(props) {
-  const { equipmentNamesList, equipmentNames } = props;
+  const { equipListBySubId, getEquipmentsBySubId } = props;
 
   return (
     <div>
-      {equipmentNamesList.map((value) => {
+      {equipListBySubId.map((value) => {
         return (
           <List key={value.equipmentId}>
             <ListItem>
@@ -30,17 +21,16 @@ export default function SubjectEquipmentList(props) {
                 }}
               >
                 <EditSubjectEquipment
-                  data={value}
                   subId={value.subjectId}
                   equipId={value.equipmentId}
                   prio={value.priority}
                   obli={value.obligatory}
                   name={value.name}
-                  equipmentNames={equipmentNames}
+                  getEquipmentsBySubId={getEquipmentsBySubId}
                 />
                 <DeleteSubjectEquipment
-                  values={value}
-                  equipmentNames={equipmentNames}
+                  singleEquipBySubId={value}
+                  getEquipmentsBySubId={getEquipmentsBySubId}
                   subId={value.subjectId}
                 />
               </Grid>
