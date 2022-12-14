@@ -6,7 +6,14 @@ import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import { Collapse, Typography, Box } from "@mui/material";
 import theme from "../styles/theme";
 import resultRoomsStore from "../../data/ResultRoomsStore";
-export default function Result(props) {
+
+//komponentti allokaation tuloksen huodeiden näyttämiselle 
+//näyttää:
+//huoneen nimen
+//käyttöasteen
+//dropdownissa huonetta käyttävät opetukset
+
+export default function RoomResult(props) {
 
   return (
     <>
