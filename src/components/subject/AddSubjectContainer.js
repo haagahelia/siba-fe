@@ -154,7 +154,6 @@ export default function AddSubjectContainer(props) {
     });
     setAlertOpen(true);
     resetFormm();
-
     getAllSubjects();
   };
   // Tässä tulee lista opetuksia

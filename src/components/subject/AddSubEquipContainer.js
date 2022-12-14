@@ -66,7 +66,12 @@ export default function AddSubEquipContainer(props) {
     validate,
     onSubmit: (values) => {
       setDialogOptions({
-        title: "Haluatko varmasti lisätä varusteen?",
+        // Tässä etsitään varusteen nimi, jonka id vastaa values.id
+        title:
+          "Haluatko varmasti lisätä " +
+          equipmentSelectList.filter((i) => i.id === values.equipmentId)[0]
+            .name +
+          " ?",
         content: "Painamalla jatka, varuste lisätään opetukseen",
       });
       setDialogOpen(true);
@@ -117,7 +122,7 @@ export default function AddSubEquipContainer(props) {
       message: "Varuste lisätty.",
     });
     setAlertOpen(true);
-
+    formik.resetForm();
     getSubEquipBySubId(subId);
   };
 
