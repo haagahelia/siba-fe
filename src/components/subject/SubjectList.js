@@ -12,10 +12,8 @@ import SubjectPagination from "./SubjectPagination";
 import SubjectFiltering from "./SubjectFiltering";
 
 export default function SubjectListItems(props) {
-  const { subjectList, refreshSubjects } = props;
-  const [subjectListState, setSubjectListState] = useState(
-    subjectList.slice(0, 15),
-  );
+  const { subjectList, refreshSubjects, paginateSubjects } = props;
+  const [subjectListState, setSubjectListState] = useState(subjectList);
   const [initialRender, setInitialRender] = useState(true);
 
   const [open, setOpen] = useState(false);
@@ -49,7 +47,7 @@ export default function SubjectListItems(props) {
       />
       <Box>
         <nav>
-          {subjectListState.map((value) => {
+          {paginateSubjects.map((value) => {
             return (
               <List key={value.id}>
                 <ListItem
@@ -153,10 +151,6 @@ export default function SubjectListItems(props) {
             );
           })}
         </nav>
-        <SubjectPagination
-          subjectList={subjectList}
-          setSubjectListState={setSubjectListState}
-        />
       </Box>
     </div>
   );
