@@ -121,13 +121,13 @@ export default function EditSubEquipContainer(props) {
         alertOpen={alertOpen}
         alertOptions={alertOptions}
         setAlertOpen={setAlertOpen}
-      ></AlertBox>
+      />
       <ConfirmationDialog
         dialogOpen={dialogOpen}
         dialogOptions={dialogOptions}
         setDialogOpen={setDialogOpen}
-        confirmfunction={submitEditedSubjectEquip}
-        functionparam={formik.values}
+        submit={submitEditedSubjectEquip}
+        submitValues={formik.values}
       />
       <EditSubEquipForm
         formik={formik}

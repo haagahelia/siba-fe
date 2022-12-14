@@ -179,14 +179,14 @@ export default function AddSubjectContainer(props) {
         alertOpen={alertOpen}
         alertOptions={alertOptions}
         setAlertOpen={setAlertOpen}
-      ></AlertBox>
+      />
       <ConfirmationDialog
         dialogOpen={dialogOpen}
         dialogOptions={dialogOptions}
         setDialogOpen={setDialogOpen}
-        confirmfunction={addSubject}
-        functionparam={formik.values}
-      ></ConfirmationDialog>
+        submit={addSubject}
+        submitValues={formik.values}
+      />
       <Card
         variant="outlined"
         sx={{
@@ -209,7 +209,7 @@ export default function AddSubjectContainer(props) {
             setInitialSubject={setInitialSubject}
             allSubjectsList={allSubjectsList}
             spaceTypeSelectList={spaceTypeSelectList}
-          ></AddSubjectForm>
+          />
         </CardContent>
       </Card>
     </div>

@@ -77,14 +77,14 @@ export default function DeleteSubjectEquipment(props) {
         alertOpen={alertOpen}
         alertOptions={alertOptions}
         setAlertOpen={setAlertOpen}
-      ></AlertBox>
+      />
       <ConfirmationDialog
         dialogOpen={dialogOpen}
         dialogOptions={dialogOptions}
         setDialogOpen={setDialogOpen}
-        confirmfunction={deleteSubjectEquipment}
-        functionparam={deleteSubEquip}
-      ></ConfirmationDialog>
+        submit={deleteSubjectEquipment}
+        submitValues={deleteSubEquip}
+      />
       <Button
         variant="contained"
         color="error"

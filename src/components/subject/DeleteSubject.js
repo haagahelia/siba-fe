@@ -68,14 +68,14 @@ export default function DeleteSubject(props) {
         alertOpen={alertOpen}
         alertOptions={alertOptions}
         setAlertOpen={setAlertOpen}
-      ></AlertBox>
+      />
       <ConfirmationDialog
         dialogOpen={dialogOpen}
         dialogOptions={dialogOptions}
         setDialogOpen={setDialogOpen}
-        confirmfunction={deleteSubject}
-        functionparam={deleteId}
-      ></ConfirmationDialog>
+        submit={deleteSubject}
+        submitValues={deleteId}
+      />
       <ThemeProvider theme={globalTheme}>
         <Button
           variant="contained"

@@ -9,13 +9,13 @@ import {
   DialogActions,
 } from "@mui/material";
 import DeleteSubject from "./DeleteSubject";
-import EditSubject from "./EditSubject";
+import EditSubjectContainer from "./EditSubjectContainer";
 import AddSubEquipContainer from "./AddSubEquipContainer";
 import SubjectEquipmentList from "./SubjectEquipmentList";
 import dao from "../../ajax/dao";
 import AlertBox from "../common/AlertBox";
 
-export default function PopUpDialog(props) {
+export default function SingleSubjectDialog(props) {
   const { open, setOpen, singleSubject, getAllSubjects, setSingleSubject } =
     props;
 
@@ -49,17 +49,13 @@ export default function PopUpDialog(props) {
     }
   }, []);
 
-  // useEffect(() => {
-  //   getAllSubjects();
-  // });
-
   return (
     <div>
       <AlertBox
         alertOpen={alertOpen}
         alertOptions={alertOptions}
         setAlertOpen={setAlertOpen}
-      ></AlertBox>
+      />
       <Dialog open={open} onClose={() => setOpen(false)} width="400px">
         <DialogTitle id="dialog-title">
           {singleSubject?.subjectName}
@@ -72,8 +68,8 @@ export default function PopUpDialog(props) {
               singleSubject={singleSubject}
               getAllSubjects={getAllSubjects}
               setOpen={setOpen}
-            ></DeleteSubject>
-            <EditSubject
+            />
+            <EditSubjectContainer
               singleSubject={singleSubject}
               getAllSubjects={getAllSubjects}
               setSingleSubject={setSingleSubject}

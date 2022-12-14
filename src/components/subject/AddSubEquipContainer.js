@@ -127,19 +127,18 @@ export default function AddSubEquipContainer(props) {
         alertOpen={alertOpen}
         alertOptions={alertOptions}
         setAlertOpen={setAlertOpen}
-      ></AlertBox>
+      />
       <ConfirmationDialog
         dialogOpen={dialogOpen}
         dialogOptions={dialogOptions}
         setDialogOpen={setDialogOpen}
-        confirmfunction={addSubjectEquipment}
-        functionparam={formik.values}
+        submit={addSubjectEquipment}
+        submitValues={formik.values}
       />
       <AddSubEquipForm
         equipmentSelectList={equipmentSelectList}
         singleSubject={singleSubject}
         formik={formik}
-        submitValues={formik.values}
       />
     </div>
   );

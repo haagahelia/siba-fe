@@ -7,7 +7,7 @@ import Grid from "@mui/material/Grid";
 import { styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
 import { TextField, Typography } from "@mui/material";
-import PopUpDialog from "./PopDialog";
+import SingleSubjectDialog from "./SingleSubjectDialog";
 
 export default function SubjectList(props) {
   const { allSubjectsList, getAllSubjects } = props;
@@ -54,13 +54,13 @@ export default function SubjectList(props) {
   }));
   return (
     <div>
-      <PopUpDialog
+      <SingleSubjectDialog
         open={open}
         setOpen={setOpen}
         singleSubject={singleSubject}
         setSingleSubject={setSingleSubject}
         getAllSubjects={getAllSubjects}
-      ></PopUpDialog>
+      />
       <Box>
         <TextField
           name="searched"

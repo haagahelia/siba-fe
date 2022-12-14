@@ -40,7 +40,7 @@ export default function SubjectView() {
         alertOpen={alertOpen}
         alertOptions={alertOptions}
         setAlertOpen={setAlertOpen}
-      ></AlertBox>
+      />
       <Container maxWidth="100%">
         <AddSubjectContainer
           getAllSubjects={getAllSubjects}
