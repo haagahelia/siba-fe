@@ -59,7 +59,24 @@ Fronttipuolen asennusohjeet
 ## Käyttö
 ### Opetukset näkymä
 * Millainen kuvaus tähän hyvä? Onko tarpeellinen?
-### Tulos näkymä
-* Millainen kuvaus tähän hyvä? Onko tarpeellinen?
+### Tulosnäkymä
+
+1. Tulosnäkymässä käyttäjä käynnistää allokoinnin "Start Allocation" napilla.
+
+2. Käyttäjä ei pysty aloittaa toista allokointia ennenkun on painanut "Reset Allocation" nappia.
+
+3. Tällähetkellä käyttäjän pitää päivittää päivittää sivu, jotta näkee muutokset allokointiin.
+
+4. Aineryhmä kohdassa käyttäjä pystyy avata dropdown valikon, joka kertoo, mitä huoneita aineryhmä käyttää ja kuinka monta tuntia sillä huoneella on käytössä.
+
+5. Aineryhmä kohdassa informaatio nappia painamalla aukeaa pop-up ikkuna, jossa käyttäjä näkee ainekohtaiset opetukset. 
+   Pop-up ikkunassa käyttäjä pystyy avata opetuskohtaiset dropdownit, josta näkee missä huoneessa opetusta on.
+
+6. Huone kohdassa käyttäjä näkee kaikki käytössä olevat huoneet ja niitten käyttöasteet. 
+
+7. Huone kohdassa käyttäjä pystyy avata huonekohtaiset dropdown listat, josta näkee, mitä opetuksia huoneissa on ja kuinka monta tuntia ne käyttä
+
+8. Huoneet ovat värikoodilla erotettuja, luokkatyypeittäin. Esim. Studio, Esitystilat, Luentoluokat ja musiikki luokat
+
 
 <p align="right">(<a href="#top">back to top</a>)</p>
