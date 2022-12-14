@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import dao from "../../ajax/dao";
-import AddSubjectEquipmentForm from "./AddSubjectEquipmentForm";
+import AddSubEquipForm from "./AddSubEquipForm";
 import { useFormik } from "formik";
 import ConfirmationDialog from "../common/ConfirmationDialog";
 import { validate } from "../../validation/ValidateAddSubjectEquipment";
 import AlertBox from "../common/AlertBox";
 
-export default function AddSubjectEquipment(props) {
+export default function AddSubEquipContainer(props) {
   const { singleSubject, equipmentsBySubId } = props;
   const [equipmentSelectList, setEquipmentSelectList] = useState([]);
   const [initialSubEquip, setInitialSubEquip] = useState({
@@ -135,7 +135,7 @@ export default function AddSubjectEquipment(props) {
         confirmfunction={addSubjectEquipment}
         functionparam={formik.values}
       />
-      <AddSubjectEquipmentForm
+      <AddSubEquipForm
         equipmentSelectList={equipmentSelectList}
         singleSubject={singleSubject}
         formik={formik}

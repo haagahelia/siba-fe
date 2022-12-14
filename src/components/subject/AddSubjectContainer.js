@@ -14,10 +14,10 @@ import AddSubjectForm from "./AddSubjectForm";
 //import {BASEURL} from "../config/consts.js";
 //const baseUrl = BASEURL;
 
-export default function AddSubject(props) {
+export default function AddSubjectContainer(props) {
   const { getAllSubjects, allSubjectsList } = props;
-  const [programNameList, setProgramNameList] = useState([]);
-  const [spaceTypeNameList, setSpaceTypeNameList] = useState([]);
+  const [programSelectList, setProgramSelectList] = useState([]);
+  const [spaceTypeSelectList, setSpaceTypeSelectList] = useState([]);
   const [alertOpen, setAlertOpen] = useState(false);
   const [alertOptions, setAlertOptions] = useState({
     title: "This is title",
@@ -30,7 +30,7 @@ export default function AddSubject(props) {
     content: "Something here",
   });
   // Tässä formikin initialvalues tallennetaan stateen
-  const [copySubjectData, setCopySubjectData] = useState({
+  const [initialSubject, setInitialSubject] = useState({
     name: "",
     groupSize: 0,
     groupCount: 0,
@@ -40,9 +40,21 @@ export default function AddSubject(props) {
     programId: 0,
   });
 
+  const resetFormm = () => {
+    setInitialSubject({
+      name: "",
+      groupSize: 0,
+      groupCount: 0,
+      sessionLength: "",
+      sessionCount: 0,
+      area: 0,
+      programId: 0,
+    });
+  };
+
   const formik = useFormik({
     enableReinitialize: true,
-    initialValues: copySubjectData,
+    initialValues: initialSubject,
     validate,
     onSubmit: (values) => {
       setDialogOptions({
@@ -51,11 +63,12 @@ export default function AddSubject(props) {
           "Painamalla jatka, " + values.name + " lisätään opetuslistaukseen",
       });
       setDialogOpen(true);
+
       return;
     },
   });
 
-  const getProgramNames = async function () {
+  const getProgramsForSelect = async function () {
     const result = await dao.fetchProgramsForSelect();
     if (result === 500) {
       setAlertOptions({
@@ -66,14 +79,14 @@ export default function AddSubject(props) {
       setAlertOpen(true);
       return;
     } else {
-      setProgramNameList(result);
+      setProgramSelectList(result);
     }
   };
   useEffect(() => {
-    getProgramNames();
+    getProgramsForSelect();
   }, []);
 
-  const getSpaceTypeNames = async function () {
+  const getSpaceTypesForSelect = async function () {
     const result = await dao.fetchSpacetypeForSelect();
     if (result === 500) {
       setAlertOptions({
@@ -84,11 +97,11 @@ export default function AddSubject(props) {
       setAlertOpen(true);
       return;
     } else {
-      setSpaceTypeNameList(result);
+      setSpaceTypeSelectList(result);
     }
   };
   useEffect(() => {
-    getSpaceTypeNames();
+    getSpaceTypesForSelect();
   }, []);
 
   const addSubject = async (submitValues) => {
@@ -140,6 +153,7 @@ export default function AddSubject(props) {
       message: submitValues.name + " lisätty.",
     });
     setAlertOpen(true);
+    resetFormm();
 
     getAllSubjects();
   };
@@ -147,7 +161,7 @@ export default function AddSubject(props) {
   // Kun opetuksen valitsee menee tiedot formikin initialvaluesiin
   const handleChange = (e) => {
     let selected = e.target.value;
-    setCopySubjectData({
+    setInitialSubject({
       name: formik.values.name, // Tämä, jotta syötetty nimi ei vaihdu vaikka valitsisi olemassa olevan opetuksen tiedot
       groupSize: selected.groupSize,
       groupCount: selected.groupCount,
@@ -189,13 +203,12 @@ export default function AddSubject(props) {
           ></CardHeader>
           <AddSubjectForm
             handleChange={handleChange}
-            programNameList={programNameList}
+            programSelectList={programSelectList}
             formik={formik}
             submitValues={formik.values}
-            setCopySubjectData={setCopySubjectData}
+            setInitialSubject={setInitialSubject}
             allSubjectsList={allSubjectsList}
-            copySubjectData={copySubjectData}
-            spaceTypeNameList={spaceTypeNameList}
+            spaceTypeSelectList={spaceTypeSelectList}
           ></AddSubjectForm>
         </CardContent>
       </Card>

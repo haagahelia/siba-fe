@@ -10,7 +10,7 @@ import {
 } from "@mui/material";
 import DeleteSubject from "./DeleteSubject";
 import EditSubject from "./EditSubject";
-import AddSubjectEquipment from "./AddSubjectEquipment";
+import AddSubEquipContainer from "./AddSubEquipContainer";
 import SubjectEquipmentList from "./SubjectEquipmentList";
 import dao from "../../ajax/dao";
 import AlertBox from "../common/AlertBox";
@@ -73,7 +73,7 @@ export default function PopUpDialog(props) {
               getAllSubjects={getAllSubjects}
               setOpen={setOpen}
             />
-            <AddSubjectEquipment
+            <AddSubEquipContainer
               singleSubject={singleSubject}
               equipmentsBySubId={getEquipmentsBySubId}
             />
