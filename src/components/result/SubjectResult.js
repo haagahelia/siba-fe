@@ -5,6 +5,12 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import { Collapse, Typography } from "@mui/material";
 import resultRoomsStore from "../../data/ResultRoomsStore";
+//komponentti allokaation tuloksen opetuksien näyttämiselle 
+//näyttää:
+//opetuksen nimen
+//opetuksen tarvitsemat tunnit jaettuna sille allokoidut tunnit %%
+//dropdownissa opetuksen huoneet
+
 export default function SubjectResult(props) {
 
   return (
