@@ -17,12 +17,12 @@ import { globalTheme } from "../styles/theme";
 export default function AddSubjectForm(props) {
   const {
     handleChange,
-    programNameList,
+    programSelectList,
     formik,
     submitValues,
-    setCopySubjectData,
+    setInitialSubject,
     allSubjectsList,
-    spaceTypeNameList,
+    spaceTypeSelectList,
   } = props;
 
   return (
@@ -152,7 +152,7 @@ export default function AddSubjectForm(props) {
                 }
                 onBlur={formik.handleBlur("programId")}
               >
-                {programNameList.map((value) => {
+                {programSelectList.map((value) => {
                   return (
                     <MenuItem key={value.id} value={value.id}>
                       {value.name}
@@ -175,7 +175,7 @@ export default function AddSubjectForm(props) {
                 value={formik.values.spaceTypeId}
                 onBlur={formik.handleBlur("spaceTypeId")}
               >
-                {spaceTypeNameList.map((value) => {
+                {spaceTypeSelectList.map((value) => {
                   return (
                     <MenuItem key={value.id} value={value.id}>
                       {value.name}
@@ -212,7 +212,7 @@ export default function AddSubjectForm(props) {
               variant="contained"
               style={{ color: "white" }}
               onClick={() => {
-                setCopySubjectData(submitValues);
+                setInitialSubject(submitValues);
               }}
             >
               Lisää

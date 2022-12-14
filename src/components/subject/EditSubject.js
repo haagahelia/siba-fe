@@ -10,10 +10,10 @@ import dao from "../../ajax/dao";
 import EditSubjectForm from "./EditSubjectForm";
 
 export default function EditSubject(props) {
-  // Aina kun editSubject muuttuu subjectList.js filussa ne tiedot tulee tähän nimellä data
+  // Aina kun editSubject muuttuu subjectList.js filussa ne tiedot tulee tähän nimellä singleSubject
   const { singleSubject, getAllSubjects, setOpen } = props;
-  const [programNameList, setProgramNameList] = useState([]);
-  const [spaceTypeNameList, setSpaceTypeNameList] = useState([]);
+  const [programSelectList, setProgramSelectList] = useState([]);
+  const [spaceTypeSelectList, setSpaceTypeSelectList] = useState([]);
   const [alertOpen, setAlertOpen] = useState(false);
   const [alertOptions, setAlertOptions] = useState({
     title: "This is title",
@@ -39,7 +39,7 @@ export default function EditSubject(props) {
   });
 
   const formik = useFormik({
-    // Katsoo pitääkö Formikin nollata lomake, jos aloitusarvot muuttuvat
+    // enableReinitialize katsoo pitääkö Formikin nollata lomake, jos aloitusarvot muuttuvat
     enableReinitialize: true,
     initialValues: singleSubject,
     validate,
@@ -107,7 +107,7 @@ export default function EditSubject(props) {
     getAllSubjects();
   }
 
-  const getProgramNames = async function () {
+  const getProgramsForSelect = async function () {
     const result = await dao.fetchProgramsForSelect();
     if (result === 500) {
       setAlertOptions({
@@ -118,15 +118,15 @@ export default function EditSubject(props) {
       setAlertOpen(true);
       return;
     } else {
-      setProgramNameList(result);
+      setProgramSelectList(result);
     }
   };
 
   useEffect(() => {
-    getProgramNames();
+    getProgramsForSelect();
   }, []);
 
-  const getSpaceTypeNames = async function () {
+  const getSpaceTypesForSelect = async function () {
     const result = await dao.fetchSpacetypeForSelect();
     if (result === 500) {
       setAlertOptions({
@@ -137,11 +137,11 @@ export default function EditSubject(props) {
       setAlertOpen(true);
       return;
     } else {
-      setSpaceTypeNameList(result);
+      setSpaceTypeSelectList(result);
     }
   };
   useEffect(() => {
-    getSpaceTypeNames();
+    getSpaceTypesForSelect();
   }, []);
 
   return (
@@ -159,8 +159,8 @@ export default function EditSubject(props) {
         functionparam={formik.values}
       />
       <EditSubjectForm
-        programNameList={programNameList}
-        spaceTypeNameList={spaceTypeNameList}
+        programSelectList={programSelectList}
+        spaceTypeSelectList={spaceTypeSelectList}
         formik={formik}
         setEditSubject={setEditSubject}
       />

@@ -4,9 +4,9 @@ import ConfirmationDialog from "../common/ConfirmationDialog";
 import { validate } from "../../validation/ValidateEditSubjectEquipment";
 import AlertBox from "../common/AlertBox";
 import dao from "../../ajax/dao";
-import EditSubjectEquipmentForm from "./EditSubjectEquipmentForm";
+import EditSubEquipForm from "./EditSubEquipForm";
 
-export default function EditSubjectEquipment(props) {
+export default function EditSubEquipContainer(props) {
   const { subId, equipId, prio, obli, name, getEquipmentsBySubId } = props;
 
   const [equipmentPriorityList, setEquipmentPriorityList] = useState([]);
@@ -30,6 +30,7 @@ export default function EditSubjectEquipment(props) {
   });
 
   const formik = useFormik({
+    // enableReinitialize katsoo pitääkö Formikin nollata lomake, jos aloitusarvot muuttuvat
     enableReinitialize: true,
     initialValues: initialEquipValues,
     validate,
@@ -124,9 +125,12 @@ export default function EditSubjectEquipment(props) {
         confirmfunction={submitEditedSubjectEquip}
         functionparam={formik.values}
       />
-      <EditSubjectEquipmentForm
+      <EditSubEquipForm
         formik={formik}
         equipmentPriorityList={equipmentPriorityList}
+        subId={subId}
+        setInitialEquipValues={setInitialEquipValues}
+        submitValues={formik.values}
       />
     </div>
   );

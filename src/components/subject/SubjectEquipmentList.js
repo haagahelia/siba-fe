@@ -1,7 +1,7 @@
 import { Grid, List, ListItem, ListItemText, Typography } from "@mui/material";
 import React from "react";
 import DeleteSubjectEquipment from "./DeleteSubjectEquipment";
-import EditSubjectEquipment from "./EditSubjectEquipment";
+import EditSubEquipContainer from "./EditSubEquipContainer";
 
 export default function SubjectEquipmentList(props) {
   const { equipListBySubId, getEquipmentsBySubId } = props;
@@ -20,7 +20,7 @@ export default function SubjectEquipmentList(props) {
                   marginRight: "10px",
                 }}
               >
-                <EditSubjectEquipment
+                <EditSubEquipContainer
                   subId={value.subjectId}
                   equipId={value.equipmentId}
                   prio={value.priority}

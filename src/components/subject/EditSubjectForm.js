@@ -10,9 +10,12 @@ import { DialogActions, DialogContent, DialogContentText } from "@mui/material";
 import { globalTheme } from "../styles/theme";
 
 export default function EditSubjectForm(props) {
-  const { programNameList, formik, setEditSubject, spaceTypeNameList } = props;
+  const { programSelectList, formik, setEditSubject, spaceTypeSelectList } =
+    props;
 
   const [open, setOpen] = useState(false);
+
+  // Nollataan lomake jos painaa peruuta
   const handleClose = () => {
     setEditSubject({
       id: null,
@@ -45,7 +48,7 @@ export default function EditSubjectForm(props) {
       </ThemeProvider>
       <Dialog open={open}>
         <form onSubmit={formik.handleSubmit}>
-          {/* formik.initialValues?.subjectName} Tässä ? katsoo löytyykö data objektista attribuuttia subjectName, jos ei löydy palauttaa arvon null eikä kaadu */}
+          {/* formik.initialValues?.subjectName} Tässä ? katsoo löytyykö initialValues objektista attribuuttia subjectName, jos ei löydy palauttaa arvon null eikä kaadu */}
           <DialogTitle sx={{ maxWidth: "300px" }}>
             Muokkaa: {formik.initialValues?.subjectName}
           </DialogTitle>
@@ -191,7 +194,7 @@ export default function EditSubjectForm(props) {
                       value={formik.values?.programId}
                       onBlur={formik.handleBlur("programId")}
                     >
-                      {programNameList.map((value) => {
+                      {programSelectList.map((value) => {
                         return (
                           <MenuItem key={value.id} value={value.id}>
                             {value.name}
@@ -213,7 +216,7 @@ export default function EditSubjectForm(props) {
                       value={formik.values?.spaceTypeId}
                       onBlur={formik.handleBlur("spaceTypeId")}
                     >
-                      {spaceTypeNameList.map((value) => {
+                      {spaceTypeSelectList.map((value) => {
                         return (
                           <MenuItem key={value.id} value={value.id}>
                             {value.name}

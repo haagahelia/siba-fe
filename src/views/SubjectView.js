@@ -3,7 +3,7 @@ import SubjectListContainer from "../components/subject/SubjectListContainer";
 import CardContent from "@mui/material/CardContent";
 import { CardHeader, Card, Container } from "@mui/material";
 import Grid from "@mui/material/Grid";
-import AddSubject from "../components/subject/AddSubject";
+import AddSubjectContainer from "../components/subject/AddSubjectContainer";
 import dao from "../ajax/dao";
 import AlertBox from "../components/common/AlertBox";
 
@@ -42,7 +42,7 @@ export default function SubjectView() {
         setAlertOpen={setAlertOpen}
       />
       <Container maxWidth="100%">
-        <AddSubject
+        <AddSubjectContainer
           getAllSubjects={getAllSubjects}
           allSubjectsList={allSubjectsList}
         />
