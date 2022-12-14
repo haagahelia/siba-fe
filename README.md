@@ -63,3 +63,14 @@ Fronttipuolen asennusohjeet
 * Millainen kuvaus tähän hyvä? Onko tarpeellinen?
 
 <p align="right">(<a href="#top">back to top</a>)</p>
+
+## Vanhalta kurssilta jääneet ongelmat
+### Lisää tähän kurssin päätteeksi
+
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+## Jatkokehitysideat
+### Lisää tähän kurssin päätteeksi
+
+<p align="right">(<a href="#top">back to top</a>)</p>
