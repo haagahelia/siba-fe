@@ -119,9 +119,12 @@ const editSubject = async (editedSubject) => {
 
 // EditSubject.js / AddSubject.js
 const fetchProgramsForSelect = async () => {
-  const request = new Request("http://localhost:3001/api/program/getNames", {
-    method: "GET",
-  });
+  const request = new Request(
+    "http://localhost:3001/api/program/getSelectData",
+    {
+      method: "GET",
+    },
+  );
 
   const response = await fetch(request);
   if (response.status === 500) {
@@ -135,9 +138,12 @@ const fetchProgramsForSelect = async () => {
 
 // EditSubject.js / AddSubject.js
 const fetchSpacetypeForSelect = async () => {
-  const request = new Request("http://localhost:3001/api/spaceType/getNames", {
-    method: "GET",
-  });
+  const request = new Request(
+    "http://localhost:3001/api/spaceType/getSelectData",
+    {
+      method: "GET",
+    },
+  );
 
   const response = await fetch(request);
   if (response.status === 500) {
@@ -152,9 +158,12 @@ const fetchSpacetypeForSelect = async () => {
 EditSubjectEquipment.js jossa haetaan varusteen oletus prioriteetti arvoa
 AddSubjectEquipment.js jossa haetaan varusteet selectiin */
 const fetchEquipmentData = async () => {
-  const request = new Request("http://localhost:3001/api/equipment/getNames", {
-    method: "GET",
-  });
+  const request = new Request(
+    "http://localhost:3001/api/equipment/getEquipData",
+    {
+      method: "GET",
+    },
+  );
 
   const response = await fetch(request);
   if (response.status === 500) {
