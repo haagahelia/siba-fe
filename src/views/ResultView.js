@@ -1,4 +1,4 @@
-import Result from "../components/result/Result";
+import RoomResult from "../components/result/RoomResult";
 import ProgramResult from "../components/result/ProgramResult";
 import testData from "../data/testData";
 import "../styles/ResultView.css";
@@ -7,21 +7,11 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import resultRoomsStore from "../data/ResultRoomsStore";
 import resultProgramStore from "../data/ResultProgramStore";
-import allocationPost from "../data/AllocationPost";
+import allocationPost from "../data/ResultAllocationStore";
 import theme from "../components/styles/theme";
 import { globalTheme } from "../components/styles/theme";
 
-// Tee funktiolle muuttuja
-
-/*
-const ExampleComponent = (props) => {  
-
-  You can use Hooks here!  
-  
-  return <div />;};
-
-export default ExampleComponent; */
-
+// komponentti laskennan tulosten, eli allokaation näyttämiselle
 export default function () {
   const roomStore = resultRoomsStore;
   const progStore = resultProgramStore;
@@ -126,7 +116,7 @@ export default function () {
           </div>
         </div>
 
-        <Result data={rooms} dropdownData={testData.programs} />
+        <RoomResult data={rooms} dropdownData={testData.programs} />
       </div>
     </>
   );

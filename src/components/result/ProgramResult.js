@@ -11,6 +11,13 @@ import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import resultProgramStore from "../../data/ResultProgramStore";
 
+//komponentti allokaation tuloksen aineryhmien näyttämiselle
+//näyttää:
+//aineryhmän nimen
+//aineryhmän tarvitsemat tunnit jaettuna sille allokoidut tunnit %%
+//dropdownissa aineryhmän huoneet
+//popup nappi, joka näyttää aineryhmän opetukset
+
 export default function ProgramResult(props) {
   const programs = props.data;
   const progStore = resultProgramStore;
