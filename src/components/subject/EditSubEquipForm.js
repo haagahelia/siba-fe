@@ -20,8 +20,7 @@ import { globalTheme } from "../styles/theme";
 import Radio from "@mui/material/Radio";
 
 export default function EditSubEquipForm(props) {
-  const { formik, equipmentPriorityList, submitValues, setInitialEquipValues } =
-    props;
+  const { formik, equipmentPriorityList } = props;
 
   const [open, setOpen] = useState(false);
   const [equipPriority, setEquipPriority] = useState(0);
@@ -138,8 +137,6 @@ export default function EditSubEquipForm(props) {
                 variant="contained"
                 onClick={() => {
                   setOpen(false);
-                  // Lomake nollantuu ja saa uude initialvaluet
-                  formik.resetForm(setInitialEquipValues(submitValues));
                 }}
               >
                 Muokkaa

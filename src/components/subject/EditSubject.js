@@ -11,7 +11,7 @@ import EditSubjectForm from "./EditSubjectForm";
 
 export default function EditSubject(props) {
   // Aina kun editSubject muuttuu subjectList.js filussa ne tiedot tulee tähän nimellä singleSubject
-  const { singleSubject, getAllSubjects, setOpen } = props;
+  const { singleSubject, getAllSubjects, setSingleSubject } = props;
   const [programSelectList, setProgramSelectList] = useState([]);
   const [spaceTypeSelectList, setSpaceTypeSelectList] = useState([]);
   const [alertOpen, setAlertOpen] = useState(false);
@@ -103,7 +103,7 @@ export default function EditSubject(props) {
       message: `${values.subjectName} uudet tiedot lisätty.`,
     });
     setAlertOpen(true);
-    setOpen(false);
+    setSingleSubject(formik.values);
     getAllSubjects();
   }
 

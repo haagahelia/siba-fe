@@ -16,7 +16,8 @@ import dao from "../../ajax/dao";
 import AlertBox from "../common/AlertBox";
 
 export default function PopUpDialog(props) {
-  const { open, setOpen, singleSubject, getAllSubjects } = props;
+  const { open, setOpen, singleSubject, getAllSubjects, setSingleSubject } =
+    props;
 
   const [equipListBySubId, setEquipListBySubId] = useState([]);
   const [alertOpen, setAlertOpen] = useState(false);
@@ -48,6 +49,10 @@ export default function PopUpDialog(props) {
     }
   }, []);
 
+  // useEffect(() => {
+  //   getAllSubjects();
+  // });
+
   return (
     <div>
       <AlertBox
@@ -71,7 +76,7 @@ export default function PopUpDialog(props) {
             <EditSubject
               singleSubject={singleSubject}
               getAllSubjects={getAllSubjects}
-              setOpen={setOpen}
+              setSingleSubject={setSingleSubject}
             />
             <AddSubEquipContainer
               singleSubject={singleSubject}
