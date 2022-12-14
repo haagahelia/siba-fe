@@ -82,8 +82,8 @@ export default function DeleteSubjectEquipment(props) {
         dialogOpen={dialogOpen}
         dialogOptions={dialogOptions}
         setDialogOpen={setDialogOpen}
-        confirmfunction={deleteSubjectEquipment}
-        functionparam={deleteSubEquip}
+        submit={deleteSubjectEquipment}
+        submitValues={deleteSubEquip}
       />
       <Button
         variant="contained"

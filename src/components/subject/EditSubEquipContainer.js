@@ -124,8 +124,8 @@ export default function EditSubEquipContainer(props) {
         dialogOpen={dialogOpen}
         dialogOptions={dialogOptions}
         setDialogOpen={setDialogOpen}
-        confirmfunction={submitEditedSubjectEquip}
-        functionparam={formik.values}
+        submit={submitEditedSubjectEquip}
+        submitValues={formik.values}
       />
       <EditSubEquipForm
         formik={formik}

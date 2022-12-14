@@ -10,27 +10,9 @@ import { DialogActions, DialogContent, DialogContentText } from "@mui/material";
 import { globalTheme } from "../styles/theme";
 
 export default function EditSubjectForm(props) {
-  const { programSelectList, formik, setEditSubject, spaceTypeSelectList } =
-    props;
+  const { programSelectList, formik, spaceTypeSelectList } = props;
 
   const [open, setOpen] = useState(false);
-
-  // Nollataan lomake jos painaa peruuta
-  const handleClose = () => {
-    setEditSubject({
-      id: null,
-      name: null,
-      groupSize: null,
-      groupCount: null,
-      sessionLength: null,
-      sessionCount: null,
-      area: null,
-      programId: null,
-      spaceTypeId: null,
-      subjectName: null,
-    });
-    setOpen(false);
-  };
 
   return (
     <div>
@@ -233,7 +215,15 @@ export default function EditSubjectForm(props) {
             sx={{ justifyContent: "space-evenly", padding: "16px" }}
           >
             <ThemeProvider theme={globalTheme}>
-              <Button onClick={handleClose} variant="contained" color="red">
+              <Button
+                onClick={() => {
+                  setOpen(false);
+                  // Nollataan lomake jos painaa peruuta
+                  formik.resetForm();
+                }}
+                variant="contained"
+                color="red"
+              >
                 Peruuta
               </Button>
               <Button

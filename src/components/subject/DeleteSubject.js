@@ -73,8 +73,8 @@ export default function DeleteSubject(props) {
         dialogOpen={dialogOpen}
         dialogOptions={dialogOptions}
         setDialogOpen={setDialogOpen}
-        confirmfunction={deleteSubject}
-        functionparam={deleteId}
+        submit={deleteSubject}
+        submitValues={deleteId}
       />
       <ThemeProvider theme={globalTheme}>
         <Button

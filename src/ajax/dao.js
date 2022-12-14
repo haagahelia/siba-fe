@@ -7,8 +7,7 @@ const baseUrl = process.env.REACT_APP_BE_SERVER_BASE_URL;
 // Http Method kertoo sen jo, esim /subject/  GET ilman id:tä => get all subjects
 // DELETE, POST jne.
 
-// TODO: Mikähän tänne olis hyvä nimeämiskäytäntö? Siis fetchSubjects,
-// getSubjects, getAllSubjects?
+// TODO: Mikähän tänne olis hyvä nimeämiskäytäntö? FETCH
 
 /* ---- SUBJECT ---- */
 
@@ -191,7 +190,6 @@ const postNewSubjectEquipment = async (newSubjectEquipment) => {
       return 500;
     }
     const data = await response.json();
-    console.log("data", data);
     return data;
   } catch (error) {
     return "error";
@@ -325,6 +323,7 @@ const getMissingEquipmentForRoom = async (subjectId, roomId) => {
   }
 };
 
+/* ---- EXAMPLE ---- */
 /*
 const fetchCategories = async () => {
     const request = new Request(`${baseUrl}/category/`,{
@@ -334,28 +333,6 @@ const fetchCategories = async () => {
     const response = await fetch(request);
     const data = await response.json();
     return data;
-};
-const fetchOneCategoryById = async (categoryId) => {
-    const request = new Request(`${baseUrl}/category/${categoryId}`,{
-        method: 'GET',  
-    });
-
-    const response = await fetch(request);
-    const data = await response.json();
-
-    const category = data && data.length>0 ? data[0] : null;
-    return category;
-};
-const deleteOneCategoryById = async (categoryId) => {
-    const request = new Request(`${baseUrl}/category/${categoryId}`,{
-        method: 'DELETE',  
-    });
-
-    const response = await fetch(request);
-    const data = await response.json();
-
-    const category = data && data.returnValue===1 ? true : false;
-    return category;
 };
 */
 
@@ -376,7 +353,5 @@ const dao = {
   getSubjectRooms,
   getMissingEquipmentForRoom,
   // fetchCategories,
-  // fetchOneCategoryById,
-  // deleteOneCategoryById,
 };
 export default dao;

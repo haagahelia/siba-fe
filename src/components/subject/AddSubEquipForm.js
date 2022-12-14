@@ -23,16 +23,7 @@ import { ThemeProvider } from "@mui/material";
 import { globalTheme } from "../styles/theme";
 
 export default function AddSubEquipForm(props) {
-  const { equipmentSelectList, singleSubject, formik, submitValues } = props;
-
-  // Nollataan lomake jos painaa peruuta
-  const handleClose = () => {
-    submitValues.subjectId = null;
-    submitValues.equipmentId = null;
-    submitValues.priority = 0;
-    submitValues.obligatory = null;
-    setEquipPriority(null);
-  };
+  const { equipmentSelectList, singleSubject, formik } = props;
   const [open, setOpen] = useState(false);
   const [equipPriority, setEquipPriority] = useState(0);
 
@@ -165,7 +156,8 @@ export default function AddSubEquipForm(props) {
                 style={{ color: "white" }}
                 onClick={() => {
                   setOpen(false);
-                  handleClose();
+                  // Nollataan lomake jos painaa peruuta
+                  formik.resetForm();
                 }}
               >
                 Peruuta

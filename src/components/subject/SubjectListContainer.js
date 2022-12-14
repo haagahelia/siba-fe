@@ -1,6 +1,6 @@
 import React from "react";
 import Grid from "@mui/material/Grid";
-import PopUpDialog from "./PopDialog";
+import SingleSubjectDialog from "./SingleSubjectDialog";
 import SubjectList from "./SubjectList";
 import CardContent from "@mui/material/CardContent";
 import { CardHeader, Card } from "@mui/material";
@@ -13,7 +13,7 @@ export default function SubjectListContainer(props) {
   const { allSubjectsList, getAllSubjects } = props;
   return (
     <div>
-      <PopUpDialog getAllSubjects={getAllSubjects} />
+      <SingleSubjectDialog getAllSubjects={getAllSubjects} />
       <Grid
         container
         rowSpacing={0.5}

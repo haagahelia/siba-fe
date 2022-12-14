@@ -9,7 +9,7 @@ import AlertBox from "../common/AlertBox";
 import dao from "../../ajax/dao";
 import EditSubjectForm from "./EditSubjectForm";
 
-export default function EditSubject(props) {
+export default function EditSubjectContainer(props) {
   // Aina kun editSubject muuttuu subjectList.js filussa ne tiedot tulee tähän nimellä singleSubject
   const { singleSubject, getAllSubjects, setSingleSubject } = props;
   const [programSelectList, setProgramSelectList] = useState([]);
@@ -24,18 +24,6 @@ export default function EditSubject(props) {
   const [dialogOptions, setDialogOptions] = useState({
     title: "this is dialog",
     content: "Something here",
-  });
-  const [editSubject, setEditSubject] = useState({
-    id: null,
-    name: null,
-    groupSize: null,
-    groupCount: null,
-    sessionLength: null,
-    sessionCount: null,
-    area: null,
-    programId: null,
-    subjectName: null,
-    spaceTypeId: null,
   });
 
   const formik = useFormik({
@@ -155,14 +143,13 @@ export default function EditSubject(props) {
         dialogOpen={dialogOpen}
         dialogOptions={dialogOptions}
         setDialogOpen={setDialogOpen}
-        confirmfunction={submitEditedSubject}
-        functionparam={formik.values}
+        submit={submitEditedSubject}
+        submitValues={formik.values}
       />
       <EditSubjectForm
         programSelectList={programSelectList}
         spaceTypeSelectList={spaceTypeSelectList}
         formik={formik}
-        setEditSubject={setEditSubject}
       />
     </div>
   );

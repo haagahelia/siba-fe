@@ -184,8 +184,8 @@ export default function AddSubjectContainer(props) {
         dialogOpen={dialogOpen}
         dialogOptions={dialogOptions}
         setDialogOpen={setDialogOpen}
-        confirmfunction={addSubject}
-        functionparam={formik.values}
+        submit={addSubject}
+        submitValues={formik.values}
       />
       <Card
         variant="outlined"
