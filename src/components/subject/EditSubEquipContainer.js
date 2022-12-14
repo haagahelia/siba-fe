@@ -93,6 +93,8 @@ export default function EditSubEquipContainer(props) {
       message: values.name + " uudet tiedot lisätty.",
     });
     setAlertOpen(true);
+    // Lomake nollaantuu ja saa uudet muokatut initialValuet
+    formik.resetForm(setInitialEquipValues(formik.values));
     getEquipmentsBySubId(subId);
   }
   const getEquipmentPriority = async function () {
@@ -131,8 +133,6 @@ export default function EditSubEquipContainer(props) {
         formik={formik}
         equipmentPriorityList={equipmentPriorityList}
         subId={subId}
-        setInitialEquipValues={setInitialEquipValues}
-        submitValues={formik.values}
       />
     </div>
   );
