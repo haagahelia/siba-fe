@@ -7,9 +7,11 @@ import AddSubject from "../components/subject/AddSubject";
 import dao from "../ajax/dao";
 import AlertBox from "../components/common/AlertBox";
 import SubjectFiltering from "../components/subject/SubjectFiltering";
+import SubjectPagination from "../components/subject/SubjectPagination";
 
 export default function SubjectView() {
   const [subjectList, setSubjectList] = useState([]);
+  const [paginateSubjects, setPaginateSubjects] = useState([]);
   const [alertOpen, setAlertOpen] = useState(false);
   const [alertOptions, setAlertOptions] = useState({
     message: "This is an error alert — check it out!",
@@ -37,6 +39,9 @@ export default function SubjectView() {
   useEffect(() => {
     refreshSubjects();
   }, []);
+  useEffect(() => {
+    setPaginateSubjects(subjectList.slice(0,15));
+  }, [subjectList]);
 
   return (
     <div>
@@ -71,7 +76,14 @@ export default function SubjectView() {
                 refreshSubjects={refreshSubjects}
                 subjectList={subjectList}
                 setSubjectList={setSubjectList}
+                paginateSubjects={paginateSubjects}
               />
+            <SubjectPagination
+              subjectList = {subjectList} 
+              setSubjectListState={setSubjectList}
+              paginateSubjects={paginateSubjects}
+              setPaginateSubjects={setPaginateSubjects}
+            />
             </CardContent>
           </Card>
         </Grid>
