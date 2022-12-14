@@ -156,6 +156,7 @@ export default function AddSubEquipForm(props) {
                 style={{ color: "white" }}
                 onClick={() => {
                   setOpen(false);
+                  setEquipPriority(0);
                   // Nollataan lomake jos painaa peruuta
                   formik.resetForm();
                 }}
@@ -168,6 +169,7 @@ export default function AddSubEquipForm(props) {
                 variant="contained"
                 onClick={() => {
                   setOpen(false);
+                  setEquipPriority(0);
                 }}
               >
                 Lisää

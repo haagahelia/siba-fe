@@ -4,7 +4,7 @@ import { Button } from "@mui/material";
 import ConfirmationDialog from "../common/ConfirmationDialog";
 import AlertBox from "../common/AlertBox";
 
-export default function DeleteSubjectEquipment(props) {
+export default function DeleteSubEquip(props) {
   const { singleEquipBySubId, getEquipmentsBySubId } = props;
 
   const [alertOpen, setAlertOpen] = useState(false);
