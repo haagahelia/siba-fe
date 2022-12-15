@@ -65,7 +65,7 @@ Fronttipuolen asennusohjeet
 
 2. Käyttäjä ei pysty aloittaa toista allokointia ennenkun on painanut "Reset Allocation" nappia.
 
-3. Tällähetkellä käyttäjän pitää päivittää päivittää sivu, jotta näkee muutokset allokointiin.
+3. Tällähetkellä käyttäjän pitää päivittää sivu, jotta näkee muutokset allokointiin.
 
 4. Aineryhmä kohdassa käyttäjä pystyy avata dropdown valikon, joka kertoo, mitä huoneita aineryhmä käyttää ja kuinka monta tuntia sillä huoneella on käytössä.
 
