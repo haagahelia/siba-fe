@@ -3,9 +3,7 @@ export async function validate(values) {
   const errors = {};
   const regName = new RegExp(/^[A-Za-zäöåÄÖÅ0-9\s-]*$/);
   const regNumber = new RegExp(/^[0-9]+$/);
-  const regTime = new RegExp(
-    /^([0-1][0-9]|[2][0-3]):([0-5][0-9]):([0-5][0-9])$/
-  );
+  const regTime = new RegExp(/^([0-1][0-2]):([0-5][0-9])(:[0-5][0-9])?$/);
   const regArea = new RegExp(/^[0-9]*(.[0-9]{1,2})?$/);
 
   let subjectList = [];
@@ -16,15 +14,21 @@ export async function validate(values) {
     let result;
     let id;
     let filteredList = [];
+    // Tässä katsotaan ettei käyttäjä syötä jo olemassa olevan opetuksen nimeä.
+    // Suodatuksessa kuitenkin katsotaan / huomioidaan että nimi voi muokkauksessa olla sama kuin muokkattavan opetuksen nimi
     let list = subjectList.map((item) => {
       if (values.id === item.id) {
         id = item.id;
+        // Tässä suodatetaan pois kaikki opetus id jotka eivät täsmää muokattavan opetuksen id
         filteredList = subjectList.filter((element) => {
           return element.id !== id;
         });
       }
     });
-    result = filteredList.some((names) => names.name === values.subjectName);
+    // Tässä vertaillaan niitä opetuksia, jotka eivät täsmänneet muokkattavan opetuksen id ja katsotaan vastaako käyttäjän syöte jo olemassa olevan opetuksen nimeä
+    result = filteredList.some(
+      (names) => names.name.toLowerCase() === values.subjectName.toLowerCase()
+    );
     return result;
   };
 
@@ -56,7 +60,7 @@ export async function validate(values) {
   if (!values.sessionLength) {
     errors.sessionLength = "Pakollinen kenttä";
   } else if (!regTime.test(values.sessionLength)) {
-    errors.sessionLength = "Sallittu muoto on 00:00:00";
+    errors.sessionLength = "Sallittu muoto on 00:00 tai 00:00:00";
   }
 
   if (!values.sessionCount) {

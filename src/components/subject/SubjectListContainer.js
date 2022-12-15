@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Grid from "@mui/material/Grid";
-import PopUpDialog from "./PopDialog";
+import SingleSubjectDialog from "./SingleSubjectDialog";
 import SubjectList from "./SubjectList";
 import CardContent from "@mui/material/CardContent";
 import { CardHeader, Card, Container } from "@mui/material";
@@ -10,11 +10,11 @@ import SubjectPagination from "./SubjectPagination";
 //import {BASEURL} from "../config/consts.js";
 //const baseUrl = BASEURL;
 
-export default function SubjectList(props) {
-  const { subjectList, refreshSubjects, setSubjectList } = props;
+export default function SubjectListContainer(props) {
+  const { getAllSubjects, allSubjectsList, paginateSubjects } = props;
   return (
     <div>
-      <PopUpDialog refreshSubjects={refreshSubjects}></PopUpDialog>
+      <SingleSubjectDialog getAllSubjects={getAllSubjects} />
       <Grid
         container
         rowSpacing={0.5}
@@ -26,9 +26,9 @@ export default function SubjectList(props) {
           <CardContent>
             <CardHeader title="Opetukset" />
             <SubjectList
-              refreshSubjects={refreshSubjects}
-              subjectList={subjectList}
-              setSubjectList={setSubjectList}
+              getAllSubjects={getAllSubjects}
+              allSubjectsList={allSubjectsList}
+              paginateSubjects={paginateSubjects}
             />
           </CardContent>
         </Card>

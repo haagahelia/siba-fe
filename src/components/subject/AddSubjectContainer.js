@@ -14,10 +14,10 @@ import AddSubjectForm from "./AddSubjectForm";
 //import {BASEURL} from "../config/consts.js";
 //const baseUrl = BASEURL;
 
-export default function AddSubject(props) {
-  const { refreshSubjects, subjectList } = props;
-  const [programNameList, setProgramNameList] = useState([]);
-  const [spaceTypeNameList, setSpaceTypeNameList] = useState([]);
+export default function AddSubjectContainer(props) {
+  const { getAllSubjects, allSubjectsList } = props;
+  const [programSelectList, setProgramSelectList] = useState([]);
+  const [spaceTypeSelectList, setSpaceTypeSelectList] = useState([]);
   const [alertOpen, setAlertOpen] = useState(false);
   const [alertOptions, setAlertOptions] = useState({
     title: "This is title",
@@ -30,7 +30,7 @@ export default function AddSubject(props) {
     content: "Something here",
   });
   // Tässä formikin initialvalues tallennetaan stateen
-  const [copySubjectData, setCopySubjectData] = useState({
+  const [initialSubject, setInitialSubject] = useState({
     name: "",
     groupSize: 0,
     groupCount: 0,
@@ -40,9 +40,21 @@ export default function AddSubject(props) {
     programId: 0,
   });
 
+  const resetFormm = () => {
+    setInitialSubject({
+      name: "",
+      groupSize: 0,
+      groupCount: 0,
+      sessionLength: "",
+      sessionCount: 0,
+      area: 0,
+      programId: 0,
+    });
+  };
+
   const formik = useFormik({
     enableReinitialize: true,
-    initialValues: copySubjectData,
+    initialValues: initialSubject,
     validate,
     onSubmit: (values) => {
       setDialogOptions({
@@ -51,13 +63,14 @@ export default function AddSubject(props) {
           "Painamalla jatka, " + values.name + " lisätään opetuslistaukseen",
       });
       setDialogOpen(true);
+
       return;
     },
   });
 
-  const programs = async function () {
-    const data = await dao.getProgramNames();
-    if (data === 500) {
+  const getProgramsForSelect = async function () {
+    const result = await dao.fetchProgramsForSelect();
+    if (result === 500) {
       setAlertOptions({
         severity: "error",
         title: "Virhe",
@@ -66,16 +79,16 @@ export default function AddSubject(props) {
       setAlertOpen(true);
       return;
     } else {
-      setProgramNameList(data);
+      setProgramSelectList(result);
     }
   };
   useEffect(() => {
-    programs();
+    getProgramsForSelect();
   }, []);
 
-  const spaceType = async function () {
-    const data = await dao.getSpaceTypeNames();
-    if (data === 500) {
+  const getSpaceTypesForSelect = async function () {
+    const result = await dao.fetchSpacetypeForSelect();
+    if (result === 500) {
       setAlertOptions({
         severity: "error",
         title: "Virhe",
@@ -84,24 +97,24 @@ export default function AddSubject(props) {
       setAlertOpen(true);
       return;
     } else {
-      setSpaceTypeNameList(data);
+      setSpaceTypeSelectList(result);
     }
   };
   useEffect(() => {
-    spaceType();
+    getSpaceTypesForSelect();
   }, []);
 
-  const addSubject = async (values) => {
-    let capitalName = capitalizeFirstLetter(values.name);
+  const addSubject = async (submitValues) => {
+    let capitalName = capitalizeFirstLetter(submitValues.name);
     let newSubject = {
       name: capitalName,
-      groupSize: values.groupSize,
-      groupCount: values.groupCount,
-      sessionLength: values.sessionLength,
-      sessionCount: values.sessionCount,
-      area: values.area,
-      programId: values.programId,
-      spaceTypeId: values.spaceTypeId ? values.spaceTypeId : null,
+      groupSize: submitValues.groupSize,
+      groupCount: submitValues.groupCount,
+      sessionLength: submitValues.sessionLength,
+      sessionCount: submitValues.sessionCount,
+      area: submitValues.area,
+      programId: submitValues.programId,
+      spaceTypeId: submitValues.spaceTypeId ? submitValues.spaceTypeId : null,
     };
 
     let result = await dao.postNewSubject(newSubject);
@@ -137,17 +150,17 @@ export default function AddSubject(props) {
     setAlertOptions({
       severity: "success",
       title: "Onnistui!",
-      message: values.name + " lisätty.",
+      message: submitValues.name + " lisätty.",
     });
     setAlertOpen(true);
-
-    refreshSubjects();
+    resetFormm();
+    getAllSubjects();
   };
   // Tässä tulee lista opetuksia
   // Kun opetuksen valitsee menee tiedot formikin initialvaluesiin
   const handleChange = (e) => {
     let selected = e.target.value;
-    setCopySubjectData({
+    setInitialSubject({
       name: formik.values.name, // Tämä, jotta syötetty nimi ei vaihdu vaikka valitsisi olemassa olevan opetuksen tiedot
       groupSize: selected.groupSize,
       groupCount: selected.groupCount,
@@ -165,14 +178,14 @@ export default function AddSubject(props) {
         alertOpen={alertOpen}
         alertOptions={alertOptions}
         setAlertOpen={setAlertOpen}
-      ></AlertBox>
+      />
       <ConfirmationDialog
         dialogOpen={dialogOpen}
         dialogOptions={dialogOptions}
         setDialogOpen={setDialogOpen}
-        confirmfunction={addSubject}
-        functionparam={formik.values}
-      ></ConfirmationDialog>
+        submit={addSubject}
+        submitValues={formik.values}
+      />
       <Card
         variant="outlined"
         sx={{
@@ -189,14 +202,13 @@ export default function AddSubject(props) {
           ></CardHeader>
           <AddSubjectForm
             handleChange={handleChange}
-            programNameList={programNameList}
+            programSelectList={programSelectList}
             formik={formik}
-            values={formik.values}
-            setCopySubjectData={setCopySubjectData}
-            subjectList={subjectList}
-            copySubjectData={copySubjectData}
-            spaceTypeNameList={spaceTypeNameList}
-          ></AddSubjectForm>
+            submitValues={formik.values}
+            setInitialSubject={setInitialSubject}
+            allSubjectsList={allSubjectsList}
+            spaceTypeSelectList={spaceTypeSelectList}
+          />
         </CardContent>
       </Card>
     </div>

@@ -4,7 +4,7 @@ const darkBrown = "#272121";
 const lightGray = "#363333";
 const light = "#F6E9E9";
 const orange = "#E16428";
-const lightgreen = "#ABFFDD";
+const lightgreen = "#90EE90";
 const lightblue = "#73FDFF";
 const lightyellow = "#FFF5AB";
 const lightred = "#FF8585";
@@ -138,6 +138,40 @@ const theme = createTheme({
         musiikkiluokka: {
           color: lightyellow
         }
+      },
+      IndexRooms: {
+       studioindex: {
+        width: 15,
+        height: 15,
+        backgroundColor: lightred,
+        border:'3px solid',
+        borderColor: "black", 
+        marginLeft: 60
+       },
+        luentoluokkaindex: {
+        width: 15,
+        height: 15,
+        backgroundColor: lightblue,
+        border:'3px solid',
+        borderColor: "black", 
+        marginLeft: 60
+       },
+       esitystilaindex: {
+        width: 15,
+        height: 15,
+        backgroundColor: lightgreen,
+        border:'3px solid',
+        borderColor: "black", 
+        marginLeft: 60
+       },
+       musiikkiluokkaindex: {
+        width: 15,
+        height: 15,
+        backgroundColor: lightyellow,
+        border:'3px solid',
+        borderColor: "black", 
+        marginLeft: 60
+       } 
       },
       MuiButton: {
         styleOverrides:{

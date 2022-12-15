@@ -9,52 +9,36 @@ import Dialog from "@mui/material/Dialog";
 import { DialogActions, DialogContent, DialogContentText } from "@mui/material";
 import { globalTheme } from "../styles/theme";
 
-export default function EditSubjectDialog(props) {
-  const { programNameList, formik, values, setEditSubject, spaceTypeNameList } =
-    props;
+export default function EditSubjectForm(props) {
+  const { programSelectList, formik, spaceTypeSelectList } = props;
 
   const [open, setOpen] = useState(false);
-  const handleClose = () => {
-    setEditSubject({
-      id: null,
-      name: null,
-      groupSize: null,
-      groupCount: null,
-      sessionLength: null,
-      sessionCount: null,
-      area: null,
-      programId: null,
-      spaceTypeId: null,
-      subjectName: null,
-    });
-    setOpen(false);
-  };
 
   return (
     <div>
       <ThemeProvider theme={globalTheme}>
-      <Button
-        variant="contained"
-        color="secondary"
-        style={{color: "white"}}
-        onClick={() => {
-          setOpen(true);
-        }}
-      >
-        Muokkaa
-      </Button>
+        <Button
+          variant="contained"
+          color="secondary"
+          style={{ color: "white" }}
+          onClick={() => {
+            setOpen(true);
+          }}
+        >
+          Muokkaa
+        </Button>
       </ThemeProvider>
       <Dialog open={open}>
         <form onSubmit={formik.handleSubmit}>
-          {/* formik.initialValues?.subjectName} Tässä ? katsoo löytyykö data objektista attribuuttia subjectName, jos ei löydy palauttaa arvon null eikä kaadu */}
-          <DialogTitle>
+          {/* formik.initialValues?.subjectName} Tässä ? katsoo löytyykö initialValues objektista attribuuttia subjectName, jos ei löydy palauttaa arvon null eikä kaadu */}
+          <DialogTitle sx={{ maxWidth: "300px" }}>
             Muokkaa: {formik.initialValues?.subjectName}
           </DialogTitle>
           <DialogContent>
             <DialogContentText>
               <Grid
                 container
-                spacing={2}
+                spacing={3}
                 column={7}
                 direction="column"
                 justifyContent="center"
@@ -72,7 +56,7 @@ export default function EditSubjectDialog(props) {
                     label="Opetuksen nimi"
                     defaultValue={formik.initialValues?.subjectName}
                     variant="outlined"
-                    value={formik.formikValues?.subjectName}
+                    value={formik.values?.subjectName}
                     onChange={formik.handleChange("subjectName")}
                     onBlur={formik.handleBlur("subjectName")}
                     helperText={
@@ -192,7 +176,7 @@ export default function EditSubjectDialog(props) {
                       value={formik.values?.programId}
                       onBlur={formik.handleBlur("programId")}
                     >
-                      {programNameList.map((value) => {
+                      {programSelectList.map((value) => {
                         return (
                           <MenuItem key={value.id} value={value.id}>
                             {value.name}
@@ -214,7 +198,7 @@ export default function EditSubjectDialog(props) {
                       value={formik.values?.spaceTypeId}
                       onBlur={formik.handleBlur("spaceTypeId")}
                     >
-                      {spaceTypeNameList.map((value) => {
+                      {spaceTypeSelectList.map((value) => {
                         return (
                           <MenuItem key={value.id} value={value.id}>
                             {value.name}
@@ -232,19 +216,21 @@ export default function EditSubjectDialog(props) {
           >
             <ThemeProvider theme={globalTheme}>
               <Button
-                onClick={handleClose}
+                onClick={() => {
+                  setOpen(false);
+                  // Nollataan lomake jos painaa peruuta
+                  formik.resetForm();
+                }}
                 variant="contained"
-                color="red">
+                color="red"
+              >
                 Peruuta
               </Button>
-            </ThemeProvider>
-            <ThemeProvider theme={globalTheme}>
               <Button
                 type="submit"
                 variant="contained"
-                style={{color: "white"}}
+                style={{ color: "white" }}
                 onClick={() => {
-                  setEditSubject(values);
                   setOpen(false);
                 }}
               >

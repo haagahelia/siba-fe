@@ -4,9 +4,9 @@ import { useEffect, useState } from "react";
 const pageSize = 15;
 
 
-export default function SubjectPagination({subjectList, setSubjectListState, paginateSubjects, setPaginateSubjects}){
+export default function SubjectPagination({allSubjectsList, paginateSubjects, setPaginateSubjects}){
 
-    const count = Math.ceil(subjectList.length/pageSize);
+    const count = Math.ceil(allSubjectsList.length/pageSize);
     const [pagination, setPagination] = useState({
         from: 0,
         to: pageSize
@@ -20,7 +20,7 @@ export default function SubjectPagination({subjectList, setSubjectListState, pag
         }
         else
         {
-            const slicedSubjects = subjectList.slice(pagination.from, pagination.to)
+            const slicedSubjects = allSubjectsList.slice(pagination.from, pagination.to)
             setPaginateSubjects(slicedSubjects)
             console.log(paginateSubjects)
         }

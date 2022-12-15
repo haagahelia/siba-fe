@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Button,
   Grid,
@@ -10,6 +10,7 @@ import {
   TextField,
   DialogActions,
   RadioGroup,
+  Typography,
 } from "@mui/material";
 import Select from "@mui/material/Select";
 import InputLabel from "@mui/material/InputLabel";
@@ -21,35 +22,52 @@ import FormLabel from "@mui/material/FormLabel";
 import { ThemeProvider } from "@mui/material";
 import { globalTheme } from "../styles/theme";
 
-export default function AddSubjectEquipmentDialog(props) {
-  const { equipmentList, data, formik, values, setInitialSubEquip } = props;
+export default function AddSubEquipForm(props) {
+  const { equipmentSelectList, singleSubject, formik } = props;
   const [open, setOpen] = useState(false);
+  const [equipPriority, setEquipPriority] = useState(0);
+
+  /* Tässä etsitään selectistä valitun varusteen prioriteettia, 
+  jotta käyttäjä näkee mikä varusteen oletus prioriteetti arvo on */
+  useEffect(() => {
+    const prio = equipmentSelectList.find((obj) => {
+      return obj.id === formik.values.equipmentId;
+    });
+    if (prio?.equipmentPriority) {
+      setEquipPriority(prio.equipmentPriority);
+      // Asettaa oletus prioriteetti arvon suoraan syötekenttään
+      formik.setValues({ ...formik.values, priority: prio.equipmentPriority });
+    }
+  }, [formik.values.equipmentId]);
 
   return (
     <div>
       <ThemeProvider theme={globalTheme}>
-      <Button
-        variant="contained"
-        color="secondary"
-        onClick={() => {
-          setOpen(true);
-        }}
-      >
-        Lisää varuste
-      </Button>
+        <Button
+          variant="contained"
+          color="secondary"
+          onClick={() => {
+            setOpen(true);
+          }}
+        >
+          Lisää varuste
+        </Button>
       </ThemeProvider>
       <Dialog open={open}>
-        <DialogTitle> {data?.subjectName}</DialogTitle>
+        {/* formik.singleSubject?.subjectName} Tässä ? katsoo löytyykö singleSubject objektista attribuuttia subjectName, jos ei löydy palauttaa arvon null eikä kaadu */}
+        <DialogTitle sx={{ maxWidth: "300px" }}>
+          {singleSubject?.subjectName}
+        </DialogTitle>
         <form onSubmit={formik.handleSubmit}>
           <DialogContent>
             <DialogContentText>
               <Grid
                 container
-                spacing={5}
+                spacing={3}
                 column={3}
                 direction="column"
                 justifyContent="flex-start"
-                alignItems="flex-start"
+                alignItems="flex-center"
                 padding={2}
               >
                 <Grid item sx={12}>
@@ -66,7 +84,7 @@ export default function AddSubjectEquipmentDialog(props) {
                       value={formik.values?.equipmentId}
                       onBlur={formik.handleBlur("equipmentId")}
                     >
-                      {equipmentList.map((value) => {
+                      {equipmentSelectList.map((value) => {
                         return (
                           <MenuItem key={value.id} value={value.id}>
                             {value.name}
@@ -80,6 +98,9 @@ export default function AddSubjectEquipmentDialog(props) {
                   </FormControl>
                 </Grid>
                 <Grid item sx={12}>
+                  <Typography sx={{ marginBottom: 2 }}>
+                    Prioriteetin oletusarvo: {equipPriority}
+                  </Typography>
                   <TextField
                     error={
                       formik.touched.priority && formik.errors.priority
@@ -104,7 +125,6 @@ export default function AddSubjectEquipmentDialog(props) {
                   <FormControl>
                     <FormLabel>Varusteen pakollisuus</FormLabel>
                     <RadioGroup
-                      defaultValue="Pakollinen"
                       name="obligatory"
                       value={formik.values.obligatory}
                       onChange={formik.handleChange("obligatory")}
@@ -126,31 +146,34 @@ export default function AddSubjectEquipmentDialog(props) {
               </Grid>
             </DialogContentText>
           </DialogContent>
-          <DialogActions>
+          <DialogActions
+            sx={{ justifyContent: "space-evenly", padding: "16px" }}
+          >
             <ThemeProvider theme={globalTheme}>
-            <Button
-              variant="contained"
-              color="red"
-              style={{color: "white"}}
-              onClick={() => {
-                setOpen(false);
-              }}
-            >
-              Peruuta
-            </Button>
-            </ThemeProvider>
-            <ThemeProvider theme={globalTheme}>
-            <Button
-              type="submit"
-              style={{color: "white"}}
-              variant="contained"
-              onClick={() => {
-                setInitialSubEquip(values);
-                setOpen(false);
-              }}
-            >
-              Lisää
-            </Button>
+              <Button
+                variant="contained"
+                color="red"
+                style={{ color: "white" }}
+                onClick={() => {
+                  setOpen(false);
+                  setEquipPriority(0);
+                  // Nollataan lomake jos painaa peruuta
+                  formik.resetForm();
+                }}
+              >
+                Peruuta
+              </Button>
+              <Button
+                type="submit"
+                style={{ color: "white" }}
+                variant="contained"
+                onClick={() => {
+                  setOpen(false);
+                  setEquipPriority(0);
+                }}
+              >
+                Lisää
+              </Button>
             </ThemeProvider>
           </DialogActions>
         </form>
