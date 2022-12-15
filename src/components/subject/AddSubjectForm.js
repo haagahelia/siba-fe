@@ -17,13 +17,12 @@ import { globalTheme } from "../styles/theme";
 export default function AddSubjectForm(props) {
   const {
     handleChange,
-    programNameList,
+    programSelectList,
     formik,
-    values,
-    setCopySubjectData,
-    subjectList,
-    copySubjectData,
-    spaceTypeNameList,
+    submitValues,
+    setInitialSubject,
+    allSubjectsList,
+    spaceTypeSelectList,
   } = props;
 
   return (
@@ -153,7 +152,7 @@ export default function AddSubjectForm(props) {
                 }
                 onBlur={formik.handleBlur("programId")}
               >
-                {programNameList.map((value) => {
+                {programSelectList.map((value) => {
                   return (
                     <MenuItem key={value.id} value={value.id}>
                       {value.name}
@@ -176,7 +175,7 @@ export default function AddSubjectForm(props) {
                 value={formik.values.spaceTypeId}
                 onBlur={formik.handleBlur("spaceTypeId")}
               >
-                {spaceTypeNameList.map((value) => {
+                {spaceTypeSelectList.map((value) => {
                   return (
                     <MenuItem key={value.id} value={value.id}>
                       {value.name}
@@ -195,7 +194,7 @@ export default function AddSubjectForm(props) {
             <FormControl sx={{ maxWidth: 340, minWidth: 200 }}>
               <InputLabel>Kopioi olemassa olevan opetuksen tiedot</InputLabel>
               <Select onChange={handleChange}>
-                {subjectList.map((value) => {
+                {allSubjectsList.map((value) => {
                   return (
                     <MenuItem key={value.id} value={value}>
                       {value.subjectName}
@@ -213,7 +212,7 @@ export default function AddSubjectForm(props) {
               variant="contained"
               style={{ color: "white" }}
               onClick={() => {
-                setCopySubjectData(values);
+                setInitialSubject(submitValues);
               }}
             >
               Lisää

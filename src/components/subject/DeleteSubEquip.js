@@ -2,9 +2,11 @@ import React, { useState } from "react";
 import dao from "../../ajax/dao";
 import { Button } from "@mui/material";
 import ConfirmationDialog from "../common/ConfirmationDialog";
+import AlertBox from "../common/AlertBox";
 
-export default function DeleteSubjectEquipment(props) {
-  const { values, refreshSubjects } = props;
+export default function DeleteSubEquip(props) {
+  const { singleEquipBySubId, getEquipmentsBySubId } = props;
+
   const [alertOpen, setAlertOpen] = useState(false);
   const [alertOptions, setAlertOptions] = useState({
     message: "This is an error alert — check it out!",
@@ -19,9 +21,9 @@ export default function DeleteSubjectEquipment(props) {
     subjectId: 0,
     equipmentId: 0,
   });
-  let id1 = values.subjectId;
-  let id2 = values.equipmentId;
-  let equipmentName = values.name;
+  let id1 = singleEquipBySubId.subjectId;
+  let id2 = singleEquipBySubId.equipmentId;
+  let equipmentName = singleEquipBySubId.name;
 
   const deleteSubjectEquipment = async (subjectId, equipmentId) => {
     subjectId = id1;
@@ -54,6 +56,7 @@ export default function DeleteSubjectEquipment(props) {
       message: `${equipmentName} poistettu.`,
     });
     setAlertOpen(true);
+    getEquipmentsBySubId(subjectId);
   };
 
   const submitDelete = (values) => {
@@ -70,19 +73,24 @@ export default function DeleteSubjectEquipment(props) {
 
   return (
     <div>
+      <AlertBox
+        alertOpen={alertOpen}
+        alertOptions={alertOptions}
+        setAlertOpen={setAlertOpen}
+      />
       <ConfirmationDialog
         dialogOpen={dialogOpen}
         dialogOptions={dialogOptions}
         setDialogOpen={setDialogOpen}
-        confirmfunction={deleteSubjectEquipment}
-        functionparam={deleteSubEquip}
+        submit={deleteSubjectEquipment}
+        submitValues={deleteSubEquip}
       />
       <Button
         variant="contained"
         color="error"
         sx={{ margin: "5px", maxWidth: "85px" }}
         onClick={() => {
-          submitDelete(values);
+          submitDelete(singleEquipBySubId);
         }}
       >
         Poista

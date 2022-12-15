@@ -4,9 +4,7 @@ export async function validate(values) {
   const errors = {};
   const regName = new RegExp(/^[A-Za-zäöåÄÖÅ0-9\s-]*$/);
   const regNumber = new RegExp(/^[0-9]+$/);
-  const regTime = new RegExp(
-    /^([0-1][0-9]|[2][0-3]):([0-5][0-9]):([0-5][0-9])$/,
-  );
+  const regTime = new RegExp(/^([0-1][0-2]):([0-5][0-9])(:[0-5][0-9])?$/);
   const regArea = new RegExp(/^[0-9]*(.[0-9]{1,2})?$/);
 
   let subjectList = [];
@@ -14,7 +12,7 @@ export async function validate(values) {
   const getSubjectNames = async function () {
     const data = await dao.fetchSubjectsNames();
     subjectList = data;
-
+    // Tässä katsotaan ettei käyttäjä syötä jo olemassa olevan opetuksen nimeä.
     let result = subjectList.some(
       (names) => names.name.toLowerCase() === values.name.toLowerCase(),
     );
@@ -49,7 +47,7 @@ export async function validate(values) {
   if (!values.sessionLength) {
     errors.sessionLength = "Pakollinen kenttä";
   } else if (!regTime.test(values.sessionLength)) {
-    errors.sessionLength = "Sallittu muoto on 00:00:00";
+    errors.sessionLength = "Sallittu muoto on 00:00 tai 00:00:00";
   }
 
   if (!values.sessionCount) {
@@ -70,8 +68,8 @@ export async function validate(values) {
 
   if (!values.programId) {
     errors.programId = "Pakollinen kenttä";
-    return errors;
   }
+  return errors;
 }
 
 export function capitalizeFirstLetter(string) {
