@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from "react";
 import dao from "../../ajax/dao";
-import AddSubjectEquipmentDialog from "./AddSubjectEquipmentDialog";
+import AddSubEquipForm from "./AddSubEquipForm";
 import { useFormik } from "formik";
 import ConfirmationDialog from "../common/ConfirmationDialog";
 import { validate } from "../../validation/ValidateAddSubjectEquipment";
+import AlertBox from "../common/AlertBox";
 
-export default function AddSubjectEquipment(props) {
-  const { data } = props;
-
-  const [equipmentList, setEquipmentList] = useState([]);
+export default function AddSubEquipContainer(props) {
+  const { singleSubject, equipmentsBySubId } = props;
+  const [equipmentSelectList, setEquipmentSelectList] = useState([]);
   const [initialSubEquip, setInitialSubEquip] = useState({
-    subjectId: data?.id,
+    subjectId: singleSubject?.id,
     equipmentId: 0,
     priority: 0,
     obligatory: 1,
@@ -28,21 +28,21 @@ export default function AddSubjectEquipment(props) {
     content: "Something here",
   });
 
-  let subId = data?.id;
+  let subId = singleSubject?.id;
 
-  const getSubjectEquipment = async function (subId) {
-    const data = await dao.getEquipmentBySubjectId(subId);
-
-    equipment(data);
+  const getSubEquipBySubId = async function (subId) {
+    let result = await equipmentsBySubId(subId);
+    getEquipmentsForSelect(result);
   };
+
   useEffect(() => {
-    getSubjectEquipment(subId);
+    getSubEquipBySubId(subId);
   }, []);
 
-  const equipment = async function (subEquipList) {
-    const data = await dao.getEquipmentNames();
+  const getEquipmentsForSelect = async function (subEquipList) {
+    const result = await dao.fetchEquipmentData();
 
-    if (data === 500) {
+    if (result === 500) {
       setAlertOptions({
         severity: "error",
         title: "Virhe",
@@ -51,12 +51,13 @@ export default function AddSubjectEquipment(props) {
       setAlertOpen(true);
       return;
     } else {
-      const filteredList = data.filter((item) => {
+      // Tässä suodetetaan pois jo olemassa olevat varustukset opetuksessa
+      const filteredList = result.filter((item) => {
         return !subEquipList.some((element) => {
           return element.equipmentId === item.id;
         });
       });
-      setEquipmentList(filteredList);
+      setEquipmentSelectList(filteredList);
     }
   };
 
@@ -65,8 +66,17 @@ export default function AddSubjectEquipment(props) {
     validate,
     onSubmit: (values) => {
       setDialogOptions({
-        title: "Haluatko varmasti lisätä varusteen?",
-        content: "Painamalla jatka, varuste lisätään opetukseen",
+        // Tässä etsitään varusteen nimi, jonka id vastaa values.id
+        title:
+          "Haluatko varmasti lisätä " +
+          equipmentSelectList.filter((i) => i.id === values.equipmentId)[0]
+            .name +
+          " ?",
+        content:
+          "Painamalla jatka " +
+          equipmentSelectList.filter((i) => i.id === values.equipmentId)[0]
+            .name +
+          " lisätään opetukseen",
       });
       setDialogOpen(true);
       return;
@@ -116,24 +126,28 @@ export default function AddSubjectEquipment(props) {
       message: "Varuste lisätty.",
     });
     setAlertOpen(true);
+    formik.resetForm();
+    getSubEquipBySubId(subId);
   };
 
   return (
     <div>
+      <AlertBox
+        alertOpen={alertOpen}
+        alertOptions={alertOptions}
+        setAlertOpen={setAlertOpen}
+      />
       <ConfirmationDialog
         dialogOpen={dialogOpen}
         dialogOptions={dialogOptions}
         setDialogOpen={setDialogOpen}
-        confirmfunction={addSubjectEquipment}
-        functionparam={formik.values}
+        submit={addSubjectEquipment}
+        submitValues={formik.values}
       />
-      <AddSubjectEquipmentDialog
-        equipmentList={equipmentList}
-        data={data}
-        addSubjectEquipment={addSubjectEquipment}
+      <AddSubEquipForm
+        equipmentSelectList={equipmentSelectList}
+        singleSubject={singleSubject}
         formik={formik}
-        values={formik.values}
-        setInitialSubEquip={setInitialSubEquip}
       />
     </div>
   );

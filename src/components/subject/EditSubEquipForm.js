@@ -19,29 +19,23 @@ import { useEffect } from "react";
 import { globalTheme } from "../styles/theme";
 import Radio from "@mui/material/Radio";
 
-export default function EditSubjectEquipmentDialog(props) {
-  const { formik, values, setEditSubEquip, equipmentList } = props;
-  const [open, setOpen] = useState(false);
-  const [ePriority, setEPriority] = useState(0);
-  const handleClose = () => {
-    setEditSubEquip({
-      priority: null,
-      obligatory: null,
-      subjectId: null,
-      equipmentId: null,
-    });
-    setOpen(false);
-  };
+export default function EditSubEquipForm(props) {
+  const { formik, equipmentPriorityList } = props;
 
+  const [open, setOpen] = useState(false);
+  const [equipPriority, setEquipPriority] = useState(0);
+
+  /* Tässä etsitään selectistä valitun varusteen prioriteettia, 
+  jotta käyttäjä näkee mikä varusteen oletus prioriteetti arvo on */
   useEffect(() => {
-    const prio = equipmentList.find((obj) => {
+    const prio = equipmentPriorityList.find((obj) => {
       return obj.id === formik.values.equipmentId;
     });
 
     if (prio?.equipmentPriority) {
-      setEPriority(prio.equipmentPriority);
+      setEquipPriority(prio.equipmentPriority);
     }
-  }, [equipmentList]);
+  }, [equipmentPriorityList]);
 
   return (
     <div>
@@ -59,6 +53,7 @@ export default function EditSubjectEquipmentDialog(props) {
       </ThemeProvider>
       <Dialog open={open}>
         <form onSubmit={formik.handleSubmit}>
+          {/* formik.initialValues?.name} Tässä ? katsoo löytyykö initialValues objektista attribuuttia name, jos ei löydy palauttaa arvon null eikä kaadu */}
           <DialogTitle>Muokkaa: {formik.initialValues?.name}</DialogTitle>
           <DialogContent>
             <DialogContentText>
@@ -73,7 +68,7 @@ export default function EditSubjectEquipmentDialog(props) {
               >
                 <Grid item sx={12}>
                   <Typography sx={{ marginBottom: 2 }}>
-                    Prioriteetin oletusarvo: {ePriority}
+                    Prioriteetin oletusarvo: {equipPriority}
                   </Typography>
                   <TextField
                     error={
@@ -130,12 +125,12 @@ export default function EditSubjectEquipmentDialog(props) {
                 style={{ color: "white" }}
                 onClick={() => {
                   setOpen(false);
-                  handleClose();
+                  // Nollataan lomake jos painaa peruuta
+                  formik.resetForm();
                 }}
               >
                 Peruuta
               </Button>
-
               <Button
                 type="submit"
                 style={{ color: "white" }}

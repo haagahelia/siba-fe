@@ -1,19 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { useFormik } from "formik";
 import ConfirmationDialog from "../common/ConfirmationDialog";
-import {
-  validate,
-  capitalizeFirstLetter,
-} from "../../validation/ValidateEditSubjectEquipment";
+import { validate } from "../../validation/ValidateEditSubjectEquipment";
 import AlertBox from "../common/AlertBox";
 import dao from "../../ajax/dao";
+import EditSubEquipForm from "./EditSubEquipForm";
 
-import EditSubjectEquipmentDialog from "./EditSubjectEquipmentDialog";
+export default function EditSubEquipContainer(props) {
+  const { subId, equipId, prio, obli, name, getEquipmentsBySubId } = props;
 
-export default function EditSubjectEquipment(props) {
-  const { subId, equipId, prio, obli, name } = props;
-
-  const [equipmentList, setEquipmentList] = useState([]);
+  const [equipmentPriorityList, setEquipmentPriorityList] = useState([]);
   const [alertOpen, setAlertOpen] = useState(false);
   const [alertOptions, setAlertOptions] = useState({
     title: "This is title",
@@ -33,14 +29,8 @@ export default function EditSubjectEquipment(props) {
     name: name,
   });
 
-  const [editSubEquip, setEditSubEquip] = useState({
-    priority: null,
-    obligatory: null,
-    subjectId: null,
-    equipmentId: null,
-  });
-
   const formik = useFormik({
+    // enableReinitialize katsoo pitääkö Formikin nollata lomake, jos aloitusarvot muuttuvat
     enableReinitialize: true,
     initialValues: initialEquipValues,
     validate,
@@ -103,10 +93,13 @@ export default function EditSubjectEquipment(props) {
       message: values.name + " uudet tiedot lisätty.",
     });
     setAlertOpen(true);
+    // Lomake nollaantuu ja saa uudet muokatut initialValuet
+    formik.resetForm(setInitialEquipValues(formik.values));
+    getEquipmentsBySubId(subId);
   }
-  const equipment = async function () {
-    const data = await dao.getEquipmentNames();
-    if (data === 500) {
+  const getEquipmentPriority = async function () {
+    const result = await dao.fetchEquipmentData();
+    if (result === 500) {
       setAlertOptions({
         severity: "error",
         title: "Virhe",
@@ -115,29 +108,31 @@ export default function EditSubjectEquipment(props) {
       setAlertOpen(true);
       return;
     } else {
-      setEquipmentList(data);
+      setEquipmentPriorityList(result);
     }
   };
   useEffect(() => {
-    equipment();
+    getEquipmentPriority();
   }, []);
 
   return (
     <div>
+      <AlertBox
+        alertOpen={alertOpen}
+        alertOptions={alertOptions}
+        setAlertOpen={setAlertOpen}
+      />
       <ConfirmationDialog
         dialogOpen={dialogOpen}
         dialogOptions={dialogOptions}
         setDialogOpen={setDialogOpen}
-        confirmfunction={submitEditedSubjectEquip}
-        functionparam={formik.values}
+        submit={submitEditedSubjectEquip}
+        submitValues={formik.values}
       />
-
-      <EditSubjectEquipmentDialog
+      <EditSubEquipForm
         formik={formik}
-        values={formik.values}
-        editSubEquip={editSubEquip}
-        setEditSubEquip={setEditSubEquip}
-        equipmentList={equipmentList}
+        equipmentPriorityList={equipmentPriorityList}
+        subId={subId}
       />
     </div>
   );

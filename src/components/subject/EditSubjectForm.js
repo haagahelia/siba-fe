@@ -9,26 +9,10 @@ import Dialog from "@mui/material/Dialog";
 import { DialogActions, DialogContent, DialogContentText } from "@mui/material";
 import { globalTheme } from "../styles/theme";
 
-export default function EditSubjectDialog(props) {
-  const { programNameList, formik, values, setEditSubject, spaceTypeNameList } =
-    props;
+export default function EditSubjectForm(props) {
+  const { programSelectList, formik, spaceTypeSelectList } = props;
 
   const [open, setOpen] = useState(false);
-  const handleClose = () => {
-    setEditSubject({
-      id: null,
-      name: null,
-      groupSize: null,
-      groupCount: null,
-      sessionLength: null,
-      sessionCount: null,
-      area: null,
-      programId: null,
-      spaceTypeId: null,
-      subjectName: null,
-    });
-    setOpen(false);
-  };
 
   return (
     <div>
@@ -46,7 +30,7 @@ export default function EditSubjectDialog(props) {
       </ThemeProvider>
       <Dialog open={open}>
         <form onSubmit={formik.handleSubmit}>
-          {/* formik.initialValues?.subjectName} Tässä ? katsoo löytyykö data objektista attribuuttia subjectName, jos ei löydy palauttaa arvon null eikä kaadu */}
+          {/* formik.initialValues?.subjectName} Tässä ? katsoo löytyykö initialValues objektista attribuuttia subjectName, jos ei löydy palauttaa arvon null eikä kaadu */}
           <DialogTitle sx={{ maxWidth: "300px" }}>
             Muokkaa: {formik.initialValues?.subjectName}
           </DialogTitle>
@@ -72,7 +56,7 @@ export default function EditSubjectDialog(props) {
                     label="Opetuksen nimi"
                     defaultValue={formik.initialValues?.subjectName}
                     variant="outlined"
-                    value={formik.formikValues?.subjectName}
+                    value={formik.values?.subjectName}
                     onChange={formik.handleChange("subjectName")}
                     onBlur={formik.handleBlur("subjectName")}
                     helperText={
@@ -192,7 +176,7 @@ export default function EditSubjectDialog(props) {
                       value={formik.values?.programId}
                       onBlur={formik.handleBlur("programId")}
                     >
-                      {programNameList.map((value) => {
+                      {programSelectList.map((value) => {
                         return (
                           <MenuItem key={value.id} value={value.id}>
                             {value.name}
@@ -214,7 +198,7 @@ export default function EditSubjectDialog(props) {
                       value={formik.values?.spaceTypeId}
                       onBlur={formik.handleBlur("spaceTypeId")}
                     >
-                      {spaceTypeNameList.map((value) => {
+                      {spaceTypeSelectList.map((value) => {
                         return (
                           <MenuItem key={value.id} value={value.id}>
                             {value.name}
@@ -231,7 +215,15 @@ export default function EditSubjectDialog(props) {
             sx={{ justifyContent: "space-evenly", padding: "16px" }}
           >
             <ThemeProvider theme={globalTheme}>
-              <Button onClick={handleClose} variant="contained" color="red">
+              <Button
+                onClick={() => {
+                  setOpen(false);
+                  // Nollataan lomake jos painaa peruuta
+                  formik.resetForm();
+                }}
+                variant="contained"
+                color="red"
+              >
                 Peruuta
               </Button>
               <Button
