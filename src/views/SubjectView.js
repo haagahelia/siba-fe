@@ -39,7 +39,6 @@ export default function SubjectView() {
   }, []);
   useEffect(() => {
     setPaginateSubjects(allSubjectsList.slice(0,15));
-    console.log(paginateSubjects)
   }, [allSubjectsList]);
 
   return (

@@ -11,8 +11,6 @@ const requestSearch = (e) => {
         .includes(e.target.value.toLowerCase());
     }
     setFilteredSubject(filteredSubjects);
-
-    console.log(filteredSubject, searched)
   };
 
   return(

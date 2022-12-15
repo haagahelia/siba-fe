@@ -22,7 +22,6 @@ export default function SubjectPagination({allSubjectsList, paginateSubjects, se
         {
             const slicedSubjects = allSubjectsList.slice(pagination.from, pagination.to)
             setPaginateSubjects(slicedSubjects)
-            console.log(paginateSubjects)
         }
     },[pagination])
 
