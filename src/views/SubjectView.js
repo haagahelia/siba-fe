@@ -9,6 +9,8 @@ import AlertBox from "../components/common/AlertBox";
 import SubjectFiltering from "../components/subject/SubjectFiltering";
 import SubjectPagination from "../components/subject/SubjectPagination";
 
+const pageSize = 15;
+
 export default function SubjectView() {
   const [paginateSubjects, setPaginateSubjects] = useState([]);
   const [allSubjectsList, setAllSubjectsList] = useState([]);
@@ -17,6 +19,10 @@ export default function SubjectView() {
     message: "This is an error alert — check it out!",
     severity: "error",
   });
+  const [pagination, setPagination] = useState({
+    from: 0,
+    to: pageSize
+})
 
   const getAllSubjects = async function () {
     const result = await dao.fetchAllSubjects();
@@ -63,12 +69,21 @@ export default function SubjectView() {
           <Card variant="outlined">
             <CardContent>
               <CardHeader title="Opetukset" />
+              <SubjectFiltering 
+                allSubjectsList={allSubjectsList}
+                setAllSubjectsList={setAllSubjectsList}
+                paginateSubjects={paginateSubjects}
+                setPaginateSubjects={setPaginateSubjects}
+                pagination = {pagination}
+              />
               <SubjectListContainer
                 getAllSubjects={getAllSubjects}
                 allSubjectsList={allSubjectsList}
                 paginateSubjects={paginateSubjects}
               />
             <SubjectPagination
+              pagination = {pagination}
+              setPagination = {setPagination}
               allSubjectsList = {allSubjectsList} 
               paginateSubjects={paginateSubjects}
               setPaginateSubjects={setPaginateSubjects}
