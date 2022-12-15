@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import { TextField } from "@mui/material";
+import { TextField, IconButton } from "@mui/material";
+import { Clear } from "@mui/icons-material";
 
 export default function SubjectFiltering({
   allSubjectsList,
@@ -29,6 +30,11 @@ export default function SubjectFiltering({
     }
   }, [searched]);
 
+  const cancelSearch = () => {
+    setSearched("");
+    requestSearch(searched);
+  };
+
   return (
     <TextField
       name="searched"
@@ -39,6 +45,16 @@ export default function SubjectFiltering({
       size="medium"
       value={searched}
       onChange={(e) => requestSearch(e)}
+      InputProps={{
+        endAdornment: (
+          <IconButton
+            onClick={cancelSearch}
+            sx={{ visibility: searched ? "visible" : "hidden" }}
+          >
+            <Clear sx={{ color: "#ffffff " }} />
+          </IconButton>
+        ),
+      }}
     />
   );
 }
