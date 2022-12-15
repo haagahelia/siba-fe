@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import { TextField } from "@mui/material";
+import { TextField, IconButton } from "@mui/material";
+import { Clear } from "@mui/icons-material";
 
 export default function SubjectFiltering({allSubjectsList, setallSubjectsList, paginateSubjects, setPaginateSubjects, pagination}){
 
@@ -23,6 +24,11 @@ const requestSearch = (e) => {
     }
   },[searched])
 
+  const cancelSearch = () => {
+    setSearched("");
+    requestSearch(searched);
+  };
+
   return(
   <TextField
     name="searched"
@@ -33,6 +39,13 @@ const requestSearch = (e) => {
     size="medium"
     value={searched}
     onChange={(e) => requestSearch(e)}
+    InputProps={{
+      endAdornment: (
+      <IconButton onClick={cancelSearch}
+        sx={{visibility:searched ? "visible" : "hidden"}}>
+        <Clear sx={{color: "#ffffff "}}/>
+      </IconButton>)
+    }}
   />
   )
 }
