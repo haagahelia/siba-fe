@@ -4,12 +4,11 @@ import { useEffect, useState } from "react";
 const pageSize = 15;
 
 export default function SubjectPagination({
-  subjectList,
-  setSubjectListState,
+  allSubjectsList,
   paginateSubjects,
   setPaginateSubjects,
 }) {
-  const count = Math.ceil(subjectList.length / pageSize);
+  const count = Math.ceil(allSubjectsList.length / pageSize);
   const [pagination, setPagination] = useState({
     from: 0,
     to: pageSize,
@@ -20,7 +19,10 @@ export default function SubjectPagination({
     if (initialRender) {
       setInitialRender(false);
     } else {
-      const slicedSubjects = subjectList.slice(pagination.from, pagination.to);
+      const slicedSubjects = allSubjectsList.slice(
+        pagination.from,
+        pagination.to,
+      );
       setPaginateSubjects(slicedSubjects);
       console.log(paginateSubjects);
     }

@@ -9,6 +9,7 @@ import "../styles/NavBar.css";
 // import logo from "../styles/SIBA_LOGO_WHITE.png";
 import ResultView from "../views/ResultView";
 import SubjectView from "../views/SubjectView";
+import AllocationSubjectFailureView from "../views/AllocationSubjectFailureView";
 import MenuIcon from "@mui/icons-material/Menu";
 
 function NavBar() {
@@ -46,7 +47,7 @@ function NavBar() {
                 className="nav-links"
                 onClick={handleClick}
               >
-                Aineryhmänäkymä
+                Opetukset
               </NavLink>
             </li>
             <li className="nav-item">
@@ -78,6 +79,10 @@ function NavBar() {
           }
         />
         <Route path="/onlyresult" element={<ResultView />} />
+        <Route
+          path="/alloc-fail/:allocId"
+          element={<AllocationSubjectFailureView />}
+        />
       </Routes>
     </Router>
   );

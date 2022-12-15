@@ -7,13 +7,13 @@ import {
 } from "../../validation/ValidateEditSubject";
 import AlertBox from "../common/AlertBox";
 import dao from "../../ajax/dao";
-import EditSubjectDialog from "./EditSubjectDialog";
+import EditSubjectForm from "./EditSubjectForm";
 
-export default function EditSubject(props) {
-  // Aina kun editSubject muuttuu subjectList.js filussa ne tiedot tulee tähän nimellä data
-  const { data, refreshSubjects } = props;
-  const [programNameList, setProgramNameList] = useState([]);
-  const [spaceTypeNameList, setSpaceTypeNameList] = useState([]);
+export default function EditSubjectContainer(props) {
+  // Aina kun editSubject muuttuu subjectList.js filussa ne tiedot tulee tähän nimellä singleSubject
+  const { singleSubject, getAllSubjects, setSingleSubject } = props;
+  const [programSelectList, setProgramSelectList] = useState([]);
+  const [spaceTypeSelectList, setSpaceTypeSelectList] = useState([]);
   const [alertOpen, setAlertOpen] = useState(false);
   const [alertOptions, setAlertOptions] = useState({
     title: "This is title",
@@ -25,23 +25,11 @@ export default function EditSubject(props) {
     title: "this is dialog",
     content: "Something here",
   });
-  const [editSubject, setEditSubject] = useState({
-    id: null,
-    name: null,
-    groupSize: null,
-    groupCount: null,
-    sessionLength: null,
-    sessionCount: null,
-    area: null,
-    programId: null,
-    subjectName: null,
-    spaceTypeId: null,
-  });
 
   const formik = useFormik({
-    // Katsoo pitääkö Formikin nollata lomake, jos aloitusarvot muuttuvat
+    // enableReinitialize katsoo pitääkö Formikin nollata lomake, jos aloitusarvot muuttuvat
     enableReinitialize: true,
-    initialValues: data,
+    initialValues: singleSubject,
     validate,
     onSubmit: (values) => {
       setDialogOptions({
@@ -103,13 +91,13 @@ export default function EditSubject(props) {
       message: `${values.subjectName} uudet tiedot lisätty.`,
     });
     setAlertOpen(true);
-
-    refreshSubjects();
+    setSingleSubject(formik.values);
+    getAllSubjects();
   }
 
-  const programs = async function () {
-    const data = await dao.getProgramNames();
-    if (data === 500) {
+  const getProgramsForSelect = async function () {
+    const result = await dao.fetchProgramsForSelect();
+    if (result === 500) {
       setAlertOptions({
         severity: "error",
         title: "Virhe",
@@ -118,17 +106,17 @@ export default function EditSubject(props) {
       setAlertOpen(true);
       return;
     } else {
-      setProgramNameList(data);
+      setProgramSelectList(result);
     }
   };
 
   useEffect(() => {
-    programs();
+    getProgramsForSelect();
   }, []);
 
-  const spaceType = async function () {
-    const data = await dao.getSpaceTypeNames();
-    if (data === 500) {
+  const getSpaceTypesForSelect = async function () {
+    const result = await dao.fetchSpacetypeForSelect();
+    if (result === 500) {
       setAlertOptions({
         severity: "error",
         title: "Virhe",
@@ -137,11 +125,11 @@ export default function EditSubject(props) {
       setAlertOpen(true);
       return;
     } else {
-      setSpaceTypeNameList(data);
+      setSpaceTypeSelectList(result);
     }
   };
   useEffect(() => {
-    spaceType();
+    getSpaceTypesForSelect();
   }, []);
 
   return (
@@ -155,17 +143,13 @@ export default function EditSubject(props) {
         dialogOpen={dialogOpen}
         dialogOptions={dialogOptions}
         setDialogOpen={setDialogOpen}
-        confirmfunction={submitEditedSubject}
-        functionparam={formik.values}
+        submit={submitEditedSubject}
+        submitValues={formik.values}
       />
-      <EditSubjectDialog
-        programNameList={programNameList}
-        spaceTypeNameList={spaceTypeNameList}
-        data={data}
+      <EditSubjectForm
+        programSelectList={programSelectList}
+        spaceTypeSelectList={spaceTypeSelectList}
         formik={formik}
-        values={formik.values}
-        setEditSubject={setEditSubject}
-        editSubject={editSubject}
       />
     </div>
   );

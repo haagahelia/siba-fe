@@ -1,19 +1,21 @@
 import React, { useState, useEffect } from "react";
 import dao from "../../ajax/dao";
-import AddSubjectEquipmentDialog from "./AddSubjectEquipmentDialog";
+import AddSubEquipForm from "./AddSubEquipForm";
 import { useFormik } from "formik";
 import ConfirmationDialog from "../common/ConfirmationDialog";
 import { validate } from "../../validation/ValidateAddSubjectEquipment";
+import AlertBox from "../common/AlertBox";
 
-export default function AddSubjectEquipment(props) {
-  const { data, refreshSubjects } = props;
-  const [equipmentList, setEquipmentList] = useState([]);
+export default function AddSubEquipContainer(props) {
+  const { singleSubject, equipmentsBySubId } = props;
+  const [equipmentSelectList, setEquipmentSelectList] = useState([]);
   const [initialSubEquip, setInitialSubEquip] = useState({
-    subjectId: data?.id,
+    subjectId: singleSubject?.id,
     equipmentId: 0,
     priority: 0,
-    obligatory: 0,
+    obligatory: 1,
   });
+
   const [alertOpen, setAlertOpen] = useState(false);
   const [alertOptions, setAlertOptions] = useState({
     title: "This is title",
@@ -26,9 +28,21 @@ export default function AddSubjectEquipment(props) {
     content: "Something here",
   });
 
-  const equipment = async function () {
-    const data = await dao.getEquipmentNames();
-    if (data === 500) {
+  let subId = singleSubject?.id;
+
+  const getSubEquipBySubId = async function (subId) {
+    let result = await equipmentsBySubId(subId);
+    getEquipmentsForSelect(result);
+  };
+
+  useEffect(() => {
+    getSubEquipBySubId(subId);
+  }, []);
+
+  const getEquipmentsForSelect = async function (subEquipList) {
+    const result = await dao.fetchEquipmentData();
+
+    if (result === 500) {
       setAlertOptions({
         severity: "error",
         title: "Virhe",
@@ -37,20 +51,28 @@ export default function AddSubjectEquipment(props) {
       setAlertOpen(true);
       return;
     } else {
-      setEquipmentList(data);
+      // Tässä suodetetaan pois jo olemassa olevat varustukset opetuksessa
+      const filteredList = result.filter((item) => {
+        return !subEquipList.some((element) => {
+          return element.equipmentId === item.id;
+        });
+      });
+      setEquipmentSelectList(filteredList);
     }
   };
-  useEffect(() => {
-    equipment();
-  }, []);
 
   const formik = useFormik({
     initialValues: initialSubEquip,
     validate,
     onSubmit: (values) => {
       setDialogOptions({
-        title: "Haluatko varmasti lisätä varusteen?",
-        content: "Painamalla jatka, varuste lisätään opetukseen",
+        // Tässä etsitään varusteen nimi, jonka id vastaa values.id
+        title:
+          `Haluatko varmasti lisätä ${equipmentSelectList.filter((i) => i.id === values.equipmentId)[0]
+            .name} ?`,
+        content:
+          `Painamalla jatka ${equipmentSelectList.filter((i) => i.id === values.equipmentId)[0]
+            .name} lisätään opetukseen`,
       });
       setDialogOpen(true);
       return;
@@ -100,26 +122,28 @@ export default function AddSubjectEquipment(props) {
       message: "Varuste lisätty.",
     });
     setAlertOpen(true);
-
-    refreshSubjects();
+    formik.resetForm();
+    getSubEquipBySubId(subId);
   };
 
   return (
     <div>
+      <AlertBox
+        alertOpen={alertOpen}
+        alertOptions={alertOptions}
+        setAlertOpen={setAlertOpen}
+      />
       <ConfirmationDialog
         dialogOpen={dialogOpen}
         dialogOptions={dialogOptions}
         setDialogOpen={setDialogOpen}
-        confirmfunction={addSubjectEquipment}
-        functionparam={formik.values}
+        submit={addSubjectEquipment}
+        submitValues={formik.values}
       />
-      <AddSubjectEquipmentDialog
-        equipmentList={equipmentList}
-        data={data}
-        addSubjectEquipment={addSubjectEquipment}
+      <AddSubEquipForm
+        equipmentSelectList={equipmentSelectList}
+        singleSubject={singleSubject}
         formik={formik}
-        values={formik.values}
-        setInitialSubEquip={setInitialSubEquip}
       />
     </div>
   );

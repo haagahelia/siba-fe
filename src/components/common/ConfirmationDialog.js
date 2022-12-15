@@ -11,17 +11,8 @@ import {
 import { globalTheme } from "../styles/theme";
 
 export default function ConfirmationDialog(props) {
-  const {
-    dialogOpen,
-    dialogOptions,
-    setDialogOpen,
-    confirmfunction,
-    functionparam,
-  } = props;
-
-  const handleClickOpen = () => {
-    setDialogOpen(true);
-  };
+  const { dialogOpen, dialogOptions, setDialogOpen, submit, submitValues } =
+    props;
 
   const handleClose = () => {
     setDialogOpen(false);
@@ -34,7 +25,6 @@ export default function ConfirmationDialog(props) {
           <DialogContentText>{dialogOptions.content}</DialogContentText>
         </DialogContent>
         <DialogActions>
-          {" "}
           <ThemeProvider theme={globalTheme}>
             <Button
               variant="contained"
@@ -44,17 +34,15 @@ export default function ConfirmationDialog(props) {
             >
               Peruuta
             </Button>
-          </ThemeProvider>
-          <ThemeProvider theme={globalTheme}>
             <Button
               autoFocus
               style={{ color: "white" }}
               variant="contained"
               onClick={() => {
-                if (functionparam) {
-                  confirmfunction(functionparam);
+                if (submitValues) {
+                  submit(submitValues);
                 } else {
-                  confirmfunction();
+                  submit();
                 }
                 handleClose();
               }}

@@ -1,28 +1,26 @@
 import React, { useState, useEffect } from "react";
-import SubjectList from "../components/subject/SubjectList";
+import SubjectListContainer from "../components/subject/SubjectListContainer";
 import CardContent from "@mui/material/CardContent";
 import { CardHeader, Card, Container } from "@mui/material";
 import Grid from "@mui/material/Grid";
-import AddSubject from "../components/subject/AddSubject";
+import AddSubjectContainer from "../components/subject/AddSubjectContainer";
 import dao from "../ajax/dao";
 import AlertBox from "../components/common/AlertBox";
 import SubjectFiltering from "../components/subject/SubjectFiltering";
 import SubjectPagination from "../components/subject/SubjectPagination";
 
 export default function SubjectView() {
-  const [subjectList, setSubjectList] = useState([]);
   const [paginateSubjects, setPaginateSubjects] = useState([]);
+  const [allSubjectsList, setAllSubjectsList] = useState([]);
   const [alertOpen, setAlertOpen] = useState(false);
   const [alertOptions, setAlertOptions] = useState({
     message: "This is an error alert — check it out!",
     severity: "error",
   });
-  const [searched, setSearched] = useState("");
-  const [filteredSubject, setFilteredSubject] = useState([]);
 
-  const refreshSubjects = async function () {
-    const data = await dao.fetchSubjects();
-    if (data === 500) {
+  const getAllSubjects = async function () {
+    const result = await dao.fetchAllSubjects();
+    if (result === 500) {
       setAlertOptions({
         severity: "error",
         title: "Virhe",
@@ -31,17 +29,18 @@ export default function SubjectView() {
       setAlertOpen(true);
       return;
     } else {
-      setSubjectList(data);
-      setFilteredSubject(data);
+      setAllSubjectsList(result);
+      setPaginateSubjects(allSubjectsList.slice(0, 15));
     }
   };
 
   useEffect(() => {
-    refreshSubjects();
+    getAllSubjects();
   }, []);
   useEffect(() => {
-    setPaginateSubjects(subjectList.slice(0, 15));
-  }, [subjectList]);
+    setPaginateSubjects(allSubjectsList.slice(0, 15));
+    console.log(paginateSubjects);
+  }, [allSubjectsList]);
 
   return (
     <div>
@@ -51,10 +50,9 @@ export default function SubjectView() {
         setAlertOpen={setAlertOpen}
       />
       <Container maxWidth="100%">
-        <AddSubject
-          refreshSubjects={refreshSubjects}
-          subjectList={subjectList}
-          setSubjectList={setSubjectList}
+        <AddSubjectContainer
+          getAllSubjects={getAllSubjects}
+          allSubjectsList={allSubjectsList}
         />
         <Grid
           container
@@ -66,21 +64,13 @@ export default function SubjectView() {
           <Card variant="outlined">
             <CardContent>
               <CardHeader title="Opetukset" />
-              <SubjectFiltering
-                setFilteredSubject={setFilteredSubject}
-                filteredSubject={filteredSubject}
-                searched={searched}
-                setSearched={setSearched}
-              />
-              <SubjectList
-                refreshSubjects={refreshSubjects}
-                subjectList={subjectList}
-                setSubjectList={setSubjectList}
+              <SubjectListContainer
+                getAllSubjects={getAllSubjects}
+                allSubjectsList={allSubjectsList}
                 paginateSubjects={paginateSubjects}
               />
               <SubjectPagination
-                subjectList={subjectList}
-                setSubjectListState={setSubjectList}
+                allSubjectsList={allSubjectsList}
                 paginateSubjects={paginateSubjects}
                 setPaginateSubjects={setPaginateSubjects}
               />

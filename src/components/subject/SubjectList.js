@@ -1,4 +1,4 @@
-import React, { useEffect, useState, Component } from "react";
+import React, { useEffect, useState } from "react";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
@@ -7,18 +7,16 @@ import Grid from "@mui/material/Grid";
 import { styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
 import { TextField, Typography } from "@mui/material";
-import PopUpDialog from "./PopDialog";
 import SubjectPagination from "./SubjectPagination";
 import SubjectFiltering from "./SubjectFiltering";
+import SingleSubjectDialog from "./SingleSubjectDialog";
 
 export default function SubjectListItems(props) {
-  const { subjectList, refreshSubjects, paginateSubjects } = props;
-  const [subjectListState, setSubjectListState] = useState(subjectList);
-  const [initialRender, setInitialRender] = useState(true);
+  const { allSubjectsList, getAllSubjects, paginateSubjects } = props;
 
   const [open, setOpen] = useState(false);
   const [hoverColor, sethoverColor] = useState("#CFD6D5  ");
-  const [singelSubject, setSingleSubject] = useState({
+  const [singleSubject, setSingleSubject] = useState({
     id: null,
     name: null,
     groupSize: null,
@@ -31,19 +29,18 @@ export default function SubjectListItems(props) {
     spaceTypeName: null,
   });
 
-  // STYLES
+  // STYLE
   const Box = styled(Paper)(({ theme }) => ({
     overflow: "auto",
   }));
   return (
     <div>
-      <PopUpDialog
+      <SingleSubjectDialog
         open={open}
         setOpen={setOpen}
-        data={singelSubject}
+        singleSubject={singleSubject}
         setSingleSubject={setSingleSubject}
-        refreshSubjects={refreshSubjects}
-        subjectList={subjectList}
+        getAllSubjects={getAllSubjects}
       />
       <Box>
         <nav>

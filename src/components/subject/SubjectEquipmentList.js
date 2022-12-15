@@ -1,79 +1,47 @@
-import {
-  Button,
-  Grid,
-  List,
-  ListItem,
-  ListItemText,
-  Typography,
-} from "@mui/material";
-import React, { useState } from "react";
-import { useEffect } from "react";
-import dao from "../../ajax/dao";
-import DeleteSubjectEquipment from "./DeleteSubjectEquipment";
+import { Grid, List, ListItem, ListItemText, Typography } from "@mui/material";
+import React from "react";
+import DeleteSubEquip from "./DeleteSubEquip";
+import EditSubEquipContainer from "./EditSubEquipContainer";
 
 export default function SubjectEquipmentList(props) {
-  const { data, refreshSubjects } = props;
-  const [equipmentNamesList, setEquipmentNamesList] = useState([]);
-  const [alertOpen, setAlertOpen] = useState(false);
-  const [alertOptions, setAlertOptions] = useState({
-    title: "This is title",
-    message: "This is an error alert — check it out!",
-    severity: "error",
-  });
+  const { equipListBySubId, getEquipmentsBySubId } = props;
 
-  const equipmentNames = async function (subjectId) {
-    const data = await dao.getEquipmentBySubjectId(subjectId);
-    if (data === 500) {
-      setAlertOptions({
-        severity: "error",
-        title: "Virhe",
-        message: "Jokin meni pieleen palvelimella. Varusteita ei löytynyt",
-      });
-      setAlertOpen(true);
-      return;
-    } else {
-      setEquipmentNamesList(data);
-    }
-  };
-  useEffect(() => {
-    equipmentNames(data?.id);
-  }, []);
   return (
     <div>
-      {equipmentNamesList.map((value) => {
+      {equipListBySubId.map((value) => {
         return (
-          <List key={data?.id}>
+          <List key={value.equipmentId}>
             <ListItem>
               <Grid
+                item
+                xs={3}
+                sx={{
+                  alignItems: "center",
+                  marginRight: "10px",
+                }}
+              >
+                <EditSubEquipContainer
+                  subId={value.subjectId}
+                  equipId={value.equipmentId}
+                  prio={value.priority}
+                  obli={value.obligatory}
+                  name={value.name}
+                  getEquipmentsBySubId={getEquipmentsBySubId}
+                />
+                <DeleteSubEquip
+                  singleEquipBySubId={value}
+                  getEquipmentsBySubId={getEquipmentsBySubId}
+                  subId={value.subjectId}
+                />
+              </Grid>
+              <Grid
                 container
-                column={14}
+                column={4}
                 direction="column"
                 justifyContent="flex-start"
                 alignItems="flex-start"
+                padding={0.2}
               >
-                <Grid
-                  item
-                  xs={6}
-                  sx={{
-                    justifyContent: "space-evenly",
-                    alignItems: "center",
-                  }}
-                >
-                  {/* <Button
-                    variant="contained"
-                    color="warning"
-                    sx={{ margin: "5px" }}
-                  >
-                    Muokkaa
-                  </Button> */}
-
-                  <DeleteSubjectEquipment
-                    values={value}
-                    equipmentNamesList={equipmentNamesList}
-                    refreshSubjects={refreshSubjects}
-                  />
-                </Grid>
-
                 <Grid item xs={6}>
                   <ListItemText>
                     <Typography variant="subtitle1">
@@ -85,6 +53,25 @@ export default function SubjectEquipmentList(props) {
                   <ListItemText>
                     <Typography variant="subtitle1">
                       Varusteen tiedot:&nbsp; {value.description}
+                    </Typography>
+                  </ListItemText>
+                </Grid>
+                <Grid item xs={6}>
+                  <ListItemText>
+                    <Typography variant="subtitle1">
+                      Varusteen prioriteetti arvo:&nbsp; {value.priority}
+                    </Typography>
+                  </ListItemText>
+                </Grid>
+                <Grid item xs={6}>
+                  <ListItemText>
+                    <Typography variant="subtitle1">
+                      Varuste pakollisuus :&nbsp;{" "}
+                      {value.obligatory === 1
+                        ? "Kyllä"
+                        : value.obligatory === 0
+                        ? "Ei"
+                        : null}
                     </Typography>
                   </ListItemText>
                 </Grid>

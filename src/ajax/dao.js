@@ -7,10 +7,12 @@ const baseUrl = process.env.REACT_APP_BE_SERVER_BASE_URL;
 // Http Method kertoo sen jo, esim /subject/  GET ilman id:tä => get all subjects
 // DELETE, POST jne.
 
-// TODO: Mikähän tänne olis hyvä nimeämiskäytäntö? Siis fetchSubjects,
-// getSubjects, getAllSubjects?
+// TODO: Mikähän tänne olis hyvä nimeämiskäytäntö? FETCH
 
-const fetchSubjects = async () => {
+/* ---- SUBJECT ---- */
+
+// Subjectview.js
+const fetchAllSubjects = async () => {
   const request = new Request("http://localhost:3001/api/subject/getAll", {
     method: "GET",
   });
@@ -24,6 +26,7 @@ const fetchSubjects = async () => {
   return data;
 };
 
+// ValidateAddSubject / ValidateEditSubject, jossa katsotaan onko opetuksen nimi jo olemassa
 const fetchSubjectsNames = async () => {
   const request = new Request("http://localhost:3001/api/subject/getNames", {
     method: "GET",
@@ -38,6 +41,7 @@ const fetchSubjectsNames = async () => {
   return data;
 };
 
+// DeleteSubject.js
 const deleteSingleSubject = async (subjectId) => {
   try {
     const request = new Request(
@@ -59,6 +63,7 @@ const deleteSingleSubject = async (subjectId) => {
   }
 };
 
+// AddSubject.js
 const postNewSubject = async (newSubject) => {
   try {
     const request = new Request("http://localhost:3001/api/subject/post", {
@@ -84,6 +89,7 @@ const postNewSubject = async (newSubject) => {
   }
 };
 
+// EditSubject.js
 const editSubject = async (editedSubject) => {
   try {
     const request = new Request("http://localhost:3001/api/subject/update", {
@@ -109,10 +115,16 @@ const editSubject = async (editedSubject) => {
   }
 };
 
-const getProgramNames = async () => {
-  const request = new Request("http://localhost:3001/api/program/getNames", {
-    method: "GET",
-  });
+/* ---- PROGRAM ---- */
+
+// EditSubject.js / AddSubject.js
+const fetchProgramsForSelect = async () => {
+  const request = new Request(
+    "http://localhost:3001/api/program/getSelectData",
+    {
+      method: "GET",
+    },
+  );
 
   const response = await fetch(request);
   if (response.status === 500) {
@@ -122,10 +134,16 @@ const getProgramNames = async () => {
   return data;
 };
 
-const getSpaceTypeNames = async () => {
-  const request = new Request("http://localhost:3001/api/spaceType/getNames", {
-    method: "GET",
-  });
+/* ---- SPACETYPE ---- */
+
+// EditSubject.js / AddSubject.js
+const fetchSpacetypeForSelect = async () => {
+  const request = new Request(
+    "http://localhost:3001/api/spaceType/getSelectData",
+    {
+      method: "GET",
+    },
+  );
 
   const response = await fetch(request);
   if (response.status === 500) {
@@ -135,19 +153,30 @@ const getSpaceTypeNames = async () => {
   return data;
 };
 
-const getEquipmentNames = async () => {
-  const request = new Request("http://localhost:3001/api/equipment/getNames", {
-    method: "GET",
-  });
+/* ---- EQUIPMENT ---- */
+/* 
+EditSubjectEquipment.js jossa haetaan varusteen oletus prioriteetti arvoa
+AddSubjectEquipment.js jossa haetaan varusteet selectiin */
+const fetchEquipmentData = async () => {
+  const request = new Request(
+    "http://localhost:3001/api/equipment/getEquipData",
+    {
+      method: "GET",
+    },
+  );
 
   const response = await fetch(request);
   if (response.status === 500) {
     return 500;
   }
   const data = await response.json();
+
   return data;
 };
 
+/* ---- SUBJECTEQUIPMENT ---- */
+
+// AddSubjectEquipment.js
 const postNewSubjectEquipment = async (newSubjectEquipment) => {
   try {
     const request = new Request(
@@ -170,14 +199,14 @@ const postNewSubjectEquipment = async (newSubjectEquipment) => {
       return 500;
     }
     const data = await response.json();
-    console.log("data", data);
     return data;
   } catch (error) {
     return "error";
   }
 };
 
-const getEquipmentBySubjectId = async (id) => {
+// PopDialog.js
+const fetchEquipmentBySubjectId = async (id) => {
   const request = new Request(
     `http://localhost:3001/api/subjectequipment/getEquipment/${id}`,
     {
@@ -193,6 +222,7 @@ const getEquipmentBySubjectId = async (id) => {
   return data;
 };
 
+// DeleteSubjectEquipment.js
 const deleteSingleSubjectEquipment = async (subjectId, equipmentId) => {
   try {
     const request = new Request(
@@ -213,6 +243,96 @@ const deleteSingleSubjectEquipment = async (subjectId, equipmentId) => {
     return "error";
   }
 };
+// EditSubjectEquipment.js
+const editSubjectEquipment = async (editedSubjectEquipment) => {
+  try {
+    const request = new Request(
+      "http://localhost:3001/api/subjectequipment/update",
+      {
+        method: "PUT",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(editedSubjectEquipment),
+      },
+    );
+    const response = await fetch(request);
+    if (response.status === 400) {
+      return 400;
+    }
+
+    if (response.status === 500) {
+      return 500;
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    return "error";
+  }
+};
+
+const getUnAllocableSubjects = async (id) => {
+  try {
+    const request = new Request(
+      `http://localhost:3001/api/allocation/${id}/subject/unallocated`,
+      {
+        method: "GET",
+      },
+    );
+
+    const response = await fetch(request);
+    if (response.status === 500) {
+      return 500;
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    return "error";
+  }
+};
+
+const getSubjectRooms = async (id) => {
+  try {
+    const request = new Request(
+      `http://localhost:3001/api/allocation/subject/${id}/rooms`,
+      {
+        method: "GET",
+      },
+    );
+
+    const response = await fetch(request);
+    if (response.status === 500) {
+      return 500;
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    return "error";
+  }
+};
+
+const getMissingEquipmentForRoom = async (subjectId, roomId) => {
+  try {
+    const request = new Request(
+      `http://localhost:3001/api/allocation/missing-eqpt/subject/${subjectId}/room/${roomId}`,
+      {
+        method: "GET",
+      },
+    );
+
+    const response = await fetch(request);
+    if (response.status === 500) {
+      return 500;
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    return "error";
+  }
+};
+
+/* ---- EXAMPLE ---- */
 /*
 const fetchCategories = async () => {
     const request = new Request(`${baseUrl}/category/`,{
@@ -223,44 +343,24 @@ const fetchCategories = async () => {
     const data = await response.json();
     return data;
 };
-const fetchOneCategoryById = async (categoryId) => {
-    const request = new Request(`${baseUrl}/category/${categoryId}`,{
-        method: 'GET',  
-    });
-
-    const response = await fetch(request);
-    const data = await response.json();
-
-    const category = data && data.length>0 ? data[0] : null;
-    return category;
-};
-const deleteOneCategoryById = async (categoryId) => {
-    const request = new Request(`${baseUrl}/category/${categoryId}`,{
-        method: 'DELETE',  
-    });
-
-    const response = await fetch(request);
-    const data = await response.json();
-
-    const category = data && data.returnValue===1 ? true : false;
-    return category;
-};
 */
 
 const dao = {
-  fetchSubjects,
+  fetchAllSubjects,
   fetchSubjectsNames,
   deleteSingleSubject,
   postNewSubject,
-  getProgramNames,
+  fetchProgramsForSelect,
   editSubject,
-  getSpaceTypeNames,
-  getEquipmentNames,
+  fetchSpacetypeForSelect,
+  fetchEquipmentData,
   postNewSubjectEquipment,
-  getEquipmentBySubjectId,
+  fetchEquipmentBySubjectId,
   deleteSingleSubjectEquipment,
+  editSubjectEquipment,
+  getUnAllocableSubjects,
+  getSubjectRooms,
+  getMissingEquipmentForRoom,
   // fetchCategories,
-  // fetchOneCategoryById,
-  // deleteOneCategoryById,
 };
 export default dao;
