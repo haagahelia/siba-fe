@@ -4,15 +4,13 @@ import { useEffect, useState } from "react";
 const pageSize = 15;
 
 export default function SubjectPagination({
+  pagination,
+  setPagination,
   allSubjectsList,
   paginateSubjects,
   setPaginateSubjects,
 }) {
   const count = Math.ceil(allSubjectsList.length / pageSize);
-  const [pagination, setPagination] = useState({
-    from: 0,
-    to: pageSize,
-  });
   const [initialRender, setInitialRender] = useState(true);
 
   useEffect(() => {

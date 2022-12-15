@@ -1,21 +1,33 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { TextField } from "@mui/material";
+
 export default function SubjectFiltering({
-  setFilteredSubject,
-  filteredSubject,
-  searched,
-  setSearched,
+  allSubjectsList,
+  setallSubjectsList,
+  paginateSubjects,
+  setPaginateSubjects,
+  pagination,
 }) {
+  const [searched, setSearched] = useState("");
+
   const requestSearch = (e) => {
     setSearched(e.target.value);
-    const filteredSubjects = filteredSubject.filter(subject);
+    const filteredSubjects = allSubjectsList.filter(subject);
     function subject(subject) {
       return subject.subjectName
         .toLowerCase()
         .includes(e.target.value.toLowerCase());
     }
-    setFilteredSubject(filteredSubjects);
+    setPaginateSubjects(filteredSubjects);
   };
+
+  useEffect(() => {
+    if (searched === "") {
+      setPaginateSubjects(
+        allSubjectsList.slice(pagination.from, pagination.to),
+      );
+    }
+  }, [searched]);
 
   return (
     <TextField
