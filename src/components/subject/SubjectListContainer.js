@@ -24,7 +24,6 @@ export default function SubjectListContainer(props) {
       >
         <Card variant="outlined">
           <CardContent>
-            <CardHeader title="Opetukset" />
             <SubjectList
               getAllSubjects={getAllSubjects}
               allSubjectsList={allSubjectsList}
