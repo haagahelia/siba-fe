@@ -146,6 +146,17 @@ const theme = createTheme({
         },
       },
     },
+    MuiPagination: {
+      styleOverrides: {
+        root: {
+          marginTop: "1rem",
+          button: {
+            color: light,
+            borderColor: orange,
+          },
+        },
+      },
+    },
   },
 });
 
