@@ -58,7 +58,10 @@ Fronttipuolen asennusohjeet
 
 ## Käyttö
 ### Opetukset näkymä
-* Millainen kuvaus tähän hyvä? Onko tarpeellinen?
+1. Opetusnäkymässä on mahdollisuus lisätä uusia opetuksia "Lisää opetus" osiossa. Käyttäjällä myös mahdollisuus kopioida jo olemassa olevan opetuksen tiedot dropdown valikosta
+2. "Opetukset" otsikon alla on listattuna kaikki syötetyt opetukset. Opetuksia pystytään hakea "Opetusten haku:" tekstikentän avulla
+3. Listattuja opetuksia pystytään valitsemaan ja tällöin opetuksen Popup Dialog tulee esiin. Tässä dialogissa pystytään poistamaan, muokkaamaan tai lisäämään opetukselle varusteita
+4. Listalla näytetään aina 15 opetusta kerralla. Listan alaosassa on käytättey paginationia, jossa voidaan selata lisää opetuksia
 ### Tulosnäkymä
 
 1. Tulosnäkymässä käyttäjä käynnistää allokoinnin "Start Allocation" napilla.
