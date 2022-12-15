@@ -3,14 +3,15 @@ import Grid from "@mui/material/Grid";
 import SingleSubjectDialog from "./SingleSubjectDialog";
 import SubjectList from "./SubjectList";
 import CardContent from "@mui/material/CardContent";
-import { CardHeader, Card } from "@mui/material";
+import { CardHeader, Card, Container } from "@mui/material";
+import SubjectPagination from "./SubjectPagination";
 
 //const baseUrl = process.env.REACT_APP_BE_SERVER_BASE_URL;
 //import {BASEURL} from "../config/consts.js";
 //const baseUrl = BASEURL;
 
 export default function SubjectListContainer(props) {
-  const { allSubjectsList, getAllSubjects } = props;
+  const { getAllSubjects, allSubjectsList, paginateSubjects } = props;
   return (
     <div>
       <SingleSubjectDialog getAllSubjects={getAllSubjects} />
@@ -23,10 +24,10 @@ export default function SubjectListContainer(props) {
       >
         <Card variant="outlined">
           <CardContent>
-            <CardHeader title="Opetukset" />
             <SubjectList
               getAllSubjects={getAllSubjects}
               allSubjectsList={allSubjectsList}
+              paginateSubjects={paginateSubjects}
             />
           </CardContent>
         </Card>

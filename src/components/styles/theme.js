@@ -180,6 +180,19 @@ const theme = createTheme({
         },
       },
     },
+    MuiPagination: {
+      styleOverrides: {
+        root: {
+          marginTop: "1rem",
+          display: "flex",
+          justifyContent: "center",
+          button: {
+            color: light,
+            borderColor: orange,
+          },
+        },
+      },
+    },
   },
 });
 
