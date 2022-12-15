@@ -24,7 +24,6 @@ export default function SubjectPagination({
         pagination.to,
       );
       setPaginateSubjects(slicedSubjects);
-      console.log(paginateSubjects);
     }
   }, [pagination]);
 

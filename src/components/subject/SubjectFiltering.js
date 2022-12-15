@@ -15,8 +15,6 @@ export default function SubjectFiltering({
         .includes(e.target.value.toLowerCase());
     }
     setFilteredSubject(filteredSubjects);
-
-    console.log(filteredSubject, searched);
   };
 
   return (
