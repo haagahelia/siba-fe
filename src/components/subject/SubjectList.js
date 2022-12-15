@@ -7,17 +7,13 @@ import Grid from "@mui/material/Grid";
 import { styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
 import { TextField, Typography } from "@mui/material";
+import SubjectPagination from "./SubjectPagination";
+import SubjectFiltering from "./SubjectFiltering";
 import SingleSubjectDialog from "./SingleSubjectDialog";
 
-export default function SubjectList(props) {
-  const { allSubjectsList, getAllSubjects } = props;
-  const [subjectListState, setSubjectListState] = useState(allSubjectsList);
+export default function SubjectListItems(props) {
+  const { allSubjectsList, getAllSubjects, paginateSubjects} = props;
 
-  useEffect(() => {
-    if (!searched) {
-      setSubjectListState(allSubjectsList);
-    }
-  });
 
   const [open, setOpen] = useState(false);
   const [hoverColor, sethoverColor] = useState("#CFD6D5  ");
@@ -34,19 +30,6 @@ export default function SubjectList(props) {
     spaceTypeName: null,
   });
 
-  const [searched, setSearched] = useState("");
-
-  const requestSearch = (e) => {
-    e.preventDefault();
-    setSearched(e.target.value);
-    const filteredSubjects = props.allSubjectsList.filter(subject);
-    function subject(subject) {
-      return subject.subjectName
-        .toLowerCase()
-        .includes(e.target.value.toLowerCase());
-    }
-    setSubjectListState(filteredSubjects);
-  };
 
   // STYLE
   const Box = styled(Paper)(({ theme }) => ({
@@ -62,19 +45,8 @@ export default function SubjectList(props) {
         getAllSubjects={getAllSubjects}
       />
       <Box>
-        <TextField
-          name="searched"
-          placeholder="Opetusten haku:"
-          type="text"
-          variant="outlined"
-          fullWidth
-          size="medium"
-          value={searched}
-          onChange={(e) => requestSearch(e)}
-          autoFocus
-        />
         <nav>
-          {subjectListState.map((value) => {
+          {paginateSubjects.map((value) => {
             return (
               <List key={value.id}>
                 <ListItem
@@ -85,8 +57,8 @@ export default function SubjectList(props) {
 
                     setOpen(true);
                   }}
-                  onMouseEnter={() => sethoverColor("#CFD6D5  ")}
-                  onMouseLeave={() => sethoverColor("#FFFFFF ")}
+                  //onMouseEnter={() => sethoverColor("#CFD6D5  ")}
+                  //onMouseLeave={() => sethoverColor("#FFFFFF ")}
                 >
                   <Grid item md={3} xs={7} padding={2}>
                     <Typography

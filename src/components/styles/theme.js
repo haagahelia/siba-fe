@@ -171,9 +171,7 @@ const theme = createTheme({
         border:'3px solid',
         borderColor: "black", 
         marginLeft: 60
-       }
-
-        
+       } 
       },
       MuiButton: {
         styleOverrides:{
@@ -181,6 +179,19 @@ const theme = createTheme({
             backgroundColor: "pink",
             color: light
           }
+        }
+      },
+      MuiPagination: {
+        styleOverrides: {
+          root: {
+            marginTop: "1rem",
+            display: "flex",
+            justifyContent: "center",
+            button: {
+              color: light,
+              borderColor: orange
+            },
+          } 
         }
       }
     },

@@ -6,14 +6,23 @@ import Grid from "@mui/material/Grid";
 import AddSubjectContainer from "../components/subject/AddSubjectContainer";
 import dao from "../ajax/dao";
 import AlertBox from "../components/common/AlertBox";
+import SubjectFiltering from "../components/subject/SubjectFiltering";
+import SubjectPagination from "../components/subject/SubjectPagination";
+
+const pageSize = 15;
 
 export default function SubjectView() {
+  const [paginateSubjects, setPaginateSubjects] = useState([]);
   const [allSubjectsList, setAllSubjectsList] = useState([]);
   const [alertOpen, setAlertOpen] = useState(false);
   const [alertOptions, setAlertOptions] = useState({
     message: "This is an error alert — check it out!",
     severity: "error",
   });
+  const [pagination, setPagination] = useState({
+    from: 0,
+    to: pageSize
+})
 
   const getAllSubjects = async function () {
     const result = await dao.fetchAllSubjects();
@@ -27,12 +36,16 @@ export default function SubjectView() {
       return;
     } else {
       setAllSubjectsList(result);
+      setPaginateSubjects(allSubjectsList.slice(0,15));
     }
   };
 
   useEffect(() => {
     getAllSubjects();
   }, []);
+  useEffect(() => {
+    setPaginateSubjects(allSubjectsList.slice(0,15));
+  }, [allSubjectsList]);
 
   return (
     <div>
@@ -56,10 +69,25 @@ export default function SubjectView() {
           <Card variant="outlined">
             <CardContent>
               <CardHeader title="Opetukset" />
+              <SubjectFiltering 
+                allSubjectsList={allSubjectsList}
+                setAllSubjectsList={setAllSubjectsList}
+                paginateSubjects={paginateSubjects}
+                setPaginateSubjects={setPaginateSubjects}
+                pagination = {pagination}
+              />
               <SubjectListContainer
                 getAllSubjects={getAllSubjects}
                 allSubjectsList={allSubjectsList}
+                paginateSubjects={paginateSubjects}
               />
+            <SubjectPagination
+              pagination = {pagination}
+              setPagination = {setPagination}
+              allSubjectsList = {allSubjectsList} 
+              paginateSubjects={paginateSubjects}
+              setPaginateSubjects={setPaginateSubjects}
+            />
             </CardContent>
           </Card>
         </Grid>
