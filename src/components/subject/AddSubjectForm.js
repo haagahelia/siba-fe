@@ -97,7 +97,7 @@ export default function AddSubjectForm(props) {
                   : false
               }
               name="sessionLength"
-              label="Opetuskerran pituus(hh:mm:ss)"
+              label="Opetuskerran pituus(hh:mm)"
               variant="outlined"
               value={formik.values.sessionLength}
               onChange={formik.handleChange("sessionLength")}
