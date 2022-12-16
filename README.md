@@ -1,83 +1,117 @@
-This is the FRONTEND repo.
+<div id="top"></div>
 
-Backend repo at: https://github.com/haagahelia/Siba_be
+<!-- PROJECT LOGO -->
+<br />
+<div align="center">
+  
+<h1 align="center">SIBA22S</h1>
 
-## Note: The frontend needs a .env.local file in the repo root folder
+<h3 align="center">
+    Projekti luotu Softalaprojekti kurssilla <br />
+<br />
+</div>
 
-Here is a sample content for that file. Make sure just non-empty lines ended with Enter:  (second line here just helping the first line to be correct :D )
+## Tekijät
 
-```
-REACT_APP_BE_SERVER_BASE_URL=http://localhost:3001/api
-REACT_APP_BE_SERVER_BASE_URL2=http://jokutoinenpalvelin:3001/api
-```
+  <p>SIBA22S</p>
 
-# Getting Started with Create React App
+<!-- ABOUT THE PROJECT -->
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Projektista
 
-## Available Scripts
+Projekti on Haaga-Helian ja Sibelius akatemian yhteistyön pohjalta toteutettava sovellus, jonka tarkoituksena on mahdollistaa Sibelius akatemian opetustilojen ja varusteiden käytön laskenta, sekä optimointi eri opetuksille.
 
-In the project directory, you can run:
+<p align="right">(<a href="#top">back to top</a>)</p>
 
-### `npm start`
+### Teknologiat ja muut hyödylliset resurssit
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- [React](https://reactjs.org/)
+- [Axios](https://www.npmjs.com/package/axios)
+- [Formik](https://formik.org/)
+- [MUI](https://mui.com/)
+- [Colorhunt](https://colorhunt.co/)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+<p align="right">(<a href="#top">back to top</a>)</p>
 
-### `npm test`
+<!-- GETTING STARTED -->
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Aloitus
 
-### `npm run build`
+Fronttipuolen asennusohjeet
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Asennus
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+1. Kloonaa repo
+   ```sh
+   git clone https://github.com/haagahelia/siba-fe.git
+   ```
+2. Asenna tarvittavat paketit
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+   ```sh
+   npm install
+   ```
 
-### `npm run eject`
+3. Env. tiedoston lisäys. Lisää .env tiedosto repon juurihakemistoon
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+   ```sh
+   REACT_APP_BE_SERVER_BASE_URL=http://localhost:3001/api
+   REACT_APP_BE_SERVER_BASE_URL2=http://jokutoinenpalvelin:3001/api
+   ```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+4. Sovelluksen käynnistys
+   ```sh
+   npm start
+   ```
+5. Huom! Seuraa [Backend repon](https://github.com/haagahelia/Siba_be) asennusohjetta myös
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+<p align="right">(<a href="#top">back to top</a>)</p>
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## Käyttö
 
-## Learn More
+### Opetukset näkymä
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+1. Opetusnäkymässä on mahdollisuus lisätä uusia opetuksia "Lisää opetus" osiossa. Käyttäjällä myös mahdollisuus kopioida jo olemassa olevan opetuksen tiedot dropdown valikosta
+2. "Opetukset" otsikon alla on listattuna kaikki syötetyt opetukset. Opetuksia pystytään hakea "Opetusten haku:" tekstikentän avulla
+3. Listattuja opetuksia pystytään valitsemaan ja tällöin opetuksen Popup Dialog tulee esiin. Tässä dialogissa pystytään poistamaan, muokkaamaan tai lisäämään opetukselle varusteita
+4. Listalla näytetään aina 15 opetusta kerralla. Listan alaosassa on käytättey paginationia, jossa voidaan selata lisää opetuksia
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Tulosnäkymä
 
-### Code Splitting
+1. Tulosnäkymässä käyttäjä käynnistää allokoinnin "Start Allocation" napilla.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+2. Käyttäjä ei pysty aloittaa toista allokointia ennenkun on painanut "Reset Allocation" nappia.
 
-### Analyzing the Bundle Size
+3. Tällähetkellä käyttäjän pitää päivittää sivu, jotta näkee muutokset allokointiin.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+4. Aineryhmä kohdassa käyttäjä pystyy avata dropdown valikon, joka kertoo, mitä huoneita aineryhmä käyttää ja kuinka monta tuntia sillä huoneella on käytössä.
 
-### Making a Progressive Web App
+5. Aineryhmä kohdassa informaatio nappia painamalla aukeaa pop-up ikkuna, jossa käyttäjä näkee ainekohtaiset opetukset.
+   Pop-up ikkunassa käyttäjä pystyy avata opetuskohtaiset dropdownit, josta näkee missä huoneessa opetusta on.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+6. Huone kohdassa käyttäjä näkee kaikki käytössä olevat huoneet ja niitten käyttöasteet.
 
-### Advanced Configuration
+7. Huone kohdassa käyttäjä pystyy avata huonekohtaiset dropdown listat, josta näkee, mitä opetuksia huoneissa on ja kuinka monta tuntia ne käyttä
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+8. Huoneet ovat värikoodilla erotettuja, luokkatyypeittäin. Esim. Studio, Esitystilat, Luentoluokat ja musiikki luokat
 
-### Deployment
+<p align="right">(<a href="#top">back to top</a>)</p>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+## Vanhalta kurssilta jääneet ongelmat
 
-### `npm run build` fails to minify
+### Lisää tähän kurssin päätteeksi
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+dao.js tiedoston yhtenäistäminen
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+## Jatkokehitysideat
+
+### Lisää tähän kurssin päätteeksi
+
+Opetuksen lisäyksessä, jossa voi kopioida tietoja muista opetuksista, voisi olla selectin lisäksi samassa etsi -toiminto, jotta käyttäjä löytäisi nopeammin sekä helpommin haluamansa opetuksen.
+
+Opetuksen lisäsyksessä voisi valita onko opetus etäopetus, jotta laskennassa voisi ottaa huomioon opetukset, jotka eivät tarvitse tai tarvitsevat vähemmän opetustilaa.
+
+Opetuksen lisäyksessä olisi toiminto, jolla lomakkeen voisi nollata syötetyistä syötteistä
+
+<p align="right">(<a href="#top">back to top</a>)</p>
