@@ -1,4 +1,4 @@
-const fetchProgramsForSelect = async () => {
+export const fetchProgramsForSelect = async () => {
   const request = new Request(
     "http://localhost:3001/api/program/getSelectData",
     {
@@ -13,5 +13,3 @@ const fetchProgramsForSelect = async () => {
   const data = await response.json();
   return data;
 };
-
-export { fetchProgramsForSelect };

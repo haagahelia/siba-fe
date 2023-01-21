@@ -1,4 +1,4 @@
-const fetchAllSubjects = async () => {
+export const fetchAllSubjects = async () => {
   const request = new Request("http://localhost:3001/api/subject/getAll", {
     method: "GET",
   });
@@ -13,7 +13,7 @@ const fetchAllSubjects = async () => {
 };
 
 // ValidateAddSubject / ValidateEditSubject, jossa katsotaan onko opetuksen nimi jo olemassa
-const fetchSubjectsNames = async () => {
+export const fetchSubjectsNames = async () => {
   const request = new Request("http://localhost:3001/api/subject/getNames", {
     method: "GET",
   });
@@ -26,7 +26,8 @@ const fetchSubjectsNames = async () => {
   const data = await response.json();
   return data;
 };
-const deleteSingleSubject = async (subjectId) => {
+
+export const deleteSingleSubject = async (subjectId) => {
   try {
     const request = new Request(
       `http://localhost:3001/api/subject/delete/${subjectId}`,
@@ -48,7 +49,7 @@ const deleteSingleSubject = async (subjectId) => {
 };
 
 // AddSubject.js
-const postNewSubject = async (newSubject) => {
+export const postNewSubject = async (newSubject) => {
   try {
     const request = new Request("http://localhost:3001/api/subject/post", {
       method: "POST",
@@ -74,7 +75,7 @@ const postNewSubject = async (newSubject) => {
 };
 
 // EditSubject.js
-const editSubject = async (editedSubject) => {
+export const editSubject = async (editedSubject) => {
   try {
     const request = new Request("http://localhost:3001/api/subject/update", {
       method: "PUT",
@@ -97,12 +98,4 @@ const editSubject = async (editedSubject) => {
   } catch (error) {
     return "error";
   }
-};
-
-export {
-  fetchAllSubjects,
-  fetchSubjectsNames,
-  postNewSubject,
-  editSubject,
-  deleteSingleSubject,
 };

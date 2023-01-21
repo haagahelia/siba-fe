@@ -1,4 +1,4 @@
-const getUnAllocableSubjects = async (id) => {
+export const getUnAllocableSubjects = async (id) => {
   try {
     const request = new Request(
       `http://localhost:3001/api/allocation/${id}/subject/unallocated`,
@@ -18,7 +18,7 @@ const getUnAllocableSubjects = async (id) => {
   }
 };
 
-const getSubjectRooms = async (id) => {
+export const getSubjectRooms = async (id) => {
   try {
     const request = new Request(
       `http://localhost:3001/api/allocation/subject/${id}/rooms`,
@@ -38,7 +38,7 @@ const getSubjectRooms = async (id) => {
   }
 };
 
-const getMissingEquipmentForRoom = async (subjectId, roomId) => {
+export const getMissingEquipmentForRoom = async (subjectId, roomId) => {
   try {
     const request = new Request(
       `http://localhost:3001/api/allocation/missing-eqpt/subject/${subjectId}/room/${roomId}`,
@@ -57,5 +57,3 @@ const getMissingEquipmentForRoom = async (subjectId, roomId) => {
     return "error";
   }
 };
-
-export { getUnAllocableSubjects, getMissingEquipmentForRoom, getSubjectRooms };

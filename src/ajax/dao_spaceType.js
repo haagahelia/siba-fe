@@ -1,4 +1,4 @@
-const fetchSpacetypeForSelect = async () => {
+export const fetchSpacetypeForSelect = async () => {
   const request = new Request(
     "http://localhost:3001/api/spaceType/getSelectData",
     {
@@ -13,5 +13,3 @@ const fetchSpacetypeForSelect = async () => {
   const data = await response.json();
   return data;
 };
-
-export { fetchSpacetypeForSelect };

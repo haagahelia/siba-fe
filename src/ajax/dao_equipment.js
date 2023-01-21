@@ -1,4 +1,4 @@
-const fetchEquipmentData = async () => {
+export const fetchEquipmentData = async () => {
   const request = new Request(
     "http://localhost:3001/api/equipment/getEquipData",
     {
@@ -14,5 +14,3 @@ const fetchEquipmentData = async () => {
 
   return data;
 };
-
-export { fetchEquipmentData };

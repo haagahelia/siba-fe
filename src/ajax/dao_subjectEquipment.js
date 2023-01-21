@@ -1,4 +1,4 @@
-const postNewSubjectEquipment = async (newSubjectEquipment) => {
+export const postNewSubjectEquipment = async (newSubjectEquipment) => {
   try {
     const request = new Request(
       "http://localhost:3001/api/subjectequipment/post",
@@ -27,7 +27,7 @@ const postNewSubjectEquipment = async (newSubjectEquipment) => {
 };
 
 // PopDialog.js
-const fetchEquipmentBySubjectId = async (id) => {
+export const fetchEquipmentBySubjectId = async (id) => {
   const request = new Request(
     `http://localhost:3001/api/subjectequipment/getEquipment/${id}`,
     {
@@ -44,7 +44,7 @@ const fetchEquipmentBySubjectId = async (id) => {
 };
 
 // DeleteSubjectEquipment.js
-const deleteSingleSubjectEquipment = async (subjectId, equipmentId) => {
+export const deleteSingleSubjectEquipment = async (subjectId, equipmentId) => {
   try {
     const request = new Request(
       `http://localhost:3001/api/subjectequipment/delete/${subjectId}/${equipmentId}`,
@@ -65,7 +65,7 @@ const deleteSingleSubjectEquipment = async (subjectId, equipmentId) => {
   }
 };
 // EditSubjectEquipment.js
-const editSubjectEquipment = async (editedSubjectEquipment) => {
+export const editSubjectEquipment = async (editedSubjectEquipment) => {
   try {
     const request = new Request(
       "http://localhost:3001/api/subjectequipment/update",
@@ -91,11 +91,4 @@ const editSubjectEquipment = async (editedSubjectEquipment) => {
   } catch (error) {
     return "error";
   }
-};
-
-export {
-  postNewSubjectEquipment,
-  fetchEquipmentBySubjectId,
-  editSubjectEquipment,
-  deleteSingleSubjectEquipment,
 };

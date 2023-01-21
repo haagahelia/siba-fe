@@ -1,41 +1,17 @@
-import { fetchProgramsForSelect } from "./dao_program";
-import { fetchEquipmentData } from "./dao_equipment";
-import {
-  getUnAllocableSubjects,
-  getMissingEquipmentForRoom,
-  getSubjectRooms,
-} from "./dao_allocation";
-import { fetchSpacetypeForSelect } from "./dao_spaceType";
-import {
-  fetchAllSubjects,
-  fetchSubjectsNames,
-  postNewSubject,
-  editSubject,
-  deleteSingleSubject,
-} from "./dao_subject";
-import {
-  postNewSubjectEquipment,
-  fetchEquipmentBySubjectId,
-  editSubjectEquipment,
-  deleteSingleSubjectEquipment,
-} from "./dao_subjectEquipment";
+import * as dao_program from "./dao_program";
+import * as dao_equipment from "./dao_equipment";
+import * as dao_allocation from "./dao_allocation";
+import * as dao_spaceType from "./dao_spaceType";
+import * as dao_subject from "./dao_subject";
+import * as dao_subjectEquipment from "./dao_subjectEquipment";
 
 const dao = {
-  fetchAllSubjects,
-  fetchSubjectsNames,
-  deleteSingleSubject,
-  postNewSubject,
-  fetchProgramsForSelect,
-  editSubject,
-  fetchSpacetypeForSelect,
-  fetchEquipmentData,
-  postNewSubjectEquipment,
-  fetchEquipmentBySubjectId,
-  deleteSingleSubjectEquipment,
-  editSubjectEquipment,
-  getUnAllocableSubjects,
-  getSubjectRooms,
-  getMissingEquipmentForRoom,
+  ...dao_program,
+  ...dao_equipment,
+  ...dao_allocation,
+  ...dao_spaceType,
+  ...dao_subject,
+  ...dao_subjectEquipment,
 };
 
 export default dao;
