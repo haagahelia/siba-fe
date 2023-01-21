@@ -118,34 +118,34 @@ function CollapsedRow(id) {
           </Grid2>
         </Grid2>
         {subjects?.map((dropdownItem) => {
-            return (
-              <Grid2 container>
-                <Grid2 xs={8}>
-                  {" "}
-                  <Typography
-                    style={{
-                      textAlign: "left",
-                      marginTop: 10,
-                      color: "#F6E9E9",
-                    }}
-                  >
-                    {dropdownItem.name}
-                  </Typography>
-                </Grid2>
-                <Grid2 xs={4}>
-                  <Typography
-                    style={{
-                      textAlign: "left",
-                      marginTop: 10,
-                      color: "#F6E9E9",
-                    }}
-                  >
-                    {dropdownItem.totalTime}
-                  </Typography>
-                </Grid2>
+          return (
+            <Grid2 container>
+              <Grid2 xs={8}>
+                {" "}
+                <Typography
+                  style={{
+                    textAlign: "left",
+                    marginTop: 10,
+                    color: "#F6E9E9",
+                  }}
+                >
+                  {dropdownItem.name}
+                </Typography>
               </Grid2>
-            );
-          })}
+              <Grid2 xs={4}>
+                <Typography
+                  style={{
+                    textAlign: "left",
+                    marginTop: 10,
+                    color: "#F6E9E9",
+                  }}
+                >
+                  {dropdownItem.totalTime}
+                </Typography>
+              </Grid2>
+            </Grid2>
+          );
+        })}
       </Collapse>
     </Grid2>
   );

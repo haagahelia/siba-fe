@@ -54,8 +54,7 @@ export default function DeleteSubject(props) {
   const submitDelete = (data) => {
     setDialogOptions({
       title: `Haluatko varmasti poistaa ${data.subjectName}?`,
-      content:
-        `Painamalla jatka poistat ${data.subjectName} listauksesta.`,
+      content: `Painamalla jatka poistat ${data.subjectName} listauksesta.`,
     });
     setDialogOpen(true);
     setDeleteId(data.id);

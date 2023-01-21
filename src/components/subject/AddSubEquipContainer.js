@@ -67,12 +67,12 @@ export default function AddSubEquipContainer(props) {
     onSubmit: (values) => {
       setDialogOptions({
         // Tässä etsitään varusteen nimi, jonka id vastaa values.id
-        title:
-          `Haluatko varmasti lisätä ${equipmentSelectList.filter((i) => i.id === values.equipmentId)[0]
-            .name} ?`,
-        content:
-          `Painamalla jatka ${equipmentSelectList.filter((i) => i.id === values.equipmentId)[0]
-            .name} lisätään opetukseen`,
+        title: `Haluatko varmasti lisätä ${
+          equipmentSelectList.filter((i) => i.id === values.equipmentId)[0].name
+        } ?`,
+        content: `Painamalla jatka ${
+          equipmentSelectList.filter((i) => i.id === values.equipmentId)[0].name
+        } lisätään opetukseen`,
       });
       setDialogOpen(true);
       return;

@@ -59,8 +59,7 @@ export default function AddSubjectContainer(props) {
     onSubmit: (values) => {
       setDialogOptions({
         title: `Haluatko varmasti lisätä ${values.name}?`,
-        content:
-          `Painamalla jatka, ${values.name} lisätään opetuslistaukseen`,
+        content: `Painamalla jatka, ${values.name} lisätään opetuslistaukseen`,
       });
       setDialogOpen(true);
 
@@ -196,10 +195,7 @@ export default function AddSubjectContainer(props) {
         }}
       >
         <CardContent>
-          <CardHeader
-            title="Lisää opetus"
-            sx={{ marginBottom: "30px" }}
-          />
+          <CardHeader title="Lisää opetus" sx={{ marginBottom: "30px" }} />
           <AddSubjectForm
             handleChange={handleChange}
             programSelectList={programSelectList}

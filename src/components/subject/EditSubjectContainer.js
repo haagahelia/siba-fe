@@ -34,8 +34,7 @@ export default function EditSubjectContainer(props) {
     onSubmit: (values) => {
       setDialogOptions({
         title: `Haluatko varmasti muuttaa ${values.subjectName} tietoja?`,
-        content:
-          `Painamalla jatka, tallennat ${values.subjectName} uudet tiedot. `,
+        content: `Painamalla jatka, tallennat ${values.subjectName} uudet tiedot. `,
       });
       setDialogOpen(true);
       return;

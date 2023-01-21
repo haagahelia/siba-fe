@@ -36,10 +36,8 @@ export default function EditSubEquipContainer(props) {
     validate,
     onSubmit: (values) => {
       setDialogOptions({
-        title:
-          `Haluatko varmasti muuttaa ${initialEquipValues.name} tietoja?`,
-        content:
-          `Painamalla jatka, tallennat ${initialEquipValues.name} uudet tiedot. `,
+        title: `Haluatko varmasti muuttaa ${initialEquipValues.name} tietoja?`,
+        content: `Painamalla jatka, tallennat ${initialEquipValues.name} uudet tiedot. `,
       });
       setDialogOpen(true);
       return;
