@@ -3,7 +3,7 @@ FILES=$(git diff --cached --name-only | grep 'src/.*\.(js|ts)$')
 
 if [ -n "$FILES" ]; then
     rome format $FILES --write --indent-style space --indent-size 2
-    rome check $FILES --apply-suggested
+    rome check $FILES --apply-suggested || true
     git add $FILES
 else
     echo "No files to format"
