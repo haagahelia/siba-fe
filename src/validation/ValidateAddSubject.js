@@ -10,7 +10,7 @@ export async function validate(values) {
   let subjectList = [];
 
   const getSubjectNames = async function () {
-    const data = await dao.fetchSubjectsNames();
+    const { data } = await dao.fetchSubjectsNames();
     subjectList = data;
     // Tässä katsotaan ettei käyttäjä syötä jo olemassa olevan opetuksen nimeä.
     let result = subjectList.some(

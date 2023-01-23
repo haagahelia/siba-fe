@@ -52,34 +52,14 @@ export default function EditSubEquipContainer(props) {
       equipmentId: values.equipmentId,
     };
 
-    let result = await dao.editSubjectEquipment(editedSubEquip);
+    let success = await dao.editSubjectEquipment(editedSubEquip);
 
-    if (result === 400) {
+    if (!success) {
       setAlertOptions({
         severity: "error",
         title: "Virhe",
         message: "Jokin meni pieleen - yritä hetken kuluttua uudestaan.",
       });
-      setAlertOpen(true);
-      return;
-    }
-    if (result === 500) {
-      setAlertOptions({
-        severity: "error",
-        title: "Virhe",
-        message:
-          "Jokin meni pieleen palvelimella - yritä hetken kuluttua uudestaan.",
-      });
-      setAlertOpen(true);
-      return;
-    }
-    if (result === "error") {
-      setAlertOptions({
-        severity: "error",
-        title: "Virhe",
-        message: "Jokin meni pieleen - yritä hetken kuluttua uudestaan.",
-      });
-
       setAlertOpen(true);
       return;
     }
@@ -94,8 +74,8 @@ export default function EditSubEquipContainer(props) {
     getEquipmentsBySubId(subId);
   }
   const getEquipmentPriority = async function () {
-    const result = await dao.fetchEquipmentData();
-    if (result === 500) {
+    const { success, data } = await dao.fetchEquipmentData();
+    if (!success) {
       setAlertOptions({
         severity: "error",
         title: "Virhe",
@@ -103,10 +83,10 @@ export default function EditSubEquipContainer(props) {
       });
       setAlertOpen(true);
       return;
-    } else {
-      setEquipmentPriorityList(result);
     }
+    setEquipmentPriorityList(data);
   };
+
   useEffect(() => {
     getEquipmentPriority();
   }, []);

@@ -68,8 +68,8 @@ export default function AddSubjectContainer(props) {
   });
 
   const getProgramsForSelect = async function () {
-    const result = await dao.fetchProgramsForSelect();
-    if (result === 500) {
+    const { success, data } = await dao.fetchProgramsForSelect();
+    if (!success) {
       setAlertOptions({
         severity: "error",
         title: "Virhe",
@@ -78,7 +78,7 @@ export default function AddSubjectContainer(props) {
       setAlertOpen(true);
       return;
     } else {
-      setProgramSelectList(result);
+      setProgramSelectList(data);
     }
   };
   useEffect(() => {
@@ -86,8 +86,8 @@ export default function AddSubjectContainer(props) {
   }, []);
 
   const getSpaceTypesForSelect = async function () {
-    const result = await dao.fetchSpacetypeForSelect();
-    if (result === 500) {
+    const { success, data } = await dao.fetchSpacetypeForSelect();
+    if (!success) {
       setAlertOptions({
         severity: "error",
         title: "Virhe",
@@ -96,7 +96,7 @@ export default function AddSubjectContainer(props) {
       setAlertOpen(true);
       return;
     } else {
-      setSpaceTypeSelectList(result);
+      setSpaceTypeSelectList(data);
     }
   };
   useEffect(() => {
@@ -117,31 +117,11 @@ export default function AddSubjectContainer(props) {
     };
 
     let result = await dao.postNewSubject(newSubject);
-    if (result === 400) {
+    if (!result) {
       setAlertOptions({
         severity: "error",
         title: "Virhe",
         message: "Jokin meni pieleen - yritä hetken kuluttua uudestaan.",
-      });
-      setAlertOpen(true);
-      return;
-    }
-    if (result === 500) {
-      setAlertOptions({
-        severity: "error",
-        title: "Virhe",
-        message:
-          "Jokin meni pieleen palvelimella - yritä hetken kuluttua uudestaan.",
-      });
-      setAlertOpen(true);
-      return;
-    }
-    if (result === "error") {
-      setAlertOptions({
-        severity: "error",
-        title: "Virhe",
-        message:
-          "Jokin meni pieleen palvelimella - yritä hetken kuluttua uudestaan.",
       });
       setAlertOpen(true);
       return;

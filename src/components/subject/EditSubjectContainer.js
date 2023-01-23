@@ -55,32 +55,12 @@ export default function EditSubjectContainer(props) {
       id: values.id,
     };
     let result = await dao.editSubject(editedSubject);
-    if (result === 400) {
+    if (!result) {
       setAlertOptions({
         severity: "error",
         title: "Virhe",
         message: "Jokin meni pieleen - yritä hetken kuluttua uudestaan.",
       });
-      setAlertOpen(true);
-      return;
-    }
-    if (result === 500) {
-      setAlertOptions({
-        severity: "error",
-        title: "Virhe",
-        message:
-          "Jokin meni pieleen palvelimella - yritä hetken kuluttua uudestaan.",
-      });
-      setAlertOpen(true);
-      return;
-    }
-    if (result === "error") {
-      setAlertOptions({
-        severity: "error",
-        title: "Virhe",
-        message: "Jokin meni pieleen - yritä hetken kuluttua uudestaan.",
-      });
-
       setAlertOpen(true);
       return;
     }
@@ -95,8 +75,8 @@ export default function EditSubjectContainer(props) {
   }
 
   const getProgramsForSelect = async function () {
-    const result = await dao.fetchProgramsForSelect();
-    if (result === 500) {
+    const { success, data } = await dao.fetchProgramsForSelect();
+    if (!success) {
       setAlertOptions({
         severity: "error",
         title: "Virhe",
@@ -104,9 +84,8 @@ export default function EditSubjectContainer(props) {
       });
       setAlertOpen(true);
       return;
-    } else {
-      setProgramSelectList(result);
     }
+    setProgramSelectList(data);
   };
 
   useEffect(() => {
@@ -114,8 +93,8 @@ export default function EditSubjectContainer(props) {
   }, []);
 
   const getSpaceTypesForSelect = async function () {
-    const result = await dao.fetchSpacetypeForSelect();
-    if (result === 500) {
+    const { success, data } = await dao.fetchSpacetypeForSelect();
+    if (!success) {
       setAlertOptions({
         severity: "error",
         title: "Virhe",
@@ -124,7 +103,7 @@ export default function EditSubjectContainer(props) {
       setAlertOpen(true);
       return;
     } else {
-      setSpaceTypeSelectList(result);
+      setSpaceTypeSelectList(data);
     }
   };
   useEffect(() => {

@@ -28,8 +28,11 @@ export default function DeleteSubEquip(props) {
   const deleteSubjectEquipment = async (subjectId, equipmentId) => {
     subjectId = id1;
     equipmentId = id2;
-    let result = await dao.deleteSingleSubjectEquipment(subjectId, equipmentId);
-    if (result === 400) {
+    let success = await dao.deleteSingleSubjectEquipment(
+      subjectId,
+      equipmentId,
+    );
+    if (!success) {
       setAlertOptions({
         severity: "error",
         title: "Virhe",
@@ -38,18 +41,6 @@ export default function DeleteSubEquip(props) {
       setAlertOpen(true);
       return;
     }
-
-    if (result === "error") {
-      setAlertOptions({
-        severity: "error",
-        title: "Virhe",
-        message:
-          "Jokin meni pieleen, opetuksen poisto epäonnistui - yritä hetken kuluttua uudestaan.",
-      });
-      setAlertOpen(true);
-      return;
-    }
-
     setAlertOptions({
       severity: "success",
       title: "Onnistui!",

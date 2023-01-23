@@ -123,7 +123,6 @@ export default function AllocationSubjectFailureView() {
   const getUnAlloc = async function (id) {
     const data = await dao.getUnAllocableSubjects(id);
     if (data === 500 || data === "error") {
-      console.log("Hupsista keikkaa!");
       setAlertOptions({
         severity: "error",
         title: "Virhe",

@@ -9,7 +9,7 @@ export async function validate(values) {
   let subjectList = [];
 
   const getSubjectNames = async function () {
-    const data = await dao.fetchSubjectsNames();
+    const { data } = await dao.fetchSubjectsNames();
     subjectList = data;
     let result;
     let id;

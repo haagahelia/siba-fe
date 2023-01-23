@@ -21,21 +21,11 @@ export default function DeleteSubject(props) {
 
   const deleteSubject = async (value) => {
     let result = await dao.deleteSingleSubject(value);
-    if (result === 400) {
+    if (result === false) {
       setAlertOptions({
         severity: "error",
         title: "Virhe",
         message: "Jokin meni pieleen - yritä hetken kuluttua uudestaan.",
-      });
-      setAlertOpen(true);
-      return;
-    }
-    if (result === "error") {
-      setAlertOptions({
-        severity: "error",
-        title: "Virhe",
-        message:
-          "Jokin meni pieleen, opetuksen poisto epäonnistui - yritä hetken kuluttua uudestaan.",
       });
       setAlertOpen(true);
       return;

@@ -25,8 +25,8 @@ export default function SubjectView() {
   });
 
   const getAllSubjects = async function () {
-    const result = await dao.fetchAllSubjects();
-    if (result === 500) {
+    const { success, data } = await dao.fetchAllSubjects();
+    if (!success) {
       setAlertOptions({
         severity: "error",
         title: "Virhe",
@@ -35,7 +35,7 @@ export default function SubjectView() {
       setAlertOpen(true);
       return;
     } else {
-      setAllSubjectsList(result);
+      setAllSubjectsList(data);
       setPaginateSubjects(allSubjectsList.slice(0, 15));
     }
   };

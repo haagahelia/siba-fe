@@ -40,9 +40,9 @@ export default function AddSubEquipContainer(props) {
   }, []);
 
   const getEquipmentsForSelect = async function (subEquipList) {
-    const result = await dao.fetchEquipmentData();
+    const { success, data } = await dao.fetchEquipmentData();
 
-    if (result === 500) {
+    if (!success) {
       setAlertOptions({
         severity: "error",
         title: "Virhe",
@@ -50,15 +50,15 @@ export default function AddSubEquipContainer(props) {
       });
       setAlertOpen(true);
       return;
-    } else {
-      // Tässä suodetetaan pois jo olemassa olevat varustukset opetuksessa
-      const filteredList = result.filter((item) => {
-        return !subEquipList.some((element) => {
-          return element.equipmentId === item.id;
-        });
-      });
-      setEquipmentSelectList(filteredList);
     }
+
+    // Tässä suodetetaan pois jo olemassa olevat varustukset opetuksessa
+    const filteredList = data.filter((item) => {
+      return !subEquipList.some((element) => {
+        return element.equipmentId === item.id;
+      });
+    });
+    setEquipmentSelectList(filteredList);
   };
 
   const formik = useFormik({
@@ -86,32 +86,12 @@ export default function AddSubEquipContainer(props) {
       priority: values.priority,
       obligatory: Number.parseInt(values.obligatory),
     };
-    let result = await dao.postNewSubjectEquipment(newSubjectEquipment);
-    if (result === 400) {
+    let success = await dao.postNewSubjectEquipment(newSubjectEquipment);
+    if (!success) {
       setAlertOptions({
         severity: "error",
         title: "Virhe",
         message: "Jokin meni pieleen - yritä hetken kuluttua uudestaan.",
-      });
-      setAlertOpen(true);
-      return;
-    }
-    if (result === 500) {
-      setAlertOptions({
-        severity: "error",
-        title: "Virhe",
-        message:
-          "Jokin meni pieleen palvelimella - yritä hetken kuluttua uudestaan.",
-      });
-      setAlertOpen(true);
-      return;
-    }
-    if (result === "error") {
-      setAlertOptions({
-        severity: "error",
-        title: "Virhe",
-        message:
-          "Jokin meni pieleen palvelimella - yritä hetken kuluttua uudestaan.",
       });
       setAlertOpen(true);
       return;
