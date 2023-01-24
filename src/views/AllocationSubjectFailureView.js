@@ -49,8 +49,11 @@ export function GetMissingEquipment(idData) {
   };
 
   const getMissingEquipment = async function (subjectId, spaceId) {
-    const data = await dao.getMissingEquipmentForRoom(subjectId, spaceId);
-    if (data === 500 || data === "error") {
+    const { success, data } = await dao.getMissingEquipmentForRoom(
+      subjectId,
+      spaceId,
+    );
+    if (!success) {
       console.log("Hupsista keikkaa!");
       setAlertOptions({
         severity: "error",
@@ -60,19 +63,10 @@ export function GetMissingEquipment(idData) {
       });
       setAlertOpen(true);
       return;
-    } else {
-      let i = 0;
-      let resultString = "Puuttuvat varusteet: ";
-      while (data.length > i) {
-        if (i === 0) {
-          resultString = resultString + data[i].name;
-        } else {
-          resultString = `${resultString}, ${data[i].name}`;
-        }
-        i++;
-      }
-      setMissingEquipment(resultString);
     }
+
+    const equipmentNames = data.map((item) => item.name);
+    setMissingEquipment(`Puuttuvat varusteet: ${equipmentNames.join(", ")}`);
   };
 
   return (
@@ -121,8 +115,8 @@ export default function AllocationSubjectFailureView() {
   });
 
   const getUnAlloc = async function (id) {
-    const data = await dao.getUnAllocableSubjects(id);
-    if (data === 500 || data === "error") {
+    const { success, data } = await dao.getUnAllocableSubjects(id);
+    if (!success) {
       setAlertOptions({
         severity: "error",
         title: "Virhe",
@@ -136,9 +130,8 @@ export default function AllocationSubjectFailureView() {
   };
 
   const getUnAllocRooms = async function (id) {
-    const data = await dao.getSubjectRooms(id);
-    if (data === 500 || data === "error") {
-      console.log("Hupsista keikkaa!");
+    const { success, data } = await dao.getSubjectRooms(id);
+    if (!success) {
       setAlertOptions({
         severity: "error",
         title: "Virhe",
