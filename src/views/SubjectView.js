@@ -29,8 +29,8 @@ export default function SubjectView() {
     if (!success) {
       setAlertOptions({
         severity: "error",
-        title: "Virhe",
-        message: "Oho! Jotain meni pieleen palvelimella. Opetuksia ei löytynyt",
+        title: "Error",
+        message: "Oops! Something went wrong on the server. No lessons found",
       });
       setAlertOpen(true);
       return;
@@ -68,7 +68,7 @@ export default function SubjectView() {
         >
           <Card variant="outlined">
             <CardContent>
-              <CardHeader title="Opetukset" />
+              <CardHeader title="Lessons" />
               <SubjectFiltering
                 allSubjectsList={allSubjectsList}
                 setAllSubjectsList={setAllSubjectsList}

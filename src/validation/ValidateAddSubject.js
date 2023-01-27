@@ -12,7 +12,7 @@ export async function validate(values) {
   const getSubjectNames = async function () {
     const { data } = await dao.fetchSubjectsNames();
     subjectList = data;
-    // Tässä katsotaan ettei käyttäjä syötä jo olemassa olevan opetuksen nimeä.
+    // Here it is considered that the user does not enter the name of an already existing lesson.
     let result = subjectList.some(
       (names) => names.name.toLowerCase() === values.name.toLowerCase(),
     );
@@ -20,54 +20,54 @@ export async function validate(values) {
   };
 
   if (!values.name) {
-    errors.name = "Pakollinen kenttä";
+    errors.name = "Required field";
   } else if (await getSubjectNames()) {
-    errors.name = "Nimi on jo olemassa";
+    errors.name = "The name already exists";
   } else if (values.name.length < 2 || values.name.length > 255) {
-    errors.name = "Nimen pitää olla 2-255 merkkiä pitkä";
+    errors.name = "The name must be 2-255 characters long";
   } else if (!regName.test(values.name)) {
-    errors.name = "Vain kirjaimet, numerot ja '-' sallittu";
+    errors.name = "Only letters, numbers and '-' allowed";
   }
   if (!values.groupSize) {
-    errors.groupSize = "Pakollinen kenttä";
+    errors.groupSize = "Required field";
   } else if (values.groupSize <= 0) {
-    errors.groupSize = "Ryhmän koko ei voi olla 0";
+    errors.groupSize = "Group size cannot be 0";
   } else if (!regNumber.test(values.groupSize)) {
-    errors.groupSize = "Vain numerot sallittu";
+    errors.groupSize = "Only numbers allowed";
   }
 
   if (!values.groupCount) {
-    errors.groupCount = "Pakollinen kenttä";
+    errors.groupCount = "Required field";
   } else if (values.groupCount <= 0) {
-    errors.groupCount = "Ryhmien määrä ei voi olla 0";
+    errors.groupCount = "The number of groups cannot be 0";
   } else if (!regNumber.test(values.groupCount)) {
-    errors.groupCount = "Vain numerot sallittu";
+    errors.groupCount = "Only numbers allowed";
   }
 
   if (!values.sessionLength) {
-    errors.sessionLength = "Pakollinen kenttä";
+    errors.sessionLength = "Required field";
   } else if (!regTime.test(values.sessionLength)) {
-    errors.sessionLength = "Sallittu muoto on 00:00 tai 00:00:00";
+    errors.sessionLength = "Allowed format is 00:00 or 00:00:00";
   }
 
   if (!values.sessionCount) {
-    errors.sessionCount = "Pakollinen kenttä";
+    errors.sessionCount = "Required field";
   } else if (values.sessionCount <= 0) {
-    errors.sessionCount = "Opetuksien määrä ei voi olla 0";
+    errors.sessionCount = "The number of lessons cannot be 0";
   } else if (!regNumber.test(values.sessionCount)) {
-    errors.sessionCount = "Vain numerot sallittu";
+    errors.sessionCount = "Only numbers allowed";
   }
 
   if (!values.area) {
-    errors.area = "Pakollinen kenttä";
+    errors.area = "Required field";
   } else if (values.area <= 0) {
-    errors.area = "Vaadittu määrä ei voi olla 0";
+    errors.area = "The required quantity cannot be 0";
   } else if (!regArea.test(values.area)) {
-    errors.area = "Vain numerot sallittu & sallittu muoto .00";
+    errors.area = "Only numbers allowed & format .00 allowed";
   }
 
   if (!values.programId) {
-    errors.programId = "Pakollinen kenttä";
+    errors.programId = "Required field";
   }
   return errors;
 }

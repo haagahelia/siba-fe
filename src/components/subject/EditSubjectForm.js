@@ -25,14 +25,14 @@ export default function EditSubjectForm(props) {
             setOpen(true);
           }}
         >
-          Muokkaa
+          Edit
         </Button>
       </ThemeProvider>
       <Dialog open={open}>
         <form onSubmit={formik.handleSubmit}>
-          {/* formik.initialValues?.subjectName} Tässä ? katsoo löytyykö initialValues objektista attribuuttia subjectName, jos ei löydy palauttaa arvon null eikä kaadu */}
+          {/* formik.initialValues?.subjectName} Here ? checks if the subjectName attribute can be found in the initialValues ​​object, if not found returns null and does not crash */}
           <DialogTitle sx={{ maxWidth: "300px" }}>
-            Muokkaa: {formik.initialValues?.subjectName}
+            Edit: {formik.initialValues?.subjectName}
           </DialogTitle>
           <DialogContent>
             <DialogContentText>
@@ -53,7 +53,7 @@ export default function EditSubjectForm(props) {
                         : false
                     }
                     name="subjectName"
-                    label="Opetuksen nimi"
+                    label="The name of the lesson"
                     defaultValue={formik.initialValues?.subjectName}
                     variant="outlined"
                     value={formik.values?.subjectName}
@@ -74,7 +74,7 @@ export default function EditSubjectForm(props) {
                         : false
                     }
                     name="groupSize"
-                    label="Ryhmän koko"
+                    label="Group size"
                     defaultValue={formik.initialValues?.groupSize}
                     variant="outlined"
                     value={formik.values?.groupSize}
@@ -95,7 +95,7 @@ export default function EditSubjectForm(props) {
                         : false
                     }
                     name="groupCount"
-                    label="Ryhmien määrä"
+                    label="Group count"
                     defaultValue={formik.initialValues?.groupCount}
                     variant="outlined"
                     value={formik.values?.groupCount}
@@ -115,7 +115,7 @@ export default function EditSubjectForm(props) {
                         : false
                     }
                     name="sessionLength"
-                    label="Opetuskerran pituus(hh:mm)"
+                    label="Length of lesson(hh:mm)"
                     defaultValue={formik.initialValues?.sessionLength}
                     variant="outlined"
                     value={formik.values?.sessionLength}
@@ -135,7 +135,7 @@ export default function EditSubjectForm(props) {
                         : false
                     }
                     name="sessionCount"
-                    label="Opetuksien määrä viikossa"
+                    label="Number of lessons per week"
                     defaultValue={formik.initialValues?.sessionCount}
                     variant="outlined"
                     value={formik.values?.sessionCount}
@@ -152,7 +152,7 @@ export default function EditSubjectForm(props) {
                       formik.touched.area && formik.errors.area ? true : false
                     }
                     name="area"
-                    label="Vaaditut neliömetrit"
+                    label="Required square meters"
                     defaultValue={formik.initialValues?.area}
                     variant="outlined"
                     value={formik.values?.area}
@@ -218,13 +218,13 @@ export default function EditSubjectForm(props) {
               <Button
                 onClick={() => {
                   setOpen(false);
-                  // Nollataan lomake jos painaa peruuta
+                  // Let's reset the form if you press cancel
                   formik.resetForm();
                 }}
                 variant="contained"
                 color="red"
               >
-                Peruuta
+                Cancel
               </Button>
               <Button
                 type="submit"
@@ -234,7 +234,7 @@ export default function EditSubjectForm(props) {
                   setOpen(false);
                 }}
               >
-                Jatka
+                Continue
               </Button>
             </ThemeProvider>
           </DialogActions>

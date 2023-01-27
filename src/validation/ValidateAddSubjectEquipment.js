@@ -3,14 +3,14 @@ export function validate(values) {
   const regNumber = new RegExp(/^[0-9]+$/);
 
   if (!values.equipmentId) {
-    errors.equipmentId = "Pakollinen kenttä";
+    errors.equipmentId = "Required field";
   }
   if (!values.priority) {
-    errors.priority = "Pakollinen kenttä";
+    errors.priority = "Required field";
   } else if (values.priority < 50 || values.priority > 900) {
-    errors.priority = "Prioriteetin pitää olla 50 - 900 pisteen välillä";
+    errors.priority = "The priority must be between 50 and 900 points";
   } else if (!regNumber.test(values.priority)) {
-    errors.priority = "Vain numerot sallittu";
+    errors.priority = "Only numbers allowed";
   }
   return errors;
 }
