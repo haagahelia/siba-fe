@@ -63,7 +63,7 @@ export default function SubjectListItems(props) {
                       variant="caption"
                       style={{ fontWeight: "bold" }}
                     >
-                      Nimi:
+                      Name:
                     </Typography>
                     <ListItemText
                       primary={value.subjectName}
@@ -77,7 +77,7 @@ export default function SubjectListItems(props) {
                       variant="caption"
                       style={{ fontWeight: "bold" }}
                     >
-                      Ryhmän koko:
+                      Group size:
                     </Typography>
                     <ListItemText
                       primary={value.groupSize}
@@ -91,7 +91,7 @@ export default function SubjectListItems(props) {
                       variant="caption"
                       style={{ fontWeight: "bold" }}
                     >
-                      Ryhmien määrä:
+                      Group count:
                     </Typography>
                     <ListItemText
                       primary={value.groupCount}
@@ -105,7 +105,7 @@ export default function SubjectListItems(props) {
                       variant="caption"
                       style={{ fontWeight: "bold" }}
                     >
-                      Opetuskerran pituus:
+                      Length of lesson:
                     </Typography>
                     <ListItemText
                       primary={value.sessionLength}
@@ -119,7 +119,7 @@ export default function SubjectListItems(props) {
                       variant="caption"
                       style={{ fontWeight: "bold" }}
                     >
-                      Pääaine:
+                      Major:
                     </Typography>
                     <ListItemText
                       primary={value.programName}
@@ -133,7 +133,7 @@ export default function SubjectListItems(props) {
                       variant="caption"
                       style={{ fontWeight: "bold" }}
                     >
-                      Huoneen tyyppi:
+                      Room type:
                     </Typography>
                     <ListItemText
                       primary={value.spaceTypeName}

@@ -11,7 +11,7 @@ import allocationPost from "../data/ResultAllocationStore";
 import theme from "../components/styles/theme";
 import { globalTheme } from "../components/styles/theme";
 
-// komponentti laskennan tulosten, eli allokaation näyttämiselle
+// component for displaying the calculation results, i.e. the allocation
 export default function () {
   const roomStore = resultRoomsStore;
   const progStore = resultProgramStore;
@@ -93,7 +93,7 @@ export default function () {
           <div style={theme.components.IndexRooms.luentoluokkaindex}>
             <Typography style={{ marginLeft: 40, color: "#F6E9E9" }}>
               {" "}
-              Luento luokka{" "}
+              Lecture class{" "}
             </Typography>
           </div>
           <div style={theme.components.IndexRooms.studioindex}>
@@ -105,13 +105,13 @@ export default function () {
           <div style={theme.components.IndexRooms.esitystilaindex}>
             <Typography style={{ marginLeft: 40, color: "#F6E9E9" }}>
               {" "}
-              Esitystila{" "}
+              Performance space{" "}
             </Typography>
           </div>
           <div style={theme.components.IndexRooms.musiikkiluokkaindex}>
             <Typography style={{ marginLeft: 40, color: "#F6E9E9" }}>
               {" "}
-              Musiikki luokka{" "}
+              Music class{" "}
             </Typography>
           </div>
         </div>

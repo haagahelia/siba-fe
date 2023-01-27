@@ -52,7 +52,7 @@ export default function AddSubEquipContainer(props) {
       return;
     }
 
-    // Tässä suodetetaan pois jo olemassa olevat varustukset opetuksessa
+    // Here we filter out the already existing equipment in teaching
     const filteredList = data.filter((item) => {
       return !subEquipList.some((element) => {
         return element.equipmentId === item.id;
@@ -66,13 +66,13 @@ export default function AddSubEquipContainer(props) {
     validate,
     onSubmit: (values) => {
       setDialogOptions({
-        // Tässä etsitään varusteen nimi, jonka id vastaa values.id
-        title: `Haluatko varmasti lisätä ${
+        // Here we search for the name of the equipment whose id corresponds to values.id
+        title: `Are you sure you want to add ${
           equipmentSelectList.filter((i) => i.id === values.equipmentId)[0].name
         } ?`,
-        content: `Painamalla jatka ${
+        content: `By clicking continue ${
           equipmentSelectList.filter((i) => i.id === values.equipmentId)[0].name
-        } lisätään opetukseen`,
+        } will be added to the class`,
       });
       setDialogOpen(true);
       return;
@@ -90,16 +90,16 @@ export default function AddSubEquipContainer(props) {
     if (!success) {
       setAlertOptions({
         severity: "error",
-        title: "Virhe",
-        message: "Jokin meni pieleen - yritä hetken kuluttua uudestaan.",
+        title: "Error",
+        message: "Something went wrong - please try again later.",
       });
       setAlertOpen(true);
       return;
     }
     setAlertOptions({
       severity: "success",
-      title: "Onnistui!",
-      message: "Varuste lisätty.",
+      title: "Success!",
+      message: "Equipment added.",
     });
     setAlertOpen(true);
     formik.resetForm();

@@ -21,7 +21,7 @@ function NavBar() {
       <nav className="navbar">
         <div className="nav-container">
           <NavLink exact to="/" className="nav-logo">
-            {/* mulla ei ollu logoja, lisää ne projektiin nii toimii */}
+            {/* I didn't have logos, add them to the project and it works */}
             {/* <img src={logo} alt="Logo" /> */}
             <i className="fas fa-code" />
           </NavLink>
@@ -36,7 +36,7 @@ function NavBar() {
                 className="nav-links"
                 onClick={handleClick}
               >
-                Etusivu
+                Front page
               </NavLink>
             </li>
             <li className="nav-item">
@@ -47,7 +47,7 @@ function NavBar() {
                 className="nav-links"
                 onClick={handleClick}
               >
-                Opetukset
+                Lessons
               </NavLink>
             </li>
             <li className="nav-item">
@@ -58,7 +58,7 @@ function NavBar() {
                 className="nav-links"
                 onClick={handleClick}
               >
-                Tulosnäkymä
+                Results view
               </NavLink>
             </li>
           </ul>

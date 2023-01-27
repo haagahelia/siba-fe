@@ -41,7 +41,7 @@ export default function AddSubjectForm(props) {
             <TextField
               error={formik.touched.name && formik.errors.name ? true : false}
               name="name"
-              label="Opetuksen nimi"
+              label="Name of the lesson"
               variant="outlined"
               value={formik.values.name}
               onChange={formik.handleChange("name")}
@@ -61,7 +61,7 @@ export default function AddSubjectForm(props) {
                   : false
               }
               name="groupSize"
-              label="Ryhmän koko"
+              label="Group size"
               variant="outlined"
               value={formik.values.groupSize}
               onChange={formik.handleChange("groupSize")}
@@ -81,7 +81,7 @@ export default function AddSubjectForm(props) {
                   : false
               }
               name="groupCount"
-              label="Ryhmien määrä"
+              label="Group count"
               variant="outlined"
               value={formik.values.groupCount}
               onChange={formik.handleChange("groupCount")}
@@ -97,7 +97,7 @@ export default function AddSubjectForm(props) {
                   : false
               }
               name="sessionLength"
-              label="Opetuskerran pituus(hh:mm)"
+              label="Length of lesson(hh:mm)"
               variant="outlined"
               value={formik.values.sessionLength}
               onChange={formik.handleChange("sessionLength")}
@@ -115,7 +115,7 @@ export default function AddSubjectForm(props) {
                   : false
               }
               name="sessionCount"
-              label="Opetuksien määrä viikossa"
+              label="Number of lessons per week"
               variant="outlined"
               value={formik.values.sessionCount}
               onChange={formik.handleChange("sessionCount")}
@@ -129,7 +129,7 @@ export default function AddSubjectForm(props) {
             <TextField
               error={formik.touched.area && formik.errors.area ? true : false}
               name="area"
-              label="Vaaditut neliömetrit"
+              label="Required square meters"
               variant="outlined"
               value={formik.values.area}
               onChange={formik.handleChange("area")}
@@ -139,7 +139,7 @@ export default function AddSubjectForm(props) {
           </Grid>
           <Grid item xs={12} sm={12} md={3}>
             <FormControl sx={{ maxWidth: 220, maxHeight: 58, minWidth: 120 }}>
-              <InputLabel>Pääaine</InputLabel>
+              <InputLabel>Major</InputLabel>
 
               <Select
                 name="programId"
@@ -167,7 +167,7 @@ export default function AddSubjectForm(props) {
           </Grid>
           <Grid item xs={12} sm={12} md={3}>
             <FormControl sx={{ maxWidth: 220, maxHeight: 58, minWidth: 120 }}>
-              <InputLabel>Huoneen tyyppi</InputLabel>
+              <InputLabel>Room type</InputLabel>
 
               <Select
                 name="spaceTypeId"
@@ -187,12 +187,12 @@ export default function AddSubjectForm(props) {
           </Grid>
           <Grid item xs={12}>
             <Typography variant="h6" sx={{ color: "#F6E9E9" }}>
-              Kopioi tiedot toisesta opetuksesta
+              Copy the information from another lesson
             </Typography>
           </Grid>
           <Grid item xs={12}>
             <FormControl sx={{ maxWidth: 340, minWidth: 200 }}>
-              <InputLabel>Kopioi olemassa olevan opetuksen tiedot</InputLabel>
+              <InputLabel>Copy data from an existing lesson</InputLabel>
               <Select onChange={handleChange}>
                 {allSubjectsList.map((value) => {
                   return (
@@ -215,7 +215,7 @@ export default function AddSubjectForm(props) {
                 setInitialSubject(submitValues);
               }}
             >
-              Lisää
+              Add
             </Button>
           </ThemeProvider>
         </Grid>

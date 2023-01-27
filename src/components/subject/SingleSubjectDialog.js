@@ -32,8 +32,8 @@ export default function SingleSubjectDialog(props) {
     if (result === 500) {
       setAlertOptions({
         severity: "error",
-        title: "Virhe",
-        message: "Jokin meni pieleen palvelimella. Varusteita ei löytynyt",
+        title: "Error",
+        message: "Something went wrong on the server. No equipment found",
       });
       setAlertOpen(true);
       return;
@@ -91,54 +91,54 @@ export default function SingleSubjectDialog(props) {
             >
               <Grid item s={6}>
                 <Typography variant="subtitle1">
-                  Nimi:&nbsp;
+                  Name:&nbsp;
                   {singleSubject?.subjectName}
                 </Typography>
               </Grid>
               <Grid item s={6}>
                 <Typography variant="subtitle1">
-                  Ryhmän koko:&nbsp;
+                  Group size:&nbsp;
                   {singleSubject?.groupSize}
                 </Typography>
               </Grid>
               <Grid item s={6}>
                 <Typography variant="subtitle1">
-                  Ryhmien määrä:&nbsp;
+                  Group count:&nbsp;
                   {singleSubject?.groupCount}
                 </Typography>
               </Grid>
               <Grid item s={6}>
                 <Typography variant="subtitle1">
-                  Tuntien pituus:&nbsp;
+                  Length of lessons:&nbsp;
                   {singleSubject?.sessionLength}
                 </Typography>
               </Grid>
               <Grid item s={6}>
                 <Typography variant="subtitle1">
-                  Tuntien määrä:&nbsp;
+                  Number of hours:&nbsp;
                   {singleSubject?.sessionCount}
                 </Typography>
               </Grid>
               <Grid item s={6}>
                 <Typography variant="subtitle1">
-                  Vaaditut neliömetrit:&nbsp;
+                  Required square meters:&nbsp;
                   {singleSubject?.area}
                 </Typography>
               </Grid>
               <Grid item s={6}>
                 <Typography variant="subtitle1">
-                  Pääaine:&nbsp;
+                  Major:&nbsp;
                   {singleSubject?.programName}
                 </Typography>
               </Grid>
               <Grid item s={6}>
                 <Typography variant="subtitle1">
-                  Huoneen tyyppi:&nbsp;
+                  Room type:&nbsp;
                   {singleSubject?.spaceTypeName}
                 </Typography>
               </Grid>
               <Grid item s={6}>
-                <Typography variant="subtitle1">Varuste tarpeet:</Typography>
+                <Typography variant="subtitle1">Equipment needs:</Typography>
                 <SubjectEquipmentList
                   equipListBySubId={equipListBySubId}
                   getEquipmentsBySubId={getEquipmentsBySubId}

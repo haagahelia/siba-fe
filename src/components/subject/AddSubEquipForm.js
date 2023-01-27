@@ -27,15 +27,15 @@ export default function AddSubEquipForm(props) {
   const [open, setOpen] = useState(false);
   const [equipPriority, setEquipPriority] = useState(0);
 
-  /* Tässä etsitään selectistä valitun varusteen prioriteettia, 
-  jotta käyttäjä näkee mikä varusteen oletus prioriteetti arvo on */
+  /* Here we look for the priority of the equipment selected in select,
+  so that the user can see what the equipment's default priority value is */
   useEffect(() => {
     const prio = equipmentSelectList.find((obj) => {
       return obj.id === formik.values.equipmentId;
     });
     if (prio?.equipmentPriority) {
       setEquipPriority(prio.equipmentPriority);
-      // Asettaa oletus prioriteetti arvon suoraan syötekenttään
+      // Sets the default priority value directly in the input field
       formik.setValues({ ...formik.values, priority: prio.equipmentPriority });
     }
   }, [formik.values.equipmentId]);
@@ -50,11 +50,11 @@ export default function AddSubEquipForm(props) {
             setOpen(true);
           }}
         >
-          Lisää varuste
+          Add equipment
         </Button>
       </ThemeProvider>
       <Dialog open={open}>
-        {/* formik.singleSubject?.subjectName} Tässä ? katsoo löytyykö singleSubject objektista attribuuttia subjectName, jos ei löydy palauttaa arvon null eikä kaadu */}
+        {/* formik.singleSubject?.subjectName} Here ? checks whether the singleSubject object has the subjectName attribute, if not found it returns the value null and does not crash */}
         <DialogTitle sx={{ maxWidth: "300px" }}>
           {singleSubject?.subjectName}
         </DialogTitle>
@@ -72,7 +72,7 @@ export default function AddSubEquipForm(props) {
               >
                 <Grid item sx={12}>
                   <FormControl sx={{ minWidth: 225 }}>
-                    <InputLabel>Varuste</InputLabel>
+                    <InputLabel>Equipment</InputLabel>
                     <Select
                       error={
                         formik.touched.equipmentId && formik.errors.equipmentId
@@ -99,7 +99,7 @@ export default function AddSubEquipForm(props) {
                 </Grid>
                 <Grid item sx={12}>
                   <Typography sx={{ marginBottom: 2 }}>
-                    Prioriteetin oletusarvo: {equipPriority}
+                    Priority default value: {equipPriority}
                   </Typography>
                   <TextField
                     error={
@@ -108,7 +108,7 @@ export default function AddSubEquipForm(props) {
                         : false
                     }
                     name="priority"
-                    label="Prioriteetti"
+                    label="Priority"
                     variant="outlined"
                     type="number"
                     value={formik.values.priority}
@@ -123,7 +123,7 @@ export default function AddSubEquipForm(props) {
                 </Grid>
                 <Grid item sx={12}>
                   <FormControl>
-                    <FormLabel>Varusteen pakollisuus</FormLabel>
+                    <FormLabel>Mandatority of the equipment</FormLabel>
                     <RadioGroup
                       name="obligatory"
                       value={formik.values.obligatory}
@@ -133,12 +133,12 @@ export default function AddSubEquipForm(props) {
                       <FormControlLabel
                         value={1}
                         control={<Radio />}
-                        label="Pakollinen"
+                        label="Mandatory"
                       />
                       <FormControlLabel
                         value={0}
                         control={<Radio />}
-                        label="Ei pakollinen"
+                        label="Not mandatory"
                       />
                     </RadioGroup>
                   </FormControl>
@@ -157,11 +157,11 @@ export default function AddSubEquipForm(props) {
                 onClick={() => {
                   setOpen(false);
                   setEquipPriority(0);
-                  // Nollataan lomake jos painaa peruuta
+                  // Let's reset the form if you press cancel
                   formik.resetForm();
                 }}
               >
-                Peruuta
+                Cancel
               </Button>
               <Button
                 type="submit"
@@ -172,7 +172,7 @@ export default function AddSubEquipForm(props) {
                   setEquipPriority(0);
                 }}
               >
-                Lisää
+                Add
               </Button>
             </ThemeProvider>
           </DialogActions>

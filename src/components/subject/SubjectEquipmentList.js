@@ -45,32 +45,32 @@ export default function SubjectEquipmentList(props) {
                 <Grid item xs={6}>
                   <ListItemText>
                     <Typography variant="subtitle1">
-                      Varusteen nimi:&nbsp; {value.name}
+                      Equipment name:&nbsp; {value.name}
                     </Typography>
                   </ListItemText>
                 </Grid>
                 <Grid item xs={6}>
                   <ListItemText>
                     <Typography variant="subtitle1">
-                      Varusteen tiedot:&nbsp; {value.description}
+                      Equipment information:&nbsp; {value.description}
                     </Typography>
                   </ListItemText>
                 </Grid>
                 <Grid item xs={6}>
                   <ListItemText>
                     <Typography variant="subtitle1">
-                      Varusteen prioriteetti arvo:&nbsp; {value.priority}
+                      Equipment priority value:&nbsp; {value.priority}
                     </Typography>
                   </ListItemText>
                 </Grid>
                 <Grid item xs={6}>
                   <ListItemText>
                     <Typography variant="subtitle1">
-                      Varuste pakollisuus :&nbsp;{" "}
+                      Equipment mandatority :&nbsp;{" "}
                       {value.obligatory === 1
-                        ? "Kyllä"
+                        ? "Yes"
                         : value.obligatory === 0
-                        ? "Ei"
+                        ? "No"
                         : null}
                     </Typography>
                   </ListItemText>

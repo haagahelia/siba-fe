@@ -35,16 +35,16 @@ export default function DeleteSubEquip(props) {
     if (!success) {
       setAlertOptions({
         severity: "error",
-        title: "Virhe",
-        message: "Jokin meni pieleen - yritä hetken kuluttua uudestaan.",
+        title: "Error",
+        message: "Something went wrong - please try again later.",
       });
       setAlertOpen(true);
       return;
     }
     setAlertOptions({
       severity: "success",
-      title: "Onnistui!",
-      message: `${equipmentName} poistettu.`,
+      title: "Success!",
+      message: `${equipmentName} removed.`,
     });
     setAlertOpen(true);
     getEquipmentsBySubId(subjectId);
@@ -52,8 +52,8 @@ export default function DeleteSubEquip(props) {
 
   const submitDelete = (values) => {
     setDialogOptions({
-      title: `Haluatko varmasti poistaa ${values.name}?`,
-      content: `Painamalla jatka poistat ${values.name} listauksesta.`,
+      title: `Are you sure you want to delete ${values.name}?`,
+      content: `Press continue to delete ${values.name} from the listing.`,
     });
     setDialogOpen(true);
 
@@ -84,7 +84,7 @@ export default function DeleteSubEquip(props) {
           submitDelete(singleEquipBySubId);
         }}
       >
-        Poista
+        Delete
       </Button>
     </div>
   );

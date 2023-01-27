@@ -32,7 +32,7 @@ export default function ConfirmationDialog(props) {
               style={{ color: "white" }}
               onClick={handleClose}
             >
-              Peruuta
+              Cancel
             </Button>
             <Button
               autoFocus
@@ -47,7 +47,7 @@ export default function ConfirmationDialog(props) {
                 handleClose();
               }}
             >
-              Jatka
+              Continue
             </Button>
           </ThemeProvider>
         </DialogActions>

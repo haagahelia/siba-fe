@@ -30,14 +30,14 @@ export default function EditSubEquipContainer(props) {
   });
 
   const formik = useFormik({
-    // enableReinitialize katsoo pitääkö Formikin nollata lomake, jos aloitusarvot muuttuvat
+    // enableReinitialize checks if Formik needs to reset the form if the initial values ​​change
     enableReinitialize: true,
     initialValues: initialEquipValues,
     validate,
     onSubmit: (values) => {
       setDialogOptions({
-        title: `Haluatko varmasti muuttaa ${initialEquipValues.name} tietoja?`,
-        content: `Painamalla jatka, tallennat ${initialEquipValues.name} uudet tiedot. `,
+        title: `Are you sure you want to edit ${initialEquipValues.name}?`,
+        content: `Press continue to save ${initialEquipValues.name} new information. `,
       });
       setDialogOpen(true);
       return;
@@ -57,19 +57,19 @@ export default function EditSubEquipContainer(props) {
     if (!success) {
       setAlertOptions({
         severity: "error",
-        title: "Virhe",
-        message: "Jokin meni pieleen - yritä hetken kuluttua uudestaan.",
+        title: "Error",
+        message: "Something went wrong - please try again later.",
       });
       setAlertOpen(true);
       return;
     }
     setAlertOptions({
       severity: "success",
-      title: "Onnistui!",
-      message: `${values.name} uudet tiedot lisätty.`,
+      title: "Success!",
+      message: `${values.name} new information added.`,
     });
     setAlertOpen(true);
-    // Lomake nollaantuu ja saa uudet muokatut initialValuet
+    // The form resets and gets the new modified initialValues
     formik.resetForm(setInitialEquipValues(formik.values));
     getEquipmentsBySubId(subId);
   }
@@ -78,8 +78,8 @@ export default function EditSubEquipContainer(props) {
     if (!success) {
       setAlertOptions({
         severity: "error",
-        title: "Virhe",
-        message: "Jokin meni pieleen palvelimella. Varusteita ei löytynyt.",
+        title: "Error",
+        message: "Something went wrong on the server. No equipment found.",
       });
       setAlertOpen(true);
       return;

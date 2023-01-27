@@ -24,16 +24,16 @@ export default function DeleteSubject(props) {
     if (result === false) {
       setAlertOptions({
         severity: "error",
-        title: "Virhe",
-        message: "Jokin meni pieleen - yritä hetken kuluttua uudestaan.",
+        title: "Error",
+        message: "Something went wrong - please try again later.",
       });
       setAlertOpen(true);
       return;
     }
     setAlertOptions({
       severity: "success",
-      title: "Onnistui!",
-      message: `${value.subjectName} poistettu.`,
+      title: "Success!",
+      message: `${value.subjectName} removed.`,
     });
     setAlertOpen(true);
     setOpen(false);
@@ -43,8 +43,8 @@ export default function DeleteSubject(props) {
 
   const submitDelete = (data) => {
     setDialogOptions({
-      title: `Haluatko varmasti poistaa ${data.subjectName}?`,
-      content: `Painamalla jatka poistat ${data.subjectName} listauksesta.`,
+      title: `Are you sure you want to delete ${data.subjectName}?`,
+      content: `Press continue to delete ${data.subjectName} from the listing.`,
     });
     setDialogOpen(true);
     setDeleteId(data.id);
@@ -71,7 +71,7 @@ export default function DeleteSubject(props) {
           color="red"
           onClick={() => submitDelete(singleSubject)}
         >
-          Poista
+          Delete
         </Button>
       </ThemeProvider>
     </div>

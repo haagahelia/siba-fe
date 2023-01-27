@@ -27,12 +27,12 @@ export function GetMissingEquipment(idData) {
   let item = idData.item;
 
   const [missingEquipment, setMissingEquipment] = useState(
-    "Ei puuttuvia varusteita",
+    "No missing equipment",
   );
   const [tooltipOpen, setTooltipOpen] = React.useState(false);
   const [alertOpen, setAlertOpen] = useState(false);
   const [alertOptions, setAlertOptions] = useState({
-    message: "Hupsista keikkaa!",
+    message: "Whoops!",
     severity: "error",
   });
 
@@ -54,19 +54,19 @@ export function GetMissingEquipment(idData) {
       spaceId,
     );
     if (!success) {
-      console.log("Hupsista keikkaa!");
+      console.log("Whoops!");
       setAlertOptions({
         severity: "error",
-        title: "Virhe",
+        title: "Error",
         message:
-          "Oho! Jotain meni pieleen palvelimella. Puuttuvia varusteita ei löytynyt",
+          "Oops! Something went wrong on the server. No missing equipment was found",
       });
       setAlertOpen(true);
       return;
     }
 
     const equipmentNames = data.map((item) => item.name);
-    setMissingEquipment(`Puuttuvat varusteet: ${equipmentNames.join(", ")}`);
+    setMissingEquipment(`Missing equipment: ${equipmentNames.join(", ")}`);
   };
 
   return (
@@ -110,7 +110,7 @@ export default function AllocationSubjectFailureView() {
   const { allocId } = useParams();
   const [alertOpen, setAlertOpen] = useState(false);
   const [alertOptions, setAlertOptions] = useState({
-    message: "Hupsista keikkaa!",
+    message: "Whoops!",
     severity: "error",
   });
 
@@ -119,8 +119,8 @@ export default function AllocationSubjectFailureView() {
     if (!success) {
       setAlertOptions({
         severity: "error",
-        title: "Virhe",
-        message: "Oho! Jotain meni pieleen palvelimella. Opetuksia ei löytynyt",
+        title: "Error",
+        message: "Oops! Something went wrong on the server. No lessons found",
       });
       setAlertOpen(true);
       return;
@@ -134,8 +134,8 @@ export default function AllocationSubjectFailureView() {
     if (!success) {
       setAlertOptions({
         severity: "error",
-        title: "Virhe",
-        message: "Oho! Jotain meni pieleen palvelimella. Huoneita ei löytynyt",
+        title: "Error",
+        message: "Oops! Something went wrong on the server. No rooms found",
       });
       setAlertOpen(true);
       return;
@@ -177,7 +177,7 @@ export default function AllocationSubjectFailureView() {
       />
 
       <Typography style={{ color: "#F6E9E9", margin: 20 }}>
-        Allokoimattomat opetukset
+        Unallocated lessons
       </Typography>
 
       <div style={{ width: "70%", backgroundColor: "#ff1744", margin: "auto" }}>
@@ -185,10 +185,10 @@ export default function AllocationSubjectFailureView() {
           <Table sx={{ minWidth: 650 }} aria-label="simple table">
             <TableHead>
               <TableRow>
-                <TableCell>Opetuksen nimi</TableCell>
-                <TableCell>Henkilömäärä</TableCell>
-                <TableCell>Tilavaatimus (m&#178;)</TableCell>
-                <TableCell>Tilatyyppi</TableCell>
+                <TableCell>The name of the lesson</TableCell>
+                <TableCell>Number of people</TableCell>
+                <TableCell>Space requirement (m&#178;)</TableCell>
+                <TableCell>Space type</TableCell>
               </TableRow>
             </TableHead>
             <TableBody id="setcursor">
@@ -208,17 +208,17 @@ export default function AllocationSubjectFailureView() {
         </TableContainer>
       </div>
       <Dialog open={open} onClose={handleClose} scroll="body" maxWidth="70%">
-        <DialogTitle>Tilojen sopivuus</DialogTitle>
+        <DialogTitle>Suitability of the space</DialogTitle>
         <DialogContent>
           <TableContainer component={Paper}>
             <Table sx={{ minWidth: 650 }} aria-label="simple table">
               <TableHead>
                 <TableRow>
-                  <TableCell>Tilan nimi</TableCell>
-                  <TableCell>Varusteet</TableCell>
-                  <TableCell>Tilakoko</TableCell>
-                  <TableCell>Hlömäärä</TableCell>
-                  <TableCell>Tilatyyppi</TableCell>
+                  <TableCell>Space name</TableCell>
+                  <TableCell>Equipment</TableCell>
+                  <TableCell>Space size</TableCell>
+                  <TableCell>Number of people</TableCell>
+                  <TableCell>Space type</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -275,7 +275,7 @@ export default function AllocationSubjectFailureView() {
             onClick={handleClose}
             style={{ backgroundColor: "#ff6d00", cursor: "pointer" }}
           >
-            Poistu
+            Exit
           </Button>
         </DialogActions>
       </Dialog>

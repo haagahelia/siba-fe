@@ -7,11 +7,11 @@ import { Collapse, Typography, Box } from "@mui/material";
 import theme from "../styles/theme";
 import resultRoomsStore from "../../data/ResultRoomsStore";
 
-//komponentti allokaation tuloksen huodeiden näyttämiselle
-//näyttää:
-//huoneen nimen
-//käyttöasteen
-//dropdownissa huonetta käyttävät opetukset
+//a component for displaying allocation results
+//shows:
+//the name of the room
+//utilization rate
+//the classes using the room in the dropdown
 
 export default function RoomResult(props) {
   return (
@@ -72,7 +72,7 @@ export default function RoomResult(props) {
   );
 }
 
-//pitää muokata kun tulee oikeaa dataa, nyt havainnollistamis versio.
+//have to edit when the correct data comes, for now an illustrative version.
 function CollapsedRow(id) {
   const [expand, setExpand] = React.useState(false);
   const [subjects, setSubjects] = React.useState([]);

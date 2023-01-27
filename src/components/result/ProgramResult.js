@@ -11,12 +11,12 @@ import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import resultProgramStore from "../../data/ResultProgramStore";
 
-//komponentti allokaation tuloksen aineryhmien näyttämiselle
-//näyttää:
-//aineryhmän nimen
-//aineryhmän tarvitsemat tunnit jaettuna sille allokoidut tunnit %%
-//dropdownissa aineryhmän huoneet
-//popup nappi, joka näyttää aineryhmän opetukset
+//component for displaying the subject groups of the allocation result
+//shows:
+//the name of the subject groups
+//the hours needed by the subject group divided by the hours allocated to it %%
+//the name of the subject group rooms in the dropdown
+//popup button that shows the lessons of the subject group
 
 export default function ProgramResult(props) {
   const programs = props.data;
@@ -107,7 +107,7 @@ export default function ProgramResult(props) {
 
               <Grid2 xs={3}>
                 <ProgressBar
-                  // Jouduin kommentoimaan pois muutoin appi ei toiminut
+                  // Had to comment out, otherwise the button wouldn't work
                   // style= {styles.section}
                   baseBgColor={"#272121"}
                   labelAlignment={"left"}

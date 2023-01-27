@@ -5,11 +5,11 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import { Collapse, Typography } from "@mui/material";
 import resultRoomsStore from "../../data/ResultRoomsStore";
-//komponentti allokaation tuloksen opetuksien näyttämiselle
-//näyttää:
-//opetuksen nimen
-//opetuksen tarvitsemat tunnit jaettuna sille allokoidut tunnit %%
-//dropdownissa opetuksen huoneet
+//component for displaying the classes of the allocation result
+//shows:
+//the name of the class
+//the hours needed for teaching divided by the hours allocated to it %%
+//classrooms in the dropdown
 
 export default function SubjectResult(props) {
   return (
@@ -59,7 +59,7 @@ export default function SubjectResult(props) {
   );
 }
 
-//pitää muokata kun tulee oikeaa dataa, nyt havainnollistamis versio.
+//have to edit when the correct data comes, for now an illustrative version.
 function CollapsedRow(id) {
   const [expand, setExpand] = React.useState(false);
   const [rooms, setRooms] = React.useState([]);

@@ -25,8 +25,8 @@ export default function EditSubEquipForm(props) {
   const [open, setOpen] = useState(false);
   const [equipPriority, setEquipPriority] = useState(0);
 
-  /* Tässä etsitään selectistä valitun varusteen prioriteettia, 
-  jotta käyttäjä näkee mikä varusteen oletus prioriteetti arvo on */
+  /* Here we look for the priority of the equipment selected in select,
+  so that the user can see what the equipment's default priority value is */
   useEffect(() => {
     const prio = equipmentPriorityList.find((obj) => {
       return obj.id === formik.values.equipmentId;
@@ -48,13 +48,13 @@ export default function EditSubEquipForm(props) {
             setOpen(true);
           }}
         >
-          Muokkaa
+          Edit
         </Button>
       </ThemeProvider>
       <Dialog open={open}>
         <form onSubmit={formik.handleSubmit}>
-          {/* formik.initialValues?.name} Tässä ? katsoo löytyykö initialValues objektista attribuuttia name, jos ei löydy palauttaa arvon null eikä kaadu */}
-          <DialogTitle>Muokkaa: {formik.initialValues?.name}</DialogTitle>
+          {/* formik.initialValues?.name} Here ? checks if the name attribute can be found in the initialValues ​​object, if not found it returns the value null and does not crash */}
+          <DialogTitle>Edit: {formik.initialValues?.name}</DialogTitle>
           <DialogContent>
             <DialogContentText>
               <Grid
@@ -68,7 +68,7 @@ export default function EditSubEquipForm(props) {
               >
                 <Grid item sx={12}>
                   <Typography sx={{ marginBottom: 2 }}>
-                    Prioriteetin oletusarvo: {equipPriority}
+                    Default value for priority: {equipPriority}
                   </Typography>
                   <TextField
                     error={
@@ -92,7 +92,7 @@ export default function EditSubEquipForm(props) {
                 </Grid>
                 <Grid item sx={12}>
                   <FormControl>
-                    <FormLabel>Varusteen pakollisuus</FormLabel>
+                    <FormLabel>Mandatority of the equipment</FormLabel>
                     <RadioGroup
                       name="obligatory"
                       value={formik.values.obligatory}
@@ -102,12 +102,12 @@ export default function EditSubEquipForm(props) {
                       <FormControlLabel
                         value={1}
                         control={<Radio />}
-                        label="Pakollinen"
+                        label="Mandatory"
                       />
                       <FormControlLabel
                         value={0}
                         control={<Radio />}
-                        label="Ei pakollinen"
+                        label="Not mandatory"
                       />
                     </RadioGroup>
                   </FormControl>
@@ -125,11 +125,11 @@ export default function EditSubEquipForm(props) {
                 style={{ color: "white" }}
                 onClick={() => {
                   setOpen(false);
-                  // Nollataan lomake jos painaa peruuta
+                  // Let's reset the form if you press cancel
                   formik.resetForm();
                 }}
               >
-                Peruuta
+                Cancel
               </Button>
               <Button
                 type="submit"
@@ -139,7 +139,7 @@ export default function EditSubEquipForm(props) {
                   setOpen(false);
                 }}
               >
-                Muokkaa
+                Edit
               </Button>
             </ThemeProvider>
           </DialogActions>

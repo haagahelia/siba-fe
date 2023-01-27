@@ -29,7 +29,7 @@ export default function AddSubjectContainer(props) {
     title: "this is dialog",
     content: "Something here",
   });
-  // Tässä formikin initialvalues tallennetaan stateen
+  // Here the initialvalues ​​of the form are stored in the state
   const [initialSubject, setInitialSubject] = useState({
     name: "",
     groupSize: 0,
@@ -58,8 +58,8 @@ export default function AddSubjectContainer(props) {
     validate,
     onSubmit: (values) => {
       setDialogOptions({
-        title: `Haluatko varmasti lisätä ${values.name}?`,
-        content: `Painamalla jatka, ${values.name} lisätään opetuslistaukseen`,
+        title: `Are you sure you want to add ${values.name}?`,
+        content: `By clicking continue, ${values.name} will be added to the teaching list`,
       });
       setDialogOpen(true);
 
@@ -72,8 +72,8 @@ export default function AddSubjectContainer(props) {
     if (!success) {
       setAlertOptions({
         severity: "error",
-        title: "Virhe",
-        message: "Jokin meni pieleen palvelimella. Pääaineita ei löytynyt.",
+        title: "Error",
+        message: "Something went wrong on the server. No majors found.",
       });
       setAlertOpen(true);
       return;
@@ -90,8 +90,8 @@ export default function AddSubjectContainer(props) {
     if (!success) {
       setAlertOptions({
         severity: "error",
-        title: "Virhe",
-        message: "Jokin meni pieleen palvelimella. Huonetyyppejä ei löytynyt.",
+        title: "Error",
+        message: "Something went wrong on the server. No room types found.",
       });
       setAlertOpen(true);
       return;
@@ -120,27 +120,27 @@ export default function AddSubjectContainer(props) {
     if (!result) {
       setAlertOptions({
         severity: "error",
-        title: "Virhe",
-        message: "Jokin meni pieleen - yritä hetken kuluttua uudestaan.",
+        title: "Error",
+        message: "Something went wrong - please try again later.",
       });
       setAlertOpen(true);
       return;
     }
     setAlertOptions({
       severity: "success",
-      title: "Onnistui!",
-      message: `${submitValues.name} lisätty.`,
+      title: "Success!",
+      message: `${submitValues.name} added.`,
     });
     setAlertOpen(true);
     resetFormm();
     getAllSubjects();
   };
-  // Tässä tulee lista opetuksia
-  // Kun opetuksen valitsee menee tiedot formikin initialvaluesiin
+  // Here is a list of lessons
+  // When you choose a lesson, the information goes to the form's initialvalues
   const handleChange = (e) => {
     let selected = e.target.value;
     setInitialSubject({
-      name: formik.values.name, // Tämä, jotta syötetty nimi ei vaihdu vaikka valitsisi olemassa olevan opetuksen tiedot
+      name: formik.values.name, // This is so that the entered name does not change even if you select the data of an existing lesson
       groupSize: selected.groupSize,
       groupCount: selected.groupCount,
       sessionLength: selected.sessionLength,
@@ -175,7 +175,7 @@ export default function AddSubjectContainer(props) {
         }}
       >
         <CardContent>
-          <CardHeader title="Lisää opetus" sx={{ marginBottom: "30px" }} />
+          <CardHeader title="Add lesson" sx={{ marginBottom: "30px" }} />
           <AddSubjectForm
             handleChange={handleChange}
             programSelectList={programSelectList}

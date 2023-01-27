@@ -10,7 +10,7 @@ import dao from "../../ajax/dao";
 import EditSubjectForm from "./EditSubjectForm";
 
 export default function EditSubjectContainer(props) {
-  // Aina kun editSubject muuttuu subjectList.js filussa ne tiedot tulee tähän nimellä singleSubject
+  // Whenever the editSubject changes in the subjectList.js file, that information comes here as singleSubject
   const { singleSubject, getAllSubjects, setSingleSubject } = props;
   const [programSelectList, setProgramSelectList] = useState([]);
   const [spaceTypeSelectList, setSpaceTypeSelectList] = useState([]);
@@ -27,14 +27,14 @@ export default function EditSubjectContainer(props) {
   });
 
   const formik = useFormik({
-    // enableReinitialize katsoo pitääkö Formikin nollata lomake, jos aloitusarvot muuttuvat
+    // enableReinitialize checks if Formik needs to reset the form if the initial values ​​change
     enableReinitialize: true,
     initialValues: singleSubject,
     validate,
     onSubmit: (values) => {
       setDialogOptions({
-        title: `Haluatko varmasti muuttaa ${values.subjectName} tietoja?`,
-        content: `Painamalla jatka, tallennat ${values.subjectName} uudet tiedot. `,
+        title: `Are you sure you want to edit ${values.subjectName}?`,
+        content: `Press continue to save ${values.subjectName} new information. `,
       });
       setDialogOpen(true);
       return;
@@ -58,16 +58,16 @@ export default function EditSubjectContainer(props) {
     if (!result) {
       setAlertOptions({
         severity: "error",
-        title: "Virhe",
-        message: "Jokin meni pieleen - yritä hetken kuluttua uudestaan.",
+        title: "Error",
+        message: "Something went wrong - please try again later.",
       });
       setAlertOpen(true);
       return;
     }
     setAlertOptions({
       severity: "success",
-      title: "Onnistui!",
-      message: `${values.subjectName} uudet tiedot lisätty.`,
+      title: "Success!",
+      message: `${values.subjectName} new information added.`,
     });
     setAlertOpen(true);
     setSingleSubject(formik.values);
@@ -79,8 +79,8 @@ export default function EditSubjectContainer(props) {
     if (!success) {
       setAlertOptions({
         severity: "error",
-        title: "Virhe",
-        message: "Jokin meni pieleen palvelimella. Pääaineita ei löytynyt.",
+        title: "Error",
+        message: "Something went wrong on the server. No majors found.",
       });
       setAlertOpen(true);
       return;
@@ -97,8 +97,8 @@ export default function EditSubjectContainer(props) {
     if (!success) {
       setAlertOptions({
         severity: "error",
-        title: "Virhe",
-        message: "Jokin meni pieleen palvelimella. Huonetyyppejä ei löytynyt.",
+        title: "Error",
+        message: "Something went wrong on the server. No room types found.",
       });
       setAlertOpen(true);
       return;
