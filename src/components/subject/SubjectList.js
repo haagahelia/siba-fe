@@ -6,16 +6,16 @@ import Divider from "@mui/material/Divider";
 import Grid from "@mui/material/Grid";
 import { styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
-import { TextField, Typography } from "@mui/material";
-import SubjectPagination from "./SubjectPagination";
-import SubjectFiltering from "./SubjectFiltering";
+import { Typography } from "@mui/material"; //TextField,???
+//import SubjectPagination from "./SubjectPagination";???
+//import SubjectFiltering from "./SubjectFiltering";???
 import SingleSubjectDialog from "./SingleSubjectDialog";
 
 export default function SubjectListItems(props) {
-  const { allSubjectsList, getAllSubjects, paginateSubjects } = props;
+  const { allSubjectsList, getAllSubjects, paginateSubjects } = props; //allSubjectsList???
 
   const [open, setOpen] = useState(false);
-  const [hoverColor, sethoverColor] = useState("#CFD6D5  ");
+  const [hoverColor, sethoverColor] = useState("#CFD6D5  "); //[hoverColor, sethoverColor] ???
   const [singleSubject, setSingleSubject] = useState({
     id: null,
     name: null,

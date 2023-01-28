@@ -7,7 +7,7 @@ export default function SubjectPagination({
   pagination,
   setPagination,
   allSubjectsList,
-  paginateSubjects,
+  // paginateSubjects,??
   setPaginateSubjects,
 }) {
   const count = Math.ceil(allSubjectsList.length / pageSize);

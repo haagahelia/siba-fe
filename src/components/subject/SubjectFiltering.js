@@ -4,8 +4,8 @@ import { Clear } from "@mui/icons-material";
 
 export default function SubjectFiltering({
   allSubjectsList,
-  setallSubjectsList,
-  paginateSubjects,
+  //setallSubjectsList,???
+  //paginateSubjects,???
   setPaginateSubjects,
   pagination,
 }) {
