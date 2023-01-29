@@ -17,6 +17,7 @@ export async function validate(values) {
     // Here it is considered that the user does not enter the name of an already existing lesson.
     // In filtering, however, it is considered / taken into account that the name can be the same as the name of the lesson being edited
     let list = subjectList.map((item) => {
+      //let list ???
       if (values.id === item.id) {
         id = item.id;
         // Here, all teaching IDs that do not match the teaching ID to be edited are filtered out

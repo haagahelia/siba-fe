@@ -2,7 +2,7 @@ import * as React from "react";
 import Grid2 from "@mui/material/Unstable_Grid2";
 import ProgressBar from "@ramonak/react-progress-bar";
 import Modal from "@mui/material/Modal";
-import { Box, Button, Collapse } from "@mui/material";
+import { Box, Collapse } from "@mui/material"; // Button???
 import SubjectResult from "./SubjectResult";
 import testData from "../../data/testData";
 import Typography from "@mui/material/Typography";
@@ -19,8 +19,8 @@ import resultProgramStore from "../../data/ResultProgramStore";
 //popup button that shows the lessons of the subject group
 
 export default function ProgramResult(props) {
-  const programs = props.data;
-  const progStore = resultProgramStore;
+  const programs = props.data; //const programs ???
+  const progStore = resultProgramStore; //const progStore
   const [subProg, setSubProg] = React.useState({});
   const [open, setOpen] = React.useState(false);
   const handleOpen = (prog) => {
