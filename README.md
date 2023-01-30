@@ -4,26 +4,28 @@
 <br />
 <div align="center">
   
-<h1 align="center">SIBA22S</h1>
+<h1 align="center">SIBA project</h1>
 
 <h3 align="center">
-    Projekti luotu Softalaprojekti kurssilla <br />
+   This project was created on the courses Softala-projekti / Software Project<br />
 <br />
 </div>
 
-## Tekijät
+## Authors
 
   <p>SIBA22S</p>
+  <p>SIBA23K</p>
+  <p>SWP23K</p>
 
 <!-- ABOUT THE PROJECT -->
 
-## Projektista
+## About the project
 
-Projekti on Haaga-Helian ja Sibelius akatemian yhteistyön pohjalta toteutettava sovellus, jonka tarkoituksena on mahdollistaa Sibelius akatemian opetustilojen ja varusteiden käytön laskenta, sekä optimointi eri opetuksille.
+This Project is Haaga-Helia's and Sibelius Academy's collaborative work, which aims at building an information system that makes it possible to calculate and optimize Sibelius Academy's teaching space and equipment usage for different lessons.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-### Teknologiat ja muut hyödylliset resurssit
+### Frontend technology and other useful resources
 
 - [React](https://reactjs.org/)
 - [Axios](https://www.npmjs.com/package/axios)
@@ -35,83 +37,83 @@ Projekti on Haaga-Helian ja Sibelius akatemian yhteistyön pohjalta toteutettava
 
 <!-- GETTING STARTED -->
 
-## Aloitus
+## Beginning
 
-Fronttipuolen asennusohjeet
+Frontend side installation instructions
 
-### Asennus
+### Installation
 
-1. Kloonaa repo
+1. Clone the repository
    ```sh
    git clone https://github.com/haagahelia/siba-fe.git
    ```
-2. Asenna tarvittavat paketit
+2. Install needed packages
 
    ```sh
    npm install
    ```
 
-3. Env. tiedoston lisäys. Lisää .env tiedosto repon juurihakemistoon
+3. Create **.env.local** file. Add .env to the root of the project
 
    ```sh
    REACT_APP_BE_SERVER_BASE_URL=http://localhost:3001/api
-   REACT_APP_BE_SERVER_BASE_URL2=http://jokutoinenpalvelin:3001/api
+   REACT_APP_BE_SERVER_BASE_URL2=http://someotherserver:3001/api
    ```
 
-4. Sovelluksen käynnistys
+4. Application launch
    ```sh
    npm start
    ```
-5. Huom! Seuraa [Backend repon](https://github.com/haagahelia/Siba_be) asennusohjetta myös
+5. Attention! Follow [Backend repo](https://github.com/haagahelia/Siba_be) asennusohjetta myös
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-## Käyttö
+## Using the system
 
-### Opetukset näkymä
+### Teachings/Opetukset screen
 
-1. Opetusnäkymässä on mahdollisuus lisätä uusia opetuksia "Lisää opetus" osiossa. Käyttäjällä myös mahdollisuus kopioida jo olemassa olevan opetuksen tiedot dropdown valikosta
-2. "Opetukset" otsikon alla on listattuna kaikki syötetyt opetukset. Opetuksia pystytään hakea "Opetusten haku:" tekstikentän avulla
-3. Listattuja opetuksia pystytään valitsemaan ja tällöin opetuksen Popup Dialog tulee esiin. Tässä dialogissa pystytään poistamaan, muokkaamaan tai lisäämään opetukselle varusteita
-4. Listalla näytetään aina 15 opetusta kerralla. Listan alaosassa on käytättey paginationia, jossa voidaan selata lisää opetuksia
+1. In the lesson view, there is an option to add new lessons in the "Add lesson" section. The user also has the option to copy the information of an already existing lesson from the dropdown menu
+2. All entered lessons are listed under the "Lessons" heading. Lessons can be searched using the "Teaching search:" text field
+3. Listed lessons can be selected and then the Popup Dialog of the lesson will appear. In this dialog, you can remove, modify or add equipment to the lesson
+4. The list always shows 15 lessons at once. At the bottom of the list, you can use pagination, where you can browse more lessons
 
-### Tulosnäkymä
+### Results view
 
-1. Tulosnäkymässä käyttäjä käynnistää allokoinnin "Start Allocation" napilla.
+1. In the results view, the user starts the allocation with the "Start Allocation" button.
 
-2. Käyttäjä ei pysty aloittaa toista allokointia ennenkun on painanut "Reset Allocation" nappia.
+2. The user cannot start another allocation until he has pressed the "Reset Allocation" button.
 
-3. Tällähetkellä käyttäjän pitää päivittää sivu, jotta näkee muutokset allokointiin.
+3. At this moment, the user needs to refresh the page in order to see the changes to the allocation.
 
-4. Aineryhmä kohdassa käyttäjä pystyy avata dropdown valikon, joka kertoo, mitä huoneita aineryhmä käyttää ja kuinka monta tuntia sillä huoneella on käytössä.
+4. In the subject group section, the user can open a dropdown menu that tells which rooms the subject group uses and how many hours that room is in use.
 
-5. Aineryhmä kohdassa informaatio nappia painamalla aukeaa pop-up ikkuna, jossa käyttäjä näkee ainekohtaiset opetukset.
-   Pop-up ikkunassa käyttäjä pystyy avata opetuskohtaiset dropdownit, josta näkee missä huoneessa opetusta on.
+5. By pressing the subject group information button, a pop-up window opens where the user can see subject-specific lessons.
+    In the pop-up window, the user can open the lesson-specific dropdowns, from which you can see which room the lesson is in.
 
-6. Huone kohdassa käyttäjä näkee kaikki käytössä olevat huoneet ja niitten käyttöasteet.
+6. In the Room section, the user can see all the rooms in use and their occupancy rates.
 
-7. Huone kohdassa käyttäjä pystyy avata huonekohtaiset dropdown listat, josta näkee, mitä opetuksia huoneissa on ja kuinka monta tuntia ne käyttä
+7. In the Room section, the user can open the room-specific dropdown lists, where you can see what classes are in the rooms and how many hours they are used
 
-8. Huoneet ovat värikoodilla erotettuja, luokkatyypeittäin. Esim. Studio, Esitystilat, Luentoluokat ja musiikki luokat
-
-<p align="right">(<a href="#top">back to top</a>)</p>
-
-## Vanhalta kurssilta jääneet ongelmat
-
-### Lisää tähän kurssin päätteeksi
-
-dao.js tiedoston yhtenäistäminen
+8. The rooms are separated by color code, by class type. E.g. Studio, Performance spaces, Lecture classes and music classes
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-## Jatkokehitysideat
+## Problems inherited from the old course teams
 
-### Lisää tähän kurssin päätteeksi
+### Add here at the end of the course
 
-Opetuksen lisäyksessä, jossa voi kopioida tietoja muista opetuksista, voisi olla selectin lisäksi samassa etsi -toiminto, jotta käyttäjä löytäisi nopeammin sekä helpommin haluamansa opetuksen.
+dao.js file unifications
 
-Opetuksen lisäsyksessä voisi valita onko opetus etäopetus, jotta laskennassa voisi ottaa huomioon opetukset, jotka eivät tarvitse tai tarvitsevat vähemmän opetustilaa.
+<p align="right">(<a href="#top">back to top</a>)</p>
 
-Opetuksen lisäyksessä olisi toiminto, jolla lomakkeen voisi nollata syötetyistä syötteistä
+## Further development ideas
+
+### Add here at the end of the course
+
+The addition of a lesson, where you can copy information from other lessons, could have, in addition to select, a search in the same function, so that the user can find the lesson he wants faster and more easily.
+
+When adding a lesson, you could choose whether the lesson is distance learning, so that the calculation could take into account lessons that do not need or need less teaching space.
+
+In the addition of the teaching, there would be a function with which the form could be reset from the entered inputs
 
 <p align="right">(<a href="#top">back to top</a>)</p>
