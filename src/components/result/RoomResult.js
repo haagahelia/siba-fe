@@ -3,7 +3,7 @@ import React from "react";
 import ProgressBar from "@ramonak/react-progress-bar";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
-import { Collapse, Typography, Box } from "@mui/material";
+import { Collapse, Typography } from "@mui/material"; //Box ???
 import theme from "../styles/theme";
 import resultRoomsStore from "../../data/ResultRoomsStore";
 
