@@ -1,4 +1,5 @@
 import axios from "axios";
+const baseUrl = process.env.REACT_APP_BE_SERVER_BASE_URL;
 
 class ResultProgramStore {
   getNames() {
@@ -7,7 +8,7 @@ class ResultProgramStore {
 
   async fetchNames(id) {
     await axios
-      .get(`http://localhost:3001/api/allocation/${id}/program/`)
+      .get(`${baseUrl}/allocation/${id}/program/`)
       .then((data) => (this.names = data.data))
       .catch((e) => console.error(e));
   }

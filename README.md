@@ -56,7 +56,7 @@ Frontend side installation instructions
 3. Create **.env.local** file. Add .env to the root of the project
 
    ```sh
-   REACT_APP_BE_SERVER_BASE_URL=http://localhost:3001/api
+   REACT_APP_BE_SERVER_BASE_URL=http://...backend server address and port here.../api
    REACT_APP_BE_SERVER_BASE_URL2=http://someotherserver:3001/api
    ```
 

@@ -1,7 +1,8 @@
 import { Response, Subject, SubjectName } from "../types";
+const baseUrl = process.env.REACT_APP_BE_SERVER_BASE_URL;
 
 export const fetchAllSubjects = async (): Promise<Response<Subject>> => {
-  const request = new Request("http://localhost:3001/api/subject/getAll", {
+  const request = new Request(`${baseUrl}/subject/getAll`, {
     method: "GET",
   });
   const response = await fetch(request);
@@ -11,7 +12,7 @@ export const fetchAllSubjects = async (): Promise<Response<Subject>> => {
 };
 
 export const fetchSubjectsNames = async (): Promise<Response<SubjectName>> => {
-  const request = new Request("http://localhost:3001/api/subject/getNames", {
+  const request = new Request(`${baseUrl}/subject/getNames`, {
     method: "GET",
   });
   const response = await fetch(request);
@@ -23,12 +24,9 @@ export const fetchSubjectsNames = async (): Promise<Response<SubjectName>> => {
 export const deleteSingleSubject = async (
   subjectId: number,
 ): Promise<boolean> => {
-  const request = new Request(
-    `http://localhost:3001/api/subject/delete/${subjectId}`,
-    {
-      method: "DELETE",
-    },
-  );
+  const request = new Request(`${baseUrl}/subject/delete/${subjectId}`, {
+    method: "DELETE",
+  });
   const response = await fetch(request);
   const data = await response.json();
 
@@ -36,7 +34,7 @@ export const deleteSingleSubject = async (
 };
 
 export const postNewSubject = async (newSubject: Subject): Promise<boolean> => {
-  const request = new Request("http://localhost:3001/api/subject/post", {
+  const request = new Request(`${baseUrl}/subject/post`, {
     method: "POST",
     headers: {
       Accept: "application/json",
@@ -49,7 +47,7 @@ export const postNewSubject = async (newSubject: Subject): Promise<boolean> => {
 };
 
 export const editSubject = async (editedSubject: Subject): Promise<boolean> => {
-  const request = new Request("http://localhost:3001/api/subject/update", {
+  const request = new Request(`${baseUrl}/subject/update`, {
     method: "PUT",
     headers: {
       Accept: "application/json",

@@ -37,7 +37,7 @@ export default function AddSubjectContainer(props) {
     sessionLength: "",
     sessionCount: 0,
     area: 0,
-    programId: 0,
+    programId: 3009,
   });
 
   const resetFormm = () => {

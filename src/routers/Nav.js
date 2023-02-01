@@ -31,8 +31,8 @@ function NavBar() {
               <NavLink
                 to="/"
                 end
-                exact={true}
-                activeClassName="active"
+                exact="true"
+                activeclassname="active"
                 className="nav-links"
                 onClick={handleClick}
               >
@@ -41,9 +41,9 @@ function NavBar() {
             </li>
             <li className="nav-item">
               <NavLink
-                exact
+                exact="true"
                 to="/subject"
-                activeClassName="active"
+                activeclassname="active"
                 className="nav-links"
                 onClick={handleClick}
               >
@@ -52,9 +52,9 @@ function NavBar() {
             </li>
             <li className="nav-item">
               <NavLink
-                exact
+                exact="true"
                 to="/onlyresult"
-                activeClassName="active"
+                activeclassname="active"
                 className="nav-links"
                 onClick={handleClick}
               >

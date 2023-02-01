@@ -1,19 +1,17 @@
 import { Response, SubjectEquipment } from "../types";
+const baseUrl = process.env.REACT_APP_BE_SERVER_BASE_URL;
 
 export const postNewSubjectEquipment = async (
   newSubjectEquipment: SubjectEquipment,
 ): Promise<boolean> => {
-  const request = new Request(
-    "http://localhost:3001/api/subjectequipment/post",
-    {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(newSubjectEquipment),
+  const request = new Request(`${baseUrl}/subjectequipment/post`, {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
     },
-  );
+    body: JSON.stringify(newSubjectEquipment),
+  });
   const response = await fetch(request);
   const data = await response.json();
   return data.ok;
@@ -24,7 +22,7 @@ export const fetchEquipmentBySubjectId = async (
   id: number,
 ): Promise<Response<SubjectEquipment>> => {
   const request = new Request(
-    `http://localhost:3001/api/subjectequipment/getEquipment/${id}`,
+    `${baseUrl}/subjectequipment/getEquipment/${id}`,
     {
       method: "GET",
     },
@@ -41,7 +39,7 @@ export const deleteSingleSubjectEquipment = async (
   equipmentId: number,
 ): Promise<boolean> => {
   const request = new Request(
-    `http://localhost:3001/api/subjectequipment/delete/${subjectId}/${equipmentId}`,
+    `${baseUrl}/subjectequipment/delete/${subjectId}/${equipmentId}`,
     {
       method: "DELETE",
     },
@@ -55,17 +53,14 @@ export const deleteSingleSubjectEquipment = async (
 export const editSubjectEquipment = async (
   editedSubjectEquipment: SubjectEquipment,
 ): Promise<boolean> => {
-  const request = new Request(
-    "http://localhost:3001/api/subjectequipment/update",
-    {
-      method: "PUT",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(editedSubjectEquipment),
+  const request = new Request(`${baseUrl}/subjectequipment/update`, {
+    method: "PUT",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
     },
-  );
+    body: JSON.stringify(editedSubjectEquipment),
+  });
   const response = await fetch(request);
   const data = await response.json();
   return data.ok;

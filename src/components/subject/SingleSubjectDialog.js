@@ -54,7 +54,7 @@ export default function SingleSubjectDialog(props) {
       <AlertBox
         alertOpen={alertOpen}
         alertOptions={alertOptions}
-        setAlertOpen={setAlertOpen}
+        open={setAlertOpen}
       />
       <Dialog open={open} onClose={() => setOpen(false)} width="400px">
         <DialogTitle id="dialog-title">

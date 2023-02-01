@@ -1,11 +1,12 @@
 import axios from "axios";
 import resultRoomsStore from "./ResultRoomsStore";
 import resultProgramStore from "./ResultProgramStore";
+const baseUrl = process.env.REACT_APP_BE_SERVER_BASE_URL;
 
 class AllocationPost {
   startAlloc() {
     axios
-      .post("http://localhost:3001/api/allocation/start", {
+      .post(`${baseUrl}/allocation/start`, {
         allocRound: 10004,
       })
       .then(function (response) {
@@ -23,7 +24,7 @@ class AllocationPost {
 
   resetAlloc() {
     axios
-      .post("http://localhost:3001/api/allocation/reset", {
+      .post(`${baseUrl}/allocation/reset`, {
         allocRound: 10004,
       })
       .then(function (response) {

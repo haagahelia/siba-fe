@@ -1,14 +1,12 @@
 import { Response, SpaceType } from "../types";
+const baseUrl = process.env.REACT_APP_BE_SERVER_BASE_URL;
 
 export const fetchSpacetypeForSelect = async (): Promise<
   Response<SpaceType>
 > => {
-  const request = new Request(
-    "http://localhost:3001/api/spaceType/getSelectData",
-    {
-      method: "GET",
-    },
-  );
+  const request = new Request(`${baseUrl}/spaceType/getSelectData`, {
+    method: "GET",
+  });
 
   const response = await fetch(request);
   const programs: SpaceType[] = await response.json();

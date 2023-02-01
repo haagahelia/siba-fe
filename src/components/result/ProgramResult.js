@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import Grid2 from "@mui/material/Unstable_Grid2";
 import ProgressBar from "@ramonak/react-progress-bar";
 import Modal from "@mui/material/Modal";
@@ -9,7 +9,7 @@ import Typography from "@mui/material/Typography";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
-import resultProgramStore from "../../data/ResultProgramStore";
+//import resultProgramStore from "../../data/ResultProgramStore";
 
 //component for displaying the subject groups of the allocation result
 //shows:
@@ -19,8 +19,8 @@ import resultProgramStore from "../../data/ResultProgramStore";
 //popup button that shows the lessons of the subject group
 
 export default function ProgramResult(props) {
-  const programs = props.data; //const programs ???
-  const progStore = resultProgramStore; //const progStore
+  //const programs = props.data; //const programs ???
+  //const progStore = resultProgramStore; //const progStore
   const [subProg, setSubProg] = React.useState({});
   const [open, setOpen] = React.useState(false);
   const handleOpen = (prog) => {
@@ -71,7 +71,7 @@ export default function ProgramResult(props) {
         columnSpacing={{ xs: 1, sm: 2, md: 3 }}
         spacing={2}
         style={{
-          padding: 2,
+          //padding: 2,
           margin: "auto",
           width: "80%",
           marginTop: 20,
