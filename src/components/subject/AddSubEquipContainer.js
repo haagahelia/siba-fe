@@ -50,15 +50,15 @@ export default function AddSubEquipContainer(props) {
       });
       setAlertOpen(true);
       return;
-    }
-
-    // Here we filter out the already existing equipment in teaching
-    const filteredList = data.filter((item) => {
-      return !subEquipList.some((element) => {
-        return element.equipmentId === item.id;
+    } else {
+      // Here we filter out the already existing equipment in teaching
+      const filteredList = data.filter((item) => {
+        return !subEquipList.some((element) => {
+          return element.equipmentId === item.id;
+        });
       });
-    });
-    setEquipmentSelectList(filteredList);
+      setEquipmentSelectList(filteredList);
+    }
   };
 
   const formik = useFormik({

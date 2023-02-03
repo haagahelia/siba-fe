@@ -64,7 +64,7 @@ Frontend side installation instructions
    ```sh
    npm start
    ```
-5. Attention! Follow [Backend repo](https://github.com/haagahelia/Siba_be) asennusohjetta myös
+5. Attention! Follow [Backend repo](https://github.com/haagahelia/Siba_be) installation instructions also
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
