@@ -14,7 +14,8 @@ export const postNewSubjectEquipment = async (
   });
   const response = await fetch(request);
   const data = await response.json();
-  return data.ok;
+  console.dir(`dao_se_ data:${data}`);
+  return data;
 };
 
 // PopDialog.js

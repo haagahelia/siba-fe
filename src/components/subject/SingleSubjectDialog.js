@@ -29,7 +29,7 @@ export default function SingleSubjectDialog(props) {
 
   const getEquipmentsBySubId = async function (subjectId) {
     const result = await dao.fetchEquipmentBySubjectId(subjectId);
-    if (result === 500) {
+    if (result.success === false) {
       setAlertOptions({
         severity: "error",
         title: "Error",
@@ -38,14 +38,18 @@ export default function SingleSubjectDialog(props) {
       setAlertOpen(true);
       return;
     } else {
-      setEquipListBySubId(result);
-      return result;
+      setEquipListBySubId(result.data);
+      console.log(`setEquipListBySubId(result): ${result.data.length}`);
+      return result.data;
     }
   };
 
   useEffect(() => {
-    if (singleSubject?.id) {
-      getEquipmentsBySubId(singleSubject?.id);
+    console.log(`singleSubject?.id${singleSubject?.id}`);
+    console.log(`singleSubject?.name${singleSubject?.name}`);
+    if (singleSubject && typeof singleSubject.id === "number") {
+      console.log(`getEquipmentsBySubId(${singleSubject.id})`);
+      getEquipmentsBySubId(singleSubject.id);
     }
   }, []);
 

@@ -16,7 +16,10 @@ export default function SubjectListItems(props) {
 
   const [open, setOpen] = useState(false);
   const [hoverColor, sethoverColor] = useState("#CFD6D5  "); //[hoverColor, sethoverColor] ???
-  const [singleSubject, setSingleSubject] = useState({
+  const [singleSubject, setSingleSubject] = useState(null);
+
+  /*
+    const [singleSubject, setSingleSubject] = useState({
     id: null,
     name: null,
     groupSize: null,
@@ -28,6 +31,7 @@ export default function SubjectListItems(props) {
     subjectName: null,
     spaceTypeName: null,
   });
+  */
 
   // STYLE
   const Box = styled(Paper)(({ theme }) => ({
