@@ -9,6 +9,7 @@ import "../styles/NavBar.css";
 // import logo from "../styles/SIBA_LOGO_WHITE.png";
 import ResultView from "../views/ResultView";
 import SubjectView from "../views/SubjectView";
+import AllocationView from "../views/AllocRoundListView";
 import AllocationSubjectFailureView from "../views/AllocationSubjectFailureView";
 import MenuIcon from "@mui/icons-material/Menu";
 
@@ -61,6 +62,17 @@ function NavBar() {
                 Results view
               </NavLink>
             </li>
+            <li className="nav-item">
+              <NavLink
+                exact="true"
+                to="/allocationpage"
+                activeClassName="active"
+                className="nav-links"
+                onClick={handleClick}
+              >
+                Allocations
+              </NavLink>
+            </li>
           </ul>
           <div className="nav-icon" onClick={handleClick}>
             <MenuIcon />
@@ -75,6 +87,14 @@ function NavBar() {
           element={
             <>
               <SubjectView />
+            </>
+          }
+        />
+        <Route
+          path="/allocationpage"
+          element={
+            <>
+              <AllocationView />
             </>
           }
         />

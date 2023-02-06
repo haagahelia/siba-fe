@@ -44,3 +44,10 @@ export interface SubjectEquipment {
   priority: number;
   obligatory: number;
 }
+
+export interface Allocation {
+  id: number;
+  name: string;
+  description: string;
+  lastModified: string;
+}
