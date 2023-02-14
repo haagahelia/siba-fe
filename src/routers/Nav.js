@@ -9,7 +9,7 @@ import "../styles/NavBar.css";
 // import logo from "../styles/SIBA_LOGO_WHITE.png";
 import ResultView from "../views/ResultView";
 import SubjectView from "../views/SubjectView";
-import AllocationView from "../views/AllocRoundListView";
+import AllocRoundView from "../views/AllocRoundListView";
 import AllocationSubjectFailureView from "../views/AllocationSubjectFailureView";
 import MenuIcon from "@mui/icons-material/Menu";
 
@@ -65,7 +65,7 @@ function NavBar() {
             <li className="nav-item">
               <NavLink
                 exact="true"
-                to="/allocationpage"
+                to="/allocroundpage"
                 activeClassName="active"
                 className="nav-links"
                 onClick={handleClick}
@@ -91,10 +91,10 @@ function NavBar() {
           }
         />
         <Route
-          path="/allocationpage"
+          path="/allocroundpage"
           element={
             <>
-              <AllocationView />
+              <AllocRoundView />
             </>
           }
         />

@@ -1,11 +1,11 @@
 import React from "react";
 import Grid from "@mui/material/Grid";
-import AllocationList from "./AllocRoundList";
+import AllocRoundList from "./AllocRoundList";
 import CardContent from "@mui/material/CardContent";
 import { Card } from "@mui/material";
 
-export default function AllocationListContainer(props) {
-  const { getAllAllocations, allAllocationsList, paginateAllocations } = props;
+export default function AllocRoundListContainer(props) {
+  const { getAllAllocRounds, allAllocRoundsList, paginateAllocRounds } = props;
   return (
     <div>
       <Grid
@@ -17,10 +17,10 @@ export default function AllocationListContainer(props) {
       >
         <Card variant="outlined">
           <CardContent>
-            <AllocationList
-              getAllAllocations={getAllAllocations}
-              allAllocationsList={allAllocationsList}
-              paginateAllocations={paginateAllocations}
+            <AllocRoundList
+              getAllAllocRounds={getAllAllocRounds}
+              allAllocRoundsList={allAllocRoundsList}
+              paginateAllocRounds={paginateAllocRounds}
             />
           </CardContent>
         </Card>
