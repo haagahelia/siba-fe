@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import AllocRoundListContainer from "../components/AllocRound/AllocRoundListItem";
+import AllocRoundListContainer from "../components/AllocRound/AllocRoundListContainer";
 import CardContent from "@mui/material/CardContent";
 import { CardHeader, Card, Container } from "@mui/material";
 import Grid from "@mui/material/Grid";
