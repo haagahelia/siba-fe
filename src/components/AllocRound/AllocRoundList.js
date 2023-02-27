@@ -7,9 +7,12 @@ import Grid from "@mui/material/Grid";
 import { styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
 import { Typography } from "@mui/material";
+import AllocRoudDetails from "./AllocRoundDetails";
 
 export default function AllocRoundListItems(props) {
-  const { paginateAllocRounds } = props;
+  const { paginateAllocRounds, gettAllocRouds } = props;
+  const [singleAllocRoud, setAllocRoud] = useState(null);
+  const [open, setOpen] = useState(false);
 
   // STYLE
   const Box = styled(Paper)(({ theme }) => ({
@@ -17,12 +20,27 @@ export default function AllocRoundListItems(props) {
   }));
   return (
     <div>
+      <AllocRoudDetails
+        open={open}
+        setOpen={setOpen}
+        singleAllocRoud={singleAllocRoud}
+        setAllocRoud={setAllocRoud}
+        gettAllocRouds={gettAllocRouds}
+      />
       <Box>
         <nav>
           {paginateAllocRounds.map((value) => {
             return (
               <List key={value.id}>
-                <ListItem>
+                <ListItem
+                  disablePadding
+                  button
+                  onClick={() => {
+                    setAllocRoud(value);
+
+                    setOpen(true);
+                  }}
+                >
                   <Grid item md={3} xs={2} padding={2}>
                     <Typography
                       variant="caption"
