@@ -45,7 +45,7 @@ export interface SubjectEquipment {
   obligatory: number;
 }
 
-export interface Allocation {
+export interface AllocRound {
   id: number;
   name: string;
   description: string;

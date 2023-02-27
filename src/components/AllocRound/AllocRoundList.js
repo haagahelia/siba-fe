@@ -8,8 +8,8 @@ import { styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
 import { Typography } from "@mui/material";
 
-export default function AllocationListItems(props) {
-  const { paginateAllocations } = props;
+export default function AllocRoundListItems(props) {
+  const { paginateAllocRounds } = props;
 
   // STYLE
   const Box = styled(Paper)(({ theme }) => ({
@@ -19,7 +19,7 @@ export default function AllocationListItems(props) {
     <div>
       <Box>
         <nav>
-          {paginateAllocations.map((value) => {
+          {paginateAllocRounds.map((value) => {
             return (
               <List key={value.id}>
                 <ListItem>
