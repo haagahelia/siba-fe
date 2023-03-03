@@ -8,11 +8,13 @@ import { styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
 import { Typography } from "@mui/material";
 import AllocRoudDetails from "./AllocRoundDetails";
+import { useTheme } from "@mui/material/styles";
 
 export default function AllocRoundListItems(props) {
   const { paginateAllocRounds, gettAllocRouds } = props;
   const [singleAllocRoud, setAllocRoud] = useState(null);
   const [open, setOpen] = useState(false);
+  const theme = useTheme();
 
   // STYLE
   const Box = styled(Paper)(({ theme }) => ({

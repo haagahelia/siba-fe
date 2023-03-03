@@ -10,6 +10,7 @@ import { Typography } from "@mui/material"; //TextField,???
 //import SubjectPagination from "./SubjectPagination";???
 //import SubjectFiltering from "./SubjectFiltering";???
 import SingleSubjectDialog from "./SingleSubjectDialog";
+import { useTheme } from "@mui/material/styles";
 
 export default function SubjectListItems(props) {
   const { allSubjectsList, getAllSubjects, paginateSubjects } = props; //allSubjectsList???
@@ -17,6 +18,7 @@ export default function SubjectListItems(props) {
   const [open, setOpen] = useState(false);
   const [hoverColor, sethoverColor] = useState("#CFD6D5  "); //[hoverColor, sethoverColor] ???
   const [singleSubject, setSingleSubject] = useState(null);
+  const theme = useTheme();
 
   /*
     const [singleSubject, setSingleSubject] = useState({

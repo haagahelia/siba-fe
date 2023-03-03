@@ -208,3 +208,11 @@ const theme = createTheme({
 });
 
 export default theme;
+
+/* In other components, how to get access to the Theme and its settings?
+  
+     import { useTheme } from "@mui/material/styles";
+     ...
+       const theme = useTheme(); 
+
+*/
