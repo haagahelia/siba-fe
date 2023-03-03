@@ -2,14 +2,13 @@ import RoomResult from "../components/result/RoomResult";
 import ProgramResult from "../components/result/ProgramResult";
 import testData from "../data/testData";
 import "../styles/ResultView.css";
-import { Button, ThemeProvider, Typography } from "@mui/material";
+import { Button, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import resultRoomsStore from "../data/ResultRoomsStore";
 import resultProgramStore from "../data/ResultProgramStore";
 import allocationPost from "../data/ResultAllocationStore";
-import theme from "../components/styles/theme";
-import { globalTheme } from "../components/styles/theme";
+import { useTheme } from "@mui/material/styles";
 
 // component for displaying the calculation results, i.e. the allocation
 export default function () {
@@ -19,6 +18,7 @@ export default function () {
   const [isClicked, setIsClicked] = useState(false);
   const [rooms, setRooms] = useState([]);
   const [progs, setProgs] = useState([]);
+  const theme = useTheme();
 
   useEffect(() => getRoomsData, []);
   useEffect(() => getProgramData, []);
@@ -35,48 +35,46 @@ export default function () {
 
   return (
     <>
-      <ThemeProvider theme={globalTheme}>
-        <Button
-          type="submit"
-          variant="contained"
-          style={{ color: "white" }}
-          onClick={() => {
-            allocationPost.startAlloc();
-            if (!isClicked) setIsClicked(true);
-          }}
-          disabled={isClicked}
-        >
-          Start Allocation
-        </Button>
-        <Button
-          type="submit"
-          variant="contained"
-          color="red"
-          style={{ color: "white" }}
-          onClick={() => {
-            allocationPost.resetAlloc();
-            if (isClicked) setIsClicked(false);
-          }}
-        >
-          Reset Allocation
-        </Button>
-        <Typography style={{ color: "#F6E9E9", margin: 20, fontSize: 24 }}>
-          Aineryhmät
-        </Typography>
+      <Button
+        type="submit"
+        variant="contained"
+        style={{ color: "white" }}
+        onClick={() => {
+          allocationPost.startAlloc();
+          if (!isClicked) setIsClicked(true);
+        }}
+        disabled={isClicked}
+      >
+        Start Allocation
+      </Button>
+      <Button
+        type="submit"
+        variant="contained"
+        color="red"
+        style={{ color: "white" }}
+        onClick={() => {
+          allocationPost.resetAlloc();
+          if (isClicked) setIsClicked(false);
+        }}
+      >
+        Reset Allocation
+      </Button>
+      <Typography style={{ color: "#F6E9E9", margin: 20, fontSize: 24 }}>
+        Aineryhmät
+      </Typography>
 
-        <div style={{ display: "flex", marginLeft: 286.5 }}>
-          <Link to="/alloc-fail/10004">
-            <Button
-              type="submit"
-              variant="outlined"
-              color="secondary"
-              style={{ color: "#F6E9E9" }}
-            >
-              Show failed allocation
-            </Button>
-          </Link>
-        </div>
-      </ThemeProvider>
+      <div style={{ display: "flex", marginLeft: 286.5 }}>
+        <Link to="/alloc-fail/10004">
+          <Button
+            type="submit"
+            variant="outlined"
+            color="secondary"
+            style={{ color: "#F6E9E9" }}
+          >
+            Show failed allocation
+          </Button>
+        </Link>
+      </div>
       <ProgramResult data={testData.programs} programs={progs} />
       <div style={{ width: "80%", margin: "auto" }}>
         <Typography style={{ color: "#F6E9E9", marginTop: "5%", fontSize: 24 }}>

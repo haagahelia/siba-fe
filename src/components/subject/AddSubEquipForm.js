@@ -19,8 +19,6 @@ import FormControl from "@mui/material/FormControl";
 import Radio from "@mui/material/Radio";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormLabel from "@mui/material/FormLabel";
-import { ThemeProvider } from "@mui/material";
-import { globalTheme } from "../styles/theme";
 
 export default function AddSubEquipForm(props) {
   const { equipmentSelectList, singleSubject, formik } = props;
@@ -42,17 +40,15 @@ export default function AddSubEquipForm(props) {
 
   return (
     <div>
-      <ThemeProvider theme={globalTheme}>
-        <Button
-          variant="contained"
-          color="secondary"
-          onClick={() => {
-            setOpen(true);
-          }}
-        >
-          Add equipment
-        </Button>
-      </ThemeProvider>
+      <Button
+        variant="contained"
+        color="secondary"
+        onClick={() => {
+          setOpen(true);
+        }}
+      >
+        Add equipment
+      </Button>
       <Dialog open={open}>
         {/* formik.singleSubject?.subjectName} Here ? checks whether the singleSubject object has the subjectName attribute, if not found it returns the value null and does not crash */}
         <DialogTitle sx={{ maxWidth: "300px" }}>
@@ -149,32 +145,30 @@ export default function AddSubEquipForm(props) {
           <DialogActions
             sx={{ justifyContent: "space-evenly", padding: "16px" }}
           >
-            <ThemeProvider theme={globalTheme}>
-              <Button
-                variant="contained"
-                color="red"
-                style={{ color: "white" }}
-                onClick={() => {
-                  setOpen(false);
-                  setEquipPriority(0);
-                  // Let's reset the form if you press cancel
-                  formik.resetForm();
-                }}
-              >
-                Cancel
-              </Button>
-              <Button
-                type="submit"
-                style={{ color: "white" }}
-                variant="contained"
-                onClick={() => {
-                  setOpen(false);
-                  setEquipPriority(0);
-                }}
-              >
-                Add
-              </Button>
-            </ThemeProvider>
+            <Button
+              variant="contained"
+              color="red"
+              style={{ color: "white" }}
+              onClick={() => {
+                setOpen(false);
+                setEquipPriority(0);
+                // Let's reset the form if you press cancel
+                formik.resetForm();
+              }}
+            >
+              Cancel
+            </Button>
+            <Button
+              type="submit"
+              style={{ color: "white" }}
+              variant="contained"
+              onClick={() => {
+                setOpen(false);
+                setEquipPriority(0);
+              }}
+            >
+              Add
+            </Button>
           </DialogActions>
         </form>
       </Dialog>

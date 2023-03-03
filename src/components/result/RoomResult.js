@@ -4,8 +4,8 @@ import ProgressBar from "@ramonak/react-progress-bar";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import { Collapse, Typography } from "@mui/material"; //Box ???
-import theme from "../styles/theme";
 import resultRoomsStore from "../../data/ResultRoomsStore";
+import { useTheme } from "@mui/material/styles";
 
 //a component for displaying allocation results
 //shows:
@@ -14,6 +14,7 @@ import resultRoomsStore from "../../data/ResultRoomsStore";
 //the classes using the room in the dropdown
 
 export default function RoomResult(props) {
+  const theme = useTheme();
   return (
     <>
       <Grid2

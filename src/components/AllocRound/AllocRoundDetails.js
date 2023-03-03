@@ -34,7 +34,7 @@ export default function AllocRoudDetails(props) {
         <DialogContent>
           <DialogActions
             sx={{ justifyContent: "space-evenly", padding: "16px" }}
-          ></DialogActions>
+          />
           <DialogContentText>
             <Grid
               container

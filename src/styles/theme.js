@@ -13,6 +13,17 @@ const buttonGreen = "#54B435";
 const buttonRed = "#FF1E00";
 
 const theme = createTheme({
+  palette: {
+    primary: {
+      main: buttonGreen,
+    },
+    secondary: {
+      main: buttonOrange,
+    },
+    red: {
+      main: buttonRed,
+    },
+  },
   components: {
     MuiCard: {
       styleOverrides: {
@@ -192,20 +203,6 @@ const theme = createTheme({
           },
         },
       },
-    },
-  },
-});
-
-export const globalTheme = createTheme({
-  palette: {
-    primary: {
-      main: buttonGreen,
-    },
-    secondary: {
-      main: buttonOrange,
-    },
-    red: {
-      main: buttonRed,
     },
   },
 });

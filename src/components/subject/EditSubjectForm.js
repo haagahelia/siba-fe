@@ -1,13 +1,12 @@
 import React, { useState } from "react";
 import TextField from "@mui/material/TextField";
-import { Button, Grid, FormHelperText, ThemeProvider } from "@mui/material";
+import { Button, Grid, FormHelperText } from "@mui/material";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import DialogTitle from "@mui/material/DialogTitle";
 import Dialog from "@mui/material/Dialog";
 import { DialogActions, DialogContent, DialogContentText } from "@mui/material";
-import { globalTheme } from "../styles/theme";
 
 export default function EditSubjectForm(props) {
   const { programSelectList, formik, spaceTypeSelectList } = props;
@@ -16,18 +15,16 @@ export default function EditSubjectForm(props) {
 
   return (
     <div>
-      <ThemeProvider theme={globalTheme}>
-        <Button
-          variant="contained"
-          color="secondary"
-          style={{ color: "white" }}
-          onClick={() => {
-            setOpen(true);
-          }}
-        >
-          Edit
-        </Button>
-      </ThemeProvider>
+      <Button
+        variant="contained"
+        color="secondary"
+        style={{ color: "white" }}
+        onClick={() => {
+          setOpen(true);
+        }}
+      >
+        Edit
+      </Button>
       <Dialog open={open}>
         <form onSubmit={formik.handleSubmit}>
           {/* formik.initialValues?.subjectName} Here ? checks if the subjectName attribute can be found in the initialValues ​​object, if not found returns null and does not crash */}
@@ -214,29 +211,27 @@ export default function EditSubjectForm(props) {
           <DialogActions
             sx={{ justifyContent: "space-evenly", padding: "16px" }}
           >
-            <ThemeProvider theme={globalTheme}>
-              <Button
-                onClick={() => {
-                  setOpen(false);
-                  // Let's reset the form if you press cancel
-                  formik.resetForm();
-                }}
-                variant="contained"
-                color="red"
-              >
-                Cancel
-              </Button>
-              <Button
-                type="submit"
-                variant="contained"
-                style={{ color: "white" }}
-                onClick={() => {
-                  setOpen(false);
-                }}
-              >
-                Continue
-              </Button>
-            </ThemeProvider>
+            <Button
+              onClick={() => {
+                setOpen(false);
+                // Let's reset the form if you press cancel
+                formik.resetForm();
+              }}
+              variant="contained"
+              color="red"
+            >
+              Cancel
+            </Button>
+            <Button
+              type="submit"
+              variant="contained"
+              style={{ color: "white" }}
+              onClick={() => {
+                setOpen(false);
+              }}
+            >
+              Continue
+            </Button>
           </DialogActions>
         </form>
       </Dialog>

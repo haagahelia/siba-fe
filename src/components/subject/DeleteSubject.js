@@ -1,9 +1,8 @@
 import React, { useState } from "react";
-import { Button, ThemeProvider } from "@mui/material";
+import { Button } from "@mui/material";
 import dao from "../../ajax/dao";
 import AlertBox from "../common/AlertBox";
 import ConfirmationDialog from "../common/ConfirmationDialog";
-import { globalTheme } from "../styles/theme";
 
 export default function DeleteSubject(props) {
   const { singleSubject, getAllSubjects, setOpen } = props;
@@ -65,15 +64,13 @@ export default function DeleteSubject(props) {
         submit={deleteSubject}
         submitValues={deleteId}
       />
-      <ThemeProvider theme={globalTheme}>
-        <Button
-          variant="contained"
-          color="red"
-          onClick={() => submitDelete(singleSubject)}
-        >
-          Delete
-        </Button>
-      </ThemeProvider>
+      <Button
+        variant="contained"
+        color="red"
+        onClick={() => submitDelete(singleSubject)}
+      >
+        Delete
+      </Button>
     </div>
   );
 }
