@@ -25,22 +25,20 @@ export default function RoomResult(props) {
         style={{
           margin: "auto",
           marginTop: 20,
-          backgroundColor: "#363333",
           padding: 10,
           borderRadius: 20,
         }}
       >
         {props.data.map((prog) => {
           const progress = (prog.allocatedHours / prog.requiredHours) * 100;
-
-          const color =
+          const progressColor =
             progress > 100 ? "#FF1700" : progress < 80 ? "#FFE400" : "#06FF00";
-
           const textColor = progress === 0 ? "white" : "black";
 
           return (
             <>
               <Grid2
+                key={prog.id}
                 xs={3}
                 style={
                   prog.spaceTypeId === 5001
@@ -59,7 +57,7 @@ export default function RoomResult(props) {
                   labelAlignment={"left"}
                   baseBgColor={"#272121"}
                   labelColor={textColor}
-                  bgColor={color}
+                  bgColor={progressColor}
                   padding={"3px"}
                   completed={Math.round(progress)}
                 />
@@ -118,9 +116,10 @@ function CollapsedRow(id) {
             </Typography>
           </Grid2>
         </Grid2>
-        {subjects?.map((dropdownItem) => {
+
+        {subjects?.map((subject) => {
           return (
-            <Grid2 container>
+            <Grid2 container key={subject.id}>
               <Grid2 xs={8}>
                 {" "}
                 <Typography
@@ -130,7 +129,7 @@ function CollapsedRow(id) {
                     color: "#F6E9E9",
                   }}
                 >
-                  {dropdownItem.name}
+                  {subject.name}
                 </Typography>
               </Grid2>
               <Grid2 xs={4}>
@@ -141,7 +140,7 @@ function CollapsedRow(id) {
                     color: "#F6E9E9",
                   }}
                 >
-                  {dropdownItem.totalTime}
+                  {subject.totalTime}
                 </Typography>
               </Grid2>
             </Grid2>

@@ -10,7 +10,7 @@ export default function AllocRoundListContainer(props) {
     <div>
       <Grid
         container
-        rowSpacing={0.5}
+        rowSpacing={1}
         justifyContent="space-evenly"
         alignItems="flex-start"
         marginTop="20px"

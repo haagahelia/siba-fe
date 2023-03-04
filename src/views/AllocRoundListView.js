@@ -49,7 +49,7 @@ export default function AllocRoundView() {
       <Container maxWidth="100%">
         <Grid
           container
-          rowSpacing={0.5}
+          rowSpacing={1}
           justifyContent="space-evenly"
           alignItems="flex-start"
           marginTop="20px"

@@ -55,7 +55,6 @@ export default function SubjectListItems(props) {
               <List key={value.id}>
                 <ListItem
                   disablePadding
-                  button
                   onClick={() => {
                     setSingleSubject(value);
 

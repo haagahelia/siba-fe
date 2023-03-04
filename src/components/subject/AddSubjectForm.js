@@ -22,7 +22,7 @@ export default function AddSubjectForm(props) {
       <form onSubmit={formik.handleSubmit}>
         <Grid
           container
-          rowSpacing={3}
+          rowSpacing={1}
           columnSpacing={1}
           column={8}
           justifyContent="space-evenly"
@@ -137,6 +137,7 @@ export default function AddSubjectForm(props) {
                 name="programId"
                 onChange={formik.handleChange("programId")}
                 value={formik.values.programId}
+                defaultValue={""}
                 error={
                   formik.touched.programId && formik.errors.programId
                     ? true
@@ -144,10 +145,10 @@ export default function AddSubjectForm(props) {
                 }
                 onBlur={formik.handleBlur("programId")}
               >
-                {programSelectList.map((value) => {
+                {programSelectList.map((program) => {
                   return (
-                    <MenuItem key={value.id} value={value.id}>
-                      {value.name}
+                    <MenuItem key={program.id} value={program.id}>
+                      {program.name}
                     </MenuItem>
                   );
                 })}
@@ -165,12 +166,13 @@ export default function AddSubjectForm(props) {
                 name="spaceTypeId"
                 onChange={formik.handleChange("spaceTypeId")}
                 value={formik.values.spaceTypeId}
+                defaultValue={""}
                 onBlur={formik.handleBlur("spaceTypeId")}
               >
-                {spaceTypeSelectList.map((value) => {
+                {spaceTypeSelectList.map((spaceType) => {
                   return (
-                    <MenuItem key={value.id} value={value.id}>
-                      {value.name}
+                    <MenuItem key={spaceType.id} value={spaceType.id}>
+                      {spaceType.name}
                     </MenuItem>
                   );
                 })}

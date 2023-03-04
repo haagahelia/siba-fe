@@ -32,7 +32,6 @@ function NavBar() {
               <NavLink
                 to="/"
                 end
-                exact="true"
                 activeclassname="active"
                 className="nav-links"
                 onClick={handleClick}
@@ -42,7 +41,6 @@ function NavBar() {
             </li>
             <li className="nav-item">
               <NavLink
-                exact="true"
                 to="/subject"
                 activeclassname="active"
                 className="nav-links"
@@ -53,7 +51,6 @@ function NavBar() {
             </li>
             <li className="nav-item">
               <NavLink
-                exact="true"
                 to="/onlyresult"
                 activeclassname="active"
                 className="nav-links"
@@ -64,7 +61,6 @@ function NavBar() {
             </li>
             <li className="nav-item">
               <NavLink
-                exact="true"
                 to="/allocroundpage"
                 activeClassName="active"
                 className="nav-links"
@@ -82,22 +78,9 @@ function NavBar() {
       </nav>
 
       <Routes>
-        <Route
-          path="/subject"
-          element={
-            <>
-              <SubjectView />
-            </>
-          }
-        />
-        <Route
-          path="/allocroundpage"
-          element={
-            <>
-              <AllocRoundView />
-            </>
-          }
-        />
+        <Route path="/" element={<SubjectView />} />
+        <Route path="/subject" element={<SubjectView />} />
+        <Route path="/allocroundpage" element={<AllocRoundView />} />
         <Route path="/onlyresult" element={<ResultView />} />
         <Route
           path="/alloc-fail/:allocId"

@@ -5,6 +5,7 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import { Collapse, Typography } from "@mui/material";
 import resultRoomsStore from "../../data/ResultRoomsStore";
+import { useTheme } from "@mui/material/styles";
 //component for displaying the classes of the allocation result
 //shows:
 //the name of the class
@@ -12,6 +13,8 @@ import resultRoomsStore from "../../data/ResultRoomsStore";
 //classrooms in the dropdown
 
 export default function SubjectResult(props) {
+  const theme = useTheme();
+
   return (
     <>
       <Grid2
@@ -22,7 +25,6 @@ export default function SubjectResult(props) {
         style={{
           margin: "auto",
           marginTop: 20,
-          backgroundColor: "#363333",
           padding: 10,
           borderRadius: 20,
         }}
@@ -43,7 +45,7 @@ export default function SubjectResult(props) {
               <Grid2 xs={3}>
                 <ProgressBar
                   labelAlignment={"left"}
-                  baseBgColor={"#272121"}
+                  baseBgColor={theme.baseBgColor}
                   labelColor={textColor}
                   bgColor={color}
                   padding={"3px"}

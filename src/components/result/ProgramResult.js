@@ -10,6 +10,7 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 //import resultProgramStore from "../../data/ResultProgramStore";
+import { useTheme } from "@mui/material/styles";
 
 //component for displaying the subject groups of the allocation result
 //shows:
@@ -23,6 +24,8 @@ export default function ProgramResult(props) {
   //const progStore = resultProgramStore; //const progStore
   const [subProg, setSubProg] = React.useState({});
   const [open, setOpen] = React.useState(false);
+  const theme = useTheme();
+
   const handleOpen = (prog) => {
     setSubProg(prog);
     setOpen(true);
@@ -50,12 +53,15 @@ export default function ProgramResult(props) {
             width: "80%",
             margin: "auto",
             borderRadius: 20,
-            backgroundColor: "#363333",
             marginTop: "10%",
           }}
         >
           <Typography
-            style={{ textAlign: "center", marginTop: "5%", color: "#F6E9E9" }}
+            style={{
+              textAlign: "center",
+              marginTop: "5%",
+              color: theme.palette.primary.light,
+            }}
           >
             {subProg.name} -subjects
           </Typography>
@@ -75,7 +81,6 @@ export default function ProgramResult(props) {
           margin: "auto",
           width: "80%",
           marginTop: 20,
-          backgroundColor: "#363333",
           padding: 10,
           borderRadius: 20,
         }}
@@ -83,7 +88,7 @@ export default function ProgramResult(props) {
         {props.programs.map((prog) => {
           const progress = calculateProsent(prog.subjects);
 
-          const color =
+          const progressColor =
             progress > 100 ? "#FF1700" : progress < 80 ? "#FFE400" : "#06FF00";
 
           const textColor = progress === 0 ? "white" : "black";
@@ -112,7 +117,7 @@ export default function ProgramResult(props) {
                   baseBgColor={"#272121"}
                   labelAlignment={"left"}
                   labelColor={textColor}
-                  bgColor={color}
+                  bgColor={progressColor}
                   padding={"3px"}
                   completed={progress}
                   maxCompleted={100}
@@ -129,6 +134,7 @@ export default function ProgramResult(props) {
   function CollapsedRow(props) {
     const prog1 = props.prog1;
     const [expand, setExpand] = React.useState(false);
+    const theme = useTheme();
 
     return (
       <Grid2 container>
@@ -163,14 +169,14 @@ export default function ProgramResult(props) {
           </Grid2>
           {prog1.rooms.map((room) => {
             return (
-              <Grid2 container>
+              <Grid2 container key={room.id}>
                 <Grid2 xs={8}>
                   {" "}
                   <Typography
                     style={{
                       textAlign: "center",
                       marginTop: 5,
-                      color: "#F6E9E9",
+                      color: theme.baseBgColor,
                     }}
                   >
                     {room.name}
