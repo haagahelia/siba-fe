@@ -4,11 +4,12 @@ import React from "react";
 //import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 //import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import { Typography } from "@mui/material"; //Box ???
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import resultRoomsStore from "../../data/ResultRoomsStore";
 
 import { useTheme } from "@mui/material/styles";
 import RoomsWithTimesList from "../room/RoomsWithTimesList";
+import { AppContext } from "../../AppContext";
 
 //a component for displaying allocation results
 //shows: 1.the name of the room 2. utilization rate 3. classes using the room
@@ -16,11 +17,11 @@ import RoomsWithTimesList from "../room/RoomsWithTimesList";
 export default function RoomResult(props) {
   const roomStore = resultRoomsStore;
   const [rooms, setRooms] = useState([]);
-
+  const appContext = useContext(AppContext);
   useEffect(() => getRoomsData);
 
   const getRoomsData = async () => {
-    await roomStore.fetchRooms(10004);
+    await roomStore.fetchRooms(appContext.allocRoundId);
     setRooms(roomStore.rooms);
   };
 

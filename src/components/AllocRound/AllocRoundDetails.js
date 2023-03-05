@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import Grid from "@mui/material/Grid";
 import {
   Dialog,
@@ -9,16 +9,27 @@ import {
   DialogActions,
 } from "@mui/material";
 import AlertBox from "../common/AlertBox";
+import { AppContext } from "../../AppContext";
 
 export default function AllocRoudDetails(props) {
   const { open, setOpen, singleAllocRoud } = props;
-
   const [alertOpen, setAlertOpen] = useState(false);
   const [alertOptions] = useState({
     title: "This is alert title",
     message: "This is an error alert — check it out!",
     severity: "error",
   });
+  let appContext = useContext(AppContext);
+
+  const handleClose = (allocRoundId) => {
+    setOpen(false);
+  };
+
+  const setAllocRound = (allocRoundId) => {
+    //console.log ("allocRoundId 456: " +allocRoundId);
+    appContext.allocRoundId = allocRoundId; // Does not work
+    setOpen(false);
+  };
 
   return (
     <div>
@@ -27,7 +38,14 @@ export default function AllocRoudDetails(props) {
         alertOptions={alertOptions}
         open={setAlertOpen}
       />
-      <Dialog open={open} onClose={() => setOpen(false)} width="400px">
+      <Dialog
+        open={open}
+        onClose={handleClose}
+        onClick={() => {
+          setAllocRound(singleAllocRoud.id);
+        }}
+        width="400px"
+      >
         <DialogTitle id="dialog-title">
           {singleAllocRoud?.AllocRoudName}
         </DialogTitle>
@@ -63,6 +81,9 @@ export default function AllocRoudDetails(props) {
               </Typography>
             </Grid>
           </Grid>
+          <Typography variant="subtitle1">
+            Click to set as active allocRound!
+          </Typography>
         </DialogContent>
       </Dialog>
     </div>

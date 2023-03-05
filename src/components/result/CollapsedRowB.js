@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import Grid2 from "@mui/material/Unstable_Grid2";
 import Typography from "@mui/material/Typography";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
@@ -6,15 +6,17 @@ import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import { Collapse } from "@mui/material"; // Button???
 // import RoomsWithTimeList from "../room/RoomsWithTimesList";
 import resultRoomsStore from "../../data/ResultRoomsStore";
+import { AppContext } from "../../AppContext";
 
 //have to edit when the correct data comes, for now an illustrative version.
 export default function CollapsedRowB({ id }) {
   const [expand, setExpand] = React.useState(false);
   const [subjects, setSubjects] = React.useState([]);
+  const appContext = useContext(AppContext);
 
   const getSubjects = async () => {
     // console.log(id);    // Works
-    await resultRoomsStore.fetchRoomSubs(id, 10004);
+    await resultRoomsStore.fetchRoomSubs(id, appContext.allocRoundId);
     setSubjects(resultRoomsStore.roomSubs);
   };
 

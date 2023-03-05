@@ -9,7 +9,8 @@ import Typography from "@mui/material/Typography";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import resultProgramStore from "../../data/ResultProgramStore";
 import CollapsedRow from "./CollapsedRow";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
+import { AppContext } from "../../AppContext";
 
 //component for displaying the subject groups of the allocation result
 //shows:
@@ -21,11 +22,12 @@ import { useEffect, useState } from "react";
 export default function ProgramResult(props) {
   const progStore = resultProgramStore;
   const [progs, setProgs] = useState([]);
+  const appContext = useContext(AppContext);
 
   useEffect(() => getProgramData);
 
   const getProgramData = async () => {
-    await progStore.fetchNames(10004);
+    await progStore.fetchNames(appContext.allocRoundId);
     setProgs(progStore.getNames());
   };
 
