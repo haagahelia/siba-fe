@@ -7,11 +7,14 @@ import {
 } from "react-router-dom";
 import "../styles/NavBar.css";
 // import logo from "../styles/SIBA_LOGO_WHITE.png";
-import ResultView from "../views/ResultView";
+import MenuIcon from "@mui/icons-material/Menu";
+
+import RoomResultView from "../views/RoomResultView";
+import ProgramResultView from "../views/ProgramResultView";
 import SubjectView from "../views/SubjectView";
 import AllocRoundView from "../views/AllocRoundListView";
 import AllocationSubjectFailureView from "../views/AllocationSubjectFailureView";
-import MenuIcon from "@mui/icons-material/Menu";
+import NotFoundView from "../views/NotFoundView";
 
 function NavBar() {
   const [click, setClick] = useState(false);
@@ -21,7 +24,7 @@ function NavBar() {
     <Router>
       <nav className="navbar">
         <div className="nav-container">
-          <NavLink exact to="/" className="nav-logo">
+          <NavLink to="/" className="nav-logo">
             {/* I didn't have logos, add them to the project and it works */}
             {/* <img src={logo} alt="Logo" /> */}
             <i className="fas fa-code" />
@@ -51,22 +54,32 @@ function NavBar() {
             </li>
             <li className="nav-item">
               <NavLink
-                to="/onlyresult"
+                to="/roomresult"
                 activeclassname="active"
                 className="nav-links"
                 onClick={handleClick}
               >
-                Results view
+                Room results
+              </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink
+                to="/programresult"
+                activeclassname="active"
+                className="nav-links"
+                onClick={handleClick}
+              >
+                Program results
               </NavLink>
             </li>
             <li className="nav-item">
               <NavLink
                 to="/allocroundpage"
-                activeClassName="active"
+                activeclassname="active"
                 className="nav-links"
                 onClick={handleClick}
               >
-                Allocations
+                Alloc rounds
               </NavLink>
             </li>
           </ul>
@@ -81,11 +94,13 @@ function NavBar() {
         <Route path="/" element={<SubjectView />} />
         <Route path="/subject" element={<SubjectView />} />
         <Route path="/allocroundpage" element={<AllocRoundView />} />
-        <Route path="/onlyresult" element={<ResultView />} />
+        <Route path="/roomresult" element={<RoomResultView />} />
+        <Route path="/programresult" element={<ProgramResultView />} />
         <Route
           path="/alloc-fail/:allocId"
           element={<AllocationSubjectFailureView />}
         />
+        <Route path="*" element={<NotFoundView />} />
       </Routes>
     </Router>
   );

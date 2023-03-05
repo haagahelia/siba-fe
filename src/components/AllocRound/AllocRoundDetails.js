@@ -3,7 +3,7 @@ import Grid from "@mui/material/Grid";
 import {
   Dialog,
   DialogContent,
-  DialogContentText,
+  //DialogContentText,
   DialogTitle,
   Typography,
   DialogActions,
@@ -35,36 +35,34 @@ export default function AllocRoudDetails(props) {
           <DialogActions
             sx={{ justifyContent: "space-evenly", padding: "16px" }}
           />
-          <DialogContentText>
-            <Grid
-              container
-              spacing={1}
-              column={14}
-              direction="column"
-              justifyContent="flex-start"
-              alignItems="flex-start"
-              padding={2}
-            >
-              <Grid item s={6}>
-                <Typography variant="subtitle1">
-                  Name:&nbsp;
-                  {singleAllocRoud?.name}
-                </Typography>
-              </Grid>
-              <Grid item s={6}>
-                <Typography variant="subtitle1">
-                  Description:&nbsp;
-                  {singleAllocRoud?.description}
-                </Typography>
-              </Grid>
-              <Grid item s={6}>
-                <Typography variant="subtitle1">
-                  Last modified:&nbsp;
-                  {singleAllocRoud?.lastModified}
-                </Typography>
-              </Grid>
+          <Grid
+            container
+            spacing={1}
+            column={14}
+            direction="column"
+            justifyContent="flex-start"
+            alignItems="flex-start"
+            padding={2}
+          >
+            <Grid item s={6}>
+              <Typography variant="subtitle1">
+                Name:&nbsp;
+                {singleAllocRoud?.name}
+              </Typography>
             </Grid>
-          </DialogContentText>
+            <Grid item s={6}>
+              <Typography variant="subtitle1">
+                Description:&nbsp;
+                {singleAllocRoud?.description}
+              </Typography>
+            </Grid>
+            <Grid item s={6}>
+              <Typography variant="subtitle1">
+                Last modified:&nbsp;
+                {singleAllocRoud?.lastModified}
+              </Typography>
+            </Grid>
+          </Grid>
         </DialogContent>
       </Dialog>
     </div>

@@ -137,7 +137,7 @@ export default function AddSubjectForm(props) {
                 name="programId"
                 onChange={formik.handleChange("programId")}
                 value={formik.values.programId}
-                defaultValue={""}
+                defaultValue=""
                 error={
                   formik.touched.programId && formik.errors.programId
                     ? true
@@ -166,7 +166,7 @@ export default function AddSubjectForm(props) {
                 name="spaceTypeId"
                 onChange={formik.handleChange("spaceTypeId")}
                 value={formik.values.spaceTypeId}
-                defaultValue={""}
+                defaultValue=""
                 onBlur={formik.handleBlur("spaceTypeId")}
               >
                 {spaceTypeSelectList.map((spaceType) => {

@@ -84,7 +84,7 @@ export default function AddSubjectContainer(props) {
       setAlertOpen(true);
       return;
     } else {
-      console.log(data);
+      //console.log(data);
       setProgramSelectList(data);
     }
   };

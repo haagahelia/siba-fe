@@ -2,15 +2,14 @@ import React from "react";
 import Grid2 from "@mui/material/Unstable_Grid2";
 import ProgressBar from "@ramonak/react-progress-bar";
 import Modal from "@mui/material/Modal";
-import { Box, Collapse } from "@mui/material"; // Button???
+import { Box } from "@mui/material"; // Button???
 import SubjectResult from "./SubjectResult";
 import testData from "../../data/testData";
 import Typography from "@mui/material/Typography";
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
-//import resultProgramStore from "../../data/ResultProgramStore";
-import { useTheme } from "@mui/material/styles";
+import resultProgramStore from "../../data/ResultProgramStore";
+import CollapsedRow from "./CollapsedRow";
+import { useEffect, useState } from "react";
 
 //component for displaying the subject groups of the allocation result
 //shows:
@@ -20,11 +19,19 @@ import { useTheme } from "@mui/material/styles";
 //popup button that shows the lessons of the subject group
 
 export default function ProgramResult(props) {
-  //const programs = props.data; //const programs ???
-  //const progStore = resultProgramStore; //const progStore
+  const progStore = resultProgramStore;
+  const [progs, setProgs] = useState([]);
+
+  useEffect(() => getProgramData);
+
+  const getProgramData = async () => {
+    await progStore.fetchNames(10004);
+    setProgs(progStore.getNames());
+  };
+
   const [subProg, setSubProg] = React.useState({});
   const [open, setOpen] = React.useState(false);
-  const theme = useTheme();
+  //const theme = useTheme();
 
   const handleOpen = (prog) => {
     setSubProg(prog);
@@ -47,6 +54,9 @@ export default function ProgramResult(props) {
 
   return (
     <>
+      <Typography style={{ color: "#F6E9E9", margin: 20, fontSize: 24 }}>
+        Programs (Aineryhmät)
+      </Typography>
       <Modal open={open} onClose={handleClose} style={{ overflow: "scroll" }}>
         <Box
           style={{
@@ -60,7 +70,7 @@ export default function ProgramResult(props) {
             style={{
               textAlign: "center",
               marginTop: "5%",
-              color: theme.palette.primary.light,
+              color: "primary",
             }}
           >
             {subProg.name} -subjects
@@ -85,17 +95,15 @@ export default function ProgramResult(props) {
           borderRadius: 20,
         }}
       >
-        {props.programs.map((prog) => {
+        {progs.map((prog) => {
           const progress = calculateProsent(prog.subjects);
-
           const progressColor =
             progress > 100 ? "#FF1700" : progress < 80 ? "#FFE400" : "#06FF00";
-
           const textColor = progress === 0 ? "white" : "black";
 
           return (
             <>
-              <Grid2 xs={1.5}>
+              <Grid2 xs={1.5} key={`${prog.id}-a`}>
                 <InfoOutlinedIcon
                   sx={{ color: "white", fontSize: 20 }}
                   onClick={() => handleOpen(prog)}
@@ -104,13 +112,13 @@ export default function ProgramResult(props) {
                 </InfoOutlinedIcon>
               </Grid2>
 
-              <Grid2 xs={1.5}>
+              <Grid2 xs={1.5} key={`${prog.id}-b`}>
                 <Typography style={{ color: "#F6E9E9" }}>
                   {prog.name}
                 </Typography>
               </Grid2>
 
-              <Grid2 xs={3}>
+              <Grid2 xs={3} key={`${prog.id}-c`}>
                 <ProgressBar
                   // Had to comment out, otherwise the button wouldn't work
                   // style= {styles.section}
@@ -130,74 +138,4 @@ export default function ProgramResult(props) {
       </Grid2>
     </>
   );
-
-  function CollapsedRow(props) {
-    const prog1 = props.prog1;
-    const [expand, setExpand] = React.useState(false);
-    const theme = useTheme();
-
-    return (
-      <Grid2 container>
-        {expand ? (
-          <KeyboardArrowUpIcon
-            sx={{ color: "white", fontSize: 24 }}
-            onClick={() => setExpand(!expand)}
-          >
-            {" "}
-          </KeyboardArrowUpIcon>
-        ) : (
-          <KeyboardArrowDownIcon
-            sx={{ color: "white", fontSize: 24 }}
-            onClick={() => setExpand(!expand)}
-          >
-            {" "}
-          </KeyboardArrowDownIcon>
-        )}
-
-        <Collapse in={expand} style={{ width: "100%" }}>
-          <Grid2 container>
-            <Grid2 xs={8}>
-              <Typography style={{ color: "#F6E9E9", fontSize: 20 }}>
-                Huoneet
-              </Typography>
-            </Grid2>
-            <Grid2 xs={4}>
-              <Typography style={{ color: "#F6E9E9", fontSize: 20 }}>
-                Tunnit
-              </Typography>
-            </Grid2>
-          </Grid2>
-          {prog1.rooms.map((room) => {
-            return (
-              <Grid2 container key={room.id}>
-                <Grid2 xs={8}>
-                  {" "}
-                  <Typography
-                    style={{
-                      textAlign: "center",
-                      marginTop: 5,
-                      color: theme.baseBgColor,
-                    }}
-                  >
-                    {room.name}
-                  </Typography>
-                </Grid2>
-                <Grid2 xs={4}>
-                  <Typography
-                    style={{
-                      textAlign: "center",
-                      marginTop: 5,
-                      color: "#F6E9E9",
-                    }}
-                  >
-                    {room.allocatedHours} h
-                  </Typography>
-                </Grid2>
-              </Grid2>
-            );
-          })}
-        </Collapse>
-      </Grid2>
-    );
-  }
 }
