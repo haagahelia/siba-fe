@@ -10,8 +10,8 @@ import { Typography } from "@mui/material";
 import AllocRoudDetails from "./AllocRoundDetails";
 
 export default function AllocRoundListItems(props) {
-  const { paginateAllocRounds, gettAllocRouds } = props;
-  const [singleAllocRoud, setAllocRoud] = useState(null);
+  const { paginateAllocRounds, getAllocRounds, setAllocRoundId } = props;
+  const [singleAllocRound, setAllocRound] = useState(null);
   const [open, setOpen] = useState(false);
 
   // STYLE
@@ -23,9 +23,10 @@ export default function AllocRoundListItems(props) {
       <AllocRoudDetails
         open={open}
         setOpen={setOpen}
-        singleAllocRoud={singleAllocRoud}
-        setAllocRoud={setAllocRoud}
-        gettAllocRouds={gettAllocRouds}
+        singleAllocRound={singleAllocRound}
+        setAllocRound={setAllocRound}
+        setAllocRoundId={setAllocRoundId}
+        getAllocRounds={getAllocRounds}
       />
       <Box>
         <nav>
@@ -35,8 +36,8 @@ export default function AllocRoundListItems(props) {
                 <ListItem
                   disablePadding
                   onClick={() => {
-                    setAllocRoud(value);
-
+                    setAllocRound(value);
+                    setAllocRoundId(value.id);
                     setOpen(true);
                   }}
                 >

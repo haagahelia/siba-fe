@@ -11,8 +11,8 @@ import {
 import AlertBox from "../common/AlertBox";
 import { AppContext } from "../../AppContext";
 
-export default function AllocRoudDetails(props) {
-  const { open, setOpen, singleAllocRoud } = props;
+export default function AllocRoundDetails(props) {
+  const { open, setOpen, singleAllocRound, setAllocRoundId } = props;
   const [alertOpen, setAlertOpen] = useState(false);
   const [alertOptions] = useState({
     title: "This is alert title",
@@ -27,7 +27,8 @@ export default function AllocRoudDetails(props) {
 
   const setAllocRound = (allocRoundId) => {
     //console.log ("allocRoundId 456: " +allocRoundId);
-    appContext.allocRoundId = allocRoundId; // Does not work
+    appContext.allocRoundId = allocRoundId; // Works now!
+    setAllocRoundId(allocRoundId); // Notifying parent
     setOpen(false);
   };
 
@@ -42,12 +43,12 @@ export default function AllocRoudDetails(props) {
         open={open}
         onClose={handleClose}
         onClick={() => {
-          setAllocRound(singleAllocRoud.id);
+          setAllocRound(singleAllocRound.id);
         }}
         width="400px"
       >
         <DialogTitle id="dialog-title">
-          {singleAllocRoud?.AllocRoudName}
+          {singleAllocRound?.AllocRoundName}
         </DialogTitle>
         <DialogContent>
           <DialogActions
@@ -65,25 +66,22 @@ export default function AllocRoudDetails(props) {
             <Grid item s={6}>
               <Typography variant="subtitle1">
                 Name:&nbsp;
-                {singleAllocRoud?.name}
+                {singleAllocRound?.name}
               </Typography>
             </Grid>
             <Grid item s={6}>
               <Typography variant="subtitle1">
                 Description:&nbsp;
-                {singleAllocRoud?.description}
+                {singleAllocRound?.description}
               </Typography>
             </Grid>
             <Grid item s={6}>
               <Typography variant="subtitle1">
                 Last modified:&nbsp;
-                {singleAllocRoud?.lastModified}
+                {singleAllocRound?.lastModified}
               </Typography>
             </Grid>
           </Grid>
-          <Typography variant="subtitle1">
-            Click to set as active allocRound!
-          </Typography>
         </DialogContent>
       </Dialog>
     </div>
