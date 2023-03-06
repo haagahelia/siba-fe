@@ -11,6 +11,7 @@ import ResultView from "../views/ResultView";
 import SubjectView from "../views/SubjectView";
 import AllocRoundView from "../views/AllocRoundListView";
 import AllocationSubjectFailureView from "../views/AllocationSubjectFailureView";
+import EquipmentView from "../views/EquipmentView";
 import MenuIcon from "@mui/icons-material/Menu";
 
 function NavBar() {
@@ -73,6 +74,17 @@ function NavBar() {
                 Allocations
               </NavLink>
             </li>
+            <li className="nav-item">
+              <NavLink
+                exact="true"
+                to="/equipment"
+                activeClassName="active"
+                className="nav-links"
+                onClick={handleClick}
+              >
+                Equipment
+              </NavLink>
+            </li>
           </ul>
           <div className="nav-icon" onClick={handleClick}>
             <MenuIcon />
@@ -95,6 +107,14 @@ function NavBar() {
           element={
             <>
               <AllocRoundView />
+            </>
+          }
+        />
+        <Route
+          path="/equipment"
+          element={
+            <>
+              <EquipmentView />
             </>
           }
         />
