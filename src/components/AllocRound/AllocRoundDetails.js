@@ -9,9 +9,10 @@ import {
   DialogActions,
 } from "@mui/material";
 import AlertBox from "../common/AlertBox";
+import DeleteAllocRound from "./DeleteAllocRound";
 
 export default function AllocRoudDetails(props) {
-  const { open, setOpen, singleAllocRoud } = props;
+  const { open, setOpen, singleAllocRound, getAllAllocRounds } = props;
 
   const [alertOpen, setAlertOpen] = useState(false);
   const [alertOptions] = useState({
@@ -29,11 +30,16 @@ export default function AllocRoudDetails(props) {
       />
       <Dialog open={open} onClose={() => setOpen(false)} width="400px">
         <DialogTitle id="dialog-title">
-          {singleAllocRoud?.AllocRoudName}
+          {singleAllocRound?.AllocRoudName}
         </DialogTitle>
         <DialogContent>
           <DialogActions
             sx={{ justifyContent: "space-evenly", padding: "16px" }}
+          />
+          <DeleteAllocRound
+            singleAllocRound={singleAllocRound}
+            getAllAllocRounds={getAllAllocRounds}
+            setOpen={setOpen}
           />
           <DialogContentText>
             <Grid
@@ -48,19 +54,19 @@ export default function AllocRoudDetails(props) {
               <Grid item s={6}>
                 <Typography variant="subtitle1">
                   Name:&nbsp;
-                  {singleAllocRoud?.name}
+                  {singleAllocRound?.name}
                 </Typography>
               </Grid>
               <Grid item s={6}>
                 <Typography variant="subtitle1">
                   Description:&nbsp;
-                  {singleAllocRoud?.description}
+                  {singleAllocRound?.description}
                 </Typography>
               </Grid>
               <Grid item s={6}>
                 <Typography variant="subtitle1">
                   Last modified:&nbsp;
-                  {singleAllocRoud?.lastModified}
+                  {singleAllocRound?.lastModified}
                 </Typography>
               </Grid>
             </Grid>

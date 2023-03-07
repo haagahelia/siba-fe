@@ -10,6 +10,7 @@ import "../styles/NavBar.css";
 import ResultView from "../views/ResultView";
 import SubjectView from "../views/SubjectView";
 import AllocRoundView from "../views/AllocRoundListView";
+import AddAllocRound from "../components/AllocRound/AddAllocRound";
 import AllocationSubjectFailureView from "../views/AllocationSubjectFailureView";
 import MenuIcon from "@mui/icons-material/Menu";
 
@@ -97,6 +98,10 @@ function NavBar() {
               <AllocRoundView />
             </>
           }
+        />
+        <Route
+          path='/allocroundpage/addAllocRound'
+          element={<AddAllocRound />}
         />
         <Route path="/onlyresult" element={<ResultView />} />
         <Route

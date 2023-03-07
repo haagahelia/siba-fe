@@ -12,7 +12,7 @@ import { useTheme } from "@mui/material/styles";
 
 export default function AllocRoundListItems(props) {
   const { paginateAllocRounds, gettAllocRouds } = props;
-  const [singleAllocRoud, setAllocRoud] = useState(null);
+  const [singleAllocRound, setAllocRoud] = useState(null);
   const [open, setOpen] = useState(false);
   const theme = useTheme();
 
@@ -25,7 +25,7 @@ export default function AllocRoundListItems(props) {
       <AllocRoudDetails
         open={open}
         setOpen={setOpen}
-        singleAllocRoud={singleAllocRoud}
+        singleAllocRound={singleAllocRound}
         setAllocRoud={setAllocRoud}
         gettAllocRouds={gettAllocRouds}
       />

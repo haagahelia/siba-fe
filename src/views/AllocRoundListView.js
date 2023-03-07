@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import AllocRoundListContainer from "../components/AllocRound/AllocRoundListContainer";
 import CardContent from "@mui/material/CardContent";
-import { CardHeader, Card, Container } from "@mui/material";
+import { CardHeader, Card, Container, Button } from "@mui/material";
 import Grid from "@mui/material/Grid";
 import dao from "../ajax/dao";
 import AlertBox from "../components/common/AlertBox";
@@ -39,6 +40,8 @@ export default function AllocRoundView() {
     setpaginateAllocRounds(allAllocRoundsList.slice(0, 15));
   }, [allAllocRoundsList]);
 
+  const navigate = useNavigate();
+
   return (
     <div>
       <AlertBox
@@ -46,6 +49,10 @@ export default function AllocRoundView() {
         alertOptions={alertOptions}
         setAlertOpen={setAlertOpen}
       />
+      <Button onClick={() => navigate("addAllocRound")}>
+        {" "}
+        Create new AllocRound
+      </Button>
       <Container maxWidth="100%">
         <Grid
           container
