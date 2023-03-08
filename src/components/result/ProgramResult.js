@@ -23,9 +23,12 @@ import { AppContext } from "../../AppContext";
 export default function ProgramResult(props) {
   const progStore = resultProgramStore;
   const [progs, setProgs] = useState([]);
+  const [resetCounter, setResetCounter] = useState(0);
   const appContext = useContext(AppContext);
 
-  useEffect(() => getProgramData, []);
+  useEffect(() => {
+    getProgramData();
+  }, [resetCounter]);
 
   const getProgramData = async () => {
     await progStore.fetchNames(appContext.allocRoundId);
@@ -42,6 +45,10 @@ export default function ProgramResult(props) {
   };
   const handleClose = () => setOpen(false);
 
+  const incrementResetCounter = () => {
+    setResetCounter(resetCounter + 1);
+  };
+
   const calculateProsent = (array) => {
     let allocatedHours = 0;
     let requiredHours = 0;
@@ -57,7 +64,7 @@ export default function ProgramResult(props) {
 
   return (
     <>
-      <AllocRoundControlPanel />
+      <AllocRoundControlPanel incrementResetCounter={incrementResetCounter} />
       <Typography style={{ color: "#F6E9E9", margin: 20, fontSize: 24 }}>
         Programs (Aineryhmät)
       </Typography>
