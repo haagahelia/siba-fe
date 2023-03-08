@@ -1,10 +1,12 @@
 import Grid2 from "@mui/material/Unstable_Grid2";
-import React from "react"; // { useEffect } ???
+import React, { useContext } from "react"; // { useEffect } ???
 import ProgressBar from "@ramonak/react-progress-bar";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import { Collapse, Typography } from "@mui/material";
 import resultRoomsStore from "../../data/ResultRoomsStore";
+import { useTheme } from "@mui/material/styles";
+import { AppContext } from "../../AppContext";
 //component for displaying the classes of the allocation result
 //shows:
 //the name of the class
@@ -12,6 +14,8 @@ import resultRoomsStore from "../../data/ResultRoomsStore";
 //classrooms in the dropdown
 
 export default function SubjectResult(props) {
+  const theme = useTheme();
+
   return (
     <>
       <Grid2
@@ -22,7 +26,6 @@ export default function SubjectResult(props) {
         style={{
           margin: "auto",
           marginTop: 20,
-          backgroundColor: "#363333",
           padding: 10,
           borderRadius: 20,
         }}
@@ -43,7 +46,7 @@ export default function SubjectResult(props) {
               <Grid2 xs={3}>
                 <ProgressBar
                   labelAlignment={"left"}
-                  baseBgColor={"#272121"}
+                  baseBgColor={theme.baseBgColor}
                   labelColor={textColor}
                   bgColor={color}
                   padding={"3px"}
@@ -63,10 +66,11 @@ export default function SubjectResult(props) {
 function CollapsedRow(id) {
   const [expand, setExpand] = React.useState(false);
   const [rooms, setRooms] = React.useState([]);
+  const appContext = useContext(AppContext);
 
   const getRoomsData = async () => {
     console.log(id);
-    await resultRoomsStore.fetchSubRooms(id, 10004);
+    await resultRoomsStore.fetchSubRooms(id, appContext.allocRoundId);
     setRooms(resultRoomsStore.subRooms);
   };
 

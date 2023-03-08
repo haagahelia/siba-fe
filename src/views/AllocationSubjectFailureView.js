@@ -177,7 +177,7 @@ export default function AllocationSubjectFailureView() {
       />
 
       <Typography style={{ color: "#F6E9E9", margin: 20 }}>
-        Unallocated lessons
+        Unallocated lessons (Click each to see reasons for failing to allocate)
       </Typography>
 
       <div style={{ width: "70%", backgroundColor: "#ff1744", margin: "auto" }}>
