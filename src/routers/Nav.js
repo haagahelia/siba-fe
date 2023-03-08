@@ -8,6 +8,8 @@ import {
 import "../styles/NavBar.css";
 // import logo from "../styles/SIBA_LOGO_WHITE.png";
 import ResultView from "../views/ResultView";
+import Settings from "../views/Settings";
+import EditSetting from "../components/settings/EditSetting";
 import SubjectView from "../views/SubjectView";
 import AllocRoundView from "../views/AllocRoundListView";
 import AllocationSubjectFailureView from "../views/AllocationSubjectFailureView";
@@ -64,6 +66,17 @@ function NavBar() {
             </li>
             <li className="nav-item">
               <NavLink
+                exact
+                to="/settings"
+                activeClassName="active"
+                className="nav-links"
+                onClick={handleClick}
+              >
+                Settings
+              </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink
                 exact="true"
                 to="/allocroundpage"
                 activeClassName="active"
@@ -99,6 +112,8 @@ function NavBar() {
           }
         />
         <Route path="/onlyresult" element={<ResultView />} />
+        <Route path="/settings" element={<Settings />} />
+        <Route path="/editSetting" element={<EditSetting />} />
         <Route
           path="/alloc-fail/:allocId"
           element={<AllocationSubjectFailureView />}
