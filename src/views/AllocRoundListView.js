@@ -62,7 +62,7 @@ export default function AllocRoundView() {
             <CardContent>
               <CardHeader title="Allocation rounds (Select to change)" />
               <Typography color="white">
-                Only 10004 has results so far though. Current: {allocRoundId}
+                Current allocation round: {allocRoundId}
               </Typography>
               <AllocRoundListContainer
                 getAllAllocRounds={getAllAllocRounds}

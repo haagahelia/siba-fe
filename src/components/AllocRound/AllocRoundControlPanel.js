@@ -1,13 +1,8 @@
 import React from "react";
-//import { useTheme } from "@mui/material/styles";
 import { Button, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
-
-//import Grid2 from "@mui/material/Unstable_Grid2";
-//import Typography from "@mui/material/Typography";
 import { useState, useContext } from "react";
 
-//import resultProgramStore from "../data/ResultProgramStore";
 import allocationPost from "../../data/ResultAllocationStore";
 import { AppContext } from "../../AppContext";
 
@@ -18,8 +13,8 @@ const AllocRoundControlPanel = () => {
   //const theme = useTheme();
 
   return (
-    <Typography color="white">
-      Current allocRoundId is: {appContext.allocRoundId} &nbsp;
+    <Typography color="white" component="p">
+      Current allocation round: {appContext.allocRoundId} &nbsp;
       <Button
         type="submit"
         variant="contained"

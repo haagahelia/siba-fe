@@ -24,7 +24,7 @@ export default function ProgramResult(props) {
   const [progs, setProgs] = useState([]);
   const appContext = useContext(AppContext);
 
-  useEffect(() => getProgramData);
+  useEffect(() => getProgramData, []);
 
   const getProgramData = async () => {
     await progStore.fetchNames(appContext.allocRoundId);

@@ -18,7 +18,7 @@ export default function RoomResult(props) {
   const roomStore = resultRoomsStore;
   const [rooms, setRooms] = useState([]);
   const appContext = useContext(AppContext);
-  useEffect(() => getRoomsData);
+  useEffect(() => getRoomsData, []);
 
   const getRoomsData = async () => {
     await roomStore.fetchRooms(appContext.allocRoundId);
