@@ -5,7 +5,6 @@ import RoomResult from "../components/result/RoomResult";
 const RoomResultView = () => {
   return (
     <>
-      <AllocRoundControlPanel />
       <RoomResult />
     </>
   );

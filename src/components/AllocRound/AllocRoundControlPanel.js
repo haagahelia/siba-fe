@@ -6,7 +6,7 @@ import { useState, useContext } from "react";
 import allocationPost from "../../data/ResultAllocationStore";
 import { AppContext } from "../../AppContext";
 
-const AllocRoundControlPanel = () => {
+const AllocRoundControlPanel = ({ allocCounter, setAllocCounter }) => {
   const [isClicked, setIsClicked] = useState(false);
   const appContext = useContext(AppContext);
   //console.log("appContext 123: "+appContext);

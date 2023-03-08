@@ -13,7 +13,13 @@ import { AppContext } from "../../AppContext";
 import DeleteAllocRound from "./DeleteAllocRound";
 
 export default function AllocRoudDetails(props) {
-  const { open, setOpen, singleAllocRound, getAllAllocRounds } = props;
+  const {
+    open,
+    setOpen,
+    singleAllocRound,
+    getAllAllocRounds,
+    setAllocRoundId,
+  } = props;
   const [alertOpen, setAlertOpen] = useState(false);
   const [alertOptions] = useState({
     title: "This is alert title",
@@ -86,7 +92,6 @@ export default function AllocRoudDetails(props) {
                 Last modified:&nbsp;
                 {singleAllocRound?.lastModified}
               </Typography>
-
             </Grid>
           </Grid>
         </DialogContent>
