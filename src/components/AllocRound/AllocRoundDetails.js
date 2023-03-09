@@ -10,9 +10,16 @@ import {
 } from "@mui/material";
 import AlertBox from "../common/AlertBox";
 import { AppContext } from "../../AppContext";
+import DeleteAllocRound from "./DeleteAllocRound";
 
-export default function AllocRoundDetails(props) {
-  const { open, setOpen, singleAllocRound, setAllocRoundId } = props;
+export default function AllocRoudDetails(props) {
+  const {
+    open,
+    setOpen,
+    singleAllocRound,
+    getAllAllocRounds,
+    setAllocRoundId,
+  } = props;
   const [alertOpen, setAlertOpen] = useState(false);
   const [alertOptions] = useState({
     title: "This is alert title",
@@ -27,8 +34,8 @@ export default function AllocRoundDetails(props) {
 
   const setAllocRound = (allocRoundId) => {
     //console.log ("allocRoundId 456: " +allocRoundId);
-    appContext.allocRoundId = allocRoundId; // Works now!
-    setAllocRoundId(allocRoundId); // Notifying parent
+    appContext.allocRoundId = allocRoundId; // Works now! Updating app context.
+    setAllocRoundId(allocRoundId); // Notifying grangrangranparent. Updating component state
     setOpen(false);
   };
 
@@ -53,6 +60,11 @@ export default function AllocRoundDetails(props) {
         <DialogContent>
           <DialogActions
             sx={{ justifyContent: "space-evenly", padding: "16px" }}
+          />
+          <DeleteAllocRound
+            singleAllocRound={singleAllocRound}
+            getAllAllocRounds={getAllAllocRounds}
+            setOpen={setOpen}
           />
           <Grid
             container

@@ -13,6 +13,7 @@ import RoomResultView from "../views/RoomResultView";
 import ProgramResultView from "../views/ProgramResultView";
 import SubjectView from "../views/SubjectView";
 import AllocRoundView from "../views/AllocRoundListView";
+import AddAllocRound from "../components/AllocRound/AddAllocRound";
 import AllocationSubjectFailureView from "../views/AllocationSubjectFailureView";
 import NotFoundView from "../views/NotFoundView";
 import EquipmentView from "../views/EquipmentView";
@@ -109,6 +110,10 @@ function NavBar() {
         <Route path="/roomresult" element={<RoomResultView />} />
         <Route path="/programresult" element={<ProgramResultView />} />
         <Route path="/equipment" element={<EquipmentView />} />
+        <Route
+          path='/allocroundpage/addAllocRound'
+          element={<AddAllocRound />}
+        />
         <Route
           path="/alloc-fail/:allocId"
           element={<AllocationSubjectFailureView />}

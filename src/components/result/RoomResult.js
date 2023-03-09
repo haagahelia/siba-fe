@@ -5,9 +5,9 @@ import React from "react";
 //import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import { Typography } from "@mui/material"; //Box ???
 import { useEffect, useState, useContext } from "react";
-import resultRoomsStore from "../../data/ResultRoomsStore";
-
 import { useTheme } from "@mui/material/styles";
+import AllocRoundControlPanel from "../AllocRound/AllocRoundControlPanel";
+import resultRoomsStore from "../../data/ResultRoomsStore";
 import RoomsWithTimesList from "../room/RoomsWithTimesList";
 import { AppContext } from "../../AppContext";
 
@@ -18,7 +18,7 @@ export default function RoomResult(props) {
   const roomStore = resultRoomsStore;
   const [rooms, setRooms] = useState([]);
   const appContext = useContext(AppContext);
-  useEffect(() => getRoomsData);
+  useEffect(() => getRoomsData, []);
 
   const getRoomsData = async () => {
     await roomStore.fetchRooms(appContext.allocRoundId);
@@ -28,6 +28,7 @@ export default function RoomResult(props) {
   const theme = useTheme();
   return (
     <div style={{ width: "80%", margin: "auto" }}>
+      <AllocRoundControlPanel />
       <Typography style={{ color: "#F6E9E9", marginTop: "5%", fontSize: 24 }}>
         Spaces (Huoneet)
       </Typography>

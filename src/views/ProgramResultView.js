@@ -6,7 +6,6 @@ import ProgramResult from "../components/result/ProgramResult";
 const ProgramResultView = function () {
   return (
     <>
-      <AllocRoundControlPanel />
       <ProgramResult />
     </>
   );

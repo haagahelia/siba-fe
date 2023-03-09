@@ -3,10 +3,11 @@ import Grid2 from "@mui/material/Unstable_Grid2";
 import ProgressBar from "@ramonak/react-progress-bar";
 import Modal from "@mui/material/Modal";
 import { Box } from "@mui/material"; // Button???
-import SubjectResult from "./SubjectResult";
-import testData from "../../data/testData";
 import Typography from "@mui/material/Typography";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
+import SubjectResult from "./SubjectResult";
+import testData from "../../data/testData";
+import AllocRoundControlPanel from "../AllocRound/AllocRoundControlPanel";
 import resultProgramStore from "../../data/ResultProgramStore";
 import CollapsedRow from "./CollapsedRow";
 import { useEffect, useState, useContext } from "react";
@@ -24,7 +25,7 @@ export default function ProgramResult(props) {
   const [progs, setProgs] = useState([]);
   const appContext = useContext(AppContext);
 
-  useEffect(() => getProgramData);
+  useEffect(() => getProgramData, []);
 
   const getProgramData = async () => {
     await progStore.fetchNames(appContext.allocRoundId);
@@ -56,6 +57,7 @@ export default function ProgramResult(props) {
 
   return (
     <>
+      <AllocRoundControlPanel />
       <Typography style={{ color: "#F6E9E9", margin: 20, fontSize: 24 }}>
         Programs (Aineryhmät)
       </Typography>
