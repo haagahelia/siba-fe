@@ -19,10 +19,14 @@ export default function SingleEquipmentDialog(props) {
     <div>
       <Dialog open={open} onClose={() => setOpen(false)} width="400px">
         <DialogTitle>{singleEquipment?.name}</DialogTitle>
-        <DialogContent>{singleEquipment?.id}</DialogContent>
-        <DialogContent>{singleEquipment?.name}</DialogContent>
-        <DialogContent>{singleEquipment?.equipmentPriority}</DialogContent>
-        <DialogContent>{singleEquipment?.description}</DialogContent>
+        <DialogContent>ID: {singleEquipment?.id}</DialogContent>
+        <DialogContent>Name: {singleEquipment?.name}</DialogContent>
+        <DialogContent>
+          Priority: {singleEquipment?.equipmentPriority}
+        </DialogContent>
+        <DialogContent>
+          Description: {singleEquipment?.description}
+        </DialogContent>
       </Dialog>
     </div>
   );

@@ -59,7 +59,7 @@ export default function AddSubEquipForm(props) {
             <DialogContentText>
               <Grid
                 container
-                spacing={3}
+                spacing={1}
                 column={3}
                 direction="column"
                 justifyContent="flex-start"

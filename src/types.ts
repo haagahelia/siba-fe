@@ -36,6 +36,7 @@ export interface Equipment {
   id: number;
   name: string;
   equipmentPriority: number;
+  description: string;
 }
 
 export interface SubjectEquipment {
