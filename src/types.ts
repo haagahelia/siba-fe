@@ -27,6 +27,11 @@ export interface Program {
   name: string;
 }
 
+export interface Settings {
+  id: number;
+  name: string;
+}
+
 export interface SpaceType {
   id: number;
   name: string;
