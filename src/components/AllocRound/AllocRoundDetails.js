@@ -12,7 +12,7 @@ import AlertBox from "../common/AlertBox";
 import { AppContext } from "../../AppContext";
 import DeleteAllocRound from "./DeleteAllocRound";
 
-export default function AllocRoudDetails(props) {
+export default function AllocRoundDetails(props) {
   const {
     open,
     setOpen,

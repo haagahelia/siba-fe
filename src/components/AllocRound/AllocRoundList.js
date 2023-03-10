@@ -7,7 +7,7 @@ import Grid from "@mui/material/Grid";
 import { styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
 import { Typography } from "@mui/material";
-import AllocRoudDetails from "./AllocRoundDetails";
+import AllocRoundDetails from "./AllocRoundDetails";
 
 export default function AllocRoundListItems(props) {
   const { paginateAllocRounds, getAllocRounds, setAllocRoundId } = props;
@@ -20,7 +20,7 @@ export default function AllocRoundListItems(props) {
   }));
   return (
     <div>
-      <AllocRoudDetails
+      <AllocRoundDetails
         open={open}
         setOpen={setOpen}
         singleAllocRound={singleAllocRound}
