@@ -18,6 +18,7 @@ import AllocRoundView from "../views/AllocRoundListView";
 import AddAllocRound from "../components/AllocRound/AddAllocRound";
 import AllocationSubjectFailureView from "../views/AllocationSubjectFailureView";
 import NotFoundView from "../views/NotFoundView";
+import EquipmentView from "../views/EquipmentView";
 
 function NavBar() {
   const [click, setClick] = useState(false);
@@ -95,6 +96,16 @@ function NavBar() {
                 Alloc rounds
               </NavLink>
             </li>
+            <li className="nav-item">
+              <NavLink
+                to="/equipment"
+                activeclassname="active"
+                className="nav-links"
+                onClick={handleClick}
+              >
+                Equipment
+              </NavLink>
+            </li>
           </ul>
           <div className="nav-icon" onClick={handleClick}>
             <MenuIcon />
@@ -109,6 +120,7 @@ function NavBar() {
         <Route path="/allocroundpage" element={<AllocRoundView />} />
         <Route path="/roomresult" element={<RoomResultView />} />
         <Route path="/programresult" element={<ProgramResultView />} />
+        <Route path="/equipment" element={<EquipmentView />} />
         <Route
           path='/allocroundpage/addAllocRound'
           element={<AddAllocRound />}

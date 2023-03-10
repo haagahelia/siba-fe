@@ -12,3 +12,46 @@ export const fetchEquipmentData = async (): Promise<Response<Equipment>> => {
   console.log(`Equipments[0]:${equipments[0].id}-${equipments[0].name}`);
   return { success: response.ok, data: equipments };
 };
+
+export const deleteSingleEquipment = async (
+  equipmentId: number,
+): Promise<boolean> => {
+  const request = new Request(`${baseUrl}/equipment/${equipmentId}`, {
+    method: "DELETE",
+  });
+
+  const response = await fetch(request);
+  const data = await response.json();
+
+  return data?.affectedRows === 1;
+};
+
+export const postNewEquipment = async (
+  newEquipment: Equipment,
+): Promise<boolean> => {
+  const request = new Request(`${baseUrl}/equipment/`, {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(newEquipment),
+  });
+  const response = await fetch(request);
+  return response.ok;
+};
+
+export const editEquipment = async (
+  editedEquipment: Equipment,
+): Promise<boolean> => {
+  const request = new Request(`${baseUrl}/equipment/updateEquip`, {
+    method: "PUT",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(editedEquipment),
+  });
+  const response = await fetch(request);
+  return response.ok;
+};
