@@ -12,7 +12,7 @@ import AlertBox from "../common/AlertBox";
 import { AppContext } from "../../AppContext";
 import DeleteAllocRound from "./DeleteAllocRound";
 
-export default function AllocRoudDetails(props) {
+export default function AllocRoundDetails(props) {
   const {
     open,
     setOpen,
@@ -26,7 +26,7 @@ export default function AllocRoudDetails(props) {
     message: "This is an error alert — check it out!",
     severity: "error",
   });
-  let appContext = useContext(AppContext);
+  const appContext = useContext(AppContext);
 
   const handleClose = (allocRoundId) => {
     setOpen(false);

@@ -17,18 +17,26 @@ import { AppContext } from "../../AppContext";
 export default function RoomResult(props) {
   const roomStore = resultRoomsStore;
   const [rooms, setRooms] = useState([]);
+  const [resetCounter, setResetCounter] = useState(0);
   const appContext = useContext(AppContext);
-  useEffect(() => getRoomsData, []);
+  const theme = useTheme();
+
+  useEffect(() => {
+    getRoomsData();
+  }, [resetCounter]);
 
   const getRoomsData = async () => {
     await roomStore.fetchRooms(appContext.allocRoundId);
     setRooms(roomStore.rooms);
   };
 
-  const theme = useTheme();
+  const incrementResetCounter = () => {
+    setResetCounter(resetCounter + 1);
+  };
+
   return (
     <div style={{ width: "80%", margin: "auto" }}>
-      <AllocRoundControlPanel />
+      <AllocRoundControlPanel incrementResetCounter={incrementResetCounter} />
       <Typography style={{ color: "#F6E9E9", marginTop: "5%", fontSize: 24 }}>
         Spaces (Huoneet)
       </Typography>

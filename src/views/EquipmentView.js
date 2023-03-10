@@ -1,23 +1,35 @@
 import React, { useState, useEffect } from "react";
 import dao from "../ajax/dao";
+import Grid from "@mui/material/Grid";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
-import { Grid } from "@mui/material";
-import Typography from "@mui/material/Typography";
-import CardContent from "@mui/material/CardContent";
+import { Typography } from "@mui/material";
 import { CardHeader, Card, Container } from "@mui/material";
+import CardContent from "@mui/material/CardContent";
 import SingleEquipmentDialog from "../components/equipment/SingleEquipmentDialog";
 
 export default function EquipmentView() {
   const [equipmentList, setEquipmentList] = useState([]);
-  const [singleEquipment, setSingleEquipment] = useState(null);
+  const [testState, setTestState] = useState("test");
+  const [singleEquipment, setSingleEquipment] = useState();
   const [open, setOpen] = useState(false);
+  const [alertOptions, setAlertOptions] = useState({
+    message: "This is an error alert — check it out!",
+    severity: "error",
+  });
+  const [alertOpen, setAlertOpen] = useState(false);
 
-  const getAllEquipment = async function () {
+  const getAllEquipments = async function () {
     const { success, data } = await dao.fetchEquipmentData();
     if (!success) {
-      alert("nope");
+      setAlertOptions({
+        severity: "error",
+        title: "Error",
+        message: "Oops! Something went wrong on the server. No equipment found",
+      });
+      setAlertOpen(true);
+      return;
     } else {
       setEquipmentList(data);
     }
@@ -34,7 +46,7 @@ export default function EquipmentView() {
         setOpen={setOpen}
         singleEquipment={singleEquipment}
         setSingleEquipment={setSingleEquipment}
-        getAllEquipment={getAllEquipment}
+        getAllEquipments={getAllEquipments}
       />
       <Container maxWidth="100%">
         <Grid
@@ -56,41 +68,61 @@ export default function EquipmentView() {
                         setOpen(true);
                       }}
                     >
-                      <Grid item md={3} xs={1} padding={2}>
+                      <Grid item md={3} xs={3} padding={3}>
                         <Typography
                           variant="caption"
                           style={{ fontWeight: "bold" }}
                         >
-                          ID
+                          Id:
                         </Typography>
-                        <ListItemText primary={value.id} />
+                        <ListItemText
+                          primary={value.id}
+                          primaryTypographyProps={{
+                            variant: "body2",
+                          }}
+                        />
+                      </Grid>
+                      <Grid item md={3} xs={3} padding={3}>
+                        <Typography
+                          variant="caption"
+                          style={{ fontWeight: "bold" }}
+                        >
+                          Name:
+                        </Typography>
+                        <ListItemText
+                          primary={value.name}
+                          primaryTypographyProps={{
+                            variant: "body2",
+                          }}
+                        />
                       </Grid>
                       <Grid item md={3} xs={7} padding={2}>
                         <Typography
                           variant="caption"
                           style={{ fontWeight: "bold" }}
                         >
-                          Name
+                          Priority:
                         </Typography>
-                        <ListItemText primary={value.name} />
+                        <ListItemText
+                          primary={value.equipmentPriority}
+                          primaryTypographyProps={{
+                            variant: "body2",
+                          }}
+                        />
                       </Grid>
-                      <Grid item md={3} xs={2} padding={2}>
+                      <Grid item md={1} xs={1} padding={2}>
                         <Typography
                           variant="caption"
                           style={{ fontWeight: "bold" }}
                         >
-                          Priority
+                          Description:
                         </Typography>
-                        <ListItemText primary={value.equipmentPriority} />
-                      </Grid>
-                      <Grid item md={3} xs={4} padding={2}>
-                        <Typography
-                          variant="caption"
-                          style={{ fontWeight: "bold" }}
-                        >
-                          Description
-                        </Typography>
-                        <ListItemText primary={value.description} />
+                        <ListItemText
+                          primary={value.description}
+                          primaryTypographyProps={{
+                            variant: "body2",
+                          }}
+                        />
                       </Grid>
                     </ListItem>
                   </List>
