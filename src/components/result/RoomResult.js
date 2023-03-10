@@ -19,6 +19,8 @@ export default function RoomResult(props) {
   const [rooms, setRooms] = useState([]);
   const [resetCounter, setResetCounter] = useState(0);
   const appContext = useContext(AppContext);
+  const theme = useTheme();
+
   useEffect(() => {
     getRoomsData();
   }, [resetCounter]);
@@ -32,7 +34,6 @@ export default function RoomResult(props) {
     setResetCounter(resetCounter + 1);
   };
 
-  const theme = useTheme();
   return (
     <div style={{ width: "80%", margin: "auto" }}>
       <AllocRoundControlPanel incrementResetCounter={incrementResetCounter} />

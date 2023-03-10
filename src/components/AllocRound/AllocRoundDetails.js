@@ -26,7 +26,7 @@ export default function AllocRoudDetails(props) {
     message: "This is an error alert — check it out!",
     severity: "error",
   });
-  let appContext = useContext(AppContext);
+  const appContext = useContext(AppContext);
 
   const handleClose = (allocRoundId) => {
     setOpen(false);
