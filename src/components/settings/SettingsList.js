@@ -6,13 +6,15 @@ import Divider from "@mui/material/Divider";
 import Grid from "@mui/material/Grid";
 import { styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
-import { Typography } from "@mui/material";
-import AllocRoundDetails from "./AllocRoundDetails";
+import { Button, Typography } from "@mui/material";
+import SettingsDetails from "./SettingsDetails";
+import { useTheme } from "@mui/material/styles";
 
-export default function AllocRoundListItems(props) {
-  const { paginateAllocRounds, getAllocRounds, setAllocRoundId } = props;
-  const [singleAllocRound, setAllocRound] = useState(null);
+export default function SettingsList(props) {
+  const { paginateSettings, getSettings } = props;
+  const [singleSetting, setSingleSetting] = useState(null);
   const [open, setOpen] = useState(false);
+  const theme = useTheme();
 
   // STYLE
   const Box = styled(Paper)(({ theme }) => ({
@@ -20,24 +22,24 @@ export default function AllocRoundListItems(props) {
   }));
   return (
     <div>
-      <AllocRoundDetails
+      <SettingsDetails
         open={open}
         setOpen={setOpen}
-        singleAllocRound={singleAllocRound}
-        setAllocRound={setAllocRound}
-        setAllocRoundId={setAllocRoundId}
-        getAllocRounds={getAllocRounds}
+        singleSetting={singleSetting}
+        setSingleSetting={setSingleSetting}
+        getSettings={getSettings}
       />
       <Box>
         <nav>
-          {paginateAllocRounds.map((value) => {
+          {paginateSettings.map((value) => {
             return (
               <List key={value.id}>
                 <ListItem
                   disablePadding
+                  button
                   onClick={() => {
-                    setAllocRound(value);
-                    setAllocRoundId(value.id);
+                    setSingleSetting(value);
+
                     setOpen(true);
                   }}
                 >
@@ -83,15 +85,29 @@ export default function AllocRoundListItems(props) {
                       }}
                     />
                   </Grid>
-                  <Grid item md={3} xs={3} padding={3}>
+                  <Grid item md={10} xs={7} padding={5}>
                     <Typography
                       variant="caption"
                       style={{ fontWeight: "bold" }}
                     >
-                      Last modified:
+                      textValue:
                     </Typography>
                     <ListItemText
-                      primary={value.lastModified}
+                      primary={value.textValue}
+                      primaryTypographyProps={{
+                        variant: "body2",
+                      }}
+                    />
+                  </Grid>
+                  <Grid item md={10} xs={7} padding={5}>
+                    <Typography
+                      variant="caption"
+                      style={{ fontWeight: "bold" }}
+                    >
+                      numberValue:
+                    </Typography>
+                    <ListItemText
+                      primary={value.numberValue}
                       primaryTypographyProps={{
                         variant: "body2",
                       }}

@@ -9,6 +9,8 @@ import "../styles/NavBar.css";
 // import logo from "../styles/SIBA_LOGO_WHITE.png";
 import MenuIcon from "@mui/icons-material/Menu";
 
+import Settings from "../views/Settings";
+import EditSetting from "../components/settings/EditSetting";
 import RoomResultView from "../views/RoomResultView";
 import ProgramResultView from "../views/ProgramResultView";
 import SubjectView from "../views/SubjectView";
@@ -76,6 +78,16 @@ function NavBar() {
             </li>
             <li className="nav-item">
               <NavLink
+                to="/settings"
+                activeClassName="active"
+                className="nav-links"
+                onClick={handleClick}
+              >
+                Settings
+              </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink
                 to="/allocroundpage"
                 activeclassname="active"
                 className="nav-links"
@@ -113,6 +125,8 @@ function NavBar() {
           path='/allocroundpage/addAllocRound'
           element={<AddAllocRound />}
         />
+        <Route path="/settings" element={<Settings />} />
+        <Route path="/editSetting" element={<EditSetting />} />
         <Route
           path="/alloc-fail/:allocId"
           element={<AllocationSubjectFailureView />}
