@@ -39,19 +39,19 @@ export default function SingleSubjectDialog(props) {
       return;
     } else {
       setEquipListBySubId(result.data);
-      console.log(`setEquipListBySubId(result): ${result.data.length}`);
+      //console.log(`setEquipListBySubId(result): ${result.data.length}`);
       return result.data;
     }
   };
 
   useEffect(() => {
-    console.log(`singleSubject?.id${singleSubject?.id}`);
-    console.log(`singleSubject?.name${singleSubject?.name}`);
+    //console.log(`singleSubject?.id${singleSubject?.id}`);
+    //console.log(`singleSubject?.name${singleSubject?.name}`);
     if (singleSubject && typeof singleSubject.id === "number") {
-      console.log(`getEquipmentsBySubId(${singleSubject.id})`);
+      //console.log(`getEquipmentsBySubId(${singleSubject.id})`);
       getEquipmentsBySubId(singleSubject.id);
     }
-  }, []);
+  }, [singleSubject]);
 
   return (
     <div>

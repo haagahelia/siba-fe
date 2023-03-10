@@ -1,18 +1,7 @@
-import { Response, AllocRound } from "../types";
+import { Response } from "../types";
 const baseUrl = process.env.REACT_APP_BE_SERVER_BASE_URL;
 
 // TODO: get type definition for data
-
-export const fetchAllAllocRounds = async (): Promise<Response<AllocRound>> => {
-  const request = new Request(`${baseUrl}/allocation`, {
-    method: "GET",
-  });
-
-  const response = await fetch(request);
-  const allocrounds: AllocRound[] = await response.json();
-
-  return { success: response.ok, data: allocrounds };
-};
 
 export const getUnAllocableSubjects = async (
   id: number,

@@ -16,8 +16,12 @@ import AddSubjectForm from "./AddSubjectForm";
 
 export default function AddSubjectContainer(props) {
   const { getAllSubjects, allSubjectsList } = props;
-  const [programSelectList, setProgramSelectList] = useState([]);
-  const [spaceTypeSelectList, setSpaceTypeSelectList] = useState([]);
+  const [programSelectList, setProgramSelectList] = useState([
+    { id: 3009, name: "Globalist music" },
+  ]);
+  const [spaceTypeSelectList, setSpaceTypeSelectList] = useState([
+    { id: 5004, name: "Musicalist room" },
+  ]);
   const [alertOpen, setAlertOpen] = useState(false);
   const [alertOptions, setAlertOptions] = useState({
     title: "This is title",
@@ -38,9 +42,10 @@ export default function AddSubjectContainer(props) {
     sessionCount: 0,
     area: 0,
     programId: 3009,
+    spaceTypeId: 5004,
   });
 
-  const resetFormm = () => {
+  const resetForm = () => {
     setInitialSubject({
       name: "",
       groupSize: 0,
@@ -48,7 +53,8 @@ export default function AddSubjectContainer(props) {
       sessionLength: "",
       sessionCount: 0,
       area: 0,
-      programId: 0,
+      programId: 3009,
+      spaceTypeId: 5004,
     });
   };
 
@@ -78,6 +84,7 @@ export default function AddSubjectContainer(props) {
       setAlertOpen(true);
       return;
     } else {
+      //console.log(data);
       setProgramSelectList(data);
     }
   };
@@ -132,7 +139,7 @@ export default function AddSubjectContainer(props) {
       message: `${submitValues.name} added.`,
     });
     setAlertOpen(true);
-    resetFormm();
+    resetForm();
     getAllSubjects();
   };
   // Here is a list of lessons

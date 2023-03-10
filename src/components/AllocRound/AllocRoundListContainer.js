@@ -5,12 +5,17 @@ import CardContent from "@mui/material/CardContent";
 import { Card } from "@mui/material";
 
 export default function AllocRoundListContainer(props) {
-  const { getAllAllocRounds, allAllocRoundsList, paginateAllocRounds } = props;
+  const {
+    getAllAllocRounds,
+    allAllocRoundsList,
+    paginateAllocRounds,
+    setAllocRoundId,
+  } = props;
   return (
     <div>
       <Grid
         container
-        rowSpacing={0.5}
+        rowSpacing={1}
         justifyContent="space-evenly"
         alignItems="flex-start"
         marginTop="20px"
@@ -21,6 +26,7 @@ export default function AllocRoundListContainer(props) {
               getAllAllocRounds={getAllAllocRounds}
               allAllocRoundsList={allAllocRoundsList}
               paginateAllocRounds={paginateAllocRounds}
+              setAllocRoundId={setAllocRoundId}
             />
           </CardContent>
         </Card>

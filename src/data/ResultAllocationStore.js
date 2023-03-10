@@ -1,20 +1,21 @@
 import axios from "axios";
 import resultRoomsStore from "./ResultRoomsStore";
 import resultProgramStore from "./ResultProgramStore";
+
 const baseUrl = process.env.REACT_APP_BE_SERVER_BASE_URL;
 
 class AllocationPost {
-  startAlloc() {
+  startAlloc(allocRoundId) {
     axios
       .post(`${baseUrl}/allocation/start`, {
-        allocRound: 10004,
+        allocRound: allocRoundId,
       })
       .then(function (response) {
         console.log(response);
       })
       .then(() => {
-        resultRoomsStore.fetchRooms(10004);
-        resultProgramStore.fetchNames(10004);
+        resultRoomsStore.fetchRooms(allocRoundId);
+        resultProgramStore.fetchNames(allocRoundId);
       })
 
       .catch(function (error) {
@@ -22,10 +23,10 @@ class AllocationPost {
       });
   }
 
-  resetAlloc() {
+  resetAlloc(allocRoundId) {
     axios
       .post(`${baseUrl}/allocation/reset`, {
-        allocRound: 10004,
+        allocRound: allocRoundId,
       })
       .then(function (response) {
         console.log(response);

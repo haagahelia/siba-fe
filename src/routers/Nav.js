@@ -7,13 +7,17 @@ import {
 } from "react-router-dom";
 import "../styles/NavBar.css";
 // import logo from "../styles/SIBA_LOGO_WHITE.png";
-import ResultView from "../views/ResultView";
+import MenuIcon from "@mui/icons-material/Menu";
+
 import Settings from "../views/Settings";
 import EditSetting from "../components/settings/EditSetting";
+import RoomResultView from "../views/RoomResultView";
+import ProgramResultView from "../views/ProgramResultView";
 import SubjectView from "../views/SubjectView";
 import AllocRoundView from "../views/AllocRoundListView";
+import AddAllocRound from "../components/AllocRound/AddAllocRound";
 import AllocationSubjectFailureView from "../views/AllocationSubjectFailureView";
-import MenuIcon from "@mui/icons-material/Menu";
+import NotFoundView from "../views/NotFoundView";
 
 function NavBar() {
   const [click, setClick] = useState(false);
@@ -23,7 +27,7 @@ function NavBar() {
     <Router>
       <nav className="navbar">
         <div className="nav-container">
-          <NavLink exact to="/" className="nav-logo">
+          <NavLink to="/" className="nav-logo">
             {/* I didn't have logos, add them to the project and it works */}
             {/* <img src={logo} alt="Logo" /> */}
             <i className="fas fa-code" />
@@ -34,7 +38,6 @@ function NavBar() {
               <NavLink
                 to="/"
                 end
-                exact="true"
                 activeclassname="active"
                 className="nav-links"
                 onClick={handleClick}
@@ -44,7 +47,6 @@ function NavBar() {
             </li>
             <li className="nav-item">
               <NavLink
-                exact="true"
                 to="/subject"
                 activeclassname="active"
                 className="nav-links"
@@ -55,18 +57,26 @@ function NavBar() {
             </li>
             <li className="nav-item">
               <NavLink
-                exact="true"
-                to="/onlyresult"
+                to="/roomresult"
                 activeclassname="active"
                 className="nav-links"
                 onClick={handleClick}
               >
-                Results view
+                Room results
               </NavLink>
             </li>
             <li className="nav-item">
               <NavLink
-                exact
+                to="/programresult"
+                activeclassname="active"
+                className="nav-links"
+                onClick={handleClick}
+              >
+                Program results
+              </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink
                 to="/settings"
                 activeClassName="active"
                 className="nav-links"
@@ -77,13 +87,12 @@ function NavBar() {
             </li>
             <li className="nav-item">
               <NavLink
-                exact="true"
                 to="/allocroundpage"
-                activeClassName="active"
+                activeclassname="active"
                 className="nav-links"
                 onClick={handleClick}
               >
-                Allocations
+                Alloc rounds
               </NavLink>
             </li>
           </ul>
@@ -95,29 +104,22 @@ function NavBar() {
       </nav>
 
       <Routes>
+        <Route path="/" element={<SubjectView />} />
+        <Route path="/subject" element={<SubjectView />} />
+        <Route path="/allocroundpage" element={<AllocRoundView />} />
+        <Route path="/roomresult" element={<RoomResultView />} />
+        <Route path="/programresult" element={<ProgramResultView />} />
         <Route
-          path="/subject"
-          element={
-            <>
-              <SubjectView />
-            </>
-          }
+          path='/allocroundpage/addAllocRound'
+          element={<AddAllocRound />}
         />
-        <Route
-          path="/allocroundpage"
-          element={
-            <>
-              <AllocRoundView />
-            </>
-          }
-        />
-        <Route path="/onlyresult" element={<ResultView />} />
         <Route path="/settings" element={<Settings />} />
         <Route path="/editSetting" element={<EditSetting />} />
         <Route
           path="/alloc-fail/:allocId"
           element={<AllocationSubjectFailureView />}
         />
+        <Route path="*" element={<NotFoundView />} />
       </Routes>
     </Router>
   );
