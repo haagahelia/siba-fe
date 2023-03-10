@@ -28,6 +28,10 @@ export default function ProgramResult(props) {
 
   useEffect(() => {
     getProgramData();
+
+    return () => {
+      // cleanup function doing nothing
+    };
   }, [resetCounter]);
 
   const getProgramData = async () => {

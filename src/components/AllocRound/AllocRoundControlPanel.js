@@ -19,7 +19,7 @@ const AllocRoundControlPanel = ({ incrementResetCounter }) => {
       } else {
         setIsClicked(false);
       }
-    }, 2000);
+    }, 3000);
   };
 
   return (
