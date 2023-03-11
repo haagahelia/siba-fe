@@ -3,7 +3,7 @@ import { CardHeader, Card, CardContent } from "@mui/material";
 import AlertBox from "../common/AlertBox";
 import { useFormik } from "formik";
 import ConfirmationDialog from "../common/ConfirmationDialog";
-import { capitalizeFirstLetter } from "../../validation/ValidateAddSubject";
+import { capitalizeFirstLetter } from "../../validation/ValidateAddAllocRound";
 import dao from "../../ajax/dao";
 import AddAllocRoundForm from "./AddAllocRoundForm";
 
@@ -43,7 +43,7 @@ export default function AddAllocRound(props) {
     onSubmit: (values) => {
       setDialogOptions({
         title: `Are you sure you want to add ${values.name}?`,
-        content: `By clicking continue, ${values.name} will be added to the AllocRound list`,
+        content: `By clicking continue, ${values.name} will be added to the allocation round list`,
       });
       setDialogOpen(true);
 
@@ -111,7 +111,10 @@ export default function AddAllocRound(props) {
         }}
       >
         <CardContent>
-          <CardHeader title="Add AllocRound" sx={{ marginBottom: "30px" }} />
+          <CardHeader
+            title="Add allocation round"
+            sx={{ marginBottom: "30px" }}
+          />
           <AddAllocRoundForm
             handleChange={handleChange}
             formik={formik}
