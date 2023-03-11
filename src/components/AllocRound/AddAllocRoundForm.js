@@ -21,7 +21,7 @@ export default function AddAllocRoundForm(props) {
             <TextField
               error={formik.touched.name && formik.errors.name ? true : false}
               name="name"
-              label="Name of the allocround"
+              label="Name of the allocation round"
               variant="outlined"
               value={formik.values.name}
               onChange={formik.handleChange("name")}
