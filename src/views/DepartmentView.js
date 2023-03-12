@@ -7,6 +7,7 @@ import ListItemText from "@mui/material/ListItemText";
 import { Typography } from "@mui/material";
 import { CardHeader, Card, Container } from "@mui/material";
 import CardContent from "@mui/material/CardContent";
+import DepartmentDialog from "../components/department/DepartmentDialog";
 
 export default function DepartmentView() {
   const [DepartmentList, setDepartmentList] = useState([]);
@@ -24,7 +25,8 @@ export default function DepartmentView() {
       setAlertOptions({
         severity: "error",
         title: "Error",
-        message: "Oops! Something went wrong on the server. No equipment found",
+        message:
+          "Oops! Something went wrong on the server. Department not found",
       });
       setAlertOpen(true);
       return;
@@ -39,6 +41,13 @@ export default function DepartmentView() {
 
   return (
     <>
+      <DepartmentDialog
+        open={open}
+        setOpen={setOpen}
+        singleDepartment={singleDepartment}
+        setSingleDepartment={setSingleDepartment}
+        getAllDepartments={getAllDepartments}
+      />
       <Container maxWidth="100%">
         <Grid
           container
@@ -53,7 +62,12 @@ export default function DepartmentView() {
               {DepartmentList.map((value) => {
                 return (
                   <List key={value.id}>
-                    <ListItem>
+                    <ListItem
+                      onClick={() => {
+                        setSingleDepartment(value);
+                        setOpen(true);
+                      }}
+                    >
                       <Grid item md={3} xs={3} padding={3}>
                         <Typography
                           variant="caption"
