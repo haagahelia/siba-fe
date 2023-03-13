@@ -20,6 +20,7 @@ import AllocationSubjectFailureView from "../views/AllocationSubjectFailureView"
 import NotFoundView from "../views/NotFoundView";
 import EquipmentView from "../views/EquipmentView";
 import BuildingView from "../views/BuildingView";
+import DepartmentView from "../views/DepartmentView";
 
 function NavBar() {
   const [click, setClick] = useState(false);
@@ -116,6 +117,15 @@ function NavBar() {
               >
                 Buildings
               </NavLink>
+              <NavLink
+                to="/department"
+                activeclassname="active"
+                className="nav-links"
+                onClick={handleClick}
+              >
+                Department
+              </NavLink>
+              
             </li>
           </ul>
           <div className="nav-icon" onClick={handleClick}>
@@ -133,8 +143,9 @@ function NavBar() {
         <Route path="/programresult" element={<ProgramResultView />} />
         <Route path="/equipment" element={<EquipmentView />} />
         <Route path="/building" element={<BuildingView />} />
+        <Route path="/department" element={<DepartmentView />} />
         <Route
-          path='/allocroundpage/addAllocRound'
+          path="/allocroundpage/addAllocRound"
           element={<AddAllocRound />}
         />
         <Route path="/settings" element={<Settings />} />
