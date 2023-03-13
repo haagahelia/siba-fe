@@ -66,7 +66,7 @@ export default function AddSubEquipForm(props) {
                 alignItems="flex-center"
                 padding={2}
               >
-                <Grid item sx={12}>
+                <Grid item xs={12}>
                   <FormControl sx={{ minWidth: 225 }}>
                     <InputLabel>Equipment</InputLabel>
                     <Select
@@ -93,7 +93,7 @@ export default function AddSubEquipForm(props) {
                     </FormHelperText>
                   </FormControl>
                 </Grid>
-                <Grid item sx={12}>
+                <Grid item xs={12}>
                   <Typography sx={{ marginBottom: 2 }}>
                     Priority default value: {equipPriority}
                   </Typography>
@@ -117,7 +117,7 @@ export default function AddSubEquipForm(props) {
                     }
                   />
                 </Grid>
-                <Grid item sx={12}>
+                <Grid item xs={12}>
                   <FormControl>
                     <FormLabel>Mandatority of the equipment</FormLabel>
                     <RadioGroup
