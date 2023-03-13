@@ -57,3 +57,8 @@ export interface AllocRound {
   description: string;
   lastModified: string;
 }
+
+export interface Building {
+  name: string;
+  description: string;
+}
