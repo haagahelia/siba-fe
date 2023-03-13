@@ -6,6 +6,7 @@ import * as dao_spaceType from "./dao_spaceType";
 import * as dao_subject from "./dao_subject";
 import * as dao_subjectEquipment from "./dao_subjectEquipment";
 import * as dao_allocRound from "./dao_allocRound";
+import * as dao_building from "./dao_building";
 import * as dao_department from "./dao_department";
 
 const dao = {
@@ -17,6 +18,7 @@ const dao = {
   ...dao_subject,
   ...dao_subjectEquipment,
   ...dao_allocRound,
+  ...dao_building,
   ...dao_department,
 };
 
