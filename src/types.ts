@@ -57,3 +57,9 @@ export interface AllocRound {
   description: string;
   lastModified: string;
 }
+
+export interface Department {
+  id: number;
+  name: string;
+  description: string;
+}
