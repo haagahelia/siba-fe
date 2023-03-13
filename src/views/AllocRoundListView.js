@@ -55,7 +55,7 @@ export default function AllocRoundView() {
       />
       <Button onClick={() => navigate("addAllocRound")}>
         {" "}
-        Create new AllocRound
+        Create new Allocation round
       </Button>
       <Container maxWidth="100%">
         <Grid
