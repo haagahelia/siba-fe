@@ -62,7 +62,7 @@ export default function EditSubEquipForm(props) {
                 alignItems="flex-start"
                 padding={2}
               >
-                <Grid item sx={12}>
+                <Grid item xs={12}>
                   <Typography sx={{ marginBottom: 2 }}>
                     Default value for priority: {equipPriority}
                   </Typography>
@@ -86,7 +86,7 @@ export default function EditSubEquipForm(props) {
                     }
                   />
                 </Grid>
-                <Grid item sx={12}>
+                <Grid item xs={12}>
                   <FormControl>
                     <FormLabel>Mandatority of the equipment</FormLabel>
                     <RadioGroup
