@@ -36,7 +36,7 @@ export default function EquipmentView() {
   };
 
   useEffect(() => {
-    getAllEquipment();
+    getAllEquipments();
   }, []);
 
   return (

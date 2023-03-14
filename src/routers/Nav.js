@@ -99,14 +99,8 @@ function NavBar() {
             </li>
             <li className="nav-item">
               <NavLink
-<<<<<<< HEAD
-                exact="true"
-                to="/equipment"
-                activeClassName="active"
-=======
                 to="/equipment"
                 activeclassname="active"
->>>>>>> d6b23f5175e06177055eeed7e9e2775b92af3e79
                 className="nav-links"
                 onClick={handleClick}
               >
