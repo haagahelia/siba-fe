@@ -8,6 +8,7 @@ import { Typography } from "@mui/material";
 import { CardHeader, Card, Container } from "@mui/material";
 import CardContent from "@mui/material/CardContent";
 import SingleEquipmentDialog from "../components/equipment/SingleEquipmentDialog";
+import AddEquipment from "../components/equipment/AddEquipment";
 
 export default function EquipmentView() {
   const [equipmentList, setEquipmentList] = useState([]);
@@ -40,7 +41,8 @@ export default function EquipmentView() {
   }, []);
 
   return (
-    <>
+    <div>
+      <AddEquipment getAllEquipments={getAllEquipments} />
       <SingleEquipmentDialog
         open={open}
         setOpen={setOpen}
@@ -132,6 +134,6 @@ export default function EquipmentView() {
           </Card>
         </Grid>
       </Container>
-    </>
+    </div>
   );
 }

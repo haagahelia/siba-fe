@@ -125,7 +125,6 @@ function NavBar() {
               >
                 Department
               </NavLink>
-              
             </li>
           </ul>
           <div className="nav-icon" onClick={handleClick}>
