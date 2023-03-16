@@ -21,6 +21,7 @@ import NotFoundView from "../views/NotFoundView";
 import EquipmentView from "../views/EquipmentView";
 import BuildingView from "../views/BuildingView";
 import DepartmentView from "../views/DepartmentView";
+import SpaceTypeView from "../views/SpaceTypeView";
 
 function NavBar() {
   const [click, setClick] = useState(false);
@@ -125,6 +126,14 @@ function NavBar() {
               >
                 Department
               </NavLink>
+              <NavLink
+                to="/spaceType"
+                activeclassname="active"
+                className="nav-links"
+                onClick={handleClick}
+              >
+                Space Type
+              </NavLink>
             </li>
           </ul>
           <div className="nav-icon" onClick={handleClick}>
@@ -143,6 +152,7 @@ function NavBar() {
         <Route path="/equipment" element={<EquipmentView />} />
         <Route path="/building" element={<BuildingView />} />
         <Route path="/department" element={<DepartmentView />} />
+        <Route path="/spaceType" element={<SpaceTypeView />} />
         <Route
           path="/allocroundpage/addAllocRound"
           element={<AddAllocRound />}
