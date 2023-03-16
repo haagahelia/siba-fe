@@ -38,7 +38,7 @@ export const deleteSingleEquipment = async (
   const response = await fetch(request);
   const data = await response.json();
 
-  return data?.affectedRows === 1;
+  return data?.returnedNumberValue === 1;
 };
 
 export const editEquipment = async (

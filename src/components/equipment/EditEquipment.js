@@ -3,8 +3,9 @@ import Dialog from "@mui/material/Dialog";
 import DialogTitle from "@mui/material/DialogTitle";
 import TextField from "@mui/material/TextField";
 import { Button, Grid } from "@mui/material";
-import { DialogActions, DialogContent, DialogContentText } from "@mui/material";
+import { DialogContent, DialogContentText } from "@mui/material";
 import dao from "../../ajax/dao";
+import ValidateEditEquipment from "../../validation/ValidateEditEquipment";
 
 export default function EditEquipment(props) {
   const {
@@ -24,14 +25,19 @@ export default function EditEquipment(props) {
   });
 
   const submitEdits = async () => {
-    let result = await dao.editEquipment(equipment);
-    if (!result) {
-      alert("Something went wrong");
+    let validation = ValidateEditEquipment(equipment);
+    if (Object.values(validation).length !== 0) {
+      alert(Object.values(validation));
     } else {
-      alert(`Equipment ${equipment.name} updated`);
-      setEditOpen(false);
-      setOpen(false);
-      getAllEquipments();
+      let result = await dao.editEquipment(equipment);
+      if (!result) {
+        alert("Something went wrong");
+      } else {
+        alert(`Equipment ${equipment.name} updated`);
+        setEditOpen(false);
+        setOpen(false);
+        getAllEquipments();
+      }
     }
   };
 
@@ -74,6 +80,7 @@ export default function EditEquipment(props) {
                 <TextField
                   name='Priority'
                   label='Priority'
+                  type="number"
                   defaultValue={singleEquipment?.equipmentPriority}
                   onChange={(e) =>
                     setEquipment({ ...equipment, priority: e.target.value })
