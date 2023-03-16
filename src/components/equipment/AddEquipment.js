@@ -15,15 +15,6 @@ export default function AddEquipment(props) {
   });
 
   const openDialogBox = () => {
-    if (
-      equipment.name === "" ||
-      equipment.priority === "" ||
-      equipment.description === "" ||
-      equipment.isMovable === ""
-    ) {
-      alert("No empty fields!");
-      return;
-    }
     setOpen(true);
   };
 
@@ -33,6 +24,7 @@ export default function AddEquipment(props) {
         <CardHeader title="Add Equipment" />
         <Grid>
           <TextField
+            value={equipment.name}
             onChange={(event) =>
               setEquipment({ ...equipment, name: event.target.value })
             }
@@ -41,6 +33,7 @@ export default function AddEquipment(props) {
         </Grid>
         <Grid>
           <TextField
+            value={equipment.priority}
             type="number"
             onChange={(event) =>
               setEquipment({ ...equipment, priority: event.target.value })
@@ -50,6 +43,7 @@ export default function AddEquipment(props) {
         </Grid>
         <Grid>
           <TextField
+            value={equipment.description}
             onChange={(event) =>
               setEquipment({ ...equipment, description: event.target.value })
             }
@@ -58,6 +52,7 @@ export default function AddEquipment(props) {
         </Grid>
         <Grid>
           <TextField
+            value={equipment.isMovable}
             type="number"
             onChange={(event) =>
               setEquipment({ ...equipment, isMovable: event.target.value })
