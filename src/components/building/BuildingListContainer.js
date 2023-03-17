@@ -3,14 +3,11 @@ import Grid from "@mui/material/Grid";
 import BuildingList from "./BuildingList";
 import CardContent from "@mui/material/CardContent";
 import { Card } from "@mui/material";
-import SingleBuildingDialog from "./SingleBuildingDialog";
 
 export default function BuildingListContainer(props) {
-  // console.log(props)
   const { getAllBuildings, allBuildingsList } = props;
   return (
-    <div>
-      <SingleBuildingDialog getAllBuildings={getAllBuildings} />
+    <React.Fragment>
       <Grid
         container
         rowSpacing={1}
@@ -27,6 +24,6 @@ export default function BuildingListContainer(props) {
           </CardContent>
         </Card>
       </Grid>
-    </div>
+    </React.Fragment>
   );
 }
