@@ -6,10 +6,8 @@ import Grid from "@mui/material/Grid";
 import AlertBox from "../components/common/AlertBox";
 import BuildingListContainer from "../components/building/BuildingListContainer";
 import AddBuildingContainer from "../components/building/AddBuildingContainer";
-import BuildingFiltering from "../components/building/BuildingFiltering";
 
 export default function BuildingView() {
-  //states
   const [allBuildingsList, setAllBuildingsList] = useState([]);
   const [alertOpen, setAlertOpen] = useState(false);
   const [alertOptions, setAlertOptions] = useState({
@@ -17,7 +15,6 @@ export default function BuildingView() {
     severity: "error",
   });
 
-  //get buildings from db
   const getAllBuildings = async function () {
     const { success, data } = await dao.fetchAllBuildings();
     if (!success) {
@@ -38,17 +35,14 @@ export default function BuildingView() {
   }, []);
 
   return (
-    <div>
+    <React.Fragment>
       <AlertBox
         alertOpen={alertOpen}
         alertOptions={alertOptions}
         setAlertOpen={setAlertOpen}
       />
       <Container maxWidth="100%">
-        {/* <AddBuildingContainer
-          getAllBuildings={getAllBuildings}
-          allBuildingsList={allBuildingsList}
-        /> */}
+        <AddBuildingContainer getAllBuildings={getAllBuildings} />
         <Grid
           container
           rowSpacing={1}
@@ -62,7 +56,6 @@ export default function BuildingView() {
               {/* <BuildingFiltering
                 allBuildingsList={allBuildingsList}
                 setAllBuildingsList={setAllBuildingsList}
-                setPaginateBuildings={setPaginateBuildings}
               /> */}
               <BuildingListContainer
                 getAllBuildings={getAllBuildings}
@@ -72,6 +65,6 @@ export default function BuildingView() {
           </Card>
         </Grid>
       </Container>
-    </div>
+    </React.Fragment>
   );
 }

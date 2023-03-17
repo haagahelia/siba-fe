@@ -8,12 +8,13 @@ export async function validate(values) {
   let buildingList = [];
 
   const getBuildingNames = async function () {
-    const { data } = await dao.fetchBuildingsNames();
+    const { data } = await dao.fetchAllBuildings();
     buildingList = data;
-    // Here it is considered that the user does not enter the name of an already existing building.
+    //Check if user enter an existed building name
     let result = buildingList.some(
       (names) => names.name.toLowerCase() === values.name.toLowerCase(),
     );
+
     return result;
   };
 

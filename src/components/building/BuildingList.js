@@ -10,7 +10,6 @@ import { Typography } from "@mui/material";
 import SingleBuildingDialog from "./SingleBuildingDialog";
 
 export default function BuildingListItems(props) {
-  // console.log(props);
   const { getAllBuildings, allBuildingsList } = props;
 
   const [open, setOpen] = useState(false);
@@ -21,8 +20,9 @@ export default function BuildingListItems(props) {
   const Box = styled(Paper)(({ theme }) => ({
     overflow: "auto",
   }));
+
   return (
-    <div>
+    <React.Fragment>
       <SingleBuildingDialog
         open={open}
         setOpen={setOpen}
@@ -80,6 +80,6 @@ export default function BuildingListItems(props) {
           })}
         </nav>
       </Box>
-    </div>
+    </React.Fragment>
   );
 }
