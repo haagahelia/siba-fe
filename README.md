@@ -21,7 +21,7 @@
 
 ## About the project
 
-This Project is collaborative work, which aims at building an information system that makes it possible to calculate and optimize teaching space and equipment usage for different lessons.
+Copyrights reserved. This Project is collaborative work, which aims at building an information system that makes it possible to calculate and optimize teaching space and equipment usage for different lessons.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
