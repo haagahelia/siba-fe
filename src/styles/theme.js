@@ -12,18 +12,66 @@ const buttonOrange = "#E16428";
 const buttonGreen = "#54B435";
 const buttonRed = "#FF1E00";
 
-const theme = createTheme({
-  palette: {
-    primary: {
-      main: buttonGreen,
-    },
-    secondary: {
-      main: buttonOrange,
-    },
-    red: {
-      main: buttonRed,
-    },
+export const normalPalette = {
+  primary: {
+    main: buttonGreen,
+    light: "#5DBCD2",
   },
+  secondary: {
+    main: buttonOrange,
+  },
+  red: {
+    main: buttonRed,
+  },
+  error: { main: buttonRed },
+  warning: { main: "#FFA000" },
+  information: { main: "#1976D2" },
+  success: { main: "#43A047" },
+};
+
+export const yellowPalette = {
+  primary: {
+    main: "#CC9900",
+    light: "#CCFF66",
+  },
+  secondary: {
+    main: "#FFFF99",
+  },
+  red: {
+    main: "#FF6600",
+  },
+  error: { main: "#FFCC00" },
+  warning: { main: "#66FFFF" },
+  information: { main: "#CCFF33" },
+  success: { main: "#FFFFE6" },
+};
+/* More yellow tint values used from here: 
+"#F2F2BF"  "#FFFFAA"  "#AAAA11"  "#FFFF11"  "#BB7700"
+*/
+
+export const redPalette = {
+  primary: {
+    main: "#FF3333",
+    light: "#FF6666",
+  },
+  secondary: {
+    main: "#FF8888",
+  },
+  red: {
+    main: "#FFBBBB",
+  },
+  error: { main: "#FF1111" },
+  warning: { main: "#FF6600" },
+  information: { main: "#B97446" },
+  success: { main: "#CC9900" },
+};
+/* More red tint values used from here: 
+ "#F2AEB8" "#F44336" "#FF2222" "#FF9AD5" "#AC3939"
+*/
+
+const theme = createTheme({
+  palette: normalPalette,
+
   components: {
     MuiCard: {
       styleOverrides: {
