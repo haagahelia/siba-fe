@@ -36,3 +36,18 @@ export const deleteSingleAllocRound = async (id: number): Promise<boolean> => {
 
   return data?.affectedRows === 1;
 };
+
+export const editAllocRound = async (
+  editedAllocRound: AllocRound,
+): Promise<boolean> => {
+  const request = new Request(`${baseUrl}/allocation/update`, {
+    method: "PUT",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(editedAllocRound),
+  });
+  const response = await fetch(request);
+  return response.ok;
+};

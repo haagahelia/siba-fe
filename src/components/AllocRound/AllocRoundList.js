@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
@@ -8,12 +8,17 @@ import { styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
 import { Typography } from "@mui/material";
 import AllocRoundDetails from "./AllocRoundDetails";
+import { AppContext } from "../../AppContext";
 
 export default function AllocRoundListItems(props) {
-  const { paginateAllocRounds, getAllocRounds, setAllocRoundId } = props;
-  const [singleAllocRound, setAllocRound] = useState(null);
+  const {
+    paginateAllocRounds,
+    getAllocRounds,
+    /*setAllocRoundId,*/ getAllAllocRounds,
+  } = props;
+  const [singleAllocRound, setSingleAllocRound] = useState(null);
   const [open, setOpen] = useState(false);
-
+  const appContext = useContext(AppContext);
   // STYLE
   const Box = styled(Paper)(({ theme }) => ({
     overflow: "auto",
@@ -24,8 +29,8 @@ export default function AllocRoundListItems(props) {
         open={open}
         setOpen={setOpen}
         singleAllocRound={singleAllocRound}
-        setAllocRound={setAllocRound}
-        setAllocRoundId={setAllocRoundId}
+        setSingleAllocRound={setSingleAllocRound}
+        //setAllocRoundId={setAllocRoundId}
         getAllocRounds={getAllocRounds}
       />
       <Box>
@@ -36,8 +41,8 @@ export default function AllocRoundListItems(props) {
                 <ListItem
                   disablePadding
                   onClick={() => {
-                    setAllocRound(value);
-                    setAllocRoundId(value.id);
+                    setSingleAllocRound(value);
+                    // setAllocRoundId(value.id);
                     setOpen(true);
                   }}
                 >
@@ -49,7 +54,11 @@ export default function AllocRoundListItems(props) {
                       ID:
                     </Typography>
                     <ListItemText
-                      primary={value.id}
+                      primary={
+                        value.id === appContext.allocRoundId
+                          ? `${value.id} ✅`
+                          : value.id
+                      }
                       primaryTypographyProps={{
                         variant: "body2",
                       }}

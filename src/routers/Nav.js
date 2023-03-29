@@ -90,7 +90,7 @@ function NavBar() {
             </li>
             <li className="nav-item">
               <NavLink
-                to="/allocroundpage"
+                to="/allocation"
                 activeclassname="active"
                 className="nav-links"
                 onClick={handleClick}
@@ -137,16 +137,13 @@ function NavBar() {
       <Routes>
         <Route path="/" element={<SubjectView />} />
         <Route path="/subject" element={<SubjectView />} />
-        <Route path="/allocroundpage" element={<AllocRoundView />} />
+        <Route path="/allocation" element={<AllocRoundView />} />
         <Route path="/roomresult" element={<RoomResultView />} />
         <Route path="/programresult" element={<ProgramResultView />} />
         <Route path="/equipment" element={<EquipmentView />} />
         <Route path="/building" element={<BuildingView />} />
         <Route path="/department" element={<DepartmentView />} />
-        <Route
-          path="/allocroundpage/addAllocRound"
-          element={<AddAllocRound />}
-        />
+        <Route path="/allocation/addAllocRound" element={<AddAllocRound />} />
         <Route path="/settings" element={<Settings />} />
         <Route path="/editSetting" element={<EditSetting />} />
         <Route
