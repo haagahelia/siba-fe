@@ -11,7 +11,7 @@ import { AppContext } from "../AppContext";
 export default function AllocRoundView() {
   const [paginateAllocRounds, setpaginateAllocRounds] = useState([]);
   const [allAllocRoundsList, setallAllocRoundsList] = useState([]);
-  const [allocRoundId, setAllocRoundId] = useState("00000");
+  //const [allocRoundId, setAllocRoundId] = useState("00000");
   const [alertOpen, setAlertOpen] = useState(false);
   const [alertOptions, setAlertOptions] = useState({
     message: "This is an error alert — check it out!",
@@ -38,7 +38,7 @@ export default function AllocRoundView() {
 
   useEffect(() => {
     getAllAllocRounds();
-    setAllocRoundId(appContext.allocRoundId); // Initial
+    //setAllocRoundId(appContext.allocRoundId); // Initial
   }, []);
   useEffect(() => {
     setpaginateAllocRounds(allAllocRoundsList.slice(0, 15));
@@ -68,14 +68,10 @@ export default function AllocRoundView() {
           <Card variant="outlined">
             <CardContent>
               <CardHeader title="Allocation rounds (Select to change)" />
-              <Typography color="white">
-                Current allocation round: {allocRoundId}
-              </Typography>
               <AllocRoundListContainer
                 getAllAllocRounds={getAllAllocRounds}
                 allAllocRoundsList={allAllocRoundsList}
                 paginateAllocRounds={paginateAllocRounds}
-                setAllocRoundId={setAllocRoundId}
               />
             </CardContent>
           </Card>
