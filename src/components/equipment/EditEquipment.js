@@ -98,7 +98,13 @@ export default function EditEquipment(props) {
                 />
               </Grid>
             </Grid>
-            <Button onClick={submitEdits}>Submit</Button>
+            <Button
+              onClick={submitEdits}
+              variant="contained"
+              style={{ color: "white" }}
+            >
+              Submit
+            </Button>
           </DialogContentText>
         </DialogContent>
       </Dialog>

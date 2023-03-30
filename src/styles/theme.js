@@ -1,4 +1,5 @@
 import { createTheme } from "@mui/material";
+import { green, lightBlue } from "@mui/material/colors";
 
 const darkBrown = "#272121";
 const lightGray = "#363333";
@@ -13,6 +14,7 @@ const buttonGreen = "#54B435";
 const buttonRed = "#FF1E00";
 
 export const normalPalette = {
+  background: { default: lightGray },
   primary: {
     main: buttonGreen,
     light: "#5DBCD2",
@@ -30,6 +32,7 @@ export const normalPalette = {
 };
 
 export const yellowPalette = {
+  background: { default: "#FFFF8F" },
   primary: {
     main: "#CC9900",
     light: "#CCFF66",
@@ -50,6 +53,7 @@ export const yellowPalette = {
 */
 
 export const redPalette = {
+  background: { default: "#FF2400" },
   primary: {
     main: "#FF3333",
     light: "#FF6666",
@@ -68,9 +72,10 @@ export const redPalette = {
 /* More red tint values used from here: 
  "#F2AEB8" "#F44336" "#FF2222" "#FF9AD5" "#AC3939"
 */
+const currentPalette = normalPalette;
 
 const theme = createTheme({
-  palette: normalPalette,
+  palette: currentPalette,
 
   components: {
     MuiCard: {
