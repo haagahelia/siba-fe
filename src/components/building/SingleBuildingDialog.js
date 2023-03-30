@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Grid from "@mui/material/Grid";
 import {
   Dialog,
@@ -8,7 +8,6 @@ import {
   Typography,
   DialogActions,
 } from "@mui/material";
-import AlertBox from "../common/AlertBox";
 import DeleteBuilding from "./DeleteBuilding";
 import EditBuildingContainer from "./EditBuildingContainer";
 
@@ -16,20 +15,8 @@ export default function SingleBuildingDialog(props) {
   const { open, setOpen, singleBuilding, getAllBuildings, setSingleBuilding } =
     props;
 
-  const [alertOpen, setAlertOpen] = useState(false);
-  const [alertOptions, setAlertOptions] = useState({
-    title: "This is title",
-    message: "This is an error alert — check it out!",
-    severity: "error",
-  });
-
   return (
     <React.Fragment>
-      <AlertBox
-        alertOpen={alertOpen}
-        alertOptions={alertOptions}
-        open={setAlertOpen}
-      />
       <Dialog open={open} onClose={() => setOpen(false)} width="400px">
         <DialogTitle id="dialog-title">{singleBuilding?.name}</DialogTitle>
         <DialogContent>
