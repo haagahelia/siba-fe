@@ -1,23 +1,47 @@
 import { createTheme } from "@mui/material";
-//import { green, lightBlue } from "@mui/material/colors";
+// import { green, lightBlue } from "@mui/material/colors";
 
+// First a place for defining different kinds of colors
 const darkBrown = "#272121";
-const lightGray = "#363333";
+const lightGray = "#363333"; // E.g. background
+
 const light = "#F6E9E9";
 const orange = "#E16428";
-const lightgreen = "#90EE90";
-const lightblue = "#73FDFF";
-const lightyellow = "#FFF5AB";
-const lightred = "#FF8585";
+
+const fontWhite = "#FFFFFF";
+
+const lightGreen = "#90EE90";
+const lightBlue = "#73FDFF";
+const lightBlue2 = "#5DBCD2";
+const lightYellow = "#FFF5AB";
+const lightRed = "#FF8585";
+
+const borderColor = "#8C4B2D";
+
 const buttonOrange = "#E16428";
 const buttonGreen = "#54B435";
-const buttonRed = "#FF1E00";
+const buttonRed = "#FF1E00"; // Reset button
+
+const progressBarGreen = "#06FF00";
+const progressBarYellow = "#FFE400";
+const progressBarRed = "#FF1700";
+
+const snackbarErrorRed = buttonRed;
+const snackbarWarningOrange = "#FFA000";
+const snackbarInformationBlue = "#1976D2";
+const snackbarSuccessGreen = "#43A047";
+
+// Then defining three palettes so that in the normal palette
+// no new colors are defined. Red and yellow palettes though are
+// used with ad-hoc "#AABBCC" kind of RGB hexadecimal color definitions
 
 export const normalPalette = {
   background: { default: lightGray },
+  backgroundDarker: { default: darkBrown },
+  fontColorDefault: { default: fontWhite },
   primary: {
     main: buttonGreen,
-    light: "#5DBCD2",
+    light: lightBlue2,
   },
   secondary: {
     main: buttonOrange,
@@ -25,14 +49,22 @@ export const normalPalette = {
   red: {
     main: buttonRed,
   },
-  error: { main: buttonRed },
-  warning: { main: "#FFA000" },
-  information: { main: "#1976D2" },
-  success: { main: "#43A047" },
+  error: { main: snackbarErrorRed },
+  warning: { main: snackbarWarningOrange },
+  information: { main: snackbarInformationBlue },
+  success: { main: snackbarSuccessGreen },
+
+  progressBarGreen: { main: progressBarGreen },
+  progressBarYellow: { main: progressBarYellow },
+  progressBarRed: { main: progressBarRed },
+
+  borderColor: { main: borderColor },
 };
 
 export const yellowPalette = {
   background: { default: "#FFFF8F" },
+  backgroundDarker: { default: "#FFFFAA" },
+  fontColorDefault: { default: "#AAAA11" },
   primary: {
     main: "#CC9900",
     light: "#CCFF66",
@@ -44,16 +76,24 @@ export const yellowPalette = {
     main: "#FF6600",
   },
   error: { main: "#FFCC00" },
-  warning: { main: "#66FFFF" },
+  warning: { main: "#F2F2BF" },
   information: { main: "#CCFF33" },
   success: { main: "#FFFFE6" },
+
+  progressBarGreen: { main: progressBarGreen },
+  progressBarYellow: { main: progressBarYellow },
+  progressBarRed: { main: progressBarRed },
+
+  borderColor: { main: borderColor },
 };
 /* More yellow tint values used from here: 
-"#F2F2BF"  "#FFFFAA"  "#AAAA11"  "#FFFF11"  "#BB7700"
+  "#FFFF11"  "#BB7700"
 */
 
 export const redPalette = {
   background: { default: "#FF2400" },
+  backgroundDarker: { default: "#F2AEB8" },
+  fontColorDefault: { default: "#FFD1CF" },
   primary: {
     main: "#FF3333",
     light: "#FF6666",
@@ -67,12 +107,21 @@ export const redPalette = {
   error: { main: "#FF1111" },
   warning: { main: "#FF6600" },
   information: { main: "#B97446" },
-  success: { main: "#CC9900" },
+  success: { main: "#EE9900" },
+
+  progressBarGreen: { main: progressBarGreen },
+  progressBarYellow: { main: progressBarYellow },
+  progressBarRed: { main: progressBarRed },
+
+  borderColor: { main: borderColor },
 };
 /* More red tint values used from here: 
- "#F2AEB8" "#F44336" "#FF2222" "#FF9AD5" "#AC3939"
+ "#FF2222" "#FF9AD5" "#AC3939"
 */
+
+// The swapping fast what palette will be in use right now:
 const currentPalette = normalPalette;
+// Options are       = normalPalette, redPalette, yellowPalette
 
 const theme = createTheme({
   palette: currentPalette,
@@ -81,7 +130,7 @@ const theme = createTheme({
     MuiCard: {
       styleOverrides: {
         root: {
-          backgroundColor: darkBrown,
+          backgroundColor: currentPalette.backgroundDarker.default,
           borderColor: light,
           width: "75%",
         },
@@ -90,9 +139,9 @@ const theme = createTheme({
     MuiCardHeader: {
       styleOverrides: {
         root: {
-          backgroundColor: lightGray,
+          backgroundColor: currentPalette.background.default,
           fontSize: 25,
-          color: "white",
+          color: currentPalette.fontColorDefault.default,
           marginBottom: "15px",
           padding: "20px",
         },
@@ -101,7 +150,7 @@ const theme = createTheme({
     MuiTextField: {
       styleOverrides: {
         root: {
-          backgroundColor: darkBrown,
+          backgroundColor: currentPalette.backgroundDarker.default,
           "& label": {
             color: light,
           },
@@ -134,7 +183,7 @@ const theme = createTheme({
       styleOverrides: {
         root: {
           "& label": {
-            color: "white",
+            color: currentPalette.fontColorDefault.default,
           },
           "& label.Mui-focused": {
             color: orange,
@@ -160,14 +209,14 @@ const theme = createTheme({
     MuiList: {
       styleOverrides: {
         root: {
-          backgroundColor: darkBrown,
+          backgroundColor: currentPalette.backgroundDarker.default,
         },
       },
     },
     MuiListItem: {
       styleOverrides: {
         root: {
-          backgroundColor: darkBrown,
+          backgroundColor: currentPalette.backgroundDarker.default,
           color: light,
           border: "1px solid #F6E9E9",
         },
@@ -176,7 +225,7 @@ const theme = createTheme({
     MuiDialog: {
       styleOverrides: {
         paper: {
-          backgroundColor: darkBrown,
+          backgroundColor: currentPalette.backgroundDarker.default,
           color: light,
         },
       },
@@ -190,23 +239,23 @@ const theme = createTheme({
     },
     AllocRoom: {
       studio: {
-        color: lightred,
+        color: lightRed,
       },
       luentoluokka: {
-        color: lightblue,
+        color: lightBlue,
       },
       esitystila: {
-        color: lightgreen,
+        color: lightGreen,
       },
       musiikkiluokka: {
-        color: lightyellow,
+        color: lightYellow,
       },
     },
     IndexRooms: {
       studioindex: {
         width: 15,
         height: 15,
-        backgroundColor: lightred,
+        backgroundColor: lightRed,
         border: "3px solid",
         borderColor: "black",
         marginLeft: 60,
@@ -214,7 +263,7 @@ const theme = createTheme({
       luentoluokkaindex: {
         width: 15,
         height: 15,
-        backgroundColor: lightblue,
+        backgroundColor: lightBlue,
         border: "3px solid",
         borderColor: "black",
         marginLeft: 60,
@@ -222,7 +271,7 @@ const theme = createTheme({
       esitystilaindex: {
         width: 15,
         height: 15,
-        backgroundColor: lightgreen,
+        backgroundColor: lightGreen,
         border: "3px solid",
         borderColor: "black",
         marginLeft: 60,
@@ -230,7 +279,7 @@ const theme = createTheme({
       musiikkiluokkaindex: {
         width: 15,
         height: 15,
-        backgroundColor: lightyellow,
+        backgroundColor: lightYellow,
         border: "3px solid",
         borderColor: "black",
         marginLeft: 60,

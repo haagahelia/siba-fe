@@ -12,6 +12,7 @@ import resultProgramStore from "../../data/ResultProgramStore";
 import CollapsedRow from "./CollapsedRow";
 import { useEffect, useState, useContext } from "react";
 import { AppContext } from "../../AppContext";
+import { useTheme } from "@mui/material";
 
 //component for displaying the subject groups of the allocation result
 //shows:
@@ -25,6 +26,7 @@ export default function ProgramResult(props) {
   const [progs, setProgs] = useState([]);
   const [resetCounter, setResetCounter] = useState(0);
   const appContext = useContext(AppContext);
+  const theme = useTheme();
 
   useEffect(() => {
     getProgramData();
@@ -32,6 +34,8 @@ export default function ProgramResult(props) {
     return () => {
       // cleanup function doing nothing
     };
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [resetCounter]);
 
   const getProgramData = async () => {
@@ -41,7 +45,6 @@ export default function ProgramResult(props) {
 
   const [subProg, setSubProg] = React.useState({});
   const [open, setOpen] = React.useState(false);
-  //const theme = useTheme();
 
   const handleOpen = (prog) => {
     setSubProg(prog);
@@ -113,7 +116,11 @@ export default function ProgramResult(props) {
         {progs.map((prog) => {
           const progress = calculateProsent(prog.subjects);
           const progressColor =
-            progress > 100 ? "#FF1700" : progress < 80 ? "#FFE400" : "#06FF00";
+            progress > 100
+              ? theme.palette.progressBarGreen.main
+              : progress < 80
+              ? theme.palette.progressBarYellow.main
+              : theme.palette.progressBarRed.main;
           const textColor = progress === 0 ? "white" : "black";
 
           return (

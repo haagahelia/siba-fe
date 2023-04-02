@@ -31,6 +31,7 @@ export default function Equipments() {
 
   useEffect(() => {
     getAllEquipments();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
