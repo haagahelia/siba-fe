@@ -6,13 +6,13 @@ import CardContent from "@mui/material/CardContent";
 import AddEquipment from "./AddEquipment";
 import EquipmentListContainer from "./EquipmentListContainer";
 
-export default function EquipmentResult() {
+export default function Equipments() {
   const [equipmentList, setEquipmentList] = useState([]);
-  const [alertOptions, setAlertOptions] = useState({
+  const [/*alertOptions,*/ setAlertOptions] = useState({
     message: "This is an error alert — check it out!",
     severity: "error",
   });
-  const [alertOpen, setAlertOpen] = useState(false);
+  const [/* alertOpen ,*/ setAlertOpen] = useState(false);
 
   const getAllEquipments = async function () {
     const { success, data } = await dao.fetchEquipmentData();

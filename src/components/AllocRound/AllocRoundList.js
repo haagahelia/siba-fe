@@ -14,7 +14,8 @@ export default function AllocRoundListItems(props) {
   const {
     paginateAllocRounds,
     getAllocRounds,
-    /*setAllocRoundId,*/ getAllAllocRounds,
+    /*setAllocRoundId,*/
+    /* getAllAllocRounds, */
   } = props;
   const [singleAllocRound, setSingleAllocRound] = useState(null);
   const [open, setOpen] = useState(false);

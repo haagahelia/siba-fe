@@ -1,12 +1,16 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import AllocRoundListContainer from "../components/AllocRound/AllocRoundListContainer";
 import CardContent from "@mui/material/CardContent";
-import { CardHeader, Card, Container, Typography, Button } from "@mui/material";
+import {
+  CardHeader,
+  Card,
+  Container /*, Typography*/,
+  Button,
+} from "@mui/material";
 import Grid from "@mui/material/Grid";
 import dao from "../ajax/dao";
 import AlertBox from "../components/common/AlertBox";
-import { AppContext } from "../AppContext";
 
 export default function AllocRoundView() {
   const [paginateAllocRounds, setpaginateAllocRounds] = useState([]);
@@ -17,7 +21,6 @@ export default function AllocRoundView() {
     message: "This is an error alert — check it out!",
     severity: "error",
   });
-  const appContext = useContext(AppContext);
 
   const getAllAllocRounds = async function () {
     const { success, data } = await dao.fetchAllAllocRounds();
@@ -38,8 +41,8 @@ export default function AllocRoundView() {
 
   useEffect(() => {
     getAllAllocRounds();
-    //setAllocRoundId(appContext.allocRoundId); // Initial
   }, []);
+
   useEffect(() => {
     setpaginateAllocRounds(allAllocRoundsList.slice(0, 15));
   }, [allAllocRoundsList]);
