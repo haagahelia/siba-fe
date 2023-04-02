@@ -1,7 +1,7 @@
-import EquipmentResult from "../components/result/EquipmentResult";
+import Equipments from "../components/equipment/Equipments";
 
 const EquipmentView = () => {
-  return <EquipmentResult />;
+  return <Equipments />;
 };
 
 export default EquipmentView;

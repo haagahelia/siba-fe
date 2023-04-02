@@ -3,8 +3,6 @@ import {
   DialogContent,
   DialogContentText,
   DialogTitle,
-  Typography,
-  DialogActions,
 } from "@mui/material";
 import { Button } from "@mui/material";
 import dao from "../../ajax/dao";
