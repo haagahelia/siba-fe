@@ -3,8 +3,8 @@ import dao from "../../ajax/dao";
 import Grid from "@mui/material/Grid";
 import { CardHeader, Card, Container } from "@mui/material";
 import CardContent from "@mui/material/CardContent";
-import AddEquipment from "../equipment/AddEquipment";
-import EquipmentListContainer from "../equipment/EquipmentListContainer";
+import AddEquipment from "./AddEquipment";
+import EquipmentListContainer from "./EquipmentListContainer";
 
 export default function EquipmentResult() {
   const [equipmentList, setEquipmentList] = useState([]);
