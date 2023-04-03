@@ -73,7 +73,7 @@ export const yellowPalette = {
     main: "#FFFF99",
   },
   red: {
-    main: "#FF6600",
+    main: "#FFBB66",
   },
   error: { main: "#FFCC00" },
   warning: { main: "#F2F2BF" },
