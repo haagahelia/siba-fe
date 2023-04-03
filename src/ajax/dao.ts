@@ -8,6 +8,7 @@ import * as dao_subjectEquipment from "./dao_subjectEquipment";
 import * as dao_allocRound from "./dao_allocRound";
 import * as dao_building from "./dao_building";
 import * as dao_department from "./dao_department";
+import * as dao_user from "./dao_user";
 
 const dao = {
   ...dao_settings,
@@ -20,6 +21,7 @@ const dao = {
   ...dao_allocRound,
   ...dao_building,
   ...dao_department,
+  ...dao_user,
 };
 
 export default dao;

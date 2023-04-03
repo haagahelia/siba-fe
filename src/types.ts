@@ -72,3 +72,10 @@ export interface Department {
   name: string;
   description: string;
 }
+
+export interface User {
+  id: number;
+  email: string;
+  password: string;
+  isAdmin: number;
+}
