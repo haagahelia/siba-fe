@@ -7,10 +7,12 @@ import {
   DialogTitle,
   Typography,
   DialogActions,
+  Button,
 } from "@mui/material";
 import AlertBox from "../common/AlertBox";
 import { AppContext } from "../../AppContext";
 import DeleteAllocRound from "./DeleteAllocRound";
+import EditAllocRound from "./EditAllocRound";
 
 export default function AllocRoundDetails(props) {
   const {
@@ -19,6 +21,7 @@ export default function AllocRoundDetails(props) {
     singleAllocRound,
     getAllAllocRounds,
     setAllocRoundId,
+    setSingleAllocRound,
   } = props;
   const [alertOpen, setAlertOpen] = useState(false);
   const [alertOptions] = useState({
@@ -38,7 +41,14 @@ export default function AllocRoundDetails(props) {
     setAllocRoundId(allocRoundId); // Notifying grangrangranparent. Updating component state
     setOpen(false);
   };
-
+  const allocationSelection = () => {
+    const confirmation = window.confirm(
+      ` Allocation round will be change to ${singleAllocRound.id}`,
+    );
+    if (confirmation) {
+      setAllocRound(singleAllocRound.id);
+    }
+  };
   return (
     <div>
       <AlertBox
@@ -46,20 +56,16 @@ export default function AllocRoundDetails(props) {
         alertOptions={alertOptions}
         open={setAlertOpen}
       />
-      <Dialog
-        open={open}
-        onClose={handleClose}
-        onClick={() => {
-          setAllocRound(singleAllocRound.id);
-        }}
-        width="400px"
-      >
-        <DialogTitle id="dialog-title">
-          {singleAllocRound?.AllocRoundName}
-        </DialogTitle>
+      <Dialog open={open} onClose={handleClose} width="400px">
+        <DialogTitle id="dialog-title">{singleAllocRound?.name}</DialogTitle>
         <DialogContent>
           <DialogActions
             sx={{ justifyContent: "space-evenly", padding: "16px" }}
+          />
+          <EditAllocRound
+            singleAllocRound={singleAllocRound}
+            getAllAllocRounds={getAllAllocRounds}
+            setSingleAllocRound={setSingleAllocRound}
           />
           <DeleteAllocRound
             singleAllocRound={singleAllocRound}
@@ -95,6 +101,14 @@ export default function AllocRoundDetails(props) {
             </Grid>
           </Grid>
         </DialogContent>
+        <Button
+          variant="contained"
+          color="red"
+          style={{ color: "white" }}
+          onClick={allocationSelection}
+        >
+          Pick this allocation
+        </Button>
       </Dialog>
     </div>
   );

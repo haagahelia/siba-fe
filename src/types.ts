@@ -30,6 +30,9 @@ export interface Program {
 export interface Settings {
   id: number;
   name: string;
+  description: string;
+  numberValue: number;
+  textValue: string;
 }
 
 export interface SpaceType {

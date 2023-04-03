@@ -1,23 +1,26 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import AllocRoundListContainer from "../components/AllocRound/AllocRoundListContainer";
 import CardContent from "@mui/material/CardContent";
-import { CardHeader, Card, Container, Typography, Button } from "@mui/material";
+import {
+  CardHeader,
+  Card,
+  Container /*, Typography*/,
+  Button,
+} from "@mui/material";
 import Grid from "@mui/material/Grid";
 import dao from "../ajax/dao";
 import AlertBox from "../components/common/AlertBox";
-import { AppContext } from "../AppContext";
 
 export default function AllocRoundView() {
   const [paginateAllocRounds, setpaginateAllocRounds] = useState([]);
   const [allAllocRoundsList, setallAllocRoundsList] = useState([]);
-  const [allocRoundId, setAllocRoundId] = useState("00000");
+  //const [allocRoundId, setAllocRoundId] = useState("00000");
   const [alertOpen, setAlertOpen] = useState(false);
   const [alertOptions, setAlertOptions] = useState({
     message: "This is an error alert — check it out!",
     severity: "error",
   });
-  const appContext = useContext(AppContext);
 
   const getAllAllocRounds = async function () {
     const { success, data } = await dao.fetchAllAllocRounds();
@@ -38,8 +41,9 @@ export default function AllocRoundView() {
 
   useEffect(() => {
     getAllAllocRounds();
-    setAllocRoundId(appContext.allocRoundId); // Initial
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
   useEffect(() => {
     setpaginateAllocRounds(allAllocRoundsList.slice(0, 15));
   }, [allAllocRoundsList]);
@@ -68,14 +72,10 @@ export default function AllocRoundView() {
           <Card variant="outlined">
             <CardContent>
               <CardHeader title="Allocation rounds (Select to change)" />
-              <Typography color="white">
-                Current allocation round: {allocRoundId}
-              </Typography>
               <AllocRoundListContainer
                 getAllAllocRounds={getAllAllocRounds}
                 allAllocRoundsList={allAllocRoundsList}
                 paginateAllocRounds={paginateAllocRounds}
-                setAllocRoundId={setAllocRoundId}
               />
             </CardContent>
           </Card>

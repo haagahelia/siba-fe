@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Dialog from "@mui/material/Dialog";
 import DialogTitle from "@mui/material/DialogTitle";
 import TextField from "@mui/material/TextField";
@@ -10,9 +10,9 @@ import ValidateEditEquipment from "../../validation/ValidateEditEquipment";
 export default function EditEquipment(props) {
   const {
     singleEquipment,
-    setSingleEquipment,
+    /* setSingleEquipment, */
     getAllEquipments,
-    open,
+    /* open, */
     setOpen,
   } = props;
 
@@ -98,7 +98,13 @@ export default function EditEquipment(props) {
                 />
               </Grid>
             </Grid>
-            <Button onClick={submitEdits}>Submit</Button>
+            <Button
+              onClick={submitEdits}
+              variant="contained"
+              style={{ color: "white" }}
+            >
+              Submit
+            </Button>
           </DialogContentText>
         </DialogContent>
       </Dialog>

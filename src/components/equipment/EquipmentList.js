@@ -1,71 +1,59 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react"; //useEffect
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
-import Divider from "@mui/material/Divider";
+// import Divider from "@mui/material/Divider";
 import Grid from "@mui/material/Grid";
 import { styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
 import { Typography } from "@mui/material";
-import AllocRoundDetails from "./AllocRoundDetails";
-import { AppContext } from "../../AppContext";
+import SingleEquipmentDialog from "./SingleEquipmentDialog";
 
-export default function AllocRoundListItems(props) {
-  const {
-    paginateAllocRounds,
-    getAllocRounds,
-    /*setAllocRoundId,*/
-    /* getAllAllocRounds, */
-  } = props;
-  const [singleAllocRound, setSingleAllocRound] = useState(null);
+export default function EquipmentListItems(props) {
+  const { getAllEquipments, equipmentList } = props;
+
   const [open, setOpen] = useState(false);
-  const appContext = useContext(AppContext);
-  // STYLE
+  const [singleEquipment, setSingleEquipment] = useState(null);
+
   const Box = styled(Paper)(({ theme }) => ({
     overflow: "auto",
   }));
+
   return (
     <div>
-      <AllocRoundDetails
+      <SingleEquipmentDialog
         open={open}
         setOpen={setOpen}
-        singleAllocRound={singleAllocRound}
-        setSingleAllocRound={setSingleAllocRound}
-        //setAllocRoundId={setAllocRoundId}
-        getAllocRounds={getAllocRounds}
+        singleEquipment={singleEquipment}
+        setSingleEquipment={setSingleEquipment}
+        getAllEquipments={getAllEquipments}
       />
       <Box>
         <nav>
-          {paginateAllocRounds.map((value) => {
+          {equipmentList.map((value) => {
             return (
               <List key={value.id}>
                 <ListItem
-                  disablePadding
                   onClick={() => {
-                    setSingleAllocRound(value);
-                    // setAllocRoundId(value.id);
+                    setSingleEquipment(value);
                     setOpen(true);
                   }}
                 >
-                  <Grid item md={3} xs={2} padding={2}>
+                  <Grid item md={3} xs={3} padding={3}>
                     <Typography
                       variant="caption"
                       style={{ fontWeight: "bold" }}
                     >
-                      ID:
+                      Id:
                     </Typography>
                     <ListItemText
-                      primary={
-                        value.id === appContext.allocRoundId
-                          ? `${value.id} ✅`
-                          : value.id
-                      }
+                      primary={value.id}
                       primaryTypographyProps={{
                         variant: "body2",
                       }}
                     />
                   </Grid>
-                  <Grid item md={3} xs={4} padding={2}>
+                  <Grid item md={3} xs={3} padding={3}>
                     <Typography
                       variant="caption"
                       style={{ fontWeight: "bold" }}
@@ -79,7 +67,21 @@ export default function AllocRoundListItems(props) {
                       }}
                     />
                   </Grid>
-                  <Grid item md={10} xs={7} padding={5}>
+                  <Grid item md={3} xs={7} padding={2}>
+                    <Typography
+                      variant="caption"
+                      style={{ fontWeight: "bold" }}
+                    >
+                      Priority:
+                    </Typography>
+                    <ListItemText
+                      primary={value.equipmentPriority}
+                      primaryTypographyProps={{
+                        variant: "body2",
+                      }}
+                    />
+                  </Grid>
+                  <Grid item md={1} xs={1} padding={2}>
                     <Typography
                       variant="caption"
                       style={{ fontWeight: "bold" }}
@@ -93,22 +95,7 @@ export default function AllocRoundListItems(props) {
                       }}
                     />
                   </Grid>
-                  <Grid item md={3} xs={3} padding={3}>
-                    <Typography
-                      variant="caption"
-                      style={{ fontWeight: "bold" }}
-                    >
-                      Last modified:
-                    </Typography>
-                    <ListItemText
-                      primary={value.lastModified}
-                      primaryTypographyProps={{
-                        variant: "body2",
-                      }}
-                    />
-                  </Grid>
                 </ListItem>
-                <Divider />
               </List>
             );
           })}

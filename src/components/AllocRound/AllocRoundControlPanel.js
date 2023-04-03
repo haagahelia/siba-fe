@@ -19,6 +19,7 @@ const AllocRoundControlPanel = ({ incrementResetCounter }) => {
       } else {
         setIsClicked(false);
       }
+      incrementResetCounter();
     }, 3000);
   };
 
@@ -33,7 +34,6 @@ const AllocRoundControlPanel = ({ incrementResetCounter }) => {
         onClick={() => {
           allocationPost.startAlloc(appContext.allocRoundId);
           setDelayedClickedToggle();
-          incrementResetCounter();
         }}
         disabled={isClicked}
       >
@@ -47,7 +47,6 @@ const AllocRoundControlPanel = ({ incrementResetCounter }) => {
         onClick={() => {
           allocationPost.resetAlloc(appContext.allocRoundId);
           setDelayedClickedToggle();
-          incrementResetCounter();
         }}
         disabled={!isClicked}
       >
