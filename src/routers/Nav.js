@@ -21,6 +21,7 @@ import NotFoundView from "../views/NotFoundView";
 import EquipmentView from "../views/EquipmentView";
 import BuildingView from "../views/BuildingView";
 import DepartmentView from "../views/DepartmentView";
+import RegisterView from "../views/RegisterView";
 
 function NavBar() {
   const [click, setClick] = useState(false);
@@ -37,6 +38,17 @@ function NavBar() {
           </NavLink>
 
           <ul className={click ? "nav-menu active" : "nav-menu"}>
+            <li className="nav-item">
+              <NavLink
+                to="/register"
+                end
+                activeclassname="active"
+                className="nav-links"
+                onClick={handleClick}
+              >
+                Register
+              </NavLink>
+            </li>
             <li className="nav-item">
               <NavLink
                 to="/"
@@ -137,6 +149,7 @@ function NavBar() {
       </nav>
 
       <Routes>
+        <Route path="/register" element={<RegisterView />} />
         <Route path="/" element={<SubjectView />} />
         <Route path="/subject" element={<SubjectView />} />
         <Route path="/allocation" element={<AllocRoundView />} />
