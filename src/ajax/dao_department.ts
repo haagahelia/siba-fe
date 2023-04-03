@@ -21,5 +21,20 @@ export const deleteDepartment = async (
   const response = await fetch(request);
   const data = await response.json();
 
-  return data?.affectedRows === 1;
+  return data?.returnedNumberValue === 1;
+};
+
+export const AddDepartment = async (
+  newDepartment: Department,
+): Promise<boolean> => {
+  const request = new Request(`${baseUrl}/department/`, {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(newDepartment),
+  });
+  const response = await fetch(request);
+  return response.ok;
 };

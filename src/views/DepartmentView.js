@@ -9,6 +9,7 @@ import { CardHeader, Card, Container } from "@mui/material";
 import CardContent from "@mui/material/CardContent";
 import DepartmentDialog from "../components/department/DepartmentDialog";
 import DeleteDepartment from "../components/department/DeleteDeparment";
+import AddDepartment from "../components/department/AddDepartment";
 
 export default function DepartmentView() {
   const [DepartmentList, setDepartmentList] = useState([]);
@@ -49,6 +50,8 @@ export default function DepartmentView() {
         singleDepartment={singleDepartment}
         setSingleDepartment={setSingleDepartment}
         getAllDepartments={getAllDepartments}
+        openDelete={openDelete}
+        setOpenDelete={setOpenDelete}
       />
       <Container maxWidth="100%">
         <Grid
@@ -61,6 +64,7 @@ export default function DepartmentView() {
           <Card variant="outlined">
             <CardContent>
               <CardHeader title="Department" />
+              <AddDepartment getAllDepartments={getAllDepartments} />
               {DepartmentList.map((value) => {
                 return (
                   <List key={value.id}>
@@ -110,14 +114,6 @@ export default function DepartmentView() {
                           primaryTypographyProps={{
                             variant: "body2",
                           }}
-                        />
-                      </Grid>
-                      <Grid item md={1} xs={1} marginLeft={20}>
-                        <DeleteDepartment
-                          open={openDelete}
-                          setOpen={setOpenDelete}
-                          getAllDepartments={getAllDepartments}
-                          singleDepartment={singleDepartment}
                         />
                       </Grid>
                     </ListItem>
