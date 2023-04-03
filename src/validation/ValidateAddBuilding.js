@@ -5,14 +5,13 @@ export async function validate(values) {
   const regName = new RegExp(/^[A-Za-zäöåÄÖÅ0-9\s-]*$/);
   const regDescription = new RegExp(/^[A-Za-zäöåÄÖÅ0-9\s-]*$/);
 
-  let buildingList = [];
-
-  const getBuildingNames = async function () {
+  const isDuplicatedName = async function () {
+    let buildingList = [];
     const { data } = await dao.fetchAllBuildings();
     buildingList = data;
     //Check if user enter an existed building name
     let result = buildingList.some(
-      (names) => names.name.toLowerCase() === values.name.toLowerCase(),
+      (building) => building.name.toLowerCase() === values.name.toLowerCase(),
     );
 
     return result;
@@ -20,7 +19,7 @@ export async function validate(values) {
 
   if (!values.name) {
     errors.name = "Required field";
-  } else if (await getBuildingNames()) {
+  } else if (await isDuplicatedName()) {
     errors.name = "The name already exists";
   } else if (values.name.length < 2 || values.name.length > 255) {
     errors.name = "The name must be 2-255 characters long";

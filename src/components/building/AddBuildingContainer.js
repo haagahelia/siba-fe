@@ -6,7 +6,7 @@ import ConfirmationDialog from "../common/ConfirmationDialog";
 import {
   validate,
   capitalizeFirstLetter,
-} from "../../validation/ValidateAddEditBuilding";
+} from "../../validation/ValidateAddBuilding";
 import dao from "../../ajax/dao";
 import AddBuildingForm from "./AddBuildingForm";
 
@@ -76,15 +76,7 @@ export default function AddBuildingContainer(props) {
     resetForm();
     getAllBuildings();
   };
-  // Here is a list of lessons
-  // When you choose a lesson, the information goes to the form's initialvalues
-  // const handleChange = (e) => {
-  //   let selected = e.target.value;
-  //   setInitialBuilding({
-  //     name: formik.values.name, // This is so that the entered name does not change even if you select the data of an existing lesson
-  //     description: selected.groupSize,
-  //   });
-  // };
+
   return (
     <React.Fragment>
       <AlertBox
@@ -111,11 +103,9 @@ export default function AddBuildingContainer(props) {
         <CardContent>
           <CardHeader title="Add Building" sx={{ marginBottom: "30px" }} />
           <AddBuildingForm
-            // handleChange={handleChange}
             formik={formik}
             submitValues={formik.values}
             setInitialBuilding={setInitialBuilding}
-            // allBuildingsList={allBuildingsList}
           />
         </CardContent>
       </Card>
