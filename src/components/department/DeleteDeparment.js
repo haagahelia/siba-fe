@@ -5,7 +5,7 @@ import AlertBox from "../common/AlertBox";
 import ConfirmationDialog from "../common/ConfirmationDialog";
 
 export default function DeleteDepartment(props) {
-  const { singleDepartment, getAllDepartments, setOpenDelete } = props;
+  const { singleDepartment, getAllDepartments, setOpen } = props;
   const [alertOpen, setAlertOpen] = useState(false);
   const [alertOptions, setAlertOptions] = useState({
     message: "This is an error alert — check it out!",
@@ -36,7 +36,7 @@ export default function DeleteDepartment(props) {
       message: `${value.subjectName} removed.`,
     });
     setAlertOpen(true);
-    setOpenDelete(false);
+    setOpen(false);
 
     getAllDepartments();
   };

@@ -4,11 +4,11 @@ import Grid from "@mui/material/Grid";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
-import { Typography, Button } from "@mui/material";
+import { Typography } from "@mui/material";
 import { CardHeader, Card, Container } from "@mui/material";
 import CardContent from "@mui/material/CardContent";
 import DepartmentDialog from "../components/department/DepartmentDialog";
-import DeleteDepartment from "../components/department/DeleteDeparment";
+
 import AddDepartment from "../components/department/AddDepartment";
 
 export default function DepartmentView() {
@@ -20,7 +20,6 @@ export default function DepartmentView() {
     severity: "error",
   });
   const [alertOpen, setAlertOpen] = useState(false);
-  const [openDelete, setOpenDelete] = useState(false);
 
   const getAllDepartments = async function () {
     const { success, data } = await dao.fetchDepartmentData();
@@ -50,8 +49,6 @@ export default function DepartmentView() {
         singleDepartment={singleDepartment}
         setSingleDepartment={setSingleDepartment}
         getAllDepartments={getAllDepartments}
-        openDelete={openDelete}
-        setOpenDelete={setOpenDelete}
       />
       <Container maxWidth="100%">
         <Grid

@@ -38,3 +38,18 @@ export const AddDepartment = async (
   const response = await fetch(request);
   return response.ok;
 };
+
+export const editDepartment = async (
+  editedDepartment: Department,
+): Promise<boolean> => {
+  const request = new Request(`${baseUrl}/department/updateDept`, {
+    method: "PUT",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(editedDepartment),
+  });
+  const response = await fetch(request);
+  return response.ok;
+};

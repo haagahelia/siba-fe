@@ -1,5 +1,6 @@
 import { Dialog, DialogContent, DialogTitle } from "@mui/material";
 import DeleteDepartment from "./DeleteDeparment";
+import EditDepartment from "./EditDepartment";
 
 export default function DepartmentDialog(props) {
   const {
@@ -8,25 +9,29 @@ export default function DepartmentDialog(props) {
     singleDepartment,
     setSingleDepartment,
     getAllDepartments,
-    openDelete,
-    setOpenDelete,
   } = props;
 
   return (
     <>
-      <Dialog open={props.open} onClose={() => setOpen(false)}>
+      <Dialog open={open} onClose={() => setOpen(false)}>
         <DialogTitle id="dialog-title">Department Info</DialogTitle>
         <DialogContent>id: {singleDepartment?.id}</DialogContent>
         <DialogContent>Name: {singleDepartment?.name}</DialogContent>
         <DialogContent>
           Description: {singleDepartment?.description}
         </DialogContent>
-        <DialogContent>
+        <DialogContent
+          sx={{ display: "flex", flexDirection: "row", gap: "1rem" }}
+        >
           <DeleteDepartment
-            openDelete={openDelete}
-            setOpenDelete={setOpenDelete}
+            setOpen={setOpen}
             getAllDepartments={getAllDepartments}
             singleDepartment={singleDepartment}
+          />
+          <EditDepartment
+            getAllDepartments={getAllDepartments}
+            singleDepartment={singleDepartment}
+            setOpen={setOpen}
           />
         </DialogContent>
       </Dialog>
