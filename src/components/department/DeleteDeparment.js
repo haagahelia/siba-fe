@@ -4,7 +4,7 @@ import dao from "../../ajax/dao";
 import AlertBox from "../common/AlertBox";
 import ConfirmationDialog from "../common/ConfirmationDialog";
 
-export default function DeleteSubject(props) {
+export default function DeleteDepartment(props) {
   const { singleDepartment, getAllDepartments, setOpen } = props;
   const [alertOpen, setAlertOpen] = useState(false);
   const [alertOptions, setAlertOptions] = useState({
@@ -20,7 +20,7 @@ export default function DeleteSubject(props) {
 
   const deleteDepartment = async (value) => {
     let result = await dao.deleteDepartment(value);
-    console.log(value);
+    console.log(result);
     if (result === false) {
       setAlertOptions({
         severity: "error",
