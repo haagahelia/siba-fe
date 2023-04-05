@@ -10,6 +10,7 @@ import {
   Button,
 } from "@mui/material";
 import AlertBox from "../common/AlertBox";
+import ConfirmationDialog from "../common/ConfirmationDialog";
 import { AppContext } from "../../AppContext";
 import DeleteAllocRound from "./DeleteAllocRound";
 import EditAllocRound from "./EditAllocRound";
@@ -24,10 +25,15 @@ export default function AllocRoundDetails(props) {
     setSingleAllocRound,
   } = props;
   const [alertOpen, setAlertOpen] = useState(false);
-  const [alertOptions] = useState({
+  const [alertOptions, setAlertOptions] = useState({
     title: "This is alert title",
     message: "This is an error alert — check it out!",
     severity: "error",
+  });
+  const [dialogOpen, setDialogOpen] = useState(false);
+  const [dialogOptions, setDialogOptions] = useState({
+    title: "this is dialog",
+    content: "Something here",
   });
   const appContext = useContext(AppContext);
 
@@ -42,13 +48,26 @@ export default function AllocRoundDetails(props) {
     setOpen(false);
   };
   const allocationSelection = () => {
-    const confirmation = window.confirm(
-      ` Allocation round will be change to ${singleAllocRound.id}`,
-    );
-    if (confirmation) {
-      setAllocRound(singleAllocRound.id);
-    }
+    //call function to set alloc round here
+    setAllocRound(singleAllocRound.id);
+
+    setAlertOptions({
+      severity: "success",
+      title: "Success!",
+      message: `Alloc round ${singleAllocRound.id} selected.`,
+    });
+    setAlertOpen(true);
+    setOpen(false);
   };
+
+  const confirmAllocationSelection = () => {
+    setDialogOptions({
+      title: `Are you sure you want to change to ${singleAllocRound.id}?`,
+      content: `Press continue to choose alloc round ${singleAllocRound.id} from the listing.`,
+    });
+    setDialogOpen(true);
+  };
+
   return (
     <div>
       <AlertBox
@@ -101,11 +120,17 @@ export default function AllocRoundDetails(props) {
             </Grid>
           </Grid>
         </DialogContent>
+        <ConfirmationDialog
+          dialogOpen={dialogOpen}
+          dialogOptions={dialogOptions}
+          setDialogOpen={setDialogOpen}
+          submit={allocationSelection}
+        />
         <Button
           variant="contained"
           color="red"
           style={{ color: "white" }}
-          onClick={allocationSelection}
+          onClick={confirmAllocationSelection}
         >
           Pick this allocation
         </Button>
