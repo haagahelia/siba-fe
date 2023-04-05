@@ -11,7 +11,8 @@ import SettingsDetails from "./SettingsDetails";
 import { useTheme } from "@mui/material/styles";
 
 export default function SettingsList(props) {
-  const { paginateSettings, getAllSettings } = props;
+  const { paginateSettings, getAllSettings, incrementDataModifiedCounter } =
+    props;
   const [singleSetting, setSingleSetting] = useState(null);
   const [open, setOpen] = useState(false);
   const theme = useTheme();
@@ -28,6 +29,7 @@ export default function SettingsList(props) {
         singleSetting={singleSetting}
         setSingleSetting={setSingleSetting}
         getSettings={getAllSettings}
+        incrementDataModifiedCounter={incrementDataModifiedCounter}
       />
       <Box>
         <nav>
@@ -36,7 +38,6 @@ export default function SettingsList(props) {
               <List key={value.id}>
                 <ListItem
                   disablePadding
-                  button
                   onClick={() => {
                     setSingleSetting(value);
 

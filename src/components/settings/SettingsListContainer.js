@@ -5,7 +5,12 @@ import CardContent from "@mui/material/CardContent";
 import { Card } from "@mui/material";
 
 export default function SettingsListContainer(props) {
-  const { getAllSettings, allSettings, paginateSettings } = props;
+  const {
+    getAllSettings,
+    allSettings,
+    incrementDataModifiedCounter,
+    paginateSettings,
+  } = props;
   return (
     <div>
       <Grid
@@ -19,7 +24,8 @@ export default function SettingsListContainer(props) {
           <CardContent>
             <SettingsList
               getAllSettings={getAllSettings}
-              allSettings={allSettings}
+              //allSettings={allSettings}
+              incrementDataModifiedCounter={incrementDataModifiedCounter}
               paginateSettings={paginateSettings}
             />
           </CardContent>

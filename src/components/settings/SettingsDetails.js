@@ -14,8 +14,14 @@ import DeleteSetting from "./DeleteSetting";
 import EditSettingContainer from "./EditSettingContainer";
 
 export default function SettingsDetails(props) {
-  const { open, setOpen, singleSetting, getAllSettings, setSingleSetting } =
-    props;
+  const {
+    open,
+    setOpen,
+    singleSetting,
+    getAllSettings,
+    incrementDataModifiedCounter,
+    setSingleSetting,
+  } = props;
 
   const [alertOpen, setAlertOpen] = useState(false);
   const [alertOptions] = useState({
@@ -42,6 +48,7 @@ export default function SettingsDetails(props) {
           <DeleteSetting
             singleSetting={singleSetting}
             getAllSettings={getAllSettings}
+            incrementDataModifiedCounter={incrementDataModifiedCounter}
             setOpen={setOpen}
           />
           <EditSettingContainer

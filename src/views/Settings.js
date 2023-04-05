@@ -9,6 +9,7 @@ import dao from "../ajax/dao";
 export default function Settings() {
   const [paginateSettings, setPaginateSettings] = useState([]);
   const [settings, setSettings] = useState([]);
+  const [dataModifiedCounter, setDataModifiedCounter] = useState(0);
   const [alertOpen, setAlertOpen] = useState(false);
   const [alertOptions, setAlertOptions] = useState({
     message: "This is an error alert — check it out!",
@@ -31,9 +32,19 @@ export default function Settings() {
     }
   };
 
+  const incrementDataModifiedCounter = () => {
+    let newValue = dataModifiedCounter + 1;
+    setDataModifiedCounter(newValue);
+  };
+
   useEffect(() => {
     getAllSettings();
   }, []);
+
+  useEffect(() => {
+    getAllSettings();
+  }, [dataModifiedCounter]);
+
   useEffect(() => {
     setPaginateSettings(settings.slice(0, 15));
   }, [settings]);
@@ -60,7 +71,8 @@ export default function Settings() {
 
               <SettingsListContainer
                 getAllSettings={getAllSettings}
-                settings={settings}
+                incrementDataModifiedCounter={incrementDataModifiedCounter}
+                allSettings={settings}
                 paginateSettings={paginateSettings}
               />
             </CardContent>

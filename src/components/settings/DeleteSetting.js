@@ -5,7 +5,12 @@ import AlertBox from "../common/AlertBox";
 import ConfirmationDialog from "../common/ConfirmationDialog";
 
 export default function DeleteSetting(props) {
-  const { singleSetting, getAllSettings, setOpen } = props;
+  const {
+    singleSetting,
+    getAllSettings,
+    setOpen,
+    incrementDataModifiedCounter,
+  } = props;
   const [alertOpen, setAlertOpen] = useState(false);
   const [alertOptions, setAlertOptions] = useState({
     message: "This is an error alert — check it out!",
@@ -34,9 +39,10 @@ export default function DeleteSetting(props) {
       title: "Success!",
       message: `${value.name} removed.`,
     });
-    setAlertOpen(true);
+    //getAllSettings();
     setOpen(false);
-    getAllSettings();
+    incrementDataModifiedCounter();
+    setAlertOpen(true);
   };
 
   const submitDelete = (data) => {
