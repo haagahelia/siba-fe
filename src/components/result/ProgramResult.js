@@ -116,11 +116,11 @@ export default function ProgramResult(props) {
         {progs.map((prog) => {
           const progress = calculateProsent(prog.subjects);
           const progressColor =
-            progress > 100
+            progress >= 100
               ? theme.palette.progressBarGreen.main
               : progress < 80
-              ? theme.palette.progressBarYellow.main
-              : theme.palette.progressBarRed.main;
+              ? theme.palette.progressBarRed.main
+              : theme.palette.progressBarYellow.main;
           const textColor = progress === 0 ? "white" : "black";
 
           return (

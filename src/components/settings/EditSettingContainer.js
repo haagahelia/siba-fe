@@ -4,7 +4,7 @@ import ConfirmationDialog from "../common/ConfirmationDialog";
 import {
   validate,
   capitalizeFirstLetter,
-} from "../../validation/ValidateAddEditBuilding";
+} from "../../validation/ValidateAddEditSetting";
 import AlertBox from "../common/AlertBox";
 import dao from "../../ajax/dao";
 import EditSettingForm from "./EditSettingForm";
