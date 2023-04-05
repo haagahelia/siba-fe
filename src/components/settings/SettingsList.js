@@ -11,7 +11,7 @@ import SettingsDetails from "./SettingsDetails";
 import { useTheme } from "@mui/material/styles";
 
 export default function SettingsList(props) {
-  const { paginateSettings, getSettings } = props;
+  const { paginateSettings, getAllSettings } = props;
   const [singleSetting, setSingleSetting] = useState(null);
   const [open, setOpen] = useState(false);
   const theme = useTheme();
@@ -27,7 +27,7 @@ export default function SettingsList(props) {
         setOpen={setOpen}
         singleSetting={singleSetting}
         setSingleSetting={setSingleSetting}
-        getSettings={getSettings}
+        getSettings={getAllSettings}
       />
       <Box>
         <nav>

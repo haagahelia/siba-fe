@@ -12,8 +12,10 @@ export const fetchSettings = async (): Promise<Response<Settings>> => {
 };
 
 // delete setting
-export const deleteSettingById = async (id: number): Promise<boolean> => {
-  const request = new Request(`${baseUrl}/setting/delete/${id}`, {
+export const deleteSettingById = async (
+  settingId: number,
+): Promise<boolean> => {
+  const request = new Request(`${baseUrl}/setting/delete/${settingId}`, {
     method: "DELETE",
   });
   const response = await fetch(request);

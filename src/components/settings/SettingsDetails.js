@@ -10,11 +10,12 @@ import {
   Button,
 } from "@mui/material";
 import AlertBox from "../common/AlertBox";
-import { Link } from "react-router-dom";
-import EditSetting from "./EditSetting";
+import DeleteSetting from "./DeleteSetting";
+import EditSettingContainer from "./EditSettingContainer";
 
 export default function SettingsDetails(props) {
-  const { open, setOpen, singleSetting } = props;
+  const { open, setOpen, singleSetting, getAllSettings, setSingleSetting } =
+    props;
 
   const [alertOpen, setAlertOpen] = useState(false);
   const [alertOptions] = useState({
@@ -37,6 +38,16 @@ export default function SettingsDetails(props) {
         <DialogContent>
           <DialogActions
             sx={{ justifyContent: "space-evenly", padding: "16px" }}
+          />
+          <DeleteSetting
+            singleSetting={singleSetting}
+            getAllSettings={getAllSettings}
+            setOpen={setOpen}
+          />
+          <EditSettingContainer
+            singleSetting={singleSetting}
+            getAllSettings={getAllSettings}
+            setSingleSetting={setSingleSetting}
           />
           <DialogContentText>
             <Grid
@@ -72,22 +83,6 @@ export default function SettingsDetails(props) {
                   {singleSetting?.numberValue}
                 </Typography>
               </Grid>
-              <Button>
-                {
-                  <Link
-                    to='/editSetting'
-                    state={{
-                      id: singleSetting?.id,
-                      name: singleSetting?.name,
-                      description: singleSetting?.description,
-                      numberValue: singleSetting?.numberValue,
-                      textValue: singleSetting?.textValue,
-                    }}
-                  >
-                    Edit
-                  </Link>
-                }
-              </Button>
             </Grid>
           </DialogContentText>
         </DialogContent>
