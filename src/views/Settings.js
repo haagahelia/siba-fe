@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import CardContent from "@mui/material/CardContent";
 import SettingsListContainer from "../components/settings/SettingsListContainer";
+import AddSettingContainer from "../components/settings/AddSettingContainer";
 import { CardHeader, Card, Container, Grid } from "@mui/material";
 import AlertBox from "../components/common/AlertBox";
 import dao from "../ajax/dao";
@@ -45,6 +46,7 @@ export default function Settings() {
         setAlertOpen={setAlertOpen}
       />
       <Container maxWidth="100%">
+        <AddSettingContainer getAllSettings={getAllSettings} />
         <Grid
           container
           rowSpacing={0.5}

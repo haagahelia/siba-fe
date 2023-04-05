@@ -10,7 +10,6 @@ import "../styles/NavBar.css";
 import MenuIcon from "@mui/icons-material/Menu";
 
 import Settings from "../views/Settings";
-import EditSetting from "../components/settings/EditSetting";
 import RoomResultView from "../views/RoomResultView";
 import ProgramResultView from "../views/ProgramResultView";
 import SubjectView from "../views/SubjectView";
@@ -145,7 +144,6 @@ function NavBar() {
         <Route path="/department" element={<DepartmentView />} />
         <Route path="/allocation/addAllocRound" element={<AddAllocRound />} />
         <Route path="/settings" element={<Settings />} />
-        <Route path="/editSetting" element={<EditSetting />} />
         <Route
           path="/alloc-fail/:allocId"
           element={<AllocationSubjectFailureView />}
