@@ -2,7 +2,7 @@ import { Response, Department } from "../types";
 const baseUrl = process.env.REACT_APP_BE_SERVER_BASE_URL;
 
 export const fetchDepartmentData = async (): Promise<Response<Department>> => {
-  const request = new Request(`${baseUrl}/department/getDeptData`, {
+  const request = new Request(`${baseUrl}/department/`, {
     method: "GET",
   });
 
@@ -42,7 +42,7 @@ export const AddDepartment = async (
 export const editDepartment = async (
   editedDepartment: Department,
 ): Promise<boolean> => {
-  const request = new Request(`${baseUrl}/department/updateDept`, {
+  const request = new Request(`${baseUrl}/department/`, {
     method: "PUT",
     headers: {
       Accept: "application/json",
