@@ -21,6 +21,7 @@ import EquipmentView from "../views/EquipmentView";
 import BuildingView from "../views/BuildingView";
 import DepartmentView from "../views/DepartmentView";
 import RegisterView from "../views/RegisterView";
+import LoginView from "../views/LoginView";
 
 function NavBar() {
   const [click, setClick] = useState(false);
@@ -37,6 +38,17 @@ function NavBar() {
           </NavLink>
 
           <ul className={click ? "nav-menu active" : "nav-menu"}>
+            <li className="nav-item">
+              <NavLink
+                to="/login"
+                end
+                activeclassname="active"
+                className="nav-links"
+                onClick={handleClick}
+              >
+                Login
+              </NavLink>
+            </li>
             <li className="nav-item">
               <NavLink
                 to="/register"
@@ -148,6 +160,7 @@ function NavBar() {
       </nav>
 
       <Routes>
+        <Route path="/login" element={<LoginView />} />
         <Route path="/register" element={<RegisterView />} />
         <Route path="/" element={<SubjectView />} />
         <Route path="/subject" element={<SubjectView />} />
