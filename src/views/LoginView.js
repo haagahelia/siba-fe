@@ -1,7 +1,9 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { TextField, Card, CardContent, Grid, Button } from "@mui/material";
 import dao from "../ajax/dao";
+import { AppContext } from "../AppContext";
+//import jsonwebtoken from "jsonwebtoken";
 
 export default function LoginView() {
   const [loginForm, setLoginForm] = useState({
@@ -9,12 +11,15 @@ export default function LoginView() {
     password: "",
   });
 
+  const appContext = useContext(AppContext);
+
   const loginUser = async () => {
     const { success, data } = await dao.getUserByEmail(loginForm);
     if (!success) {
       console.log("error");
     } else {
       console.log(data);
+      appContext.userEmail = data[0].email;
     }
   };
 

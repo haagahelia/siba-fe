@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import {
   NavLink,
   BrowserRouter as Router,
@@ -22,9 +22,13 @@ import BuildingView from "../views/BuildingView";
 import DepartmentView from "../views/DepartmentView";
 import RegisterView from "../views/RegisterView";
 import LoginView from "../views/LoginView";
+import { Typography } from "@mui/material";
+import { AppContext } from "../AppContext";
 
 function NavBar() {
   const [click, setClick] = useState(false);
+
+  const appContext = useContext(AppContext);
 
   const handleClick = () => setClick(!click);
   return (
@@ -36,6 +40,13 @@ function NavBar() {
             {/* <img src={logo} alt="Logo" /> */}
             <i className="fas fa-code" />
           </NavLink>
+
+          <Typography>
+            U:
+            {typeof appContext.userEmail === "string"
+              ? appContext.userEmail.substring(0, 7)
+              : "Not logged in yet"}
+          </Typography>
 
           <ul className={click ? "nav-menu active" : "nav-menu"}>
             <li className="nav-item">
