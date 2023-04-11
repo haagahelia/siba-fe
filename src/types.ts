@@ -79,3 +79,11 @@ export interface User {
   password: string;
   isAdmin: number;
 }
+
+export interface UserLoggedIn {
+  id: number;
+  email: string;
+  password: string;
+  isAdmin: number;
+  token: string;
+}
