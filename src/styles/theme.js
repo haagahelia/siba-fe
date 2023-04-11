@@ -292,7 +292,20 @@ const theme = createTheme({
           color: light,
         },
       },
+      redbutton: {
+        backgroundColor: "red",
+        color: light,
+      },
+      editbutton: {
+        backgroundColor: buttonOrange,
+        color: light,
+      },
+      greenbutton: {
+        backgroundColor: "green",
+        color: light,
+      },
     },
+
     MuiPagination: {
       styleOverrides: {
         root: {
