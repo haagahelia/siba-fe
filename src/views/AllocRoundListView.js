@@ -11,6 +11,7 @@ import {
 import Grid from "@mui/material/Grid";
 import dao from "../ajax/dao";
 import AlertBox from "../components/common/AlertBox";
+import { useTheme } from "@mui/material/styles";
 
 export default function AllocRoundView() {
   const [paginateAllocRounds, setpaginateAllocRounds] = useState([]);
@@ -41,7 +42,6 @@ export default function AllocRoundView() {
 
   useEffect(() => {
     getAllAllocRounds();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -50,6 +50,8 @@ export default function AllocRoundView() {
 
   const navigate = useNavigate();
 
+  const theme = useTheme();
+
   return (
     <div>
       <AlertBox
@@ -57,10 +59,7 @@ export default function AllocRoundView() {
         alertOptions={alertOptions}
         setAlertOpen={setAlertOpen}
       />
-      <Button onClick={() => navigate("addAllocRound")}>
-        {" "}
-        Create new Allocation round
-      </Button>
+
       <Container maxWidth="100%">
         <Grid
           container
@@ -72,6 +71,13 @@ export default function AllocRoundView() {
           <Card variant="outlined">
             <CardContent>
               <CardHeader title="Allocation rounds (Select to change)" />
+              <Button
+                style={theme.components.MuiButton.greenbutton}
+                onClick={() => navigate("addAllocRound")}
+              >
+                {" "}
+                Create new Allocation round
+              </Button>
               <AllocRoundListContainer
                 getAllAllocRounds={getAllAllocRounds}
                 allAllocRoundsList={allAllocRoundsList}

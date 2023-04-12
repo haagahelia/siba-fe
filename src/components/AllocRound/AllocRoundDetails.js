@@ -14,6 +14,7 @@ import ConfirmationDialog from "../common/ConfirmationDialog";
 import { AppContext } from "../../AppContext";
 import DeleteAllocRound from "./DeleteAllocRound";
 import EditAllocRound from "./EditAllocRound";
+import { useTheme } from "@mui/material/styles";
 
 export default function AllocRoundDetails(props) {
   const {
@@ -36,6 +37,8 @@ export default function AllocRoundDetails(props) {
     content: "Something here",
   });
   const appContext = useContext(AppContext);
+
+  const theme = useTheme();
 
   const handleClose = (allocRoundId) => {
     setOpen(false);
@@ -128,8 +131,7 @@ export default function AllocRoundDetails(props) {
         />
         <Button
           variant="contained"
-          color="red"
-          style={{ color: "white" }}
+          style={theme.components.MuiButton.greenbutton}
           onClick={confirmAllocationSelection}
         >
           Pick this allocation

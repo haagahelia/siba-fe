@@ -4,18 +4,20 @@ import { Button, Grid } from "@mui/material";
 import DialogTitle from "@mui/material/DialogTitle";
 import Dialog from "@mui/material/Dialog";
 import { DialogActions, DialogContent, DialogContentText } from "@mui/material";
+import { useTheme } from "@mui/material/styles";
 
 export default function EditAllocRoundForm(props) {
   const { formik } = props;
 
   const [open, setOpen] = useState(false);
 
+  const theme = useTheme();
+
   return (
     <div>
-      <Button
+      <Button //theme button yellow
         variant="contained"
-        color="secondary"
-        style={{ color: "white" }}
+        style={theme.components.MuiButton.editbutton}
         onClick={() => {
           setOpen(true);
         }}
@@ -83,21 +85,21 @@ export default function EditAllocRoundForm(props) {
           <DialogActions
             sx={{ justifyContent: "space-evenly", padding: "16px" }}
           >
-            <Button
+            <Button //theme button red
               onClick={() => {
                 setOpen(false);
                 // Let's reset the form if you press cancel
                 formik.resetForm();
               }}
               variant="contained"
-              color="red"
+              style={theme.components.MuiButton.redbutton}
             >
               Cancel
             </Button>
-            <Button
+            <Button //theme button green
               type="submit"
               variant="contained"
-              style={{ color: "white" }}
+              style={theme.components.MuiButton.greenbutton}
               onClick={() => {
                 setOpen(false);
               }}

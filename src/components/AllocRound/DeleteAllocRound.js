@@ -3,6 +3,7 @@ import { Button } from "@mui/material";
 import dao from "../../ajax/dao";
 import AlertBox from "../common/AlertBox";
 import ConfirmationDialog from "../common/ConfirmationDialog";
+import { useTheme } from "@mui/material/styles";
 
 export default function DeleteAllocRound(props) {
   const { singleAllocRound, getAllAllocRounds, setOpen } = props;
@@ -18,7 +19,7 @@ export default function DeleteAllocRound(props) {
   });
   const [deleteId, setDeleteId] = useState("");
 
-  const DeleteAllocRound = async (value) => {
+  const deleteAllocRound = async (value) => {
     let result = await dao.deleteSingleAllocRound(value);
     if (result === false) {
       setAlertOptions({
@@ -39,6 +40,7 @@ export default function DeleteAllocRound(props) {
 
     getAllAllocRounds();
   };
+  const theme = useTheme();
 
   const submitDelete = (data) => {
     setDialogOptions({
@@ -61,12 +63,13 @@ export default function DeleteAllocRound(props) {
         dialogOpen={dialogOpen}
         dialogOptions={dialogOptions}
         setDialogOpen={setDialogOpen}
-        submit={DeleteAllocRound}
+        submit={deleteAllocRound}
         submitValues={deleteId}
       />
       <Button
+        //theme button red
         variant="contained"
-        color="red"
+        style={theme.components.MuiButton.redbutton}
         onClick={() => submitDelete(singleAllocRound)}
       >
         Delete
