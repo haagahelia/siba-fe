@@ -4,6 +4,8 @@ export async function validate(values) {
   const errors = {};
   const regName = new RegExp(/^[A-Za-zäöåÄÖÅ0-9\s-]*$/);
   const regDescription = new RegExp(/^[A-Za-zäöåÄÖÅ0-9\s-]*$/);
+  const regNumberValue = new RegExp(/^[0-9]+$/);
+  const regTextValue = new RegExp(/^[A-Za-zäöåÄÖÅ0-9\s-]*$/);
 
   let settingList = [];
 
@@ -33,6 +35,20 @@ export async function validate(values) {
       "The description must be maximum 16000 characters long";
   } else if (!regDescription.test(values.description)) {
     errors.description = "Only letters, numbers and '-' allowed";
+  }
+
+  if (!values.numberValue) {
+    errors.priority = "Required field";
+  } else if (values.numberValue < 0 || values.numberValue > 11) {
+    errors.numberValue = "The numberValue must be between 0 and 11 points";
+  } else if (!regNumberValue.test(values.numberValue)) {
+    errors.numberValue = "Only numbers allowed";
+  }
+
+  if (values.textValue.length > 255) {
+    errors.textValue = "The textValue must be maximum 255 characters long";
+  } else if (!regTextValue.test(values.textValue)) {
+    errors.textValue = "Only letters, numbers and '-' allowed";
   }
 
   return errors;
