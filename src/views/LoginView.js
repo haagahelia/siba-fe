@@ -18,8 +18,8 @@ export default function LoginView() {
     if (!success) {
       console.log("error");
     } else {
-      console.log(data);
       appContext.userEmail = data[0].email;
+      console.log(`success: ${data[0].token}`);
     }
   };
 
