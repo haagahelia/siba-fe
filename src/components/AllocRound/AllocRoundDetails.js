@@ -132,7 +132,7 @@ export default function AllocRoundDetails(props) {
         <Button
           variant="contained"
           style={theme.components.MuiButton.greenbutton}
-          onClick={allocationSelection}
+          onClick={confirmAllocationSelection}
         >
           Pick this allocation
         </Button>

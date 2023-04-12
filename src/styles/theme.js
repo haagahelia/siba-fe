@@ -293,7 +293,7 @@ const theme = createTheme({
         },
       },
       redbutton: {
-        backgroundColor: "red",
+        backgroundColor: buttonRed,
         color: light,
       },
       editbutton: {
@@ -301,7 +301,7 @@ const theme = createTheme({
         color: light,
       },
       greenbutton: {
-        backgroundColor: "green",
+        backgroundColor: buttonGreen,
         color: light,
       },
     },
