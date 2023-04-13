@@ -47,7 +47,7 @@ export default function AllocRoundDetails(props) {
   const setAllocRound = (allocRoundId) => {
     //console.log ("allocRoundId 456: " +allocRoundId);
     appContext.allocRoundId = allocRoundId; // Works now! Updating app context.
-    setAllocRoundId(allocRoundId); // Notifying grangrangranparent. Updating component state
+    // setAllocRoundId(allocRoundId); // Notifying grangrangranparent. Updating component state
     setOpen(false);
   };
   const allocationSelection = () => {
