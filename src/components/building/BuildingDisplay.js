@@ -17,9 +17,8 @@ export default function BuildingDisplay(props) {
         padding={2}
       >
         <Grid item md={3} xs={7} padding={2}>
-          <Typography variant="body" style={{ fontWeight: "bold" }}>
-            Name:
-          </Typography>
+          {/* <Typography variant="body" style={{ fontWeight: "bold" }}> */}
+          <Typography variant="boldTitle">Name:</Typography>
           <ListItemText
             primary={singleBuilding.name}
             primaryTypographyProps={{
@@ -28,9 +27,7 @@ export default function BuildingDisplay(props) {
           />
         </Grid>
         <Grid item md={2} xs={3} padding={2}>
-          <Typography variant="body" style={{ fontWeight: "bold" }}>
-            Description:
-          </Typography>
+          <Typography variant="boldTitle">Description:</Typography>
           <ListItemText
             primary={singleBuilding.description}
             primaryTypographyProps={{

@@ -25,9 +25,7 @@ export default function EditBuildingForm(props) {
       <Dialog open={open}>
         <form onSubmit={formik.handleSubmit}>
           {/* formik.initialValues?.subjectName} Here ? checks if the subjectName attribute can be found in the initialValues ​​object, if not found returns null and does not crash */}
-          <DialogTitle sx={{ maxWidth: "300px" }}>
-            Edit: {formik.initialValues?.name}
-          </DialogTitle>
+          <DialogTitle>Edit: {formik.initialValues?.name}</DialogTitle>
           <DialogContent>
             <Grid
               container
@@ -41,9 +39,7 @@ export default function EditBuildingForm(props) {
               <BuildingInputField formik={formik} />
             </Grid>
           </DialogContent>
-          <DialogActions
-            sx={{ justifyContent: "space-evenly", padding: "16px" }}
-          >
+          <DialogActions sx={{ justifyContent: "space-evenly" }}>
             <Button
               onClick={() => {
                 setOpen(false);
@@ -58,7 +54,6 @@ export default function EditBuildingForm(props) {
             <Button
               type="submit"
               variant="contained"
-              style={{ color: "white" }}
               onClick={() => {
                 setOpen(false);
               }}

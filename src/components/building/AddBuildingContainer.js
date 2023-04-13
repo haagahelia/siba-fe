@@ -91,17 +91,9 @@ export default function AddBuildingContainer(props) {
         submit={addBuilding}
         submitValues={formik.values}
       />
-      <Card
-        variant="outlined"
-        sx={{
-          width: "65%",
-          padding: 1,
-          margin: "auto",
-          marginTop: "20px",
-        }}
-      >
+      <Card variant="outlined">
         <CardContent>
-          <CardHeader title="Add Building" sx={{ marginBottom: "30px" }} />
+          <CardHeader title="Add Building" />
           <AddBuildingForm
             formik={formik}
             submitValues={formik.values}

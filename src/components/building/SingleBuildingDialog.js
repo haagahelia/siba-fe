@@ -20,7 +20,7 @@ export default function SingleBuildingDialog(props) {
       <Dialog open={open} onClose={() => setOpen(false)} width="400px">
         <DialogTitle id="dialog-title">{singleBuilding?.name}</DialogTitle>
         <DialogContent>
-          <DialogActions sx={{ justifyContent: "center", padding: "16px" }}>
+          <DialogActions>
             <DeleteBuilding
               singleBuilding={singleBuilding}
               getAllBuildings={getAllBuildings}

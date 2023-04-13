@@ -48,7 +48,7 @@ export default function BuildingList() {
         alertOptions={alertOptions}
         setAlertOpen={setAlertOpen}
       />
-      <Container maxWidth="100%">
+      <Container>
         <AddBuildingContainer getAllBuildings={getAllBuildings} />
         <SingleBuildingDialog
           open={open}
@@ -62,7 +62,6 @@ export default function BuildingList() {
           rowSpacing={1}
           justifyContent="space-evenly"
           alignItems="flex-start"
-          marginTop="20px"
         >
           <Card variant="outlined">
             <CardContent>
