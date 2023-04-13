@@ -15,21 +15,44 @@ const lightBlue = "#73FDFF";
 const lightBlue2 = "#5DBCD2";
 const lightYellow = "#FFF5AB";
 const lightRed = "#FF8585";
+//yellowPalette
+const canary = "#FFFF8F";
+const paleCanary = "FFFFAA";
+const sahara = "#AAAA11";
+const buddhaGold = "CC9900";
+const paleLime = "#CCFF66";
+const saffronMango = "#FFBB66";
+const tangerineYellow = "#FFCC00";
+const eggWhite = "#F2F2BF";
+const greenYellow = "#CCFF33";
+const butteryWhite = "#FFFFE6";
+//redPalette
+const tomatoRed = "#FF2400";
+const softPink = "#F2AEB8";
+const lightPink = "#FFD1CF";
+const redOrange = "#FF3333";
+const bitterSweet = "#FF6666";
+const salmonPink = "#FF8888";
+const cherryBlossom = "#FF8888";
+const brightRed = "#FF1111";
+const pumpkinOrange = "#FF6600";
+const clayBrown = "#B97446";
+const darkOrange = "#EE9900";
 
-const borderColor = "#8C4B2D";
+const mediumBrown = "#8C4B2D"; // borderColor
 
-const buttonOrange = "#E16428";
-const buttonGreen = "#54B435";
-const buttonRed = "#FF1E00"; // Reset button
+const buttonOrange = "#E16428"; // Halloween Orange
+const buttonGreen = "#54B435"; // Apple green
+const buttonRed = "#FF1E00"; // Reset button Ruby red
 
-const progressBarGreen = "#06FF00";
-const progressBarYellow = "#FFE400";
-const progressBarRed = "#FF1700";
+const progressBarGreen = "#06FF00"; // Highlighter Green/Lime
+const progressBarYellow = "#FFE400"; // Golden Yellow
+const progressBarRed = "#FF1700"; // Scarlet red / almost the same as #FF1E00
 
 const snackbarErrorRed = buttonRed;
-const snackbarWarningOrange = "#FFA000";
-const snackbarInformationBlue = "#1976D2";
-const snackbarSuccessGreen = "#43A047";
+const snackbarWarningOrange = "#FFA000"; // Orange Peel
+const snackbarInformationBlue = "#1976D2"; // Navy Blue
+const snackbarSuccessGreen = "#43A047"; // Medium Green
 
 // Then defining three palettes so that in the normal palette
 // no new colors are defined. Red and yellow palettes though are
@@ -37,8 +60,6 @@ const snackbarSuccessGreen = "#43A047";
 
 export const normalPalette = {
   background: { default: lightGray },
-  backgroundDarker: { default: darkBrown },
-  fontColorDefault: { default: fontWhite },
   primary: {
     main: buttonGreen,
     light: lightBlue2,
@@ -51,72 +72,74 @@ export const normalPalette = {
   },
   error: { main: snackbarErrorRed },
   warning: { main: snackbarWarningOrange },
-  information: { main: snackbarInformationBlue },
+  info: { main: snackbarInformationBlue },
   success: { main: snackbarSuccessGreen },
 
+  backgroundDarker: { default: darkBrown },
+  fontColorDefault: { default: fontWhite },
   progressBarGreen: { main: progressBarGreen },
   progressBarYellow: { main: progressBarYellow },
   progressBarRed: { main: progressBarRed },
 
-  borderColor: { main: borderColor },
+  borderColor: { main: mediumBrown },
 };
 
 export const yellowPalette = {
-  background: { default: "#FFFF8F" },
-  backgroundDarker: { default: "#FFFFAA" },
-  fontColorDefault: { default: "#AAAA11" },
+  background: { default: canary },
   primary: {
-    main: "#CC9900",
-    light: "#CCFF66",
+    main: buddhaGold,
+    light: paleLime,
   },
   secondary: {
-    main: "#FFFF99",
+    main: paleCanary,
   },
   red: {
-    main: "#FFBB66",
+    main: saffronMango,
   },
-  error: { main: "#FFCC00" },
-  warning: { main: "#F2F2BF" },
-  information: { main: "#CCFF33" },
-  success: { main: "#FFFFE6" },
+  error: { main: tangerineYellow },
+  warning: { main: eggWhite },
+  info: { main: greenYellow },
+  success: { main: butteryWhite },
 
+  backgroundDarker: { default: paleCanary },
+  fontColorDefault: { default: sahara },
   progressBarGreen: { main: progressBarGreen },
   progressBarYellow: { main: progressBarYellow },
   progressBarRed: { main: progressBarRed },
 
-  borderColor: { main: borderColor },
+  borderColor: { main: mediumBrown },
 };
 /* More yellow tint values used from here: 
-  "#FFFF11"  "#BB7700"
+  "#FFFF11" Sunny Yellow,  "#BB7700" Mustard Brown
 */
 
 export const redPalette = {
-  background: { default: "#FF2400" },
-  backgroundDarker: { default: "#F2AEB8" },
-  fontColorDefault: { default: "#FFD1CF" },
+  background: { default: tomatoRed },
   primary: {
-    main: "#FF3333",
-    light: "#FF6666",
+    main: redOrange,
+    light: bitterSweet,
   },
   secondary: {
-    main: "#FF8888",
+    main: salmonPink,
   },
   red: {
-    main: "#FFBBBB",
+    main: cherryBlossom,
   },
-  error: { main: "#FF1111" },
-  warning: { main: "#FF6600" },
-  information: { main: "#B97446" },
-  success: { main: "#EE9900" },
+  error: { main: brightRed },
+  warning: { main: pumpkinOrange },
+  info: { main: clayBrown },
+  success: { main: darkOrange },
 
+  backgroundDarker: { default: softPink },
+  fontColorDefault: { default: lightPink },
   progressBarGreen: { main: progressBarGreen },
   progressBarYellow: { main: progressBarYellow },
   progressBarRed: { main: progressBarRed },
 
-  borderColor: { main: borderColor },
+  borderColor: { main: mediumBrown },
 };
 /* More red tint values used from here: 
- "#FF2222" "#FF9AD5" "#AC3939"
+ "#FF2222" Torch Red, "#FF9AD5" Lavender Rose, "#AC3939" Dull Red
 */
 
 // The swapping fast what palette will be in use right now:
@@ -133,6 +156,9 @@ const theme = createTheme({
           backgroundColor: currentPalette.backgroundDarker.default,
           borderColor: light,
           width: "75%",
+          margin: "auto",
+          marginTop: "20px",
+          padding: "8px",
         },
       },
     },
@@ -142,7 +168,7 @@ const theme = createTheme({
           backgroundColor: currentPalette.background.default,
           fontSize: 25,
           color: currentPalette.fontColorDefault.default,
-          marginBottom: "15px",
+          marginBottom: "30px",
           padding: "20px",
         },
       },
@@ -237,6 +263,14 @@ const theme = createTheme({
         },
       },
     },
+    MuiDialogActions: {
+      styleOverrides: {
+        root: {
+          justifyContent: "center",
+          padding: "16px",
+        },
+      },
+    },
     AllocRoom: {
       studio: {
         color: lightRed,
@@ -287,6 +321,9 @@ const theme = createTheme({
     },
     MuiButton: {
       styleOverrides: {
+        contained: {
+          color: "#ffffff",
+        },
         text: {
           backgroundColor: "pink",
           color: light,
@@ -305,7 +342,6 @@ const theme = createTheme({
         color: light,
       },
     },
-
     MuiPagination: {
       styleOverrides: {
         root: {
@@ -316,6 +352,27 @@ const theme = createTheme({
             color: light,
             borderColor: orange,
           },
+        },
+      },
+    },
+    MuiTypography: {
+      variants: [
+        {
+          props: { variant: "boldTitle" },
+          style: {
+            fontFamily: "Roboto, Helvetica, Aria, sans-serif",
+            fontWeight: 700,
+            fontSize: "1rem",
+            lineHeight: 1.5,
+            letterSpacing: "0.00938em",
+          },
+        },
+      ],
+    },
+    MuiGrid: {
+      styleOverrides: {
+        root: {
+          marginTop: 20,
         },
       },
     },
