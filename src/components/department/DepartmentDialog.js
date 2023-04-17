@@ -20,9 +20,7 @@ export default function DepartmentDialog(props) {
         <DialogContent>
           Description: {singleDepartment?.description}
         </DialogContent>
-        <DialogContent
-          sx={{ display: "flex", flexDirection: "row", gap: "1rem" }}
-        >
+        <DialogContent variant="sibaDialogContent">
           <DeleteDepartment
             setOpen={setOpen}
             getAllDepartments={getAllDepartments}

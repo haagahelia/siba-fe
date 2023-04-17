@@ -248,6 +248,18 @@ const theme = createTheme({
         },
       },
     },
+    MuiDialogContent: {
+      variants: [
+        {
+          props: { variant: "sibaDialogContent" },
+          style: {
+            display: "flex",
+            flexDirection: "row",
+            gap: "1rem",
+          },
+        },
+      ],
+    },
     MuiDialog: {
       styleOverrides: {
         paper: {
@@ -375,7 +387,7 @@ const theme = createTheme({
           justifyContent: "space-evenly",
           alignItems: "flex-start",
           marginTop: 20,
-          padding: 2,
+          padding: 16,
         },
       },
       variants: [
@@ -398,8 +410,9 @@ const theme = createTheme({
           },
         },
         {
-          props: { variant: "editBuildingForm" },
+          props: { variant: "sibaGridEdit" },
           style: {
+            flexDirection: "column",
             justifyContent: "center",
             alignItems: "center",
             padding: 16,
