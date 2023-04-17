@@ -57,15 +57,7 @@ export default function EditEquipment(props) {
         <DialogTitle>Edit equipment</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            <Grid
-              container
-              spacing={3}
-              column={7}
-              direction="column"
-              justifyContent="center"
-              alignItems="center"
-              padding={2}
-            >
+            <Grid container spacing={3} column={7} direction="column">
               <Grid item xs={12}>
                 <TextField
                   name='Equipment'

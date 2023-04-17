@@ -32,7 +32,7 @@ export default function AddSubEquipContainer(props) {
 
   const getSubEquipBySubId = async function (subId) {
     let result = await equipmentsBySubId(subId);
-    console.log(`result:${result}`);
+    // console.log(`result:${result}`);
     getEquipmentsForSelect(result);
   };
 
@@ -55,9 +55,9 @@ export default function AddSubEquipContainer(props) {
       // Here we filter out the already existing equipment in teaching
       let filteredList = [];
 
-      console.log(`data: ${data}`);
-      console.log(`subEquipList: ${subEquipList}`);
-      console.log(`subEquipList.length: ${subEquipList.length}`);
+      // console.log(`data: ${data}`);
+      // console.log(`subEquipList: ${subEquipList}`);
+      // console.log(`subEquipList.length: ${subEquipList.length}`);
       if (subEquipList && typeof subEquipList.length === "number") {
         filteredList = data.filter((item) => {
           return !subEquipList.some((element) => {
@@ -65,7 +65,7 @@ export default function AddSubEquipContainer(props) {
           });
         });
       }
-      console.log(`filteredList:${filteredList},first:${filteredList[0]}`);
+      // console.log(`filteredList:${filteredList},first:${filteredList[0]}`);
       setEquipmentSelectList(filteredList);
     }
   };

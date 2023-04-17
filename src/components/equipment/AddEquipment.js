@@ -20,15 +20,7 @@ export default function AddEquipment(props) {
 
   return (
     <>
-      <Card
-        variant="outlined"
-        sx={{
-          width: "65%",
-          padding: 1,
-          margin: "auto",
-          marginTop: "20px",
-        }}
-      >
+      <Card variant="outlined">
         <CardContent>
           <CardHeader title="Add Equipment" />
           <Grid>

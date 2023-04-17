@@ -10,13 +10,7 @@ export default function EquipmentListContainer(props) {
   return (
     <div>
       <SingleEquipmentDialog getAllEquipments={getAllEquipments} />
-      <Grid
-        container
-        owSpacing={1}
-        justifyContent="space-evenly"
-        alignItems="flex-start"
-        marginTop="20px"
-      >
+      <Grid container rowSpacing={1}>
         <Card variant="outlined">
           <CardContent>
             <EquipmentList
