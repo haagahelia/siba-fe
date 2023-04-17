@@ -78,6 +78,8 @@ export interface User {
   email: string;
   password: string;
   isAdmin: number;
+  isPlanner: number;
+  isStatist: number;
 }
 
 export interface UserLoggedIn {
@@ -85,5 +87,7 @@ export interface UserLoggedIn {
   email: string;
   password: string;
   isAdmin: number;
+  isPlanner: number;
+  isStatist: number;
   token: string;
 }
