@@ -51,23 +51,19 @@ export default function AddSubEquipForm(props) {
       </Button>
       <Dialog open={open}>
         {/* formik.singleSubject?.subjectName} Here ? checks whether the singleSubject object has the subjectName attribute, if not found it returns the value null and does not crash */}
-        <DialogTitle sx={{ maxWidth: "300px" }}>
-          {singleSubject?.subjectName}
-        </DialogTitle>
+        <DialogTitle>{singleSubject?.subjectName}</DialogTitle>
         <form onSubmit={formik.handleSubmit}>
           <DialogContent>
             <DialogContentText>
               <Grid
                 container
+                variant="sibaGridAddFormInDialog"
                 spacing={1}
                 column={3}
                 direction="column"
-                justifyContent="flex-start"
-                alignItems="flex-center"
-                padding={2}
               >
                 <Grid item xs={12}>
-                  <FormControl sx={{ minWidth: 225 }}>
+                  <FormControl>
                     <InputLabel>Equipment</InputLabel>
                     <Select
                       error={
@@ -94,7 +90,7 @@ export default function AddSubEquipForm(props) {
                   </FormControl>
                 </Grid>
                 <Grid item xs={12}>
-                  <Typography sx={{ marginBottom: 2 }}>
+                  <Typography>
                     Priority default value: {equipPriority}
                   </Typography>
                   <TextField
@@ -142,9 +138,7 @@ export default function AddSubEquipForm(props) {
               </Grid>
             </DialogContentText>
           </DialogContent>
-          <DialogActions
-            sx={{ justifyContent: "space-evenly", padding: "16px" }}
-          >
+          <DialogActions>
             <Button
               variant="contained"
               color="red"

@@ -278,7 +278,7 @@ const theme = createTheme({
     MuiDialogActions: {
       styleOverrides: {
         root: {
-          justifyContent: "center",
+          justifyContent: "space-evenly",
           padding: "16px",
         },
       },
@@ -368,6 +368,11 @@ const theme = createTheme({
       },
     },
     MuiTypography: {
+      styleOverrides: {
+        root: {
+          marginBottom: 16,
+        },
+      },
       variants: [
         {
           props: { variant: "boldTitle" },
@@ -394,15 +399,25 @@ const theme = createTheme({
         {
           props: { variant: "sibaGridAddForm" },
           style: {
-            columnGap: 8,
-            rowGap: 8,
+            // columnGap: 8,
+            // rowGap: 8,
             padding: 8,
             alignItems: "center",
             justifyContent: "space-evenly",
           },
         },
         {
-          props: { variant: "buildingDisplay" },
+          props: { variant: "sibaGridAddFormInDialog" },
+          style: {
+            columnGap: 8,
+            rowGap: 8,
+            padding: 16,
+            justifyContent: "flex-start",
+            alignItems: "flex-center",
+          },
+        },
+        {
+          props: { variant: "sibaGridSingleItemDisplay" },
           style: {
             justifyContent: "flex-start",
             alignItems: "flex-start",
