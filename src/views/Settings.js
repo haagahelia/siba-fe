@@ -58,13 +58,7 @@ export default function Settings() {
       />
       <Container maxWidth="100%">
         <AddSettingContainer getAllSettings={getAllSettings} />
-        <Grid
-          container
-          rowSpacing={0.5}
-          justifyContent="space-evenly"
-          alignItems="flex-start"
-          marginTop="20px"
-        >
+        <Grid container rowSpacing={0.5}>
           <Card variant="outlined">
             <CardContent>
               <CardHeader title="Settings" />

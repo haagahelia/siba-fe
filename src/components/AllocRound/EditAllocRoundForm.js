@@ -30,15 +30,7 @@ export default function EditAllocRoundForm(props) {
           <DialogTitle>Edit: {formik.initialValues?.name}</DialogTitle>
           <DialogContent>
             <DialogContentText>
-              <Grid
-                container
-                spacing={3}
-                column={7}
-                direction="column"
-                justifyContent="center"
-                alignItems="center"
-                padding={2}
-              >
+              <Grid container variant="sibaGridEdit" spacing={3} column={7}>
                 <Grid item xs={12}>
                   <TextField
                     error={

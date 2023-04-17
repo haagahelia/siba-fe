@@ -61,13 +61,7 @@ export default function AllocRoundView() {
       />
 
       <Container maxWidth="100%">
-        <Grid
-          container
-          rowSpacing={1}
-          justifyContent="space-evenly"
-          alignItems="flex-start"
-          marginTop="20px"
-        >
+        <Grid container rowSpacing={1}>
           <Card variant="outlined">
             <CardContent>
               <CardHeader title="Allocation rounds (Select to change)" />

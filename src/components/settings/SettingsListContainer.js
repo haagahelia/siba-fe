@@ -13,13 +13,7 @@ export default function SettingsListContainer(props) {
   } = props;
   return (
     <div>
-      <Grid
-        container
-        rowSpacing={0.5}
-        justifyContent="space-evenly"
-        alignItems="flex-start"
-        marginTop="20px"
-      >
+      <Grid container rowSpacing={0.5}>
         <Card variant="outlined">
           <CardContent>
             <SettingsList

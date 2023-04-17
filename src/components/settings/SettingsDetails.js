@@ -37,25 +37,22 @@ export default function SettingsDetails(props) {
         alertOptions={alertOptions}
         open={setAlertOpen}
       />
-      <Dialog open={open} onClose={() => setOpen(false)} width="400px">
-        <DialogTitle id="dialog-title">
-          {singleSetting?.SettingName}
-        </DialogTitle>
+      <Dialog open={open} onClose={() => setOpen(false)}>
+        <DialogTitle id="dialog-title">{singleSetting?.name}</DialogTitle>
         <DialogContent>
-          <DialogActions
-            sx={{ justifyContent: "space-evenly", padding: "16px" }}
-          />
-          <DeleteSetting
-            singleSetting={singleSetting}
-            getAllSettings={getAllSettings}
-            incrementDataModifiedCounter={incrementDataModifiedCounter}
-            setOpen={setOpen}
-          />
-          <EditSettingContainer
-            singleSetting={singleSetting}
-            getAllSettings={getAllSettings}
-            setSingleSetting={setSingleSetting}
-          />
+          <DialogActions>
+            <DeleteSetting
+              singleSetting={singleSetting}
+              getAllSettings={getAllSettings}
+              incrementDataModifiedCounter={incrementDataModifiedCounter}
+              setOpen={setOpen}
+            />
+            <EditSettingContainer
+              singleSetting={singleSetting}
+              getAllSettings={getAllSettings}
+              setSingleSetting={setSingleSetting}
+            />
+          </DialogActions>
           <DialogContentText>
             <Grid
               container

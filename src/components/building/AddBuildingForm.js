@@ -8,7 +8,7 @@ export default function AddBuildingForm(props) {
   return (
     <React.Fragment>
       <form onSubmit={formik.handleSubmit}>
-        <Grid container variant="addBuildingForm" column={8}>
+        <Grid container variant="sibaGridAddForm" column={8}>
           <BuildingInputField formik={formik} />
         </Grid>
         <Grid item xs={3}>

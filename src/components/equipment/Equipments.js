@@ -38,13 +38,7 @@ export default function Equipments() {
     <div>
       <Container maxWidth="100%">
         <AddEquipment getAllEquipments={getAllEquipments} />
-        <Grid
-          container
-          rowSpacing={0.5}
-          justifyContent="space-evenly"
-          alignItems="flex-start"
-          marginTop="20px"
-        >
+        <Grid container rowSpacing={0.5}>
           <Card variant="outlined">
             <CardContent>
               <CardHeader title="Equipment" />

@@ -101,20 +101,9 @@ export default function AddAllocRound(props) {
         submit={addAllocRound}
         submitValues={formik.values}
       />
-      <Card
-        variant="outlined"
-        sx={{
-          width: "65%",
-          padding: 1,
-          margin: "auto",
-          marginTop: "20px",
-        }}
-      >
+      <Card variant="outlined">
         <CardContent>
-          <CardHeader
-            title="Add allocation round"
-            sx={{ marginBottom: "30px" }}
-          />
+          <CardHeader title="Add allocation round" />
           <AddAllocRoundForm
             handleChange={handleChange}
             formik={formik}

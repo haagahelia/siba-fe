@@ -25,20 +25,10 @@ export default function EditSettingForm(props) {
       <Dialog open={open}>
         <form onSubmit={formik.handleSubmit}>
           {/* formik.initialValues?.subjectName} Here ? checks if the subjectName attribute can be found in the initialValues ​​object, if not found returns null and does not crash */}
-          <DialogTitle sx={{ maxWidth: "300px" }}>
-            Edit: {formik.initialValues?.name}
-          </DialogTitle>
+          <DialogTitle>Edit: {formik.initialValues?.name}</DialogTitle>
           <DialogContent>
             <DialogContentText>
-              <Grid
-                container
-                spacing={3}
-                column={7}
-                direction="column"
-                justifyContent="center"
-                alignItems="center"
-                padding={2}
-              >
+              <Grid container variant="sibaGridEdit" spacing={3} column={7}>
                 <Grid item xs={12}>
                   <TextField
                     error={
@@ -124,9 +114,7 @@ export default function EditSettingForm(props) {
               </Grid>
             </DialogContentText>
           </DialogContent>
-          <DialogActions
-            sx={{ justifyContent: "space-evenly", padding: "16px" }}
-          >
+          <DialogActions>
             <Button
               onClick={() => {
                 setOpen(false);

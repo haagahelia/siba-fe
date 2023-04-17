@@ -47,7 +47,7 @@ export default function AllocRoundListItems(props) {
                     setOpen(true);
                   }}
                 >
-                  <Grid item md={3} xs={2} padding={2}>
+                  <Grid item md={3} xs={2}>
                     <Typography
                       variant="caption"
                       style={{ fontWeight: "bold" }}
@@ -65,7 +65,7 @@ export default function AllocRoundListItems(props) {
                       }}
                     />
                   </Grid>
-                  <Grid item md={3} xs={4} padding={2}>
+                  <Grid item md={3} xs={4}>
                     <Typography
                       variant="caption"
                       style={{ fontWeight: "bold" }}
@@ -79,7 +79,7 @@ export default function AllocRoundListItems(props) {
                       }}
                     />
                   </Grid>
-                  <Grid item md={10} xs={7} padding={5}>
+                  <Grid item md={10} xs={7}>
                     <Typography
                       variant="caption"
                       style={{ fontWeight: "bold" }}
@@ -93,7 +93,7 @@ export default function AllocRoundListItems(props) {
                       }}
                     />
                   </Grid>
-                  <Grid item md={3} xs={3} padding={3}>
+                  <Grid item md={3} xs={3}>
                     <Typography
                       variant="caption"
                       style={{ fontWeight: "bold" }}

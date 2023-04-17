@@ -8,16 +8,8 @@ export default function AddSettingForm(props) {
   return (
     <React.Fragment>
       <form onSubmit={formik.handleSubmit}>
-        <Grid
-          container
-          rowSpacing={1}
-          columnSpacing={1}
-          column={8}
-          justifyContent="space-evenly"
-          alignItems="center"
-          padding={1}
-        >
-          <Grid item xs={12} sm={6} md={3}>
+        <Grid container variant="sibaGridAddForm" column={8}>
+          <Grid item xs={12} sm={6} md={2}>
             <TextField
               error={formik.touched.name && formik.errors.name ? true : false}
               name="name"
@@ -33,7 +25,7 @@ export default function AddSettingForm(props) {
               }
             />
           </Grid>
-          <Grid item xs={12} sm={6} md={3}>
+          <Grid item xs={12} sm={6} md={2}>
             <TextField
               error={
                 formik.touched.description && formik.errors.description
@@ -53,7 +45,7 @@ export default function AddSettingForm(props) {
               }
             />
           </Grid>
-          <Grid item xs={12} sm={6} md={3}>
+          <Grid item xs={12} sm={6} md={2}>
             <TextField
               error={
                 formik.touched.numberValue && formik.errors.numberValue
@@ -73,7 +65,7 @@ export default function AddSettingForm(props) {
               }
             />
           </Grid>
-          <Grid item xs={12} sm={6} md={3}>
+          <Grid item xs={12} sm={6} md={2}>
             <TextField
               error={
                 formik.touched.textValue && formik.errors.textValue
