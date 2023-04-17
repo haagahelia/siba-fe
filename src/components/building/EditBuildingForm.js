@@ -29,7 +29,7 @@ export default function EditBuildingForm(props) {
           <DialogContent>
             <Grid
               container
-              variant="editBuildingForm"
+              variant="sibaGridEdit"
               direction="column"
               spacing={3}
               column={7}

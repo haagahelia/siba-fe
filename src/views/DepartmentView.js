@@ -51,13 +51,7 @@ export default function DepartmentView() {
         getAllDepartments={getAllDepartments}
       />
       <Container maxWidth="100%">
-        <Grid
-          container
-          rowSpacing={0.5}
-          justifyContent="space-evenly"
-          alignItems="flex-start"
-          marginTop="20px"
-        >
+        <Grid container rowSpacing={0.5}>
           <Card variant="outlined">
             <CardContent>
               <CardHeader title="Department" />
@@ -71,7 +65,7 @@ export default function DepartmentView() {
                         setOpen(true);
                       }}
                     >
-                      <Grid item md={3} xs={3} padding={3}>
+                      <Grid item md={3} xs={3}>
                         <Typography
                           variant="caption"
                           style={{ fontWeight: "bold" }}
@@ -85,7 +79,7 @@ export default function DepartmentView() {
                           }}
                         />
                       </Grid>
-                      <Grid item md={3} xs={3} padding={3}>
+                      <Grid item md={3} xs={3}>
                         <Typography
                           variant="caption"
                           style={{ fontWeight: "bold" }}
@@ -99,7 +93,7 @@ export default function DepartmentView() {
                           }}
                         />
                       </Grid>
-                      <Grid item md={1} xs={1} padding={2}>
+                      <Grid item md={1} xs={1}>
                         <Typography
                           variant="caption"
                           style={{ fontWeight: "bold" }}
