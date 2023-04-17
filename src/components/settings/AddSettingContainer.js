@@ -96,17 +96,9 @@ export default function AddSettingContainer(props) {
         submit={addSetting}
         submitValues={formik.values}
       />
-      <Card
-        variant="outlined"
-        sx={{
-          width: "65%",
-          padding: 1,
-          margin: "auto",
-          marginTop: "20px",
-        }}
-      >
+      <Card variant="outlined">
         <CardContent>
-          <CardHeader title="Add Setting" sx={{ marginBottom: "30px" }} />
+          <CardHeader title="Add Setting" />
           <AddSettingForm
             formik={formik}
             submitValues={formik.values}
