@@ -372,9 +372,40 @@ const theme = createTheme({
     MuiGrid: {
       styleOverrides: {
         root: {
+          justifyContent: "space-evenly",
+          alignItems: "flex-start",
           marginTop: 20,
+          padding: 2,
         },
       },
+      variants: [
+        {
+          props: { variant: "addBuildingForm" },
+          style: {
+            columnGap: 8,
+            rowGap: 8,
+            padding: 8,
+            alignItems: "center",
+            justifyContent: "space-evenly",
+          },
+        },
+        {
+          props: { variant: "buildingDisplay" },
+          style: {
+            justifyContent: "flex-start",
+            alignItems: "flex-start",
+            padding: 16,
+          },
+        },
+        {
+          props: { variant: "editBuildingForm" },
+          style: {
+            justifyContent: "center",
+            alignItems: "center",
+            padding: 16,
+          },
+        },
+      ],
     },
   },
 });
