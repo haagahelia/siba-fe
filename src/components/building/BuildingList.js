@@ -57,12 +57,7 @@ export default function BuildingList() {
           setSingleBuilding={setSingleBuilding}
           getAllBuildings={getAllBuildings}
         />
-        <Grid
-          container
-          rowSpacing={1}
-          justifyContent="space-evenly"
-          alignItems="flex-start"
-        >
+        <Grid container rowSpacing={1}>
           <Card variant="outlined">
             <CardContent>
               <CardHeader title="Buildings" />

@@ -8,18 +8,10 @@ export default function AddBuildingForm(props) {
   return (
     <React.Fragment>
       <form onSubmit={formik.handleSubmit}>
-        <Grid
-          container
-          rowSpacing={1}
-          columnSpacing={1}
-          column={8}
-          justifyContent="space-evenly"
-          alignItems="center"
-          padding={1}
-        >
+        <Grid container variant="addBuildingForm" column={8}>
           <BuildingInputField formik={formik} />
         </Grid>
-        <Grid item xs={3} padding={2}>
+        <Grid item xs={3}>
           <Button
             type="submit"
             variant="contained"

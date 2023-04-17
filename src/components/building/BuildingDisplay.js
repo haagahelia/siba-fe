@@ -10,13 +10,11 @@ export default function BuildingDisplay(props) {
     <React.Fragment>
       <Grid
         container
+        variant="buildingDisplay"
         spacing={1}
         direction={flexDirection}
-        justifyContent="flex-start"
-        alignItems="flex-start"
-        padding={2}
       >
-        <Grid item md={3} xs={7} padding={2}>
+        <Grid item md={3} xs={7}>
           {/* <Typography variant="body" style={{ fontWeight: "bold" }}> */}
           <Typography variant="boldTitle">Name:</Typography>
           <ListItemText
@@ -26,7 +24,7 @@ export default function BuildingDisplay(props) {
             }}
           />
         </Grid>
-        <Grid item md={2} xs={3} padding={2}>
+        <Grid item md={2} xs={3}>
           <Typography variant="boldTitle">Description:</Typography>
           <ListItemText
             primary={singleBuilding.description}

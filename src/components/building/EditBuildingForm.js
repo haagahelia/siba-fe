@@ -29,12 +29,10 @@ export default function EditBuildingForm(props) {
           <DialogContent>
             <Grid
               container
+              variant="editBuildingForm"
+              direction="column"
               spacing={3}
               column={7}
-              direction="column"
-              justifyContent="center"
-              alignItems="center"
-              padding={2}
             >
               <BuildingInputField formik={formik} />
             </Grid>
