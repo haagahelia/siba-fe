@@ -387,12 +387,12 @@ const theme = createTheme({
           justifyContent: "space-evenly",
           alignItems: "flex-start",
           marginTop: 20,
-          padding: 16,
+          padding: 24,
         },
       },
       variants: [
         {
-          props: { variant: "addBuildingForm" },
+          props: { variant: "sibaGridAddForm" },
           style: {
             columnGap: 8,
             rowGap: 8,

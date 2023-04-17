@@ -81,19 +81,18 @@ export default function AllocRoundDetails(props) {
       <Dialog open={open} onClose={handleClose} width="400px">
         <DialogTitle id="dialog-title">{singleAllocRound?.name}</DialogTitle>
         <DialogContent>
-          <DialogActions
-            sx={{ justifyContent: "space-evenly", padding: "16px" }}
-          />
-          <EditAllocRound
-            singleAllocRound={singleAllocRound}
-            getAllAllocRounds={getAllAllocRounds}
-            setSingleAllocRound={setSingleAllocRound}
-          />
-          <DeleteAllocRound
-            singleAllocRound={singleAllocRound}
-            getAllAllocRounds={getAllAllocRounds}
-            setOpen={setOpen}
-          />
+          <DialogActions>
+            <EditAllocRound
+              singleAllocRound={singleAllocRound}
+              getAllAllocRounds={getAllAllocRounds}
+              setSingleAllocRound={setSingleAllocRound}
+            />
+            <DeleteAllocRound
+              singleAllocRound={singleAllocRound}
+              getAllAllocRounds={getAllAllocRounds}
+              setOpen={setOpen}
+            />
+          </DialogActions>
           <Grid
             container
             spacing={1}
