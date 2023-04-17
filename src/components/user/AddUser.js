@@ -12,15 +12,6 @@ export default function AddUser() {
     isStatist: "",
   });
 
-  const [isAdmin, setIsAdmin] = useState("");
-
-  useEffect(() => {
-    const isAdminCheck = localStorage.getItem("isAdmin");
-    setIsAdmin(isAdminCheck);
-  }, []);
-
-  console.log(isAdmin);
-
   const registerUser = async () => {
     const hashedPassword = bcrypt.hashSync(registerForm.password, 10);
     let success = await dao.postNewUser({
@@ -42,8 +33,9 @@ export default function AddUser() {
   };
 
   const test = () => {
-    const test = localStorage.getItem("sessionToken");
-    console.log(test);
+    for (let key in localStorage) {
+      console.log(`${key}: ${localStorage.getItem(key)}`);
+    }
   };
 
   return (
