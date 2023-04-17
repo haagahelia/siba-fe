@@ -1,5 +1,5 @@
 import { TextField, Card, CardContent, Grid, Button } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import dao from "../../ajax/dao";
 import bcrypt from "bcryptjs";
 
@@ -8,7 +8,18 @@ export default function AddUser() {
     email: "",
     password: "",
     isAdmin: "",
+    isPlanner: "",
+    isStatist: "",
   });
+
+  const [isAdmin, setIsAdmin] = useState("");
+
+  useEffect(() => {
+    const isAdminCheck = localStorage.getItem("isAdmin");
+    setIsAdmin(isAdminCheck);
+  }, []);
+
+  console.log(isAdmin);
 
   const registerUser = async () => {
     const hashedPassword = bcrypt.hashSync(registerForm.password, 10);
@@ -23,8 +34,16 @@ export default function AddUser() {
         email: "",
         password: "",
         isAdmin: "",
+        email: "",
+        isPlanner: "",
+        isStatist: "",
       });
     }
+  };
+
+  const test = () => {
+    const test = localStorage.getItem("sessionToken");
+    console.log(test);
   };
 
   return (
@@ -73,7 +92,34 @@ export default function AddUser() {
             />
           </Grid>
           <Grid>
+            <TextField
+              value={registerForm.isPlanner}
+              onChange={(event) =>
+                setRegisterForm({
+                  ...registerForm,
+                  isPlanner: event.target.value,
+                })
+              }
+              placeholder="isPlanner"
+            />
+          </Grid>
+          <Grid>
+            <TextField
+              value={registerForm.isStatist}
+              onChange={(event) =>
+                setRegisterForm({
+                  ...registerForm,
+                  isStatist: event.target.value,
+                })
+              }
+              placeholder="isStatist"
+            />
+          </Grid>
+          <Grid>
             <Button onClick={registerUser}>Register</Button>
+          </Grid>
+          <Grid>
+            <Button onClick={test}>Test</Button>
           </Grid>
         </CardContent>
       </Card>

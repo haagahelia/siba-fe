@@ -19,8 +19,14 @@ export default function LoginView() {
       console.log("error");
     } else {
       appContext.userEmail = data[0].email;
+      localStorage.setItem("sessionToken", data[0].token);
+      localStorage.setItem("isAdmin", data[0].isAdmin);
       console.log(`success: ${data[0].token}`);
     }
+  };
+
+  const logOut = () => {
+    localStorage.clear();
   };
 
   return (
@@ -59,6 +65,9 @@ export default function LoginView() {
           </Grid>
           <Grid>
             <Button onClick={loginUser}>Login</Button>
+          </Grid>
+          <Grid>
+            <Button onClick={logOut}>Log out</Button>
           </Grid>
         </CardContent>
       </Card>
