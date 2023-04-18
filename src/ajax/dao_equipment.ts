@@ -2,8 +2,12 @@ import { Response, Equipment } from "../types";
 const baseUrl = process.env.REACT_APP_BE_SERVER_BASE_URL;
 
 export const fetchEquipmentData = async (): Promise<Response<Equipment>> => {
+  const headers = {
+    Authorization: `Bearer ${localStorage.getItem("sessionToken")}`,
+  };
   const request = new Request(`${baseUrl}/equipment/`, {
     method: "GET",
+    headers: headers,
   });
   const response = await fetch(request);
   const equipments: Equipment[] = await response.json();

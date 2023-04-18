@@ -32,12 +32,6 @@ export default function AddUser() {
     }
   };
 
-  const test = () => {
-    for (let key in localStorage) {
-      console.log(`${key}: ${localStorage.getItem(key)}`);
-    }
-  };
-
   return (
     <>
       <Card
@@ -109,9 +103,6 @@ export default function AddUser() {
           </Grid>
           <Grid>
             <Button onClick={registerUser}>Register</Button>
-          </Grid>
-          <Grid>
-            <Button onClick={test}>Test</Button>
           </Grid>
         </CardContent>
       </Card>

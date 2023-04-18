@@ -1,9 +1,8 @@
 import React from "react";
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { TextField, Card, CardContent, Grid, Button } from "@mui/material";
 import dao from "../ajax/dao";
 import { AppContext } from "../AppContext";
-import jwtDecode from "jwt-decode";
 
 export default function LoginView() {
   const [loginForm, setLoginForm] = useState({
@@ -19,6 +18,7 @@ export default function LoginView() {
       console.log("error");
     } else {
       appContext.userEmail = data[0].email;
+      localStorage.setItem("email", data[0].email);
       localStorage.setItem("sessionToken", data[0].token);
       localStorage.setItem("isAdmin", data[0].isAdmin);
       localStorage.setItem("isPlanner", data[0].isPlanner);
@@ -28,8 +28,6 @@ export default function LoginView() {
 
   const logOut = () => {
     localStorage.clear();
-    //const testing = jwtDecode(localStorage.getItem("sessionToken"))
-    //console.log(testing)
   };
 
   return (
