@@ -29,6 +29,10 @@ function NavBar() {
   const [click, setClick] = useState(false);
 
   const appContext = useContext(AppContext);
+  const [loggedIn, setLoggedIn] = useState(localStorage.getItem("email"));
+  const [adminLoggedIn, setAdminLoggedIn] = useState(
+    localStorage.getItem("isAdmin"),
+  );
 
   const handleClick = () => setClick(!click);
   return (
@@ -41,11 +45,8 @@ function NavBar() {
             <i className="fas fa-code" />
           </NavLink>
 
-          <Typography>
-            U:
-            {typeof appContext.userEmail === "string"
-              ? appContext.userEmail.substring(0, 7)
-              : "Not logged in yet"}
+          <Typography style={{ color: "white" }}>
+            Logged in as: {loggedIn}
           </Typography>
 
           <ul className={click ? "nav-menu active" : "nav-menu"}>
@@ -60,17 +61,19 @@ function NavBar() {
                 Login
               </NavLink>
             </li>
-            <li className="nav-item">
-              <NavLink
-                to="/register"
-                end
-                activeclassname="active"
-                className="nav-links"
-                onClick={handleClick}
-              >
-                Register
-              </NavLink>
-            </li>
+            {adminLoggedIn === "1" && (
+              <li className="nav-item">
+                <NavLink
+                  to="/register"
+                  end
+                  activeclassname="active"
+                  className="nav-links"
+                  onClick={handleClick}
+                >
+                  Register
+                </NavLink>
+              </li>
+            )}
             <li className="nav-item">
               <NavLink
                 to="/"
