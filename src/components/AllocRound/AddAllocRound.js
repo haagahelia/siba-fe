@@ -3,7 +3,10 @@ import { CardHeader, Card, CardContent } from "@mui/material";
 import AlertBox from "../common/AlertBox";
 import { useFormik } from "formik";
 import ConfirmationDialog from "../common/ConfirmationDialog";
-import { capitalizeFirstLetter } from "../../validation/ValidateAddAllocRound";
+import {
+  capitalizeFirstLetter,
+  validate,
+} from "../../validation/ValidateAddEditAllocRound";
 import dao from "../../ajax/dao";
 import AddAllocRoundForm from "./AddAllocRoundForm";
 
@@ -40,6 +43,7 @@ export default function AddAllocRound(props) {
   const formik = useFormik({
     enableReinitialize: true,
     initialValues: initialAllocRound,
+    validate,
     onSubmit: (values) => {
       setDialogOptions({
         title: `Are you sure you want to add ${values.name}?`,

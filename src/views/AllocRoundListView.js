@@ -16,6 +16,7 @@ import { useTheme } from "@mui/material/styles";
 export default function AllocRoundView() {
   const [paginateAllocRounds, setpaginateAllocRounds] = useState([]);
   const [allAllocRoundsList, setallAllocRoundsList] = useState([]);
+  const [dataModifiedCounter, setDataModifiedCounter] = useState(0);
   //const [allocRoundId, setAllocRoundId] = useState("00000");
   const [alertOpen, setAlertOpen] = useState(false);
   const [alertOptions, setAlertOptions] = useState({
@@ -40,9 +41,18 @@ export default function AllocRoundView() {
     }
   };
 
+  const incrementDataModifiedCounter = () => {
+    let newValue = dataModifiedCounter + 1;
+    setDataModifiedCounter(newValue);
+  };
+
   useEffect(() => {
     getAllAllocRounds();
   }, []);
+
+  useEffect(() => {
+    getAllAllocRounds();
+  }, [dataModifiedCounter]);
 
   useEffect(() => {
     setpaginateAllocRounds(allAllocRoundsList.slice(0, 15));
@@ -76,6 +86,7 @@ export default function AllocRoundView() {
                 getAllAllocRounds={getAllAllocRounds}
                 allAllocRoundsList={allAllocRoundsList}
                 paginateAllocRounds={paginateAllocRounds}
+                incrementDataModifiedCounter={incrementDataModifiedCounter}
               />
             </CardContent>
           </Card>

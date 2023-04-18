@@ -24,6 +24,7 @@ export default function AllocRoundDetails(props) {
     getAllAllocRounds,
     setAllocRoundId,
     setSingleAllocRound,
+    incrementDataModifiedCounter,
   } = props;
   const [alertOpen, setAlertOpen] = useState(false);
   const [alertOptions, setAlertOptions] = useState({
@@ -86,10 +87,12 @@ export default function AllocRoundDetails(props) {
               singleAllocRound={singleAllocRound}
               getAllAllocRounds={getAllAllocRounds}
               setSingleAllocRound={setSingleAllocRound}
+              incrementDataModifiedCounter={incrementDataModifiedCounter}
             />
             <DeleteAllocRound
               singleAllocRound={singleAllocRound}
               getAllAllocRounds={getAllAllocRounds}
+              incrementDataModifiedCounter={incrementDataModifiedCounter}
               setOpen={setOpen}
             />
           </DialogActions>

@@ -6,7 +6,12 @@ import ConfirmationDialog from "../common/ConfirmationDialog";
 import { useTheme } from "@mui/material/styles";
 
 export default function DeleteAllocRound(props) {
-  const { singleAllocRound, getAllAllocRounds, setOpen } = props;
+  const {
+    singleAllocRound,
+    getAllAllocRounds,
+    incrementDataModifiedCounter,
+    setOpen,
+  } = props;
   const [alertOpen, setAlertOpen] = useState(false);
   const [alertOptions, setAlertOptions] = useState({
     message: "This is an error alert — check it out!",
@@ -37,8 +42,8 @@ export default function DeleteAllocRound(props) {
     });
     setAlertOpen(true);
     setOpen(false);
-
-    getAllAllocRounds();
+    incrementDataModifiedCounter();
+    //getAllAllocRounds();
   };
   const theme = useTheme();
 

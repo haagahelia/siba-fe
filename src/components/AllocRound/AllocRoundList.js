@@ -16,6 +16,7 @@ export default function AllocRoundListItems(props) {
     getAllocRounds,
     /*setAllocRoundId,*/
     /* getAllAllocRounds, */
+    incrementDataModifiedCounter,
   } = props;
   const [singleAllocRound, setSingleAllocRound] = useState(null);
   const [open, setOpen] = useState(false);
@@ -33,6 +34,7 @@ export default function AllocRoundListItems(props) {
         setSingleAllocRound={setSingleAllocRound}
         //setAllocRoundId={setAllocRoundId}
         getAllocRounds={getAllocRounds}
+        incrementDataModifiedCounter={incrementDataModifiedCounter}
       />
       <Box>
         <nav>

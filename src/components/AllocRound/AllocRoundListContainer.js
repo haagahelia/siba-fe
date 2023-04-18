@@ -10,6 +10,7 @@ export default function AllocRoundListContainer(props) {
     allAllocRoundsList,
     paginateAllocRounds,
     setAllocRoundId,
+    incrementDataModifiedCounter,
   } = props;
   return (
     <div>
@@ -21,6 +22,7 @@ export default function AllocRoundListContainer(props) {
               allAllocRoundsList={allAllocRoundsList}
               paginateAllocRounds={paginateAllocRounds}
               setAllocRoundId={setAllocRoundId}
+              incrementDataModifiedCounter={incrementDataModifiedCounter}
             />
           </CardContent>
         </Card>
