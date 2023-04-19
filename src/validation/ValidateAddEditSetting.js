@@ -38,7 +38,7 @@ export async function validate(values) {
   }
 
   if (!values.numberValue) {
-    errors.priority = "Required field";
+    errors.numberValue = "Required field";
   } else if (values.numberValue < 0 || values.numberValue > 11) {
     errors.numberValue = "The numberValue must be between 0 and 11 points";
   } else if (!regNumberValue.test(values.numberValue)) {
