@@ -1,14 +1,22 @@
 import React, { useState } from "react";
 import { useFormik } from "formik";
 import ConfirmationDialog from "../common/ConfirmationDialog";
-import { capitalizeFirstLetter } from "../../validation/ValidateEditAllocRound";
+import {
+  capitalizeFirstLetter,
+  validate,
+} from "../../validation/ValidateAddEditAllocRound";
 import AlertBox from "../common/AlertBox";
 import dao from "../../ajax/dao";
 import EditAllocRoundForm from "./EditAllocRoundForm";
 
 export default function EditAllocRound(props) {
   // Whenever the editAllocRound changes in the AllocRoundList.js file, that information comes here as singleAllocRound
-  const { singleAllocRound, getAllAllocRounds, setSingleAllocRound } = props;
+  const {
+    singleAllocRound,
+    getAllAllocRounds,
+    incrementDataModifiedCounter,
+    setSingleAllocRound,
+  } = props;
   const [alertOpen, setAlertOpen] = useState(false);
   const [alertOptions, setAlertOptions] = useState({
     title: "This is title",
@@ -25,6 +33,7 @@ export default function EditAllocRound(props) {
     // enableReinitialize checks if Formik needs to reset the form if the initial values ​​change
     enableReinitialize: true,
     initialValues: singleAllocRound,
+    validate,
     onSubmit: (values) => {
       setDialogOptions({
         title: `Are you sure you want to edit ${values.name}?`,
@@ -60,7 +69,8 @@ export default function EditAllocRound(props) {
     });
     setAlertOpen(true);
     setSingleAllocRound(formik.values);
-    getAllAllocRounds();
+    // getAllAllocRounds();
+    incrementDataModifiedCounter();
   }
 
   return (

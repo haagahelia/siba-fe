@@ -34,7 +34,7 @@ export const deleteSingleAllocRound = async (id: number): Promise<boolean> => {
   const response = await fetch(request);
   const data = await response.json();
 
-  return data?.affectedRows === 1;
+  return data?.returnedNumberValue === 1;
 };
 
 export const editAllocRound = async (
