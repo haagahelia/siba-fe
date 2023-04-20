@@ -53,15 +53,7 @@ export default function EditSubEquipForm(props) {
           <DialogTitle>Edit: {formik.initialValues?.name}</DialogTitle>
           <DialogContent>
             <DialogContentText>
-              <Grid
-                container
-                spacing={3}
-                column={3}
-                direction="column"
-                justifyContent="flex-start"
-                alignItems="flex-start"
-                padding={2}
-              >
+              <Grid container variant="sibaGridEdit" spacing={3} column={3}>
                 <Grid item xs={12}>
                   <Typography sx={{ marginBottom: 2 }}>
                     Default value for priority: {equipPriority}

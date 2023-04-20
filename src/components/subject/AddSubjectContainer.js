@@ -172,17 +172,9 @@ export default function AddSubjectContainer(props) {
         submit={addSubject}
         submitValues={formik.values}
       />
-      <Card
-        variant="outlined"
-        sx={{
-          width: "65%",
-          padding: 1,
-          margin: "auto",
-          marginTop: "20px",
-        }}
-      >
+      <Card variant="outlined">
         <CardContent>
-          <CardHeader title="Add lesson" sx={{ marginBottom: "30px" }} />
+          <CardHeader title="Add lesson" />
           <AddSubjectForm
             handleChange={handleChange}
             programSelectList={programSelectList}

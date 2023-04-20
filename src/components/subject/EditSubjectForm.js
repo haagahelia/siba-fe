@@ -33,15 +33,7 @@ export default function EditSubjectForm(props) {
           </DialogTitle>
           <DialogContent>
             <DialogContentText>
-              <Grid
-                container
-                spacing={3}
-                column={7}
-                direction="column"
-                justifyContent="center"
-                alignItems="center"
-                padding={2}
-              >
+              <Grid container variant="sibaGridEdit" spacing={3} column={7}>
                 <Grid item xs={12}>
                   <TextField
                     error={
@@ -160,7 +152,7 @@ export default function EditSubjectForm(props) {
                 </Grid>
 
                 <Grid item xs={12}>
-                  <FormControl sx={{ minWidth: 225 }}>
+                  <FormControl sx={{ minWidth: 200 }}>
                     <Select
                       error={
                         formik.touched.programId && formik.errors.programId
@@ -187,7 +179,7 @@ export default function EditSubjectForm(props) {
                   </FormControl>
                 </Grid>
                 <Grid item xs={12}>
-                  <FormControl sx={{ minWidth: 225 }}>
+                  <FormControl sx={{ minWidth: 200 }}>
                     <Select
                       name="spaceTypeId"
                       defaultValue={formik.initialValues?.spaceTypeId}

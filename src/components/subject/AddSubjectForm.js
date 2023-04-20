@@ -20,15 +20,7 @@ export default function AddSubjectForm(props) {
   return (
     <div>
       <form onSubmit={formik.handleSubmit}>
-        <Grid
-          container
-          rowSpacing={1}
-          columnSpacing={1}
-          column={8}
-          justifyContent="space-evenly"
-          alignItems="center"
-          padding={1}
-        >
+        <Grid container variant="sibaGridAddForm" column={8}>
           <Grid item xs={12} sm={6} md={3}>
             <TextField
               error={formik.touched.name && formik.errors.name ? true : false}
@@ -185,7 +177,7 @@ export default function AddSubjectForm(props) {
             </Typography>
           </Grid>
           <Grid item xs={12}>
-            <FormControl sx={{ maxWidth: 340, minWidth: 200 }}>
+            <FormControl sx={{ maxWidth: 340, minWidth: 270 }}>
               <InputLabel>Copy data from an existing lesson</InputLabel>
               <Select onChange={handleChange}>
                 {allSubjectsList.map((value) => {

@@ -65,9 +65,7 @@ export default function SingleSubjectDialog(props) {
           {singleSubject?.subjectName}
         </DialogTitle>
         <DialogContent>
-          <DialogActions
-            sx={{ justifyContent: "space-evenly", padding: "16px" }}
-          >
+          <DialogActions>
             <DeleteSubject
               singleSubject={singleSubject}
               getAllSubjects={getAllSubjects}
@@ -86,12 +84,10 @@ export default function SingleSubjectDialog(props) {
           <DialogContentText>
             <Grid
               container
+              variant="sibaGridSingleItemDisplay"
               spacing={1}
               column={14}
               direction="column"
-              justifyContent="flex-start"
-              alignItems="flex-start"
-              padding={2}
             >
               <Grid item s={6}>
                 <Typography variant="subtitle1">

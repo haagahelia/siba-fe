@@ -63,7 +63,7 @@ export default function SubjectListItems(props) {
                   //onMouseEnter={() => sethoverColor("#CFD6D5  ")}
                   //onMouseLeave={() => sethoverColor("#FFFFFF ")}
                 >
-                  <Grid item md={3} xs={7} padding={2}>
+                  <Grid item md={3} xs={7}>
                     <Typography
                       variant="caption"
                       style={{ fontWeight: "bold" }}
@@ -77,7 +77,7 @@ export default function SubjectListItems(props) {
                       }}
                     />
                   </Grid>
-                  <Grid item md={2} xs={3} padding={2}>
+                  <Grid item md={2} xs={3}>
                     <Typography
                       variant="caption"
                       style={{ fontWeight: "bold" }}
@@ -91,7 +91,7 @@ export default function SubjectListItems(props) {
                       }}
                     />
                   </Grid>
-                  <Grid item md={2} xs={2} padding={2}>
+                  <Grid item md={2} xs={2}>
                     <Typography
                       variant="caption"
                       style={{ fontWeight: "bold" }}
@@ -105,7 +105,7 @@ export default function SubjectListItems(props) {
                       }}
                     />
                   </Grid>
-                  <Grid item md={2} xs={2} padding={3}>
+                  <Grid item md={2} xs={2}>
                     <Typography
                       variant="caption"
                       style={{ fontWeight: "bold" }}
@@ -119,7 +119,7 @@ export default function SubjectListItems(props) {
                       }}
                     />
                   </Grid>
-                  <Grid item md={3} xs={7} padding={2}>
+                  <Grid item md={3} xs={7}>
                     <Typography
                       variant="caption"
                       style={{ fontWeight: "bold" }}
@@ -133,7 +133,7 @@ export default function SubjectListItems(props) {
                       }}
                     />
                   </Grid>
-                  <Grid item md={3} xs={7} padding={2}>
+                  <Grid item md={3} xs={7}>
                     <Typography
                       variant="caption"
                       style={{ fontWeight: "bold" }}

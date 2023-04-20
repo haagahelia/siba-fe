@@ -10,7 +10,7 @@ export default function BuildingDisplay(props) {
     <React.Fragment>
       <Grid
         container
-        variant="buildingDisplay"
+        variant="sibaGridSingleItemDisplay"
         spacing={1}
         direction={flexDirection}
       >

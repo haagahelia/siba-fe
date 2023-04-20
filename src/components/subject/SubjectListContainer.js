@@ -15,13 +15,7 @@ export default function SubjectListContainer(props) {
   return (
     <div>
       <SingleSubjectDialog getAllSubjects={getAllSubjects} />
-      <Grid
-        container
-        rowSpacing={1}
-        justifyContent="space-evenly"
-        alignItems="flex-start"
-        marginTop="20px"
-      >
+      <Grid container rowSpacing={1}>
         <Card variant="outlined">
           <CardContent>
             <SubjectList

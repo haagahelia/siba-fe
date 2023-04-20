@@ -37,11 +37,9 @@ export default function SubjectEquipmentList(props) {
                 </Grid>
                 <Grid
                   container
+                  variant="sibaGridSingleItemDisplay"
                   column={4}
                   direction="column"
-                  justifyContent="flex-start"
-                  alignItems="flex-start"
-                  padding={0.2}
                 >
                   <Grid item xs={6}>
                     <ListItemText>
