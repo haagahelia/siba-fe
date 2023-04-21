@@ -4,7 +4,8 @@ import { TextField, Card, CardContent, Grid, Button } from "@mui/material";
 import dao from "../ajax/dao";
 import { AppContext } from "../AppContext";
 
-export default function LoginView() {
+export default function LoginView(props) {
+  const { setLoggedIn } = props;
   const [loginForm, setLoginForm] = useState({
     email: "",
     password: "",
@@ -15,7 +16,7 @@ export default function LoginView() {
   const loginUser = async () => {
     const { success, data } = await dao.getUserByEmail(loginForm);
     if (!success) {
-      console.log("error");
+      console.log(data);
     } else {
       appContext.userEmail = data[0].email;
       localStorage.setItem("email", data[0].email);
@@ -23,11 +24,18 @@ export default function LoginView() {
       localStorage.setItem("isAdmin", data[0].isAdmin);
       localStorage.setItem("isPlanner", data[0].isPlanner);
       localStorage.setItem("isStatist", data[0].isStatist);
+      setLoggedIn(data[0].email);
+      window.alert("Welcome!");
+      setLoginForm({
+        email: "",
+        password: "",
+      });
     }
   };
 
   const logOut = () => {
     localStorage.clear();
+    setLoggedIn("");
   };
 
   return (

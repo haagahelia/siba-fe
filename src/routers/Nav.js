@@ -174,7 +174,10 @@ function NavBar() {
       </nav>
 
       <Routes>
-        <Route path="/login" element={<LoginView />} />
+        <Route
+          path="/login"
+          element={<LoginView setLoggedIn={setLoggedIn} />}
+        />
         <Route path="/register" element={<RegisterView />} />
         <Route path="/" element={<SubjectView />} />
         <Route path="/subject" element={<SubjectView />} />
