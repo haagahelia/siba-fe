@@ -29,6 +29,7 @@ export const getUserByEmail = async (
     .then((passwordCheck) => {
       if (!passwordCheck) {
         console.log("error");
+        return;
       } else {
         console.log("success");
       }
