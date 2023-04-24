@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import {
   NavLink,
   BrowserRouter as Router,
@@ -24,15 +24,14 @@ import RegisterView from "../views/RegisterView";
 import LoginView from "../views/LoginView";
 import { Typography } from "@mui/material";
 import { AppContext } from "../AppContext";
+import { RoleLoggedIn } from "../customhooks/RoleLoggedIn";
 
 function NavBar() {
   const [click, setClick] = useState(false);
 
   const appContext = useContext(AppContext);
   const [loggedIn, setLoggedIn] = useState(localStorage.getItem("email"));
-  const [adminLoggedIn, setAdminLoggedIn] = useState(
-    localStorage.getItem("isAdmin"),
-  );
+  const { roles, setRoles } = RoleLoggedIn();
 
   const handleClick = () => setClick(!click);
   return (
@@ -61,7 +60,7 @@ function NavBar() {
                 Login
               </NavLink>
             </li>
-            {adminLoggedIn === "1" && (
+            {roles.admin === "1" && (
               <li className="nav-item">
                 <NavLink
                   to="/register"
