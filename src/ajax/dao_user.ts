@@ -19,23 +19,16 @@ export const postNewUser = async (newUser: User): Promise<boolean> => {
 export const getUserByEmail = async (
   user: User,
 ): Promise<Response<UserLoggedIn>> => {
-  const request = new Request(`${baseUrl}/user/${user.email}`, {
-    method: "GET",
+  const request = new Request(`${baseUrl}/user/login`, {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(user),
   });
   const response = await fetch(request);
   const users: UserLoggedIn[] = await response.json();
-  bcrypt
-    .compare(user.password, users[0].password)
-    .then((passwordCheck) => {
-      if (!passwordCheck) {
-        console.log("error");
-        return;
-      } else {
-        console.log("success");
-      }
-    })
-    .catch((error) => {
-      console.log(error);
-    });
+
   return { success: response.ok, data: users };
 };
