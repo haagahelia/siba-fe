@@ -5,10 +5,17 @@ import {
   Routes,
   Route,
 } from "react-router-dom";
-import "../styles/NavBar.css";
 // import logo from "../styles/SIBA_LOGO_WHITE.png";
+import AppBar from "@mui/material/AppBar";
+import Box from "@mui/material/Box";
+import Toolbar from "@mui/material/Toolbar";
+import IconButton from "@mui/material/IconButton";
+import Typography from "@mui/material/Typography";
+import Menu from "@mui/material/Menu";
+import Container from "@mui/material/Container";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
 import MenuIcon from "@mui/icons-material/Menu";
-
 import Settings from "../views/Settings";
 import RoomResultView from "../views/RoomResultView";
 import ProgramResultView from "../views/ProgramResultView";
@@ -22,156 +29,125 @@ import BuildingView from "../views/BuildingView";
 import DepartmentView from "../views/DepartmentView";
 import RegisterView from "../views/RegisterView";
 import LoginView from "../views/LoginView";
-import { Typography } from "@mui/material";
 import { AppContext } from "../AppContext";
 import { RoleLoggedIn } from "../customhooks/RoleLoggedIn";
 
+const sibaPages = [
+  { name: "Register", href: "/register" },
+  { name: "Login", href: "/login" },
+  { name: "Front page", href: "/" },
+  { name: "Lessons", href: "/subject" },
+  { name: "Room results", href: "/roomresult" },
+  { name: "Program results", href: "/programresult" },
+  { name: "Settings", href: "/settings" },
+  { name: "Alloc rounds", href: "allocation" },
+  { name: "Equipment", href: "equipment" },
+  { name: "Buildings", href: "building" },
+  { name: "Department", href: "department" },
+];
+
 function NavBar() {
   const [click, setClick] = useState(false);
+
+  const handleClick = () => setClick(!click);
 
   const appContext = useContext(AppContext);
   const [loggedIn, setLoggedIn] = useState(localStorage.getItem("email"));
   const { roles, setRoles } = RoleLoggedIn();
 
-  const handleClick = () => setClick(!click);
+  const [anchorElNav, setAnchorElNav] = React.useState(null);
+  const handleOpenNavMenu = (event) => {
+    setAnchorElNav(event.currentTarget);
+  };
+  const handleCloseNavMenu = () => {
+    setAnchorElNav(null);
+  };
+
+  const renderNavLinks = () => {
+    if (roles.admin === "1") {
+      return sibaPages.map((page, index) => (
+        <ListItem variant="sibaAppBarHorizontal" key={index}>
+          <NavLink
+            to={page.href}
+            end
+            activeclassname="active"
+            className="nav-links"
+            onClick={handleClick}
+          >
+            {page.name}
+          </NavLink>
+        </ListItem>
+      ));
+    } else {
+      return sibaPages.slice(1).map((page, index) => (
+        <ListItem variant="sibaAppBarHorizontal" key={index}>
+          <NavLink
+            to={page.href}
+            end
+            activeclassname="active"
+            className="nav-links"
+            onClick={handleClick}
+          >
+            <Typography variant="sibaNavLink">{page.name}</Typography>
+          </NavLink>
+        </ListItem>
+      ));
+    }
+  };
+
   return (
     <Router>
-      <nav className="navbar">
-        <div className="nav-container">
-          <NavLink to="/" className="nav-logo">
-            {/* I didn't have logos, add them to the project and it works */}
-            {/* <img src={logo} alt="Logo" /> */}
-            <i className="fas fa-code" />
-          </NavLink>
-
-          <Typography style={{ color: "white" }}>
-            Logged in as: {loggedIn}
-          </Typography>
-
-          <ul className={click ? "nav-menu active" : "nav-menu"}>
-            <li className="nav-item">
-              <NavLink
-                to="/login"
-                end
-                activeclassname="active"
-                className="nav-links"
-                onClick={handleClick}
+      <AppBar>
+        <Container maxWidth="xl">
+          <Toolbar disableGutters>
+            <Typography style={{ color: "white" }}>
+              Logged in as: {loggedIn}
+            </Typography>
+            <Box sx={{ flexGrow: 1, display: { xs: "flex", lg: "none" } }}>
+              <IconButton
+                size="large"
+                aria-label="account of current user"
+                aria-controls="menu-appbar"
+                aria-haspopup="true"
+                onClick={handleOpenNavMenu}
+                color="inherit"
               >
-                Login
-              </NavLink>
-            </li>
-            {roles.admin === "1" && (
-              <li className="nav-item">
-                <NavLink
-                  to="/register"
-                  end
-                  activeclassname="active"
-                  className="nav-links"
-                  onClick={handleClick}
-                >
-                  Register
-                </NavLink>
-              </li>
-            )}
-            <li className="nav-item">
-              <NavLink
-                to="/"
-                end
-                activeclassname="active"
-                className="nav-links"
-                onClick={handleClick}
+                <MenuIcon />
+              </IconButton>
+              <Menu
+                id="menu-appbar"
+                anchorEl={anchorElNav}
+                anchorOrigin={{
+                  vertical: "bottom",
+                  horizontal: "left",
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: "top",
+                  horizontal: "left",
+                }}
+                open={Boolean(anchorElNav)}
+                onClose={handleCloseNavMenu}
+                sx={{
+                  display: { xs: "block", lg: "none" },
+                }}
               >
-                Front page
-              </NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink
-                to="/subject"
-                activeclassname="active"
-                className="nav-links"
-                onClick={handleClick}
-              >
-                Lessons
-              </NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink
-                to="/roomresult"
-                activeclassname="active"
-                className="nav-links"
-                onClick={handleClick}
-              >
-                Room results
-              </NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink
-                to="/programresult"
-                activeclassname="active"
-                className="nav-links"
-                onClick={handleClick}
-              >
-                Program results
-              </NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink
-                to="/settings"
-                activeclassname="active"
-                className="nav-links"
-                onClick={handleClick}
-              >
-                Settings
-              </NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink
-                to="/allocation"
-                activeclassname="active"
-                className="nav-links"
-                onClick={handleClick}
-              >
-                Alloc rounds
-              </NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink
-                to="/equipment"
-                activeclassname="active"
-                className="nav-links"
-                onClick={handleClick}
-              >
-                Equipment
-              </NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink
-                to="/building"
-                activeclassname="active"
-                className="nav-links"
-                onClick={handleClick}
-              >
-                Buildings
-              </NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink
-                to="/department"
-                activeclassname="active"
-                className="nav-links"
-                onClick={handleClick}
-              >
-                Department
-              </NavLink>
-            </li>
-          </ul>
-          <div className="nav-icon" onClick={handleClick}>
-            <MenuIcon />
-            <i className={click ? "fas fa-times" : "fas fa-bars"} />
-          </div>
-        </div>
-      </nav>
-
+                <List variant="sibaAppBarVertival">
+                  <NavLink to="/" className="nav-logo">
+                    {/* I didn't have logos, add them to the project and it works */}
+                    {/* <img src={logo} alt="Logo" /> */}
+                    <i className="fas fa-code" />
+                  </NavLink>
+                  {renderNavLinks()}
+                </List>
+              </Menu>
+            </Box>
+            <Box sx={{ flexGrow: 1, display: { xs: "none", lg: "flex" } }}>
+              <List variant="sibaAppBarHorizontal">{renderNavLinks()}</List>
+            </Box>
+          </Toolbar>
+        </Container>
+      </AppBar>
       <Routes>
         <Route
           path="/login"
