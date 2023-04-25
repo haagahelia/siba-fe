@@ -24,7 +24,7 @@ const AllocRoundControlPanel = ({ incrementResetCounter }) => {
   };
 
   return (
-    <Typography color="white" component="p">
+    <Typography color="white" component="p" style={{ marginTop: 80 }}>
       Current allocation round: {appContext.allocRoundId} &nbsp; After Start and
       Reset wait for few seconds.
       <Button

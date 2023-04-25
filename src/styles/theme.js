@@ -17,9 +17,9 @@ const lightYellow = "#FFF5AB";
 const lightRed = "#FF8585";
 //yellowPalette
 const canary = "#FFFF8F";
-const paleCanary = "FFFFAA";
+const paleCanary = "#FFFFAA";
 const sahara = "#AAAA11";
-const buddhaGold = "CC9900";
+const buddhaGold = "#CC9900";
 const paleLime = "#CCFF66";
 const saffronMango = "#FFBB66";
 const tangerineYellow = "#FFCC00";
@@ -157,7 +157,7 @@ const theme = createTheme({
           borderColor: light,
           width: "75%",
           margin: "auto",
-          marginTop: "20px",
+          marginTop: "100px",
           padding: "8px",
         },
       },
@@ -238,6 +238,32 @@ const theme = createTheme({
           backgroundColor: currentPalette.backgroundDarker.default,
         },
       },
+      variants: [
+        {
+          props: { variant: "sibaAppBarHorizontal" },
+          style: {
+            display: "flex",
+            flexDirection: "row",
+            flexWrap: "nowrap",
+            alignItems: "flex-start",
+            height: "80px",
+            fontSize: "1.2rem",
+            position: "sticky",
+            top: 0,
+            zIndex: 20,
+            marginRight: "2rem",
+          },
+        },
+        {
+          props: { variant: "sibaAppBarVertival" },
+          style: {
+            display: "flex",
+            flexDirection: "column",
+            opacity: 1,
+            transition: "all 0.5s ease",
+          },
+        },
+      ],
     },
     MuiListItem: {
       styleOverrides: {
@@ -247,6 +273,43 @@ const theme = createTheme({
           border: "1px solid #F6E9E9",
         },
       },
+      variants: [
+        {
+          props: { variant: "sibaAppBarHorizontal" },
+          style: {
+            borderColor: currentPalette.backgroundDarker.default,
+            fontSize: "1.2rem",
+            display: "contents",
+            "& a": {
+              padding: "0.5rem 1rem",
+              borderBottom: "3px solid transparent",
+              marginRight: "0.2rem",
+              color: "#FFFFFF",
+              textDecoration: "none",
+              fontFamily: "Roboto, Helvetica, Aria, sans-serif",
+              fontWeight: 700,
+              padding: "0.5rem 1rem",
+              height: "100%",
+              borderBottom: "3px solid transparent",
+            },
+            "&:after": {
+              content: '""',
+              display: "block",
+              height: "3px",
+              width: 0,
+              background: "transparent",
+              transition: "width 0.7s ease",
+              backgroundColor: "0.5s ease",
+            },
+            "&:hover a span": {
+              borderBottom: "2px solid #E16428",
+            },
+            "& a.nav-links.active span": {
+              color: "#E16428",
+            },
+          },
+        },
+      ],
     },
     MuiDialogContent: {
       variants: [
@@ -384,6 +447,17 @@ const theme = createTheme({
             letterSpacing: "0.00938em",
           },
         },
+        {
+          props: { variant: "sibaNavLink" },
+          style: {
+            color: "#FFFFFF",
+            textDecoration: "none",
+            fontFamily: "Roboto, Helvetica, Aria, sans-serif",
+            fontWeight: 700,
+            height: "100%",
+            borderBottom: "3px solid transparent",
+          },
+        },
       ],
     },
     MuiGrid: {
@@ -434,6 +508,19 @@ const theme = createTheme({
           },
         },
       ],
+    },
+    MuiAppBar: {
+      styleOverrides: {
+        root: {
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          width: "100%",
+          height: "80px",
+          background: currentPalette.backgroundDarker.default,
+          fontSize: "1.2rem",
+        },
+      },
     },
   },
 });
