@@ -20,7 +20,6 @@ export default function DeleteEquipment(props) {
 
   const deleteEquipment = async (value) => {
     let result = await dao.deleteSingleEquipment(value);
-    console.log(result);
     if (result === false) {
       setAlertOptions({
         severity: "error",

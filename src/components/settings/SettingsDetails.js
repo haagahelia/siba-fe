@@ -12,6 +12,7 @@ import {
 import AlertBox from "../common/AlertBox";
 import DeleteSetting from "./DeleteSetting";
 import EditSettingContainer from "./EditSettingContainer";
+import { RoleLoggedIn } from "../../customhooks/RoleLoggedIn";
 
 export default function SettingsDetails(props) {
   const {
@@ -22,6 +23,7 @@ export default function SettingsDetails(props) {
     incrementDataModifiedCounter,
     setSingleSetting,
   } = props;
+  const { roles, setRoles } = RoleLoggedIn();
 
   const [alertOpen, setAlertOpen] = useState(false);
   const [alertOptions] = useState({
@@ -40,19 +42,21 @@ export default function SettingsDetails(props) {
       <Dialog open={open} onClose={() => setOpen(false)}>
         <DialogTitle id="dialog-title">{singleSetting?.name}</DialogTitle>
         <DialogContent>
-          <DialogActions>
-            <DeleteSetting
-              singleSetting={singleSetting}
-              getAllSettings={getAllSettings}
-              incrementDataModifiedCounter={incrementDataModifiedCounter}
-              setOpen={setOpen}
-            />
-            <EditSettingContainer
-              singleSetting={singleSetting}
-              getAllSettings={getAllSettings}
-              setSingleSetting={setSingleSetting}
-            />
-          </DialogActions>
+          {roles.admin === "1" && (
+            <DialogActions>
+              <DeleteSetting
+                singleSetting={singleSetting}
+                getAllSettings={getAllSettings}
+                incrementDataModifiedCounter={incrementDataModifiedCounter}
+                setOpen={setOpen}
+              />
+              <EditSettingContainer
+                singleSetting={singleSetting}
+                getAllSettings={getAllSettings}
+                setSingleSetting={setSingleSetting}
+              />
+            </DialogActions>
+          )}
           <DialogContentText>
             <Grid
               container

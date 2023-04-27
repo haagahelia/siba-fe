@@ -1,6 +1,7 @@
 import { Dialog, DialogContent, DialogTitle } from "@mui/material";
 import DeleteDepartment from "./DeleteDeparment";
 import EditDepartment from "./EditDepartment";
+import { RoleLoggedIn } from "../../customhooks/RoleLoggedIn";
 
 export default function DepartmentDialog(props) {
   const {
@@ -10,6 +11,7 @@ export default function DepartmentDialog(props) {
     setSingleDepartment,
     getAllDepartments,
   } = props;
+  const { roles, setRoles } = RoleLoggedIn();
 
   return (
     <>
@@ -20,18 +22,20 @@ export default function DepartmentDialog(props) {
         <DialogContent>
           Description: {singleDepartment?.description}
         </DialogContent>
-        <DialogContent variant="sibaDialogContent">
-          <DeleteDepartment
-            setOpen={setOpen}
-            getAllDepartments={getAllDepartments}
-            singleDepartment={singleDepartment}
-          />
-          <EditDepartment
-            getAllDepartments={getAllDepartments}
-            singleDepartment={singleDepartment}
-            setOpen={setOpen}
-          />
-        </DialogContent>
+        {roles.admin === "1" && (
+          <DialogContent variant="sibaDialogContent">
+            <DeleteDepartment
+              setOpen={setOpen}
+              getAllDepartments={getAllDepartments}
+              singleDepartment={singleDepartment}
+            />
+            <EditDepartment
+              getAllDepartments={getAllDepartments}
+              singleDepartment={singleDepartment}
+              setOpen={setOpen}
+            />
+          </DialogContent>
+        )}
       </Dialog>
     </>
   );

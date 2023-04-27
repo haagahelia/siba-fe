@@ -5,6 +5,7 @@ import { CardHeader, Card, Container } from "@mui/material";
 import CardContent from "@mui/material/CardContent";
 import AddEquipment from "./AddEquipment";
 import EquipmentListContainer from "./EquipmentListContainer";
+import { RoleLoggedIn } from "../../customhooks/RoleLoggedIn";
 
 export default function Equipments() {
   const [equipmentList, setEquipmentList] = useState([]);
@@ -13,6 +14,7 @@ export default function Equipments() {
     severity: "error",
   });
   const [/* alertOpen ,*/ setAlertOpen] = useState(false);
+  const { roles, setRoles } = RoleLoggedIn();
 
   const getAllEquipments = async function () {
     const { success, data } = await dao.fetchEquipmentData();
@@ -37,7 +39,9 @@ export default function Equipments() {
   return (
     <div>
       <Container maxWidth="100%">
-        <AddEquipment getAllEquipments={getAllEquipments} />
+        {(roles.admin === "1" || roles.planner === "1") && (
+          <AddEquipment getAllEquipments={getAllEquipments} />
+        )}
         <Grid container rowSpacing={0.5}>
           <Card variant="outlined">
             <CardContent>
