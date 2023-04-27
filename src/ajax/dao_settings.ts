@@ -4,6 +4,9 @@ const baseUrl = process.env.REACT_APP_BE_SERVER_BASE_URL;
 export const fetchSettings = async (): Promise<Response<Settings>> => {
   const request = new Request(`${baseUrl}/setting`, {
     method: "GET",
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("sessionToken")}`,
+    },
   });
 
   const response = await fetch(request);
@@ -17,8 +20,15 @@ export const deleteSettingById = async (
 ): Promise<boolean> => {
   const request = new Request(`${baseUrl}/setting/delete/${settingId}`, {
     method: "DELETE",
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("sessionToken")}`,
+    },
   });
+
   const response = await fetch(request);
+  if (response.status === 403) {
+    return false;
+  }
   const data = await response.json();
 
   return data?.returnedNumberValue === 1;
@@ -31,12 +41,17 @@ export const editSetting = async (
   const request = new Request(`${baseUrl}/setting/updateSetting`, {
     method: "PUT",
     headers: {
+      Authorization: `Bearer ${localStorage.getItem("sessionToken")}`,
       Accept: "application/json",
       "Content-Type": "application/json",
     },
     body: JSON.stringify(editedSetting),
   });
   const response = await fetch(request);
+  if (response.status === 403) {
+    return false;
+  }
+
   const data = await response.json();
   return data.ok;
 };
@@ -48,12 +63,17 @@ export const postNewSetting = async (
   const request = new Request(`${baseUrl}/setting/postSetting`, {
     method: "POST",
     headers: {
+      Authorization: `Bearer ${localStorage.getItem("sessionToken")}`,
       Accept: "application/json",
       "Content-Type": "application/json",
     },
     body: JSON.stringify(newSetting),
   });
   const response = await fetch(request);
+  if (response.status === 403) {
+    return false;
+  }
+
   const data = await response.json();
   console.dir(`dao_se_ data:${data}`);
   return data;

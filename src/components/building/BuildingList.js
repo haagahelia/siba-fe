@@ -9,6 +9,7 @@ import AlertBox from "../common/AlertBox";
 import BuildingListItem from "./BuildingListItem";
 import AddBuildingContainer from "./AddBuildingContainer";
 import SingleBuildingDialog from "./SingleBuildingDialog";
+import { RoleLoggedIn } from "../../customhooks/RoleLoggedIn";
 
 export default function BuildingList() {
   const [allBuildingsList, setAllBuildingsList] = useState([]);
@@ -17,6 +18,7 @@ export default function BuildingList() {
     message: "This is an error alert — check it out!",
     severity: "error",
   });
+  const { roles, setRoles } = RoleLoggedIn();
 
   const [open, setOpen] = useState(false);
 
@@ -49,7 +51,9 @@ export default function BuildingList() {
         setAlertOpen={setAlertOpen}
       />
       <Container>
-        <AddBuildingContainer getAllBuildings={getAllBuildings} />
+        {(roles.admin === "1" || roles.planner === "1") && (
+          <AddBuildingContainer getAllBuildings={getAllBuildings} />
+        )}
         <SingleBuildingDialog
           open={open}
           setOpen={setOpen}

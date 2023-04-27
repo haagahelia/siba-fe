@@ -20,6 +20,7 @@ export const postNewEquipment = async (
   const request = new Request(`${baseUrl}/equipment/`, {
     method: "POST",
     headers: {
+      Authorization: `Bearer ${localStorage.getItem("sessionToken")}`,
       Accept: "application/json",
       "Content-Type": "application/json",
     },
@@ -34,9 +35,15 @@ export const deleteSingleEquipment = async (
 ): Promise<boolean> => {
   const request = new Request(`${baseUrl}/equipment/${equipmentId}`, {
     method: "DELETE",
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("sessionToken")}`,
+    },
   });
 
   const response = await fetch(request);
+  if (response.status === 403) {
+    return false;
+  }
   const data = await response.json();
 
   return data?.returnedNumberValue === 1;
@@ -48,6 +55,7 @@ export const editEquipment = async (
   const request = new Request(`${baseUrl}/equipment/updateEquip`, {
     method: "PUT",
     headers: {
+      Authorization: `Bearer ${localStorage.getItem("sessionToken")}`,
       Accept: "application/json",
       "Content-Type": "application/json",
     },

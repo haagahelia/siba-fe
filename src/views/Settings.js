@@ -5,6 +5,7 @@ import AddSettingContainer from "../components/settings/AddSettingContainer";
 import { CardHeader, Card, Container, Grid } from "@mui/material";
 import AlertBox from "../components/common/AlertBox";
 import dao from "../ajax/dao";
+import { RoleLoggedIn } from "../customhooks/RoleLoggedIn";
 
 export default function Settings() {
   const [paginateSettings, setPaginateSettings] = useState([]);
@@ -15,6 +16,7 @@ export default function Settings() {
     message: "This is an error alert — check it out!",
     severity: "error",
   });
+  const { roles, setRoles } = RoleLoggedIn();
 
   const getAllSettings = async function () {
     const { success, data } = await dao.fetchSettings();
@@ -57,7 +59,9 @@ export default function Settings() {
         setAlertOpen={setAlertOpen}
       />
       <Container maxWidth="100%">
-        <AddSettingContainer getAllSettings={getAllSettings} />
+        {(roles.admin === "1" || roles.planner === "1") && (
+          <AddSettingContainer getAllSettings={getAllSettings} />
+        )}
         <Grid container rowSpacing={0.5}>
           <Card variant="outlined">
             <CardContent>

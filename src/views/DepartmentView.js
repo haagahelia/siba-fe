@@ -10,6 +10,7 @@ import CardContent from "@mui/material/CardContent";
 import DepartmentDialog from "../components/department/DepartmentDialog";
 
 import AddDepartment from "../components/department/AddDepartment";
+import { RoleLoggedIn } from "../customhooks/RoleLoggedIn";
 
 export default function DepartmentView() {
   const [DepartmentList, setDepartmentList] = useState([]);
@@ -20,6 +21,7 @@ export default function DepartmentView() {
     severity: "error",
   });
   const [alertOpen, setAlertOpen] = useState(false);
+  const { roles, setRoles } = RoleLoggedIn();
 
   const getAllDepartments = async function () {
     const { success, data } = await dao.fetchDepartmentData();
@@ -55,7 +57,9 @@ export default function DepartmentView() {
           <Card variant="outlined">
             <CardContent>
               <CardHeader title="Department" />
-              <AddDepartment getAllDepartments={getAllDepartments} />
+              {(roles.admin === "1" || roles.planner === "1") && (
+                <AddDepartment getAllDepartments={getAllDepartments} />
+              )}
               {DepartmentList.map((value) => {
                 return (
                   <List key={value.id}>

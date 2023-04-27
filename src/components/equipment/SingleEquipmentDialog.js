@@ -9,6 +9,7 @@ import {
 } from "@mui/material";
 import EditEquipment from "./EditEquipment";
 import DeleteEquipment from "./DeleteEquipment";
+import { RoleLoggedIn } from "../../customhooks/RoleLoggedIn";
 
 export default function SingleEquipmentDialog(props) {
   const {
@@ -18,25 +19,28 @@ export default function SingleEquipmentDialog(props) {
     setSingleEquipment,
     getAllEquipments,
   } = props;
+  const { roles, setRoles } = RoleLoggedIn();
 
   return (
     <>
       <Dialog open={open} onClose={() => setOpen(false)}>
         <DialogTitle id="dialog-title">Equipment Info</DialogTitle>
-        <DialogActions>
-          <EditEquipment
-            singleEquipment={singleEquipment}
-            setSingleEquipment={setSingleEquipment}
-            getAllEquipments={getAllEquipments}
-            open={open}
-            setOpen={setOpen}
-          />
-          <DeleteEquipment
-            singleEquipment={singleEquipment}
-            getAllEquipments={getAllEquipments}
-            setOpen={setOpen}
-          />
-        </DialogActions>
+        {roles.admin === "1" && (
+          <DialogActions>
+            <EditEquipment
+              singleEquipment={singleEquipment}
+              setSingleEquipment={setSingleEquipment}
+              getAllEquipments={getAllEquipments}
+              open={open}
+              setOpen={setOpen}
+            />
+            <DeleteEquipment
+              singleEquipment={singleEquipment}
+              getAllEquipments={getAllEquipments}
+              setOpen={setOpen}
+            />
+          </DialogActions>
+        )}
         <DialogContent>id: {singleEquipment?.id}</DialogContent>
         <DialogContent>Name: {singleEquipment?.name}</DialogContent>
         <DialogContent>
