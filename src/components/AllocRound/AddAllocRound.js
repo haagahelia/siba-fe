@@ -6,7 +6,7 @@ import ConfirmationDialog from "../common/ConfirmationDialog";
 import {
   capitalizeFirstLetter,
   validate,
-} from "../../validation/ValidateAddEditAllocRound";
+} from "../../validation/ValidateAddAllocRound";
 import dao from "../../ajax/dao";
 import AddAllocRoundForm from "./AddAllocRoundForm";
 

@@ -1,16 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Button } from "@mui/material";
-import dao from "../../ajax/dao";
+import { AppContext } from "../../AppContext";
 import AlertBox from "../common/AlertBox";
 import ConfirmationDialog from "../common/ConfirmationDialog";
 import { useTheme } from "@mui/material/styles";
 
-export default function DeleteAllocRound(props) {
-  const {
-    singleAllocRound,
-    //getAllAllocRounds,
-    incrementDataModifiedCounter,
-  } = props;
+export default function SelectAllocRound(props) {
+  const { singleAllocRound } = props;
   const [alertOpen, setAlertOpen] = useState(false);
   const [alertOptions, setAlertOptions] = useState({
     message: "This is an error alert — check it out!",
@@ -21,37 +17,33 @@ export default function DeleteAllocRound(props) {
     title: "this is dialog",
     content: "Something here",
   });
-  const [deleteId, setDeleteId] = useState("");
+  const appContext = useContext(AppContext);
 
-  const deleteAllocRound = async (value) => {
-    let result = await dao.deleteSingleAllocRound(value);
-    if (result === false) {
-      setAlertOptions({
-        severity: "error",
-        title: "Error",
-        message: "Something went wrong - please try again later.",
-      });
-      setAlertOpen(true);
-      return;
-    }
+  const setAllocRound = (allocRoundId) => {
+    //console.log ("allocRoundId 456: " +allocRoundId);
+    appContext.allocRoundId = allocRoundId; // Works now! Updating app context.
+    // setAllocRoundId(allocRoundId); // Notifying grangrangranparent. Updating component state
+  };
+
+  const allocationSelection = () => {
+    //call function to set alloc round here
+    setAllocRound(singleAllocRound.id);
+
     setAlertOptions({
       severity: "success",
       title: "Success!",
-      message: `${value.name} removed.`,
+      message: `Alloc round ${singleAllocRound.id} selected.`,
     });
     setAlertOpen(true);
-    incrementDataModifiedCounter();
-    // getAllAllocRounds();
   };
   const theme = useTheme();
 
-  const submitDelete = (data) => {
+  const confirmAllocationSelection = () => {
     setDialogOptions({
-      title: `Are you sure you want to delete ${data.name}?`,
-      content: `Press continue to delete ${data.name} from the listing.`,
+      title: `Are you sure you want to change to ${singleAllocRound.id}?`,
+      content: `Press continue to choose alloc round ${singleAllocRound.id} from the listing.`,
     });
     setDialogOpen(true);
-    setDeleteId(data.id);
     return;
   };
 
@@ -66,16 +58,14 @@ export default function DeleteAllocRound(props) {
         dialogOpen={dialogOpen}
         dialogOptions={dialogOptions}
         setDialogOpen={setDialogOpen}
-        submit={deleteAllocRound}
-        submitValues={deleteId}
+        submit={allocationSelection}
       />
       <Button
-        //theme button red
         variant="contained"
-        style={theme.components.MuiButton.redbutton}
-        onClick={() => submitDelete(singleAllocRound)}
+        style={theme.components.MuiButton.greenbutton}
+        onClick={confirmAllocationSelection}
       >
-        Delete
+        Pick this allocation
       </Button>
     </div>
   );
