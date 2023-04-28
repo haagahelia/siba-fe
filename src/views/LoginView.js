@@ -5,7 +5,7 @@ import dao from "../ajax/dao";
 import { AppContext } from "../AppContext";
 
 export default function LoginView(props) {
-  const { setLoggedIn } = props;
+  const { handleLoginChange } = props;
   const [loginForm, setLoginForm] = useState({
     email: "",
     password: "",
@@ -24,7 +24,7 @@ export default function LoginView(props) {
       localStorage.setItem("isAdmin", data[0].isAdmin);
       localStorage.setItem("isPlanner", data[0].isPlanner);
       localStorage.setItem("isStatist", data[0].isStatist);
-      setLoggedIn(data[0].email);
+      handleLoginChange();
       window.alert("Welcome!");
       setLoginForm({
         email: "",
@@ -35,7 +35,7 @@ export default function LoginView(props) {
 
   const logOut = () => {
     localStorage.clear();
-    setLoggedIn("");
+    handleLoginChange();
   };
 
   return (

@@ -29,7 +29,7 @@ import BuildingView from "../views/BuildingView";
 import DepartmentView from "../views/DepartmentView";
 import RegisterView from "../views/RegisterView";
 import LoginView from "../views/LoginView";
-import { AppContext } from "../AppContext";
+//import { AppContext } from "../AppContext";
 import { RoleLoggedIn } from "../customhooks/RoleLoggedIn";
 
 const sibaPages = [
@@ -51,8 +51,10 @@ function NavBar() {
 
   const handleClick = () => setClick(!click);
 
-  const appContext = useContext(AppContext);
-  const [loggedIn, setLoggedIn] = useState(localStorage.getItem("email"));
+  //const appContext = useContext(AppContext);
+  const [loggedIn, setLoggedIn] = useState(
+    localStorage.getItem("email") ? localStorage.getItem("email") : "Not yet",
+  );
   const { roles, setRoles } = RoleLoggedIn();
 
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -61,6 +63,12 @@ function NavBar() {
   };
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
+  };
+
+  const handleLoginChange = () => {
+    setLoggedIn(
+      localStorage.getItem("email") ? localStorage.getItem("email") : "No more",
+    );
   };
 
   const renderNavLinks = () => {
@@ -151,7 +159,7 @@ function NavBar() {
       <Routes>
         <Route
           path="/login"
-          element={<LoginView setLoggedIn={setLoggedIn} />}
+          element={<LoginView handleLoginChange={handleLoginChange} />}
         />
         <Route path="/register" element={<RegisterView />} />
         <Route path="/" element={<SubjectView />} />
