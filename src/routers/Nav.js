@@ -69,6 +69,12 @@ function NavBar() {
     setLoggedIn(
       localStorage.getItem("email") ? localStorage.getItem("email") : "No more",
     );
+
+    setRoles({
+      admin: localStorage.getItem("isAdmin"),
+      planner: localStorage.getItem("isPlanner"),
+      statist: localStorage.getItem("isStatist"),
+    });
   };
 
   const renderNavLinks = () => {
