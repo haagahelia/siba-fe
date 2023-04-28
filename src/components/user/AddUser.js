@@ -1,7 +1,7 @@
 import { TextField, Card, CardContent, Grid, Button } from "@mui/material";
 import { useEffect, useState } from "react";
 import dao from "../../ajax/dao";
-import bcrypt from "bcryptjs";
+//import bcrypt from "bcryptjs";
 
 export default function AddUser() {
   const [registerForm, setRegisterForm] = useState({
@@ -13,11 +13,11 @@ export default function AddUser() {
   });
 
   const registerUser = async () => {
-    const hashedPassword = bcrypt.hashSync(registerForm.password, 10);
+    //const hashedPassword = bcrypt.hashSync(registerForm.password, 10);
     let success = await dao.postNewUser({
       ...registerForm,
-      password: hashedPassword,
     });
+    //password: hashedPassword,
     if (!success) {
       alert("Something went wrong");
     } else {
