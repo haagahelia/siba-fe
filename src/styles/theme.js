@@ -288,9 +288,7 @@ const theme = createTheme({
               textDecoration: "none",
               fontFamily: "Roboto, Helvetica, Aria, sans-serif",
               fontWeight: 700,
-              padding: "0.5rem 1rem",
               height: "100%",
-              borderBottom: "3px solid transparent",
             },
             "&:after": {
               content: '""',
