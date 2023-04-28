@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import { useState } from "react";
 import Grid from "@mui/material/Grid";
 import {
   Dialog,
@@ -7,14 +7,11 @@ import {
   DialogTitle,
   Typography,
   DialogActions,
-  Button,
 } from "@mui/material";
 import AlertBox from "../common/AlertBox";
-import ConfirmationDialog from "../common/ConfirmationDialog";
-import { AppContext } from "../../AppContext";
 import DeleteAllocRound from "./DeleteAllocRound";
 import EditAllocRound from "./EditAllocRound";
-import { useTheme } from "@mui/material/styles";
+import SelectAllocRound from "./SelectAllocRound";
 
 export default function AllocRoundDetails(props) {
   const {
@@ -22,7 +19,6 @@ export default function AllocRoundDetails(props) {
     setOpen,
     singleAllocRound,
     getAllAllocRounds,
-    setAllocRoundId,
     setSingleAllocRound,
     incrementDataModifiedCounter,
   } = props;
@@ -32,44 +28,9 @@ export default function AllocRoundDetails(props) {
     message: "This is an error alert — check it out!",
     severity: "error",
   });
-  const [dialogOpen, setDialogOpen] = useState(false);
-  const [dialogOptions, setDialogOptions] = useState({
-    title: "this is dialog",
-    content: "Something here",
-  });
-  const appContext = useContext(AppContext);
-
-  const theme = useTheme();
 
   const handleClose = (allocRoundId) => {
     setOpen(false);
-  };
-
-  const setAllocRound = (allocRoundId) => {
-    //console.log ("allocRoundId 456: " +allocRoundId);
-    appContext.allocRoundId = allocRoundId; // Works now! Updating app context.
-    // setAllocRoundId(allocRoundId); // Notifying grangrangranparent. Updating component state
-    setOpen(false);
-  };
-  const allocationSelection = () => {
-    //call function to set alloc round here
-    setAllocRound(singleAllocRound.id);
-
-    setAlertOptions({
-      severity: "success",
-      title: "Success!",
-      message: `Alloc round ${singleAllocRound.id} selected.`,
-    });
-    setAlertOpen(true);
-    setOpen(false);
-  };
-
-  const confirmAllocationSelection = () => {
-    setDialogOptions({
-      title: `Are you sure you want to change to ${singleAllocRound.id}?`,
-      content: `Press continue to choose alloc round ${singleAllocRound.id} from the listing.`,
-    });
-    setDialogOpen(true);
   };
 
   return (
@@ -94,6 +55,11 @@ export default function AllocRoundDetails(props) {
               getAllAllocRounds={getAllAllocRounds}
               incrementDataModifiedCounter={incrementDataModifiedCounter}
               setOpen={setOpen}
+            />
+            <SelectAllocRound
+              singleAllocRound={singleAllocRound}
+              getAllAllocRounds={getAllAllocRounds}
+              setSingleAllocRound={setSingleAllocRound}
             />
           </DialogActions>
           <Grid
@@ -125,19 +91,6 @@ export default function AllocRoundDetails(props) {
             </Grid>
           </Grid>
         </DialogContent>
-        <ConfirmationDialog
-          dialogOpen={dialogOpen}
-          dialogOptions={dialogOptions}
-          setDialogOpen={setDialogOpen}
-          submit={allocationSelection}
-        />
-        <Button
-          variant="contained"
-          style={theme.components.MuiButton.greenbutton}
-          onClick={confirmAllocationSelection}
-        >
-          Pick this allocation
-        </Button>
       </Dialog>
     </div>
   );
