@@ -3,7 +3,7 @@ import Grid from "@mui/material/Grid";
 import {
   Dialog,
   DialogContent,
-  DialogContentText,
+  //DialogContentText,
   DialogTitle,
   Typography,
   DialogActions,
@@ -57,42 +57,41 @@ export default function SettingsDetails(props) {
               />
             </DialogActions>
           )}
-          <DialogContentText>
-            <Grid
-              container
-              spacing={1}
-              column={14}
-              direction="column"
-              justifyContent="flex-start"
-              alignItems="flex-start"
-              padding={2}
-            >
-              <Grid item s={6}>
-                <Typography variant="subtitle1">
-                  Name:&nbsp;
-                  {singleSetting?.name}
-                </Typography>
-              </Grid>
-              <Grid item s={6}>
-                <Typography variant="subtitle1">
-                  Description:&nbsp;
-                  {singleSetting?.description}
-                </Typography>
-              </Grid>
-              <Grid item s={6}>
-                <Typography variant="subtitle1">
-                  textValue:&nbsp;
-                  {singleSetting?.textValue}
-                </Typography>
-              </Grid>
-              <Grid item s={6}>
-                <Typography variant="subtitle1">
-                  numberValue:&nbsp;
-                  {singleSetting?.numberValue}
-                </Typography>
-              </Grid>
+
+          <Grid
+            container
+            spacing={1}
+            column={14}
+            direction="column"
+            justifyContent="flex-start"
+            alignItems="flex-start"
+            padding={2}
+          >
+            <Grid item s={6}>
+              <Typography variant="subtitle1">
+                Name:&nbsp;
+                {singleSetting?.name}
+              </Typography>
             </Grid>
-          </DialogContentText>
+            <Grid item s={6}>
+              <Typography variant="subtitle1">
+                Description:&nbsp;
+                {singleSetting?.description}
+              </Typography>
+            </Grid>
+            <Grid item s={6}>
+              <Typography variant="subtitle1">
+                textValue:&nbsp;
+                {singleSetting?.textValue}
+              </Typography>
+            </Grid>
+            <Grid item s={6}>
+              <Typography variant="subtitle1">
+                numberValue:&nbsp;
+                {singleSetting?.numberValue}
+              </Typography>
+            </Grid>
+          </Grid>
         </DialogContent>
       </Dialog>
     </div>

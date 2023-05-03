@@ -10,7 +10,7 @@ export default function AlertBox(props) {
     <div>
       <Snackbar
         open={alertOpen}
-        snackOpen={alertOpen}
+        snackopen={alertOpen ? "true" : "false"}
         autoHideDuration={2000}
         onClose={setAlertOpen}
         anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
