@@ -14,6 +14,18 @@ export const fetchEquipmentData = async (): Promise<Response<Equipment>> => {
   return { success: response.ok, data: equipments };
 };
 
+export const fetchEquipmentById = async (
+  id: number,
+): Promise<Response<Equipment>> => {
+  const request = new Request(`${baseUrl}/equipment/${id}`, {
+    method: "GET",
+  });
+
+  const response = await fetch(request);
+  const singleEquipment: Equipment[] = await response.json();
+  return { success: response.ok, data: singleEquipment };
+};
+
 export const postNewEquipment = async (
   newEquipment: Equipment,
 ): Promise<boolean> => {

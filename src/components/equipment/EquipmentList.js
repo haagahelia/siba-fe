@@ -8,12 +8,28 @@ import { styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
 import { Typography } from "@mui/material";
 import SingleEquipmentDialog from "./SingleEquipmentDialog";
+import dao from "../../ajax/dao";
 
 export default function EquipmentListItems(props) {
   const { getAllEquipments, equipmentList } = props;
 
   const [open, setOpen] = useState(false);
-  const [singleEquipment, setSingleEquipment] = useState(null);
+  const [singleEquipment, setSingleEquipment] = useState({});
+
+  const getSingleEquipment = async (value) => {
+    const { success, data } = await dao.fetchEquipmentById(value);
+    if (!success) {
+      console.log("too bad");
+    } else {
+      console.log(data);
+      setSingleEquipment({
+        id: data[0].id,
+        name: data[0].name,
+        priority: data[0].priority,
+        description: data[0].description,
+      });
+    }
+  };
 
   const Box = styled(Paper)(({ theme }) => ({
     overflow: "auto",
@@ -35,7 +51,8 @@ export default function EquipmentListItems(props) {
               <List key={value.id}>
                 <ListItem
                   onClick={() => {
-                    setSingleEquipment(value);
+                    getSingleEquipment(value.id);
+                    //setSingleEquipment(value);
                     setOpen(true);
                   }}
                 >
