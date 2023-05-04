@@ -20,7 +20,7 @@ export default function SingleEquipmentDialog(props) {
     getAllEquipments,
   } = props;
   const { roles, setRoles } = RoleLoggedIn();
-
+  console.log(singleEquipment);
   return (
     <>
       <Dialog open={open} onClose={() => setOpen(false)}>
@@ -43,10 +43,7 @@ export default function SingleEquipmentDialog(props) {
         )}
         <DialogContent>id: {singleEquipment?.id}</DialogContent>
         <DialogContent>Name: {singleEquipment?.name}</DialogContent>
-        <DialogContent>
-          {" "}
-          Priority: {singleEquipment?.equipmentPriority}
-        </DialogContent>
+        <DialogContent> Priority: {singleEquipment?.priority}</DialogContent>
         <DialogContent>
           Description: {singleEquipment?.description}
         </DialogContent>

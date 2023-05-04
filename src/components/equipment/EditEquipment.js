@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Dialog from "@mui/material/Dialog";
 import DialogTitle from "@mui/material/DialogTitle";
 import TextField from "@mui/material/TextField";
@@ -10,32 +10,32 @@ import ValidateEditEquipment from "../../validation/ValidateEditEquipment";
 export default function EditEquipment(props) {
   const {
     singleEquipment,
-    /* setSingleEquipment, */
+    setSingleEquipment,
     getAllEquipments,
     /* open, */
     setOpen,
   } = props;
 
   const [editOpen, setEditOpen] = useState(false);
-  const [equipment, setEquipment] = useState({
-    id: singleEquipment?.id,
-    name: singleEquipment?.name,
-    priority: singleEquipment?.equipmentPriority,
-    description: singleEquipment?.description,
-  });
 
   const submitEdits = async () => {
-    let validation = ValidateEditEquipment(equipment);
+    let validation = ValidateEditEquipment(singleEquipment);
     if (Object.values(validation).length !== 0) {
       alert(Object.values(validation));
     } else {
-      let result = await dao.editEquipment(equipment);
+      let result = await dao.editEquipment(singleEquipment);
       if (!result) {
         alert("Something went wrong");
       } else {
-        alert(`Equipment ${equipment.name} updated`);
+        alert(`Equipment ${singleEquipment.name} updated`);
         setEditOpen(false);
         setOpen(false);
+        setSingleEquipment({
+          id: "",
+          name: "",
+          priority: "",
+          description: "",
+        });
         getAllEquipments();
       }
     }
@@ -63,7 +63,10 @@ export default function EditEquipment(props) {
                   label='Equipment'
                   defaultValue={singleEquipment?.name}
                   onChange={(e) =>
-                    setEquipment({ ...equipment, name: e.target.value })
+                    setSingleEquipment({
+                      ...singleEquipment,
+                      name: e.target.value,
+                    })
                   }
                 />
               </Grid>
@@ -72,9 +75,12 @@ export default function EditEquipment(props) {
                   name='Priority'
                   label='Priority'
                   type="number"
-                  defaultValue={singleEquipment?.equipmentPriority}
+                  defaultValue={singleEquipment?.priority}
                   onChange={(e) =>
-                    setEquipment({ ...equipment, priority: e.target.value })
+                    setSingleEquipment({
+                      ...singleEquipment,
+                      priority: e.target.value,
+                    })
                   }
                 />
               </Grid>
@@ -84,7 +90,10 @@ export default function EditEquipment(props) {
                   label='Description'
                   defaultValue={singleEquipment?.description}
                   onChange={(e) =>
-                    setEquipment({ ...equipment, description: e.target.value })
+                    setSingleEquipment({
+                      ...singleEquipment,
+                      description: e.target.value,
+                    })
                   }
                 />
               </Grid>
