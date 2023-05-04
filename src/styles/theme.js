@@ -59,84 +59,225 @@ const snackbarSuccessGreen = "#43A047"; // Medium Green
 // used with ad-hoc "#AABBCC" kind of RGB hexadecimal color definitions
 
 export const normalPalette = {
-  background: { default: lightGray },
+  // mode: "light",
+  common: {
+    black: "#1D1D1D",
+    white: "#fff",
+  },
   primary: {
     main: buttonGreen,
     light: lightBlue2,
+    dark: "#0059B2",
+    contrastText: "#ffffff",
   },
   secondary: {
     main: buttonOrange,
+    light: "#ba68c8",
+    dark: "#7b1fa2",
+    contrastText: "#ffffff",
   },
+  error: {
+    main: snackbarErrorRed,
+    light: "#FF99A2",
+    dark: "#C70011",
+    contrastText: "#ffffff",
+  },
+  warning: {
+    main: snackbarWarningOrange,
+    light: "#FFDC48",
+    dark: "#AB6800",
+    contrastText: "#000000",
+  },
+  info: {
+    main: snackbarInformationBlue,
+    light: "#03a9f4",
+    dark: "#01579b",
+    contrastText: "#ffffff",
+  },
+  success: {
+    main: snackbarSuccessGreen,
+    light: "#6AE79C",
+    dark: "#1AA251",
+    contrastText: "#ffffff",
+  },
+  contrastThreshold: 3,
+  tonalOffset: 0.2,
+  text: {
+    primary: "#1A2027",
+    secondary: "#3E5060",
+    disabled: "#ffffff",
+  },
+  divider: "#E7EBF0",
+  background: {
+    paper: "#ffffff",
+    default: lightGray,
+  },
+  action: {
+    active: "rgba(0, 0, 0, 0.54)",
+    hover: "rgba(0, 0, 0, 0.04)",
+    hoverOpacity: 0.04,
+    selected: "rgba(0, 0, 0, 0.08)",
+    selectedOpacity: 0.08,
+    disabled: "rgba(0, 0, 0, 0.26)",
+    disabledBackground: "rgba(0, 0, 0, 0.12)",
+    disabledOpacity: 0.38,
+    focus: "rgba(0, 0, 0, 0.12)",
+    focusOpacity: 0.12,
+    activatedOpacity: 0.12,
+  },
+  //own colors
   red: {
     main: buttonRed,
   },
-  error: { main: snackbarErrorRed },
-  warning: { main: snackbarWarningOrange },
-  info: { main: snackbarInformationBlue },
-  success: { main: snackbarSuccessGreen },
-
   backgroundDarker: { default: darkBrown },
   fontColorDefault: { default: fontWhite },
   progressBarGreen: { main: progressBarGreen },
   progressBarYellow: { main: progressBarYellow },
   progressBarRed: { main: progressBarRed },
-
-  borderColor: { main: mediumBrown },
+  borderColor: {
+    main: mediumBrown,
+    cardBoder: light,
+  },
 };
 
 export const yellowPalette = {
-  background: { default: canary },
+  // mode: "light",
+  common: {
+    black: "#1D1D1D",
+    white: "#fff",
+  },
   primary: {
     main: buddhaGold,
     light: paleLime,
+    dark: "#0059B2",
+    contrastText: "#ffffff",
   },
   secondary: {
     main: paleCanary,
+    light: "#ba68c8",
+    dark: "#7b1fa2",
+    contrastText: "#ffffff",
   },
+  error: {
+    main: tangerineYellow,
+    light: "#FF99A2",
+    dark: "#C70011",
+    contrastText: "#ffffff",
+  },
+  warning: {
+    main: eggWhite,
+    light: "#FFDC48",
+    dark: "#AB6800",
+    contrastText: "#000000",
+  },
+  info: {
+    main: greenYellow,
+    light: "#03a9f4",
+    dark: "#01579b",
+    contrastText: "#ffffff",
+  },
+  success: {
+    main: butteryWhite,
+    light: "#6AE79C",
+    dark: "#1AA251",
+    contrastText: "#ffffff",
+  },
+  contrastThreshold: 3,
+  tonalOffset: 0.2,
+  text: {
+    primary: "#1A2027",
+    secondary: "#3E5060",
+    disabled: "#ffffff",
+  },
+  divider: "#E7EBF0",
+  background: {
+    paper: "#ffffff",
+    default: canary,
+  },
+  // own colors
   red: {
     main: saffronMango,
   },
-  error: { main: tangerineYellow },
-  warning: { main: eggWhite },
-  info: { main: greenYellow },
-  success: { main: butteryWhite },
-
   backgroundDarker: { default: paleCanary },
   fontColorDefault: { default: sahara },
   progressBarGreen: { main: progressBarGreen },
   progressBarYellow: { main: progressBarYellow },
   progressBarRed: { main: progressBarRed },
-
-  borderColor: { main: mediumBrown },
+  borderColor: {
+    main: mediumBrown,
+    cardBoder: lightBlue,
+  },
 };
 /* More yellow tint values used from here: 
   "#FFFF11" Sunny Yellow,  "#BB7700" Mustard Brown
 */
 
 export const redPalette = {
-  background: { default: tomatoRed },
+  // mode: "light",
+  common: {
+    black: "#1D1D1D",
+    white: "#fff",
+  },
   primary: {
     main: redOrange,
     light: bitterSweet,
+    dark: "#0059B2",
+    contrastText: "#ffffff",
   },
   secondary: {
     main: salmonPink,
+    light: "#ba68c8",
+    dark: "#7b1fa2",
+    contrastText: "#ffffff",
   },
+  error: {
+    main: brightRed,
+    light: "#FF99A2",
+    dark: "#C70011",
+    contrastText: "#ffffff",
+  },
+  warning: {
+    main: pumpkinOrange,
+    light: "#FFDC48",
+    dark: "#AB6800",
+    contrastText: "#000000",
+  },
+  info: {
+    main: clayBrown,
+    light: "#03a9f4",
+    dark: "#01579b",
+    contrastText: "#ffffff",
+  },
+  success: {
+    main: darkOrange,
+    light: "#6AE79C",
+    dark: "#1AA251",
+    contrastText: "#ffffff",
+  },
+  contrastThreshold: 3,
+  tonalOffset: 0.2,
+  text: {
+    primary: "#1A2027",
+    secondary: "#3E5060",
+    disabled: "#ffffff",
+  },
+  background: {
+    paper: "#ffffff",
+    default: tomatoRed,
+  },
+  //own colors
   red: {
     main: cherryBlossom,
   },
-  error: { main: brightRed },
-  warning: { main: pumpkinOrange },
-  info: { main: clayBrown },
-  success: { main: darkOrange },
-
   backgroundDarker: { default: softPink },
   fontColorDefault: { default: lightPink },
   progressBarGreen: { main: progressBarGreen },
   progressBarYellow: { main: progressBarYellow },
   progressBarRed: { main: progressBarRed },
-
-  borderColor: { main: mediumBrown },
+  borderColor: {
+    main: mediumBrown,
+    cardBoder: lightBlue2,
+  },
 };
 /* More red tint values used from here: 
  "#FF2222" Torch Red, "#FF9AD5" Lavender Rose, "#AC3939" Dull Red
@@ -154,7 +295,7 @@ const theme = createTheme({
       styleOverrides: {
         root: {
           backgroundColor: currentPalette.backgroundDarker.default,
-          borderColor: light,
+          borderColor: currentPalette.borderColor.cardBoder,
           width: "75%",
           margin: "auto",
           marginTop: "100px",
@@ -178,7 +319,7 @@ const theme = createTheme({
         root: {
           backgroundColor: currentPalette.backgroundDarker.default,
           "& label": {
-            color: light,
+            color: currentPalette.fontColorDefault.default,
           },
           "& label.Mui-focused": {
             color: orange,
@@ -186,13 +327,13 @@ const theme = createTheme({
           "& .MuiOutlinedInput-root": {
             color: light,
             "& fieldset": {
-              borderColor: orange,
+              borderColor: currentPalette.borderColor.main,
             },
             "&:hover fieldset": {
-              borderColor: light,
+              borderColor: currentPalette.borderColor.main,
             },
             "&.Mui-focused fieldset": {
-              borderColor: light,
+              borderColor: currentPalette.borderColor.main,
             },
           },
         },
@@ -270,7 +411,7 @@ const theme = createTheme({
         root: {
           backgroundColor: currentPalette.backgroundDarker.default,
           color: light,
-          border: "1px solid #F6E9E9",
+          border: `1px solid ${currentPalette.borderColor.cardBoder}`,
         },
       },
       variants: [
@@ -284,7 +425,7 @@ const theme = createTheme({
               padding: "0.5rem 1rem",
               borderBottom: "3px solid transparent",
               marginRight: "0.2rem",
-              color: "#FFFFFF",
+              color: currentPalette.fontColorDefault.default,
               textDecoration: "none",
               fontFamily: "Roboto, Helvetica, Aria, sans-serif",
               fontWeight: 700,
@@ -299,10 +440,10 @@ const theme = createTheme({
               transition: "width 0.7s ease",
               backgroundColor: "0.5s ease",
             },
-            "&:hover a span": {
+            "&:hover a": {
               borderBottom: "2px solid #E16428",
             },
-            "& a.nav-links.active span": {
+            "& a.nav-links.active": {
               color: "#E16428",
             },
           },
@@ -395,24 +536,24 @@ const theme = createTheme({
     MuiButton: {
       styleOverrides: {
         contained: {
-          color: "#ffffff",
+          color: currentPalette.fontColorDefault.default,
         },
         text: {
           backgroundColor: "pink",
-          color: light,
+          color: currentPalette.fontColorDefault.default,
         },
       },
       redbutton: {
         backgroundColor: buttonRed,
-        color: light,
+        color: currentPalette.fontColorDefault.default,
       },
       editbutton: {
         backgroundColor: buttonOrange,
-        color: light,
+        color: currentPalette.fontColorDefault.default,
       },
       greenbutton: {
         backgroundColor: buttonGreen,
-        color: light,
+        color: currentPalette.fontColorDefault.default,
       },
     },
     MuiPagination: {
@@ -422,7 +563,7 @@ const theme = createTheme({
           display: "flex",
           justifyContent: "center",
           button: {
-            color: light,
+            color: currentPalette.fontColorDefault.default,
             borderColor: orange,
           },
         },
@@ -432,12 +573,14 @@ const theme = createTheme({
       styleOverrides: {
         root: {
           marginBottom: 16,
+          color: currentPalette.fontColorDefault.default,
         },
       },
       variants: [
         {
           props: { variant: "boldTitle" },
           style: {
+            color: currentPalette.fontColorDefault.default,
             fontFamily: "Roboto, Helvetica, Aria, sans-serif",
             fontWeight: 700,
             fontSize: "1rem",
@@ -452,6 +595,17 @@ const theme = createTheme({
             textDecoration: "none",
             fontFamily: "Roboto, Helvetica, Aria, sans-serif",
             fontWeight: 700,
+            height: "100%",
+            borderBottom: "3px solid transparent",
+          },
+        },
+        {
+          props: { variant: "sibaTypography" },
+          style: {
+            color: currentPalette.fontColorDefault.default,
+            textDecoration: "none",
+            fontFamily: "Roboto, Helvetica, Aria, sans-serif",
+            fontWeight: 400,
             height: "100%",
             borderBottom: "3px solid transparent",
           },

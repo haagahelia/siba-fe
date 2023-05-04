@@ -195,7 +195,6 @@ export default function AddSubjectForm(props) {
           <Button
             type="submit"
             variant="contained"
-            style={{ color: "white" }}
             onClick={() => {
               setInitialSubject(submitValues);
             }}

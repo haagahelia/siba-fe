@@ -15,7 +15,6 @@ export default function BuildingDisplay(props) {
         direction={flexDirection}
       >
         <Grid item md={3} xs={7}>
-          {/* <Typography variant="body" style={{ fontWeight: "bold" }}> */}
           <Typography variant="boldTitle">Name:</Typography>
           <ListItemText
             primary={singleBuilding.name}

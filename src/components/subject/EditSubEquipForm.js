@@ -40,7 +40,7 @@ export default function EditSubEquipForm(props) {
       <Button
         variant="contained"
         color="secondary"
-        style={{ color: "white", maxWidth: "85px", margin: "5px" }}
+        style={{ maxWidth: "85px", margin: "5px" }}
         onClick={() => {
           setOpen(true);
         }}
@@ -109,7 +109,6 @@ export default function EditSubEquipForm(props) {
             <Button
               variant="contained"
               color="red"
-              style={{ color: "white" }}
               onClick={() => {
                 setOpen(false);
                 // Let's reset the form if you press cancel
@@ -120,7 +119,6 @@ export default function EditSubEquipForm(props) {
             </Button>
             <Button
               type="submit"
-              style={{ color: "white" }}
               variant="contained"
               onClick={() => {
                 setOpen(false);

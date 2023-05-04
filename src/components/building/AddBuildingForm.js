@@ -15,7 +15,6 @@ export default function AddBuildingForm(props) {
           <Button
             type="submit"
             variant="contained"
-            style={{ color: "white" }}
             onClick={() => {
               setInitialBuilding(submitValues);
             }}

@@ -40,18 +40,12 @@ export default function AddEquipmentDialogConfirmation(props) {
           By clicking continue, {equipment?.name} will be added to equipments.
         </DialogContentText>
       </DialogContent>
-      <Button
-        variant="contained"
-        color="red"
-        style={{ color: "white" }}
-        onClick={() => setOpen(false)}
-      >
+      <Button variant="contained" color="red" onClick={() => setOpen(false)}>
         Cancel
       </Button>
       <Button
         variant="contained"
         color="success"
-        style={{ color: "white" }}
         onClick={() => addSingleEquipment()}
       >
         Continue

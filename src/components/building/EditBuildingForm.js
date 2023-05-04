@@ -15,7 +15,6 @@ export default function EditBuildingForm(props) {
       <Button
         variant="contained"
         color="secondary"
-        style={{ color: "white" }}
         onClick={() => {
           setOpen(true);
         }}

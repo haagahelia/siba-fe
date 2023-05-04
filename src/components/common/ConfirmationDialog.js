@@ -19,17 +19,11 @@ export default function ConfirmationDialog(props) {
           <DialogContentText>{dialogOptions.content}</DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button
-            variant="contained"
-            color="red"
-            style={{ color: "white" }}
-            onClick={handleClose}
-          >
+          <Button variant="contained" color="red" onClick={handleClose}>
             Cancel
           </Button>
           <Button
             autoFocus
-            style={{ color: "white" }}
             variant="contained"
             onClick={() => {
               if (submitValues) {
