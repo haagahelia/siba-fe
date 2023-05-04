@@ -46,7 +46,6 @@ export default function EditEquipment(props) {
       <Button
         variant="contained"
         color="secondary"
-        style={{ color: "white" }}
         onClick={() => {
           setEditOpen(true);
         }}
@@ -90,11 +89,7 @@ export default function EditEquipment(props) {
                 />
               </Grid>
             </Grid>
-            <Button
-              onClick={submitEdits}
-              variant="contained"
-              style={{ color: "white" }}
-            >
+            <Button onClick={submitEdits} variant="contained">
               Submit
             </Button>
           </DialogContentText>

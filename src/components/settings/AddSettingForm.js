@@ -90,7 +90,6 @@ export default function AddSettingForm(props) {
           <Button
             type="submit"
             variant="contained"
-            style={{ color: "white" }}
             onClick={() => {
               setInitialSetting(submitValues);
             }}

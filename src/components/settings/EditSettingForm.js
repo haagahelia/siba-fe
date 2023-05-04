@@ -15,7 +15,6 @@ export default function EditSettingForm(props) {
       <Button
         variant="contained"
         color="secondary"
-        style={{ color: "white" }}
         onClick={() => {
           setOpen(true);
         }}
@@ -127,7 +126,6 @@ export default function EditSettingForm(props) {
             <Button
               type="submit"
               variant="contained"
-              style={{ color: "white" }}
               onClick={() => {
                 setOpen(false);
               }}

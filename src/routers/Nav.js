@@ -114,7 +114,7 @@ function NavBar() {
       <AppBar>
         <Container maxWidth="xl">
           <Toolbar disableGutters>
-            <Typography style={{ color: "white" }}>
+            <Typography variant="sibaTypography">
               Logged in as: {loggedIn}
             </Typography>
             <Box sx={{ flexGrow: 1, display: { xs: "flex", lg: "none" } }}>

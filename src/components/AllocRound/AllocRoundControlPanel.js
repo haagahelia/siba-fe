@@ -43,7 +43,6 @@ const AllocRoundControlPanel = ({ incrementResetCounter }) => {
         type="submit"
         variant="contained"
         color="red"
-        style={{ color: "white" }}
         onClick={() => {
           allocationPost.resetAlloc(appContext.allocRoundId);
           setDelayedClickedToggle();

@@ -142,7 +142,6 @@ export default function AddSubEquipForm(props) {
             <Button
               variant="contained"
               color="red"
-              style={{ color: "white" }}
               onClick={() => {
                 setOpen(false);
                 setEquipPriority(0);
@@ -154,7 +153,6 @@ export default function AddSubEquipForm(props) {
             </Button>
             <Button
               type="submit"
-              style={{ color: "white" }}
               variant="contained"
               onClick={() => {
                 setOpen(false);

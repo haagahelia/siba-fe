@@ -18,7 +18,6 @@ export default function EditSubjectForm(props) {
       <Button
         variant="contained"
         color="secondary"
-        style={{ color: "white" }}
         onClick={() => {
           setOpen(true);
         }}
@@ -217,7 +216,6 @@ export default function EditSubjectForm(props) {
             <Button
               type="submit"
               variant="contained"
-              style={{ color: "white" }}
               onClick={() => {
                 setOpen(false);
               }}

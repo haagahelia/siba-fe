@@ -61,11 +61,7 @@ export default function AddEquipment(props) {
               label="isMovable (VALUE 0 OR 1)"
             />
           </Grid>
-          <Button
-            onClick={() => openDialogBox()}
-            variant="contained"
-            style={{ color: "white" }}
-          >
+          <Button onClick={() => openDialogBox()} variant="contained">
             Add Equipment
           </Button>
         </CardContent>
