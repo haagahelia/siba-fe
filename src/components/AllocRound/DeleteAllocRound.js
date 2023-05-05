@@ -1,11 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Button } from "@mui/material";
 import dao from "../../ajax/dao";
 import AlertBox from "../common/AlertBox";
 import ConfirmationDialog from "../common/ConfirmationDialog";
 import { useTheme } from "@mui/material/styles";
+import { AppContext } from "../../AppContext";
 
 export default function DeleteAllocRound(props) {
+  const appContext = useContext(AppContext);
   const {
     singleAllocRound,
     //getAllAllocRounds,
@@ -22,6 +24,7 @@ export default function DeleteAllocRound(props) {
     content: "Something here",
   });
   const [deleteId, setDeleteId] = useState("");
+  const [deletedName, setDeletedName] = useState("");
 
   const deleteAllocRound = async (value) => {
     let result = await dao.deleteSingleAllocRound(value);
@@ -37,7 +40,7 @@ export default function DeleteAllocRound(props) {
     setAlertOptions({
       severity: "success",
       title: "Success!",
-      message: `${value.name} removed.`,
+      message: `${deletedName} removed.`,
     });
     setAlertOpen(true);
     incrementDataModifiedCounter();
@@ -46,12 +49,24 @@ export default function DeleteAllocRound(props) {
   const theme = useTheme();
 
   const submitDelete = (data) => {
+    if (data.id === appContext.allocRoundId) {
+      //Prevent deleting a selected allocation round
+      setAlertOptions({
+        severity: "error",
+        title: "Error",
+        message: "Cannot delete selected allocation round.",
+      });
+      setAlertOpen(true);
+      return;
+    }
+
     setDialogOptions({
       title: `Are you sure you want to delete ${data.name}?`,
       content: `Press continue to delete ${data.name} from the listing.`,
     });
     setDialogOpen(true);
     setDeleteId(data.id);
+    setDeletedName(data.name); //store the name of the deleted object
     return;
   };
 
