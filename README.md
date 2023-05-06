@@ -4,7 +4,7 @@
 <br />
 <div align="center">
   
-<h1 align="center">SIBA project</h1>
+<h1 align="center">Siba project - Frontend</h1>
 
 <h3 align="center">
    This project was created on the courses Softala-projekti / Software Project<br />
@@ -32,6 +32,7 @@ Copyrights reserved. This Project is collaborative work, which aims at building 
 - [Formik](https://formik.org/)
 - [MUI](https://mui.com/)
 - [Colorhunt](https://colorhunt.co/)
+- [jwt-decode](https://www.npmjs.com/package/jwt-decode)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -53,12 +54,13 @@ Frontend side installation instructions
    npm install
    ```
 
-3. Create **.env.local** file. Add .env to the root of the project
+3. Create **.env.local** file. Add .env to the root of the project. 
 
    ```sh
    REACT_APP_BE_SERVER_BASE_URL=http://...backend server address and port here.../api
    REACT_APP_BE_SERVER_BASE_URL2=http://someotherserver:3001/api
    ```
+   Basically start the backend, make sure it runs and copy the working address here, adding /api at the end. E.g. http://localhost:1234/api 
 
 4. Application launch
    ```sh
@@ -102,8 +104,6 @@ Frontend side installation instructions
 
 ### Add here at the end of the course
 
-dao.js file unifications
-
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 ## Further development ideas
@@ -115,5 +115,7 @@ The addition of a lesson, where you can copy information from other lessons, cou
 When adding a lesson, you could choose whether the lesson is distance learning, so that the calculation could take into account lessons that do not need or need less teaching space.
 
 In the addition of the teaching, there would be a function with which the form could be reset from the entered inputs
+
+dao.js file unifications
 
 <p align="right">(<a href="#top">back to top</a>)</p>
