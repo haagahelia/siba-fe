@@ -9,6 +9,7 @@ import {
 } from "../../validation/ValidateAddBuilding";
 import dao from "../../ajax/dao";
 import AddBuildingForm from "./AddBuildingForm";
+import ImportBuilding from "./ImportBuilding";
 
 export default function AddBuildingContainer(props) {
   const { getAllBuildings } = props;
@@ -99,6 +100,7 @@ export default function AddBuildingContainer(props) {
             submitValues={formik.values}
             setInitialBuilding={setInitialBuilding}
           />
+          <ImportBuilding getAllBuildings={getAllBuildings} />
         </CardContent>
       </Card>
     </React.Fragment>
