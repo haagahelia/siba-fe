@@ -22,7 +22,7 @@
     "styled-components": "^5.3.5",
     "util": "^0.12.5",
     "web-vitals": "^2.1.4",
-    "xlsx": "^0.18.5"
+    "xlsx": "https://cdn.sheetjs.com/xlsx-0.19.3/xlsx-0.19.3.tgz"
   },
   "scripts": {
     "start": "react-scripts start",
