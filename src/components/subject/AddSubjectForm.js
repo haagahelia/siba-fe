@@ -172,7 +172,7 @@ export default function AddSubjectForm(props) {
             </FormControl>
           </Grid>
           <Grid item xs={12}>
-            <Typography variant="h6" sx={{ color: "#F6E9E9" }}>
+            <Typography variant="sibaTypography">
               Copy the information from another lesson
             </Typography>
           </Grid>

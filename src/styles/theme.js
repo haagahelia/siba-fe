@@ -421,6 +421,7 @@ const theme = createTheme({
             borderColor: currentPalette.backgroundDarker.default,
             fontSize: "1.2rem",
             display: "contents",
+            // color: currentPalette.fontColorDefault.main,
             "& a": {
               padding: "0.5rem 1rem",
               borderBottom: "3px solid transparent",
@@ -673,6 +674,16 @@ const theme = createTheme({
           fontSize: "1.2rem",
         },
       },
+    },
+    MuiInput: {
+      variants: [
+        {
+          props: { variant: "sibaInputFileName" },
+          style: {
+            color: light,
+          },
+        },
+      ],
     },
   },
 });
