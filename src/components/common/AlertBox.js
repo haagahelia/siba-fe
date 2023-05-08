@@ -40,9 +40,7 @@ export default function AlertBox(props) {
             </IconButton>
           }
         >
-          <AlertTitle>
-            <strong>{alertOptions.title}</strong>
-          </AlertTitle>
+          <AlertTitle>{alertOptions.title}</AlertTitle>
           {alertOptions.message}
         </Alert>
       </Snackbar>

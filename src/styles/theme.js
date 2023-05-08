@@ -685,6 +685,14 @@ const theme = createTheme({
         },
       ],
     },
+    MuiAlertTitle: {
+      styleOverrides: {
+        root: {
+          color: currentPalette.warning.contrastText,
+          fontWeight: 700,
+        },
+      },
+    },
   },
 });
 
