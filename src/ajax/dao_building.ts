@@ -31,6 +31,23 @@ export const postNewBuilding = async (
   return response.ok;
 };
 
+export const postNewBuildings = async (
+  newBuilding: Building,
+): Promise<boolean> => {
+  const request = new Request(`${baseUrl}/building/multi`, {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("sessionToken")}`,
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(newBuilding),
+  });
+  const response = await fetch(request);
+
+  return response.ok;
+};
+
 export const deleteBuildingById = async (
   buildingId: number,
 ): Promise<boolean> => {

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import * as XLSX from "xlsx";
+import Papa from "papaparse";
 import { Typography } from "@mui/material";
 import AlertBox from "../common/AlertBox";
 import {
@@ -23,33 +23,39 @@ export default function ImportBuilding(props) {
   const [importBuildings, setImportBuildings] = useState([]);
   const [failedBuildings, setFailedBuildings] = useState([]);
 
-  const handleFileUpload = async (e) => {
-    const file = e.target.files[0];
+  const isUploaded = (file) => {
+    return file;
+  };
 
-    if (!file) {
+  const isValidType = (file) => {
+    return file.type === "text/csv";
+  };
+
+  const handleFileUpload = (e) => {
+    let file = e.target.files[0];
+
+    if (!isUploaded(file)) {
       return;
-    }
+    } else if (!isValidType(file)) {
+      setImportBuildings([]);
 
-    if (
-      file.type !== "application/vnd.ms-excel" &&
-      file.type !==
-        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" &&
-      file.type !== "text/csv"
-    ) {
       setAlertOptions({
-        title: "Invalid file type",
-        message: "Please upload a .xlsx or .csv file.",
         severity: "error",
+        title: "Invalid file type",
+        message: "Please upload a .csv file.",
       });
       setAlertOpen(true);
-      return;
-    }
 
-    const data = await file.arrayBuffer();
-    const workbook = XLSX.read(data);
-    const worksheet = workbook.Sheets[workbook.SheetNames[0]];
-    const parsedData = XLSX.utils.sheet_to_json(worksheet);
-    setImportBuildings(parsedData);
+      return;
+    } else {
+      Papa.parse(file, {
+        header: true,
+        delimiter: "",
+        complete: (result) => {
+          setImportBuildings(result.data);
+        },
+      });
+    }
   };
 
   const importData = async () => {
@@ -96,11 +102,25 @@ export default function ImportBuilding(props) {
   };
 
   const exportData = async () => {
-    let workbook_fail = XLSX.utils.book_new();
-    let worksheet_fail = XLSX.utils.json_to_sheet(failedBuildings);
+    if (failedBuildings.length === 0) {
+      setAlertOptions({
+        severity: "info",
+        title: "Export data info",
+        message: "There is no data to export",
+      });
+      setAlertOpen(true);
 
-    XLSX.utils.book_append_sheet(workbook_fail, worksheet_fail, "Buildings");
-    XLSX.writeFile(workbook_fail, "BuildingsFailedToImport.xlsx");
+      return;
+    } else {
+      let csv = Papa.unparse(failedBuildings);
+      let blob = new Blob([csv]);
+      let a = window.document.createElement("a");
+      a.href = window.URL.createObjectURL(blob);
+      a.download = "BuildingsFailedToImport.csv";
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    }
   };
 
   return (
