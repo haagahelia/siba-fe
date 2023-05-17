@@ -79,7 +79,7 @@ export default function AddAllocRound(props) {
     });
     setAlertOpen(true);
     resetFormm();
-    getAllAllocRounds();
+    //  getAllAllocRounds();
   };
   // Here is a list of lessons
   // When you choose a lesson, the information goes to the form's initialvalues

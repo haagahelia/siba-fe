@@ -2,7 +2,7 @@ import React from "react"; // { useState, useEffect } ???
 import TextField from "@mui/material/TextField";
 import { Button, Grid } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
-
+import AllocRoundInputField from "./AllocRoundInputField";
 export default function AddAllocRoundForm(props) {
   const { formik, submitValues, setInitialAllocRound } = props;
 
@@ -12,42 +12,7 @@ export default function AddAllocRoundForm(props) {
     <div>
       <form onSubmit={formik.handleSubmit}>
         <Grid container variant="sibaGridAddForm" column={8}>
-          <Grid item xs={12} sm={6} md={3}>
-            <TextField
-              error={formik.touched.name && formik.errors.name ? true : false}
-              name="name"
-              label="Name of the allocation round"
-              variant="outlined"
-              value={formik.values.name}
-              onChange={formik.handleChange("name")}
-              onBlur={formik.handleBlur("name")}
-              helperText={
-                formik.touched.name && formik.errors.name
-                  ? formik.errors.name
-                  : null
-              }
-            />
-          </Grid>
-          <Grid item xs={12} sm={6} md={3}>
-            <TextField
-              error={
-                formik.touched.description && formik.errors.description
-                  ? true
-                  : false
-              }
-              name="description"
-              label=" Add description"
-              variant="outlined"
-              value={formik.values.description}
-              onChange={formik.handleChange("description")}
-              onBlur={formik.handleBlur("description")}
-              helperText={
-                formik.touched.description && formik.errors.description
-                  ? formik.errors.description
-                  : null
-              }
-            />
-          </Grid>
+          <AllocRoundInputField formik={formik} />
         </Grid>
         <Grid item xs={3} padding={2}>
           <Button //theme button  green
