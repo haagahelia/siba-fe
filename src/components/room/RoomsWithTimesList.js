@@ -56,7 +56,7 @@ const RoomsWithTimesList = ({ rooms }) => {
                 padding={"3px"}
                 completed={Math.round(progress)}
               />
-              {CollapsedRowB(room.id)}
+              <CollapsedRowB id={room.id} />
             </Grid2>
           </>
         );

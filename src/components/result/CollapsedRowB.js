@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import Grid2 from "@mui/material/Unstable_Grid2";
 import Typography from "@mui/material/Typography";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
@@ -14,28 +14,34 @@ export default function CollapsedRowB({ id }) {
   const [subjects, setSubjects] = React.useState([]);
   const appContext = useContext(AppContext);
 
-  const getSubjects = async () => {
-    // console.log(id);    // Works
-    await resultRoomsStore.fetchRoomSubs(id, appContext.allocRoundId);
-    setSubjects(resultRoomsStore.roomSubs);
+  const handleExpandClick = () => {
+    setExpand((prevExpand) => !prevExpand);
   };
+
+  useEffect(() => {
+    const getSubjects = async () => {
+      await resultRoomsStore.fetchRoomSubs(id, appContext.allocRoundId);
+      setSubjects(resultRoomsStore.roomSubs);
+    };
+
+    if (expand) {
+      getSubjects();
+    }
+  }, [expand, id, appContext.allocRoundId]);
 
   return (
     <Grid2 container>
       {expand ? (
         <KeyboardArrowUpIcon
           sx={{ color: "white", fontSize: 24 }}
-          onClick={() => setExpand(!expand)}
+          onClick={handleExpandClick}
         >
           {" "}
         </KeyboardArrowUpIcon>
       ) : (
         <KeyboardArrowDownIcon
           sx={{ color: "white", fontSize: 24 }}
-          onClick={() => {
-            getSubjects();
-            setExpand(!expand);
-          }}
+          onClick={handleExpandClick}
         >
           {" "}
         </KeyboardArrowDownIcon>
@@ -59,7 +65,6 @@ export default function CollapsedRowB({ id }) {
           return (
             <Grid2 container key={subject.id}>
               <Grid2 xs={8}>
-                {" "}
                 <Typography
                   style={{
                     textAlign: "left",
