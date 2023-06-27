@@ -31,9 +31,8 @@ const RoomsWithTimesList = ({ rooms }) => {
         const textColor = progress === 0 ? "white" : "black";
 
         return (
-          <>
+          <React.Fragment key={room.id}>
             <Grid2
-              key={room.id}
               xs={3}
               style={
                 room.spaceTypeId === 5001
@@ -58,7 +57,7 @@ const RoomsWithTimesList = ({ rooms }) => {
               />
               <CollapsedRowB id={room.id} />
             </Grid2>
-          </>
+          </React.Fragment>
         );
       })}
     </Grid2>
