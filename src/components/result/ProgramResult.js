@@ -124,8 +124,8 @@ export default function ProgramResult(props) {
           const textColor = progress === 0 ? "white" : "black";
 
           return (
-            <>
-              <Grid2 xs={1.5} key={`${prog.id}-a`}>
+            <React.Fragment key={`${prog.id}-a`}>
+              <Grid2 xs={1.5}>
                 <InfoOutlinedIcon
                   sx={{ color: "white", fontSize: 20 }}
                   onClick={() => handleOpen(prog)}
@@ -154,7 +154,7 @@ export default function ProgramResult(props) {
                 />
                 <CollapsedRow prog1={prog} />
               </Grid2>
-            </>
+            </React.Fragment>
           );
         })}
       </Grid2>
