@@ -39,7 +39,7 @@ export default function SubjectResult(props) {
           const textColor = progress === 0 ? "white" : "black";
 
           return (
-            <>
+            <React.Fragment key={prog.id}>
               <Grid2 xs={3} style={{ color: "rgb(246, 233, 233)" }}>
                 {prog.name}
               </Grid2>
@@ -54,7 +54,7 @@ export default function SubjectResult(props) {
                 />
                 {CollapsedRow(prog.id)}
               </Grid2>
-            </>
+            </React.Fragment>
           );
         })}
       </Grid2>
@@ -97,9 +97,9 @@ function CollapsedRow(id) {
 
       <Collapse in={expand} style={{ width: "100%" }}>
         <Grid2 container />
-        {rooms?.map((dropdownItem) => {
+        {rooms?.map((dropdownItem, index) => {
           return (
-            <Grid2 container>
+            <Grid2 container key={index}>
               <Grid2 xs={8}>
                 {" "}
                 <Typography

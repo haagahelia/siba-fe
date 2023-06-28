@@ -3,7 +3,6 @@ import Grid from "@mui/material/Grid";
 import {
   Dialog,
   DialogContent,
-  DialogContentText,
   DialogTitle,
   Typography,
   DialogActions,
@@ -81,7 +80,7 @@ export default function SingleSubjectDialog(props) {
               equipmentsBySubId={getEquipmentsBySubId}
             />
           </DialogActions>
-          <DialogContentText>
+          <DialogContent>
             <Grid
               container
               variant="sibaGridSingleItemDisplay"
@@ -145,7 +144,7 @@ export default function SingleSubjectDialog(props) {
                 />
               </Grid>
             </Grid>
-          </DialogContentText>
+          </DialogContent>
         </DialogContent>
       </Dialog>
     </div>

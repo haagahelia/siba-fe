@@ -124,8 +124,8 @@ export default function ProgramResult(props) {
           const textColor = progress === 0 ? "white" : "black";
 
           return (
-            <>
-              <Grid2 xs={1.5} key={`${prog.id}-a`}>
+            <React.Fragment key={prog.id}>
+              <Grid2 xs={1.5}>
                 <InfoOutlinedIcon
                   sx={{ color: "white", fontSize: 20 }}
                   onClick={() => handleOpen(prog)}
@@ -133,13 +133,11 @@ export default function ProgramResult(props) {
                   {" "}
                 </InfoOutlinedIcon>
               </Grid2>
-
               <Grid2 xs={1.5} key={`${prog.id}-b`}>
                 <Typography style={{ color: "#F6E9E9" }}>
                   {prog.name}
                 </Typography>
               </Grid2>
-
               <Grid2 xs={3} key={`${prog.id}-c`}>
                 <ProgressBar
                   // Had to comment out, otherwise the button wouldn't work
@@ -154,7 +152,7 @@ export default function ProgramResult(props) {
                 />
                 <CollapsedRow prog1={prog} />
               </Grid2>
-            </>
+            </React.Fragment>
           );
         })}
       </Grid2>
