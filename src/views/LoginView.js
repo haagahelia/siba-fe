@@ -46,7 +46,7 @@ export default function LoginView(props) {
           width: "65%",
           padding: 1,
           margin: "auto",
-          marginTop: "20px",
+          marginTop: "100px",
         }}
       >
         <CardContent>

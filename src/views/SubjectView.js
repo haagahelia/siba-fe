@@ -15,6 +15,7 @@ export default function SubjectView() {
   const [paginateSubjects, setPaginateSubjects] = useState([]);
   const [allSubjectsList, setAllSubjectsList] = useState([]);
   const [alertOpen, setAlertOpen] = useState(false);
+  const [open, setOpen] = useState(false);
   const [alertOptions, setAlertOptions] = useState({
     message: "This is an error alert — check it out!",
     severity: "error",
@@ -74,6 +75,8 @@ export default function SubjectView() {
                 getAllSubjects={getAllSubjects}
                 allSubjectsList={allSubjectsList}
                 paginateSubjects={paginateSubjects}
+                open={open}
+                setOpen={setOpen}
               />
               <SubjectPagination
                 pagination={pagination}

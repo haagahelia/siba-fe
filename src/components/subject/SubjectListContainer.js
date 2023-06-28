@@ -11,10 +11,16 @@ import { Card } from "@mui/material"; //{ Container, CardHeader}???
 //const baseUrl = BASEURL;
 
 export default function SubjectListContainer(props) {
-  const { getAllSubjects, allSubjectsList, paginateSubjects } = props;
+  const { getAllSubjects, allSubjectsList, paginateSubjects, open, setOpen } =
+    props;
   return (
     <div>
-      <SingleSubjectDialog getAllSubjects={getAllSubjects} />
+      <SingleSubjectDialog
+        getAllSubjects={getAllSubjects}
+        open={open}
+        setOpen={setOpen}
+      />
+
       <Grid container rowSpacing={1}>
         <Card variant="outlined">
           <CardContent>

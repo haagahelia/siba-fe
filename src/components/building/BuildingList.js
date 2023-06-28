@@ -19,6 +19,7 @@ export default function BuildingList() {
     severity: "error",
   });
   const { roles, setRoles } = RoleLoggedIn();
+  console.log(roles);
 
   const [open, setOpen] = useState(false);
 

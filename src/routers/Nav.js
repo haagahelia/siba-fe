@@ -55,6 +55,7 @@ function NavBar() {
   const [loggedIn, setLoggedIn] = useState(
     localStorage.getItem("email") ? localStorage.getItem("email") : "Not yet",
   );
+
   const { roles, setRoles } = RoleLoggedIn();
 
   const [anchorElNav, setAnchorElNav] = React.useState(null);
