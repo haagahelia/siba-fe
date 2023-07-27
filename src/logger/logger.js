@@ -3,7 +3,11 @@ const Logger = {
   logPrefix: "CustomLogger",
 
   getFormattedTimestamp() {
-    return new Date().toISOString();
+    let now = new Date();
+    // converting to Finnish time
+    let offset = now.getTimezoneOffset() + 5 * 60;
+    let finnishTime = new Date(now.getTime() + offset * 60 * 1000);
+    return finnishTime.toISOString();
   },
 
   debug(...params) {

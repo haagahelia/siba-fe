@@ -13,6 +13,7 @@ import CollapsedRow from "./CollapsedRow";
 import { useEffect, useState, useContext } from "react";
 import { AppContext } from "../../AppContext";
 import { useTheme } from "@mui/material";
+import Logger from "../../logger/logger";
 
 //component for displaying the subject groups of the allocation result
 //shows:
@@ -22,6 +23,9 @@ import { useTheme } from "@mui/material";
 //popup button that shows the lessons of the subject group
 
 export default function ProgramResult(props) {
+  Logger.logPrefix = "ProgramResult";
+  Logger.debug("ProgramResult component instantiated.");
+
   const progStore = resultProgramStore;
   const [progs, setProgs] = useState([]);
   const [resetCounter, setResetCounter] = useState(0);
@@ -29,6 +33,7 @@ export default function ProgramResult(props) {
   const theme = useTheme();
 
   useEffect(() => {
+    Logger.debug("Running effect to fetch program data.");
     getProgramData();
 
     return () => {
@@ -39,8 +44,13 @@ export default function ProgramResult(props) {
   }, [resetCounter]);
 
   const getProgramData = async () => {
+    Logger.debug("getProgramData: fetching program names.");
     await progStore.fetchNames(appContext.allocRoundId);
-    setProgs(progStore.getNames());
+    const names = progStore.getNames();
+    Logger.debug(
+      `getProgramData: successfully fetched ${names.length} program names.`,
+    );
+    setProgs(names);
   };
 
   const [subProg, setSubProg] = React.useState({});

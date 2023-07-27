@@ -8,11 +8,14 @@ import { Typography } from "@mui/material";
 import { CardHeader, Card, Container } from "@mui/material";
 import CardContent from "@mui/material/CardContent";
 import DepartmentDialog from "../components/department/DepartmentDialog";
-
 import AddDepartment from "../components/department/AddDepartment";
 import { RoleLoggedIn } from "../customhooks/RoleLoggedIn";
+import Logger from "../logger/logger";
 
 export default function DepartmentView() {
+  Logger.logPrefix = "DepartmentView";
+  Logger.debug("DepartmentView component instantiated.");
+
   const [DepartmentList, setDepartmentList] = useState([]);
   const [singleDepartment, setSingleDepartment] = useState();
   const [open, setOpen] = useState(false);
@@ -24,8 +27,10 @@ export default function DepartmentView() {
   const { roles, setRoles } = RoleLoggedIn();
 
   const getAllDepartments = async function () {
+    Logger.debug("getAllDepartments: fetching all departments from server.");
     const { success, data } = await dao.fetchDepartmentData();
     if (!success) {
+      Logger.error("getAllDepartments: failed to fetch all departments.");
       setAlertOptions({
         severity: "error",
         title: "Error",
@@ -35,11 +40,15 @@ export default function DepartmentView() {
       setAlertOpen(true);
       return;
     } else {
+      Logger.debug(
+        `getAllDepartments: successfully fetched ${data.length} departments.`,
+      );
       setDepartmentList(data);
     }
   };
 
   useEffect(() => {
+    Logger.debug("Running effect to fetch all departments.");
     getAllDepartments();
   }, []);
 
