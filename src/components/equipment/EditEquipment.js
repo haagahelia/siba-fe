@@ -6,8 +6,10 @@ import { Button, Grid } from "@mui/material";
 import { DialogContent, DialogContentText } from "@mui/material";
 import dao from "../../ajax/dao";
 import ValidateEditEquipment from "../../validation/ValidateEditEquipment";
+import Logger from "../../logger/logger";
 
 export default function EditEquipment(props) {
+  Logger.logPrefix = "SingleEquipmentDialog";
   const {
     singleEquipment,
     setSingleEquipment,
@@ -19,6 +21,9 @@ export default function EditEquipment(props) {
   const [editOpen, setEditOpen] = useState(false);
 
   const submitEdits = async () => {
+    Logger.debug(
+      `Submitting edits for equipment: ${JSON.stringify(singleEquipment)}`,
+    );
     let validation = ValidateEditEquipment(singleEquipment);
     if (Object.values(validation).length !== 0) {
       alert(Object.values(validation));
