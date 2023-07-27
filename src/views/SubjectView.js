@@ -8,10 +8,14 @@ import dao from "../ajax/dao";
 import AlertBox from "../components/common/AlertBox";
 import SubjectFiltering from "../components/subject/SubjectFiltering";
 import SubjectPagination from "../components/subject/SubjectPagination";
+import Logger from "../logger/logger";
 
 const pageSize = 15;
 
 export default function SubjectView() {
+  Logger.logPrefix = "SubjectView";
+  Logger.debug("SubjectView component instantiated.");
+
   const [paginateSubjects, setPaginateSubjects] = useState([]);
   const [allSubjectsList, setAllSubjectsList] = useState([]);
   const [alertOpen, setAlertOpen] = useState(false);
@@ -20,14 +24,19 @@ export default function SubjectView() {
     message: "This is an error alert — check it out!",
     severity: "error",
   });
+
+  Logger.debug("Initial state set.");
+
   const [pagination, setPagination] = useState({
     from: 0,
     to: pageSize,
   });
 
   const getAllSubjects = async function () {
+    Logger.debug("getAllSubjects: fetching all subjects from server.");
     const { success, data } = await dao.fetchAllSubjects();
     if (!success) {
+      Logger.error("getAllSubjects: failed to fetch all subjects.");
       setAlertOptions({
         severity: "error",
         title: "Error",
@@ -36,15 +45,21 @@ export default function SubjectView() {
       setAlertOpen(true);
       return;
     } else {
+      Logger.debug(
+        `getAllSubjects: successfully fetched ${data.length} subjects.`,
+      );
       setAllSubjectsList(data);
-      setPaginateSubjects(allSubjectsList.slice(0, 15));
+      setPaginateSubjects(data.slice(0, 15));
     }
   };
 
   useEffect(() => {
+    Logger.debug("Running effect to fetch all subjects.");
     getAllSubjects();
   }, []);
+
   useEffect(() => {
+    Logger.debug("Running effect to update paginated subjects.");
     setPaginateSubjects(allSubjectsList.slice(0, 15));
   }, [allSubjectsList]);
 

@@ -10,7 +10,7 @@ import AllocRoundControlPanel from "../AllocRound/AllocRoundControlPanel";
 import resultRoomsStore from "../../data/ResultRoomsStore";
 import RoomsWithTimesList from "../room/RoomsWithTimesList";
 import { AppContext } from "../../AppContext";
-
+import Logger from "../../logger/logger";
 //a component for displaying allocation results
 //shows: 1.the name of the room 2. utilization rate 3. classes using the room
 
@@ -20,17 +20,25 @@ export default function RoomResult(props) {
   const [resetCounter, setResetCounter] = useState(0);
   const appContext = useContext(AppContext);
   const theme = useTheme();
+  Logger.logPrefix = "RoomResult";
+  Logger.debug("RoomResult component instantiated.");
 
   useEffect(() => {
     getRoomsData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [resetCounter]);
 
   const getRoomsData = async () => {
+    Logger.debug("getRoomsData: fetching room data from server.");
     await roomStore.fetchRooms(appContext.allocRoundId);
+    Logger.debug(
+      `getRoomsData: successfully fetched ${roomStore.rooms.length} rooms.`,
+    );
     setRooms(roomStore.rooms);
   };
 
   const incrementResetCounter = () => {
+    Logger.debug("Incrementing reset counter.");
     setResetCounter(resetCounter + 1);
   };
 
