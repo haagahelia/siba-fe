@@ -11,6 +11,7 @@ import { RoleLoggedIn } from "../../customhooks/RoleLoggedIn";
 import Logger from "../../logger/logger";
 
 export default function SingleEquipmentDialog(props) {
+  Logger.logPrefix = "SingleEquipmentDialog";
   const {
     open,
     setOpen,
