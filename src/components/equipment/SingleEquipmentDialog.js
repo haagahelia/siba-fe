@@ -2,16 +2,16 @@ import React, { useState, useEffect } from "react";
 import {
   Dialog,
   DialogContent,
-  DialogContentText,
   DialogTitle,
-  Typography,
   DialogActions,
 } from "@mui/material";
 import EditEquipment from "./EditEquipment";
 import DeleteEquipment from "./DeleteEquipment";
 import { RoleLoggedIn } from "../../customhooks/RoleLoggedIn";
+import Logger from "../../logger/logger";
 
 export default function SingleEquipmentDialog(props) {
+  Logger.logPrefix = "SingleEquipmentDialog";
   const {
     open,
     setOpen,
@@ -20,7 +20,17 @@ export default function SingleEquipmentDialog(props) {
     getAllEquipments,
   } = props;
   const { roles, setRoles } = RoleLoggedIn();
-  console.log(singleEquipment);
+
+  useEffect(() => {
+    if (open && singleEquipment) {
+      Logger.debug(
+        `Rendering SingleEquipmentDialog for equipment: ${JSON.stringify(
+          singleEquipment,
+        )}`,
+      );
+    }
+  }, [open, singleEquipment]);
+
   return (
     <>
       <Dialog open={open} onClose={() => setOpen(false)}>

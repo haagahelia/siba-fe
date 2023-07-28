@@ -10,8 +10,10 @@ import BuildingListItem from "./BuildingListItem";
 import AddBuildingContainer from "./AddBuildingContainer";
 import SingleBuildingDialog from "./SingleBuildingDialog";
 import { RoleLoggedIn } from "../../customhooks/RoleLoggedIn";
+import Logger from "../../logger/logger";
 
 export default function BuildingList() {
+  Logger.logPrefix = "Buildings";
   const [allBuildingsList, setAllBuildingsList] = useState([]);
   const [alertOpen, setAlertOpen] = useState(false);
   const [alertOptions, setAlertOptions] = useState({
@@ -19,7 +21,6 @@ export default function BuildingList() {
     severity: "error",
   });
   const { roles, setRoles } = RoleLoggedIn();
-  console.log(roles);
 
   const [open, setOpen] = useState(false);
 
@@ -27,6 +28,11 @@ export default function BuildingList() {
 
   const getAllBuildings = async function () {
     const { success, data } = await dao.fetchAllBuildings();
+    if (success) {
+      Logger.debug(`Fetched ${data.length} buildings.`);
+    } else {
+      Logger.error("Failed to fetch buildings.");
+    }
     if (!success) {
       setAlertOptions({
         severity: "error",
@@ -41,6 +47,7 @@ export default function BuildingList() {
   };
 
   useEffect(() => {
+    Logger.debug("Buildings component instantiated.");
     getAllBuildings();
   }, []);
 
@@ -73,7 +80,11 @@ export default function BuildingList() {
                       disablePadding
                       onClick={() => {
                         setSingleBuilding(buildingDetail);
-
+                        Logger.debug(
+                          `Building selected: ${JSON.stringify(
+                            buildingDetail,
+                          )}`,
+                        );
                         setOpen(true);
                       }}
                       //onMouseEnter={() => sethoverColor("#CFD6D5  ")}
