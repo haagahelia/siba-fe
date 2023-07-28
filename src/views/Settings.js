@@ -6,8 +6,10 @@ import { CardHeader, Card, Container, Grid } from "@mui/material";
 import AlertBox from "../components/common/AlertBox";
 import dao from "../ajax/dao";
 import { RoleLoggedIn } from "../customhooks/RoleLoggedIn";
+import Logger from "../logger/logger";
 
 export default function Settings() {
+  Logger.logPrefix = "Settings";
   const [paginateSettings, setPaginateSettings] = useState([]);
   const [settings, setSettings] = useState([]);
   const [dataModifiedCounter, setDataModifiedCounter] = useState(0);
@@ -19,8 +21,10 @@ export default function Settings() {
   const { roles, setRoles } = RoleLoggedIn();
 
   const getAllSettings = async function () {
+    Logger.debug("Fetching all settings");
     const { success, data } = await dao.fetchSettings();
     if (!success) {
+      Logger.error("Error fetching settings");
       setAlertOptions({
         severity: "error",
         title: "Error",
@@ -29,6 +33,7 @@ export default function Settings() {
       setAlertOpen(true);
       return;
     } else {
+      Logger.debug(`Fetched settings, amount: ${data.length}`);
       setSettings(data);
       setPaginateSettings(settings.slice(0, 15));
     }
