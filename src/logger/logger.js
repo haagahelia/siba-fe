@@ -1,11 +1,14 @@
 const Logger = {
+  // The level of the logs that should be displayed.
+  // Available options are: "debug", "info", "warn", "error".
   logLevel: "debug",
-  logPrefix: "CustomLogger",
 
+  // A prefix that will be prepended to all log messages. Should be set in the view logger is used in.
+  logPrefix: "CustomLogger",
   getFormattedTimestamp() {
     let now = new Date();
     // converting to Finnish time
-    let offset = now.getTimezoneOffset() + 5 * 60;
+    let offset = now.getTimezoneOffset() + 6 * 60;
     let finnishTime = new Date(now.getTime() + offset * 60 * 1000);
     return finnishTime.toISOString();
   },
