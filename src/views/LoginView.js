@@ -83,9 +83,6 @@ export default function LoginView(props) {
           <Grid>
             <Button onClick={loginUser}>Login</Button>
           </Grid>
-          <Grid>
-            <Button onClick={logOut}>Log out</Button>
-          </Grid>
         </CardContent>
       </Card>
     </>
