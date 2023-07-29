@@ -3,8 +3,11 @@ import { useState, useContext, useEffect } from "react";
 import { TextField, Card, CardContent, Grid, Button } from "@mui/material";
 import dao from "../ajax/dao";
 import { AppContext } from "../AppContext";
+import Logger from "../logger/logger";
 
 export default function LoginView(props) {
+  Logger.logPrefix = "LoginView";
+
   const { handleLoginChange } = props;
   const [loginForm, setLoginForm] = useState({
     email: "",
@@ -14,10 +17,12 @@ export default function LoginView(props) {
   const appContext = useContext(AppContext);
 
   const loginUser = async () => {
+    Logger.debug("Attempting to log in");
     const { success, data } = await dao.getUserByEmail(loginForm);
     if (!success) {
-      console.log(data);
+      Logger.error("Login failed:", data);
     } else {
+      Logger.debug("Login successful");
       appContext.userEmail = data[0].email;
       localStorage.setItem("email", data[0].email);
       localStorage.setItem("sessionToken", data[0].token);
@@ -34,6 +39,7 @@ export default function LoginView(props) {
   };
 
   const logOut = () => {
+    Logger.debug("Logging out");
     localStorage.clear();
     handleLoginChange();
   };

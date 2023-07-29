@@ -1,6 +1,7 @@
 import { TextField, Card, CardContent, Grid, Button } from "@mui/material";
 import { useEffect, useState } from "react";
 import dao from "../../ajax/dao";
+import Logger from "../../logger/logger";
 //import bcrypt from "bcryptjs";
 
 export default function AddUser() {
@@ -11,16 +12,22 @@ export default function AddUser() {
     isPlanner: "",
     isStatist: "",
   });
-
+  Logger.logPrefix = "RegisterUser";
   const registerUser = async () => {
+    Logger.debug(
+      "Attempting to register a user with email:",
+      registerForm.email,
+    );
     //const hashedPassword = bcrypt.hashSync(registerForm.password, 10);
     let success = await dao.postNewUser({
       ...registerForm,
     });
     //password: hashedPassword,
     if (!success) {
+      Logger.error("Registration failed for email:", registerForm.email);
       alert("Something went wrong");
     } else {
+      Logger.debug("Registration successful for email:", registerForm.email);
       setRegisterForm({
         email: "",
         password: "",

@@ -12,8 +12,11 @@ import Grid from "@mui/material/Grid";
 import dao from "../ajax/dao";
 import AlertBox from "../components/common/AlertBox";
 import { useTheme } from "@mui/material/styles";
+import Logger from "../logger/logger";
 
 export default function AllocRoundView() {
+  Logger.logPrefix = "AllocRoundView";
+
   const [paginateAllocRounds, setpaginateAllocRounds] = useState([]);
   const [allAllocRoundsList, setallAllocRoundsList] = useState([]);
   const [dataModifiedCounter, setDataModifiedCounter] = useState(0);
@@ -25,8 +28,10 @@ export default function AllocRoundView() {
   });
 
   const getAllAllocRounds = async function () {
+    Logger.debug("Fetching all allocation rounds");
     const { success, data } = await dao.fetchAllAllocRounds();
     if (!success) {
+      Logger.error("Error fetching allocation rounds");
       setAlertOptions({
         severity: "error",
         title: "Error",
@@ -36,6 +41,7 @@ export default function AllocRoundView() {
       setAlertOpen(true);
       return;
     } else {
+      Logger.debug(`Fetched allocation rounds: ${data.length}`);
       setallAllocRoundsList(data);
       setpaginateAllocRounds(allAllocRoundsList.slice(0, 15));
     }
