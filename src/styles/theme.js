@@ -60,6 +60,7 @@ const snackbarSuccessGreen = "#43A047"; // Medium Green
 
 export const normalPalette = {
   // mode: "light",
+  name: "dark",
   common: {
     black: "#1D1D1D",
     white: "#fff",
@@ -284,6 +285,7 @@ export const redPalette = {
 */
 
 export const lightPalette = {
+  name: "light",
   common: {
     black: "#1D1D1D",
     white: "#fff",
@@ -627,7 +629,7 @@ export const createAppTheme = (currentPalette) =>
               bottom: 50,
               right: 10,
               zIndex: 1000,
-              backgroundColor: buttonRed,
+              backgroundColor: buttonGreen,
               color: currentPalette.fontColorDefault.default,
             },
           },
@@ -715,7 +717,7 @@ export const createAppTheme = (currentPalette) =>
           root: {
             justifyContent: "space-evenly",
             alignItems: "flex-start",
-            marginTop: 20,
+            marginTop: 10,
             padding: 24,
           },
         },

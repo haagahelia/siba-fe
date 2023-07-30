@@ -1,10 +1,10 @@
 import "./App.css";
 import { ThemeProvider } from "@mui/material/styles";
-import theme from "./styles/theme";
 import Nav from "./routers/Nav";
 import { CssBaseline } from "@mui/material";
 import { Button } from "@mui/material";
 import { useThemeSwitcher } from "./customhooks/useThemeSwitcher";
+import { ThemeIcon } from "./styles/themeIcons";
 
 function App() {
   const { theme, toggleTheme } = useThemeSwitcher();
@@ -14,7 +14,7 @@ function App() {
         <CssBaseline />
         <Nav />
         <Button variant="themeToggle" onClick={toggleTheme}>
-          Toggle Theme
+          <ThemeIcon theme={theme} />
         </Button>
       </ThemeProvider>
     </div>
