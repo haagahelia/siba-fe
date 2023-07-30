@@ -4,10 +4,11 @@ import { TextField, Card, CardContent, Grid, Button } from "@mui/material";
 import dao from "../ajax/dao";
 import { AppContext } from "../AppContext";
 import Logger from "../logger/logger";
+import { useNavigate } from "react-router-dom";
 
 export default function LoginView(props) {
   Logger.logPrefix = "LoginView";
-
+  const navigate = useNavigate();
   const { handleLoginChange } = props;
   const [loginForm, setLoginForm] = useState({
     email: "",
@@ -35,6 +36,7 @@ export default function LoginView(props) {
         email: "",
         password: "",
       });
+      navigate("/");
     }
   };
 
@@ -80,9 +82,6 @@ export default function LoginView(props) {
           </Grid>
           <Grid>
             <Button onClick={loginUser}>Login</Button>
-          </Grid>
-          <Grid>
-            <Button onClick={logOut}>Log out</Button>
           </Grid>
         </CardContent>
       </Card>

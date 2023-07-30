@@ -48,16 +48,12 @@ const sibaPages = [
 
 function NavBar() {
   const [click, setClick] = useState(false);
-
   const handleClick = () => setClick(!click);
-
   //const appContext = useContext(AppContext);
   const [loggedIn, setLoggedIn] = useState(
     localStorage.getItem("email") ? localStorage.getItem("email") : "Not yet",
   );
-
   const { roles, setRoles } = RoleLoggedIn();
-
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -78,23 +74,37 @@ function NavBar() {
     });
   };
 
+  const logOut = () => {
+    localStorage.clear();
+    handleLoginChange();
+  };
+
   const renderNavLinks = () => {
+    let pagesToShow = [...sibaPages];
+
+    if (loggedIn !== "Not yet" && loggedIn !== "No more") {
+      pagesToShow = pagesToShow.filter((page) => page.href !== "/login"); // Hiding Login link if logged in
+      pagesToShow.push({ name: "Logout", href: "#", action: logOut }); // Showing log out button if logged in
+    }
     if (roles.admin === "1") {
-      return sibaPages.map((page, index) => (
+      return pagesToShow.map((page, index) => (
         <ListItem variant="sibaAppBarHorizontal" key={index}>
           <NavLink
             to={page.href}
             end
             activeclassname="active"
             className="nav-links"
-            onClick={handleClick}
+            onClick={() => {
+              handleClick();
+              if (page.action) page.action(); // Execute the logout action if present
+            }}
           >
             {page.name}
           </NavLink>
         </ListItem>
       ));
     } else {
-      return sibaPages.slice(1).map((page, index) => (
+      return pagesToShow.slice(1).map((page, index) => (
         <ListItem variant="sibaAppBarHorizontal" key={index}>
           <NavLink
             to={page.href}
