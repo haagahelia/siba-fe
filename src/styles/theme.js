@@ -4,17 +4,21 @@ import { createTheme } from "@mui/material";
 // First a place for defining different kinds of colors
 const darkBrown = "#272121";
 const lightGray = "#363333"; // E.g. background
-
 const light = "#F6E9E9";
 const orange = "#E16428";
-
 const fontWhite = "#FFFFFF";
-
 const lightGreen = "#90EE90";
 const lightBlue = "#73FDFF";
 const lightBlue2 = "#5DBCD2";
 const lightYellow = "#FFF5AB";
 const lightRed = "#FF8585";
+
+//light
+const mediumGray = "#6A6A6A";
+const darkGray = "#4A4A4A";
+const lightGray2 = "#F5F5F5";
+const smokyWhite = "#AEADA3";
+
 //yellowPalette
 const canary = "#FFFF8F";
 const paleCanary = "#FFFFAA";
@@ -38,22 +42,17 @@ const brightRed = "#FF1111";
 const pumpkinOrange = "#FF6600";
 const clayBrown = "#B97446";
 const darkOrange = "#EE9900";
-
 const mediumBrown = "#8C4B2D"; // borderColor
-
 const buttonOrange = "#E16428"; // Halloween Orange
 const buttonGreen = "#54B435"; // Apple green
 const buttonRed = "#FF1E00"; // Reset button Ruby red
-
 const progressBarGreen = "#06FF00"; // Highlighter Green/Lime
 const progressBarYellow = "#FFE400"; // Golden Yellow
 const progressBarRed = "#FF1700"; // Scarlet red / almost the same as #FF1E00
-
 const snackbarErrorRed = buttonRed;
 const snackbarWarningOrange = "#FFA000"; // Orange Peel
 const snackbarInformationBlue = "#1976D2"; // Navy Blue
 const snackbarSuccessGreen = "#43A047"; // Medium Green
-
 // Then defining three palettes so that in the normal palette
 // no new colors are defined. Red and yellow palettes though are
 // used with ad-hoc "#AABBCC" kind of RGB hexadecimal color definitions
@@ -283,9 +282,90 @@ export const redPalette = {
  "#FF2222" Torch Red, "#FF9AD5" Lavender Rose, "#AC3939" Dull Red
 */
 
+export const lightPalette = {
+  common: {
+    black: "#1D1D1D",
+    white: "#fff",
+  },
+  primary: {
+    main: buttonGreen,
+    light: lightBlue2,
+    dark: mediumGray,
+    contrastText: "#ffffff",
+  },
+  secondary: {
+    main: buttonOrange,
+    light: lightYellow,
+    dark: darkGray,
+    contrastText: "#ffffff",
+  },
+  error: {
+    main: snackbarErrorRed,
+    light: lightRed,
+    dark: darkOrange,
+    contrastText: "#ffffff",
+  },
+  warning: {
+    main: snackbarWarningOrange,
+    light: butteryWhite,
+    dark: sahara,
+    contrastText: "#000000",
+  },
+  info: {
+    main: snackbarInformationBlue,
+    light: lightBlue,
+    dark: mediumGray,
+    contrastText: "#ffffff",
+  },
+  success: {
+    main: snackbarSuccessGreen,
+    light: lightGreen,
+    dark: mediumGray,
+    contrastText: "#ffffff",
+  },
+  contrastThreshold: 3,
+  tonalOffset: 0.2,
+  text: {
+    primary: darkGray,
+    secondary: mediumGray,
+    disabled: lightGray2,
+  },
+  divider: lightGray,
+  background: {
+    paper: lightGray2,
+    default: smokyWhite,
+  },
+  action: {
+    active: mediumGray,
+    hover: lightGray2,
+    hoverOpacity: 0.04,
+    selected: lightGray,
+    selectedOpacity: 0.08,
+    disabled: lightGray2,
+    disabledBackground: lightGray,
+    disabledOpacity: 0.38,
+    focus: lightGray2,
+    focusOpacity: 0.12,
+    activatedOpacity: 0.12,
+  },
+  // Additional custom colors
+  red: {
+    main: buttonRed,
+  },
+  backgroundDarker: { default: light },
+  fontColorDefault: { default: darkBrown },
+  progressBarGreen: { main: progressBarGreen },
+  progressBarYellow: { main: progressBarYellow },
+  progressBarRed: { main: progressBarRed },
+  borderColor: {
+    main: mediumBrown,
+    cardBorder: lightGray,
+  },
+};
+
 // The swapping fast what palette will be in use right now:
-const currentPalette = normalPalette;
-// Options are       = normalPalette, redPalette, yellowPalette
+const currentPalette = lightPalette;
+// Options are       = normalPalette, redPalette, yellowPalette, lightPalette
 
 const theme = createTheme({
   palette: currentPalette,
@@ -315,6 +395,31 @@ const theme = createTheme({
       },
     },
     MuiTextField: {
+      styleOverrides: {
+        root: {
+          backgroundColor: currentPalette.backgroundDarker.default,
+          "& label": {
+            color: currentPalette.fontColorDefault.default,
+          },
+          "& label.Mui-focused": {
+            color: orange,
+          },
+          "& .MuiOutlinedInput-root": {
+            color: light,
+            "& fieldset": {
+              borderColor: currentPalette.borderColor.main,
+            },
+            "&:hover fieldset": {
+              borderColor: currentPalette.borderColor.main,
+            },
+            "&.Mui-focused fieldset": {
+              borderColor: currentPalette.borderColor.main,
+            },
+          },
+        },
+      },
+    },
+    TextField: {
       styleOverrides: {
         root: {
           backgroundColor: currentPalette.backgroundDarker.default,
