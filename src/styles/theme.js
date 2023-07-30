@@ -59,7 +59,6 @@ const snackbarSuccessGreen = "#43A047"; // Medium Green
 // used with ad-hoc "#AABBCC" kind of RGB hexadecimal color definitions
 
 export const normalPalette = {
-  // mode: "light",
   name: "dark",
   common: {
     black: "#1D1D1D",
@@ -355,6 +354,10 @@ export const lightPalette = {
   red: {
     main: buttonRed,
   },
+  //colors for room results
+  IndexRooms: {
+    luentoluokkaindex: { backgroundColor: "#FFFFFF", color: "#000000" },
+  },
   backgroundDarker: { default: bgGray },
   fontColorDefault: { default: darkBrown },
   progressBarGreen: { main: progressBarGreen },
@@ -370,7 +373,6 @@ export const lightPalette = {
 const currentPalette = lightPalette;
 // Options are       = normalPalette, redPalette, yellowPalette, lightPalette
 
-// const theme = createTheme({
 export const createAppTheme = (currentPalette) =>
   createTheme({
     palette: currentPalette,

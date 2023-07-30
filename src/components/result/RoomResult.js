@@ -23,6 +23,7 @@ export default function RoomResult(props) {
   Logger.logPrefix = "RoomResult";
   Logger.debug("RoomResult component instantiated.");
 
+  console.log(theme);
   useEffect(() => {
     getRoomsData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -45,7 +46,7 @@ export default function RoomResult(props) {
   return (
     <div style={{ width: "80%", margin: "auto" }}>
       <AllocRoundControlPanel incrementResetCounter={incrementResetCounter} />
-      <Typography style={{ color: "#F6E9E9", marginTop: "5%", fontSize: 24 }}>
+      <Typography style={{ marginTop: "5%", fontSize: 24 }}>
         Spaces (Huoneet)
       </Typography>
       <div
@@ -57,28 +58,19 @@ export default function RoomResult(props) {
         }}
       >
         <div style={theme.components.IndexRooms.luentoluokkaindex}>
-          <Typography style={{ marginLeft: 40, color: "#F6E9E9" }}>
-            {" "}
-            Lecture class{" "}
-          </Typography>
+          <Typography style={{ marginLeft: 40 }}> Lecture class </Typography>
         </div>
         <div style={theme.components.IndexRooms.studioindex}>
-          <Typography style={{ marginLeft: 40, color: "#F6E9E9" }}>
-            {" "}
-            Studio{" "}
-          </Typography>
+          <Typography style={{ marginLeft: 40 }}> Studio </Typography>
         </div>
         <div style={theme.components.IndexRooms.esitystilaindex}>
-          <Typography style={{ marginLeft: 40, color: "#F6E9E9" }}>
+          <Typography style={{ marginLeft: 40 }}>
             {" "}
             Performance space{" "}
           </Typography>
         </div>
         <div style={theme.components.IndexRooms.musiikkiluokkaindex}>
-          <Typography style={{ marginLeft: 40, color: "#F6E9E9" }}>
-            {" "}
-            Music class{" "}
-          </Typography>
+          <Typography style={{ marginLeft: 40 }}> Music class </Typography>
         </div>
       </div>
 
