@@ -1,4 +1,5 @@
 import { createTheme } from "@mui/material";
+import { grey } from "@mui/material/colors";
 // import { green, lightBlue } from "@mui/material/colors";
 
 // First a place for defining different kinds of colors
@@ -107,6 +108,20 @@ export const normalPalette = {
     secondary: "#3E5060",
     disabled: "#ffffff",
   },
+  AllocRoom: {
+    studio: {
+      color: lightRed,
+    },
+    luentoluokka: {
+      color: lightBlue,
+    },
+    esitystila: {
+      color: lightGreen,
+    },
+    musiikkiluokka: {
+      color: lightYellow,
+    },
+  },
   divider: "#E7EBF0",
   background: {
     paper: "#ffffff",
@@ -198,6 +213,20 @@ export const yellowPalette = {
   red: {
     main: saffronMango,
   },
+  AllocRoom: {
+    studio: {
+      color: paleLime,
+    },
+    luentoluokka: {
+      color: canary,
+    },
+    esitystila: {
+      color: butteryWhite,
+    },
+    musiikkiluokka: {
+      color: buddhaGold,
+    },
+  },
   backgroundDarker: { default: paleCanary },
   fontColorDefault: { default: sahara },
   progressBarGreen: { main: progressBarGreen },
@@ -213,7 +242,7 @@ export const yellowPalette = {
 */
 
 export const redPalette = {
-  // mode: "light",
+  name: "redPalette",
   common: {
     black: "#1D1D1D",
     white: "#fff",
@@ -224,6 +253,7 @@ export const redPalette = {
     dark: "#0059B2",
     contrastText: "#ffffff",
   },
+
   secondary: {
     main: salmonPink,
     light: "#ba68c8",
@@ -264,6 +294,20 @@ export const redPalette = {
   background: {
     paper: "#ffffff",
     default: tomatoRed,
+  },
+  AllocRoom: {
+    studio: {
+      color: salmonPink,
+    },
+    luentoluokka: {
+      color: darkOrange,
+    },
+    esitystila: {
+      color: pumpkinOrange,
+    },
+    musiikkiluokka: {
+      color: brightRed,
+    },
   },
   //own colors
   red: {
@@ -350,6 +394,21 @@ export const lightPalette = {
     focusOpacity: 0.12,
     activatedOpacity: 0.12,
   },
+  AllocRoom: {
+    studio: {
+      color: lightBlue2, // A lighter blue that can stand out on a light background
+    },
+    luentoluokka: {
+      color: buttonGreen, // A green color that contrasts well with light backgrounds
+    },
+    esitystila: {
+      color: buttonOrange, // A distinct orange that will be visible on a light background
+    },
+    musiikkiluokka: {
+      color: brightRed, // A lively yellow that can stand out on a light theme
+    },
+  },
+
   // Additional custom colors
   red: {
     main: buttonRed,
@@ -426,7 +485,6 @@ export const createAppTheme = (currentPalette) =>
           },
         },
       },
-
       MuiMenuItem: {
         styleOverrides: {
           root: {
@@ -576,23 +634,23 @@ export const createAppTheme = (currentPalette) =>
       },
       AllocRoom: {
         studio: {
-          color: lightRed,
+          color: currentPalette.AllocRoom.studio.color,
         },
         luentoluokka: {
-          color: lightBlue,
+          color: currentPalette.AllocRoom.luentoluokka.color,
         },
         esitystila: {
-          color: lightGreen,
+          color: currentPalette.AllocRoom.esitystila.color,
         },
         musiikkiluokka: {
-          color: lightYellow,
+          color: currentPalette.AllocRoom.musiikkiluokka.color,
         },
       },
       IndexRooms: {
         studioindex: {
           width: 15,
           height: 15,
-          backgroundColor: lightRed,
+          backgroundColor: currentPalette.AllocRoom.studio.color,
           border: "3px solid",
           borderColor: "black",
           marginLeft: 60,
@@ -600,7 +658,7 @@ export const createAppTheme = (currentPalette) =>
         luentoluokkaindex: {
           width: 15,
           height: 15,
-          backgroundColor: lightBlue,
+          backgroundColor: currentPalette.AllocRoom.luentoluokka.color,
           border: "3px solid",
           borderColor: "black",
           marginLeft: 60,
@@ -608,7 +666,7 @@ export const createAppTheme = (currentPalette) =>
         esitystilaindex: {
           width: 15,
           height: 15,
-          backgroundColor: lightGreen,
+          backgroundColor: currentPalette.AllocRoom.esitystila.color,
           border: "3px solid",
           borderColor: "black",
           marginLeft: 60,
@@ -616,7 +674,7 @@ export const createAppTheme = (currentPalette) =>
         musiikkiluokkaindex: {
           width: 15,
           height: 15,
-          backgroundColor: lightYellow,
+          backgroundColor: currentPalette.AllocRoom.musiikkiluokka.color,
           border: "3px solid",
           borderColor: "black",
           marginLeft: 60,
