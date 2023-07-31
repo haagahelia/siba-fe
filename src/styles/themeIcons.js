@@ -34,8 +34,8 @@ export const MoonIcon = () => (
   </svg>
 );
 
-// checks "name" property of palette used, if not light shows moon(darkmode) and if lightmode shows sun icon
+// checks "name" property of palette used, if not light shows sun(darkmode) and if lightmode shows moon icon.
 export const ThemeIcon = ({ theme }) => {
   const isLightMode = theme.palette.name === "light";
-  return isLightMode ? <SunIcon /> : <MoonIcon />;
+  return isLightMode ? <MoonIcon /> : <SunIcon />;
 };
