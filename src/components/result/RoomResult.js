@@ -23,7 +23,6 @@ export default function RoomResult(props) {
   Logger.logPrefix = "RoomResult";
   Logger.debug("RoomResult component instantiated.");
 
-  console.log(theme);
   useEffect(() => {
     getRoomsData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
