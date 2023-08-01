@@ -82,7 +82,7 @@ export default function ProgramResult(props) {
   return (
     <>
       <AllocRoundControlPanel incrementResetCounter={incrementResetCounter} />
-      <Typography style={{ color: "#F6E9E9", margin: 20, fontSize: 24 }}>
+      <Typography style={{ margin: 20, fontSize: 24 }}>
         Programs (Aineryhmät)
       </Typography>
       <Modal open={open} onClose={handleClose} style={{ overflow: "scroll" }}>
@@ -137,16 +137,12 @@ export default function ProgramResult(props) {
             <React.Fragment key={prog.id}>
               <Grid2 xs={1.5}>
                 <InfoOutlinedIcon
-                  sx={{ color: "white", fontSize: 20 }}
+                  sx={{ fontSize: 20 }}
                   onClick={() => handleOpen(prog)}
-                >
-                  {" "}
-                </InfoOutlinedIcon>
+                />
               </Grid2>
               <Grid2 xs={1.5} key={`${prog.id}-b`}>
-                <Typography style={{ color: "#F6E9E9" }}>
-                  {prog.name}
-                </Typography>
+                <Typography>{prog.name}</Typography>
               </Grid2>
               <Grid2 xs={3} key={`${prog.id}-c`}>
                 <ProgressBar

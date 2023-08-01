@@ -47,7 +47,7 @@ export default function AddUser() {
           width: "65%",
           padding: 1,
           margin: "auto",
-          marginTop: "20px",
+          marginTop: "85px",
         }}
       >
         <CardContent>

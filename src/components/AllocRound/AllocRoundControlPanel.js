@@ -24,7 +24,7 @@ const AllocRoundControlPanel = ({ incrementResetCounter }) => {
   };
 
   return (
-    <Typography color="white" component="p" style={{ marginTop: 80 }}>
+    <Typography component="p" style={{ marginTop: 80 }}>
       Current allocation round: {appContext.allocRoundId} &nbsp; After Start and
       Reset wait for few seconds.
       <Button
@@ -59,7 +59,6 @@ const AllocRoundControlPanel = ({ incrementResetCounter }) => {
           type="submit"
           variant="outlined"
           color="secondary"
-          style={{ color: "#F6E9E9" }}
           disabled={!isClicked}
         >
           Show failed allocation
