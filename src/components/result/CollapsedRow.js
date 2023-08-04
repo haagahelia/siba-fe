@@ -3,27 +3,30 @@ import Grid2 from "@mui/material/Unstable_Grid2";
 //import Typography from "@mui/material/Typography";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
-import { Collapse } from "@mui/material"; // Button???
-//import { useTheme } from "@mui/material/styles";
+import { Collapse, useTheme } from "@mui/material";
+
 import RoomList from "../room/RoomList";
 
 export default function CollapsedRow(props) {
   const prog1 = props.prog1;
   const [expand, setExpand] = React.useState(false);
-  //const theme = useTheme();
+  const theme = useTheme();
 
   return (
     <Grid2 container>
       {expand ? (
         <KeyboardArrowUpIcon
-          sx={{ color: "white", fontSize: 24 }}
+          sx={{ fontSize: 24, color: theme.palette.infoIcon.main }}
           onClick={() => setExpand(!expand)}
         >
           {" "}
         </KeyboardArrowUpIcon>
       ) : (
         <KeyboardArrowDownIcon
-          sx={{ color: "white", fontSize: 24 }}
+          sx={{
+            fontSize: 24,
+            color: theme.palette.infoIcon.main,
+          }}
           onClick={() => setExpand(!expand)}
         >
           {" "}

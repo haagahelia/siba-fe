@@ -137,7 +137,7 @@ export default function ProgramResult(props) {
             <React.Fragment key={prog.id}>
               <Grid2 xs={1.5}>
                 <InfoOutlinedIcon
-                  sx={{ fontSize: 20 }}
+                  sx={{ fontSize: 20, color: theme.palette.infoIcon.main }}
                   onClick={() => handleOpen(prog)}
                 />
               </Grid2>
@@ -146,8 +146,6 @@ export default function ProgramResult(props) {
               </Grid2>
               <Grid2 xs={3} key={`${prog.id}-c`}>
                 <ProgressBar
-                  // Had to comment out, otherwise the button wouldn't work
-                  // style= {styles.section}
                   baseBgColor={"#272121"}
                   labelAlignment={"left"}
                   labelColor={textColor}

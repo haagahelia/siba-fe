@@ -25,7 +25,7 @@ export default function SubjectResult(props) {
         spacing={2}
         style={{
           margin: "auto",
-          marginTop: 20,
+          marginTop: 100,
           padding: 10,
           borderRadius: 20,
         }}
