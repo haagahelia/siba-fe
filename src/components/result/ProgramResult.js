@@ -93,7 +93,7 @@ export default function ProgramResult(props) {
             margin: "auto",
             borderRadius: 20,
             marginTop: "10%",
-            backgroundColor: "#FFFFFF",
+            backgroundColor: theme.palette.background.default,
             position: "relative",
           }}
         >
@@ -112,8 +112,11 @@ export default function ProgramResult(props) {
               fill="none"
               viewBox="0 0 24 24"
               strokeWidth={1.5}
-              style={{ width: "24px", height: "24px" }}
-              stroke="black"
+              style={{
+                width: "24px",
+                height: "24px",
+                stroke: theme.palette.infoIcon.main,
+              }}
             >
               <path
                 strokeLinecap="round"
