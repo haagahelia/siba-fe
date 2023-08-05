@@ -25,9 +25,10 @@ export default function SubjectResult(props) {
         spacing={2}
         style={{
           margin: "auto",
-          marginTop: 100,
+          marginTop: 20,
           padding: 10,
           borderRadius: 20,
+          color: "#000000",
         }}
       >
         {props.data.map((prog) => {
@@ -40,9 +41,7 @@ export default function SubjectResult(props) {
 
           return (
             <React.Fragment key={prog.id}>
-              <Grid2 xs={3} style={{ color: "rgb(246, 233, 233)" }}>
-                {prog.name}
-              </Grid2>
+              <Grid2 xs={3}>{prog.name}</Grid2>
               <Grid2 xs={3}>
                 <ProgressBar
                   labelAlignment={"left"}
