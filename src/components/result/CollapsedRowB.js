@@ -7,12 +7,13 @@ import { Collapse } from "@mui/material"; // Button???
 // import RoomsWithTimeList from "../room/RoomsWithTimesList";
 import resultRoomsStore from "../../data/ResultRoomsStore";
 import { AppContext } from "../../AppContext";
-
+import { useTheme } from "@mui/material";
 //have to edit when the correct data comes, for now an illustrative version.
 export default function CollapsedRowB({ id }) {
   const [expand, setExpand] = React.useState(false);
   const [subjects, setSubjects] = React.useState([]);
   const appContext = useContext(AppContext);
+  const theme = useTheme();
 
   const handleExpandClick = () => {
     setExpand((prevExpand) => !prevExpand);
@@ -32,15 +33,12 @@ export default function CollapsedRowB({ id }) {
   return (
     <Grid2 container>
       {expand ? (
-        <KeyboardArrowUpIcon
-          sx={{ color: "white", fontSize: 24 }}
-          onClick={handleExpandClick}
-        >
+        <KeyboardArrowUpIcon sx={{ fontSize: 24 }} onClick={handleExpandClick}>
           {" "}
         </KeyboardArrowUpIcon>
       ) : (
         <KeyboardArrowDownIcon
-          sx={{ color: "white", fontSize: 24 }}
+          sx={{ color: theme.palette.infoIcon.main, fontSize: 24 }}
           onClick={handleExpandClick}
         >
           {" "}
