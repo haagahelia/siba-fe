@@ -15,7 +15,7 @@ export default function AddAllocRoundForm(props) {
           <AllocRoundInputField formik={formik} />
         </Grid>
         <Grid item xs={3} padding={2}>
-          <Button //theme button  green
+          <Button
             type="submit"
             variant="contained"
             style={theme.components.MuiButton.greenbutton}

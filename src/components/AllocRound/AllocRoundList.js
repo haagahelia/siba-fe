@@ -9,6 +9,7 @@ import Paper from "@mui/material/Paper";
 import { Typography } from "@mui/material";
 import AllocRoundDetails from "./AllocRoundDetails";
 import { AppContext } from "../../AppContext";
+import Logger from "../../logger/logger";
 
 export default function AllocRoundListItems(props) {
   const {
@@ -47,6 +48,7 @@ export default function AllocRoundListItems(props) {
                     setSingleAllocRound(value);
                     // setAllocRoundId(value.id);
                     setOpen(true);
+                    Logger.debug(`Allocation round chosen: ${value.name}`);
                   }}
                 >
                   <Grid item md={3} xs={2}>
