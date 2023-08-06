@@ -9,14 +9,10 @@ const RoomList = ({ rooms }) => {
     <>
       <Grid2 container key="collapse_container_row36">
         <Grid2 xs={8}>
-          <Typography style={{ color: "#F6E9E9", fontSize: 20 }}>
-            Huoneet
-          </Typography>
+          <Typography style={{ fontSize: 20 }}>Huoneet</Typography>
         </Grid2>
         <Grid2 xs={4}>
-          <Typography style={{ color: "#F6E9E9", fontSize: 20 }}>
-            Tunnit
-          </Typography>
+          <Typography style={{ fontSize: 20 }}>Tunnit</Typography>
         </Grid2>
       </Grid2>
       {rooms.map((room) => (
@@ -38,7 +34,6 @@ const RoomList = ({ rooms }) => {
               style={{
                 textAlign: "center",
                 marginTop: 5,
-                color: "#F6E9E9",
               }}
             >
               {room.allocatedHours} h

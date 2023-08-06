@@ -28,6 +28,7 @@ export default function SubjectResult(props) {
           marginTop: 20,
           padding: 10,
           borderRadius: 20,
+          color: "#000000",
         }}
       >
         {props.data.map((prog) => {
@@ -40,7 +41,10 @@ export default function SubjectResult(props) {
 
           return (
             <React.Fragment key={prog.id}>
-              <Grid2 xs={3} style={{ color: "rgb(246, 233, 233)" }}>
+              <Grid2
+                xs={3}
+                style={{ color: theme.palette.fontColorDefault.default }}
+              >
                 {prog.name}
               </Grid2>
               <Grid2 xs={3}>

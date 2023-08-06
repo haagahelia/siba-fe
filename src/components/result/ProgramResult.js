@@ -14,6 +14,7 @@ import { useEffect, useState, useContext } from "react";
 import { AppContext } from "../../AppContext";
 import { useTheme } from "@mui/material";
 import Logger from "../../logger/logger";
+import { xIcon } from "../../styles/themeIcons";
 
 //component for displaying the subject groups of the allocation result
 //shows:
@@ -92,13 +93,42 @@ export default function ProgramResult(props) {
             margin: "auto",
             borderRadius: 20,
             marginTop: "10%",
+            backgroundColor: theme.palette.background.default,
+            position: "relative",
           }}
         >
+          <div
+            style={{
+              position: "absolute",
+              top: "10px",
+              right: "10px",
+              cursor: "pointer",
+              zIndex: 1000,
+            }}
+            onClick={handleClose}
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={1.5}
+              style={{
+                width: "24px",
+                height: "24px",
+                stroke: theme.palette.infoIcon.main,
+              }}
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+              />
+            </svg>
+          </div>
           <Typography
             style={{
               textAlign: "center",
               marginTop: "5%",
-              color: "primary",
             }}
           >
             {subProg.name} -subjects
@@ -109,6 +139,7 @@ export default function ProgramResult(props) {
           />
         </Box>
       </Modal>
+
       <Grid2
         container
         rowSpacing={1}
@@ -137,7 +168,7 @@ export default function ProgramResult(props) {
             <React.Fragment key={prog.id}>
               <Grid2 xs={1.5}>
                 <InfoOutlinedIcon
-                  sx={{ fontSize: 20 }}
+                  sx={{ fontSize: 20, color: theme.palette.infoIcon.main }}
                   onClick={() => handleOpen(prog)}
                 />
               </Grid2>
@@ -146,8 +177,6 @@ export default function ProgramResult(props) {
               </Grid2>
               <Grid2 xs={3} key={`${prog.id}-c`}>
                 <ProgressBar
-                  // Had to comment out, otherwise the button wouldn't work
-                  // style= {styles.section}
                   baseBgColor={"#272121"}
                   labelAlignment={"left"}
                   labelColor={textColor}

@@ -13,6 +13,8 @@ const lightBlue = "#73FDFF";
 const lightBlue2 = "#5DBCD2";
 const lightYellow = "#FFF5AB";
 const lightRed = "#FF8585";
+const black = "#000000";
+const white = "#FFFFFF";
 
 //light
 const mediumGray = "#6A6A6A";
@@ -153,6 +155,9 @@ export const normalPalette = {
     main: mediumBrown,
     cardBorder: light,
   },
+  infoIcon: {
+    main: white,
+  },
 };
 
 export const yellowPalette = {
@@ -208,6 +213,9 @@ export const yellowPalette = {
   background: {
     paper: "#ffffff",
     default: canary,
+  },
+  infoIcon: {
+    main: butteryWhite,
   },
   // own colors
   red: {
@@ -290,6 +298,9 @@ export const redPalette = {
     primary: "#1A2027",
     secondary: "#3E5060",
     disabled: "#ffffff",
+  },
+  infoIcon: {
+    main: black,
   },
   background: {
     paper: "#ffffff",
@@ -396,17 +407,20 @@ export const lightPalette = {
   },
   AllocRoom: {
     studio: {
-      color: lightBlue2, // A lighter blue that can stand out on a light background
+      color: lightBlue2,
     },
     luentoluokka: {
-      color: buttonGreen, // A green color that contrasts well with light backgrounds
+      color: buttonGreen,
     },
     esitystila: {
-      color: buttonOrange, // A distinct orange that will be visible on a light background
+      color: buttonOrange,
     },
     musiikkiluokka: {
-      color: brightRed, // A lively yellow that can stand out on a light theme
+      color: brightRed,
     },
+  },
+  infoIcon: {
+    main: black,
   },
 
   // Additional custom colors
