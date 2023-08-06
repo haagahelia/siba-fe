@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import TextField from "@mui/material/TextField";
 import { Button, Grid, FormHelperText, Typography } from "@mui/material";
 import Select from "@mui/material/Select";
@@ -17,75 +17,64 @@ export default function AddSubjectForm(props) {
     spaceTypeSelectList,
   } = props;
 
+  const [selectedLesson, setSelectedLesson] = useState("");
+
   return (
     <div>
       <form onSubmit={formik.handleSubmit}>
         <Grid container variant="sibaGridAddForm" column={8}>
           <Grid item xs={12} sm={6} md={3}>
             <TextField
-              error={formik.touched.name && formik.errors.name ? true : false}
+              error={formik.touched.name && Boolean(formik.errors.name)}
               name="name"
               label="Name of the lesson"
               variant="outlined"
               value={formik.values.name}
-              onChange={formik.handleChange("name")}
-              onBlur={formik.handleBlur("name")}
-              helperText={
-                formik.touched.name && formik.errors.name
-                  ? formik.errors.name
-                  : null
-              }
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              helperText={formik.touched.name && formik.errors.name}
             />
           </Grid>
           <Grid item xs={12} sm={6} md={3}>
             <TextField
               error={
-                formik.touched.groupSize && formik.errors.groupSize
-                  ? true
-                  : false
+                formik.touched.groupSize && Boolean(formik.errors.groupSize)
               }
               name="groupSize"
               label="Group size"
               variant="outlined"
               value={formik.values.groupSize}
-              onChange={formik.handleChange("groupSize")}
-              onBlur={formik.handleBlur("groupSize")}
-              helperText={
-                formik.touched.groupSize && formik.errors.groupSize
-                  ? formik.errors.groupSize
-                  : null
-              }
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              helperText={formik.touched.groupSize && formik.errors.groupSize}
             />
           </Grid>
           <Grid item xs={12} sm={6} md={3}>
             <TextField
               error={
-                formik.touched.groupCount && formik.errors.groupCount
-                  ? true
-                  : false
+                formik.touched.groupCount && Boolean(formik.errors.groupCount)
               }
               name="groupCount"
               label="Group count"
               variant="outlined"
               value={formik.values.groupCount}
-              onChange={formik.handleChange("groupCount")}
-              onBlur={formik.handleBlur("groupCount")}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               helperText={formik.touched.groupCount && formik.errors.groupCount}
             />
           </Grid>
           <Grid item xs={12} sm={6} md={3}>
             <TextField
               error={
-                formik.touched.sessionLength && formik.errors.sessionLength
-                  ? true
-                  : false
+                formik.touched.sessionLength &&
+                Boolean(formik.errors.sessionLength)
               }
               name="sessionLength"
               label="Length of lesson(hh:mm)"
               variant="outlined"
               value={formik.values.sessionLength}
-              onChange={formik.handleChange("sessionLength")}
-              onBlur={formik.handleBlur("sessionLength")}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               helperText={
                 formik.touched.sessionLength && formik.errors.sessionLength
               }
@@ -94,16 +83,15 @@ export default function AddSubjectForm(props) {
           <Grid item xs={12} sm={6} md={3}>
             <TextField
               error={
-                formik.touched.sessionCount && formik.errors.sessionCount
-                  ? true
-                  : false
+                formik.touched.sessionCount &&
+                Boolean(formik.errors.sessionCount)
               }
               name="sessionCount"
               label="Number of lessons per week"
               variant="outlined"
               value={formik.values.sessionCount}
-              onChange={formik.handleChange("sessionCount")}
-              onBlur={formik.handleBlur("sessionCount")}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               helperText={
                 formik.touched.sessionCount && formik.errors.sessionCount
               }
@@ -111,39 +99,33 @@ export default function AddSubjectForm(props) {
           </Grid>
           <Grid item xs={12} sm={6} md={3}>
             <TextField
-              error={formik.touched.area && formik.errors.area ? true : false}
+              error={formik.touched.area && Boolean(formik.errors.area)}
               name="area"
               label="Required square meters"
               variant="outlined"
               value={formik.values.area}
-              onChange={formik.handleChange("area")}
-              onBlur={formik.handleBlur("area")}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               helperText={formik.touched.area && formik.errors.area}
             />
           </Grid>
           <Grid item xs={12} sm={12} md={3}>
             <FormControl sx={{ maxWidth: 220, maxHeight: 58, minWidth: 120 }}>
               <InputLabel>Major</InputLabel>
-
               <Select
                 name="programId"
-                onChange={formik.handleChange("programId")}
-                value={formik.values.programId}
-                defaultValue=""
+                onChange={formik.handleChange}
+                value={formik.values.programId || ""}
                 error={
-                  formik.touched.programId && formik.errors.programId
-                    ? true
-                    : false
+                  formik.touched.programId && Boolean(formik.errors.programId)
                 }
-                onBlur={formik.handleBlur("programId")}
+                onBlur={formik.handleBlur}
               >
-                {programSelectList.map((program) => {
-                  return (
-                    <MenuItem key={program.id} value={program.id}>
-                      {program.name}
-                    </MenuItem>
-                  );
-                })}
+                {programSelectList.map((program) => (
+                  <MenuItem key={program.id} value={program.id}>
+                    {program.name}
+                  </MenuItem>
+                ))}
               </Select>
               <FormHelperText>
                 {formik.touched.programId && formik.errors.programId}
@@ -153,21 +135,17 @@ export default function AddSubjectForm(props) {
           <Grid item xs={12} sm={12} md={3}>
             <FormControl sx={{ maxWidth: 220, maxHeight: 58, minWidth: 120 }}>
               <InputLabel>Room type</InputLabel>
-
               <Select
                 name="spaceTypeId"
-                onChange={formik.handleChange("spaceTypeId")}
-                value={formik.values.spaceTypeId}
-                defaultValue=""
-                onBlur={formik.handleBlur("spaceTypeId")}
+                onChange={formik.handleChange}
+                value={formik.values.spaceTypeId || ""}
+                onBlur={formik.handleBlur}
               >
-                {spaceTypeSelectList.map((spaceType) => {
-                  return (
-                    <MenuItem key={spaceType.id} value={spaceType.id}>
-                      {spaceType.name}
-                    </MenuItem>
-                  );
-                })}
+                {spaceTypeSelectList.map((spaceType) => (
+                  <MenuItem key={spaceType.id} value={spaceType.id}>
+                    {spaceType.name}
+                  </MenuItem>
+                ))}
               </Select>
             </FormControl>
           </Grid>
@@ -179,14 +157,18 @@ export default function AddSubjectForm(props) {
           <Grid item xs={12}>
             <FormControl sx={{ maxWidth: 340, minWidth: 270 }}>
               <InputLabel>Copy data from an existing lesson</InputLabel>
-              <Select onChange={handleChange}>
-                {allSubjectsList.map((value) => {
-                  return (
-                    <MenuItem key={value.id} value={value}>
-                      {value.subjectName}
-                    </MenuItem>
-                  );
-                })}
+              <Select
+                value={selectedLesson}
+                onChange={(e) => {
+                  handleChange(e);
+                  setSelectedLesson(e.target.value);
+                }}
+              >
+                {allSubjectsList.map((value) => (
+                  <MenuItem key={value.id} value={value}>
+                    {value.subjectName}
+                  </MenuItem>
+                ))}
               </Select>
             </FormControl>
           </Grid>
