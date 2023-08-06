@@ -48,14 +48,10 @@ export default function CollapsedRowB({ id }) {
       <Collapse in={expand} style={{ width: "100%" }}>
         <Grid2 container>
           <Grid2 xs={8}>
-            <Typography style={{ color: "#F6E9E9", fontSize: 20 }}>
-              Opetukset
-            </Typography>
+            <Typography style={{ fontSize: 20 }}>Opetukset</Typography>
           </Grid2>
           <Grid2 xs={4}>
-            <Typography style={{ color: "#F6E9E9", fontSize: 20 }}>
-              Tunnit
-            </Typography>
+            <Typography style={{ fontSize: 20 }}>Tunnit</Typography>
           </Grid2>
         </Grid2>
 
@@ -67,7 +63,6 @@ export default function CollapsedRowB({ id }) {
                   style={{
                     textAlign: "left",
                     marginTop: 10,
-                    color: "#F6E9E9",
                   }}
                 >
                   {subject.name}
@@ -78,7 +73,6 @@ export default function CollapsedRowB({ id }) {
                   style={{
                     textAlign: "left",
                     marginTop: 10,
-                    color: "#F6E9E9",
                   }}
                 >
                   {subject.totalTime}
