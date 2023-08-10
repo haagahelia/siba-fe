@@ -1,5 +1,5 @@
 import React from "react";
-import { useState, useContext, useEffect } from "react";
+import { useState, useContext } from "react";
 import { TextField, Card, CardContent, Grid, Button } from "@mui/material";
 import dao from "../ajax/dao";
 import { AppContext } from "../AppContext";
@@ -38,12 +38,6 @@ export default function LoginView(props) {
       });
       navigate("/");
     }
-  };
-
-  const logOut = () => {
-    Logger.debug("Logging out");
-    localStorage.clear();
-    handleLoginChange();
   };
 
   return (

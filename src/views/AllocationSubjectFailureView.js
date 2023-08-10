@@ -30,8 +30,8 @@ export function GetMissingEquipment(idData) {
     "No missing equipment",
   );
   const [tooltipOpen, setTooltipOpen] = React.useState(false);
-  const [alertOpen, setAlertOpen] = useState(false);
-  const [alertOptions, setAlertOptions] = useState({
+  const [, setAlertOpen] = useState(false);
+  const [, setAlertOptions] = useState({
     message: "Whoops!",
     severity: "error",
   });

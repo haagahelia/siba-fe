@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Dialog from "@mui/material/Dialog";
 import DialogTitle from "@mui/material/DialogTitle";
 import TextField from "@mui/material/TextField";
 import { Button, Grid } from "@mui/material";
-import { DialogContent, DialogContentText } from "@mui/material";
+import { DialogContent } from "@mui/material";
 import dao from "../../ajax/dao";
 import ValidateEditEquipment from "../../validation/ValidateEditEquipment";
 import Logger from "../../logger/logger";

@@ -19,12 +19,12 @@ export default function DepartmentView() {
   const [DepartmentList, setDepartmentList] = useState([]);
   const [singleDepartment, setSingleDepartment] = useState();
   const [open, setOpen] = useState(false);
-  const [alertOptions, setAlertOptions] = useState({
+  const [setAlertOptions] = useState({
     message: "This is an error alert — check it out!",
     severity: "error",
   });
-  const [alertOpen, setAlertOpen] = useState(false);
-  const { roles, setRoles } = RoleLoggedIn();
+  const [setAlertOpen] = useState(false);
+  const { roles } = RoleLoggedIn();
 
   const getAllDepartments = async function () {
     Logger.debug("getAllDepartments: fetching all departments from server.");

@@ -5,12 +5,8 @@ import CardContent from "@mui/material/CardContent";
 import { Card } from "@mui/material";
 
 export default function SettingsListContainer(props) {
-  const {
-    getAllSettings,
-    allSettings,
-    incrementDataModifiedCounter,
-    paginateSettings,
-  } = props;
+  const { getAllSettings, incrementDataModifiedCounter, paginateSettings } =
+    props;
   return (
     <div>
       <Grid container rowSpacing={0.5}>

@@ -17,7 +17,7 @@ export default function Equipments() {
     severity: "error",
   });
   const [/* alertOpen ,*/ setAlertOpen] = useState(false);
-  const { roles, setRoles } = RoleLoggedIn();
+  const { roles } = RoleLoggedIn();
 
   const getAllEquipments = async function () {
     const { success, data } = await dao.fetchEquipmentData();

@@ -20,7 +20,7 @@ export default function BuildingList() {
     message: "This is an error alert — check it out!",
     severity: "error",
   });
-  const { roles, setRoles } = RoleLoggedIn();
+  const { roles } = RoleLoggedIn();
 
   const [open, setOpen] = useState(false);
 

@@ -14,7 +14,6 @@ import { useEffect, useState, useContext } from "react";
 import { AppContext } from "../../AppContext";
 import { useTheme } from "@mui/material";
 import Logger from "../../logger/logger";
-import { xIcon } from "../../styles/themeIcons";
 
 //component for displaying the subject groups of the allocation result
 //shows:

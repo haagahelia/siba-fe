@@ -1,5 +1,5 @@
 import { TextField, Card, CardContent, Grid, Button } from "@mui/material";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import dao from "../../ajax/dao";
 import Logger from "../../logger/logger";
 //import bcrypt from "bcryptjs";
@@ -32,7 +32,6 @@ export default function AddUser() {
         email: "",
         password: "",
         isAdmin: "",
-        email: "",
         isPlanner: "",
         isStatist: "",
       });

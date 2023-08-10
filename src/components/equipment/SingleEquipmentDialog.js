@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import {
   Dialog,
   DialogContent,
@@ -19,7 +19,7 @@ export default function SingleEquipmentDialog(props) {
     setSingleEquipment,
     getAllEquipments,
   } = props;
-  const { roles, setRoles } = RoleLoggedIn();
+  const { roles } = RoleLoggedIn();
 
   useEffect(() => {
     if (open && singleEquipment) {

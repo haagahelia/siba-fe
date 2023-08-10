@@ -4,14 +4,8 @@ import EditDepartment from "./EditDepartment";
 import { RoleLoggedIn } from "../../customhooks/RoleLoggedIn";
 
 export default function DepartmentDialog(props) {
-  const {
-    open,
-    setOpen,
-    singleDepartment,
-    setSingleDepartment,
-    getAllDepartments,
-  } = props;
-  const { roles, setRoles } = RoleLoggedIn();
+  const { open, setOpen, singleDepartment, getAllDepartments } = props;
+  const { roles } = RoleLoggedIn();
 
   return (
     <>
