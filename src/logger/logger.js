@@ -1,3 +1,5 @@
+import { DateTime, toFormat } from "luxon";
+
 const Logger = {
   // The level of the logs that should be displayed.
   // Available options are: "debug", "info", "warn", "error".
@@ -6,17 +8,14 @@ const Logger = {
   // A prefix that will be prepended to all log messages. Should be set in the view logger is used in.
   logPrefix: "CustomLogger",
   getFormattedTimestamp() {
-    let now = new Date();
-    // converting to Finnish time
-    let offset = now.getTimezoneOffset() + 6 * 60;
-    let finnishTime = new Date(now.getTime() + offset * 60 * 1000);
-    return finnishTime.toISOString();
+    let time = new DateTime({});
+    return time.toFormat("yyyyMMdd HH:mm:ss");
   },
 
   debug(...params) {
     if (process.env.NODE_ENV === "development" && this.logLevel === "debug") {
       console.log(
-        `[${this.getFormattedTimestamp()}] [${this.logPrefix}] [DEBUG]`,
+        `DEBU|${this.getFormattedTimestamp()}[${this.logPrefix}]`,
         ...params,
       );
     }
@@ -28,7 +27,7 @@ const Logger = {
       ["debug", "info"].includes(this.logLevel)
     ) {
       console.info(
-        `[${this.getFormattedTimestamp()}] [${this.logPrefix}] [INFO]`,
+        `INFO|${this.getFormattedTimestamp()}[${this.logPrefix}]`,
         ...params,
       );
     }
@@ -40,7 +39,7 @@ const Logger = {
       ["debug", "info", "warn"].includes(this.logLevel)
     ) {
       console.warn(
-        `[${this.getFormattedTimestamp()}] [${this.logPrefix}] [WARN]`,
+        `WARN|${this.getFormattedTimestamp()}[${this.logPrefix}]`,
         ...params,
       );
     }
@@ -49,7 +48,7 @@ const Logger = {
   error(...params) {
     if (process.env.NODE_ENV === "development") {
       console.error(
-        `[${this.getFormattedTimestamp()}] [${this.logPrefix}] [ERROR]`,
+        `ERRO|${this.getFormattedTimestamp()}[${this.logPrefix}]`,
         ...params,
       );
     }
