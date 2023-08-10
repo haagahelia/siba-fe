@@ -1,4 +1,4 @@
-import { DateTime, toFormat } from "luxon";
+import { DateTime } from "luxon";
 
 const Logger = {
   // The level of the logs that should be displayed.
