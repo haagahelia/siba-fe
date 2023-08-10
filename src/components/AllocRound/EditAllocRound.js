@@ -13,7 +13,6 @@ export default function EditAllocRound(props) {
   // Whenever the editAllocRound changes in the AllocRoundList.js file, that information comes here as singleAllocRound
   const {
     singleAllocRound,
-    getAllAllocRounds,
     incrementDataModifiedCounter,
     setSingleAllocRound,
   } = props;

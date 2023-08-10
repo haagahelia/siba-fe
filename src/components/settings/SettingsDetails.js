@@ -7,7 +7,6 @@ import {
   DialogTitle,
   Typography,
   DialogActions,
-  Button,
 } from "@mui/material";
 import AlertBox from "../common/AlertBox";
 import DeleteSetting from "./DeleteSetting";
@@ -23,7 +22,7 @@ export default function SettingsDetails(props) {
     incrementDataModifiedCounter,
     setSingleSetting,
   } = props;
-  const { roles, setRoles } = RoleLoggedIn();
+  const { roles } = RoleLoggedIn();
 
   const [alertOpen, setAlertOpen] = useState(false);
   const [alertOptions] = useState({

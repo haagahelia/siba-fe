@@ -23,7 +23,7 @@ export default function AllocRoundDetails(props) {
     incrementDataModifiedCounter,
   } = props;
   const [alertOpen, setAlertOpen] = useState(false);
-  const [alertOptions, setAlertOptions] = useState({
+  const [alertOptions] = useState({
     title: "This is alert title",
     message: "This is an error alert — check it out!",
     severity: "error",

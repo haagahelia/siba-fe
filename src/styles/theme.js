@@ -1,5 +1,5 @@
 import { createTheme } from "@mui/material";
-import { grey } from "@mui/material/colors";
+
 // import { green, lightBlue } from "@mui/material/colors";
 
 // First a place for defining different kinds of colors
@@ -443,7 +443,7 @@ export const lightPalette = {
 };
 
 // The swapping fast what palette will be in use right now:
-const currentPalette = lightPalette;
+// const currentPalette = lightPalette;
 // Options are       = normalPalette, redPalette, yellowPalette, lightPalette
 
 export const createAppTheme = (currentPalette) =>

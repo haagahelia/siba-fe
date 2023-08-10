@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from "react";
 import CardContent from "@mui/material/CardContent";
 import SettingsListContainer from "../components/settings/SettingsListContainer";
@@ -18,7 +19,7 @@ export default function Settings() {
     message: "This is an error alert — check it out!",
     severity: "error",
   });
-  const { roles, setRoles } = RoleLoggedIn();
+  const { roles } = RoleLoggedIn();
 
   const getAllSettings = async function () {
     Logger.debug("Fetching all settings");

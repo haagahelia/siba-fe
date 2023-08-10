@@ -6,16 +6,14 @@ import Divider from "@mui/material/Divider";
 import Grid from "@mui/material/Grid";
 import { styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
-import { Button, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 import SettingsDetails from "./SettingsDetails";
-import { useTheme } from "@mui/material/styles";
 
 export default function SettingsList(props) {
   const { paginateSettings, getAllSettings, incrementDataModifiedCounter } =
     props;
   const [singleSetting, setSingleSetting] = useState(null);
   const [open, setOpen] = useState(false);
-  const theme = useTheme();
 
   // STYLE
   const Box = styled(Paper)(({ theme }) => ({

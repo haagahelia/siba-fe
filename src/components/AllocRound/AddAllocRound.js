@@ -15,7 +15,7 @@ import AddAllocRoundForm from "./AddAllocRoundForm";
 //const baseUrl = BASEURL;
 
 export default function AddAllocRound(props) {
-  const { getAllAllocRounds, allAllocRoundsList } = props;
+  const { allAllocRoundsList } = props;
   const [alertOpen, setAlertOpen] = useState(false);
   const [alertOptions, setAlertOptions] = useState({
     title: "This is title",

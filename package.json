@@ -29,7 +29,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "precommit": "sh ./pre-commit"
+    "precommit": "sh ./pre-commit",
+     "lint": "eslint src/"
   },
   "pre-commit": [
     "precommit"

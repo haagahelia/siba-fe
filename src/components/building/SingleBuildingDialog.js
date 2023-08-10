@@ -15,7 +15,7 @@ import { RoleLoggedIn } from "../../customhooks/RoleLoggedIn";
 export default function SingleBuildingDialog(props) {
   const { open, setOpen, singleBuilding, getAllBuildings, setSingleBuilding } =
     props;
-  const { roles, setRoles } = RoleLoggedIn();
+  const { roles } = RoleLoggedIn();
 
   return (
     <React.Fragment>
