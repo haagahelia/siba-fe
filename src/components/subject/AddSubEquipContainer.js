@@ -9,7 +9,7 @@ import AlertBox from "../common/AlertBox";
 export default function AddSubEquipContainer(props) {
   const { singleSubject, equipmentsBySubId } = props;
   const [equipmentSelectList, setEquipmentSelectList] = useState([]);
-  const [initialSubEquip, setInitialSubEquip] = useState({
+  const [initialSubEquip] = useState({
     subjectId: singleSubject?.id,
     equipmentId: 0,
     priority: 0,
@@ -32,12 +32,12 @@ export default function AddSubEquipContainer(props) {
 
   const getSubEquipBySubId = async function (subId) {
     let result = await equipmentsBySubId(subId);
-    // console.log(`result:${result}`);
     getEquipmentsForSelect(result);
   };
 
   useEffect(() => {
     getSubEquipBySubId(subId);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const getEquipmentsForSelect = async function (subEquipList) {

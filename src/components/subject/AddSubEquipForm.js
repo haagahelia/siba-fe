@@ -36,6 +36,7 @@ export default function AddSubEquipForm(props) {
       // Sets the default priority value directly in the input field
       formik.setValues({ ...formik.values, priority: prio.equipmentPriority });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [formik.values.equipmentId]);
 
   return (
