@@ -23,6 +23,7 @@ export default function SubjectPagination({
       );
       setPaginateSubjects(slicedSubjects);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pagination]);
 
   const handleChange = (e, p) => {

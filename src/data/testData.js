@@ -1,5 +1,4 @@
-// const testData =
-export default {
+const testData = {
   rooms: [
     {
       id: 1,
@@ -383,4 +382,4 @@ export default {
   },
 };
 
-// export default testData;
+export default testData;

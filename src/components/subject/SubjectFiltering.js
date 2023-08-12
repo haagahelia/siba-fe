@@ -4,8 +4,6 @@ import { Clear } from "@mui/icons-material";
 
 export default function SubjectFiltering({
   allSubjectsList,
-  //setallSubjectsList,???
-  //paginateSubjects,???
   setPaginateSubjects,
   pagination,
 }) {
@@ -28,6 +26,7 @@ export default function SubjectFiltering({
         allSubjectsList.slice(pagination.from, pagination.to),
       );
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searched]);
 
   const cancelSearch = () => {
