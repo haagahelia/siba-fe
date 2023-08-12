@@ -6,27 +6,26 @@ export async function validate(values) {
   const regTime = new RegExp(/^([0-1][0-2]):([0-5][0-9])(:[0-5][0-9])?$/);
   const regArea = new RegExp(/^[0-9]*(.[0-9]{1,2})?$/);
 
-  // eslint-disable-next-line no-unused-vars
   let subjectList = [];
 
   const getSubjectNames = async function () {
     const { data } = await dao.fetchSubjectsNames();
     subjectList = data;
     let result;
-    // let id;
+    let id;
     let filteredList = [];
     // Here it is considered that the user does not enter the name of an already existing lesson.
     // In filtering, however, it is considered / taken into account that the name can be the same as the name of the lesson being edited
-    // let list = subjectList.map((item) => {
-    //   //let list ???
-    //   if (values.id === item.id) {
-    //     id = item.id;
-    //     // Here, all teaching IDs that do not match the teaching ID to be edited are filtered out
-    //     filteredList = subjectList.filter((element) => {
-    //       return element.id !== id;
-    //     });
-    //   }
-    // });
+    subjectList.forEach((item) => {
+      // Changed from map to forEach, as we're not returning a new array but performing side effects
+      if (values.id === item.id) {
+        id = item.id;
+        // Here, all teaching IDs that do not match the teaching ID to be edited are filtered out
+        filteredList = subjectList.filter((element) => {
+          return element.id !== id;
+        });
+      }
+    });
     // Here we compare the lessons that did not match the id of the lesson to be edited and see if the user's input matches the name of an already existing lesson
     result = filteredList.some(
       (names) => names.name.toLowerCase() === values.subjectName.toLowerCase(),
