@@ -37,6 +37,7 @@ export const postNewSubject = async (newSubject: Subject): Promise<boolean> => {
   const request = new Request(`${baseUrl}/subject/post`, {
     method: "POST",
     headers: {
+      Authorization: `Bearer ${localStorage.getItem("sessionToken")}`,
       Accept: "application/json",
       "Content-Type": "application/json",
     },
