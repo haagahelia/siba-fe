@@ -23,19 +23,33 @@ export default function LoginView(props) {
     if (!success) {
       Logger.error("Login failed:", data);
     } else {
-      Logger.debug("Login successful");
+      Logger.debug("Login successful", data);
+
       appContext.userEmail = data[0].email;
       localStorage.setItem("email", data[0].email);
+
       localStorage.setItem("sessionToken", data[0].token);
+
       localStorage.setItem("isAdmin", data[0].isAdmin);
+      appContext.roles.admin = data[0].isAdmin;
+
       localStorage.setItem("isPlanner", data[0].isPlanner);
+      appContext.roles.planner = data[0].isPlanner;
+
       localStorage.setItem("isStatist", data[0].isStatist);
+      appContext.roles.statist = data[0].isStatist;
+
+      Logger.debug("Login info in appContext", appContext);
+
       handleLoginChange();
+
       window.alert("Welcome!");
+
       setLoginForm({
         email: "",
         password: "",
       });
+
       navigate("/");
     }
   };

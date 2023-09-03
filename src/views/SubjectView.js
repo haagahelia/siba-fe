@@ -1,13 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import SubjectListContainer from "../components/subject/SubjectListContainer";
 import CardContent from "@mui/material/CardContent";
-import { CardHeader, Card, Container } from "@mui/material";
+import { CardHeader, Card, Container, Typography } from "@mui/material";
 import Grid from "@mui/material/Grid";
 import AddSubjectContainer from "../components/subject/AddSubjectContainer";
 import dao from "../ajax/dao";
 import AlertBox from "../components/common/AlertBox";
 import SubjectFiltering from "../components/subject/SubjectFiltering";
 import SubjectPagination from "../components/subject/SubjectPagination";
+import { AppContext } from "../AppContext";
 import Logger from "../logger/logger";
 
 const pageSize = 15;
@@ -15,6 +16,8 @@ const pageSize = 15;
 export default function SubjectView() {
   Logger.logPrefix = "SubjectView";
   Logger.debug("SubjectView component instantiated.");
+
+  const appContext = useContext(AppContext);
 
   const [paginateSubjects, setPaginateSubjects] = useState([]);
   const [allSubjectsList, setAllSubjectsList] = useState([]);
@@ -71,10 +74,19 @@ export default function SubjectView() {
         setAlertOpen={setAlertOpen}
       />
       <Container maxWidth="100%">
-        <AddSubjectContainer
-          getAllSubjects={getAllSubjects}
-          allSubjectsList={allSubjectsList}
-        />
+        {appContext.roles.admin ? (
+          <AddSubjectContainer
+            getAllSubjects={getAllSubjects}
+            allSubjectsList={allSubjectsList}
+          />
+        ) : (
+          <Typography variant="subtitle1">
+            <br />
+            <br />
+            <br />
+            "Not showing add subject to your role"
+          </Typography>
+        )}
         <Grid container rowSpacing={1}>
           <Card variant="outlined">
             <CardContent>

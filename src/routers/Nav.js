@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import {
   NavLink,
   BrowserRouter as Router,
@@ -29,31 +29,86 @@ import BuildingView from "../views/BuildingView";
 import DepartmentView from "../views/DepartmentView";
 import RegisterView from "../views/RegisterView";
 import LoginView from "../views/LoginView";
-//import { AppContext } from "../AppContext";
-import { RoleLoggedIn } from "../customhooks/RoleLoggedIn";
+import { AppContext } from "../AppContext";
+import Logger from "../logger/logger";
 
 const sibaPages = [
-  { name: "Register", href: "/register" },
-  { name: "Login", href: "/login" },
-  { name: "Front page", href: "/" },
-  { name: "Lessons", href: "/subject" },
-  { name: "Room results", href: "/roomresult" },
-  { name: "Program results", href: "/programresult" },
-  { name: "Settings", href: "/settings" },
-  { name: "Alloc rounds", href: "allocation" },
-  { name: "Equipment", href: "equipment" },
-  { name: "Buildings", href: "building" },
-  { name: "Department", href: "department" },
+  {
+    name: "Register",
+    href: "/register",
+    forRoles: ["admin"],
+    showForCurrentUser: false,
+  },
+  {
+    name: "Login",
+    href: "/login",
+    forRoles: ["guest"],
+    showForCurrentUser: true,
+  },
+  {
+    name: "Front page",
+    href: "/",
+    forRoles: ["admin", "planner", "statist"],
+    showForCurrentUser: false,
+  },
+  {
+    name: "Lessons",
+    href: "/subject",
+    forRoles: ["admin", "planner", "statist"],
+    showForCurrentUser: false,
+  },
+  {
+    name: "Room results",
+    href: "/roomresult",
+    forRoles: ["admin", "planner", "statist"],
+    showForCurrentUser: false,
+  },
+  {
+    name: "Program results",
+    href: "/programresult",
+    forRoles: ["admin", "planner", "statist"],
+    showForCurrentUser: false,
+  },
+  {
+    name: "Settings",
+    href: "/settings",
+    forRoles: ["admin"],
+    showForCurrentUser: false,
+  },
+  {
+    name: "Alloc rounds",
+    href: "allocation",
+    forRoles: ["admin"],
+    showForCurrentUser: false,
+  },
+  {
+    name: "Equipment",
+    href: "equipment",
+    forRoles: ["admin", "planner", "statist"],
+    showForCurrentUser: false,
+  },
+  {
+    name: "Buildings",
+    href: "building",
+    forRoles: ["admin", "statist"],
+    showForCurrentUser: false,
+  },
+  {
+    name: "Department",
+    href: "department",
+    forRoles: ["admin", "planner", "statist"],
+    showForCurrentUser: false,
+  },
 ];
 
 function NavBar() {
   const [click, setClick] = useState(false);
   const handleClick = () => setClick(!click);
-  //const appContext = useContext(AppContext);
+  const appContext = useContext(AppContext);
   const [loggedIn, setLoggedIn] = useState(
     localStorage.getItem("email") ? localStorage.getItem("email") : "Not yet",
   );
-  const { roles, setRoles } = RoleLoggedIn();
+
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -62,20 +117,42 @@ function NavBar() {
     setAnchorElNav(null);
   };
 
+  const setSibaPages = () => {
+    Logger.debug("App context roles: setSibaPages", appContext.roles);
+    sibaPages.forEach((element) => {
+      element.showForCurrentUser = false;
+      if (
+        (element.forRoles.includes("admin") && appContext.roles.admin === 1) ||
+        (element.forRoles.includes("planner") &&
+          appContext.roles.planner === 1) ||
+        (element.forRoles.includes("statist") && appContext.roles.statist === 1)
+      ) {
+        element.showForCurrentUser = true;
+      } else if (
+        element.forRoles.includes("guest") &&
+        appContext.roles.admin !== 1 && appContext.roles.planner !== 1 &&
+        appContext.roles.statist !== 1
+      ) {
+        element.showForCurrentUser = true;
+      }
+    });
+  };
+
   const handleLoginChange = () => {
     setLoggedIn(
       localStorage.getItem("email") ? localStorage.getItem("email") : "No more",
     );
+    appContext.userEmail = loggedIn;
 
-    setRoles({
-      admin: localStorage.getItem("isAdmin"),
-      planner: localStorage.getItem("isPlanner"),
-      statist: localStorage.getItem("isStatist"),
-    });
+    Logger.debug("roles from appContext:", appContext.roles);
+
+    setSibaPages();
   };
 
   const logOut = () => {
     localStorage.clear();
+    appContext.userEmail = "No more";
+    appContext.roles = { admin: 0, planner: 0, statist: 0 };
     handleLoginChange();
   };
 
@@ -83,10 +160,14 @@ function NavBar() {
     let pagesToShow = [...sibaPages];
 
     if (loggedIn !== "Not yet" && loggedIn !== "No more") {
-      pagesToShow = pagesToShow.filter((page) => page.href !== "/login"); // Hiding Login link if logged in
+      //localStorage.clear(); // !!! for reset !!!, if get stuck to wrong state
+
+      Logger.debug("pagesToShow 000:", pagesToShow);
+      pagesToShow = pagesToShow.filter((page) => page.showForCurrentUser); // Hiding Login link if logged in
+      Logger.debug("pagesToShow 111:", pagesToShow);
       pagesToShow.push({ name: "Logout", href: "#", action: logOut }); // Showing log out button if logged in
-    }
-    if (roles.admin === "1") {
+      Logger.debug("pagesToShow 222:", pagesToShow);
+
       return pagesToShow.map((page, index) => (
         <ListItem variant="sibaAppBarHorizontal" key={index}>
           <NavLink
@@ -104,7 +185,11 @@ function NavBar() {
         </ListItem>
       ));
     } else {
-      return pagesToShow.slice(1).map((page, index) => (
+      pagesToShow = pagesToShow.filter((page) => page.showForCurrentUser);
+      Logger.debug("pagesToShow 333:", pagesToShow);
+      //pagesToShow.push({ name: "Login", href: "/login", forRoles: ["guest"], showForCurrentUser: true   });
+      Logger.debug("pagesToShow 444:", pagesToShow);
+      return pagesToShow.map((page, index) => (
         <ListItem variant="sibaAppBarHorizontal" key={index}>
           <NavLink
             to={page.href}
