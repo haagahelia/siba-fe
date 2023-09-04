@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import {
   NavLink,
   BrowserRouter as Router,
@@ -29,37 +29,94 @@ import BuildingView from "../views/BuildingView";
 import DepartmentView from "../views/DepartmentView";
 import RegisterView from "../views/RegisterView";
 import LoginView from "../views/LoginView";
-//import { AppContext } from "../AppContext";
-import { RoleLoggedIn } from "../customhooks/RoleLoggedIn";
-
-import logo from "../styles/SibeliusLogo.png";
+import { AppContext } from "../AppContext";
+import Logger from "../logger/logger";
+import logo from "../styles/SibeliusLogo.svg";
 
 const sibaPages = [
-  { name: "Lessons", href: "/subject" },
-  { name: "Programs", href: "/programresult" },
-  { name: "Rooms", href: "/roomresult" },
-  { name: "Equipment", href: "equipment" },
-  { name: "Allocation", href: "allocation" },
-  { name: "Buildings", href: "building" },
-  { name: "Departments", href: "department" },
-  { name: "Account", href: "" },
-  { name: "Settings", href: "" },
   /*
-    { name: "Register", href: "/register" },
-    { name: "Login", href: "/login" },
-    { name: "Front page", href: "/" },
-    { name: "Settings", href: "/settings" },
-    */
+  {
+    name: "Front page",
+    href: "/",
+    forRoles: ["admin", "planner", "statist"],
+    showForCurrentUser: false,
+  },*/
+  {
+    name: "Lessons",
+    href: "/subject",
+    forRoles: ["admin", "planner", "statist"],
+    showForCurrentUser: false,
+  },
+  {
+    name: "Programs",
+    href: "/programresult",
+    forRoles: ["admin", "planner", "statist"],
+    showForCurrentUser: false,
+  },
+  {
+    name: "Rooms",
+    href: "/roomresult",
+    forRoles: ["admin", "planner", "statist"],
+    showForCurrentUser: false,
+  },
+  {
+    name: "Equipment",
+    href: "equipment",
+    forRoles: ["admin", "planner", "statist"],
+    showForCurrentUser: false,
+  },
+  {
+    name: "Allocation",
+    href: "allocation",
+    forRoles: ["admin"],
+    showForCurrentUser: false,
+  },
+  {
+    name: "Buildings",
+    href: "building",
+    forRoles: ["admin", "statist"],
+    showForCurrentUser: false,
+  },
+  {
+    name: "Departments",
+    href: "department",
+    forRoles: ["admin", "planner", "statist"],
+    showForCurrentUser: false,
+  } /*
+  {
+    name: "Register",
+    href: "/register",
+    forRoles: ["admin"],
+    showForCurrentUser: false,
+  },*/,
+  {
+    name: "Login",
+    href: "/login",
+    forRoles: ["guest"],
+    showForCurrentUser: true,
+  },
+  {
+    name: "Account",
+    href: "",
+    forRoles: ["admin", "planner", "statist"],
+    showForCurrentUser: false,
+  },
+  {
+    name: "Settings",
+    href: "/settings",
+    forRoles: ["admin"],
+    showForCurrentUser: false,
+  },
 ];
 
 function NavBar() {
   const [click, setClick] = useState(false);
   const handleClick = () => setClick(!click);
-  //const appContext = useContext(AppContext);
+  const appContext = useContext(AppContext);
   const [loggedIn, setLoggedIn] = useState(
     localStorage.getItem("email") ? localStorage.getItem("email") : "Not yet",
   );
-  const { roles, setRoles } = RoleLoggedIn();
+
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -68,20 +125,43 @@ function NavBar() {
     setAnchorElNav(null);
   };
 
+  const setSibaPages = () => {
+    Logger.debug("App context roles: setSibaPages", appContext.roles);
+    sibaPages.forEach((element) => {
+      element.showForCurrentUser = false;
+      if (
+        (element.forRoles.includes("admin") && appContext.roles.admin === 1) ||
+        (element.forRoles.includes("planner") &&
+          appContext.roles.planner === 1) ||
+        (element.forRoles.includes("statist") && appContext.roles.statist === 1)
+      ) {
+        element.showForCurrentUser = true;
+      } else if (
+        element.forRoles.includes("guest") &&
+        appContext.roles.admin !== 1 &&
+        appContext.roles.planner !== 1 &&
+        appContext.roles.statist !== 1
+      ) {
+        element.showForCurrentUser = true;
+      }
+    });
+  };
+
   const handleLoginChange = () => {
     setLoggedIn(
       localStorage.getItem("email") ? localStorage.getItem("email") : "No more",
     );
+    appContext.userEmail = loggedIn;
 
-    setRoles({
-      admin: localStorage.getItem("isAdmin"),
-      planner: localStorage.getItem("isPlanner"),
-      statist: localStorage.getItem("isStatist"),
-    });
+    Logger.debug("roles from appContext:", appContext.roles);
+
+    setSibaPages();
   };
 
   const logOut = () => {
     localStorage.clear();
+    appContext.userEmail = "No more";
+    appContext.roles = { admin: 0, planner: 0, statist: 0 };
     handleLoginChange();
   };
 
@@ -89,10 +169,14 @@ function NavBar() {
     let pagesToShow = [...sibaPages];
 
     if (loggedIn !== "Not yet" && loggedIn !== "No more") {
-      pagesToShow = pagesToShow.filter((page) => page.href !== "/login"); // Hiding Login link if logged in
+      //localStorage.clear(); // !!! for reset !!!, if get stuck to wrong state
+
+      Logger.debug("pagesToShow 000:", pagesToShow);
+      pagesToShow = pagesToShow.filter((page) => page.showForCurrentUser); // Hiding Login link if logged in
+      Logger.debug("pagesToShow 111:", pagesToShow);
       pagesToShow.push({ name: "Logout", href: "#", action: logOut }); // Showing log out button if logged in
-    }
-    if (roles.admin === "1") {
+      Logger.debug("pagesToShow 222:", pagesToShow);
+
       return pagesToShow.map((page, index) => (
         <ListItem variant="sibaAppBarHorizontal" key={index}>
           <NavLink
@@ -110,7 +194,11 @@ function NavBar() {
         </ListItem>
       ));
     } else {
-      return pagesToShow.slice(1).map((page, index) => (
+      pagesToShow = pagesToShow.filter((page) => page.showForCurrentUser);
+      Logger.debug("pagesToShow 333:", pagesToShow);
+      //pagesToShow.push({ name: "Login", href: "/login", forRoles: ["guest"], showForCurrentUser: true   });
+      Logger.debug("pagesToShow 444:", pagesToShow);
+      return pagesToShow.map((page, index) => (
         <ListItem variant="sibaAppBarHorizontal" key={index}>
           <NavLink
             to={page.href}
@@ -128,15 +216,16 @@ function NavBar() {
 
   return (
     <Router>
-      <img src={logo} alt="" width="200" height="200" />
+      <NavLink to="/" className="nav-logo">
+        <img src={logo} alt="" width="200" height="200" />
+        <i className="fas fa-code" />
+      </NavLink>
       <AppBar>
         <Container maxWidth="xl">
           <Toolbar disableGutters>
-            {/*
-                        <Typography variant="sibaTypography">
-                            Logged in as: {loggedIn}
-                        </Typography>
-                        */}
+            <Typography variant="sibaTypography">
+              Logged in as: {loggedIn}
+            </Typography>
             <Box sx={{ flexGrow: 1, display: { xs: "flex", lg: "none" } }}>
               <IconButton
                 size="large"
@@ -183,19 +272,21 @@ function NavBar() {
         </Container>
       </AppBar>
       <Routes>
+        <Route path="/subject" element={<SubjectView />} />
+        <Route path="/programresult" element={<ProgramResultView />} />
+        <Route path="/roomresult" element={<RoomResultView />} />
+        <Route path="/equipment" element={<EquipmentView />} />
+        <Route path="/allocation" element={<AllocRoundView />} />
+        <Route path="/building" element={<BuildingView />} />
+        <Route path="/department" element={<DepartmentView />} />
+
         <Route
           path="/login"
           element={<LoginView handleLoginChange={handleLoginChange} />}
         />
         <Route path="/register" element={<RegisterView />} />
         <Route path="/" element={<SubjectView />} />
-        <Route path="/subject" element={<SubjectView />} />
-        <Route path="/allocation" element={<AllocRoundView />} />
-        <Route path="/roomresult" element={<RoomResultView />} />
-        <Route path="/programresult" element={<ProgramResultView />} />
-        <Route path="/equipment" element={<EquipmentView />} />
-        <Route path="/building" element={<BuildingView />} />
-        <Route path="/department" element={<DepartmentView />} />
+
         <Route path="/allocation/addAllocRound" element={<AddAllocRound />} />
         <Route path="/settings" element={<Settings />} />
         <Route
