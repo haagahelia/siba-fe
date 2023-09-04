@@ -29,6 +29,7 @@ export default function LoginView(props) {
       localStorage.setItem("email", data[0].email);
 
       localStorage.setItem("sessionToken", data[0].token);
+      appContext.sessionToken = data[0].token;
 
       localStorage.setItem("isAdmin", data[0].isAdmin);
       appContext.roles.admin = data[0].isAdmin;

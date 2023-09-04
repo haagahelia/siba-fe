@@ -130,7 +130,8 @@ function NavBar() {
         element.showForCurrentUser = true;
       } else if (
         element.forRoles.includes("guest") &&
-        appContext.roles.admin !== 1 && appContext.roles.planner !== 1 &&
+        appContext.roles.admin !== 1 &&
+        appContext.roles.planner !== 1 &&
         appContext.roles.statist !== 1
       ) {
         element.showForCurrentUser = true;
