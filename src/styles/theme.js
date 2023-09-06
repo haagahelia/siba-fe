@@ -129,6 +129,9 @@ export const normalPalette = {
     paper: "#ffffff",
     default: lightGray,
   },
+  snackbarBackground: {
+    default: mediumGray,
+  },
   action: {
     active: "rgba(0, 0, 0, 0.54)",
     hover: "rgba(0, 0, 0, 0.04)",
@@ -213,6 +216,9 @@ export const yellowPalette = {
   background: {
     paper: "#ffffff",
     default: canary,
+  },
+  snackbarBackground: {
+    default: tomatoRed,
   },
   infoIcon: {
     main: butteryWhite,
@@ -306,6 +312,9 @@ export const redPalette = {
     paper: "#ffffff",
     default: tomatoRed,
   },
+  snackbarBackground: {
+    default: canary,
+  },
   AllocRoom: {
     studio: {
       color: salmonPink,
@@ -390,6 +399,9 @@ export const lightPalette = {
   divider: lightGray,
   background: {
     paper: lightGray2,
+    default: offWhite,
+  },
+  snackbarBackground: {
     default: offWhite,
   },
   action: {

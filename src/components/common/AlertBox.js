@@ -2,9 +2,11 @@ import React from "react";
 import IconButton from "@mui/material/IconButton";
 import { Alert, AlertTitle, Snackbar } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
+import { useTheme } from "@mui/material/styles";
 
 export default function AlertBox(props) {
   const { alertOpen, alertOptions, setAlertOpen } = props;
+  const theme = useTheme();
 
   return (
     <div>
@@ -18,6 +20,7 @@ export default function AlertBox(props) {
         <Alert
           severity={alertOptions.severity}
           sx={{
+            background: theme.palette.snackbarBackground.default,
             "& .MuiAlert-icon": {
               fontSize: "50px",
             },
