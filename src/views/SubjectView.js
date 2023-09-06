@@ -10,7 +10,10 @@ import SubjectFiltering from "../components/subject/SubjectFiltering";
 import SubjectPagination from "../components/subject/SubjectPagination";
 import { AppContext } from "../AppContext";
 import Logger from "../logger/logger";
-import { ajaxRequestErrorHandler } from "../ajax/ajaxRequestErrorHandler";
+import {
+  ajaxRequestErrorHandler,
+  getFunctionName,
+} from "../ajax/ajaxRequestErrorHandler";
 
 const pageSize = 15;
 
@@ -42,7 +45,7 @@ export default function SubjectView() {
     if (httpStatus !== 200) {
       ajaxRequestErrorHandler(
         httpStatus,
-        "getAllSubjects",
+        getFunctionName(2),
         setAlertOptions,
         setAlertOpen,
       );
