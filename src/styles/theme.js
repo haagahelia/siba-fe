@@ -1,12 +1,12 @@
 import { createTheme } from "@mui/material";
-
+import { yellow } from "@mui/material/colors";
 // import { green, lightBlue } from "@mui/material/colors";
 
 // First a place for defining different kinds of colors
 const darkBrown = "#272121";
 const lightGray = "#363333"; // E.g. background
 const light = "#F6E9E9";
-const orange = "#E16428";
+// const orange = "#E16428";
 const fontWhite = "#FFFFFF";
 const lightGreen = "#90EE90";
 const lightBlue = "#73FDFF";
@@ -60,6 +60,117 @@ const snackbarSuccessGreen = "#43A047"; // Medium Green
 // Then defining three palettes so that in the normal palette
 // no new colors are defined. Red and yellow palettes though are
 // used with ad-hoc "#AABBCC" kind of RGB hexadecimal color definitions
+// Below the color palette that was provided by Sibelius Academy
+// Primary colors:
+const darkGrayPrimary = "#353535";
+const grayPrimary = "#555555";
+const lightPrimary = "#D9D9D9";
+const whitePrimary = "#FFFFFF";
+// Accent color:
+const yellowAccent = "#F4BF00";
+// StatusIndicators:
+const warningIndicator = "#D62E3D"; // (red) to indicate warning, delete or cancel
+const inProgressIndicator = "#F6D251"; // (yellow, brighter than yellow accent) to indicate process or that something is in-progress
+const successIndicator = "#48B058"; //(green) to indicate success, confirmation, or "ok"
+const editIndicator = "#FDA826"; // (orange) to indicate edit and toggle on (checkboxes)
+
+export const mainPalette = {
+  name: "dark",
+  common: {
+    black: "#1D1D1D",
+    white: "#fff",
+  },
+  primary: {
+    main: yellowAccent,
+    contrastText: darkGrayPrimary,
+  },
+  secondary: {
+    main: lightPrimary,
+    contrastText: darkGrayPrimary,
+  },
+  error: {
+    main: warningIndicator,
+    contrastText: whitePrimary,
+  },
+  warning: {
+    main: warningIndicator,
+    contrastText: whitePrimary,
+  },
+  info: {
+    main: editIndicator,
+    contrastText: darkGrayPrimary,
+  },
+  success: {
+    main: successIndicator,
+    contrastText: whitePrimary,
+  },
+  edit: {
+    main: editIndicator,
+    contrastText: whitePrimary,
+  },
+  contrastThreshold: 3,
+  tonalOffset: 0.2,
+  text: {
+    // not sure where this is used?
+    primary: whitePrimary,
+    secondary: darkGrayPrimary,
+    disabled: "#ffffff",
+  },
+  AllocRoom: {
+    studio: {
+      color: lightRed,
+    },
+    luentoluokka: {
+      color: lightBlue,
+    },
+    esitystila: {
+      color: lightGreen,
+    },
+    musiikkiluokka: {
+      color: lightYellow,
+    },
+  },
+  divider: lightPrimary,
+  background: {
+    paper: grayPrimary,
+    default: darkGrayPrimary,
+  },
+  snackbarBackground: {
+    // !!!!
+    default: yellowAccent,
+  },
+  action: {
+    active: "rgba(0, 0, 0, 0.54)",
+    hover: "rgba(0, 0, 0, 0.04)",
+    hoverOpacity: 0.25,
+    selected: "rgba(0, 0, 0, 0.08)",
+    selectedOpacity: 0.15,
+    disabled: "rgba(0, 0, 0, 0.26)",
+    disabledBackground: "rgba(0, 0, 0, 0.12)",
+    disabledOpacity: 0.38,
+    focus: "rgba(0, 0, 0, 0.12)",
+    focusOpacity: 0.12,
+    activatedOpacity: 0.12,
+  },
+
+  //own colors
+  red: {
+    main: warningIndicator,
+    contrastText: whitePrimary,
+  },
+  backgroundDarker: { default: grayPrimary }, // not darker in this case...
+  fontColorDefault: { default: whitePrimary },
+  progressBarGreen: { main: successIndicator },
+  progressBarYellow: { main: inProgressIndicator },
+  progressBarRed: { main: warningIndicator },
+  borderColor: {
+    main: lightPrimary,
+    cardBorder: whitePrimary,
+  },
+  infoIcon: {
+    main: yellowAccent,
+  },
+};
 
 export const normalPalette = {
   name: "dark",
@@ -102,6 +213,10 @@ export const normalPalette = {
     light: "#6AE79C",
     dark: "#1AA251",
     contrastText: "#ffffff",
+  },
+  edit: {
+    main: buttonOrange,
+    contrastText: whitePrimary,
   },
   contrastThreshold: 3,
   tonalOffset: 0.2,
@@ -205,6 +320,10 @@ export const yellowPalette = {
     dark: "#1AA251",
     contrastText: "#ffffff",
   },
+  edit: {
+    main: buttonOrange,
+    contrastText: whitePrimary,
+  },
   contrastThreshold: 3,
   tonalOffset: 0.2,
   text: {
@@ -267,7 +386,6 @@ export const redPalette = {
     dark: "#0059B2",
     contrastText: "#ffffff",
   },
-
   secondary: {
     main: salmonPink,
     light: "#ba68c8",
@@ -297,6 +415,10 @@ export const redPalette = {
     light: "#6AE79C",
     dark: "#1AA251",
     contrastText: "#ffffff",
+  },
+  edit: {
+    main: buttonOrange,
+    contrastText: whitePrimary,
   },
   contrastThreshold: 3,
   tonalOffset: 0.2,
@@ -389,6 +511,10 @@ export const lightPalette = {
     dark: mediumGray,
     contrastText: "#ffffff",
   },
+  edit: {
+    main: buttonOrange,
+    contrastText: whitePrimary,
+  },
   contrastThreshold: 3,
   tonalOffset: 0.2,
   text: {
@@ -439,6 +565,7 @@ export const lightPalette = {
   red: {
     main: buttonRed,
   },
+
   //colors for room results
   IndexRooms: {
     luentoluokkaindex: { backgroundColor: "#FFFFFF", color: "#000000" },
@@ -468,7 +595,7 @@ export const createAppTheme = (currentPalette) =>
           root: {
             backgroundColor: currentPalette.backgroundDarker.default,
             borderColor: currentPalette.borderColor.cardBoder,
-            width: "75%",
+            width: "85%",
             margin: "auto",
             marginTop: "100px",
             padding: "8px",
@@ -481,8 +608,8 @@ export const createAppTheme = (currentPalette) =>
             backgroundColor: currentPalette.background.default,
             fontSize: 25,
             color: currentPalette.fontColorDefault.default,
-            marginBottom: "30px",
-            padding: "20px",
+            marginBottom: "10px",
+            padding: "10px",
           },
         },
       },
@@ -494,7 +621,7 @@ export const createAppTheme = (currentPalette) =>
               color: currentPalette.fontColorDefault.default,
             },
             "& label.Mui-focused": {
-              color: orange,
+              color: currentPalette.primary.main,
             },
             "& .MuiOutlinedInput-root": {
               color: currentPalette.fontColorDefault.default,
@@ -521,11 +648,14 @@ export const createAppTheme = (currentPalette) =>
       MuiFormControl: {
         styleOverrides: {
           root: {
+            "& .MuiInputBase-input": {
+              background: currentPalette.background.default,
+            },
             "& label": {
               color: currentPalette.fontColorDefault.default,
             },
             "& label.Mui-focused": {
-              color: orange,
+              color: currentPalette.primary.main,
             },
             "& .MuiFormHelperText-root": {
               color: "red",
@@ -533,7 +663,7 @@ export const createAppTheme = (currentPalette) =>
             "& .MuiOutlinedInput-root": {
               color: light,
               "& fieldset": {
-                borderColor: orange,
+                borderColor: currentPalette.borderColor.main,
               },
               "&:hover fieldset": {
                 borderColor: light,
@@ -722,11 +852,11 @@ export const createAppTheme = (currentPalette) =>
         ],
         styleOverrides: {
           contained: {
-            color: currentPalette.fontColorDefault.default,
+            //color: currentPalette.fontColorDefault.default,
           },
           text: {
-            backgroundColor: "pink",
-            color: currentPalette.fontColorDefault.default,
+            backgroundColor: currentPalette.primary.main,
+            color: currentPalette.primary.contrastText,
           },
         },
         redbutton: {
@@ -734,7 +864,7 @@ export const createAppTheme = (currentPalette) =>
           color: currentPalette.fontColorDefault.default,
         },
         editbutton: {
-          backgroundColor: buttonOrange,
+          backgroundColor: currentPalette.edit.main,
           color: currentPalette.fontColorDefault.default,
         },
         greenbutton: {
@@ -750,7 +880,7 @@ export const createAppTheme = (currentPalette) =>
             justifyContent: "center",
             button: {
               color: currentPalette.fontColorDefault.default,
-              borderColor: orange,
+              borderColor: yellow,
             },
           },
         },
@@ -803,8 +933,8 @@ export const createAppTheme = (currentPalette) =>
           root: {
             justifyContent: "space-evenly",
             alignItems: "flex-start",
-            marginTop: 10,
-            padding: 24,
+            marginTop: 0,
+            padding: 5,
           },
         },
         variants: [
@@ -888,5 +1018,4 @@ export default createAppTheme;
      import { useTheme } from "@mui/material/styles";
      ...
        const theme = useTheme(); 
-
 */

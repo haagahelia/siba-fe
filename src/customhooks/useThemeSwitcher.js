@@ -2,6 +2,7 @@
 //this is exported to App.js
 import { useState } from "react";
 import {
+  mainPalette,
   lightPalette,
   normalPalette,
   yellowPalette,
@@ -10,7 +11,13 @@ import {
 import { createAppTheme } from "../styles/theme";
 
 export const useThemeSwitcher = () => {
-  const palettes = [lightPalette, normalPalette, yellowPalette, redPalette];
+  const palettes = [
+    mainPalette,
+    lightPalette,
+    normalPalette,
+    yellowPalette,
+    redPalette,
+  ];
   // state to keep track of the current index of the palette
   const [paletteIndex, setPaletteIndex] = useState(0);
   const toggleTheme = () => {
