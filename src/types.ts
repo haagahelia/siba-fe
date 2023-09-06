@@ -3,6 +3,11 @@ export interface Response<T> {
   data: T[];
 }
 
+export interface ResponseFiner<T> {
+  httpStatus: number;
+  data: T[];
+}
+
 export interface Subject {
   id: number;
   area: number;

@@ -10,6 +10,7 @@ import SubjectFiltering from "../components/subject/SubjectFiltering";
 import SubjectPagination from "../components/subject/SubjectPagination";
 import { AppContext } from "../AppContext";
 import Logger from "../logger/logger";
+import { ajaxRequestErrorHandler } from "../ajax/ajaxRequestErrorHandler";
 
 const pageSize = 15;
 
@@ -37,16 +38,14 @@ export default function SubjectView() {
 
   const getAllSubjects = async function () {
     Logger.debug("getAllSubjects: fetching all subjects from server.");
-    const { success, data } = await dao.fetchAllSubjects();
-    if (!success) {
-      Logger.error("getAllSubjects: failed to fetch all subjects.");
-      setAlertOptions({
-        severity: "error",
-        title: "Error",
-        message: "Oops! Something went wrong on the server. No lessons found",
-      });
-      setAlertOpen(true);
-      return;
+    const { httpStatus, data } = await dao.fetchAllSubjects();
+    if (httpStatus !== 200) {
+      ajaxRequestErrorHandler(
+        httpStatus,
+        "getAllSubjects",
+        setAlertOptions,
+        setAlertOpen,
+      );
     } else {
       Logger.debug(
         `getAllSubjects: successfully fetched ${data.length} subjects.`,
