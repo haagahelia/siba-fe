@@ -45,7 +45,7 @@ export default function SubjectView() {
     if (httpStatus !== 200) {
       ajaxRequestErrorHandler(
         httpStatus,
-        getFunctionName(2),
+        getFunctionName(2), // View name, 2 = parent of the caller function
         setAlertOptions,
         setAlertOpen,
       );
