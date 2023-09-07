@@ -22,7 +22,9 @@ export const fetchAllSubjects = async (): Promise<ResponseFiner<Subject>> => {
   }
 };
 
-export const fetchSubjectsNames = async (): Promise<Response<SubjectName>> => {
+export const fetchSubjectsNames = async (): Promise<
+  ResponseFiner<SubjectName>
+> => {
   const request = new Request(`${baseUrl}/subject/getNames`, {
     method: "GET",
     headers: {
@@ -30,9 +32,13 @@ export const fetchSubjectsNames = async (): Promise<Response<SubjectName>> => {
     },
   });
   const response = await fetch(request);
-  const subjects: SubjectName[] = await response.json();
 
-  return { success: response.ok, data: subjects };
+  if (response.status === 200) {
+    const subjects: SubjectName[] = await response.json(); // 200+JSON Data,
+    return { httpStatus: response.status, data: subjects };
+  } else {
+    return { httpStatus: response.status, data: [] }; // 401+"error", 403+"error", 400+"some"
+  }
 };
 
 export const postNewSubject = async (newSubject: Subject): Promise<boolean> => {
