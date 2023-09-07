@@ -18,7 +18,7 @@ export const fetchSettings = async (): Promise<Response<Settings>> => {
 export const deleteSettingById = async (
   settingId: number,
 ): Promise<boolean> => {
-  const request = new Request(`${baseUrl}/setting/delete/${settingId}`, {
+  const request = new Request(`${baseUrl}/setting/${settingId}`, {
     method: "DELETE",
     headers: {
       Authorization: `Bearer ${localStorage.getItem("sessionToken")}`,
@@ -38,7 +38,7 @@ export const deleteSettingById = async (
 export const editSetting = async (
   editedSetting: Settings,
 ): Promise<boolean> => {
-  const request = new Request(`${baseUrl}/setting/updateSetting`, {
+  const request = new Request(`${baseUrl}/setting/`, {
     method: "PUT",
     headers: {
       Authorization: `Bearer ${localStorage.getItem("sessionToken")}`,
@@ -60,7 +60,7 @@ export const editSetting = async (
 export const postNewSetting = async (
   newSetting: Settings,
 ): Promise<boolean> => {
-  const request = new Request(`${baseUrl}/setting/postSetting`, {
+  const request = new Request(`${baseUrl}/setting/`, {
     method: "POST",
     headers: {
       Authorization: `Bearer ${localStorage.getItem("sessionToken")}`,
