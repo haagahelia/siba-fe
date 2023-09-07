@@ -1,8 +1,8 @@
 import Logger from "../logger/logger";
-import { Response, Subject, SubjectName } from "../types";
+import { Response, ResponseFiner, Subject, SubjectName } from "../types";
 const baseUrl = process.env.REACT_APP_BE_SERVER_BASE_URL;
 
-export const fetchAllSubjects = async (): Promise<Response<Subject>> => {
+export const fetchAllSubjects = async (): Promise<ResponseFiner<Subject>> => {
   const request = new Request(`${baseUrl}/subject/`, {
     method: "GET",
     headers: {
@@ -13,9 +13,13 @@ export const fetchAllSubjects = async (): Promise<Response<Subject>> => {
   });
   Logger.debug("Sessio n token:", localStorage.getItem("sessionToken"));
   const response = await fetch(request);
-  const subjects: Subject[] = await response.json();
 
-  return { success: response.ok, data: subjects };
+  if (response.status === 200) {
+    const subjects: Subject[] = await response.json();
+    return { httpStatus: response.status, data: subjects };
+  } else {
+    return { httpStatus: response.status, data: [] };
+  }
 };
 
 export const fetchSubjectsNames = async (): Promise<Response<SubjectName>> => {

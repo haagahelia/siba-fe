@@ -21,7 +21,7 @@ export const fetchAllAllocRounds = async (): Promise<Response<AllocRound>> => {
 export const postNewAllocRound = async (
   newAllocRound: AllocRound,
 ): Promise<boolean> => {
-  const request = new Request(`${baseUrl}/allocRound/post`, {
+  const request = new Request(`${baseUrl}/allocRound/`, {
     method: "POST",
     headers: {
       Authorization: `Bearer ${localStorage.getItem("sessionToken")}`,
@@ -34,7 +34,7 @@ export const postNewAllocRound = async (
   return response.ok;
 };
 export const deleteSingleAllocRound = async (id: number): Promise<boolean> => {
-  const request = new Request(`${baseUrl}/allocRound/delete/${id}`, {
+  const request = new Request(`${baseUrl}/allocRound/${id}`, {
     method: "DELETE",
     headers: {
       Authorization: `Bearer ${localStorage.getItem("sessionToken")}`,
@@ -51,7 +51,7 @@ export const deleteSingleAllocRound = async (id: number): Promise<boolean> => {
 export const editAllocRound = async (
   editedAllocRound: AllocRound,
 ): Promise<boolean> => {
-  const request = new Request(`${baseUrl}/allocRound/update`, {
+  const request = new Request(`${baseUrl}/allocRound/`, {
     method: "PUT",
     headers: {
       Authorization: `Bearer ${localStorage.getItem("sessionToken")}`,

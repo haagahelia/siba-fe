@@ -3,6 +3,11 @@ export interface Response<T> {
   data: T[];
 }
 
+export interface ResponseFiner<T> {
+  httpStatus: number;
+  data: T[];
+}
+
 export interface Subject {
   id: number;
   area: number;
@@ -82,12 +87,6 @@ export interface User {
   isStatist: number;
 }
 
-export interface UserLoggedIn {
-  id: number;
-  email: string;
-  password: string;
-  isAdmin: number;
-  isPlanner: number;
-  isStatist: number;
+export interface UserLoggedIn extends User {
   token: string;
 }
