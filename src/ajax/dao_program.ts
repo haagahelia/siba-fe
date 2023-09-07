@@ -2,7 +2,7 @@ import { Response, Program } from "../types";
 const baseUrl = process.env.REACT_APP_BE_SERVER_BASE_URL;
 
 export const fetchProgramsForSelect = async (): Promise<Response<Program>> => {
-  const request = new Request(`${baseUrl}/program/getSelectData`, {
+  const request = new Request(`${baseUrl}/program`, {
     method: "GET",
   });
 

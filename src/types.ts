@@ -87,12 +87,6 @@ export interface User {
   isStatist: number;
 }
 
-export interface UserLoggedIn {
-  id: number;
-  email: string;
-  password: string;
-  isAdmin: number;
-  isPlanner: number;
-  isStatist: number;
+export interface UserLoggedIn extends User {
   token: string;
 }
