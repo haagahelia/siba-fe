@@ -74,17 +74,17 @@ export default function EditSubEquipContainer(props) {
     getEquipmentsBySubId(subId);
   }
   const getEquipmentPriority = async function () {
-    const { success, data } = await dao.fetchEquipmentData();
-    if (!success) {
-      setAlertOptions({
-        severity: "error",
-        title: "Error",
-        message: "Something went wrong on the server. No equipment found.",
-      });
-      setAlertOpen(true);
-      return;
+    const { httpStatus, data } = await dao.fetchEquipmentData();
+    if (httpStatus !== 200) {
+      ajaxRequestErrorHandler(
+        httpStatus,
+        getFunctionName(2),
+        setAlertOptions,
+        setAlertOpen,
+      );
+    } else {
+      setEquipmentPriorityList(data);
     }
-    setEquipmentPriorityList(data);
   };
 
   useEffect(() => {
