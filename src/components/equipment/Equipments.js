@@ -20,16 +20,14 @@ export default function Equipments() {
   const { roles } = RoleLoggedIn();
 
   const getAllEquipments = async function () {
-    const { success, data } = await dao.fetchEquipmentData();
-    if (!success) {
-      setAlertOptions({
-        severity: "error",
-        title: "Error",
-        message: "Oops! Something went wrong on the server. No equipment found",
-      });
-      setAlertOpen(true);
-      Logger.error("Error when fetching equipment data");
-      return;
+    const { httpStatus, data } = await dao.fetchEquipmentData();
+    if (httpStatus !== 200) {
+      ajaxRequestErrorHandler(
+        httpStatus,
+        getFunctionName(2),
+        setAlertOptions,
+        setAlertOpen,
+      );
     } else {
       setEquipmentList(data);
       Logger.info(`Successfully fetched equipment data. Count: ${data.length}`);

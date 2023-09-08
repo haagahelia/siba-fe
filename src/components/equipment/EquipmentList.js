@@ -17,9 +17,14 @@ export default function EquipmentListItems(props) {
   const [singleEquipment, setSingleEquipment] = useState({});
 
   const getSingleEquipment = async (value) => {
-    const { success, data } = await dao.fetchEquipmentById(value);
-    if (!success) {
-      console.log("too bad");
+    const { httpStatus, data } = await dao.fetchEquipmentById(value);
+    if (httpStatus !== 200) {
+      ajaxRequestErrorHandler(
+        httpStatus,
+        getFunctionName(2),
+        setAlertOptions,
+        setAlertOpen,
+      );
     } else {
       console.log(data);
       setSingleEquipment({

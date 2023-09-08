@@ -41,16 +41,15 @@ export default function AddSubEquipContainer(props) {
   }, []);
 
   const getEquipmentsForSelect = async function (subEquipList) {
-    const { success, data } = await dao.fetchEquipmentData();
+    const { httpStatus, data } = await dao.fetchEquipmentData();
 
-    if (!success) {
-      setAlertOptions({
-        severity: "error",
-        title: "Virhe",
-        message: "Jokin meni pieleen palvelimella. Varusteita ei löytynyt.",
-      });
-      setAlertOpen(true);
-      return;
+    if (httpStatus !== 200) {
+      ajaxRequestErrorHandler(
+        httpStatus,
+        getFunctionName(2),
+        setAlertOptions,
+        setAlertOpen,
+      );
     } else {
       // Here we filter out the already existing equipment in teaching
       let filteredList = [];
