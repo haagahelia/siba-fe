@@ -53,6 +53,15 @@ export const ajaxRequestErrorHandler = (
       });
       break;
 
+    case 500:
+      Logger.error(`${callerFuncName}: Server error.`);
+      setAlertOptions({
+        severity: "error",
+        title: "Error",
+        message: "Sorry, Something went wrong on server",
+      });
+      break;
+
     default:
       Logger.error(`${callerFuncName}: failed to do the ajax action`);
       setAlertOptions({
