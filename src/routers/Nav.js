@@ -31,15 +31,10 @@ import RegisterView from "../views/RegisterView";
 import LoginView from "../views/LoginView";
 import { AppContext } from "../AppContext";
 import Logger from "../logger/logger";
+import logo from "../styles/SibeliusLogo.svg";
 
 function NavBar() {
   const sibaPages = [
-    {
-      name: "Register",
-      href: "/register",
-      forRoles: ["admin"],
-      showForCurrentUser: false,
-    },
     {
       name: "Login",
       href: "/login",
@@ -54,39 +49,9 @@ function NavBar() {
       showForCurrentUser: false,
     },
     {
-      name: "Lessons",
-      href: "/subject",
-      forRoles: ["admin", "planner", "statist"],
-      showForCurrentUser: false,
-    },
-    {
-      name: "Room results",
-      href: "/roomresult",
-      forRoles: ["admin", "planner", "statist"],
-      showForCurrentUser: false,
-    },
-    {
-      name: "Program results",
-      href: "/programresult",
-      forRoles: ["admin", "planner", "statist"],
-      showForCurrentUser: false,
-    },
-    {
-      name: "Settings",
-      href: "/settings",
-      forRoles: ["admin"],
-      showForCurrentUser: false,
-    },
-    {
-      name: "Alloc rounds",
+      name: "Allocation",
       href: "allocation",
       forRoles: ["admin"],
-      showForCurrentUser: false,
-    },
-    {
-      name: "Equipment",
-      href: "equipment",
-      forRoles: ["admin", "planner", "statist"],
       showForCurrentUser: false,
     },
     {
@@ -96,9 +61,50 @@ function NavBar() {
       showForCurrentUser: false,
     },
     {
-      name: "Department",
+      name: "Departments",
       href: "department",
       forRoles: ["admin", "planner", "statist"],
+      showForCurrentUser: false,
+    },
+    {
+      name: "Equipment",
+      href: "equipment",
+      forRoles: ["admin", "planner", "statist"],
+      showForCurrentUser: false,
+    },
+    {
+      name: "Lessons",
+      href: "/subject",
+      forRoles: ["admin", "planner", "statist"],
+      showForCurrentUser: false,
+    },
+    {
+      name: "Programs",
+      href: "/programresult",
+      forRoles: ["admin", "planner", "statist"],
+      showForCurrentUser: false,
+    },
+    {
+      name: "Register",
+      href: "/register",
+      forRoles: ["admin"],
+      showForCurrentUser: false,
+    },
+    {
+      name: "Rooms",
+      href: "/roomresult",
+      forRoles: ["admin", "planner", "statist"],
+      showForCurrentUser: false,
+    },
+    {
+      name: "Account",
+      forRoles: ["admin", "planner", "statist"],
+      showForCurrentUser: false,
+    },
+    {
+      name: "Settings",
+      href: "/settings",
+      forRoles: ["admin"],
       showForCurrentUser: false,
     },
     {
@@ -194,6 +200,10 @@ function NavBar() {
 
   return (
     <Router>
+      <NavLink to="/" className="nav-logo">
+        <img src={logo} alt="" width="200" height="200" />
+        <i className="fas fa-code" />
+      </NavLink>
       <AppBar>
         <Container maxWidth="xl">
           <Toolbar disableGutters>
