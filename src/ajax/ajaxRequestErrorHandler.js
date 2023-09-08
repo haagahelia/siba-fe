@@ -34,7 +34,9 @@ export const ajaxRequestErrorHandler = (
 
   switch (httpStatus) {
     case 401:
-      Logger.error(`${callerFuncName}: No valid login token.`);
+      Logger.error(
+        `${callerFuncName}: Not authenticated - No valid login token.`,
+      );
       setAlertOptions({
         severity: "error",
         title: "Error",
@@ -43,7 +45,7 @@ export const ajaxRequestErrorHandler = (
       break;
 
     case 403:
-      Logger.error(`${callerFuncName}: No required role.`);
+      Logger.error(`${callerFuncName}: Not authorized - No required role.`);
       setAlertOptions({
         severity: "error",
         title: "Error",

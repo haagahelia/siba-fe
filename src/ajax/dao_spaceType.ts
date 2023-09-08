@@ -4,7 +4,7 @@ const baseUrl = process.env.REACT_APP_BE_SERVER_BASE_URL;
 export const fetchSpacetypeForSelect = async (): Promise<
   Response<SpaceType>
 > => {
-  const request = new Request(`${baseUrl}/spaceType/getSelectData`, {
+  const request = new Request(`${baseUrl}/spaceType/`, {
     method: "GET",
   });
 
