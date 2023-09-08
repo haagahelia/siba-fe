@@ -8,6 +8,10 @@ import {
 import AlertBox from "../common/AlertBox";
 import dao from "../../ajax/dao";
 import EditSubjectForm from "./EditSubjectForm";
+import {
+  ajaxRequestErrorHandler,
+  getFunctionName,
+} from "../../ajax/ajaxRequestErrorHandler";
 
 export default function EditSubjectContainer(props) {
   // Whenever the editSubject changes in the subjectList.js file, that information comes here as singleSubject
@@ -93,15 +97,14 @@ export default function EditSubjectContainer(props) {
   }, []);
 
   const getSpaceTypesForSelect = async function () {
-    const { success, data } = await dao.fetchSpacetypeForSelect();
-    if (!success) {
-      setAlertOptions({
-        severity: "error",
-        title: "Error",
-        message: "Something went wrong on the server. No room types found.",
-      });
-      setAlertOpen(true);
-      return;
+    const { httpStatus, data } = await dao.fetchSpacetypeForSelect();
+    if (httpStatus !== 200) {
+      ajaxRequestErrorHandler(
+        httpStatus,
+        getFunctionName(2),
+        setAlertOptions,
+        setAlertOpen,
+      );
     } else {
       setSpaceTypeSelectList(data);
     }
