@@ -18,18 +18,16 @@ export default function LoginView(props) {
   const appContext = useContext(AppContext);
 
   const loginUser = async () => {
-    Logger.debug("Attempting to log in");
+    //Logger.debug("Attempting to log in");
     const { success, data } = await dao.getUserByEmail(loginForm);
     if (!success) {
       Logger.error("Login failed:", data);
     } else {
-      Logger.debug("Login successful", data);
-
-      appContext.userEmail = data[0].email;
-      localStorage.setItem("email", data[0].email);
-
       localStorage.setItem("sessionToken", data[0].token);
       appContext.sessionToken = data[0].token;
+
+      localStorage.setItem("email", data[0].email);
+      appContext.userEmail = data[0].email;
 
       localStorage.setItem("isAdmin", data[0].isAdmin);
       appContext.roles.admin = data[0].isAdmin;
@@ -40,11 +38,13 @@ export default function LoginView(props) {
       localStorage.setItem("isStatist", data[0].isStatist);
       appContext.roles.statist = data[0].isStatist;
 
-      Logger.debug("Login info in appContext", appContext);
+      Logger.debug("Login successful", data);
 
-      handleLoginChange();
+      //Logger.debug("Login info in appContext", appContext);
 
       window.alert("Welcome!");
+
+      handleLoginChange();
 
       setLoginForm({
         email: "",

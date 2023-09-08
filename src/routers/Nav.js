@@ -33,6 +33,7 @@ import { AppContext } from "../AppContext";
 import Logger from "../logger/logger";
 
 function NavBar() {
+  Logger.debug("NavBar initiated");
   const sibaPages = [
     {
       name: "Register",
@@ -137,7 +138,7 @@ function NavBar() {
   };
 
   const setSibaPages = () => {
-    Logger.debug("App context roles: setSibaPages", appContext.roles);
+    // Logger.debug("App context roles: setSibaPages", appContext.roles);
     if (appContext.userEmail) {
       sibaPages[1].isLogin = true;
       sibaPages[sibaPages.length - 1].showForCurrentUser = true;
@@ -170,7 +171,7 @@ function NavBar() {
   const renderNavLinks = () => {
     updateAppContext();
     setSibaPages();
-    Logger.debug("pages status 000:", sibaPages);
+    //Logger.debug("pages status 000:", sibaPages);
 
     return sibaPages
       .filter((page) => page.showForCurrentUser)

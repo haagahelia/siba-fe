@@ -1,5 +1,5 @@
 import Logger from "../logger/logger";
-import { Response, ResponseFiner, Subject, SubjectName } from "../types";
+import { /*Response,*/ ResponseFiner, Subject, SubjectName } from "../types";
 const baseUrl = process.env.REACT_APP_BE_SERVER_BASE_URL;
 
 export const fetchAllSubjects = async (): Promise<ResponseFiner<Subject>> => {
