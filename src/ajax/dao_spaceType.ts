@@ -6,6 +6,11 @@ export const fetchSpacetypeForSelect = async (): Promise<
 > => {
   const request = new Request(`${baseUrl}/spaceType/`, {
     method: "GET",
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("sessionToken")}`,
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
   });
 
   const response = await fetch(request);
