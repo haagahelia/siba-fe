@@ -79,17 +79,17 @@ export default function EditSubjectContainer(props) {
   }
 
   const getProgramsForSelect = async function () {
-    const { success, data } = await dao.fetchProgramsForSelect();
-    if (!success) {
-      setAlertOptions({
-        severity: "error",
-        title: "Error",
-        message: "Something went wrong on the server. No majors found.",
-      });
-      setAlertOpen(true);
-      return;
+    const { httpStatus, data } = await dao.fetchProgramsForSelect();
+    if (httpStatus !== 200) {
+      ajaxRequestErrorHandler(
+        httpStatus,
+        getFunctionName(2),
+        setAlertOptions,
+        setAlertOpen,
+      );
+    } else {
+      setProgramSelectList(data);
     }
-    setProgramSelectList(data);
   };
 
   useEffect(() => {

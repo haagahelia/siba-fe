@@ -55,18 +55,16 @@ export function GetMissingEquipment(idData) {
       subjectId,
       spaceId,
     );
-    if (httpStatus!==200) {
+    if (httpStatus !== 200) {
       console.log("Whoops!");
       ajaxRequestErrorHandler(
         httpStatus,
         "getMissingEquipment",
         setAlertOptions,
         setAlertOpen,
-      )
-    } else {
-      Logger.debug(
-        `getUnAlloc: successfully fetched`,
       );
+    } else {
+      Logger.debug("getUnAlloc: successfully fetched");
       const equipmentNames = data.map((item) => item.name);
       setMissingEquipment(`Missing equipment: ${equipmentNames.join(", ")}`);
     }
@@ -119,24 +117,22 @@ export default function AllocationSubjectFailureView() {
 
   const getUnAlloc = async function (id) {
     const { httpStatus, data } = await dao.getUnAllocableSubjects(id);
-    if (httpStatus!==200) {
+    if (httpStatus !== 200) {
       ajaxRequestErrorHandler(
         httpStatus,
         "getUnAlloc",
         setAlertOptions,
         setAlertOpen,
-      )
-    } else {
-      Logger.debug(
-        `getUnAlloc: successfully fetched`,
       );
+    } else {
+      Logger.debug("getUnAlloc: successfully fetched");
       setUnAllocableSubjects(data);
     }
   };
 
   const getUnAllocRooms = async function (id) {
     const { httpStatus, data } = await dao.getSubjectRooms(id);
-    if (httpStatus!==200) {
+    if (httpStatus !== 200) {
       ajaxRequestErrorHandler(
         httpStatus,
         "getUnAllocRooms",
@@ -144,9 +140,7 @@ export default function AllocationSubjectFailureView() {
         setAlertOpen,
       );
     } else {
-      Logger.debug(
-        `getUnAllocRooms: successfully fetched`,
-      );
+      Logger.debug("getUnAllocRooms: successfully fetched");
       setUnAllocSubjectRooms(data);
       setCurrSubjId(id);
     }
