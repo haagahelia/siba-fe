@@ -16,14 +16,16 @@ export const getUnAllocableSubjects = async (
   const response = await fetch(request);
   if (response.status === 200) {
     const data = await response.json();
-    return { httpStatus: response.status, data};
+    return { httpStatus: response.status, data };
   } else {
     return { httpStatus: response.status, data: [] };
   }
 };
 
 // TODO: get type definition for data
-export const getSubjectRooms = async (id: number): Promise<ResponseFiner<any>> => {
+export const getSubjectRooms = async (
+  id: number,
+): Promise<ResponseFiner<any>> => {
   const request = new Request(`${baseUrl}/allocation/subject/${id}/rooms`, {
     method: "GET",
   });
@@ -31,7 +33,7 @@ export const getSubjectRooms = async (id: number): Promise<ResponseFiner<any>> =
   const response = await fetch(request);
   if (response.status === 200) {
     const data = await response.json();
-    return { httpStatus: response.status, data};
+    return { httpStatus: response.status, data };
   } else {
     return { httpStatus: response.status, data: [] };
   }
@@ -52,7 +54,7 @@ export const getMissingEquipmentForRoom = async (
   const response = await fetch(request);
   if (response.status === 200) {
     const data = await response.json();
-    return { httpStatus: response.status, data};
+    return { httpStatus: response.status, data };
   } else {
     return { httpStatus: response.status, data: [] };
   }
