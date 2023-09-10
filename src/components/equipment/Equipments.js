@@ -20,6 +20,7 @@ export default function Equipments() {
   const { roles } = RoleLoggedIn();
 
   const getAllEquipments = async function () {
+    Logger.debug("getAllEquipments: fetching all equipments from server.");
     const { httpStatus, data } = await dao.fetchEquipmentData();
     if (httpStatus !== 200) {
       ajaxRequestErrorHandler(
@@ -30,7 +31,9 @@ export default function Equipments() {
       );
     } else {
       setEquipmentList(data);
-      Logger.info(`Successfully fetched equipment data. Count: ${data.length}`);
+      Logger.info(
+        `getAllEquipments: successfully fetched ${data.length} subjects.`,
+      );
     }
   };
 
