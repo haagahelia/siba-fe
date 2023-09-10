@@ -30,7 +30,7 @@ export async function validate(values) {
     errors.name = "Only letters, numbers and '-' allowed";
   }
 
-  if (values.description.length > 16000) {
+  if (values.description !== null && values.description.length > 16000) {
     errors.description =
       "The description must be maximum 16000 characters long";
   } else if (!regDescription.test(values.description)) {
@@ -45,7 +45,7 @@ export async function validate(values) {
     errors.numberValue = "Only numbers allowed";
   }
 
-  if (values.textValue.length > 255) {
+  if (values.textValue !== null && values.textValue.length > 255) {
     errors.textValue = "The textValue must be maximum 255 characters long";
   } else if (!regTextValue.test(values.textValue)) {
     errors.textValue = "Only letters, numbers and '-' allowed";
