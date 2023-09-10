@@ -51,6 +51,9 @@ export function GetMissingEquipment(idData) {
   };
 
   const getMissingEquipment = async function (subjectId, spaceId) {
+    Logger.debug(
+      "getMissingEquipment: fetching all missing equipment from server.",
+    );
     const { httpStatus, data } = await dao.getMissingEquipmentForRoom(
       subjectId,
       spaceId,
@@ -64,7 +67,7 @@ export function GetMissingEquipment(idData) {
         setAlertOpen,
       );
     } else {
-      Logger.debug("getUnAlloc: successfully fetched");
+      Logger.debug("getMissingEquipment: successfully fetched");
       const equipmentNames = data.map((item) => item.name);
       setMissingEquipment(`Missing equipment: ${equipmentNames.join(", ")}`);
     }

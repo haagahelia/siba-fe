@@ -78,6 +78,9 @@ export default function AddSubjectContainer(props) {
   });
 
   const getProgramsForSelect = async function () {
+    Logger.debug(
+      "getProgramsForSelect: fetching all programs for select from server.",
+    );
     const { httpStatus, data } = await dao.fetchProgramsForSelect();
     if (httpStatus !== 200) {
       ajaxRequestErrorHandler(
@@ -89,6 +92,7 @@ export default function AddSubjectContainer(props) {
     } else {
       //console.log(data);
       setProgramSelectList(data);
+      Logger.debug("getProgramsForSelect: successfully fetched programs.");
     }
   };
   useEffect(() => {
@@ -96,6 +100,9 @@ export default function AddSubjectContainer(props) {
   }, []);
 
   const getSpaceTypesForSelect = async function () {
+    Logger.debug(
+      "getSpaceTypesForSelect: fetching all Space Types for select from server.",
+    );
     const { httpStatus, data } = await dao.fetchSpacetypeForSelect();
     if (httpStatus !== 200) {
       ajaxRequestErrorHandler(
@@ -105,6 +112,9 @@ export default function AddSubjectContainer(props) {
         setAlertOpen,
       );
     } else {
+      Logger.debug(
+        "getSpaceTypesForSelect: successfully fetched Space Types for select.",
+      );
       setSpaceTypeSelectList(data);
     }
   };
