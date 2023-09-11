@@ -3,7 +3,7 @@ import { DateTime } from "luxon";
 const Logger = {
   // The level of the logs that should be displayed.
   // Available options are: "debug", "info", "warn", "error".
-  logLevel: "info", // "debug","info","warn"
+  logLevel: "debug4", // "debug","info","warn"
   loggedEnv: "development", // "development" or "no logging"
 
   // A prefix that will be prepended to all log messages. Should be set in the view logger is used in.
@@ -19,9 +19,9 @@ const Logger = {
         `DEBU|${this.getFormattedTimestamp()}[${this.logPrefix}]`,
         ...params,
       );
-      console.log("HEI DEBUG 1");
+      //console.log("HEI DEBUG 1");
     }
-    console.log("HEI DEBUG 2");
+    //console.log("HEI DEBUG 2");
   },
 
   info(...params) {
@@ -33,9 +33,9 @@ const Logger = {
         `INFO|${this.getFormattedTimestamp()}[${this.logPrefix}]`,
         ...params,
       );
-      console.log("HEI INFO 1");
+      //console.log("HEI INFO 1");
     }
-    console.log("HEI INFO 2");
+    //console.log("HEI INFO 2");
   },
 
   warn(...params) {
