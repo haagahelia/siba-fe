@@ -5,6 +5,10 @@ import { validate } from "../../validation/ValidateEditSubjectEquipment";
 import AlertBox from "../common/AlertBox";
 import dao from "../../ajax/dao";
 import EditSubEquipForm from "./EditSubEquipForm";
+import {
+  ajaxRequestErrorHandler,
+  getFunctionName,
+} from "../../ajax/ajaxRequestErrorHandler";
 
 export default function EditSubEquipContainer(props) {
   const { subId, equipId, prio, obli, name, getEquipmentsBySubId } = props;

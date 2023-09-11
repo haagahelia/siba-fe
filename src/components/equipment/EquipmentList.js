@@ -9,6 +9,8 @@ import Paper from "@mui/material/Paper";
 import { Typography } from "@mui/material";
 import SingleEquipmentDialog from "./SingleEquipmentDialog";
 import dao from "../../ajax/dao";
+//import { ajaxRequestErrorHandler, getFunctionName } from "../../ajax/ajaxRequestErrorHandler";
+import Logger from "../../logger/logger";
 
 export default function EquipmentListItems(props) {
   const { getAllEquipments, equipmentList } = props;
@@ -19,12 +21,16 @@ export default function EquipmentListItems(props) {
   const getSingleEquipment = async (value) => {
     const { httpStatus, data } = await dao.fetchEquipmentById(value);
     if (httpStatus !== 200) {
-      ajaxRequestErrorHandler(
-        httpStatus,
-        getFunctionName(2),
-        setAlertOptions,
-        setAlertOpen,
+      // ajaxRequestErrorHandler(
+      //   httpStatus,
+      //   getFunctionName(2),
+      //   setAlertOptions,
+      //   setAlertOpen,
+      // );
+      Logger.debug(
+        `fetchEquipmentById failed with http status code: ${httpStatus}`,
       );
+      alert(`Could not fetch equipment. Code: ${httpStatus}`);
     } else {
       console.log(data);
       setSingleEquipment({

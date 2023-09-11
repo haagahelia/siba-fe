@@ -13,6 +13,7 @@ import {
   ajaxRequestErrorHandler,
   getFunctionName,
 } from "../../ajax/ajaxRequestErrorHandler";
+import Logger from "../../logger/logger";
 
 //const baseUrl = process.env.REACT_APP_BE_SERVER_BASE_URL;
 //import {BASEURL} from "../config/consts.js";

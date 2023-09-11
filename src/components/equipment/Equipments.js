@@ -7,6 +7,10 @@ import AddEquipment from "./AddEquipment";
 import EquipmentListContainer from "./EquipmentListContainer";
 import { RoleLoggedIn } from "../../customhooks/RoleLoggedIn";
 import Logger from "../../logger/logger";
+import {
+  ajaxRequestErrorHandler,
+  getFunctionName,
+} from "../../ajax/ajaxRequestErrorHandler";
 
 export default function Equipments() {
   Logger.logPrefix = "Equipments";
