@@ -1,16 +1,14 @@
 //custom hook to keep state and to switch theme between light and dark mode
 //this is exported to App.js
 import { useState } from "react";
-import {
-  lightPalette,
-  normalPalette,
-  yellowPalette,
-  redPalette,
-} from "../styles/theme";
+import { darkPalette } from "../styles/palettes/darkPalette";
+import { lightPalette } from "../styles/palettes/lightPalette";
+import { yellowPalette } from "../styles/palettes/yellowPalette";
+import { redPalette } from "../styles/palettes/yellowPalette";
 import { createAppTheme } from "../styles/theme";
 
 export const useThemeSwitcher = () => {
-  const palettes = [lightPalette, normalPalette, yellowPalette, redPalette];
+  const palettes = [darkPalette, lightPalette, yellowPalette, redPalette];
   // state to keep track of the current index of the palette
   const [paletteIndex, setPaletteIndex] = useState(0);
   const toggleTheme = () => {
