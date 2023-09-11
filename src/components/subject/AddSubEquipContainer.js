@@ -5,6 +5,10 @@ import { useFormik } from "formik";
 import ConfirmationDialog from "../common/ConfirmationDialog";
 import { validate } from "../../validation/ValidateAddSubjectEquipment";
 import AlertBox from "../common/AlertBox";
+import {
+  ajaxRequestErrorHandler,
+  getFunctionName,
+} from "../../ajax/ajaxRequestErrorHandler";
 
 export default function AddSubEquipContainer(props) {
   const { singleSubject, equipmentsBySubId } = props;
