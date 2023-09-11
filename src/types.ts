@@ -90,3 +90,28 @@ export interface User {
 export interface UserLoggedIn extends User {
   token: string;
 }
+
+export interface UnallocableSubject {
+  subjectId: number;
+  name: string;
+  groupSize: number;
+  area: number;
+  spaceType: string;
+}
+
+export interface SubjectRoom {
+  id: number;
+  name: string;
+  area: number;
+  missintItems: number;
+  areaOk: number;
+  personLimit: number;
+  isUse: number;
+  spaceType: string;
+  spaceTypeOk: number;
+}
+
+export interface MissingEquipment {
+  equipmentId: number;
+  name: string;
+}
