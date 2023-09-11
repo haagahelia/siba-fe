@@ -1,8 +1,6 @@
 import { Response, AllocRound } from "../types";
 const baseUrl = process.env.REACT_APP_BE_SERVER_BASE_URL;
 
-// TODO: get type definition for data
-
 export const fetchAllAllocRounds = async (): Promise<Response<AllocRound>> => {
   const request = new Request(`${baseUrl}/allocRound`, {
     method: "GET",
@@ -18,6 +16,7 @@ export const fetchAllAllocRounds = async (): Promise<Response<AllocRound>> => {
 
   return { success: response.ok, data: allocrounds };
 };
+
 export const postNewAllocRound = async (
   newAllocRound: AllocRound,
 ): Promise<boolean> => {
@@ -33,6 +32,7 @@ export const postNewAllocRound = async (
   const response = await fetch(request);
   return response.ok;
 };
+
 export const deleteSingleAllocRound = async (id: number): Promise<boolean> => {
   const request = new Request(`${baseUrl}/allocRound/${id}`, {
     method: "DELETE",
