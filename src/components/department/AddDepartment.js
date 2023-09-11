@@ -40,7 +40,7 @@ function AddDepartment(props) {
       alert(Object.values(validation));
       return;
     }
-    let success = await dao.AddDepartment(department);
+    let success = await dao.addDepartment(department);
     if (!success) {
       alert("something went wrong!");
     } else {
