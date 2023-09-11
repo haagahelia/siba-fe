@@ -11,21 +11,39 @@ class ResultRoomsStore {
 
   async fetchRooms(id) {
     await axios
-      .get(`${baseUrl}/allocation/${id}/rooms`)
+      .get(`${baseUrl}/allocation/${id}/rooms`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("sessionToken")}`,
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+      })
       .then((data) => (this.rooms = data.data))
       .catch((e) => console.error(e));
   }
 
   async fetchSubRooms(subjectId, allocationId) {
     await axios
-      .get(`${baseUrl}/allocation/${allocationId}/rooms/${subjectId}`)
+      .get(`${baseUrl}/allocation/${allocationId}/rooms/${subjectId}`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("sessionToken")}`,
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+      })
       .then((data) => (this.subRooms = data.data))
       .catch((e) => console.error(e));
   }
 
   async fetchRoomSubs(roomId, allocationId) {
     await axios
-      .get(`${baseUrl}/allocation/${allocationId}/subjects/${roomId}`)
+      .get(`${baseUrl}/allocation/${allocationId}/subjects/${roomId}`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("sessionToken")}`,
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+      })
       .then((data) => (this.roomSubs = data.data))
       .catch((e) => console.error(e));
   }

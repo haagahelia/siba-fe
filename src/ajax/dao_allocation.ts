@@ -10,6 +10,11 @@ export const getUnAllocableSubjects = async (
     `${baseUrl}/allocation/${id}/subject/unallocated`,
     {
       method: "GET",
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("sessionToken")}`,
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
     },
   );
 
@@ -28,6 +33,11 @@ export const getSubjectRooms = async (
 ): Promise<ResponseFiner<any>> => {
   const request = new Request(`${baseUrl}/allocation/subject/${id}/rooms`, {
     method: "GET",
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("sessionToken")}`,
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
   });
 
   const response = await fetch(request);

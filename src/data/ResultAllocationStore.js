@@ -7,9 +7,17 @@ const baseUrl = process.env.REACT_APP_BE_SERVER_BASE_URL;
 class AllocationPost {
   startAlloc(allocRoundId) {
     axios
-      .post(`${baseUrl}/allocation/start`, {
-        allocRound: allocRoundId,
-      })
+      .post(
+        `${baseUrl}/allocation/start`,
+        { allocRound: allocRoundId },
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("sessionToken")}`,
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+        },
+      )
       .then(function (response) {
         console.log(response);
       })
@@ -25,9 +33,19 @@ class AllocationPost {
 
   resetAlloc(allocRoundId) {
     axios
-      .post(`${baseUrl}/allocation/reset`, {
-        allocRound: allocRoundId,
-      })
+      .post(
+        `${baseUrl}/allocation/reset`,
+        {
+          allocRound: allocRoundId,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("sessionToken")}`,
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+        },
+      )
       .then(function (response) {
         console.log(response);
       })
