@@ -165,21 +165,22 @@ export const createAppTheme = (currentPalette) =>
         },
         variants: [
           {
-            props: { variant: "sibaAppBarHorizontal" },
+            //props: { variant: "sibaAppBarHorizontal" },
+            props: { variant: "sibaAppBarVerticalNew" },
             style: {
               borderColor: currentPalette.backgroundDarker.default,
-              fontSize: "1.2rem",
+              fontSize: "1.1rem",
               display: "contents",
               // color: currentPalette.fontColorDefault.main,
               "& a": {
                 padding: "0.5rem 1rem",
                 borderBottom: "3px solid transparent",
-                marginRight: "0.2rem",
                 color: currentPalette.fontColorDefault.default,
                 textDecoration: "none",
                 fontFamily: "Roboto, Helvetica, Aria, sans-serif",
                 fontWeight: 700,
                 height: "100%",
+                paddingBottom: "2px",
               },
               "&:after": {
                 content: '""',

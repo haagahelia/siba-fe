@@ -44,12 +44,6 @@ function NavBar() {
       isLogin: false,
     },
     {
-      name: "Teachings",
-      href: "/",
-      forRoles: ["admin", "planner", "statist"],
-      showForCurrentUser: false,
-    },
-    {
       name: "Allocation",
       href: "allocation",
       forRoles: ["admin"],
@@ -74,14 +68,14 @@ function NavBar() {
       showForCurrentUser: false,
     },
     {
-      name: "Program results",
+      name: "Programs",
       href: "/programresult",
       forRoles: ["admin", "planner", "statist"],
       showForCurrentUser: false,
     },
     {
-      name: "Room results",
-      href: "/roomresult",
+      name: "Lessons",
+      href: "/",
       forRoles: ["admin", "planner", "statist"],
       showForCurrentUser: false,
     },
@@ -89,6 +83,12 @@ function NavBar() {
       name: "Register",
       href: "/register",
       forRoles: ["admin"],
+      showForCurrentUser: false,
+    },
+    {
+      name: "Rooms",
+      href: "/roomresult",
+      forRoles: ["admin", "planner", "statist"],
       showForCurrentUser: false,
     },
     {
