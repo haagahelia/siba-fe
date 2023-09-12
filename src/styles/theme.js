@@ -140,6 +140,19 @@ export const createAppTheme = (currentPalette) =>
               transition: "all 0.5s ease",
             },
           },
+          {
+            props: { variant: "sibaAppBarVerticalNew" },
+            style: {
+              display: "flex",
+              flexDirection: "column",
+              flexWrap: "nowrap",
+              alignItems: "flex-start",
+              fontSize: "1.2rem",
+              position: "sticky",
+              top: 0,
+              zIndex: 20,
+            },
+          },
         ],
       },
       MuiListItem: {

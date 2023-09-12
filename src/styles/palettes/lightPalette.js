@@ -107,7 +107,8 @@ export const lightPalette = {
   progressBarRed: { main: red },
   borderColor: {
     main: lightGrey,
-    cardBorder: black,  },
+    cardBorder: black,
+  },
   infoIcon: {
     main: yellow,
   },
