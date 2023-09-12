@@ -16,6 +16,7 @@ const yellow = "#F4BF00";
 // Status indicators
 const red = "#D62E3D";
 const darkYellow = "#f6b751"; // changed to darker yellow so it's more readable
+//const lightYellow = "#F6D251";   // removed, use the darkYellow
 const green = "#48B058";
 const orange = "#FDA826";
 
@@ -106,8 +107,7 @@ export const lightPalette = {
   progressBarRed: { main: red },
   borderColor: {
     main: lightGrey,
-    cardBorder: black,
-  },
+    cardBorder: black,  },
   infoIcon: {
     main: yellow,
   },

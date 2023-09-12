@@ -3,6 +3,8 @@ import { createTheme } from "@mui/material";
 //yellowPalette
 
 const lightBlue = "#73FDFF";
+//const lightBlue2 = "#5DBCD2";   // removed
+//const black = "#000000";   // removed
 const canary = "#FFFF8F";
 const paleCanary = "#FFFFAA";
 const sahara = "#AAAA11";
