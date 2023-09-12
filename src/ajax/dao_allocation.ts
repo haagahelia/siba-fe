@@ -1,11 +1,14 @@
-import { /*Response*/ ResponseFiner } from "../types";
+import {
+  ResponseFiner,
+  UnallocableSubject,
+  SubjectRoom,
+  MissingEquipment,
+} from "../types";
 const baseUrl = process.env.REACT_APP_BE_SERVER_BASE_URL;
-
-// TODO: get type definition for data
 
 export const getUnAllocableSubjects = async (
   id: number,
-): Promise<ResponseFiner<any>> => {
+): Promise<ResponseFiner<UnallocableSubject>> => {
   const request = new Request(
     `${baseUrl}/allocation/${id}/subject/unallocated`,
     {
@@ -27,10 +30,9 @@ export const getUnAllocableSubjects = async (
   }
 };
 
-// TODO: get type definition for data
 export const getSubjectRooms = async (
   id: number,
-): Promise<ResponseFiner<any>> => {
+): Promise<ResponseFiner<SubjectRoom>> => {
   const request = new Request(`${baseUrl}/allocation/subject/${id}/rooms`, {
     method: "GET",
     headers: {
@@ -49,11 +51,10 @@ export const getSubjectRooms = async (
   }
 };
 
-// TODO: get type definition for data
 export const getMissingEquipmentForRoom = async (
   subjectId: number,
   roomId: number,
-): Promise<ResponseFiner<any>> => {
+): Promise<ResponseFiner<MissingEquipment>> => {
   const request = new Request(
     `${baseUrl}/allocation/missing-eqpt/subject/${subjectId}/room/${roomId}`,
     {
