@@ -1,5 +1,5 @@
 import Logger from "../logger/logger";
-import { Response, User, UserLoggedIn, Subject, ResponseFiner } from "../types";
+import { Response, User, UserLoggedIn, ResponseFiner } from "../types";
 
 const baseUrl = process.env.REACT_APP_BE_SERVER_BASE_URL;
 
@@ -18,7 +18,7 @@ export const postNewUser = async (newUser: User): Promise<boolean> => {
   return response.ok;
 };
 
-export const fetchAllUsers = async (): Promise<ResponseFiner<Subject>> => {
+export const fetchAllUsers = async (): Promise<ResponseFiner<User>> => {
   const request = new Request(`${baseUrl}/user/`, {
     method: "GET",
     headers: {
@@ -30,7 +30,7 @@ export const fetchAllUsers = async (): Promise<ResponseFiner<Subject>> => {
   const response = await fetch(request);
 
   if (response.status === 200) {
-    const users: Subject[] = await response.json();
+    const users: User[] = await response.json();
     return { httpStatus: response.status, data: users };
   } else {
     return { httpStatus: response.status, data: [] };
