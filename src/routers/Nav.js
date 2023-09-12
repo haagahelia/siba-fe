@@ -176,7 +176,7 @@ function NavBar() {
     return sibaPages
       .filter((page) => page.showForCurrentUser)
       .map((page, index) => (
-        <ListItem variant="sibaAppBarHorizontal" key={index}>
+        <ListItem variant="sibaAppBarVerticalNew" key={index}>
           <NavLink
             to={page.href}
             end
@@ -195,13 +195,22 @@ function NavBar() {
 
   return (
     <Router>
-      <NavLink to="/" className="nav-logo">
-        <img src={logo} alt="" width="200" height="200" />
-        <i className="fas fa-code" />
-      </NavLink>
-      <AppBar>
+      <AppBar
+        position="fixed"
+        sx={{
+          width: "150px",
+          height: "100vh",
+          top: 0,
+          left: 0,
+          flexDirection: "column",
+        }}
+      >
+        <NavLink to="/" className="nav-logo">
+          <img src={logo} alt="" width="100" height="100" />
+          <i className="fas fa-code" />
+        </NavLink>
         <Container maxWidth="xl">
-          <Toolbar disableGutters>
+          <Toolbar disableGutters sx={{ flexDirection: "column" }}>
             <Typography variant="sibaTypography">
               Logged in as: {loggedIn}
             </Typography>
@@ -245,7 +254,7 @@ function NavBar() {
               </Menu>
             </Box>
             <Box sx={{ flexGrow: 1, display: { xs: "none", lg: "flex" } }}>
-              <List variant="sibaAppBarHorizontal">{renderNavLinks()}</List>
+              <List variant="sibaAppBarVerticalNew">{renderNavLinks()}</List>
             </Box>
           </Toolbar>
         </Container>
