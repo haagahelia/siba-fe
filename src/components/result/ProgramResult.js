@@ -82,7 +82,7 @@ export default function ProgramResult(props) {
   return (
     <>
       <AllocRoundControlPanel incrementResetCounter={incrementResetCounter} />
-      <Typography style={{ margin: 20, fontSize: 24 }}>
+      <Typography style={{ margin: 10, fontSize: 24 }}>
         Programs (Aineryhmät)
       </Typography>
       <Modal open={open} onClose={handleClose} style={{ overflow: "scroll" }}>
@@ -91,7 +91,7 @@ export default function ProgramResult(props) {
             width: "80%",
             margin: "auto",
             borderRadius: 20,
-            marginTop: "10%",
+            marginTop: 10,
             backgroundColor: theme.palette.background.default,
             position: "relative",
           }}
@@ -148,7 +148,7 @@ export default function ProgramResult(props) {
           //padding: 2,
           margin: "auto",
           width: "80%",
-          marginTop: 20,
+          marginTop: 10,
           padding: 10,
           borderRadius: 20,
         }}
@@ -161,7 +161,8 @@ export default function ProgramResult(props) {
               : progress < 80
               ? theme.palette.progressBarRed.main
               : theme.palette.progressBarYellow.main;
-          const textColor = progress === 0 ? "white" : "black";
+          const textColor =
+            progress === 0 ? theme.palette.primary : theme.palette.primary.dark;
 
           return (
             <React.Fragment key={prog.id}>

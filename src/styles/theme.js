@@ -355,7 +355,7 @@ export const createAppTheme = (currentPalette) =>
           {
             props: { variant: "sibaNavLink" },
             style: {
-              color: "#FFFFFF",
+              color: currentPalette.fontColorDefault.default, // "#0000FF",   // was: #ffffff
               textDecoration: "none",
               fontFamily: "Roboto, Helvetica, Aria, sans-serif",
               fontWeight: 700,
