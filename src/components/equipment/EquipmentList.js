@@ -31,6 +31,12 @@ export default function EquipmentListItems(props) {
         `fetchEquipmentById failed with http status code: ${httpStatus}`,
       );
       alert(`Could not fetch equipment. Code: ${httpStatus}`);
+    } else if (data[0] === undefined) {
+      Logger.debug(
+        `fetchEquipmentById data retrieval failed with http status code: ${httpStatus}`,
+      );
+      alert(`Equipment was not found. Code: ${httpStatus}`);
+      getAllEquipments();
     } else {
       console.log(data);
       setSingleEquipment({
