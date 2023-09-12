@@ -3,7 +3,7 @@ import { createTheme } from "@mui/material";
 //redPalette
 const tomatoRed = "#FF2400";
 const softPink = "#F2AEB8";
-const lightPink = "#FFD1CF";
+const lightPink = "#FAD6D1";
 const redOrange = "#FF3333";
 const bitterSweet = "#FF6666";
 const salmonPink = "#FF8888";
@@ -23,62 +23,62 @@ export const redPalette = {
   name: "redPalette",
   common: {
     black: "#1D1D1D",
-    white: "#fff",
+    white: lightPink,
   },
   primary: {
     main: redOrange,
     light: bitterSweet,
     dark: "#0059B2",
-    contrastText: "#ffffff",
+    contrastText: lightPink,
   },
 
   secondary: {
     main: salmonPink,
     light: "#ba68c8",
     dark: "#7b1fa2",
-    contrastText: "#ffffff",
+    contrastText: lightPink,
   },
   error: {
     main: brightRed,
     light: "#FF99A2",
     dark: "#C70011",
-    contrastText: "#ffffff",
+    contrastText: lightPink,
   },
   warning: {
     main: pumpkinOrange,
     light: "#FFDC48",
     dark: "#AB6800",
-    contrastText: "#000000",
+    contrastText: lightPink,
   },
   info: {
     main: clayBrown,
     light: "#03a9f4",
     dark: "#01579b",
-    contrastText: "#ffffff",
+    contrastText: lightPink,
   },
   success: {
     main: darkOrange,
     light: "#6AE79C",
     dark: "#1AA251",
-    contrastText: "#ffffff",
+    contrastText: lightPink,
   },
   edit: {
     main: bitterSweet,
-    contrastText: "#ffffff",
+    contrastText: lightPink,
   },
   contrastThreshold: 3,
   tonalOffset: 0.2,
   text: {
     primary: "#1A2027",
     secondary: "#3E5060",
-    disabled: "#ffffff",
+    disabled: lightPink,
   },
   infoIcon: {
     main: black,
   },
   divider: bitterSweet,
   background: {
-    paper: "#ffffff",
+    paper: lightPink,
     default: tomatoRed,
   },
   snackbarBackground: {
