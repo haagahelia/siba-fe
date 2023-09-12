@@ -40,7 +40,7 @@ export default function DepartmentView() {
       setAlertOpen(true);
       return;
     } else {
-      Logger.debug(
+      Logger.info(
         `getAllDepartments: successfully fetched ${data.length} departments.`,
       );
       setDepartmentList(data);

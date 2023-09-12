@@ -1,17 +1,24 @@
-import { Response, Settings } from "../types";
+import { ResponseFiner, Settings } from "../types";
 const baseUrl = process.env.REACT_APP_BE_SERVER_BASE_URL;
 
-export const fetchSettings = async (): Promise<Response<Settings>> => {
+export const fetchSettings = async (): Promise<ResponseFiner<Settings>> => {
   const request = new Request(`${baseUrl}/setting`, {
     method: "GET",
     headers: {
       Authorization: `Bearer ${localStorage.getItem("sessionToken")}`,
+      Accept: "application/json",
+      "Content-Type": "application/json",
     },
   });
 
   const response = await fetch(request);
-  const settings: Settings[] = await response.json();
-  return { success: response.ok, data: settings };
+
+  if (response.status === 200) {
+    const settings: Settings[] = await response.json();
+    return { httpStatus: response.status, data: settings };
+  } else {
+    return { httpStatus: response.status, data: [] };
+  }
 };
 
 // delete setting

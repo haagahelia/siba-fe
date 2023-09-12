@@ -3,7 +3,7 @@ import { DateTime } from "luxon";
 const Logger = {
   // The level of the logs that should be displayed.
   // Available options are: "debug", "info", "warn", "error".
-  logLevel: "debug4", // "debug","info","warn"
+  logLevel: "debug", // "debug","info","warn"
   loggedEnv: "development", // "development" or "no logging"
 
   // A prefix that will be prepended to all log messages. Should be set in the view logger is used in.
