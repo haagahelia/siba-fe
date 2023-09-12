@@ -20,6 +20,8 @@ import { useParams } from "react-router-dom";
 import AlertBox from "../components/common/AlertBox";
 import "../styles/AllocationFailure.css";
 import dao from "../ajax/dao";
+import { ajaxRequestErrorHandler } from "../ajax/ajaxRequestErrorHandler";
+import Logger from "../logger/logger";
 
 export function GetMissingEquipment(idData) {
   let subjId = idData.subjectId;
@@ -49,24 +51,26 @@ export function GetMissingEquipment(idData) {
   };
 
   const getMissingEquipment = async function (subjectId, spaceId) {
-    const { success, data } = await dao.getMissingEquipmentForRoom(
+    Logger.debug(
+      "getMissingEquipment: fetching all missing equipment from server.",
+    );
+    const { httpStatus, data } = await dao.getMissingEquipmentForRoom(
       subjectId,
       spaceId,
     );
-    if (!success) {
+    if (httpStatus !== 200) {
       console.log("Whoops!");
-      setAlertOptions({
-        severity: "error",
-        title: "Error",
-        message:
-          "Oops! Something went wrong on the server. No missing equipment was found",
-      });
-      setAlertOpen(true);
-      return;
+      ajaxRequestErrorHandler(
+        httpStatus,
+        "getMissingEquipment",
+        setAlertOptions,
+        setAlertOpen,
+      );
+    } else {
+      Logger.debug("getMissingEquipment: successfully fetched");
+      const equipmentNames = data.map((item) => item.name);
+      setMissingEquipment(`Missing equipment: ${equipmentNames.join(", ")}`);
     }
-
-    const equipmentNames = data.map((item) => item.name);
-    setMissingEquipment(`Missing equipment: ${equipmentNames.join(", ")}`);
   };
 
   return (
@@ -115,31 +119,31 @@ export default function AllocationSubjectFailureView() {
   });
 
   const getUnAlloc = async function (id) {
-    const { success, data } = await dao.getUnAllocableSubjects(id);
-    if (!success) {
-      setAlertOptions({
-        severity: "error",
-        title: "Error",
-        message: "Oops! Something went wrong on the server. No lessons found",
-      });
-      setAlertOpen(true);
-      return;
+    const { httpStatus, data } = await dao.getUnAllocableSubjects(id);
+    if (httpStatus !== 200) {
+      ajaxRequestErrorHandler(
+        httpStatus,
+        "getUnAlloc",
+        setAlertOptions,
+        setAlertOpen,
+      );
     } else {
+      Logger.debug("getUnAlloc: successfully fetched");
       setUnAllocableSubjects(data);
     }
   };
 
   const getUnAllocRooms = async function (id) {
-    const { success, data } = await dao.getSubjectRooms(id);
-    if (!success) {
-      setAlertOptions({
-        severity: "error",
-        title: "Error",
-        message: "Oops! Something went wrong on the server. No rooms found",
-      });
-      setAlertOpen(true);
-      return;
+    const { httpStatus, data } = await dao.getSubjectRooms(id);
+    if (httpStatus !== 200) {
+      ajaxRequestErrorHandler(
+        httpStatus,
+        "getUnAllocRooms",
+        setAlertOptions,
+        setAlertOpen,
+      );
     } else {
+      Logger.debug("getUnAllocRooms: successfully fetched");
       setUnAllocSubjectRooms(data);
       setCurrSubjId(id);
     }

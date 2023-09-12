@@ -1,9 +1,6 @@
 import "./App.css";
 import { ThemeProvider } from "@mui/material/styles";
-
-//import Nav from "./routers/Nav";
-import Nav from "./routers/NewNav";
-
+import Nav from "./routers/Nav";
 import { CssBaseline } from "@mui/material";
 import { Button } from "@mui/material";
 import { useThemeSwitcher } from "./customhooks/useThemeSwitcher";

@@ -33,7 +33,7 @@ export const deleteDepartment = async (
   return data?.returnedNumberValue === 1;
 };
 
-export const AddDepartment = async (
+export const addDepartment = async (
   newDepartment: Department,
 ): Promise<boolean> => {
   const request = new Request(`${baseUrl}/department/`, {

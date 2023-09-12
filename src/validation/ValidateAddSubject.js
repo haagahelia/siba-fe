@@ -1,4 +1,5 @@
 import dao from "../ajax/dao";
+import Logger from "../logger/logger";
 
 export async function validate(values) {
   const errors = {};
@@ -10,13 +11,17 @@ export async function validate(values) {
   let subjectList = [];
 
   const getSubjectNames = async function () {
-    const { data } = await dao.fetchSubjectsNames();
-    subjectList = data;
-    // Here it is considered that the user does not enter the name of an already existing lesson.
-    let result = subjectList.some(
-      (names) => names.name.toLowerCase() === values.name.toLowerCase(),
-    );
-    return result;
+    const { httpStatus, data } = await dao.fetchSubjectsNames();
+    if (httpStatus === 200) {
+      subjectList = data;
+      // Here it is considered that the user does not enter the name of an already existing lesson.
+      let result = subjectList.some(
+        (names) => names.name.toLowerCase() === values.name.toLowerCase(),
+      );
+      return result;
+    } else {
+      Logger.error(`getSubjectNames failed, http status code: ${httpStatus}`);
+    }
   };
 
   if (!values.name) {

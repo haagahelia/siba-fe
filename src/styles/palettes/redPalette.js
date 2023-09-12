@@ -62,6 +62,10 @@ export const redPalette = {
     dark: "#1AA251",
     contrastText: "#ffffff",
   },
+  edit: {
+    main: bitterSweet,
+    contrastText: "#ffffff",
+  },
   contrastThreshold: 3,
   tonalOffset: 0.2,
   text: {
@@ -72,9 +76,13 @@ export const redPalette = {
   infoIcon: {
     main: black,
   },
+  divider: bitterSweet,
   background: {
     paper: "#ffffff",
     default: tomatoRed,
+  },
+  snackbarBackground: {
+    default: brightRed,
   },
   AllocRoom: {
     studio: {
@@ -93,6 +101,7 @@ export const redPalette = {
   //own colors
   red: {
     main: cherryBlossom,
+    contrastText: black,
   },
   backgroundDarker: { default: softPink },
   fontColorDefault: { default: lightPink },

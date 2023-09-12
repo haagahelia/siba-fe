@@ -3,6 +3,11 @@ export interface Response<T> {
   data: T[];
 }
 
+export interface ResponseFiner<T> {
+  httpStatus: number;
+  data: T[];
+}
+
 export interface Subject {
   id: number;
   area: number;
@@ -82,12 +87,31 @@ export interface User {
   isStatist: number;
 }
 
-export interface UserLoggedIn {
-  id: number;
-  email: string;
-  password: string;
-  isAdmin: number;
-  isPlanner: number;
-  isStatist: number;
+export interface UserLoggedIn extends User {
   token: string;
+}
+
+export interface UnallocableSubject {
+  subjectId: number;
+  name: string;
+  groupSize: number;
+  area: number;
+  spaceType: string;
+}
+
+export interface SubjectRoom {
+  id: number;
+  name: string;
+  area: number;
+  missintItems: number;
+  areaOk: number;
+  personLimit: number;
+  isUse: number;
+  spaceType: string;
+  spaceTypeOk: number;
+}
+
+export interface MissingEquipment {
+  equipmentId: number;
+  name: string;
 }

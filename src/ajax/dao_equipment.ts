@@ -1,7 +1,10 @@
-import { Response, Equipment } from "../types";
+import Logger from "../logger/logger";
+import { Equipment, ResponseFiner } from "../types";
 const baseUrl = process.env.REACT_APP_BE_SERVER_BASE_URL;
 
-export const fetchEquipmentData = async (): Promise<Response<Equipment>> => {
+export const fetchEquipmentData = async (): Promise<
+  ResponseFiner<Equipment>
+> => {
   const headers = {
     Authorization: `Bearer ${localStorage.getItem("sessionToken")}`,
   };
@@ -9,21 +12,35 @@ export const fetchEquipmentData = async (): Promise<Response<Equipment>> => {
     method: "GET",
     headers: headers,
   });
+  Logger.debug("Sessio n token:", localStorage.getItem("sessionToken"));
   const response = await fetch(request);
-  const equipments: Equipment[] = await response.json();
-  return { success: response.ok, data: equipments };
+
+  if (response.status === 200) {
+    const equipments: Equipment[] = await response.json();
+    return { httpStatus: response.status, data: equipments };
+  } else {
+    return { httpStatus: response.status, data: [] };
+  }
 };
 
 export const fetchEquipmentById = async (
   id: number,
-): Promise<Response<Equipment>> => {
+): Promise<ResponseFiner<Equipment>> => {
   const request = new Request(`${baseUrl}/equipment/${id}`, {
     method: "GET",
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("sessionToken")}`,
+    },
   });
 
   const response = await fetch(request);
-  const singleEquipment: Equipment[] = await response.json();
-  return { success: response.ok, data: singleEquipment };
+
+  if (response.status === 200) {
+    const equipments: Equipment[] = await response.json();
+    return { httpStatus: response.status, data: equipments };
+  } else {
+    return { httpStatus: response.status, data: [] };
+  }
 };
 
 export const postNewEquipment = async (
@@ -64,7 +81,7 @@ export const deleteSingleEquipment = async (
 export const editEquipment = async (
   editedEquipment: Equipment,
 ): Promise<boolean> => {
-  const request = new Request(`${baseUrl}/equipment/updateEquip`, {
+  const request = new Request(`${baseUrl}/equipment`, {
     method: "PUT",
     headers: {
       Authorization: `Bearer ${localStorage.getItem("sessionToken")}`,

@@ -1,14 +1,24 @@
-import { Response, SpaceType } from "../types";
+import { ResponseFiner, SpaceType } from "../types";
 const baseUrl = process.env.REACT_APP_BE_SERVER_BASE_URL;
 
 export const fetchSpacetypeForSelect = async (): Promise<
-  Response<SpaceType>
+  ResponseFiner<SpaceType>
 > => {
-  const request = new Request(`${baseUrl}/spaceType/getSelectData`, {
+  const request = new Request(`${baseUrl}/spaceType/`, {
     method: "GET",
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("sessionToken")}`,
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
   });
 
   const response = await fetch(request);
-  const programs: SpaceType[] = await response.json();
-  return { success: response.ok, data: programs };
+
+  if (response.status === 200) {
+    const programs: SpaceType[] = await response.json();
+    return { httpStatus: response.status, data: programs };
+  } else {
+    return { httpStatus: response.status, data: [] };
+  }
 };

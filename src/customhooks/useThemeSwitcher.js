@@ -4,7 +4,7 @@ import { useState } from "react";
 import { darkPalette } from "../styles/palettes/darkPalette";
 import { lightPalette } from "../styles/palettes/lightPalette";
 import { yellowPalette } from "../styles/palettes/yellowPalette";
-import { redPalette } from "../styles/palettes/yellowPalette";
+import { redPalette } from "../styles/palettes/redPalette";
 import { createAppTheme } from "../styles/theme";
 
 export const useThemeSwitcher = () => {

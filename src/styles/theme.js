@@ -1,13 +1,13 @@
 import { createTheme } from "@mui/material";
-
+import { yellow } from "@mui/material/colors";
 // import { green, lightBlue } from "@mui/material/colors";
 
 // First a place for defining different kinds of colors
-const light = "#F6E9E9";
-const orange = "#E16428";
-const buttonOrange = "#E16428"; // Halloween Orange
-const buttonGreen = "#54B435"; // Apple green
-const buttonRed = "#FF1E00"; // Reset button Ruby red
+// const light = "#F6E9E9";
+// const orange = "#E16428";
+// const buttonOrange = "#E16428"; // Halloween Orange
+const buttonGreen = "#54B435"; // Apple green, currently only used for the theme changer button
+// const buttonRed = "#FF1E00"; // Reset button Ruby red
 // Then defining three palettes so that in the normal palette
 // no new colors are defined. Red and yellow palettes though are
 // used with ad-hoc "#AABBCC" kind of RGB hexadecimal color definitions
@@ -29,7 +29,7 @@ export const createAppTheme = (currentPalette) =>
           root: {
             backgroundColor: currentPalette.backgroundDarker.default,
             borderColor: currentPalette.borderColor.cardBoder,
-            width: "75%",
+            width: "85%",
             margin: "auto",
             marginTop: "100px",
             padding: "8px",
@@ -42,8 +42,8 @@ export const createAppTheme = (currentPalette) =>
             backgroundColor: currentPalette.background.default,
             fontSize: 25,
             color: currentPalette.fontColorDefault.default,
-            marginBottom: "30px",
-            padding: "20px",
+            marginBottom: "10px",
+            padding: "10px",
           },
         },
       },
@@ -55,7 +55,7 @@ export const createAppTheme = (currentPalette) =>
               color: currentPalette.fontColorDefault.default,
             },
             "& label.Mui-focused": {
-              color: orange,
+              color: currentPalette.primary.main,
             },
             "& .MuiOutlinedInput-root": {
               color: currentPalette.fontColorDefault.default,
@@ -75,32 +75,35 @@ export const createAppTheme = (currentPalette) =>
       MuiMenuItem: {
         styleOverrides: {
           root: {
-            color: light,
+            color: currentPalette.fontColorDefault.default,
           },
         },
       },
       MuiFormControl: {
         styleOverrides: {
           root: {
+            "& .MuiInputBase-input": {
+              background: currentPalette.background.default,
+            },
             "& label": {
               color: currentPalette.fontColorDefault.default,
             },
             "& label.Mui-focused": {
-              color: orange,
+              color: currentPalette.primary.main,
             },
             "& .MuiFormHelperText-root": {
               color: "red",
             },
             "& .MuiOutlinedInput-root": {
-              color: light,
+              color: currentPalette.fontColorDefault.default,
               "& fieldset": {
-                borderColor: orange,
+                borderColor: currentPalette.borderColor.main,
               },
               "&:hover fieldset": {
-                borderColor: light,
+                borderColor: currentPalette.primary.main,
               },
               "&.Mui-focused fieldset": {
-                borderColor: light,
+                borderColor: currentPalette.primary.main,
               },
             },
           },
@@ -143,7 +146,7 @@ export const createAppTheme = (currentPalette) =>
         styleOverrides: {
           root: {
             backgroundColor: currentPalette.backgroundDarker.default,
-            color: light,
+            color: currentPalette.fontColorDefault.default,
             border: `1px solid ${currentPalette.borderColor.cardBoder}`,
           },
         },
@@ -200,14 +203,14 @@ export const createAppTheme = (currentPalette) =>
         styleOverrides: {
           paper: {
             backgroundColor: currentPalette.backgroundDarker.default,
-            color: light,
+            color: currentPalette.fontColorDefault.default,
           },
         },
       },
       MuiDialogContentText: {
         styleOverrides: {
           root: {
-            color: light,
+            color: currentPalette.fontColorDefault.default,
           },
         },
       },
@@ -283,24 +286,24 @@ export const createAppTheme = (currentPalette) =>
         ],
         styleOverrides: {
           contained: {
-            color: currentPalette.fontColorDefault.default,
+            //color: currentPalette.fontColorDefault.default,
           },
           text: {
-            backgroundColor: "pink",
-            color: currentPalette.fontColorDefault.default,
+            backgroundColor: currentPalette.primary.main,
+            color: currentPalette.primary.contrastText,
           },
         },
         redbutton: {
-          backgroundColor: buttonRed,
-          color: currentPalette.fontColorDefault.default,
+          backgroundColor: currentPalette.warning.main,
+          color: currentPalette.warning.contrastText,
         },
         editbutton: {
-          backgroundColor: buttonOrange,
-          color: currentPalette.fontColorDefault.default,
+          backgroundColor: currentPalette.edit.main,
+          color: currentPalette.edit.contrastText,
         },
         greenbutton: {
-          backgroundColor: buttonGreen,
-          color: currentPalette.fontColorDefault.default,
+          backgroundColor: currentPalette.success.main,
+          color: currentPalette.success.contrastText,
         },
       },
       MuiPagination: {
@@ -311,7 +314,7 @@ export const createAppTheme = (currentPalette) =>
             justifyContent: "center",
             button: {
               color: currentPalette.fontColorDefault.default,
-              borderColor: orange,
+              borderColor: yellow,
             },
           },
         },
@@ -364,8 +367,8 @@ export const createAppTheme = (currentPalette) =>
           root: {
             justifyContent: "space-evenly",
             alignItems: "flex-start",
-            marginTop: 10,
-            padding: 24,
+            marginTop: 0,
+            padding: 5,
           },
         },
         variants: [
@@ -426,7 +429,7 @@ export const createAppTheme = (currentPalette) =>
           {
             props: { variant: "sibaInputFileName" },
             style: {
-              color: light,
+              color: currentPalette.fontColorDefault.default,
             },
           },
         ],
@@ -449,5 +452,4 @@ export default createAppTheme;
      import { useTheme } from "@mui/material/styles";
      ...
        const theme = useTheme(); 
-
 */

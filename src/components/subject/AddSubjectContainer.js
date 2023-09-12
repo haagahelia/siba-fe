@@ -9,6 +9,11 @@ import {
 } from "../../validation/ValidateAddSubject";
 import dao from "../../ajax/dao";
 import AddSubjectForm from "./AddSubjectForm";
+import {
+  ajaxRequestErrorHandler,
+  getFunctionName,
+} from "../../ajax/ajaxRequestErrorHandler";
+import Logger from "../../logger/logger";
 
 //const baseUrl = process.env.REACT_APP_BE_SERVER_BASE_URL;
 //import {BASEURL} from "../config/consts.js";
@@ -74,18 +79,21 @@ export default function AddSubjectContainer(props) {
   });
 
   const getProgramsForSelect = async function () {
-    const { success, data } = await dao.fetchProgramsForSelect();
-    if (!success) {
-      setAlertOptions({
-        severity: "error",
-        title: "Error",
-        message: "Something went wrong on the server. No majors found.",
-      });
-      setAlertOpen(true);
-      return;
+    Logger.debug(
+      "getProgramsForSelect: fetching all programs for select from server.",
+    );
+    const { httpStatus, data } = await dao.fetchProgramsForSelect();
+    if (httpStatus !== 200) {
+      ajaxRequestErrorHandler(
+        httpStatus,
+        getFunctionName(2),
+        setAlertOptions,
+        setAlertOpen,
+      );
     } else {
       //console.log(data);
       setProgramSelectList(data);
+      Logger.debug("getProgramsForSelect: successfully fetched programs.");
     }
   };
   useEffect(() => {
@@ -93,16 +101,21 @@ export default function AddSubjectContainer(props) {
   }, []);
 
   const getSpaceTypesForSelect = async function () {
-    const { success, data } = await dao.fetchSpacetypeForSelect();
-    if (!success) {
-      setAlertOptions({
-        severity: "error",
-        title: "Error",
-        message: "Something went wrong on the server. No room types found.",
-      });
-      setAlertOpen(true);
-      return;
+    Logger.debug(
+      "getSpaceTypesForSelect: fetching all Space Types for select from server.",
+    );
+    const { httpStatus, data } = await dao.fetchSpacetypeForSelect();
+    if (httpStatus !== 200) {
+      ajaxRequestErrorHandler(
+        httpStatus,
+        getFunctionName(2),
+        setAlertOptions,
+        setAlertOpen,
+      );
     } else {
+      Logger.debug(
+        "getSpaceTypesForSelect: successfully fetched Space Types for select.",
+      );
       setSpaceTypeSelectList(data);
     }
   };
