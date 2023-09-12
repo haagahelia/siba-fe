@@ -1,0 +1,10 @@
+version: "3.8"
+services:
+  siba-fe:
+    build: .
+    container_name: siba_fe
+    env_file: .env
+    ports: 
+      - '${PORT}:${PORT}'
+    stdin_open: true
+    tty: true

@@ -48,10 +48,11 @@ Frontend side installation instructions
    ```sh
    git clone https://github.com/haagahelia/siba-fe.git
    ```
-2. Install needed packages
+
+2. Change directory
 
    ```sh
-   npm install
+   cd siba-fe
    ```
 
 3. Create **.env.local** file. Add .env to the root of the project. 
@@ -62,11 +63,27 @@ Frontend side installation instructions
    ```
    Basically start the backend, make sure it runs and copy the working address here, adding /api at the end. E.g. http://localhost:1234/api 
 
-4. Application launch
+4. Install needed packages
+
+   ```sh
+   npm install
+   ```
+
+5. Application launch
    ```sh
    npm start
    ```
-5. Attention! Follow [Backend repo](https://github.com/haagahelia/Siba_be) installation instructions also
+6. Attention! Follow [Backend repo](https://github.com/haagahelia/Siba_be) installation instructions also
+
+### How to run using docker-compose
+
+1. Follow installation steps from 1 to 3
+
+2. Run this command to launch application
+ 
+   ```sh
+   docker-compose -f docker-compose-fe.yaml up -d
+   ```
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
