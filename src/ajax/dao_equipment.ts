@@ -1,4 +1,3 @@
-import Logger from "../logger/logger";
 import { Equipment, ResponseFiner } from "../types";
 const baseUrl = process.env.REACT_APP_BE_SERVER_BASE_URL;
 
@@ -12,7 +11,6 @@ export const fetchEquipmentData = async (): Promise<
     method: "GET",
     headers: headers,
   });
-  Logger.debug("Sessio n token:", localStorage.getItem("sessionToken"));
   const response = await fetch(request);
 
   if (response.status === 200) {

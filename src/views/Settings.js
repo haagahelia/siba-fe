@@ -8,6 +8,10 @@ import AlertBox from "../components/common/AlertBox";
 import dao from "../ajax/dao";
 import { RoleLoggedIn } from "../customhooks/RoleLoggedIn";
 import Logger from "../logger/logger";
+import {
+  ajaxRequestErrorHandler,
+  getFunctionName,
+} from "../ajax/ajaxRequestErrorHandler";
 
 export default function Settings() {
   Logger.logPrefix = "Settings";
@@ -23,18 +27,17 @@ export default function Settings() {
 
   const getAllSettings = async function () {
     Logger.debug("Fetching all settings");
-    const { success, data } = await dao.fetchSettings();
-    if (!success) {
-      Logger.error("Error fetching settings");
-      setAlertOptions({
-        severity: "error",
-        title: "Error",
-        message: "Oops! Something went wrong on the server. No settings found",
-      });
-      setAlertOpen(true);
-      return;
+    const { httpStatus, data } = await dao.fetchSettings();
+    if (httpStatus !== 200) {
+      Logger.debug("Error fetching settings");
+      ajaxRequestErrorHandler(
+        httpStatus,
+        getFunctionName(2),
+        setAlertOptions,
+        setAlertOpen,
+      );
     } else {
-      Logger.debug(`Fetched settings, amount: ${data.length}`);
+      Logger.info(`Fetched ${data.length} settings.`);
       setSettings(data);
       setPaginateSettings(settings.slice(0, 15));
     }

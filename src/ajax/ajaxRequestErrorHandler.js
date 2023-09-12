@@ -23,18 +23,32 @@ export const getFunctionName = (d) => {
   return firefoxMatch || chromeMatch || safariMatch;
 };
 
+export const tidyUpFunctionName = (name) => {
+  if (name.includes("/")) {
+    let lastIndex = name.lastIndexOf("/");
+    name = name.substring(0, lastIndex);
+
+    if (name.includes("/")) {
+      lastIndex = name.lastIndexOf("/");
+      name = name.substring(lastIndex + 1);
+    }
+  }
+  return name;
+};
+
 export const ajaxRequestErrorHandler = (
   httpStatus,
   viewName,
   setAlertOptions,
   setAlertOpen,
 ) => {
-  Logger.logPrefix = viewName;
+  //viewName = "S/SS/S//S//TestFunctionNameHere/SSS__d><<>|||";
+  Logger.logPrefix = tidyUpFunctionName(viewName);
   const callerFuncName = getFunctionName(2);
 
   switch (httpStatus) {
     case 401:
-      Logger.error(
+      Logger.debug(
         `${callerFuncName}: Not authenticated - No valid login token.`,
       );
       setAlertOptions({
@@ -45,7 +59,7 @@ export const ajaxRequestErrorHandler = (
       break;
 
     case 403:
-      Logger.error(`${callerFuncName}: Not authorized - No required role.`);
+      Logger.debug(`${callerFuncName}: Not authorized - No required role.`);
       setAlertOptions({
         severity: "error",
         title: "Error",
