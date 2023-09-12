@@ -3,583 +3,17 @@ import { yellow } from "@mui/material/colors";
 // import { green, lightBlue } from "@mui/material/colors";
 
 // First a place for defining different kinds of colors
-const darkBrown = "#272121";
-const lightGray = "#363333"; // E.g. background
-const light = "#F6E9E9";
+// const light = "#F6E9E9";
 // const orange = "#E16428";
-const fontWhite = "#FFFFFF";
-const lightGreen = "#90EE90";
-const lightBlue = "#73FDFF";
-const lightBlue2 = "#5DBCD2";
-const lightYellow = "#FFF5AB";
-const lightRed = "#FF8585";
-const black = "#000000";
-const white = "#FFFFFF";
-
-//light
-const mediumGray = "#6A6A6A";
-const darkGray = "#4A4A4A";
-const lightGray2 = "#F5F5F5";
-const offWhite = "#FAF9F6";
-const bgGray = "#d3d3d3";
-
-//yellowPalette
-const canary = "#FFFF8F";
-const paleCanary = "#FFFFAA";
-const sahara = "#AAAA11";
-const buddhaGold = "#CC9900";
-const paleLime = "#CCFF66";
-const saffronMango = "#FFBB66";
-const tangerineYellow = "#FFCC00";
-const eggWhite = "#F2F2BF";
-const greenYellow = "#CCFF33";
-const butteryWhite = "#FFFFE6";
-//redPalette
-const tomatoRed = "#FF2400";
-const softPink = "#F2AEB8";
-const lightPink = "#FFD1CF";
-const redOrange = "#FF3333";
-const bitterSweet = "#FF6666";
-const salmonPink = "#FF8888";
-const cherryBlossom = "#FF8888";
-const brightRed = "#FF1111";
-const pumpkinOrange = "#FF6600";
-const clayBrown = "#B97446";
-const darkOrange = "#EE9900";
-const mediumBrown = "#8C4B2D"; // borderColor
-const buttonOrange = "#E16428"; // Halloween Orange
-const buttonGreen = "#54B435"; // Apple green
-const buttonRed = "#FF1E00"; // Reset button Ruby red
-const progressBarGreen = "#06FF00"; // Highlighter Green/Lime
-const progressBarYellow = "#FFE400"; // Golden Yellow
-const progressBarRed = "#FF1700"; // Scarlet red / almost the same as #FF1E00
-const snackbarErrorRed = buttonRed;
-const snackbarWarningOrange = "#FFA000"; // Orange Peel
-const snackbarInformationBlue = "#1976D2"; // Navy Blue
-const snackbarSuccessGreen = "#43A047"; // Medium Green
+// const buttonOrange = "#E16428"; // Halloween Orange
+const buttonGreen = "#54B435"; // Apple green, currently only used for the theme changer button
+// const buttonRed = "#FF1E00"; // Reset button Ruby red
 // Then defining three palettes so that in the normal palette
 // no new colors are defined. Red and yellow palettes though are
 // used with ad-hoc "#AABBCC" kind of RGB hexadecimal color definitions
-// Below the color palette that was provided by Sibelius Academy
-// Primary colors:
-const darkGrayPrimary = "#353535";
-const grayPrimary = "#555555";
-const lightPrimary = "#D9D9D9";
-const whitePrimary = "#FFFFFF";
-// Accent color:
-const yellowAccent = "#F4BF00";
-// StatusIndicators:
-const warningIndicator = "#D62E3D"; // (red) to indicate warning, delete or cancel
-const inProgressIndicator = "#F6D251"; // (yellow, brighter than yellow accent) to indicate process or that something is in-progress
-const successIndicator = "#48B058"; //(green) to indicate success, confirmation, or "ok"
-const editIndicator = "#FDA826"; // (orange) to indicate edit and toggle on (checkboxes)
-
-export const mainPalette = {
-  name: "dark",
-  common: {
-    black: "#1D1D1D",
-    white: "#fff",
-  },
-  primary: {
-    main: yellowAccent,
-    contrastText: darkGrayPrimary,
-  },
-  secondary: {
-    main: lightPrimary,
-    contrastText: darkGrayPrimary,
-  },
-  error: {
-    main: warningIndicator,
-    contrastText: whitePrimary,
-  },
-  warning: {
-    main: warningIndicator,
-    contrastText: whitePrimary,
-  },
-  info: {
-    main: editIndicator,
-    contrastText: darkGrayPrimary,
-  },
-  success: {
-    main: successIndicator,
-    contrastText: whitePrimary,
-  },
-  edit: {
-    main: editIndicator,
-    contrastText: whitePrimary,
-  },
-  contrastThreshold: 3,
-  tonalOffset: 0.2,
-  text: {
-    // not sure where this is used?
-    primary: whitePrimary,
-    secondary: darkGrayPrimary,
-    disabled: "#ffffff",
-  },
-  AllocRoom: {
-    studio: {
-      color: lightRed,
-    },
-    luentoluokka: {
-      color: lightBlue,
-    },
-    esitystila: {
-      color: lightGreen,
-    },
-    musiikkiluokka: {
-      color: lightYellow,
-    },
-  },
-  divider: lightPrimary,
-  background: {
-    paper: grayPrimary,
-    default: darkGrayPrimary,
-  },
-  snackbarBackground: {
-    // !!!!
-    default: yellowAccent,
-  },
-  action: {
-    active: "rgba(0, 0, 0, 0.54)",
-    hover: "rgba(0, 0, 0, 0.04)",
-    hoverOpacity: 0.25,
-    selected: "rgba(0, 0, 0, 0.08)",
-    selectedOpacity: 0.15,
-    disabled: "rgba(0, 0, 0, 0.26)",
-    disabledBackground: "rgba(0, 0, 0, 0.12)",
-    disabledOpacity: 0.38,
-    focus: "rgba(0, 0, 0, 0.12)",
-    focusOpacity: 0.12,
-    activatedOpacity: 0.12,
-  },
-
-  //own colors
-  red: {
-    main: warningIndicator,
-    contrastText: whitePrimary,
-  },
-  backgroundDarker: { default: grayPrimary }, // not darker in this case...
-  fontColorDefault: { default: whitePrimary },
-  progressBarGreen: { main: successIndicator },
-  progressBarYellow: { main: inProgressIndicator },
-  progressBarRed: { main: warningIndicator },
-  borderColor: {
-    main: lightPrimary,
-    cardBorder: whitePrimary,
-  },
-  infoIcon: {
-    main: yellowAccent,
-  },
-};
-
-export const normalPalette = {
-  name: "dark",
-  common: {
-    black: "#1D1D1D",
-    white: "#fff",
-  },
-  primary: {
-    main: buttonGreen,
-    light: lightBlue2,
-    dark: "#0059B2",
-    contrastText: "#ffffff",
-  },
-  secondary: {
-    main: buttonOrange,
-    light: "#ba68c8",
-    dark: "#7b1fa2",
-    contrastText: "#ffffff",
-  },
-  error: {
-    main: snackbarErrorRed,
-    light: "#FF99A2",
-    dark: "#C70011",
-    contrastText: "#ffffff",
-  },
-  warning: {
-    main: snackbarWarningOrange,
-    light: "#FFDC48",
-    dark: "#AB6800",
-    contrastText: "#000000",
-  },
-  info: {
-    main: snackbarInformationBlue,
-    light: "#03a9f4",
-    dark: "#01579b",
-    contrastText: "#ffffff",
-  },
-  success: {
-    main: snackbarSuccessGreen,
-    light: "#6AE79C",
-    dark: "#1AA251",
-    contrastText: "#ffffff",
-  },
-  edit: {
-    main: buttonOrange,
-    contrastText: whitePrimary,
-  },
-  contrastThreshold: 3,
-  tonalOffset: 0.2,
-  text: {
-    primary: "#1A2027",
-    secondary: "#3E5060",
-    disabled: "#ffffff",
-  },
-  AllocRoom: {
-    studio: {
-      color: lightRed,
-    },
-    luentoluokka: {
-      color: lightBlue,
-    },
-    esitystila: {
-      color: lightGreen,
-    },
-    musiikkiluokka: {
-      color: lightYellow,
-    },
-  },
-  divider: "#E7EBF0",
-  background: {
-    paper: "#ffffff",
-    default: lightGray,
-  },
-  snackbarBackground: {
-    default: mediumGray,
-  },
-  action: {
-    active: "rgba(0, 0, 0, 0.54)",
-    hover: "rgba(0, 0, 0, 0.04)",
-    hoverOpacity: 0.04,
-    selected: "rgba(0, 0, 0, 0.08)",
-    selectedOpacity: 0.08,
-    disabled: "rgba(0, 0, 0, 0.26)",
-    disabledBackground: "rgba(0, 0, 0, 0.12)",
-    disabledOpacity: 0.38,
-    focus: "rgba(0, 0, 0, 0.12)",
-    focusOpacity: 0.12,
-    activatedOpacity: 0.12,
-  },
-  //own colors
-  red: {
-    main: buttonRed,
-  },
-  backgroundDarker: { default: darkBrown },
-  fontColorDefault: { default: fontWhite },
-  progressBarGreen: { main: progressBarGreen },
-  progressBarYellow: { main: progressBarYellow },
-  progressBarRed: { main: progressBarRed },
-  borderColor: {
-    main: mediumBrown,
-    cardBorder: light,
-  },
-  infoIcon: {
-    main: white,
-  },
-};
-
-export const yellowPalette = {
-  // mode: "light",
-  common: {
-    black: "#1D1D1D",
-    white: "#fff",
-  },
-  primary: {
-    main: buddhaGold,
-    light: paleLime,
-    dark: "#0059B2",
-    contrastText: "#ffffff",
-  },
-  secondary: {
-    main: paleCanary,
-    light: "#ba68c8",
-    dark: "#7b1fa2",
-    contrastText: "#ffffff",
-  },
-  error: {
-    main: tangerineYellow,
-    light: "#FF99A2",
-    dark: "#C70011",
-    contrastText: "#ffffff",
-  },
-  warning: {
-    main: eggWhite,
-    light: "#FFDC48",
-    dark: "#AB6800",
-    contrastText: "#000000",
-  },
-  info: {
-    main: greenYellow,
-    light: "#03a9f4",
-    dark: "#01579b",
-    contrastText: "#ffffff",
-  },
-  success: {
-    main: butteryWhite,
-    light: "#6AE79C",
-    dark: "#1AA251",
-    contrastText: "#ffffff",
-  },
-  edit: {
-    main: buttonOrange,
-    contrastText: whitePrimary,
-  },
-  contrastThreshold: 3,
-  tonalOffset: 0.2,
-  text: {
-    primary: "#1A2027",
-    secondary: "#3E5060",
-    disabled: "#ffffff",
-  },
-  divider: "#E7EBF0",
-  background: {
-    paper: "#ffffff",
-    default: canary,
-  },
-  snackbarBackground: {
-    default: tomatoRed,
-  },
-  infoIcon: {
-    main: butteryWhite,
-  },
-  // own colors
-  red: {
-    main: saffronMango,
-  },
-  AllocRoom: {
-    studio: {
-      color: paleLime,
-    },
-    luentoluokka: {
-      color: canary,
-    },
-    esitystila: {
-      color: butteryWhite,
-    },
-    musiikkiluokka: {
-      color: buddhaGold,
-    },
-  },
-  backgroundDarker: { default: paleCanary },
-  fontColorDefault: { default: sahara },
-  progressBarGreen: { main: progressBarGreen },
-  progressBarYellow: { main: progressBarYellow },
-  progressBarRed: { main: progressBarRed },
-  borderColor: {
-    main: mediumBrown,
-    cardBorder: lightBlue,
-  },
-};
-/* More yellow tint values used from here: 
-  "#FFFF11" Sunny Yellow,  "#BB7700" Mustard Brown
-*/
-
-export const redPalette = {
-  name: "redPalette",
-  common: {
-    black: "#1D1D1D",
-    white: "#fff",
-  },
-  primary: {
-    main: redOrange,
-    light: bitterSweet,
-    dark: "#0059B2",
-    contrastText: "#ffffff",
-  },
-  secondary: {
-    main: salmonPink,
-    light: "#ba68c8",
-    dark: "#7b1fa2",
-    contrastText: "#ffffff",
-  },
-  error: {
-    main: brightRed,
-    light: "#FF99A2",
-    dark: "#C70011",
-    contrastText: "#ffffff",
-  },
-  warning: {
-    main: pumpkinOrange,
-    light: "#FFDC48",
-    dark: "#AB6800",
-    contrastText: "#000000",
-  },
-  info: {
-    main: clayBrown,
-    light: "#03a9f4",
-    dark: "#01579b",
-    contrastText: "#ffffff",
-  },
-  success: {
-    main: darkOrange,
-    light: "#6AE79C",
-    dark: "#1AA251",
-    contrastText: "#ffffff",
-  },
-  edit: {
-    main: buttonOrange,
-    contrastText: whitePrimary,
-  },
-  contrastThreshold: 3,
-  tonalOffset: 0.2,
-  text: {
-    primary: "#1A2027",
-    secondary: "#3E5060",
-    disabled: "#ffffff",
-  },
-  infoIcon: {
-    main: black,
-  },
-  background: {
-    paper: "#ffffff",
-    default: tomatoRed,
-  },
-  snackbarBackground: {
-    default: canary,
-  },
-  AllocRoom: {
-    studio: {
-      color: salmonPink,
-    },
-    luentoluokka: {
-      color: darkOrange,
-    },
-    esitystila: {
-      color: pumpkinOrange,
-    },
-    musiikkiluokka: {
-      color: brightRed,
-    },
-  },
-  //own colors
-  red: {
-    main: cherryBlossom,
-  },
-  backgroundDarker: { default: softPink },
-  fontColorDefault: { default: lightPink },
-  progressBarGreen: { main: progressBarGreen },
-  progressBarYellow: { main: progressBarYellow },
-  progressBarRed: { main: progressBarRed },
-  borderColor: {
-    main: mediumBrown,
-    cardBorder: lightBlue2,
-  },
-};
 /* More red tint values used from here: 
  "#FF2222" Torch Red, "#FF9AD5" Lavender Rose, "#AC3939" Dull Red
 */
-
-export const lightPalette = {
-  name: "light",
-  common: {
-    black: "#1D1D1D",
-    white: "#fff",
-  },
-  primary: {
-    main: buttonGreen,
-    light: lightBlue2,
-    dark: mediumGray,
-    contrastText: "#ffffff",
-  },
-  secondary: {
-    main: buttonOrange,
-    light: lightYellow,
-    dark: darkGray,
-    contrastText: "#ffffff",
-  },
-  error: {
-    main: snackbarErrorRed,
-    light: lightRed,
-    dark: darkOrange,
-    contrastText: "#ffffff",
-  },
-  warning: {
-    main: snackbarWarningOrange,
-    light: butteryWhite,
-    dark: sahara,
-    contrastText: "#000000",
-  },
-  info: {
-    main: snackbarInformationBlue,
-    light: lightBlue,
-    dark: mediumGray,
-    contrastText: "#ffffff",
-  },
-  success: {
-    main: snackbarSuccessGreen,
-    light: lightGreen,
-    dark: mediumGray,
-    contrastText: "#ffffff",
-  },
-  edit: {
-    main: buttonOrange,
-    contrastText: whitePrimary,
-  },
-  contrastThreshold: 3,
-  tonalOffset: 0.2,
-  text: {
-    primary: darkGray,
-    secondary: mediumGray,
-    disabled: lightGray2,
-  },
-  divider: lightGray,
-  background: {
-    paper: lightGray2,
-    default: offWhite,
-  },
-  snackbarBackground: {
-    default: offWhite,
-  },
-  action: {
-    active: mediumGray,
-    hover: lightGray2,
-    hoverOpacity: 0.04,
-    selected: lightGray,
-    selectedOpacity: 0.08,
-    disabled: lightGray2,
-    disabledBackground: lightGray,
-    disabledOpacity: 0.38,
-    focus: lightGray2,
-    focusOpacity: 0.12,
-    activatedOpacity: 0.12,
-  },
-  AllocRoom: {
-    studio: {
-      color: lightBlue2,
-    },
-    luentoluokka: {
-      color: buttonGreen,
-    },
-    esitystila: {
-      color: buttonOrange,
-    },
-    musiikkiluokka: {
-      color: brightRed,
-    },
-  },
-  infoIcon: {
-    main: black,
-  },
-
-  // Additional custom colors
-  red: {
-    main: buttonRed,
-  },
-
-  //colors for room results
-  IndexRooms: {
-    luentoluokkaindex: { backgroundColor: "#FFFFFF", color: "#000000" },
-  },
-  backgroundDarker: { default: bgGray },
-  fontColorDefault: { default: darkBrown },
-  progressBarGreen: { main: progressBarGreen },
-  progressBarYellow: { main: progressBarYellow },
-  progressBarRed: { main: progressBarRed },
-  borderColor: {
-    main: mediumBrown,
-    cardBorder: lightGray,
-  },
-};
 
 // The swapping fast what palette will be in use right now:
 // const currentPalette = lightPalette;
@@ -641,7 +75,7 @@ export const createAppTheme = (currentPalette) =>
       MuiMenuItem: {
         styleOverrides: {
           root: {
-            color: light,
+            color: currentPalette.fontColorDefault.default,
           },
         },
       },
@@ -661,15 +95,15 @@ export const createAppTheme = (currentPalette) =>
               color: "red",
             },
             "& .MuiOutlinedInput-root": {
-              color: light,
+              color: currentPalette.fontColorDefault.default,
               "& fieldset": {
                 borderColor: currentPalette.borderColor.main,
               },
               "&:hover fieldset": {
-                borderColor: light,
+                borderColor: currentPalette.primary.main,
               },
               "&.Mui-focused fieldset": {
-                borderColor: light,
+                borderColor: currentPalette.primary.main,
               },
             },
           },
@@ -712,7 +146,7 @@ export const createAppTheme = (currentPalette) =>
         styleOverrides: {
           root: {
             backgroundColor: currentPalette.backgroundDarker.default,
-            color: light,
+            color: currentPalette.fontColorDefault.default,
             border: `1px solid ${currentPalette.borderColor.cardBoder}`,
           },
         },
@@ -769,14 +203,14 @@ export const createAppTheme = (currentPalette) =>
         styleOverrides: {
           paper: {
             backgroundColor: currentPalette.backgroundDarker.default,
-            color: light,
+            color: currentPalette.fontColorDefault.default,
           },
         },
       },
       MuiDialogContentText: {
         styleOverrides: {
           root: {
-            color: light,
+            color: currentPalette.fontColorDefault.default,
           },
         },
       },
@@ -860,16 +294,16 @@ export const createAppTheme = (currentPalette) =>
           },
         },
         redbutton: {
-          backgroundColor: buttonRed,
-          color: currentPalette.fontColorDefault.default,
+          backgroundColor: currentPalette.warning.main,
+          color: currentPalette.warning.contrastText,
         },
         editbutton: {
           backgroundColor: currentPalette.edit.main,
-          color: currentPalette.fontColorDefault.default,
+          color: currentPalette.edit.contrastText,
         },
         greenbutton: {
-          backgroundColor: buttonGreen,
-          color: currentPalette.fontColorDefault.default,
+          backgroundColor: currentPalette.success.main,
+          color: currentPalette.success.contrastText,
         },
       },
       MuiPagination: {
@@ -995,7 +429,7 @@ export const createAppTheme = (currentPalette) =>
           {
             props: { variant: "sibaInputFileName" },
             style: {
-              color: light,
+              color: currentPalette.fontColorDefault.default,
             },
           },
         ],
