@@ -18,6 +18,8 @@ const buttonGreen = "#54B435"; // Apple green, currently only used for the theme
 // The swapping fast what palette will be in use right now:
 // const currentPalette = lightPalette;
 // Options are       = normalPalette, redPalette, yellowPalette, lightPalette
+const navYellow = "#F4BF00";
+const navGrey = "#353535";
 
 export const createAppTheme = (currentPalette) =>
   createTheme({
@@ -143,12 +145,12 @@ export const createAppTheme = (currentPalette) =>
           {
             props: { variant: "sibaAppBarVerticalNew" },
             style: {
-              backgroundColor: "#F4BF00",
-              color: "#555555",
+              backgroundColor: navYellow,
               display: "flex",
               flexDirection: "column",
               flexWrap: "nowrap",
               alignItems: "center",
+              textAlign: "center",
               fontSize: "1.2rem",
               position: "sticky",
               justifyContent: "center",
@@ -180,7 +182,7 @@ export const createAppTheme = (currentPalette) =>
                 borderBottom: "3px solid transparent",
                 marginRight: "0.2rem",
                 //color: currentPalette.fontColorDefault.default,
-                color: "#353535",
+                color: navGrey,
                 textDecoration: "none",
                 fontFamily: "Roboto, Helvetica, Aria, sans-serif",
                 fontWeight: 700,
@@ -196,10 +198,11 @@ export const createAppTheme = (currentPalette) =>
                 backgroundColor: "0.5s ease",
               },
               "&:hover a": {
-                borderBottom: "3px solid #353535",
+                borderBottom: "3px solid",
+                color: navGrey,
               },
               "& a.nav-links.active": {
-                color: "#353535",
+                color: navGrey,
                 fontWeight: 900,
               },
             },

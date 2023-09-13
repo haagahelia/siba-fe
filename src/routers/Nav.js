@@ -75,13 +75,13 @@ function NavBar() {
       showForCurrentUser: false,
     },
     {
-      name: "Programs",
+      name: "Program Results",
       href: "/programresult",
       forRoles: ["admin", "planner", "statist"],
       showForCurrentUser: false,
     },
     {
-      name: "Rooms",
+      name: "Room Results",
       href: "/roomresult",
       forRoles: ["admin", "planner", "statist"],
       showForCurrentUser: false,
