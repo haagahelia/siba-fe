@@ -2,18 +2,32 @@
 import { /*Response,*/ ResponseFiner, Subject, SubjectName } from "../types";
 const baseUrl = process.env.REACT_APP_BE_SERVER_BASE_URL;
 
+// export const fetchAllSubjects = async (): Promise<ResponseFiner<Subject>> => {
+//   const request = new Request(`${baseUrl}/subject/`, {
+//     method: "GET",
+//     headers: {
+//       Authorization: `Bearer ${localStorage.getItem("sessionToken")}`,
+//       Accept: "application/json",
+//       "Content-Type": "application/json",
+//     },
+//   });
+//   // Logger.debug("Session token from localStorage?:", localStorage.getItem("sessionToken"));
+//   const response = await fetch(request);
+
+//   if (response.status === 200) {
+//     const subjects: Subject[] = await response.json();
+//     return { httpStatus: response.status, data: subjects };
+//   } else {
+//     return { httpStatus: response.status, data: [] };
+//   }
+// };
+
 export const fetchAllSubjects = async (): Promise<ResponseFiner<Subject>> => {
-  const request = new Request(`${baseUrl}/subject/`, {
-    method: "GET",
+  const response = await fetch(`${baseUrl}/subject`, {
     headers: {
       Authorization: `Bearer ${localStorage.getItem("sessionToken")}`,
-      Accept: "application/json",
-      "Content-Type": "application/json",
     },
   });
-  // Logger.debug("Session token from localStorage?:", localStorage.getItem("sessionToken"));
-  const response = await fetch(request);
-
   if (response.status === 200) {
     const subjects: Subject[] = await response.json();
     return { httpStatus: response.status, data: subjects };
