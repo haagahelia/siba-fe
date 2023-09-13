@@ -71,6 +71,7 @@ export default function EquipmentListItems(props) {
                     getSingleEquipment(value.id);
                     //setSingleEquipment(value);
                     setOpen(true);
+                    getAllEquipments();
                   }}
                 >
                   <Grid item md={3} xs={3}>
