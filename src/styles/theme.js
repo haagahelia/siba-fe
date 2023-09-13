@@ -300,7 +300,7 @@ export const createAppTheme = (currentPalette) =>
         ],
         styleOverrides: {
           contained: {
-            //color: currentPalette.fontColorDefault.default,
+            color: currentPalette.fontColorDefault.default,
           },
           text: {
             backgroundColor: currentPalette.primary.main,
@@ -444,9 +444,16 @@ export const createAppTheme = (currentPalette) =>
             props: { variant: "sibaInputFileName" },
             style: {
               color: currentPalette.fontColorDefault.default,
+              background: currentPalette.primary.backgroundDarker,
             },
           },
         ],
+        styleOverrides: {
+          root: {
+            color: currentPalette.fontColorDefault.default,
+            background: currentPalette.backgroundDarker.default,
+          },
+        },
       },
       MuiAlertTitle: {
         styleOverrides: {

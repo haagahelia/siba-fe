@@ -17,25 +17,30 @@ const progressBarGreen = "#06FF00"; // Highlighter Green/Lime
 const progressBarYellow = "#FFE400"; // Golden Yellow
 const progressBarRed = "#FF1700"; // Scarlet red / almost the same as #FF1E00
 const lightBlue2 = "#5DBCD2";
-const black = "#000000";
+const blackRed = "#3D1D1D";
+const blueRed = "#7759B2";
+const someRed1 = "#ba68c8";
+
+// color definitions and namings only above, below only using them!
+// # character should not appear below this line
 
 export const redPalette = {
   name: "redPalette",
   common: {
-    black: "#1D1D1D",
+    black: blackRed,
     white: lightPink,
   },
   primary: {
     main: redOrange,
     light: bitterSweet,
-    dark: "#0059B2",
+    dark: blueRed,
     contrastText: lightPink,
   },
 
   secondary: {
     main: salmonPink,
-    light: "#ba68c8",
-    dark: "#7b1fa2",
+    light: someRed1,
+    dark: blueRed,
     contrastText: lightPink,
   },
   error: {
@@ -74,7 +79,7 @@ export const redPalette = {
     disabled: lightPink,
   },
   infoIcon: {
-    main: black,
+    main: blackRed,
   },
   divider: bitterSweet,
   background: {
@@ -101,7 +106,7 @@ export const redPalette = {
   //own colors
   red: {
     main: cherryBlossom,
-    contrastText: black,
+    contrastText: blackRed,
   },
   backgroundDarker: { default: softPink },
   fontColorDefault: { default: lightPink },

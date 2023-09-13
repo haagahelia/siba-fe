@@ -15,72 +15,75 @@ const tangerineYellow = "#FFCC00";
 const eggWhite = "#F2F2BF";
 const greenYellow = "#CCFF33";
 const butteryWhite = "#FFFFE6";
-const softPink = "#F2AEB8";
+//const softPink = "#F2AEB8";
 const mediumBrown = "#8C4B2D"; // borderColor
 const progressBarGreen = "#06FF00"; // Highlighter Green/Lime
 const progressBarYellow = "#FFE400"; // Golden Yellow
 const progressBarRed = "#FF1700"; // Scarlet red / almost the same as #FF1E00
 
+// color definitions and namings only above, below only using them!
+// # character should not appear below this line
+
 export const yellowPalette = {
   // mode: "light",
   common: {
     black: "#1D1D1D",
-    white: "#fff",
+    white: butteryWhite,
   },
   primary: {
     main: buddhaGold,
     light: paleLime,
     dark: "#0059B2",
-    contrastText: "#ffffff",
+    contrastText: butteryWhite,
   },
   secondary: {
     main: paleCanary,
     light: "#ba68c8",
     dark: "#7b1fa2",
-    contrastText: "#ffffff",
+    contrastText: butteryWhite,
   },
   error: {
     main: tangerineYellow,
     light: "#FF99A2",
     dark: "#C70011",
-    contrastText: "#ffffff",
+    contrastText: butteryWhite,
   },
   warning: {
     main: eggWhite,
     light: "#FFDC48",
     dark: "#AB6800",
-    contrastText: "#000000",
+    contrastText: mediumBrown,
   },
   info: {
     main: greenYellow,
     light: "#03a9f4",
     dark: "#01579b",
-    contrastText: "#ffffff",
+    contrastText: butteryWhite,
   },
   success: {
     main: sahara,
     light: "#6AE79C",
     dark: "#1AA251",
-    contrastText: "#ffffff",
+    contrastText: butteryWhite,
   },
   edit: {
     main: saffronMango,
-    contrastText: "#ffffff",
+    contrastText: butteryWhite,
   },
   contrastThreshold: 3,
   tonalOffset: 0.2,
   text: {
     primary: "#1A2027",
     secondary: "#3E5060",
-    disabled: "#ffffff",
+    disabled: butteryWhite,
   },
   divider: "#E7EBF0",
   background: {
-    paper: "#ffffff",
+    paper: butteryWhite,
     default: canary,
   },
   snackbarBackground: {
-    default: softPink,
+    default: paleCanary,
   },
   infoIcon: {
     main: butteryWhite,

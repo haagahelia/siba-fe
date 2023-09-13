@@ -18,6 +18,9 @@ const lightYellow = "#F6D251";
 const green = "#48B058";
 const orange = "#FDA826";
 
+// color definitions and namings only above, below only using them!
+// # character should not appear below this line
+
 export const darkPalette = {
   name: "dark",
   common: {
