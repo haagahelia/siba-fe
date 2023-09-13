@@ -75,13 +75,13 @@ function NavBar() {
       showForCurrentUser: false,
     },
     {
-      name: "Program results",
+      name: "Programs",
       href: "/programresult",
       forRoles: ["admin", "planner", "statist"],
       showForCurrentUser: false,
     },
     {
-      name: "Room results",
+      name: "Rooms",
       href: "/roomresult",
       forRoles: ["admin", "planner", "statist"],
       showForCurrentUser: false,
@@ -213,7 +213,7 @@ function NavBar() {
         }}
       >
         <NavLink to="/" className="nav-logo">
-          <img src={logo} alt="" width="100" height="100" />
+          <img src={logo} alt="" width="60" height="60" />
           <i className="fas fa-code" />
         </NavLink>
         <Container maxWidth="xl">
