@@ -143,6 +143,8 @@ export const createAppTheme = (currentPalette) =>
           {
             props: { variant: "sibaAppBarVerticalNew" },
             style: {
+              backgroundColor: "#F4BF00",
+              color: "#555555",
               display: "flex",
               flexDirection: "column",
               flexWrap: "nowrap",
@@ -177,7 +179,8 @@ export const createAppTheme = (currentPalette) =>
                 paddingBottom: "2px",
                 borderBottom: "3px solid transparent",
                 marginRight: "0.2rem",
-                color: currentPalette.fontColorDefault.default,
+                //color: currentPalette.fontColorDefault.default,
+                color: "#353535",
                 textDecoration: "none",
                 fontFamily: "Roboto, Helvetica, Aria, sans-serif",
                 fontWeight: 700,
@@ -193,10 +196,11 @@ export const createAppTheme = (currentPalette) =>
                 backgroundColor: "0.5s ease",
               },
               "&:hover a": {
-                borderBottom: "2px solid #E16428",
+                borderBottom: "3px solid #353535",
               },
               "& a.nav-links.active": {
-                color: "#E16428",
+                color: "#353535",
+                fontWeight: 900,
               },
             },
           },
