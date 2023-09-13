@@ -79,7 +79,7 @@ export const deleteSingleEquipment = async (
 export const editEquipment = async (
   editedEquipment: Equipment,
 ): Promise<boolean> => {
-  const request = new Request(`${baseUrl}/equipment`, {
+  const request = new Request(`${baseUrl}/equipment/${editedEquipment.id}`, {
     method: "PUT",
     headers: {
       Authorization: `Bearer ${localStorage.getItem("sessionToken")}`,

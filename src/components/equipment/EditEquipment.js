@@ -31,6 +31,7 @@ export default function EditEquipment(props) {
       let result = await dao.editEquipment(singleEquipment);
       if (!result) {
         alert("Something went wrong");
+        getAllEquipments();
       } else {
         alert(`Equipment ${singleEquipment.name} updated`);
         setEditOpen(false);
