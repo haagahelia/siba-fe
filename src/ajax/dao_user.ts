@@ -1,34 +1,12 @@
 import Logger from "../logger/logger";
 import { Response, User, UserLoggedIn, ResponseFiner } from "../types";
+import { create, get } from "./request";
 
 const baseUrl = process.env.REACT_APP_BE_SERVER_BASE_URL;
 
-export const postNewUser = async (newUser: User): Promise<boolean> => {
-  const request = new Request(`${baseUrl}/user/`, {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${localStorage.getItem("sessionToken")}`,
-      Accept: "application/json",
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(newUser),
-  });
-  Logger.debug("postNewUser", request);
-  const response = await fetch(request);
-  return response.ok;
-};
-
+//fetching all users
 export const fetchAllUsers = async (): Promise<ResponseFiner<User>> => {
-  const request = new Request(`${baseUrl}/user/`, {
-    method: "GET",
-    headers: {
-      Authorization: `Bearer ${localStorage.getItem("sessionToken")}`,
-      Accept: "application/json",
-      "Content-Type": "application/json",
-    },
-  });
-  const response = await fetch(request);
-
+  const response = await get(`${baseUrl}/user`);
   if (response.status === 200) {
     const users: User[] = await response.json();
     return { httpStatus: response.status, data: users };
@@ -37,6 +15,13 @@ export const fetchAllUsers = async (): Promise<ResponseFiner<User>> => {
   }
 };
 
+//creating a new user
+export const postNewUser = async (newUser: User): Promise<boolean> => {
+  const response = await create(`${baseUrl}/user`, newUser);
+  return response.ok;
+};
+
+//the implementation of this function is in a wrong way and should be fixed later after discussion -> Suraj Mishra
 export const getUserByEmail = async (
   user: User,
 ): Promise<Response<UserLoggedIn>> => {

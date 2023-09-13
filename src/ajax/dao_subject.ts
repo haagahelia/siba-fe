@@ -1,13 +1,11 @@
-//import Logger from "../logger/logger";
-import { /*Response,*/ ResponseFiner, Subject, SubjectName } from "../types";
+import { ResponseFiner, Subject, SubjectName } from "../types";
+import { create, get, remove, update } from "./request";
+
 const baseUrl = process.env.REACT_APP_BE_SERVER_BASE_URL;
 
+//fetching all subjects
 export const fetchAllSubjects = async (): Promise<ResponseFiner<Subject>> => {
-  const response = await fetch(`${baseUrl}/subject`, {
-    headers: {
-      Authorization: `Bearer ${localStorage.getItem("sessionToken")}`,
-    },
-  });
+  const response = await get(`${baseUrl}/subject`);
   if (response.status === 200) {
     const subjects: Subject[] = await response.json();
     return { httpStatus: response.status, data: subjects };
@@ -16,59 +14,36 @@ export const fetchAllSubjects = async (): Promise<ResponseFiner<Subject>> => {
   }
 };
 
+//fetching all subject's names
 export const fetchSubjectsNames = async (): Promise<
   ResponseFiner<SubjectName>
 > => {
-  const response = await fetch(`${baseUrl}/subject/getNames`, {
-    headers: {
-      Authorization: `Bearer ${localStorage.getItem("sessionToken")}`,
-    },
-  });
-
+  const response = await get(`${baseUrl}/subject/getNames`);
   if (response.status === 200) {
-    const subjects: SubjectName[] = await response.json(); // 200+JSON Data,
-    console.log("suraj", subjects);
+    const subjects: SubjectName[] = await response.json();
     return { httpStatus: response.status, data: subjects };
   } else {
-    return { httpStatus: response.status, data: [] }; // 401+"error", 403+"error", 400+"some"
+    return { httpStatus: response.status, data: [] };
   }
 };
 
+//creating new subject
 export const postNewSubject = async (newSubject: Subject): Promise<boolean> => {
-  const response = await fetch(`${baseUrl}/subject/`, {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${localStorage.getItem("sessionToken")}`,
-      Accept: "application/json",
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(newSubject),
-  });
+  const response = await create(`${baseUrl}/subject`, newSubject);
   return response.ok;
 };
 
+//updating subject
 export const editSubject = async (editedSubject: Subject): Promise<boolean> => {
-  const response = await fetch(`${baseUrl}/subject/`, {
-    method: "PUT",
-    headers: {
-      Authorization: `Bearer ${localStorage.getItem("sessionToken")}`,
-      Accept: "application/json",
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(editedSubject),
-  });
+  const response = await update(`${baseUrl}/subject`, editedSubject);
   return response.ok;
 };
 
+//removing single subject
 export const deleteSingleSubject = async (
   subjectId: number,
 ): Promise<boolean> => {
-  const response = await fetch(`${baseUrl}/subject/${subjectId}`, {
-    method: "DELETE",
-    headers: {
-      Authorization: `Bearer ${localStorage.getItem("sessionToken")}`,
-    },
-  });
+  const response = await remove(`${baseUrl}/subject/${subjectId}`);
   const data = await response.json();
   return data?.affectedRows === 1;
 };
