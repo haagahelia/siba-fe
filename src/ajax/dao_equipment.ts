@@ -56,3 +56,19 @@ export const deleteSingleEquipment = async (
   const data = await response.json();
   return data?.returnedNumberValue === 1;
 };
+
+export const editEquipment = async (
+  editedEquipment: Equipment,
+): Promise<boolean> => {
+  const request = new Request(`${baseUrl}/equipment/${editedEquipment.id}`, {
+    method: "PUT",
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("sessionToken")}`,
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(editedEquipment),
+  });
+  const response = await fetch(request);
+  return response.ok;
+};
