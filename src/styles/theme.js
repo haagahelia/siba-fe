@@ -18,6 +18,8 @@ const buttonGreen = "#54B435"; // Apple green, currently only used for the theme
 // The swapping fast what palette will be in use right now:
 // const currentPalette = lightPalette;
 // Options are       = normalPalette, redPalette, yellowPalette, lightPalette
+const navYellow = "#F4BF00";
+const navGrey = "#353535";
 
 export const createAppTheme = (currentPalette) =>
   createTheme({
@@ -140,6 +142,22 @@ export const createAppTheme = (currentPalette) =>
               transition: "all 0.5s ease",
             },
           },
+          {
+            props: { variant: "sibaAppBarVerticalNew" },
+            style: {
+              backgroundColor: navYellow,
+              display: "flex",
+              flexDirection: "column",
+              flexWrap: "nowrap",
+              alignItems: "center",
+              textAlign: "center",
+              fontSize: "1.2rem",
+              position: "sticky",
+              justifyContent: "center",
+              top: 0,
+              zIndex: 20,
+            },
+          },
         ],
       },
       MuiListItem: {
@@ -152,17 +170,19 @@ export const createAppTheme = (currentPalette) =>
         },
         variants: [
           {
-            props: { variant: "sibaAppBarHorizontal" },
+            props: { variant: "sibaAppBarVerticalNew" },
             style: {
               borderColor: currentPalette.backgroundDarker.default,
-              fontSize: "1.2rem",
+              fontSize: "1.1rem",
               display: "contents",
               // color: currentPalette.fontColorDefault.main,
               "& a": {
                 padding: "0.5rem 1rem",
+                paddingBottom: "2px",
                 borderBottom: "3px solid transparent",
                 marginRight: "0.2rem",
-                color: currentPalette.fontColorDefault.default,
+                //color: currentPalette.fontColorDefault.default,
+                color: navGrey,
                 textDecoration: "none",
                 fontFamily: "Roboto, Helvetica, Aria, sans-serif",
                 fontWeight: 700,
@@ -178,10 +198,12 @@ export const createAppTheme = (currentPalette) =>
                 backgroundColor: "0.5s ease",
               },
               "&:hover a": {
-                borderBottom: "2px solid #E16428",
+                borderBottom: "3px solid",
+                color: navGrey,
               },
               "& a.nav-links.active": {
-                color: "#E16428",
+                color: navGrey,
+                fontWeight: 900,
               },
             },
           },
@@ -286,7 +308,7 @@ export const createAppTheme = (currentPalette) =>
         ],
         styleOverrides: {
           contained: {
-            //color: currentPalette.fontColorDefault.default,
+            color: currentPalette.fontColorDefault.default,
           },
           text: {
             backgroundColor: currentPalette.primary.main,
@@ -341,7 +363,7 @@ export const createAppTheme = (currentPalette) =>
           {
             props: { variant: "sibaNavLink" },
             style: {
-              color: "#FFFFFF",
+              color: currentPalette.fontColorDefault.default, // "#0000FF",   // was: #ffffff
               textDecoration: "none",
               fontFamily: "Roboto, Helvetica, Aria, sans-serif",
               fontWeight: 700,
@@ -430,9 +452,16 @@ export const createAppTheme = (currentPalette) =>
             props: { variant: "sibaInputFileName" },
             style: {
               color: currentPalette.fontColorDefault.default,
+              background: currentPalette.primary.backgroundDarker,
             },
           },
         ],
+        styleOverrides: {
+          root: {
+            color: currentPalette.fontColorDefault.default,
+            background: currentPalette.backgroundDarker.default,
+          },
+        },
       },
       MuiAlertTitle: {
         styleOverrides: {

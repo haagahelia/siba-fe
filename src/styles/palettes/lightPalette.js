@@ -20,6 +20,9 @@ const darkYellow = "#f6b751"; // changed to darker yellow so it's more readable
 const green = "#48B058";
 const orange = "#FDA826";
 
+// color definitions and namings only above, below only using them!
+// # character should not appear below this line
+
 export const lightPalette = {
   name: "light", // Changed name to "light"
   common: {

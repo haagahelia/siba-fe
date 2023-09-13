@@ -29,6 +29,7 @@ import BuildingView from "../views/BuildingView";
 import DepartmentView from "../views/DepartmentView";
 import RegisterView from "../views/RegisterView";
 import LoginView from "../views/LoginView";
+import UserView from "../views/UserView";
 import { AppContext } from "../AppContext";
 import Logger from "../logger/logger";
 import logo from "../styles/SibeliusLogo.svg";
@@ -74,13 +75,13 @@ function NavBar() {
       showForCurrentUser: false,
     },
     {
-      name: "Program results",
+      name: "Program Results",
       href: "/programresult",
       forRoles: ["admin", "planner", "statist"],
       showForCurrentUser: false,
     },
     {
-      name: "Room results",
+      name: "Room Results",
       href: "/roomresult",
       forRoles: ["admin", "planner", "statist"],
       showForCurrentUser: false,
@@ -99,6 +100,12 @@ function NavBar() {
     {
       name: "Settings",
       href: "/settings",
+      forRoles: ["admin"],
+      showForCurrentUser: false,
+    },
+    {
+      name: "Userlist",
+      href: "/users",
       forRoles: ["admin"],
       showForCurrentUser: false,
     },
@@ -176,7 +183,7 @@ function NavBar() {
     return sibaPages
       .filter((page) => page.showForCurrentUser)
       .map((page, index) => (
-        <ListItem variant="sibaAppBarHorizontal" key={index}>
+        <ListItem variant="sibaAppBarVerticalNew" key={index}>
           <NavLink
             to={page.href}
             end
@@ -195,13 +202,23 @@ function NavBar() {
 
   return (
     <Router>
-      <NavLink to="/" className="nav-logo">
-        <img src={logo} alt="" width="200" height="200" />
-        <i className="fas fa-code" />
-      </NavLink>
-      <AppBar>
+      <AppBar
+        position="fixed"
+        sx={{
+          width: "150px",
+          height: "100vh",
+          top: 0,
+          left: 0,
+          flexDirection: "column",
+          backgroundColor: "#F4BF00",
+        }}
+      >
+        <NavLink to="/" className="nav-logo">
+          <img src={logo} alt="" width="60" height="60" />
+          <i className="fas fa-code" />
+        </NavLink>
         <Container maxWidth="xl">
-          <Toolbar disableGutters>
+          <Toolbar disableGutters sx={{ flexDirection: "column" }}>
             <Typography variant="sibaTypography">
               Logged in as: {loggedIn}
             </Typography>
@@ -245,7 +262,7 @@ function NavBar() {
               </Menu>
             </Box>
             <Box sx={{ flexGrow: 1, display: { xs: "none", lg: "flex" } }}>
-              <List variant="sibaAppBarHorizontal">{renderNavLinks()}</List>
+              <List variant="sibaAppBarVerticalNew">{renderNavLinks()}</List>
             </Box>
           </Toolbar>
         </Container>
@@ -266,6 +283,7 @@ function NavBar() {
         <Route path="/department" element={<DepartmentView />} />
         <Route path="/allocation/addAllocRound" element={<AddAllocRound />} />
         <Route path="/settings" element={<Settings />} />
+        <Route path="/users" element={<UserView />} />
         <Route
           path="/alloc-fail/:allocId"
           element={<AllocationSubjectFailureView />}

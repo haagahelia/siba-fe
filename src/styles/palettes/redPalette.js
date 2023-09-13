@@ -3,7 +3,7 @@ import { createTheme } from "@mui/material";
 //redPalette
 const tomatoRed = "#FF2400";
 const softPink = "#F2AEB8";
-const lightPink = "#FFD1CF";
+const lightPink = "#FAD6D1";
 const redOrange = "#FF3333";
 const bitterSweet = "#FF6666";
 const salmonPink = "#FF8888";
@@ -17,68 +17,73 @@ const progressBarGreen = "#06FF00"; // Highlighter Green/Lime
 const progressBarYellow = "#FFE400"; // Golden Yellow
 const progressBarRed = "#FF1700"; // Scarlet red / almost the same as #FF1E00
 const lightBlue2 = "#5DBCD2";
-const black = "#000000";
+const blackRed = "#3D1D1D";
+const blueRed = "#7759B2";
+const someRed1 = "#ba68c8";
+
+// color definitions and namings only above, below only using them!
+// # character should not appear below this line
 
 export const redPalette = {
   name: "redPalette",
   common: {
-    black: "#1D1D1D",
-    white: "#fff",
+    black: blackRed,
+    white: lightPink,
   },
   primary: {
     main: redOrange,
     light: bitterSweet,
-    dark: "#0059B2",
-    contrastText: "#ffffff",
+    dark: blueRed,
+    contrastText: lightPink,
   },
 
   secondary: {
     main: salmonPink,
-    light: "#ba68c8",
-    dark: "#7b1fa2",
-    contrastText: "#ffffff",
+    light: someRed1,
+    dark: blueRed,
+    contrastText: lightPink,
   },
   error: {
     main: brightRed,
     light: "#FF99A2",
     dark: "#C70011",
-    contrastText: "#ffffff",
+    contrastText: lightPink,
   },
   warning: {
     main: pumpkinOrange,
     light: "#FFDC48",
     dark: "#AB6800",
-    contrastText: "#000000",
+    contrastText: lightPink,
   },
   info: {
     main: clayBrown,
     light: "#03a9f4",
     dark: "#01579b",
-    contrastText: "#ffffff",
+    contrastText: lightPink,
   },
   success: {
     main: darkOrange,
     light: "#6AE79C",
     dark: "#1AA251",
-    contrastText: "#ffffff",
+    contrastText: lightPink,
   },
   edit: {
     main: bitterSweet,
-    contrastText: "#ffffff",
+    contrastText: lightPink,
   },
   contrastThreshold: 3,
   tonalOffset: 0.2,
   text: {
     primary: "#1A2027",
     secondary: "#3E5060",
-    disabled: "#ffffff",
+    disabled: lightPink,
   },
   infoIcon: {
-    main: black,
+    main: blackRed,
   },
   divider: bitterSweet,
   background: {
-    paper: "#ffffff",
+    paper: lightPink,
     default: tomatoRed,
   },
   snackbarBackground: {
@@ -101,7 +106,7 @@ export const redPalette = {
   //own colors
   red: {
     main: cherryBlossom,
-    contrastText: black,
+    contrastText: blackRed,
   },
   backgroundDarker: { default: softPink },
   fontColorDefault: { default: lightPink },

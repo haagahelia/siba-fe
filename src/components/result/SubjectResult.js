@@ -25,7 +25,7 @@ export default function SubjectResult(props) {
         spacing={2}
         style={{
           margin: "auto",
-          marginTop: 20,
+          marginTop: 10,
           padding: 10,
           borderRadius: 20,
           color: "#000000",
@@ -71,6 +71,7 @@ function CollapsedRow(id) {
   const [expand, setExpand] = React.useState(false);
   const [rooms, setRooms] = React.useState([]);
   const appContext = useContext(AppContext);
+  const theme = useTheme();
 
   const getRoomsData = async () => {
     console.log(id);
@@ -82,14 +83,14 @@ function CollapsedRow(id) {
     <Grid2 container>
       {expand ? (
         <KeyboardArrowUpIcon
-          sx={{ color: "white", fontSize: 24 }}
+          sx={{ color: theme.palette.primary, fontSize: 24 }}
           onClick={() => setExpand(!expand)}
         >
           {" "}
         </KeyboardArrowUpIcon>
       ) : (
         <KeyboardArrowDownIcon
-          sx={{ color: "white", fontSize: 24 }}
+          sx={{ color: theme.palette.primary, fontSize: 24 }}
           onClick={() => {
             getRoomsData();
             setExpand(!expand);
