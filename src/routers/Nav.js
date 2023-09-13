@@ -29,6 +29,7 @@ import BuildingView from "../views/BuildingView";
 import DepartmentView from "../views/DepartmentView";
 import RegisterView from "../views/RegisterView";
 import LoginView from "../views/LoginView";
+import UserView from "../views/UserView";
 import { AppContext } from "../AppContext";
 import Logger from "../logger/logger";
 import logo from "../styles/SibeliusLogo.svg";
@@ -99,6 +100,12 @@ function NavBar() {
     {
       name: "Settings",
       href: "/settings",
+      forRoles: ["admin"],
+      showForCurrentUser: false,
+    },
+    {
+      name: "Userlist",
+      href: "/users",
       forRoles: ["admin"],
       showForCurrentUser: false,
     },
@@ -275,6 +282,7 @@ function NavBar() {
         <Route path="/department" element={<DepartmentView />} />
         <Route path="/allocation/addAllocRound" element={<AddAllocRound />} />
         <Route path="/settings" element={<Settings />} />
+        <Route path="/users" element={<UserView />} />
         <Route
           path="/alloc-fail/:allocId"
           element={<AllocationSubjectFailureView />}
