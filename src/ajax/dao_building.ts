@@ -32,7 +32,7 @@ export const postNewBuilding = async (
 };
 
 export const postNewBuildings = async (
-  newBuilding: Building,
+  newBuilding: Building[],
 ): Promise<boolean> => {
   const request = new Request(`${baseUrl}/building/multi`, {
     method: "POST",
