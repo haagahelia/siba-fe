@@ -18,8 +18,6 @@ const buttonGreen = "#54B435"; // Apple green, currently only used for the theme
 // The swapping fast what palette will be in use right now:
 // const currentPalette = lightPalette;
 // Options are       = normalPalette, redPalette, yellowPalette, lightPalette
-const navYellow = "#F4BF00";
-const navGrey = "#353535";
 
 export const createAppTheme = (currentPalette) =>
   createTheme({
@@ -145,7 +143,7 @@ export const createAppTheme = (currentPalette) =>
           {
             props: { variant: "sibaAppBarVerticalNew" },
             style: {
-              backgroundColor: navYellow,
+              backgroundColor: currentPalette.primary.main,
               display: "flex",
               flexDirection: "column",
               flexWrap: "nowrap",
@@ -182,7 +180,7 @@ export const createAppTheme = (currentPalette) =>
                 borderBottom: "3px solid transparent",
                 marginRight: "0.2rem",
                 //color: currentPalette.fontColorDefault.default,
-                color: navGrey,
+                color: currentPalette.primary.contrastText,
                 textDecoration: "none",
                 fontFamily: "Roboto, Helvetica, Aria, sans-serif",
                 fontWeight: 700,
@@ -199,10 +197,10 @@ export const createAppTheme = (currentPalette) =>
               },
               "&:hover a": {
                 borderBottom: "3px solid",
-                color: navGrey,
+                color: currentPalette.primary.contrastText,
               },
               "& a.nav-links.active": {
-                color: navGrey,
+                color: currentPalette.primary.contrastText,
                 fontWeight: 900,
               },
             },
@@ -441,7 +439,7 @@ export const createAppTheme = (currentPalette) =>
             alignItems: "center",
             width: "100%",
             height: "80px",
-            background: currentPalette.backgroundDarker.default,
+            background: currentPalette.primary.main,
             fontSize: "1.2rem",
           },
         },

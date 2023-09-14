@@ -210,7 +210,7 @@ function NavBar() {
           top: 0,
           left: 0,
           flexDirection: "column",
-          backgroundColor: "#F4BF00",
+          //backgroundColor: "#F4BF00",
         }}
       >
         <NavLink to="/" className="nav-logo">
