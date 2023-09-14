@@ -81,7 +81,7 @@ export const lightPalette = {
   divider: black,
   background: {
     paper: lightGrey, // Changed paper background to lightGrey
-    default: lightGrey, // changed to light gray
+    default: lightGrey,
   },
   snackbarBackground: {
     default: yellow,
