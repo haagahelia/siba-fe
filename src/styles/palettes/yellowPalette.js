@@ -79,14 +79,14 @@ export const yellowPalette = {
   },
   divider: "#E7EBF0",
   background: {
-    paper: butteryWhite,
+    paper: sahara,
     default: canary,
   },
   snackbarBackground: {
     default: paleCanary,
   },
   infoIcon: {
-    main: butteryWhite,
+    main: paleLime,
   },
   // own colors
   red: {
@@ -97,16 +97,16 @@ export const yellowPalette = {
       color: paleLime,
     },
     luentoluokka: {
-      color: canary,
+      color: saffronMango,
     },
     esitystila: {
-      color: butteryWhite,
+      color: tangerineYellow,
     },
     musiikkiluokka: {
       color: buddhaGold,
     },
   },
-  backgroundDarker: { default: paleCanary },
+  backgroundDarker: { default: eggWhite },
   fontColorDefault: { default: sahara },
   progressBarGreen: { main: progressBarGreen },
   progressBarYellow: { main: progressBarYellow },
