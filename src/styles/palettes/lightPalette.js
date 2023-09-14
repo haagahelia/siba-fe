@@ -15,9 +15,13 @@ const yellow = "#F4BF00";
 
 // Status indicators
 const red = "#D62E3D";
-const lightYellow = "#F6D251";
+const darkYellow = "#f6b751"; // changed to darker yellow so it's more readable
+//const lightYellow = "#F6D251";   // removed, use the darkYellow
 const green = "#48B058";
 const orange = "#FDA826";
+
+// color definitions and namings only above, below only using them!
+// # character should not appear below this line
 
 export const lightPalette = {
   name: "light", // Changed name to "light"
@@ -56,7 +60,7 @@ export const lightPalette = {
   contrastThreshold: 3,
   tonalOffset: 0.2,
   text: {
-    primary: white,
+    primary: black,
     secondary: darkGrey,
     disabled: "#ffffff",
   },
@@ -65,16 +69,16 @@ export const lightPalette = {
       color: red,
     },
     luentoluokka: {
-      color: lightYellow,
+      color: darkYellow,
     },
     esitystila: {
       color: green,
     },
     musiikkiluokka: {
-      color: lightYellow,
+      color: darkYellow,
     },
   },
-  divider: lightGrey,
+  divider: black,
   background: {
     paper: lightGrey, // Changed paper background to lightGrey
     default: lightGrey,
@@ -102,11 +106,11 @@ export const lightPalette = {
   backgroundDarker: { default: white }, // Changed to use darkGrey
   fontColorDefault: { default: black },
   progressBarGreen: { main: green },
-  progressBarYellow: { main: lightYellow },
+  progressBarYellow: { main: darkYellow },
   progressBarRed: { main: red },
   borderColor: {
     main: lightGrey,
-    cardBorder: white,
+    cardBorder: black,
   },
   infoIcon: {
     main: yellow,

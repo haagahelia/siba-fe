@@ -9,7 +9,7 @@ import {
 } from "../../validation/ValidateAddBuilding";
 import dao from "../../ajax/dao";
 import AddBuildingForm from "./AddBuildingForm";
-import ImportBuilding from "./ImportBuilding";
+import ImportBuilding from "./ImportBuildingContainer";
 
 export default function AddBuildingContainer(props) {
   const { getAllBuildings } = props;

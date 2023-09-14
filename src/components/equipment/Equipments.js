@@ -7,6 +7,10 @@ import AddEquipment from "./AddEquipment";
 import EquipmentListContainer from "./EquipmentListContainer";
 import { RoleLoggedIn } from "../../customhooks/RoleLoggedIn";
 import Logger from "../../logger/logger";
+import {
+  ajaxRequestErrorHandler,
+  getFunctionName,
+} from "../../ajax/ajaxRequestErrorHandler";
 
 export default function Equipments() {
   Logger.logPrefix = "Equipments";
@@ -20,19 +24,20 @@ export default function Equipments() {
   const { roles } = RoleLoggedIn();
 
   const getAllEquipments = async function () {
-    const { success, data } = await dao.fetchEquipmentData();
-    if (!success) {
-      setAlertOptions({
-        severity: "error",
-        title: "Error",
-        message: "Oops! Something went wrong on the server. No equipment found",
-      });
-      setAlertOpen(true);
-      Logger.error("Error when fetching equipment data");
-      return;
+    Logger.debug("getAllEquipments: fetching all equipments from server.");
+    const { httpStatus, data } = await dao.fetchEquipmentData();
+    if (httpStatus !== 200) {
+      ajaxRequestErrorHandler(
+        httpStatus,
+        getFunctionName(2),
+        setAlertOptions,
+        setAlertOpen,
+      );
     } else {
       setEquipmentList(data);
-      Logger.info(`Successfully fetched equipment data. Count: ${data.length}`);
+      Logger.info(
+        `getAllEquipments: successfully fetched ${data.length} subjects.`,
+      );
     }
   };
 

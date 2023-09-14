@@ -29,79 +29,98 @@ import BuildingView from "../views/BuildingView";
 import DepartmentView from "../views/DepartmentView";
 import RegisterView from "../views/RegisterView";
 import LoginView from "../views/LoginView";
+import UserView from "../views/UserView";
 import { AppContext } from "../AppContext";
 import Logger from "../logger/logger";
-
-const sibaPages = [
-  {
-    name: "Register",
-    href: "/register",
-    forRoles: ["admin"],
-    showForCurrentUser: false,
-  },
-  {
-    name: "Login",
-    href: "/login",
-    forRoles: ["guest"],
-    showForCurrentUser: true,
-  },
-  {
-    name: "Front page",
-    href: "/",
-    forRoles: ["admin", "planner", "statist"],
-    showForCurrentUser: false,
-  },
-  {
-    name: "Lessons",
-    href: "/subject",
-    forRoles: ["admin", "planner", "statist"],
-    showForCurrentUser: false,
-  },
-  {
-    name: "Room results",
-    href: "/roomresult",
-    forRoles: ["admin", "planner", "statist"],
-    showForCurrentUser: false,
-  },
-  {
-    name: "Program results",
-    href: "/programresult",
-    forRoles: ["admin", "planner", "statist"],
-    showForCurrentUser: false,
-  },
-  {
-    name: "Settings",
-    href: "/settings",
-    forRoles: ["admin"],
-    showForCurrentUser: false,
-  },
-  {
-    name: "Alloc rounds",
-    href: "allocation",
-    forRoles: ["admin"],
-    showForCurrentUser: false,
-  },
-  {
-    name: "Equipment",
-    href: "equipment",
-    forRoles: ["admin", "planner", "statist"],
-    showForCurrentUser: false,
-  },
-  {
-    name: "Buildings",
-    href: "building",
-    forRoles: ["admin", "statist"],
-    showForCurrentUser: false,
-  },
-  {
-    name: "Department",
-    href: "department",
-    forRoles: ["admin", "planner", "statist"],
-    showForCurrentUser: false,
-  },
-];
+import logo from "../styles/SibeliusLogo.svg";
 
 function NavBar() {
+  Logger.debug("NavBar initiated");
+  const sibaPages = [
+    {
+      name: "Login",
+      href: "/login",
+      forRoles: ["guest"],
+      showForCurrentUser: false,
+      isLogin: false,
+    },
+    {
+      name: "Teachings",
+      href: "/",
+      forRoles: ["admin", "planner", "statist"],
+      showForCurrentUser: false,
+    },
+    {
+      name: "Allocation",
+      href: "allocation",
+      forRoles: ["admin"],
+      showForCurrentUser: false,
+    },
+    {
+      name: "Buildings",
+      href: "building",
+      forRoles: ["admin", "statist"],
+      showForCurrentUser: false,
+    },
+    {
+      name: "Departments",
+      href: "department",
+      forRoles: ["admin", "planner", "statist"],
+      showForCurrentUser: false,
+    },
+    {
+      name: "Equipment",
+      href: "equipment",
+      forRoles: ["admin", "planner", "statist"],
+      showForCurrentUser: false,
+    },
+    {
+      name: "Program Results",
+      href: "/programresult",
+      forRoles: ["admin", "planner", "statist"],
+      showForCurrentUser: false,
+    },
+    {
+      name: "Room Results",
+      href: "/roomresult",
+      forRoles: ["admin", "planner", "statist"],
+      showForCurrentUser: false,
+    },
+    {
+      name: "Register",
+      href: "/register",
+      forRoles: ["admin"],
+      showForCurrentUser: false,
+    },
+    {
+      name: "Account",
+      forRoles: ["admin", "planner", "statist"],
+      showForCurrentUser: false,
+    },
+    {
+      name: "Settings",
+      href: "/settings",
+      forRoles: ["admin"],
+      showForCurrentUser: false,
+    },
+    {
+      name: "Userlist",
+      href: "/users",
+      forRoles: ["admin"],
+      showForCurrentUser: false,
+    },
+    {
+      name: "Logout",
+      href: "#",
+      forRoles: ["admin", "planner", "statist"],
+      showForCurrentUser: false,
+      action() {
+        localStorage.clear();
+        handleLoginChange();
+      },
+    },
+  ];
+
   const [click, setClick] = useState(false);
   const handleClick = () => setClick(!click);
   const appContext = useContext(AppContext);
@@ -117,8 +136,24 @@ function NavBar() {
     setAnchorElNav(null);
   };
 
+  const updateAppContext = () => {
+    appContext.userEmail = localStorage.getItem("email");
+    appContext.sessionToken = localStorage.getItem("sessionToken");
+    appContext.roles.admin = Number(localStorage.getItem("isAdmin"));
+    appContext.roles.planner = Number(localStorage.getItem("isPlanner"));
+    appContext.roles.statist = Number(localStorage.getItem("isStatist"));
+  };
+
   const setSibaPages = () => {
-    Logger.debug("App context roles: setSibaPages", appContext.roles);
+    // Logger.debug("App context roles: setSibaPages", appContext.roles);
+    if (appContext.userEmail) {
+      sibaPages[1].isLogin = true;
+      sibaPages[sibaPages.length - 1].showForCurrentUser = true;
+    } else {
+      sibaPages[1].isLogin = false;
+      sibaPages[sibaPages.length - 1].showForCurrentUser = false;
+    }
+
     sibaPages.forEach((element) => {
       element.showForCurrentUser = false;
       if (
@@ -128,12 +163,7 @@ function NavBar() {
         (element.forRoles.includes("statist") && appContext.roles.statist === 1)
       ) {
         element.showForCurrentUser = true;
-      } else if (
-        element.forRoles.includes("guest") &&
-        appContext.roles.admin !== 1 &&
-        appContext.roles.planner !== 1 &&
-        appContext.roles.statist !== 1
-      ) {
+      } else if (element.forRoles.includes("guest") && !appContext.userEmail) {
         element.showForCurrentUser = true;
       }
     });
@@ -143,34 +173,17 @@ function NavBar() {
     setLoggedIn(
       localStorage.getItem("email") ? localStorage.getItem("email") : "No more",
     );
-    appContext.userEmail = loggedIn;
-
-    Logger.debug("roles from appContext:", appContext.roles);
-
-    setSibaPages();
-  };
-
-  const logOut = () => {
-    localStorage.clear();
-    appContext.userEmail = "No more";
-    appContext.roles = { admin: 0, planner: 0, statist: 0 };
-    handleLoginChange();
   };
 
   const renderNavLinks = () => {
-    let pagesToShow = [...sibaPages];
+    updateAppContext();
+    setSibaPages();
+    //Logger.debug("pages status 000:", sibaPages);
 
-    if (loggedIn !== "Not yet" && loggedIn !== "No more") {
-      //localStorage.clear(); // !!! for reset !!!, if get stuck to wrong state
-
-      Logger.debug("pagesToShow 000:", pagesToShow);
-      pagesToShow = pagesToShow.filter((page) => page.showForCurrentUser); // Hiding Login link if logged in
-      Logger.debug("pagesToShow 111:", pagesToShow);
-      pagesToShow.push({ name: "Logout", href: "#", action: logOut }); // Showing log out button if logged in
-      Logger.debug("pagesToShow 222:", pagesToShow);
-
-      return pagesToShow.map((page, index) => (
-        <ListItem variant="sibaAppBarHorizontal" key={index}>
+    return sibaPages
+      .filter((page) => page.showForCurrentUser)
+      .map((page, index) => (
+        <ListItem variant="sibaAppBarVerticalNew" key={index}>
           <NavLink
             to={page.href}
             end
@@ -185,32 +198,27 @@ function NavBar() {
           </NavLink>
         </ListItem>
       ));
-    } else {
-      pagesToShow = pagesToShow.filter((page) => page.showForCurrentUser);
-      Logger.debug("pagesToShow 333:", pagesToShow);
-      //pagesToShow.push({ name: "Login", href: "/login", forRoles: ["guest"], showForCurrentUser: true   });
-      Logger.debug("pagesToShow 444:", pagesToShow);
-      return pagesToShow.map((page, index) => (
-        <ListItem variant="sibaAppBarHorizontal" key={index}>
-          <NavLink
-            to={page.href}
-            end
-            activeclassname="active"
-            className="nav-links"
-            onClick={handleClick}
-          >
-            <Typography variant="sibaNavLink">{page.name}</Typography>
-          </NavLink>
-        </ListItem>
-      ));
-    }
   };
 
   return (
     <Router>
-      <AppBar>
+      <AppBar
+        position="fixed"
+        sx={{
+          width: "150px",
+          height: "100vh",
+          top: 0,
+          left: 0,
+          flexDirection: "column",
+          //backgroundColor: "#F4BF00",
+        }}
+      >
+        <NavLink to="/" className="nav-logo">
+          <img src={logo} alt="" width="60" height="60" />
+          <i className="fas fa-code" />
+        </NavLink>
         <Container maxWidth="xl">
-          <Toolbar disableGutters>
+          <Toolbar disableGutters sx={{ flexDirection: "column" }}>
             <Typography variant="sibaTypography">
               Logged in as: {loggedIn}
             </Typography>
@@ -254,7 +262,7 @@ function NavBar() {
               </Menu>
             </Box>
             <Box sx={{ flexGrow: 1, display: { xs: "none", lg: "flex" } }}>
-              <List variant="sibaAppBarHorizontal">{renderNavLinks()}</List>
+              <List variant="sibaAppBarVerticalNew">{renderNavLinks()}</List>
             </Box>
           </Toolbar>
         </Container>
@@ -275,6 +283,7 @@ function NavBar() {
         <Route path="/department" element={<DepartmentView />} />
         <Route path="/allocation/addAllocRound" element={<AddAllocRound />} />
         <Route path="/settings" element={<Settings />} />
+        <Route path="/users" element={<UserView />} />
         <Route
           path="/alloc-fail/:allocId"
           element={<AllocationSubjectFailureView />}

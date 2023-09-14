@@ -27,9 +27,8 @@ export async function validate(values) {
     errors.name = "Only letters, numbers and '-' allowed";
   }
 
-  if (values.description.length > 16000) {
-    errors.description =
-      "The description must be maximum 16000 characters long";
+  if (values.description.length < 2 || values.description.length > 255) {
+    errors.description = "The description must be 2-255 characters long";
   } else if (!regDescription.test(values.description)) {
     errors.description = "Only letters, numbers and '-' allowed";
   }

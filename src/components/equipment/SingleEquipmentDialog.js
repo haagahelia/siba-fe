@@ -33,7 +33,13 @@ export default function SingleEquipmentDialog(props) {
 
   return (
     <>
-      <Dialog open={open} onClose={() => setOpen(false)}>
+      <Dialog
+        open={open}
+        onClose={() => {
+          setOpen(false);
+          getAllEquipments();
+        }}
+      >
         <DialogTitle id="dialog-title">Equipment Info</DialogTitle>
         {roles.admin === "1" && (
           <DialogActions>

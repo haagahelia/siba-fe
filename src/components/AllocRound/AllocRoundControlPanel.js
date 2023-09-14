@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Typography } from "@mui/material";
+import { Button, Typography, useTheme } from "@mui/material";
 import { Link } from "react-router-dom";
 import { useState, useContext } from "react";
 
@@ -10,7 +10,7 @@ const AllocRoundControlPanel = ({ incrementResetCounter }) => {
   const [isClicked, setIsClicked] = useState(true);
   const appContext = useContext(AppContext);
   //console.log("appContext 123: "+appContext);
-  //const theme = useTheme();
+  const theme = useTheme();
 
   const setDelayedClickedToggle = () => {
     setTimeout(() => {
@@ -30,7 +30,7 @@ const AllocRoundControlPanel = ({ incrementResetCounter }) => {
       <Button
         type="submit"
         variant="contained"
-        style={{ color: "white" }}
+        style={{ color: theme.palette.primary.contrastText }}
         onClick={() => {
           allocationPost.startAlloc(appContext.allocRoundId);
           setDelayedClickedToggle();

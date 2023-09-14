@@ -3,8 +3,8 @@ import { createTheme } from "@mui/material";
 //yellowPalette
 
 const lightBlue = "#73FDFF";
-const lightBlue2 = "#5DBCD2";
-const black = "#000000";
+//const lightBlue2 = "#5DBCD2";   // removed
+//const black = "#000000";   // removed
 const canary = "#FFFF8F";
 const paleCanary = "#FFFFAA";
 const sahara = "#AAAA11";
@@ -15,78 +15,78 @@ const tangerineYellow = "#FFCC00";
 const eggWhite = "#F2F2BF";
 const greenYellow = "#CCFF33";
 const butteryWhite = "#FFFFE6";
-const tomatoRed = "#FF2400";
-const softPink = "#F2AEB8";
-const lightPink = "#FFD1CF";
-const redOrange = "#FF3333";
-const bitterSweet = "#FF6666";
-const salmonPink = "#FF8888";
-const cherryBlossom = "#FF8888";
-const brightRed = "#FF1111";
-const pumpkinOrange = "#FF6600";
-const clayBrown = "#B97446";
-const darkOrange = "#EE9900";
+//const softPink = "#F2AEB8";
 const mediumBrown = "#8C4B2D"; // borderColor
 const progressBarGreen = "#06FF00"; // Highlighter Green/Lime
 const progressBarYellow = "#FFE400"; // Golden Yellow
 const progressBarRed = "#FF1700"; // Scarlet red / almost the same as #FF1E00
 
+// color definitions and namings only above, below only using them!
+// # character should not appear below this line
+
 export const yellowPalette = {
   // mode: "light",
   common: {
     black: "#1D1D1D",
-    white: "#fff",
+    white: butteryWhite,
   },
   primary: {
     main: buddhaGold,
     light: paleLime,
     dark: "#0059B2",
-    contrastText: "#ffffff",
+    contrastText: butteryWhite,
   },
   secondary: {
     main: paleCanary,
     light: "#ba68c8",
     dark: "#7b1fa2",
-    contrastText: "#ffffff",
+    contrastText: butteryWhite,
   },
   error: {
     main: tangerineYellow,
     light: "#FF99A2",
     dark: "#C70011",
-    contrastText: "#ffffff",
+    contrastText: butteryWhite,
   },
   warning: {
     main: eggWhite,
     light: "#FFDC48",
     dark: "#AB6800",
-    contrastText: "#000000",
+    contrastText: mediumBrown,
   },
   info: {
     main: greenYellow,
     light: "#03a9f4",
     dark: "#01579b",
-    contrastText: "#ffffff",
+    contrastText: butteryWhite,
   },
   success: {
-    main: butteryWhite,
+    main: sahara,
     light: "#6AE79C",
     dark: "#1AA251",
-    contrastText: "#ffffff",
+    contrastText: butteryWhite,
+  },
+  edit: {
+    main: saffronMango,
+    contrastText: butteryWhite,
   },
   contrastThreshold: 3,
   tonalOffset: 0.2,
   text: {
     primary: "#1A2027",
     secondary: "#3E5060",
-    disabled: "#ffffff",
+    disabled: butteryWhite,
   },
   divider: "#E7EBF0",
   background: {
-    paper: "#ffffff",
+    paper: sahara,
     default: canary,
   },
+  snackbarBackground: {
+    default: paleCanary,
+  },
   infoIcon: {
-    main: butteryWhite,
+    main: paleLime,
   },
   // own colors
   red: {
@@ -97,16 +97,16 @@ export const yellowPalette = {
       color: paleLime,
     },
     luentoluokka: {
-      color: canary,
+      color: saffronMango,
     },
     esitystila: {
-      color: butteryWhite,
+      color: tangerineYellow,
     },
     musiikkiluokka: {
       color: buddhaGold,
     },
   },
-  backgroundDarker: { default: paleCanary },
+  backgroundDarker: { default: eggWhite },
   fontColorDefault: { default: sahara },
   progressBarGreen: { main: progressBarGreen },
   progressBarYellow: { main: progressBarYellow },
@@ -119,92 +119,6 @@ export const yellowPalette = {
 /* More yellow tint values used from here: 
   "#FFFF11" Sunny Yellow,  "#BB7700" Mustard Brown
 */
-
-export const redPalette = {
-  name: "redPalette",
-  common: {
-    black: "#1D1D1D",
-    white: "#fff",
-  },
-  primary: {
-    main: redOrange,
-    light: bitterSweet,
-    dark: "#0059B2",
-    contrastText: "#ffffff",
-  },
-
-  secondary: {
-    main: salmonPink,
-    light: "#ba68c8",
-    dark: "#7b1fa2",
-    contrastText: "#ffffff",
-  },
-  error: {
-    main: brightRed,
-    light: "#FF99A2",
-    dark: "#C70011",
-    contrastText: "#ffffff",
-  },
-  warning: {
-    main: pumpkinOrange,
-    light: "#FFDC48",
-    dark: "#AB6800",
-    contrastText: "#000000",
-  },
-  info: {
-    main: clayBrown,
-    light: "#03a9f4",
-    dark: "#01579b",
-    contrastText: "#ffffff",
-  },
-  success: {
-    main: darkOrange,
-    light: "#6AE79C",
-    dark: "#1AA251",
-    contrastText: "#ffffff",
-  },
-  contrastThreshold: 3,
-  tonalOffset: 0.2,
-  text: {
-    primary: "#1A2027",
-    secondary: "#3E5060",
-    disabled: "#ffffff",
-  },
-  infoIcon: {
-    main: black,
-  },
-  background: {
-    paper: "#ffffff",
-    default: tomatoRed,
-  },
-  AllocRoom: {
-    studio: {
-      color: salmonPink,
-    },
-    luentoluokka: {
-      color: darkOrange,
-    },
-    esitystila: {
-      color: pumpkinOrange,
-    },
-    musiikkiluokka: {
-      color: brightRed,
-    },
-  },
-  //own colors
-  red: {
-    main: cherryBlossom,
-  },
-  backgroundDarker: { default: softPink },
-  fontColorDefault: { default: lightPink },
-  progressBarGreen: { main: progressBarGreen },
-  progressBarYellow: { main: progressBarYellow },
-  progressBarRed: { main: progressBarRed },
-  borderColor: {
-    main: mediumBrown,
-    cardBorder: lightBlue2,
-  },
-};
 
 const theme = createTheme({
   palette: yellowPalette,
