@@ -77,7 +77,7 @@ export const lightPalette = {
   divider: lightGrey,
   background: {
     paper: lightGrey, // Changed paper background to lightGrey
-    default: darkGrey,
+    default: lightGrey,
   },
   snackbarBackground: {
     default: yellow,
@@ -99,8 +99,8 @@ export const lightPalette = {
     main: red,
     contrastText: white,
   },
-  backgroundDarker: { default: darkGrey }, // Changed to use darkGrey
-  fontColorDefault: { default: white },
+  backgroundDarker: { default: white }, // Changed to use darkGrey
+  fontColorDefault: { default: black },
   progressBarGreen: { main: green },
   progressBarYellow: { main: lightYellow },
   progressBarRed: { main: red },
