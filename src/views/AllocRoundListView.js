@@ -83,7 +83,7 @@ export default function AllocRoundView() {
             <CardContent>
               <CardHeader title="Allocation rounds (Select to change)" />
               <Button
-                style={theme.components.MuiButton.greenbutton}
+                sx={theme.components.MuiButton.greenbutton}
                 onClick={() => navigate("addAllocRound")}
               >
                 {" "}
