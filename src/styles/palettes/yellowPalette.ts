@@ -1,10 +1,25 @@
 import { createTheme } from "@mui/material";
+import { PaletteContract } from "../../types";
+import {
+  //accentYellow,
+  accentOrange,
+  white,
+  black,
+  buttonThemeToggleBackgroundColor,
+  darkestGrey,
+  //darkGrey,
+  //mediumGrey,
+  //lightGrey,
+  //indicatorGreen,
+  indicatorRed,
+  //indicatorOrange,
+  //indicatorYellowDark,
+} from "./commonColors";
 
-//yellowPalette
+// Color definitions for YELLOW TEST PALETTE
 
 const lightBlue = "#73FDFF";
 //const lightBlue2 = "#5DBCD2";   // removed
-//const black = "#000000";   // removed
 const canary = "#FFFF8F";
 const paleCanary = "#FFFFAA";
 const sahara = "#AAAA11";
@@ -24,8 +39,8 @@ const progressBarRed = "#FF1700"; // Scarlet red / almost the same as #FF1E00
 // color definitions and namings only above, below only using them!
 // # character should not appear below this line
 
-export const yellowPalette = {
-  // mode: "light",
+export const yellowPalette: PaletteContract = {
+  name: "yellowPallette",
   common: {
     black: "#1D1D1D",
     white: butteryWhite,
@@ -85,13 +100,44 @@ export const yellowPalette = {
   snackbarBackground: {
     default: paleCanary,
   },
+  action: {
+    active: "rgba(0, 0, 0, 0.54)",
+    hover: "rgba(0, 0, 0, 0.04)",
+    hoverOpacity: 0.25,
+    selected: "rgba(0, 0, 0, 0.08)",
+    selectedOpacity: 0.15,
+    disabled: "rgba(0, 0, 0, 0.26)",
+    disabledBackground: "rgba(0, 0, 0, 0.12)",
+    disabledOpacity: 0.38,
+    focus: "rgba(0, 0, 0, 0.12)",
+    focusOpacity: 0.12,
+    activatedOpacity: 0.12,
+  },
   infoIcon: {
     main: paleLime,
   },
-  // own colors
+
+  // own colors - YELLOW
   red: {
     main: saffronMango,
   },
+
+  backgroundDarker: { default: eggWhite },
+  fontColorDefault: { default: sahara },
+
+  progressBarBackground: {
+    main: darkestGrey,
+  },
+  progressBarGreen: { main: progressBarGreen },
+  progressBarYellow: { main: progressBarYellow },
+  progressBarRed: { main: progressBarRed },
+  progressBarTextNonZero: {
+    main: black,
+  },
+  progressBarTextZero: {
+    main: white,
+  },
+
   AllocRoom: {
     studio: {
       color: paleLime,
@@ -106,14 +152,22 @@ export const yellowPalette = {
       color: buddhaGold,
     },
   },
-  backgroundDarker: { default: eggWhite },
-  fontColorDefault: { default: sahara },
-  progressBarGreen: { main: progressBarGreen },
-  progressBarYellow: { main: progressBarYellow },
-  progressBarRed: { main: progressBarRed },
+
   borderColor: {
     main: mediumBrown,
     cardBorder: lightBlue,
+  },
+  borderColorDark: {
+    main: black,
+  },
+  buttonThemeToggle: {
+    main: buttonThemeToggleBackgroundColor,
+  },
+  helperText: {
+    main: indicatorRed,
+  },
+  activeLinkBackgroundColor: {
+    main: accentOrange,
   },
 };
 /* More yellow tint values used from here: 

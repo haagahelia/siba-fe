@@ -162,7 +162,9 @@ export default function ProgramResult(props) {
               ? theme.palette.progressBarRed.main
               : theme.palette.progressBarYellow.main;
           const textColor =
-            progress === 0 ? theme.palette.primary : theme.palette.primary.dark;
+            progress === 0
+              ? theme.palette.progressBarTextZero.main
+              : theme.palette.progressBarTextNonZero.main;
 
           return (
             <React.Fragment key={prog.id}>
@@ -177,7 +179,7 @@ export default function ProgramResult(props) {
               </Grid2>
               <Grid2 xs={3} key={`${prog.id}-c`}>
                 <ProgressBar
-                  baseBgColor={"#272121"}
+                  baseBgColor={theme.palette.progressBarBackground.main}
                   labelAlignment={"left"}
                   labelColor={textColor}
                   bgColor={progressColor}

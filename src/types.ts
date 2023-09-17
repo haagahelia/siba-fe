@@ -1,3 +1,43 @@
+import { Color } from "@mui/material";
+
+export interface PaletteContract {
+  name: string;
+  common: any;
+  primary: any;
+  secondary: any;
+  error: any;
+  warning: any;
+  info: any;
+  success: any;
+  edit: any;
+  contrastThreshold: number;
+  tonalOffset: number;
+  text: any;
+  divider: string;
+  background: any;
+  snackbarBackground: any;
+  action: any;
+  red: any;
+  backgroundDarker: any;
+  fontColorDefault: any;
+
+  progressBarBackground: any;
+  progressBarGreen: any;
+  progressBarYellow: any;
+  progressBarRed: any;
+  progressBarTextNonZero: any;
+  progressBarTextZero: any;
+
+  AllocRoom: any;
+
+  borderColor: any;
+  borderColorDark: any;
+  infoIcon: any;
+  buttonThemeToggle: any;
+  helperText: any;
+  activeLinkBackgroundColor: any;
+}
+
 export interface Response<T> {
   success: boolean;
   data: T[];

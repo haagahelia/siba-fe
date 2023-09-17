@@ -1,23 +1,6 @@
 import { createTheme } from "@mui/material";
-import { yellow } from "@mui/material/colors";
-// import { green, lightBlue } from "@mui/material/colors";
 
-// First a place for defining different kinds of colors
-// const light = "#F6E9E9";
-// const orange = "#E16428";
-// const buttonOrange = "#E16428"; // Halloween Orange
-const buttonGreen = "#54B435"; // Apple green, currently only used for the theme changer button
-// const buttonRed = "#FF1E00"; // Reset button Ruby red
-// Then defining three palettes so that in the normal palette
-// no new colors are defined. Red and yellow palettes though are
-// used with ad-hoc "#AABBCC" kind of RGB hexadecimal color definitions
-/* More red tint values used from here: 
- "#FF2222" Torch Red, "#FF9AD5" Lavender Rose, "#AC3939" Dull Red
-*/
-
-// The swapping fast what palette will be in use right now:
-// const currentPalette = lightPalette;
-// Options are       = normalPalette, redPalette, yellowPalette, lightPalette
+// Palettes are: darkPalette, lightPalette, redPalette (for testing), yellowPalette (for testing),
 
 export const createAppTheme = (currentPalette) =>
   createTheme({
@@ -92,7 +75,7 @@ export const createAppTheme = (currentPalette) =>
               color: currentPalette.primary.main,
             },
             "& .MuiFormHelperText-root": {
-              color: "red",
+              color: currentPalette.helperText,
             },
             "& .MuiOutlinedInput-root": {
               color: currentPalette.fontColorDefault.default,
@@ -202,6 +185,7 @@ export const createAppTheme = (currentPalette) =>
               "& a.nav-links.active": {
                 color: currentPalette.primary.contrastText,
                 fontWeight: 900,
+                backgroundColor: currentPalette.activeLinkBackgroundColor.main, //dark orange hex code
               },
             },
           },
@@ -262,7 +246,7 @@ export const createAppTheme = (currentPalette) =>
           height: 15,
           backgroundColor: currentPalette.AllocRoom.studio.color,
           border: "3px solid",
-          borderColor: "black",
+          borderColor: currentPalette.borderColorDark.main,
           marginLeft: 60,
         },
         luentoluokkaindex: {
@@ -270,7 +254,7 @@ export const createAppTheme = (currentPalette) =>
           height: 15,
           backgroundColor: currentPalette.AllocRoom.luentoluokka.color,
           border: "3px solid",
-          borderColor: "black",
+          borderColor: currentPalette.borderColorDark.main,
           marginLeft: 60,
         },
         esitystilaindex: {
@@ -278,7 +262,7 @@ export const createAppTheme = (currentPalette) =>
           height: 15,
           backgroundColor: currentPalette.AllocRoom.esitystila.color,
           border: "3px solid",
-          borderColor: "black",
+          borderColor: currentPalette.borderColorDark.main,
           marginLeft: 60,
         },
         musiikkiluokkaindex: {
@@ -286,7 +270,7 @@ export const createAppTheme = (currentPalette) =>
           height: 15,
           backgroundColor: currentPalette.AllocRoom.musiikkiluokka.color,
           border: "3px solid",
-          borderColor: "black",
+          borderColor: currentPalette.borderColorDark.main,
           marginLeft: 60,
         },
       },
@@ -299,7 +283,7 @@ export const createAppTheme = (currentPalette) =>
               bottom: 50,
               right: 10,
               zIndex: 1000,
-              backgroundColor: buttonGreen,
+              backgroundColor: currentPalette.buttonThemeToggleBackgroundColor,
               color: currentPalette.fontColorDefault.default,
             },
           },
@@ -334,7 +318,7 @@ export const createAppTheme = (currentPalette) =>
             justifyContent: "center",
             button: {
               color: currentPalette.fontColorDefault.default,
-              borderColor: yellow,
+              borderColor: currentPalette.borderColor.main, // was "yellow"
             },
           },
         },
@@ -361,7 +345,7 @@ export const createAppTheme = (currentPalette) =>
           {
             props: { variant: "sibaNavLink" },
             style: {
-              color: currentPalette.fontColorDefault.default, // "#0000FF",   // was: #ffffff
+              color: currentPalette.fontColorDefault.default,
               textDecoration: "none",
               fontFamily: "Roboto, Helvetica, Aria, sans-serif",
               fontWeight: 700,

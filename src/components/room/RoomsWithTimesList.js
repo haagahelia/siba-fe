@@ -27,8 +27,15 @@ const RoomsWithTimesList = ({ rooms }) => {
       {rooms.map((room) => {
         const progress = (room.allocatedHours / room.requiredHours) * 100;
         const progressColor =
-          progress > 100 ? "#FF1700" : progress < 80 ? "#FFE400" : "#06FF00";
-        const textColor = progress === 0 ? "white" : "black";
+          progress > 100
+            ? theme.palette.progressBarRed.main
+            : progress < 80
+            ? theme.palette.progressBarYellow.main
+            : theme.palette.progressBarGreen.main;
+        const progressBarTextColor =
+          progress === 0
+            ? theme.palette.progressBarTextZero.main
+            : theme.palette.progressBarTextNonZero.main;
 
         return (
           <React.Fragment key={room.id}>
@@ -49,8 +56,8 @@ const RoomsWithTimesList = ({ rooms }) => {
             <Grid2 xs={3} key={`${room.id}-b`}>
               <ProgressBar
                 labelAlignment={"left"}
-                baseBgColor={"#272121"}
-                labelColor={textColor}
+                baseBgColor={theme.palette.progressBarBackground.main}
+                labelColor={progressBarTextColor}
                 bgColor={progressColor}
                 padding={"3px"}
                 completed={Math.round(progress)}
