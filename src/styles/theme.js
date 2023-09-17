@@ -202,6 +202,7 @@ export const createAppTheme = (currentPalette) =>
               "& a.nav-links.active": {
                 color: currentPalette.primary.contrastText,
                 fontWeight: 900,
+                backgroundColor: "#FF8C00", //dark orange hex code
               },
             },
           },
