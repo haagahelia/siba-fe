@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { TextField, IconButton } from "@mui/material";
+import { TextField, InputAdornment, IconButton } from "@mui/material";
 import { Clear } from "@mui/icons-material";
 
 export default function SubjectFiltering({
@@ -10,13 +10,11 @@ export default function SubjectFiltering({
   const [searched, setSearched] = useState("");
 
   const requestSearch = (e) => {
-    setSearched(e.target.value);
-    const filteredSubjects = allSubjectsList.filter(subject);
-    function subject(subject) {
-      return subject.subjectName
-        .toLowerCase()
-        .includes(e.target.value.toLowerCase());
-    }
+    const searchText = e.target.value;
+    setSearched(searchText);
+    const filteredSubjects = allSubjectsList.filter((subject) =>
+      subject.subjectName.toLowerCase().includes(searchText.toLowerCase()),
+    );
     setPaginateSubjects(filteredSubjects);
   };
 
@@ -26,12 +24,11 @@ export default function SubjectFiltering({
         allSubjectsList.slice(pagination.from, pagination.to),
       );
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [searched]);
+  }, [searched, setPaginateSubjects, allSubjectsList, pagination]);
 
   const cancelSearch = () => {
     setSearched("");
-    requestSearch(searched);
+    setPaginateSubjects(allSubjectsList.slice(pagination.from, pagination.to));
   };
 
   return (
@@ -46,12 +43,14 @@ export default function SubjectFiltering({
       onChange={(e) => requestSearch(e)}
       InputProps={{
         endAdornment: (
-          <IconButton
-            onClick={cancelSearch}
-            sx={{ visibility: searched ? "visible" : "hidden" }}
-          >
-            <Clear sx={{ color: "#ffffff " }} />
-          </IconButton>
+          <InputAdornment position="end">
+            <IconButton
+              onClick={cancelSearch}
+              sx={{ visibility: searched ? "visible" : "hidden" }}
+            >
+              <Clear sx={{ color: "#ffffff" }} />
+            </IconButton>
+          </InputAdornment>
         ),
       }}
     />

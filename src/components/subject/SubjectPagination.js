@@ -1,5 +1,5 @@
 import { Pagination } from "@mui/material";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 const pageSize = 15;
 
@@ -7,29 +7,23 @@ export default function SubjectPagination({
   pagination,
   setPagination,
   allSubjectsList,
-  // paginateSubjects,??
   setPaginateSubjects,
 }) {
   const count = Math.ceil(allSubjectsList.length / pageSize);
-  const [initialRender, setInitialRender] = useState(true);
 
   useEffect(() => {
-    if (initialRender) {
-      setInitialRender(false);
-    } else {
-      const slicedSubjects = allSubjectsList.slice(
-        pagination.from,
-        pagination.to,
-      );
-      setPaginateSubjects(slicedSubjects);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [pagination]);
+    if (!pagination.from) return;
+    const slicedSubjects = allSubjectsList.slice(
+      pagination.from,
+      pagination.to,
+    );
+    setPaginateSubjects(slicedSubjects);
+  }, [pagination, allSubjectsList, setPaginateSubjects]);
 
   const handleChange = (e, p) => {
     const from = (p - 1) * pageSize;
     const to = (p - 1) * pageSize + pageSize;
-    setPagination({ ...pagination, from: from, to: to });
+    setPagination({ from, to });
   };
 
   return (

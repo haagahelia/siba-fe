@@ -1,5 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { CardHeader, Card, CardContent } from "@mui/material";
+import {
+  Card,
+  CardHeader,
+  CardContent,
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+} from "@mui/material";
 import AlertBox from "../common/AlertBox";
 import { useFormik } from "formik";
 import ConfirmationDialog from "../common/ConfirmationDialog";
@@ -14,10 +22,6 @@ import {
   getFunctionName,
 } from "../../ajax/ajaxRequestErrorHandler";
 import Logger from "../../logger/logger";
-
-//const baseUrl = process.env.REACT_APP_BE_SERVER_BASE_URL;
-//import {BASEURL} from "../config/consts.js";
-//const baseUrl = BASEURL;
 
 export default function AddSubjectContainer(props) {
   const { getAllSubjects, allSubjectsList } = props;
@@ -38,7 +42,7 @@ export default function AddSubjectContainer(props) {
     title: "this is dialog",
     content: "Something here",
   });
-  // Here the initialvalues ​​of the form are stored in the state
+  // Here the initial values of the form are stored in the state
   const [initialSubject, setInitialSubject] = useState({
     name: "",
     groupSize: 0,
@@ -73,7 +77,6 @@ export default function AddSubjectContainer(props) {
         content: `By clicking continue, ${values.name} will be added to the teaching list`,
       });
       setDialogOpen(true);
-
       return;
     },
   });
@@ -91,11 +94,11 @@ export default function AddSubjectContainer(props) {
         setAlertOpen,
       );
     } else {
-      //console.log(data);
       setProgramSelectList(data);
       Logger.debug("getProgramsForSelect: successfully fetched programs.");
     }
   };
+
   useEffect(() => {
     getProgramsForSelect();
   }, []);
@@ -119,6 +122,7 @@ export default function AddSubjectContainer(props) {
       setSpaceTypeSelectList(data);
     }
   };
+
   useEffect(() => {
     getSpaceTypesForSelect();
   }, []);
@@ -155,8 +159,9 @@ export default function AddSubjectContainer(props) {
     resetForm();
     getAllSubjects();
   };
+
   // Here is a list of lessons
-  // When you choose a lesson, the information goes to the form's initialvalues
+  // When you choose a lesson, the information goes to the form's initial values
   const handleChange = (e) => {
     let selected = e.target.value;
     setInitialSubject({
@@ -188,6 +193,24 @@ export default function AddSubjectContainer(props) {
       <Card variant="outlined">
         <CardContent>
           <CardHeader title="Add lesson" />
+          <FormControl fullWidth variant="outlined">
+            <InputLabel htmlFor="program-select">Select Program</InputLabel>
+            <Select
+              id="program-select"
+              label="Select Program"
+              value={formik.values.programId}
+              onChange={(e) => {
+                formik.setFieldValue("programId", e.target.value);
+                handleChange(e);
+              }}
+            >
+              {programSelectList.map((program) => (
+                <MenuItem key={program.id} value={program.id}>
+                  {program.name}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
           <AddSubjectForm
             handleChange={handleChange}
             programSelectList={programSelectList}

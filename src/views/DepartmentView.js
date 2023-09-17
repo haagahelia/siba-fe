@@ -82,7 +82,7 @@ export default function DepartmentView() {
                       <Grid item md={3} xs={3}>
                         <Typography
                           variant="caption"
-                          style={{ fontWeight: "bold" }}
+                          sx={{ fontWeight: "bold" }}
                         >
                           Id:
                         </Typography>
@@ -96,7 +96,7 @@ export default function DepartmentView() {
                       <Grid item md={3} xs={3}>
                         <Typography
                           variant="caption"
-                          style={{ fontWeight: "bold" }}
+                          sx={{ fontWeight: "bold" }}
                         >
                           Name:
                         </Typography>
@@ -110,7 +110,7 @@ export default function DepartmentView() {
                       <Grid item md={1} xs={1}>
                         <Typography
                           variant="caption"
-                          style={{ fontWeight: "bold" }}
+                          sx={{ fontWeight: "bold" }}
                         >
                           Description:
                         </Typography>
