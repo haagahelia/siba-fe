@@ -82,10 +82,7 @@ export default function SubjectView() {
             allSubjectsList={allSubjectsList}
           />
         ) : (
-          <Typography variant="subtitle1">
-            <br />
-            <br />
-            <br />
+          <Typography variant="subtitle1" mt={3}>
             "Not showing add subject to your role"
           </Typography>
         )}
