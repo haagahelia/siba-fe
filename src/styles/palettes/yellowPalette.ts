@@ -81,10 +81,7 @@ export const yellowPalette: PaletteContract = {
     dark: "#1AA251",
     contrastText: butteryWhite,
   },
-  edit: {
-    main: saffronMango,
-    contrastText: butteryWhite,
-  },
+  grey: {},
   contrastThreshold: 3,
   tonalOffset: 0.2,
   text: {
@@ -97,9 +94,7 @@ export const yellowPalette: PaletteContract = {
     paper: sahara,
     default: canary,
   },
-  snackbarBackground: {
-    default: paleCanary,
-  },
+
   action: {
     active: "rgba(0, 0, 0, 0.54)",
     hover: "rgba(0, 0, 0, 0.04)",
@@ -113,31 +108,11 @@ export const yellowPalette: PaletteContract = {
     focusOpacity: 0.12,
     activatedOpacity: 0.12,
   },
-  infoIcon: {
-    main: paleLime,
-  },
 
   // own colors - YELLOW
-  red: {
-    main: saffronMango,
+  activeLinkBackgroundColor: {
+    main: accentOrange,
   },
-
-  backgroundDarker: { default: eggWhite },
-  fontColorDefault: { default: sahara },
-
-  progressBarBackground: {
-    main: darkestGrey,
-  },
-  progressBarGreen: { main: progressBarGreen },
-  progressBarYellow: { main: progressBarYellow },
-  progressBarRed: { main: progressBarRed },
-  progressBarTextNonZero: {
-    main: black,
-  },
-  progressBarTextZero: {
-    main: white,
-  },
-
   AllocRoom: {
     studio: {
       color: paleLime,
@@ -152,7 +127,7 @@ export const yellowPalette: PaletteContract = {
       color: buddhaGold,
     },
   },
-
+  backgroundDarker: { default: eggWhite },
   borderColor: {
     main: mediumBrown,
     cardBorder: lightBlue,
@@ -163,11 +138,36 @@ export const yellowPalette: PaletteContract = {
   buttonThemeToggle: {
     main: buttonThemeToggleBackgroundColor,
   },
+  edit: {
+    main: saffronMango,
+    contrastText: butteryWhite,
+  },
+  fontColorDefault: { default: sahara },
   helperText: {
     main: indicatorRed,
   },
-  activeLinkBackgroundColor: {
-    main: accentOrange,
+  infoIcon: {
+    main: paleLime,
+  },
+
+  progressBarBackground: {
+    main: darkestGrey,
+  },
+  progressBarGreen: { main: progressBarGreen },
+  progressBarYellow: { main: progressBarYellow },
+  progressBarRed: { main: progressBarRed },
+  progressBarTextNonZero: {
+    main: black,
+  },
+  progressBarTextZero: {
+    main: white,
+  },
+
+  red: {
+    main: saffronMango,
+  },
+  snackbarBackground: {
+    default: paleCanary,
   },
 };
 /* More yellow tint values used from here: 

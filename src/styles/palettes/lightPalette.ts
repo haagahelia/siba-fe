@@ -52,10 +52,7 @@ export const lightPalette: PaletteContract = {
     main: indicatorGreen,
     contrastText: white,
   },
-  edit: {
-    main: indicatorOrange,
-    contrastText: white,
-  },
+  grey: {},
   contrastThreshold: 3,
   tonalOffset: 0.2,
   text: {
@@ -63,14 +60,10 @@ export const lightPalette: PaletteContract = {
     secondary: darkGrey,
     disabled: "#ffffff",
   },
-
   divider: black,
   background: {
     paper: lightGrey, // Changed paper background to lightGrey
     default: lightGrey,
-  },
-  snackbarBackground: {
-    default: accentYellow,
   },
   action: {
     active: "rgba(0, 0, 0, 0.54)",
@@ -85,30 +78,11 @@ export const lightPalette: PaletteContract = {
     focusOpacity: 0.12,
     activatedOpacity: 0.12,
   },
-  infoIcon: {
-    main: accentYellow,
-  },
 
   // own colors - LIGHT
-  red: {
-    main: indicatorRed,
-    contrastText: white,
+  activeLinkBackgroundColor: {
+    main: accentOrange,
   },
-  backgroundDarker: { default: white }, // Changed to use darkGrey
-  fontColorDefault: { default: black },
-  progressBarBackground: {
-    main: darkestGrey,
-  },
-  progressBarGreen: { main: indicatorGreen },
-  progressBarYellow: { main: indicatorYellowDark },
-  progressBarRed: { main: indicatorRed },
-  progressBarTextNonZero: {
-    main: black,
-  },
-  progressBarTextZero: {
-    main: white,
-  },
-
   AllocRoom: {
     studio: {
       color: indicatorRed,
@@ -123,7 +97,7 @@ export const lightPalette: PaletteContract = {
       color: indicatorYellowDark,
     },
   },
-
+  backgroundDarker: { default: white }, // Changed to use darkGrey
   borderColor: {
     main: lightGrey,
     cardBorder: black,
@@ -134,11 +108,37 @@ export const lightPalette: PaletteContract = {
   buttonThemeToggle: {
     main: buttonThemeToggleBackgroundColor,
   },
+  edit: {
+    main: indicatorOrange,
+    contrastText: white,
+  },
+  fontColorDefault: { default: black },
   helperText: {
     main: indicatorRed,
   },
-  activeLinkBackgroundColor: {
-    main: accentOrange,
+  infoIcon: {
+    main: accentYellow,
+  },
+
+  progressBarBackground: {
+    main: darkestGrey,
+  },
+  progressBarGreen: { main: indicatorGreen },
+  progressBarYellow: { main: indicatorYellowDark },
+  progressBarRed: { main: indicatorRed },
+  progressBarTextNonZero: {
+    main: black,
+  },
+  progressBarTextZero: {
+    main: white,
+  },
+
+  red: {
+    main: indicatorRed,
+    contrastText: white,
+  },
+  snackbarBackground: {
+    default: accentYellow,
   },
 };
 

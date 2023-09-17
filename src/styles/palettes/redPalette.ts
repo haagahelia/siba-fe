@@ -83,10 +83,8 @@ export const redPalette: PaletteContract = {
     dark: "#1AA251",
     contrastText: lightPink,
   },
-  edit: {
-    main: bitterSweet,
-    contrastText: lightPink,
-  },
+  grey: {},
+
   contrastThreshold: 3,
   tonalOffset: 0.2,
   text: {
@@ -100,9 +98,7 @@ export const redPalette: PaletteContract = {
     paper: lightPink,
     default: tomatoRed,
   },
-  snackbarBackground: {
-    default: brightRed,
-  },
+
   action: {
     active: "rgba(0, 0, 0, 0.54)",
     hover: "rgba(0, 0, 0, 0.04)",
@@ -116,31 +112,11 @@ export const redPalette: PaletteContract = {
     focusOpacity: 0.12,
     activatedOpacity: 0.12,
   },
-  infoIcon: {
-    main: blackRed,
-  },
 
   //own colors - RED
-  red: {
-    main: cherryBlossom,
-    contrastText: blackRed,
+  activeLinkBackgroundColor: {
+    main: accentOrange,
   },
-  backgroundDarker: { default: softPink },
-  fontColorDefault: { default: lightPink },
-
-  progressBarBackground: {
-    main: darkestGrey,
-  },
-  progressBarGreen: { main: progressBarGreen },
-  progressBarYellow: { main: progressBarYellow },
-  progressBarRed: { main: progressBarRed },
-  progressBarTextNonZero: {
-    main: black,
-  },
-  progressBarTextZero: {
-    main: white,
-  },
-
   AllocRoom: {
     studio: {
       color: salmonPink,
@@ -155,7 +131,7 @@ export const redPalette: PaletteContract = {
       color: brightRed,
     },
   },
-
+  backgroundDarker: { default: softPink },
   borderColor: {
     main: mediumBrown,
     cardBorder: lightBlue2,
@@ -166,11 +142,37 @@ export const redPalette: PaletteContract = {
   buttonThemeToggle: {
     main: buttonThemeToggleBackgroundColor,
   },
+  edit: {
+    main: bitterSweet,
+    contrastText: lightPink,
+  },
+  fontColorDefault: { default: lightPink },
   helperText: {
     main: indicatorRed,
   },
-  activeLinkBackgroundColor: {
-    main: accentOrange,
+  infoIcon: {
+    main: blackRed,
+  },
+
+  progressBarBackground: {
+    main: darkestGrey,
+  },
+  progressBarGreen: { main: progressBarGreen },
+  progressBarYellow: { main: progressBarYellow },
+  progressBarRed: { main: progressBarRed },
+  progressBarTextNonZero: {
+    main: black,
+  },
+  progressBarTextZero: {
+    main: white,
+  },
+
+  red: {
+    main: cherryBlossom,
+    contrastText: blackRed,
+  },
+  snackbarBackground: {
+    default: brightRed,
   },
 };
 

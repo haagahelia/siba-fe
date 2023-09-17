@@ -1,5 +1,14 @@
 import { Color } from "@mui/material";
 
+export interface PaletteColorComponent {
+  main?: string;
+  light?: string;
+  dark?: string;
+  contrastText?: string;
+  paper?: string;
+  default?: string;
+}
+
 export interface PaletteContract {
   name: string;
   common: any;
@@ -9,17 +18,25 @@ export interface PaletteContract {
   warning: any;
   info: any;
   success: any;
-  edit: any;
+  grey: any;
   contrastThreshold: number;
   tonalOffset: number;
   text: any;
   divider: string;
   background: any;
-  snackbarBackground: any;
   action: any;
-  red: any;
+
+  // own colors
+  activeLinkBackgroundColor: any;
+  AllocRoom: any;
   backgroundDarker: any;
+  borderColor: any;
+  borderColorDark: any;
+  buttonThemeToggle: any;
+  edit: any;
   fontColorDefault: any;
+  helperText: any;
+  infoIcon: any;
 
   progressBarBackground: any;
   progressBarGreen: any;
@@ -28,14 +45,8 @@ export interface PaletteContract {
   progressBarTextNonZero: any;
   progressBarTextZero: any;
 
-  AllocRoom: any;
-
-  borderColor: any;
-  borderColorDark: any;
-  infoIcon: any;
-  buttonThemeToggle: any;
-  helperText: any;
-  activeLinkBackgroundColor: any;
+  red: any;
+  snackbarBackground: any;
 }
 
 export interface Response<T> {

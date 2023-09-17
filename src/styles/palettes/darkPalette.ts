@@ -52,10 +52,7 @@ export const darkPalette: PaletteContract = {
     main: indicatorGreen,
     contrastText: white,
   },
-  edit: {
-    main: indicatorOrange,
-    contrastText: white,
-  },
+  grey: {},
   contrastThreshold: 3,
   tonalOffset: 0.2,
   text: {
@@ -63,14 +60,10 @@ export const darkPalette: PaletteContract = {
     secondary: darkGrey,
     disabled: white,
   },
-
   divider: lightGrey,
   background: {
     paper: mediumGrey,
     default: darkGrey,
-  },
-  snackbarBackground: {
-    default: accentYellow,
   },
   action: {
     active: "rgba(0, 0, 0, 0.54)",
@@ -85,21 +78,52 @@ export const darkPalette: PaletteContract = {
     focusOpacity: 0.12,
     activatedOpacity: 0.12,
   },
-  infoIcon: {
-    main: accentYellow,
-  },
 
   //own colors - DARK
-  red: {
-    main: indicatorRed,
-    contrastText: white,
+  activeLinkBackgroundColor: {
+    main: accentOrange,
+  },
+  AllocRoom: {
+    studio: {
+      color: indicatorRed,
+    },
+    luentoluokka: {
+      color: indicatorYellowLight,
+    },
+    esitystila: {
+      color: indicatorGreen,
+    },
+    musiikkiluokka: {
+      color: indicatorYellowLight,
+    },
   },
   backgroundDarker: {
     default: mediumGrey,
   },
+  borderColor: {
+    main: lightGrey,
+    cardBorder: white,
+  },
+  borderColorDark: {
+    main: black,
+  },
+  buttonThemeToggle: {
+    main: buttonThemeToggleBackgroundColor,
+  },
+  edit: {
+    main: indicatorOrange,
+    contrastText: white,
+  },
   fontColorDefault: {
     default: white,
   },
+  helperText: {
+    main: indicatorRed,
+  },
+  infoIcon: {
+    main: accentYellow,
+  },
+
   progressBarBackground: {
     main: darkestGrey,
   },
@@ -119,36 +143,12 @@ export const darkPalette: PaletteContract = {
     main: white,
   },
 
-  AllocRoom: {
-    studio: {
-      color: indicatorRed,
-    },
-    luentoluokka: {
-      color: indicatorYellowLight,
-    },
-    esitystila: {
-      color: indicatorGreen,
-    },
-    musiikkiluokka: {
-      color: indicatorYellowLight,
-    },
-  },
-
-  borderColor: {
-    main: lightGrey,
-    cardBorder: white,
-  },
-  borderColorDark: {
-    main: black,
-  },
-  buttonThemeToggle: {
-    main: buttonThemeToggleBackgroundColor,
-  },
-  helperText: {
+  red: {
     main: indicatorRed,
+    contrastText: white,
   },
-  activeLinkBackgroundColor: {
-    main: accentOrange,
+  snackbarBackground: {
+    default: accentYellow,
   },
 };
 
