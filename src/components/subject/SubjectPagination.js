@@ -1,5 +1,5 @@
 import { Pagination } from "@mui/material";
-import { useEffect } from "react"; // Removed unused import
+import { useEffect } from "react";
 
 const pageSize = 15;
 

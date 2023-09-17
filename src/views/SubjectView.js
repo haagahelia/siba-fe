@@ -45,7 +45,7 @@ export default function SubjectView() {
     if (httpStatus !== 200) {
       ajaxRequestErrorHandler(
         httpStatus,
-        getFunctionName(2), // View name, 2 = parent of the caller function
+        getFunctionName(2),
         setAlertOptions,
         setAlertOpen,
       );
@@ -75,7 +75,7 @@ export default function SubjectView() {
         alertOptions={alertOptions}
         setAlertOpen={setAlertOpen}
       />
-      <Container maxWidth="100%">
+      <Container maxWidth="lg">
         {appContext.roles.admin ? (
           <AddSubjectContainer
             getAllSubjects={getAllSubjects}

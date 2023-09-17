@@ -94,7 +94,6 @@ export default function AddSubjectContainer(props) {
         setAlertOpen,
       );
     } else {
-      //console.log(data);
       setProgramSelectList(data);
       Logger.debug("getProgramsForSelect: successfully fetched programs.");
     }
