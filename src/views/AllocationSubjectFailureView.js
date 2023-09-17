@@ -180,11 +180,11 @@ export default function AllocationSubjectFailureView() {
         setAlertOpen={setAlertOpen}
       />
 
-      <Typography sx={{ color: "#F6E9E9", margin: 20 }}>
+      <Typography style={{ color: "#F6E9E9", margin: 20 }}>
         Unallocated lessons (Click each to see reasons for failing to allocate)
       </Typography>
 
-      <div sx={{ width: "70%", backgroundColor: "#ff1744", margin: "auto" }}>
+      <div style={{ width: "70%", backgroundColor: "#ff1744", margin: "auto" }}>
         <TableContainer component={Paper}>
           <Table sx={{ minWidth: 650 }} aria-label="simple table">
             <TableHead>
@@ -277,7 +277,7 @@ export default function AllocationSubjectFailureView() {
         <DialogActions>
           <Button
             onClick={handleClose}
-            sx={{ backgroundColor: "#ff6d00", cursor: "pointer" }}
+            style={{ backgroundColor: "#ff6d00", cursor: "pointer" }}
           >
             Exit
           </Button>
