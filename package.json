@@ -26,12 +26,13 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
+    "clean": "rimraf dist",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "precommit": "sh ./pre-commit",
-     "lint": "eslint src/"
+    "lint": "eslint src/"
   },
   "pre-commit": [
     "precommit"
@@ -59,6 +60,7 @@
     "@types/react-dom": "^18.0.10",
     "dotenv": "^16.0.1",
     "pre-commit": "^1.2.2",
+    "rimraf": "^5.0.1",
     "rome": "^11.0.0",
     "typescript": "^4.9.4"
   }

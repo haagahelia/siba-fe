@@ -1,6 +1,22 @@
 import { createTheme } from "@mui/material";
+import { PaletteContract } from "../../types";
+import {
+  //accentYellow,
+  accentOrange,
+  white,
+  black,
+  buttonThemeToggleBackgroundColor,
+  darkestGrey,
+  //darkGrey,
+  //mediumGrey,
+  //lightGrey,
+  //indicatorGreen,
+  indicatorRed,
+  //indicatorOrange,
+  //indicatorYellowDark,
+} from "./commonColors";
 
-//redPalette
+// Color definitions for YELLOW TEST PALETTE
 const tomatoRed = "#FF2400";
 const softPink = "#F2AEB8";
 const lightPink = "#FAD6D1";
@@ -24,7 +40,7 @@ const someRed1 = "#ba68c8";
 // color definitions and namings only above, below only using them!
 // # character should not appear below this line
 
-export const redPalette = {
+export const redPalette: PaletteContract = {
   name: "redPalette",
   common: {
     black: blackRed,
@@ -78,9 +94,7 @@ export const redPalette = {
     secondary: "#3E5060",
     disabled: lightPink,
   },
-  infoIcon: {
-    main: blackRed,
-  },
+
   divider: bitterSweet,
   background: {
     paper: lightPink,
@@ -89,6 +103,44 @@ export const redPalette = {
   snackbarBackground: {
     default: brightRed,
   },
+  action: {
+    active: "rgba(0, 0, 0, 0.54)",
+    hover: "rgba(0, 0, 0, 0.04)",
+    hoverOpacity: 0.25,
+    selected: "rgba(0, 0, 0, 0.08)",
+    selectedOpacity: 0.15,
+    disabled: "rgba(0, 0, 0, 0.26)",
+    disabledBackground: "rgba(0, 0, 0, 0.12)",
+    disabledOpacity: 0.38,
+    focus: "rgba(0, 0, 0, 0.12)",
+    focusOpacity: 0.12,
+    activatedOpacity: 0.12,
+  },
+  infoIcon: {
+    main: blackRed,
+  },
+
+  //own colors - RED
+  red: {
+    main: cherryBlossom,
+    contrastText: blackRed,
+  },
+  backgroundDarker: { default: softPink },
+  fontColorDefault: { default: lightPink },
+
+  progressBarBackground: {
+    main: darkestGrey,
+  },
+  progressBarGreen: { main: progressBarGreen },
+  progressBarYellow: { main: progressBarYellow },
+  progressBarRed: { main: progressBarRed },
+  progressBarTextNonZero: {
+    main: black,
+  },
+  progressBarTextZero: {
+    main: white,
+  },
+
   AllocRoom: {
     studio: {
       color: salmonPink,
@@ -103,19 +155,22 @@ export const redPalette = {
       color: brightRed,
     },
   },
-  //own colors
-  red: {
-    main: cherryBlossom,
-    contrastText: blackRed,
-  },
-  backgroundDarker: { default: softPink },
-  fontColorDefault: { default: lightPink },
-  progressBarGreen: { main: progressBarGreen },
-  progressBarYellow: { main: progressBarYellow },
-  progressBarRed: { main: progressBarRed },
+
   borderColor: {
     main: mediumBrown,
     cardBorder: lightBlue2,
+  },
+  borderColorDark: {
+    main: black,
+  },
+  buttonThemeToggle: {
+    main: buttonThemeToggleBackgroundColor,
+  },
+  helperText: {
+    main: indicatorRed,
+  },
+  activeLinkBackgroundColor: {
+    main: accentOrange,
   },
 };
 

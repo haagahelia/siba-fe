@@ -5,7 +5,7 @@ import {
   Routes,
   Route,
 } from "react-router-dom";
-// import logo from "../styles/SIBA_LOGO_WHITE.png";
+
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";

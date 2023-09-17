@@ -1,34 +1,35 @@
 import { createTheme } from "@mui/material";
+import { PaletteContract } from "../../types";
+import {
+  accentYellow,
+  accentOrange,
+  white,
+  black,
+  buttonThemeToggleBackgroundColor,
+  darkestGrey,
+  darkGrey,
+  mediumGrey,
+  lightGrey,
+  indicatorGreen,
+  indicatorRed,
+  indicatorOrange,
+  //indicatorYellowDark,
+  indicatorYellowLight,
+} from "./commonColors";
 
-// Common
-const black = "#000000";
-const white = "#ffffff";
-
-// Primary
-const darkGrey = "#353535";
-const mediumGrey = "#555555";
-const lightGrey = "#D9D9D9";
-
-// Accent
-const yellow = "#F4BF00";
-
-// Status indicators
-const red = "#D62E3D";
-const lightYellow = "#F6D251";
-const green = "#48B058";
-const orange = "#FDA826";
+// Color definitions for DARK
 
 // color definitions and namings only above, below only using them!
 // # character should not appear below this line
 
-export const darkPalette = {
+export const darkPalette: PaletteContract = {
   name: "dark",
   common: {
     black,
     white,
   },
   primary: {
-    main: yellow,
+    main: accentYellow,
     contrastText: darkGrey,
   },
   secondary: {
@@ -36,23 +37,23 @@ export const darkPalette = {
     contrastText: darkGrey,
   },
   error: {
-    main: red,
+    main: indicatorRed,
     contrastText: white,
   },
   warning: {
-    main: red,
+    main: indicatorRed,
     contrastText: white,
   },
   info: {
-    main: orange,
+    main: indicatorOrange,
     contrastText: darkGrey,
   },
   success: {
-    main: green,
+    main: indicatorGreen,
     contrastText: white,
   },
   edit: {
-    main: orange,
+    main: indicatorOrange,
     contrastText: white,
   },
   contrastThreshold: 3,
@@ -62,27 +63,14 @@ export const darkPalette = {
     secondary: darkGrey,
     disabled: white,
   },
-  AllocRoom: {
-    studio: {
-      color: red,
-    },
-    luentoluokka: {
-      color: lightYellow,
-    },
-    esitystila: {
-      color: green,
-    },
-    musiikkiluokka: {
-      color: lightYellow,
-    },
-  },
+
   divider: lightGrey,
   background: {
     paper: mediumGrey,
     default: darkGrey,
   },
   snackbarBackground: {
-    default: yellow,
+    default: accentYellow,
   },
   action: {
     active: "rgba(0, 0, 0, 0.54)",
@@ -97,8 +85,13 @@ export const darkPalette = {
     focusOpacity: 0.12,
     activatedOpacity: 0.12,
   },
+  infoIcon: {
+    main: accentYellow,
+  },
+
+  //own colors - DARK
   red: {
-    main: red,
+    main: indicatorRed,
     contrastText: white,
   },
   backgroundDarker: {
@@ -107,21 +100,55 @@ export const darkPalette = {
   fontColorDefault: {
     default: white,
   },
+  progressBarBackground: {
+    main: darkestGrey,
+  },
   progressBarGreen: {
-    main: green,
+    main: indicatorGreen,
   },
   progressBarYellow: {
-    main: lightYellow,
+    main: indicatorYellowLight,
   },
   progressBarRed: {
-    main: red,
+    main: indicatorRed,
   },
+  progressBarTextNonZero: {
+    main: black,
+  },
+  progressBarTextZero: {
+    main: white,
+  },
+
+  AllocRoom: {
+    studio: {
+      color: indicatorRed,
+    },
+    luentoluokka: {
+      color: indicatorYellowLight,
+    },
+    esitystila: {
+      color: indicatorGreen,
+    },
+    musiikkiluokka: {
+      color: indicatorYellowLight,
+    },
+  },
+
   borderColor: {
     main: lightGrey,
     cardBorder: white,
   },
-  infoIcon: {
-    main: yellow,
+  borderColorDark: {
+    main: black,
+  },
+  buttonThemeToggle: {
+    main: buttonThemeToggleBackgroundColor,
+  },
+  helperText: {
+    main: indicatorRed,
+  },
+  activeLinkBackgroundColor: {
+    main: accentOrange,
   },
 };
 
