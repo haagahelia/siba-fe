@@ -45,7 +45,7 @@ function NavBar() {
       isLogin: false,
     },
     {
-      name: "Teachings",
+      name: "Lessons",
       href: "/",
       forRoles: ["admin", "planner", "statist"],
       showForCurrentUser: false,
