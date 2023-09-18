@@ -1,19 +1,11 @@
 import { createTheme } from "@mui/material";
 import { PaletteContract } from "../../types";
 import {
-  //accentYellow,
   accentOrange,
   white,
   black,
-  buttonThemeToggleBackgroundColor,
   darkestGrey,
-  //darkGrey,
-  //mediumGrey,
-  //lightGrey,
-  //indicatorGreen,
   indicatorRed,
-  //indicatorOrange,
-  //indicatorYellowDark,
 } from "./commonColors";
 
 // Color definitions for YELLOW TEST PALETTE
@@ -140,7 +132,7 @@ export const redPalette: PaletteContract = {
     main: black,
   },
   buttonThemeToggle: {
-    main: buttonThemeToggleBackgroundColor,
+    main: indicatorRed,
   },
   edit: {
     main: bitterSweet,

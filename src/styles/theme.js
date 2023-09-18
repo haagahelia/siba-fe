@@ -115,7 +115,7 @@ export const createAppTheme = (currentPalette) =>
             },
           },
           {
-            props: { variant: "sibaAppBarVertival" },
+            props: { variant: "sibaAppBarVertical" },
             style: {
               display: "flex",
               flexDirection: "column",
@@ -130,7 +130,7 @@ export const createAppTheme = (currentPalette) =>
               display: "flex",
               flexDirection: "column",
               flexWrap: "nowrap",
-              alignItems: "center",
+              alignItems: "flex-start",
               textAlign: "center",
               fontSize: "18px",
               position: "sticky",
@@ -157,7 +157,7 @@ export const createAppTheme = (currentPalette) =>
               display: "contents",
               // color: currentPalette.fontColorDefault.main,
               "& a": {
-                padding: "0.5rem 1rem",
+                padding: "1rem 1.08rem",
                 paddingBottom: "2px",
                 borderBottom: "3px solid transparent",
                 marginRight: "0.2rem",
@@ -184,7 +184,10 @@ export const createAppTheme = (currentPalette) =>
               "& a.nav-links.active": {
                 color: currentPalette.primary.contrastText,
                 fontWeight: 800,
-                backgroundColor: currentPalette.activeLinkBackgroundColor.main, //dark orange hex code
+                backgroundColor: currentPalette.background.default,
+                color: currentPalette.text.primary,
+                textDecorationThickness: "3px",
+                width: "100%",
               },
             },
           },
@@ -282,7 +285,7 @@ export const createAppTheme = (currentPalette) =>
               bottom: 50,
               right: 10,
               zIndex: 1000,
-              backgroundColor: currentPalette.buttonThemeToggleBackgroundColor,
+              backgroundColor: currentPalette.primary.main,
               color: currentPalette.fontColorDefault.default,
             },
           },

@@ -3,8 +3,6 @@
 export const accentYellow = "#F4BF00";
 export const accentOrange = "#FF8C00";
 
-export const buttonThemeToggleBackgroundColor = "#54B435"; // Apple green, currently only used for the theme changer button
-
 export const black = "#000000";
 export const white = "#ffffff";
 
