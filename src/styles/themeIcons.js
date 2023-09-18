@@ -5,7 +5,7 @@ export const SunIcon = () => (
     viewBox="0 0 24 24"
     strokeWidth={1.5}
     //you can change icon color here
-    stroke="yellow"
+    stroke="black"
     className="w-6 h-6"
   >
     <path
@@ -23,7 +23,7 @@ export const MoonIcon = () => (
     viewBox="0 0 24 24"
     strokeWidth={1.5}
     //you can change icon color here
-    stroke="yellow"
+    stroke="black"
     className="w-6 h-6"
   >
     <path

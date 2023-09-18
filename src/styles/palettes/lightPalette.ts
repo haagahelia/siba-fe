@@ -5,16 +5,13 @@ import {
   accentOrange,
   white,
   black,
-  buttonThemeToggleBackgroundColor,
   darkestGrey,
   darkGrey,
-  //mediumGrey,
   lightGrey,
   indicatorGreen,
   indicatorRed,
   indicatorOrange,
   indicatorYellowDark,
-  //indicatorYellowLight,
 } from "./commonColors";
 
 // Color definitions for LIGHT
@@ -106,7 +103,7 @@ export const lightPalette: PaletteContract = {
     main: black,
   },
   buttonThemeToggle: {
-    main: buttonThemeToggleBackgroundColor,
+    main: accentYellow,
   },
   edit: {
     main: indicatorOrange,

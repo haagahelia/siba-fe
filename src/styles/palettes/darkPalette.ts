@@ -5,7 +5,6 @@ import {
   accentOrange,
   white,
   black,
-  buttonThemeToggleBackgroundColor,
   darkestGrey,
   darkGrey,
   mediumGrey,
@@ -13,7 +12,6 @@ import {
   indicatorGreen,
   indicatorRed,
   indicatorOrange,
-  //indicatorYellowDark,
   indicatorYellowLight,
 } from "./commonColors";
 
@@ -108,7 +106,7 @@ export const darkPalette: PaletteContract = {
     main: black,
   },
   buttonThemeToggle: {
-    main: buttonThemeToggleBackgroundColor,
+    main: accentYellow,
   },
   edit: {
     main: indicatorOrange,
