@@ -12,6 +12,8 @@ import AddBuildingForm from "./AddBuildingForm";
 import ImportBuilding from "./ImportBuildingContainer";
 
 export default function AddBuildingContainer(props) {
+  // State for checking if Add Building card is expanded
+  const [isCardExpanded, setIsCardExpanded] = useState(false);
   const { getAllBuildings } = props;
   const [alertOpen, setAlertOpen] = useState(false);
   const [alertOptions, setAlertOptions] = useState({
@@ -94,13 +96,20 @@ export default function AddBuildingContainer(props) {
       />
       <Card variant="outlined">
         <CardContent>
-          <CardHeader title="Add Building" />
-          <AddBuildingForm
-            formik={formik}
-            submitValues={formik.values}
-            setInitialBuilding={setInitialBuilding}
+          <CardHeader
+            title="Add Building"
+            onClick={() => setIsCardExpanded(!isCardExpanded)}
           />
-          <ImportBuilding getAllBuildings={getAllBuildings} />
+          {isCardExpanded && (
+            <>
+              <AddBuildingForm
+                formik={formik}
+                submitValues={formik.values}
+                setInitialBuilding={setInitialBuilding}
+              />
+              <ImportBuilding getAllBuildings={getAllBuildings} />
+            </>
+          )}
         </CardContent>
       </Card>
     </React.Fragment>
