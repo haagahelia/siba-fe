@@ -1,14 +1,5 @@
 import { Color } from "@mui/material";
 
-export interface PaletteColorComponent {
-  main?: string;
-  light?: string;
-  dark?: string;
-  contrastText?: string;
-  paper?: string;
-  default?: string;
-}
-
 export interface PaletteContract {
   name: string;
   common: any;
