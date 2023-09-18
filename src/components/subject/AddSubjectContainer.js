@@ -24,6 +24,9 @@ import {
 import Logger from "../../logger/logger";
 
 export default function AddSubjectContainer(props) {
+  // State for checking if Add Lesson card is expanded
+  const [isCardExpanded, setIsCardExpanded] = useState(false);
+
   const { getAllSubjects, allSubjectsList } = props;
   const [programSelectList, setProgramSelectList] = useState([
     { id: 3009, name: "Globalist music" },
@@ -192,34 +195,41 @@ export default function AddSubjectContainer(props) {
       />
       <Card variant="outlined">
         <CardContent>
-          <CardHeader title="Add lesson" />
-          <FormControl fullWidth variant="outlined">
-            <InputLabel htmlFor="program-select">Select Program</InputLabel>
-            <Select
-              id="program-select"
-              label="Select Program"
-              value={formik.values.programId}
-              onChange={(e) => {
-                formik.setFieldValue("programId", e.target.value);
-                handleChange(e);
-              }}
-            >
-              {programSelectList.map((program) => (
-                <MenuItem key={program.id} value={program.id}>
-                  {program.name}
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
-          <AddSubjectForm
-            handleChange={handleChange}
-            programSelectList={programSelectList}
-            formik={formik}
-            submitValues={formik.values}
-            setInitialSubject={setInitialSubject}
-            allSubjectsList={allSubjectsList}
-            spaceTypeSelectList={spaceTypeSelectList}
+          <CardHeader
+            title="Add lesson"
+            onClick={() => setIsCardExpanded(!isCardExpanded)}
           />
+          {isCardExpanded && (
+            <>
+              <FormControl fullWidth variant="outlined">
+                <InputLabel htmlFor="program-select">Select Program</InputLabel>
+                <Select
+                  id="program-select"
+                  label="Select Program"
+                  value={formik.values.programId}
+                  onChange={(e) => {
+                    formik.setFieldValue("programId", e.target.value);
+                    handleChange(e);
+                  }}
+                >
+                  {programSelectList.map((program) => (
+                    <MenuItem key={program.id} value={program.id}>
+                      {program.name}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+              <AddSubjectForm
+                handleChange={handleChange}
+                programSelectList={programSelectList}
+                formik={formik}
+                submitValues={formik.values}
+                setInitialSubject={setInitialSubject}
+                allSubjectsList={allSubjectsList}
+                spaceTypeSelectList={spaceTypeSelectList}
+              />
+            </>
+          )}
         </CardContent>
       </Card>
     </div>
