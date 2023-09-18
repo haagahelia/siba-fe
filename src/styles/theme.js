@@ -132,7 +132,7 @@ export const createAppTheme = (currentPalette) =>
               flexWrap: "nowrap",
               alignItems: "center",
               textAlign: "center",
-              fontSize: "1.2rem",
+              fontSize: "18px",
               position: "sticky",
               justifyContent: "center",
               top: 0,
@@ -154,7 +154,6 @@ export const createAppTheme = (currentPalette) =>
             props: { variant: "sibaAppBarVerticalNew" },
             style: {
               borderColor: currentPalette.backgroundDarker.default,
-              fontSize: "1.1rem",
               display: "contents",
               // color: currentPalette.fontColorDefault.main,
               "& a": {
@@ -166,7 +165,7 @@ export const createAppTheme = (currentPalette) =>
                 color: currentPalette.primary.contrastText,
                 textDecoration: "none",
                 fontFamily: "Roboto, Helvetica, Aria, sans-serif",
-                fontWeight: 700,
+                fontWeight: 600,
                 height: "100%",
               },
               "&:after": {
@@ -184,7 +183,7 @@ export const createAppTheme = (currentPalette) =>
               },
               "& a.nav-links.active": {
                 color: currentPalette.primary.contrastText,
-                fontWeight: 900,
+                fontWeight: 800,
                 backgroundColor: currentPalette.activeLinkBackgroundColor.main, //dark orange hex code
               },
             },
