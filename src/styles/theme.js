@@ -182,7 +182,6 @@ export const createAppTheme = (currentPalette) =>
                 color: currentPalette.primary.contrastText,
               },
               "& a.nav-links.active": {
-                color: currentPalette.primary.contrastText,
                 fontWeight: 800,
                 backgroundColor: currentPalette.background.default,
                 color: currentPalette.text.primary,
