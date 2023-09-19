@@ -14,6 +14,30 @@ export default function LoginView(props) {
     email: "",
     password: "",
   });
+  const [errorMsg, setErrorMsg] = useState("");
+  const [showError, setShowError] = useState(true);
+
+  const errorShown = () => { 
+    if (showError === true) {
+      setErrorMsg("Username or Password is wrong");
+    }
+    if (showError === false) {
+      setErrorMsg("");
+    }
+  };
+
+ //one function used to serve both the functions login and error
+  const loginAndError = async () => {
+    try {
+      await loginUser(); // Wait for loginUser to complete
+    } catch (error) {
+      // Handle error from loginUser
+    }
+
+    setTimeout(() => {
+      errorShown();
+    }, 500); // Add 1000ms delay before calling errorShown
+  };
 
   const appContext = useContext(AppContext);
 
@@ -23,6 +47,7 @@ export default function LoginView(props) {
     if (!success) {
       Logger.error("Login failed:", data);
     } else {
+      setShowError(false);
       localStorage.setItem("sessionToken", data[0].token);
       appContext.sessionToken = data[0].token;
 
@@ -90,8 +115,9 @@ export default function LoginView(props) {
             />
           </Grid>
           <Grid>
-            <Button onClick={loginUser}>Login</Button>
+            <Button onClick={loginAndError}>Login</Button>
           </Grid>
+          {errorMsg}
         </CardContent>
       </Card>
     </>
