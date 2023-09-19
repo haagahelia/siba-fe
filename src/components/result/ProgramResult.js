@@ -2,8 +2,7 @@ import React from "react";
 import Grid2 from "@mui/material/Unstable_Grid2";
 import ProgressBar from "@ramonak/react-progress-bar";
 import Modal from "@mui/material/Modal";
-import { Box, Button } from "@mui/material"; // Button???
-import Typography from "@mui/material/Typography";
+import { Box, Button, Typography } from "@mui/material";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import SubjectResult from "./SubjectResult";
 import testData from "../../data/testData";
@@ -14,13 +13,6 @@ import { useEffect, useState, useContext } from "react";
 import { AppContext } from "../../AppContext";
 import { useTheme } from "@mui/material";
 import Logger from "../../logger/logger";
-
-//component for displaying the subject groups of the allocation result
-//shows:
-//the name of the subject groups
-//the hours needed by the subject group divided by the hours allocated to it %%
-//the name of the subject group rooms in the dropdown
-//popup button that shows the lessons of the subject group
 
 export default function ProgramResult(props) {
   Logger.logPrefix = "ProgramResult";
@@ -34,24 +26,18 @@ export default function ProgramResult(props) {
 
   useEffect(() => {
     Logger.debug("Running effect to fetch program data.");
-    getProgramData();
-
-    return () => {
-      // cleanup function doing nothing
+    const getProgramData = async () => {
+      Logger.debug("getProgramData: fetching program names.");
+      await progStore.fetchNames(appContext.allocRoundId);
+      const names = progStore.getNames();
+      Logger.debug(
+        `getProgramData: successfully fetched ${names.length} program names.`,
+      );
+      setProgs(names);
     };
 
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [resetCounter]);
-
-  const getProgramData = async () => {
-    Logger.debug("getProgramData: fetching program names.");
-    await progStore.fetchNames(appContext.allocRoundId);
-    const names = progStore.getNames();
-    Logger.debug(
-      `getProgramData: successfully fetched ${names.length} program names.`,
-    );
-    setProgs(names);
-  };
+    getProgramData();
+  }, [resetCounter, appContext.allocRoundId, progStore]);
 
   const [subProg, setSubProg] = React.useState({});
   const [open, setOpen] = React.useState(false);
@@ -63,7 +49,7 @@ export default function ProgramResult(props) {
   const handleClose = () => setOpen(false);
 
   const incrementResetCounter = () => {
-    setResetCounter(resetCounter + 1);
+    setResetCounter((prevCounter) => prevCounter + 1);
   };
 
   const calculateProsent = (array) => {
@@ -82,16 +68,16 @@ export default function ProgramResult(props) {
   return (
     <>
       <AllocRoundControlPanel incrementResetCounter={incrementResetCounter} />
-      <Typography style={{ margin: 10, fontSize: 24 }}>
+      <Typography variant="h4" sx={{ margin: 2 }}>
         Programs (Aineryhmät)
       </Typography>
-      <Modal open={open} onClose={handleClose} style={{ overflow: "scroll" }}>
+      <Modal open={open} onClose={handleClose} sx={{ overflow: "scroll" }}>
         <Box
           sx={{
             width: "80%",
             margin: "auto",
-            borderRadius: 20,
-            marginTop: 10,
+            borderRadius: theme.shape.borderRadius,
+            marginTop: theme.spacing(2),
             backgroundColor: theme.palette.background.default,
             position: "relative",
           }}
@@ -99,38 +85,23 @@ export default function ProgramResult(props) {
           <div
             style={{
               position: "absolute",
-              top: "10px",
-              right: "10px",
+              top: theme.spacing(1),
+              right: theme.spacing(1),
               cursor: "pointer",
               zIndex: 1000,
             }}
             onClick={handleClose}
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={1.5}
-              style={{
-                width: "24px",
-                height: "24px",
-                stroke: theme.palette.infoIcon.main,
-              }}
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-              />
-            </svg>
+            <InfoOutlinedIcon
+              sx={{ fontSize: 24, color: theme.palette.info.main }}
+            />
           </div>
           <Typography
-            style={{
-              textAlign: "center",
-              marginTop: "5%",
-            }}
+            variant="h5"
+            align="center"
+            sx={{ marginTop: theme.spacing(2) }}
           >
-            {subProg.name} -subjects
+            {subProg.name} - subjects
           </Typography>
           <SubjectResult
             data={subProg.subjects}
@@ -144,27 +115,26 @@ export default function ProgramResult(props) {
         rowSpacing={1}
         columnSpacing={{ xs: 1, sm: 2, md: 3 }}
         spacing={2}
-        style={{
-          //padding: 2,
+        sx={{
           margin: "auto",
           width: "80%",
-          marginTop: 10,
-          padding: 10,
-          borderRadius: 20,
+          marginTop: 2,
+          padding: 2,
+          borderRadius: theme.shape.borderRadius,
         }}
       >
         {progs.map((prog) => {
           const progress = calculateProsent(prog.subjects);
           const progressColor =
             progress >= 100
-              ? theme.palette.progressBarGreen.main
+              ? theme.palette.success.main
               : progress < 80
-              ? theme.palette.progressBarRed.main
-              : theme.palette.progressBarYellow.main;
+              ? theme.palette.error.main
+              : theme.palette.warning.main;
           const textColor =
             progress === 0
-              ? theme.palette.progressBarTextZero.main
-              : theme.palette.progressBarTextNonZero.main;
+              ? theme.palette.text.disabled
+              : theme.palette.text.primary;
 
           return (
             <React.Fragment key={prog.id}>
@@ -175,21 +145,22 @@ export default function ProgramResult(props) {
                   sx={{
                     fontSize: 20,
                     color: theme.palette.info.main,
+                    "& svg": { fill: "black" },
                   }}
                 >
-                  <InfoOutlinedIcon sx={{ "& path": { fill: "black" } }} />
+                  <InfoOutlinedIcon />
                 </Button>
               </Grid2>
-              <Grid2 xs={1.5} key={`${prog.id}-b`}>
+              <Grid2 xs={1.5}>
                 <Typography>{prog.name}</Typography>
               </Grid2>
-              <Grid2 xs={3} key={`${prog.id}-c`}>
+              <Grid2 xs={3}>
                 <ProgressBar
-                  baseBgColor={theme.palette.progressBarBackground.main}
-                  labelAlignment={"left"}
+                  baseBgColor={theme.palette.background.paper}
+                  labelAlignment="left"
                   labelColor={textColor}
                   bgColor={progressColor}
-                  padding={"3px"}
+                  padding={3}
                   completed={progress}
                   maxCompleted={100}
                 />
