@@ -17,7 +17,7 @@ export default function LoginView(props) {
   const [errorMsg, setErrorMsg] = useState("");
   const [showError, setShowError] = useState(true);
 
-  const errorShown = () => { 
+  const errorShown = () => {
     if (showError === true) {
       setErrorMsg("Username or Password is wrong");
     }
@@ -26,7 +26,7 @@ export default function LoginView(props) {
     }
   };
 
- //one function used to serve both the functions login and error
+  //one function used to serve both the functions login and error
   const loginAndError = async () => {
     try {
       await loginUser(); // Wait for loginUser to complete
