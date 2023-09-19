@@ -11,6 +11,8 @@ import dao from "../../ajax/dao";
 import AddSettingForm from "./AddSettingForm";
 
 export default function AddSettingContainer(props) {
+  // State for checking if Add Setting card is expanded
+  const [isCardExpanded, setIsCardExpanded] = useState(false);
   const { getAllSettings } = props;
   const [alertOpen, setAlertOpen] = useState(false);
   const [alertOptions, setAlertOptions] = useState({
@@ -98,12 +100,19 @@ export default function AddSettingContainer(props) {
       />
       <Card variant="outlined">
         <CardContent>
-          <CardHeader title="Add Setting" />
-          <AddSettingForm
-            formik={formik}
-            submitValues={formik.values}
-            setInitialSetting={setInitialSetting}
+          <CardHeader
+            title="Add Setting"
+            onClick={() => setIsCardExpanded(!isCardExpanded)}
           />
+          {isCardExpanded && (
+            <>
+              <AddSettingForm
+                formik={formik}
+                submitValues={formik.values}
+                setInitialSetting={setInitialSetting}
+              />
+            </>
+          )}
         </CardContent>
       </Card>
     </React.Fragment>

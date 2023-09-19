@@ -15,6 +15,9 @@ import {
 
 export default function Settings() {
   Logger.logPrefix = "Settings";
+  //State for checking if Settings card is expanded
+  const [isCardExpanded, setIsCardExpanded] = useState(true);
+
   const [paginateSettings, setPaginateSettings] = useState([]);
   const [settings, setSettings] = useState([]);
   const [dataModifiedCounter, setDataModifiedCounter] = useState(0);
@@ -74,14 +77,20 @@ export default function Settings() {
         <Grid container rowSpacing={0.5}>
           <Card variant="outlined">
             <CardContent>
-              <CardHeader title="Settings" />
-
-              <SettingsListContainer
-                getAllSettings={getAllSettings}
-                incrementDataModifiedCounter={incrementDataModifiedCounter}
-                allSettings={settings}
-                paginateSettings={paginateSettings}
+              <CardHeader
+                title="Settings"
+                onClick={() => setIsCardExpanded(!isCardExpanded)}
               />
+              {isCardExpanded && (
+                <>
+                  <SettingsListContainer
+                    getAllSettings={getAllSettings}
+                    incrementDataModifiedCounter={incrementDataModifiedCounter}
+                    allSettings={settings}
+                    paginateSettings={paginateSettings}
+                  />
+                </>
+              )}
             </CardContent>
           </Card>
         </Grid>
