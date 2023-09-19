@@ -31,6 +31,7 @@ export default function SubjectView() {
     message: "This is an error alert — check it out!",
     severity: "error",
   });
+  const [isCardExpanded, setIsCardExpanded] = useState(true);
 
   Logger.debug("Initial state set.");
 
@@ -88,29 +89,36 @@ export default function SubjectView() {
         )}
         <Grid container rowSpacing={1}>
           <Card variant="outlined">
+            <CardHeader
+              title="Lessons"
+              onClick={() => setIsCardExpanded(!isCardExpanded)}
+            />
             <CardContent>
-              <CardHeader title="Lessons" />
-              <SubjectFiltering
-                allSubjectsList={allSubjectsList}
-                setAllSubjectsList={setAllSubjectsList}
-                paginateSubjects={paginateSubjects}
-                setPaginateSubjects={setPaginateSubjects}
-                pagination={pagination}
-              />
-              <SubjectListContainer
-                getAllSubjects={getAllSubjects}
-                allSubjectsList={allSubjectsList}
-                paginateSubjects={paginateSubjects}
-                open={open}
-                setOpen={setOpen}
-              />
-              <SubjectPagination
-                pagination={pagination}
-                setPagination={setPagination}
-                allSubjectsList={allSubjectsList}
-                paginateSubjects={paginateSubjects}
-                setPaginateSubjects={setPaginateSubjects}
-              />
+              {isCardExpanded && (
+                <>
+                  <SubjectFiltering
+                    allSubjectsList={allSubjectsList}
+                    setAllSubjectsList={setAllSubjectsList}
+                    paginateSubjects={paginateSubjects}
+                    setPaginateSubjects={setPaginateSubjects}
+                    pagination={pagination}
+                  />
+                  <SubjectListContainer
+                    getAllSubjects={getAllSubjects}
+                    allSubjectsList={allSubjectsList}
+                    paginateSubjects={paginateSubjects}
+                    open={open}
+                    setOpen={setOpen}
+                  />
+                  <SubjectPagination
+                    pagination={pagination}
+                    setPagination={setPagination}
+                    allSubjectsList={allSubjectsList}
+                    paginateSubjects={paginateSubjects}
+                    setPaginateSubjects={setPaginateSubjects}
+                  />
+                </>
+              )}
             </CardContent>
           </Card>
         </Grid>
