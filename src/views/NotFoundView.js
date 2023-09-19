@@ -3,8 +3,8 @@ import { Typography } from "@mui/material";
 
 export default function NotFoundView() {
   return (
-    <Typography color="secondary">
-      Unfortunately this navigation Route does not exist!
+    <Typography color="secondary" variant="h5">
+      Unfortunately, this navigation route does not exist!
     </Typography>
   );
 }

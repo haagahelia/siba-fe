@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from "react";
 import CardContent from "@mui/material/CardContent";
 import SettingsListContainer from "../components/settings/SettingsListContainer";
@@ -13,9 +12,11 @@ import {
   getFunctionName,
 } from "../ajax/ajaxRequestErrorHandler";
 
+const pageSize = 15;
+
 export default function Settings() {
   Logger.logPrefix = "Settings";
-  //State for checking if Settings card is expanded
+  // State for checking if Settings card is expanded
   const [isCardExpanded, setIsCardExpanded] = useState(true);
 
   const [paginateSettings, setPaginateSettings] = useState([]);
@@ -42,7 +43,7 @@ export default function Settings() {
     } else {
       Logger.info(`Fetched ${data.length} settings.`);
       setSettings(data);
-      setPaginateSettings(settings.slice(0, 15));
+      setPaginateSettings(data.slice(0, pageSize));
     }
   };
 
@@ -60,7 +61,7 @@ export default function Settings() {
   }, [dataModifiedCounter]);
 
   useEffect(() => {
-    setPaginateSettings(settings.slice(0, 15));
+    setPaginateSettings(settings.slice(0, pageSize));
   }, [settings]);
 
   return (

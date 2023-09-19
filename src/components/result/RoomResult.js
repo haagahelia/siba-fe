@@ -1,18 +1,27 @@
-//import Grid2 from "@mui/material/Unstable_Grid2";
-import React from "react";
-//import ProgressBar from "@ramonak/react-progress-bar";
-//import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-//import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
-import { Typography } from "@mui/material"; //Box ???
-import { useEffect, useState, useContext } from "react";
-import { useTheme } from "@mui/material/styles";
+import React, { useEffect, useState, useContext } from "react";
+import { Typography, useTheme } from "@mui/material";
 import AllocRoundControlPanel from "../AllocRound/AllocRoundControlPanel";
 import resultRoomsStore from "../../data/ResultRoomsStore";
 import RoomsWithTimesList from "../room/RoomsWithTimesList";
 import { AppContext } from "../../AppContext";
 import Logger from "../../logger/logger";
-//a component for displaying allocation results
-//shows: 1.the name of the room 2. utilization rate 3. classes using the room
+import { styled } from "@mui/system"; // Import styled from @mui/system
+
+const HeaderTypography = styled(Typography)(({ theme }) => ({
+  marginTop: theme.spacing(2),
+  fontSize: 24,
+}));
+
+const RoomCategoryTypography = styled(Typography)(({ theme }) => ({
+  marginLeft: theme.spacing(2),
+}));
+
+const RoomContainer = styled("div")(({ theme }) => ({
+  display: "flex",
+  gap: theme.spacing(2),
+  marginTop: theme.spacing(1),
+  marginBottom: theme.spacing(2),
+}));
 
 export default function RoomResult(props) {
   const roomStore = resultRoomsStore;
@@ -20,22 +29,22 @@ export default function RoomResult(props) {
   const [resetCounter, setResetCounter] = useState(0);
   const appContext = useContext(AppContext);
   const theme = useTheme();
+
   Logger.logPrefix = "RoomResult";
   Logger.debug("RoomResult component instantiated.");
 
   useEffect(() => {
-    getRoomsData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [resetCounter]);
+    const getRoomsData = async () => {
+      Logger.debug("getRoomsData: fetching room data from server.");
+      await roomStore.fetchRooms(appContext.allocRoundId);
+      Logger.debug(
+        `getRoomsData: successfully fetched ${roomStore.rooms.length} rooms.`,
+      );
+      setRooms(roomStore.rooms);
+    };
 
-  const getRoomsData = async () => {
-    Logger.debug("getRoomsData: fetching room data from server.");
-    await roomStore.fetchRooms(appContext.allocRoundId);
-    Logger.debug(
-      `getRoomsData: successfully fetched ${roomStore.rooms.length} rooms.`,
-    );
-    setRooms(roomStore.rooms);
-  };
+    getRoomsData();
+  }, [resetCounter, appContext.allocRoundId, roomStore]);
 
   const incrementResetCounter = () => {
     Logger.debug("Incrementing reset counter.");
@@ -45,34 +54,21 @@ export default function RoomResult(props) {
   return (
     <div style={{ width: "80%", margin: "auto" }}>
       <AllocRoundControlPanel incrementResetCounter={incrementResetCounter} />
-      <Typography style={{ marginTop: "5%", fontSize: 24 }}>
-        Spaces (Huoneet)
-      </Typography>
-      <div
-        style={{
-          display: "flex",
-          gap: 100,
-          marginTop: "3%",
-          marginBottom: "5%",
-        }}
-      >
+      <HeaderTypography>Spaces (Huoneet)</HeaderTypography>
+      <RoomContainer>
         <div style={theme.components.IndexRooms.luentoluokkaindex}>
-          <Typography style={{ marginLeft: 40 }}> Lecture class </Typography>
+          <RoomCategoryTypography>Lecture class</RoomCategoryTypography>
         </div>
         <div style={theme.components.IndexRooms.studioindex}>
-          <Typography style={{ marginLeft: 40 }}> Studio </Typography>
+          <RoomCategoryTypography>Studio</RoomCategoryTypography>
         </div>
         <div style={theme.components.IndexRooms.esitystilaindex}>
-          <Typography style={{ marginLeft: 40 }}>
-            {" "}
-            Performance space{" "}
-          </Typography>
+          <RoomCategoryTypography>Performance space</RoomCategoryTypography>
         </div>
         <div style={theme.components.IndexRooms.musiikkiluokkaindex}>
-          <Typography style={{ marginLeft: 40 }}> Music class </Typography>
+          <RoomCategoryTypography>Music class</RoomCategoryTypography>
         </div>
-      </div>
-
+      </RoomContainer>
       <RoomsWithTimesList rooms={rooms} />
     </div>
   );

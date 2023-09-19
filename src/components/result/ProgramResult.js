@@ -87,7 +87,7 @@ export default function ProgramResult(props) {
       </Typography>
       <Modal open={open} onClose={handleClose} style={{ overflow: "scroll" }}>
         <Box
-          style={{
+          sx={{
             width: "80%",
             margin: "auto",
             borderRadius: 20,
