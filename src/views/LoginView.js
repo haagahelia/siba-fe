@@ -43,11 +43,13 @@ export default function LoginView(props) {
 
   const loginUser = async () => {
     //Logger.debug("Attempting to log in");
-    const { success, data } = await dao.getUserByEmail(loginForm);
-    if (!success) {
+    const { httpStatus, data } = await dao.getUserByEmail(loginForm);
+    if (httpStatus !== 200) {
       Logger.error("Login failed:", data);
     } else {
+      setErrorMsg("");
       setShowError(false);
+
       localStorage.setItem("sessionToken", data[0].token);
       appContext.sessionToken = data[0].token;
 
