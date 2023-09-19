@@ -24,7 +24,7 @@ export const postNewUser = async (newUser: User): Promise<boolean> => {
 //the implementation of this function is in a wrong way and should be fixed later after discussion -> Suraj Mishra
 export const getUserByEmail = async (
   user: User,
-): Promise<Response<UserLoggedIn>> => {
+): Promise<ResponseFiner<UserLoggedIn>> => {
   const request = new Request(`${baseUrl}/user/login`, {
     method: "POST",
     headers: {
@@ -34,8 +34,17 @@ export const getUserByEmail = async (
     body: JSON.stringify(user),
   });
   Logger.debug("getUserByEmail", request);
-  const response = await fetch(request);
-  const users: UserLoggedIn[] = await response.json();
 
-  return { success: response.ok, data: users };
+  const response = await fetch(request);
+
+  if (response.status === 200) {
+    const users: UserLoggedIn[] = await response.json();
+    return { httpStatus: response.status, data: users };
+  } else {
+    return { httpStatus: response.status, data: [] };
+  }
+
+  // const users: UserLoggedIn[] = await response.json();
+
+  // return { success: response.ok, data: users };
 };
