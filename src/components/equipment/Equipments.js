@@ -13,6 +13,9 @@ import {
 } from "../../ajax/ajaxRequestErrorHandler";
 
 export default function Equipments() {
+  //State for checking if Equipment card is expanded
+  const [isCardExpanded, setIsCardExpanded] = useState(true);
+
   Logger.logPrefix = "Equipments";
   Logger.debug("Equipments component instantiated.");
   const [equipmentList, setEquipmentList] = useState([]);
@@ -56,11 +59,18 @@ export default function Equipments() {
         <Grid container rowSpacing={0.5}>
           <Card variant="outlined">
             <CardContent>
-              <CardHeader title="Equipment" />
-              <EquipmentListContainer
-                getAllEquipments={getAllEquipments}
-                equipmentList={equipmentList}
+              <CardHeader
+                title="Equipment"
+                onClick={() => setIsCardExpanded(!isCardExpanded)}
               />
+              {isCardExpanded && (
+                <>
+                  <EquipmentListContainer
+                    getAllEquipments={getAllEquipments}
+                    equipmentList={equipmentList}
+                  />
+                </>
+              )}
             </CardContent>
           </Card>
         </Grid>
