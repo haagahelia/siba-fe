@@ -2,7 +2,7 @@ import React from "react";
 import Grid2 from "@mui/material/Unstable_Grid2";
 import ProgressBar from "@ramonak/react-progress-bar";
 import Modal from "@mui/material/Modal";
-import { Box } from "@mui/material"; // Button???
+import { Box, Button } from "@mui/material"; // Button???
 import Typography from "@mui/material/Typography";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import SubjectResult from "./SubjectResult";
@@ -169,10 +169,16 @@ export default function ProgramResult(props) {
           return (
             <React.Fragment key={prog.id}>
               <Grid2 xs={1.5}>
-                <InfoOutlinedIcon
-                  sx={{ fontSize: 20, color: theme.palette.infoIcon.main }}
+                <Button
+                  variant="text"
                   onClick={() => handleOpen(prog)}
-                />
+                  sx={{
+                    fontSize: 20,
+                    color: theme.palette.info.main,
+                  }}
+                >
+                  <InfoOutlinedIcon sx={{ "& path": { fill: "black" } }} />
+                </Button>
               </Grid2>
               <Grid2 xs={1.5} key={`${prog.id}-b`}>
                 <Typography>{prog.name}</Typography>
