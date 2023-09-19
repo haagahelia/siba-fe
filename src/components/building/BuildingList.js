@@ -26,6 +26,9 @@ export default function BuildingList() {
 
   const [singleBuilding, setSingleBuilding] = useState(null);
 
+  // State for checking if the card is expanded
+  const [isCardExpanded, setIsCardExpanded] = useState(true);
+
   const getAllBuildings = async function () {
     const { success, data } = await dao.fetchAllBuildings();
     if (success) {
@@ -71,8 +74,11 @@ export default function BuildingList() {
         />
         <Grid container rowSpacing={1}>
           <Card variant="outlined">
-            <CardContent>
-              <CardHeader title="Buildings" />
+            <CardHeader
+              title="Buildings"
+              onClick={() => setIsCardExpanded(!isCardExpanded)}
+            />
+            <CardContent style={{ display: isCardExpanded ? "block" : "none" }}>
               {allBuildingsList.map((buildingDetail) => {
                 return (
                   <List key={buildingDetail.id}>
@@ -87,8 +93,6 @@ export default function BuildingList() {
                         );
                         setOpen(true);
                       }}
-                      //onMouseEnter={() => sethoverColor("#CFD6D5  ")}
-                      //onMouseLeave={() => sethoverColor("#FFFFFF ")}
                     >
                       <BuildingListItem
                         open={open}
