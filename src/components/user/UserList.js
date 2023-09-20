@@ -9,7 +9,7 @@ import Paper from "@mui/material/Paper";
 import { Typography } from "@mui/material";
 import SingleUserDialog from "./SingleUserDialog";
 
-export default function UserlistItems(props) {
+export default function UserListItems(props) {
   const { getAllUsers, paginateUsers } = props;
 
   const [open, setOpen] = useState(false);
