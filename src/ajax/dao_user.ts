@@ -1,5 +1,5 @@
 import Logger from "../logger/logger";
-import { Response, User, UserLoggedIn, ResponseFiner } from "../types";
+import {User, UserLoggedIn, ResponseFiner } from "../types";
 import { create, get } from "./request";
 
 const baseUrl = process.env.REACT_APP_BE_SERVER_BASE_URL;
@@ -21,8 +21,7 @@ export const postNewUser = async (newUser: User): Promise<boolean> => {
   return response.ok;
 };
 
-//the implementation of this function is in a wrong way and should be fixed later after discussion -> Suraj Mishra
-export const getUserByEmail = async (
+export const loginUser = async (
   user: User,
 ): Promise<ResponseFiner<UserLoggedIn>> => {
   const request = new Request(`${baseUrl}/user/login`, {
@@ -44,7 +43,4 @@ export const getUserByEmail = async (
     return { httpStatus: response.status, data: [] };
   }
 
-  // const users: UserLoggedIn[] = await response.json();
-
-  // return { success: response.ok, data: users };
 };
