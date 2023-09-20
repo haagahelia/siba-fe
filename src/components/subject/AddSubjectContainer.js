@@ -22,6 +22,9 @@ import {
   getFunctionName,
 } from "../../ajax/ajaxRequestErrorHandler";
 import Logger from "../../logger/logger";
+import IconButton from "@mui/material/IconButton";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 
 export default function AddSubjectContainer(props) {
   // State for checking if Add Lesson card is expanded
@@ -197,7 +200,16 @@ export default function AddSubjectContainer(props) {
         <CardContent>
           <CardHeader
             title="Add lesson"
-            onClick={() => setIsCardExpanded(!isCardExpanded)}
+            action={
+              <IconButton
+                onClick={() => setIsCardExpanded(!isCardExpanded)}
+                aria-expanded={isCardExpanded}
+                aria-label="expand/collapse"
+                color="primary"
+              >
+                {isCardExpanded ? <ExpandLessIcon /> : <ExpandMoreIcon />}
+              </IconButton>
+            }
           />
           {isCardExpanded && (
             <>
