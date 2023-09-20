@@ -24,11 +24,13 @@ export default function EditEquipment(props) {
     Logger.debug(
       `Submitting edits for equipment: ${JSON.stringify(singleEquipment)}`,
     );
+    //extracting id from singleEquipment object
+    const id = singleEquipment.id;
     let validation = ValidateEditEquipment(singleEquipment);
     if (Object.values(validation).length !== 0) {
       alert(Object.values(validation));
     } else {
-      let result = await dao.editEquipment(singleEquipment);
+      let result = await dao.editEquipment(singleEquipment, id);
       if (!result) {
         alert("Something went wrong");
         getAllEquipments();
