@@ -33,7 +33,7 @@ export default function UserFiltering({
   return (
     <TextField
       name="searched"
-      placeholder="Käyttäjien haku:"
+      placeholder="Search users"
       type="text"
       variant="outlined"
       fullWidth

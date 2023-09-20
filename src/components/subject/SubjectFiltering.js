@@ -34,7 +34,7 @@ export default function SubjectFiltering({
   return (
     <TextField
       name="searched"
-      placeholder="Opetusten haku:"
+      placeholder="Search lessons"
       type="text"
       variant="outlined"
       fullWidth
