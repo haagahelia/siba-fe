@@ -2,6 +2,9 @@ import { createTheme } from "@mui/material";
 
 // Palettes are: darkPalette, lightPalette, redPalette (for testing), yellowPalette (for testing),
 
+export const lessPadding = "4px";
+export const morePadding = "16px";
+
 export const createAppTheme = (currentPalette) =>
   createTheme({
     palette: currentPalette,
@@ -14,8 +17,8 @@ export const createAppTheme = (currentPalette) =>
             borderColor: currentPalette.borderColor.cardBoder,
             width: "85%",
             margin: "auto",
-            marginTop: "100px",
-            padding: "8px",
+            marginTop: "70px",
+            padding: lessPadding,
           },
         },
       },
@@ -26,7 +29,7 @@ export const createAppTheme = (currentPalette) =>
             fontSize: 25,
             color: currentPalette.fontColorDefault.default,
             marginBottom: "10px",
-            padding: "10px",
+            padding: lessPadding,
           },
         },
       },
@@ -157,7 +160,7 @@ export const createAppTheme = (currentPalette) =>
               display: "contents",
               // color: currentPalette.fontColorDefault.main,
               "& a": {
-                padding: "3px",
+                padding: lessPadding,
                 borderBottom: "3px solid transparent",
                 //color: currentPalette.fontColorDefault.default,
                 color: currentPalette.primary.contrastText,
@@ -181,7 +184,6 @@ export const createAppTheme = (currentPalette) =>
                 color: currentPalette.primary.contrastText,
               },
               "& a.nav-links.active": {
-                color: currentPalette.primary.contrastText,
                 fontWeight: 800,
                 backgroundColor: currentPalette.background.default,
                 color: currentPalette.text.primary,
@@ -223,7 +225,7 @@ export const createAppTheme = (currentPalette) =>
         styleOverrides: {
           root: {
             justifyContent: "space-evenly",
-            padding: "16px",
+            padding: morePadding,
           },
         },
       },
@@ -373,7 +375,7 @@ export const createAppTheme = (currentPalette) =>
             justifyContent: "space-evenly",
             alignItems: "flex-start",
             marginTop: 0,
-            padding: 5,
+            padding: lessPadding,
           },
         },
         variants: [
@@ -382,7 +384,7 @@ export const createAppTheme = (currentPalette) =>
             style: {
               // columnGap: 8,
               // rowGap: 8,
-              padding: 8,
+              padding: lessPadding,
               alignItems: "center",
               justifyContent: "space-evenly",
             },
@@ -392,7 +394,7 @@ export const createAppTheme = (currentPalette) =>
             style: {
               columnGap: 8,
               rowGap: 8,
-              padding: 16,
+              padding: morePadding,
               justifyContent: "flex-start",
               alignItems: "flex-center",
             },
@@ -402,7 +404,7 @@ export const createAppTheme = (currentPalette) =>
             style: {
               justifyContent: "flex-start",
               alignItems: "flex-start",
-              padding: 16,
+              padding: morePadding,
             },
           },
           {
@@ -411,7 +413,7 @@ export const createAppTheme = (currentPalette) =>
               flexDirection: "column",
               justifyContent: "center",
               alignItems: "center",
-              padding: 16,
+              padding: morePadding,
             },
           },
         ],

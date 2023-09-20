@@ -13,6 +13,7 @@ import {
   indicatorRed,
   indicatorOrange,
   indicatorYellowLight,
+  transparentBlack,
 } from "./commonColors";
 
 // Color definitions for DARK
@@ -64,15 +65,15 @@ export const darkPalette: PaletteContract = {
     default: darkGrey,
   },
   action: {
-    active: "rgba(0, 0, 0, 0.54)",
-    hover: "rgba(0, 0, 0, 0.04)",
+    active: transparentBlack,
+    hover: transparentBlack,
     hoverOpacity: 0.25,
-    selected: "rgba(0, 0, 0, 0.08)",
+    selected: transparentBlack,
     selectedOpacity: 0.15,
-    disabled: "rgba(0, 0, 0, 0.26)",
-    disabledBackground: "rgba(0, 0, 0, 0.12)",
+    disabled: transparentBlack,
+    disabledBackground: transparentBlack,
     disabledOpacity: 0.38,
-    focus: "rgba(0, 0, 0, 0.12)",
+    focus: transparentBlack,
     focusOpacity: 0.12,
     activatedOpacity: 0.12,
   },

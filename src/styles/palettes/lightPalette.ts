@@ -12,7 +12,9 @@ import {
   indicatorRed,
   indicatorOrange,
   indicatorYellowDark,
+  transparentBlack,
 } from "./commonColors";
+// import { dark } from "@mui/material/styles/createPalette";
 
 // Color definitions for LIGHT
 
@@ -30,8 +32,8 @@ export const lightPalette: PaletteContract = {
     contrastText: darkGrey,
   },
   secondary: {
-    main: lightGrey,
-    contrastText: darkGrey,
+    main: darkGrey,
+    contrastText: lightGrey,
   },
   error: {
     main: indicatorRed,
@@ -63,15 +65,15 @@ export const lightPalette: PaletteContract = {
     default: lightGrey,
   },
   action: {
-    active: "rgba(0, 0, 0, 0.54)",
-    hover: "rgba(0, 0, 0, 0.04)",
+    active: transparentBlack,
+    hover: transparentBlack,
     hoverOpacity: 0.25,
-    selected: "rgba(0, 0, 0, 0.08)",
+    selected: transparentBlack,
     selectedOpacity: 0.15,
-    disabled: "rgba(0, 0, 0, 0.26)",
-    disabledBackground: "rgba(0, 0, 0, 0.12)",
+    disabled: transparentBlack,
+    disabledBackground: transparentBlack,
     disabledOpacity: 0.38,
-    focus: "rgba(0, 0, 0, 0.12)",
+    focus: transparentBlack,
     focusOpacity: 0.12,
     activatedOpacity: 0.12,
   },
