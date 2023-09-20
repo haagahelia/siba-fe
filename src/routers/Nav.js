@@ -104,7 +104,7 @@ function NavBar() {
       showForCurrentUser: false,
     },
     {
-      name: "Userlist",
+      name: "User List",
       href: "/users",
       forRoles: ["admin"],
       showForCurrentUser: false,
