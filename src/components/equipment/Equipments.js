@@ -51,7 +51,7 @@ export default function Equipments() {
   }, []);
 
   return (
-    <div>
+    <div style={{ marginLeft: "120px" }}>
       <Container maxWidth="100%">
         {(roles.admin === "1" || roles.planner === "1") && (
           <AddEquipment getAllEquipments={getAllEquipments} />
