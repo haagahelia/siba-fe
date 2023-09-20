@@ -16,3 +16,5 @@ export const indicatorRed = "#D62E3D";
 export const indicatorOrange = "#FDA826";
 export const indicatorYellowLight = "#F6D251";
 export const indicatorYellowDark = "#F6B751";
+
+export const transparentBlack = "rgba(0, 0, 0, 0.2)";
