@@ -2,8 +2,10 @@ import { createTheme } from "@mui/material";
 
 // Palettes are: darkPalette, lightPalette, redPalette (for testing), yellowPalette (for testing),
 
-export const createAppTheme = (currentPalette) =>
-  createTheme({
+export const createAppTheme = (currentPalette) => {
+  const navbarWidth = "170px";
+
+  return createTheme({
     palette: currentPalette,
 
     components: {
@@ -132,7 +134,7 @@ export const createAppTheme = (currentPalette) =>
               flexWrap: "nowrap",
               alignItems: "flex-start",
               textAlign: "center",
-              fontSize: "18px",
+              fontSize: "17.5px",
               position: "sticky",
               justifyContent: "center",
               top: 0,
@@ -165,7 +167,8 @@ export const createAppTheme = (currentPalette) =>
                 fontFamily: "Roboto, Helvetica, Aria, sans-serif",
                 fontWeight: 600,
                 height: "100%",
-                width: "150px",
+                textAlign: "center",
+                width: navbarWidth,
               },
               "&:after": {
                 content: '""',
@@ -186,7 +189,7 @@ export const createAppTheme = (currentPalette) =>
                 backgroundColor: currentPalette.background.default,
                 color: currentPalette.text.primary,
                 textDecorationThickness: "3px",
-                width: "150px",
+                width: navbarWidth,
               },
             },
           },
@@ -456,6 +459,7 @@ export const createAppTheme = (currentPalette) =>
       },
     },
   });
+};
 
 export default createAppTheme;
 

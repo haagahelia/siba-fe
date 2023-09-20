@@ -5,7 +5,6 @@ import {
   Routes,
   Route,
 } from "react-router-dom";
-
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -94,6 +93,7 @@ function NavBar() {
     },
     {
       name: "Account",
+      href: "javascript:void(0);",
       forRoles: ["admin", "planner", "statist"],
       showForCurrentUser: false,
     },
@@ -111,7 +111,7 @@ function NavBar() {
     },
     {
       name: "Log Out",
-      href: "#",
+      href: "javascript:void(0);",
       forRoles: ["admin", "planner", "statist"],
       showForCurrentUser: false,
       action() {
@@ -205,7 +205,7 @@ function NavBar() {
       <AppBar
         position="fixed"
         sx={{
-          width: "150px",
+          width: "170px",
           height: "100vh",
           top: 0,
           left: 0,
