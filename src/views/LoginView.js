@@ -29,7 +29,7 @@ export default function LoginView(props) {
   //one function used to serve both the functions login and error
   const loginAndError = async () => {
     try {
-      await loginUser(); // Wait for loginUser to complete
+      await handleLogin(); // Wait for loginUser to complete
     } catch (error) {
       // Handle error from loginUser
     }
@@ -41,9 +41,9 @@ export default function LoginView(props) {
 
   const appContext = useContext(AppContext);
 
-  const loginUser = async () => {
+  const handleLogin = async () => {
     //Logger.debug("Attempting to log in");
-    const { httpStatus, data } = await dao.getUserByEmail(loginForm);
+    const { httpStatus, data } = await dao.loginUser(loginForm);
     if (httpStatus !== 200) {
       Logger.error("Login failed:", data);
     } else {
