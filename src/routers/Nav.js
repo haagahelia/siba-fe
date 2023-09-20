@@ -38,7 +38,7 @@ function NavBar() {
   Logger.debug("NavBar initiated");
   const sibaPages = [
     {
-      name: "Login",
+      name: "Log In",
       href: "/login",
       forRoles: ["guest"],
       showForCurrentUser: false,
@@ -110,7 +110,7 @@ function NavBar() {
       showForCurrentUser: false,
     },
     {
-      name: "Logout",
+      name: "Log Out",
       href: "#",
       forRoles: ["admin", "planner", "statist"],
       showForCurrentUser: false,

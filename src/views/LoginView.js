@@ -117,7 +117,7 @@ export default function LoginView(props) {
             />
           </Grid>
           <Grid>
-            <Button onClick={loginAndError}>Login</Button>
+            <Button onClick={loginAndError}>Log In</Button>
           </Grid>
           {errorMsg}
         </CardContent>

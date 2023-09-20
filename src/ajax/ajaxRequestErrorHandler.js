@@ -54,7 +54,7 @@ export const ajaxRequestErrorHandler = (
       setAlertOptions({
         severity: "error",
         title: "Error",
-        message: "Please login with your email and password!",
+        message: "Please log in with your email and password!",
       });
       break;
 
