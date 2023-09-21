@@ -213,24 +213,7 @@ export default function AddSubjectContainer(props) {
           />
           {isCardExpanded && (
             <>
-              <FormControl fullWidth variant="outlined">
-                <InputLabel htmlFor="program-select">Select Program</InputLabel>
-                <Select
-                  id="program-select"
-                  label="Select Program"
-                  value={formik.values.programId}
-                  onChange={(e) => {
-                    formik.setFieldValue("programId", e.target.value);
-                    handleChange(e);
-                  }}
-                >
-                  {programSelectList.map((program) => (
-                    <MenuItem key={program.id} value={program.id}>
-                      {program.name}
-                    </MenuItem>
-                  ))}
-                </Select>
-              </FormControl>
+              {/* The extra program selection dropdown has been removed */}
               <AddSubjectForm
                 handleChange={handleChange}
                 programSelectList={programSelectList}
