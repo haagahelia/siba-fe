@@ -1,26 +1,21 @@
-import React from "react";
-import Grid2 from "@mui/material/Unstable_Grid2";
-import ProgressBar from "@ramonak/react-progress-bar";
-import Modal from "@mui/material/Modal";
-import { Box } from "@mui/material"; // Button???
-import Typography from "@mui/material/Typography";
+import React, { useEffect, useState, useContext } from "react";
+import {
+  Typography,
+  Modal,
+  Box,
+  Grid,
+  IconButton,
+  useTheme,
+} from "@mui/material";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
-import SubjectResult from "./SubjectResult";
-import testData from "../../data/testData";
+import ProgressBar from "@ramonak/react-progress-bar";
 import AllocRoundControlPanel from "../AllocRound/AllocRoundControlPanel";
 import resultProgramStore from "../../data/ResultProgramStore";
 import CollapsedRow from "./CollapsedRow";
-import { useEffect, useState, useContext } from "react";
+import SubjectResult from "./SubjectResult";
 import { AppContext } from "../../AppContext";
-import { useTheme } from "@mui/material";
+import testData from "../../data/testData";
 import Logger from "../../logger/logger";
-
-//component for displaying the subject groups of the allocation result
-//shows:
-//the name of the subject groups
-//the hours needed by the subject group divided by the hours allocated to it %%
-//the name of the subject group rooms in the dropdown
-//popup button that shows the lessons of the subject group
 
 export default function ProgramResult(props) {
   Logger.logPrefix = "ProgramResult";
@@ -30,7 +25,7 @@ export default function ProgramResult(props) {
   const [progs, setProgs] = useState([]);
   const [resetCounter, setResetCounter] = useState(0);
   const appContext = useContext(AppContext);
-  const theme = useTheme();
+  const theme = useTheme(); // Use the `useTheme` hook to access the Material-UI theme.
 
   useEffect(() => {
     Logger.debug("Running effect to fetch program data.");
@@ -60,6 +55,7 @@ export default function ProgramResult(props) {
     setSubProg(prog);
     setOpen(true);
   };
+
   const handleClose = () => setOpen(false);
 
   const incrementResetCounter = () => {
@@ -82,22 +78,22 @@ export default function ProgramResult(props) {
   return (
     <>
       <AllocRoundControlPanel incrementResetCounter={incrementResetCounter} />
-      <Typography style={{ margin: 10, fontSize: 24 }}>
+      <Typography variant="h5" sx={{ marginY: (theme) => theme.spacing(2) }}>
         Programs (Aineryhmät)
       </Typography>
-      <Modal open={open} onClose={handleClose} style={{ overflow: "scroll" }}>
+      <Modal open={open} onClose={handleClose} sx={{ overflow: "scroll" }}>
         <Box
-          style={{
+          sx={{
             width: "80%",
             margin: "auto",
             borderRadius: 20,
-            marginTop: 10,
+            marginTop: (theme) => theme.spacing(2),
             backgroundColor: theme.palette.background.default,
             position: "relative",
           }}
         >
-          <div
-            style={{
+          <IconButton
+            sx={{
               position: "absolute",
               top: "10px",
               right: "10px",
@@ -111,7 +107,7 @@ export default function ProgramResult(props) {
               fill="none"
               viewBox="0 0 24 24"
               strokeWidth={1.5}
-              style={{
+              sx={{
                 width: "24px",
                 height: "24px",
                 stroke: theme.palette.infoIcon.main,
@@ -123,11 +119,11 @@ export default function ProgramResult(props) {
                 d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
               />
             </svg>
-          </div>
+          </IconButton>
           <Typography
-            style={{
+            sx={{
               textAlign: "center",
-              marginTop: "5%",
+              marginTop: (theme) => theme.spacing(2),
             }}
           >
             {subProg.name} -subjects
@@ -139,17 +135,16 @@ export default function ProgramResult(props) {
         </Box>
       </Modal>
 
-      <Grid2
+      <Grid
         container
         rowSpacing={1}
         columnSpacing={{ xs: 1, sm: 2, md: 3 }}
         spacing={2}
-        style={{
-          //padding: 2,
+        sx={{
           margin: "auto",
           width: "80%",
-          marginTop: 10,
-          padding: 10,
+          marginTop: (theme) => theme.spacing(2),
+          padding: (theme) => theme.spacing(2),
           borderRadius: 20,
         }}
       >
@@ -168,31 +163,36 @@ export default function ProgramResult(props) {
 
           return (
             <React.Fragment key={prog.id}>
-              <Grid2 xs={1.5}>
-                <InfoOutlinedIcon
-                  sx={{ fontSize: 20, color: theme.palette.infoIcon.main }}
+              <Grid item xs={1.5}>
+                <IconButton
+                  sx={{
+                    fontSize: 20,
+                    color: theme.palette.infoIcon.main,
+                  }}
                   onClick={() => handleOpen(prog)}
-                />
-              </Grid2>
-              <Grid2 xs={1.5} key={`${prog.id}-b`}>
+                >
+                  <InfoOutlinedIcon />
+                </IconButton>
+              </Grid>
+              <Grid item xs={1.5}>
                 <Typography>{prog.name}</Typography>
-              </Grid2>
-              <Grid2 xs={3} key={`${prog.id}-c`}>
+              </Grid>
+              <Grid item xs={3}>
                 <ProgressBar
                   baseBgColor={theme.palette.progressBarBackground.main}
-                  labelAlignment={"left"}
+                  labelAlignment="left"
                   labelColor={textColor}
                   bgColor={progressColor}
-                  padding={"3px"}
+                  padding="3px"
                   completed={progress}
                   maxCompleted={100}
                 />
                 <CollapsedRow prog1={prog} />
-              </Grid2>
+              </Grid>
             </React.Fragment>
           );
         })}
-      </Grid2>
+      </Grid>
     </>
   );
 }
