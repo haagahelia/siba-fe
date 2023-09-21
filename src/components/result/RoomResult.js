@@ -1,25 +1,16 @@
-//import Grid2 from "@mui/material/Unstable_Grid2";
-import React from "react";
-//import ProgressBar from "@ramonak/react-progress-bar";
-//import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-//import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
-import { Typography } from "@mui/material"; //Box ???
-import { useEffect, useState, useContext } from "react";
-import { useTheme } from "@mui/material/styles";
+import React, { useEffect, useState, useContext } from "react";
+import { Typography } from "@mui/material";
 import AllocRoundControlPanel from "../AllocRound/AllocRoundControlPanel";
 import resultRoomsStore from "../../data/ResultRoomsStore";
 import RoomsWithTimesList from "../room/RoomsWithTimesList";
 import { AppContext } from "../../AppContext";
 import Logger from "../../logger/logger";
-//a component for displaying allocation results
-//shows: 1.the name of the room 2. utilization rate 3. classes using the room
 
 export default function RoomResult(props) {
   const roomStore = resultRoomsStore;
   const [rooms, setRooms] = useState([]);
   const [resetCounter, setResetCounter] = useState(0);
   const appContext = useContext(AppContext);
-  const theme = useTheme();
   Logger.logPrefix = "RoomResult";
   Logger.debug("RoomResult component instantiated.");
 
@@ -43,33 +34,60 @@ export default function RoomResult(props) {
   };
 
   return (
-    <div style={{ width: "80%", margin: "auto" }}>
+    <div
+      sx={{
+        width: "80%",
+        margin: "auto",
+      }}
+    >
       <AllocRoundControlPanel incrementResetCounter={incrementResetCounter} />
-      <Typography style={{ marginTop: "5%", fontSize: 24 }}>
+      <Typography
+        variant="h5"
+        sx={{
+          marginTop: (theme) => theme.spacing(2),
+        }}
+      >
         Spaces (Huoneet)
       </Typography>
       <div
-        style={{
+        sx={{
           display: "flex",
-          gap: 100,
-          marginTop: "3%",
-          marginBottom: "5%",
+          gap: (theme) => theme.spacing(4),
+          marginTop: (theme) => theme.spacing(3),
+          marginBottom: (theme) => theme.spacing(5),
         }}
       >
-        <div style={theme.components.IndexRooms.luentoluokkaindex}>
-          <Typography style={{ marginLeft: 40 }}> Lecture class </Typography>
+        <div
+          sx={(theme) => ({
+            ...theme.components.IndexRooms.luentoluokkaindex,
+            marginLeft: (theme) => theme.spacing(4),
+          })}
+        >
+          <Typography>Lecture class</Typography>
         </div>
-        <div style={theme.components.IndexRooms.studioindex}>
-          <Typography style={{ marginLeft: 40 }}> Studio </Typography>
+        <div
+          sx={(theme) => ({
+            ...theme.components.IndexRooms.studioindex,
+            marginLeft: (theme) => theme.spacing(4),
+          })}
+        >
+          <Typography>Studio</Typography>
         </div>
-        <div style={theme.components.IndexRooms.esitystilaindex}>
-          <Typography style={{ marginLeft: 40 }}>
-            {" "}
-            Performance space{" "}
-          </Typography>
+        <div
+          sx={(theme) => ({
+            ...theme.components.IndexRooms.esitystilaindex,
+            marginLeft: (theme) => theme.spacing(4),
+          })}
+        >
+          <Typography>Performance space</Typography>
         </div>
-        <div style={theme.components.IndexRooms.musiikkiluokkaindex}>
-          <Typography style={{ marginLeft: 40 }}> Music class </Typography>
+        <div
+          sx={(theme) => ({
+            ...theme.components.IndexRooms.musiikkiluokkaindex,
+            marginLeft: (theme) => theme.spacing(4),
+          })}
+        >
+          <Typography>Music class</Typography>
         </div>
       </div>
 

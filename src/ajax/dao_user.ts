@@ -1,5 +1,5 @@
 import Logger from "../logger/logger";
-import {User, UserLoggedIn, ResponseFiner } from "../types";
+import { User, UserLoggedIn, ResponseFiner } from "../types";
 import { create, get } from "./request";
 
 const baseUrl = process.env.REACT_APP_BE_SERVER_BASE_URL;
@@ -42,5 +42,4 @@ export const loginUser = async (
   } else {
     return { httpStatus: response.status, data: [] };
   }
-
 };
