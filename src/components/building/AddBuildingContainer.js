@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { CardHeader, Card, CardContent } from "@mui/material";
+import { CardHeader, Card, CardContent, IconButton } from "@mui/material";
 import AlertBox from "../common/AlertBox";
 import { useFormik } from "formik";
 import ConfirmationDialog from "../common/ConfirmationDialog";
@@ -10,6 +10,8 @@ import {
 import dao from "../../ajax/dao";
 import AddBuildingForm from "./AddBuildingForm";
 import ImportBuilding from "./ImportBuildingContainer";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 
 export default function AddBuildingContainer(props) {
   // State for checking if Add Building card is expanded
@@ -99,6 +101,16 @@ export default function AddBuildingContainer(props) {
           <CardHeader
             title="Add Building"
             onClick={() => setIsCardExpanded(!isCardExpanded)}
+            action={
+              <IconButton
+                onClick={() => setIsCardExpanded(!isCardExpanded)}
+                aria-expanded={isCardExpanded}
+                aria-label="expand/collapse"
+                color="primary"
+              >
+                {isCardExpanded ? <ExpandLessIcon /> : <ExpandMoreIcon />}
+              </IconButton>
+            }
           />
           {isCardExpanded && (
             <>
