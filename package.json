@@ -40,6 +40,9 @@
   "pre-commit": [
     "precommit"
   ],
+  "nano-staged": {
+    "*.{js,ts}": "biome check --apply"
+  },
   "eslintConfig": {
     "extends": [
       "react-app",
@@ -59,13 +62,14 @@
     ]
   },
   "devDependencies": {
+    "@biomejs/biome": "1.2.2",
     "@types/react": "^18.0.27",
     "@types/react-dom": "^18.0.10",
     "concurrently": "^8.2.1",
     "dotenv": "^16.0.1",
+    "nano-staged": "^0.8.0",
     "pre-commit": "^1.2.2",
     "rimraf": "^5.0.1",
-    "rome": "^11.0.0",
     "typescript": "^4.9.4"
   }
 }
