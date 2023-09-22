@@ -92,6 +92,12 @@ function NavBar() {
       showForCurrentUser: false,
     },
     {
+      name: "Userlist",
+      href: "/users",
+      forRoles: ["admin"],
+      showForCurrentUser: false,
+    },
+    {
       name: "Account",
       href: "javascript:void(0);",
       forRoles: ["admin", "planner", "statist"],
@@ -100,12 +106,6 @@ function NavBar() {
     {
       name: "Settings",
       href: "/settings",
-      forRoles: ["admin"],
-      showForCurrentUser: false,
-    },
-    {
-      name: "Userlist",
-      href: "/users",
       forRoles: ["admin"],
       showForCurrentUser: false,
     },
@@ -182,22 +182,28 @@ function NavBar() {
 
     return sibaPages
       .filter((page) => page.showForCurrentUser)
-      .map((page, index) => (
-        <ListItem variant="sibaAppBarVerticalNew" key={index}>
-          <NavLink
-            to={page.href}
-            end
-            activeclassname="active"
-            className="nav-links"
-            onClick={() => {
-              handleClick();
-              if (page.action) page.action(); // Execute the logout action if present
-            }}
-          >
-            {page.name}
-          </NavLink>
-        </ListItem>
-      ));
+      .map((page, index) => {
+        const variantValue =
+          page.name === "Account"
+            ? "sibaAppBarAccountButton"
+            : "sibaAppBarVerticalNew";
+        return (
+          <ListItem variant={variantValue} key={index}>
+            <NavLink
+              to={page.href}
+              end
+              activeclassname="active"
+              className="nav-links"
+              onClick={() => {
+                handleClick();
+                if (page.action) page.action(); // Execute the logout action if present
+              }}
+            >
+              {page.name}
+            </NavLink>
+          </ListItem>
+        );
+      });
   };
 
   return (

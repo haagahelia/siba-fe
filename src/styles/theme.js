@@ -1,4 +1,5 @@
 import { createTheme } from "@mui/material";
+import { white } from "./palettes/commonColors";
 
 // Palettes are: darkPalette, lightPalette, redPalette (for testing), yellowPalette (for testing),
 
@@ -190,6 +191,27 @@ export const createAppTheme = (currentPalette) => {
                 color: currentPalette.text.primary,
                 textDecorationThickness: "3px",
                 width: navbarWidth,
+              },
+            },
+          },
+          {
+            props: { variant: "sibaAppBarAccountButton" }, // The "Account" button styling
+            style: {
+              backgroundColor: currentPalette.background.default,
+              borderRadius: "10px",
+              display: "flex",
+              justifyContent: "center",
+              margin: "auto",
+              marginTop: "10px",
+              padding: "5px",
+              textAlign: "center",
+              width: "130px",
+
+              "& a": {
+                color: currentPalette.primary.main,
+                fontSize: "17.5px",
+                fontWeight: 700,
+                textDecoration: "none",
               },
             },
           },
