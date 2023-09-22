@@ -26,7 +26,7 @@ export default function SettingsList(props) {
         setOpen={setOpen}
         singleSetting={singleSetting}
         setSingleSetting={setSingleSetting}
-        getSettings={getAllSettings}
+        getAllSettings={getAllSettings}
         incrementDataModifiedCounter={incrementDataModifiedCounter}
       />
       <Box>

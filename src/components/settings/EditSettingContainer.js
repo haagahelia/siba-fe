@@ -8,6 +8,7 @@ import {
 import AlertBox from "../common/AlertBox";
 import dao from "../../ajax/dao";
 import EditSettingForm from "./EditSettingForm";
+import Logger from "../../logger/logger";
 
 export default function EditSettingContainer(props) {
   const { singleSetting, getAllSettings, setSingleSetting } = props;
@@ -47,6 +48,7 @@ export default function EditSettingContainer(props) {
       textValue: values.textValue,
     };
     let result = await dao.editSetting(editedSetting);
+    Logger.debug(`Submitting edits for settings: ${JSON.stringify(result)}`);
     if (!result) {
       setAlertOptions({
         severity: "error",
