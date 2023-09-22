@@ -1,8 +1,16 @@
 import React, { useState } from "react";
-import { CardHeader, Card, CardContent, Button } from "@mui/material";
+import {
+  CardHeader,
+  Card,
+  CardContent,
+  Button,
+  IconButton,
+} from "@mui/material";
 import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
 import AddEquipmentDialogConfirmation from "./AddEquipmentDialogConfirmation";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 
 export default function AddEquipment(props) {
   // State for checking if Add Equipment card is expanded
@@ -28,6 +36,16 @@ export default function AddEquipment(props) {
           <CardHeader
             title="Add Equipment"
             onClick={() => setIsCardExpanded(!isCardExpanded)}
+            action={
+              <IconButton
+                onClick={() => setIsCardExpanded(!isCardExpanded)}
+                aria-expanded={isCardExpanded}
+                aria-label="expand/collapse"
+                color="primary"
+              >
+                {isCardExpanded ? <ExpandLessIcon /> : <ExpandMoreIcon />}
+              </IconButton>
+            }
           />
           {isCardExpanded && (
             <>
