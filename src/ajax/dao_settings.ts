@@ -34,8 +34,7 @@ export const editSetting = async (
   if (response.status === 403) {
     return false;
   }
-  const data = await response.json();
-  return data.ok;
+  return response.ok;
 };
 
 // delete setting
