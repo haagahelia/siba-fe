@@ -4,6 +4,7 @@ import { createTheme } from "@mui/material";
 
 export const lessPadding = "4px";
 export const morePadding = "16px";
+export const navbarWidth = "170px";
 
 export const createAppTheme = (currentPalette) =>
   createTheme({
@@ -135,7 +136,7 @@ export const createAppTheme = (currentPalette) =>
               flexWrap: "nowrap",
               alignItems: "flex-start",
               textAlign: "center",
-              fontSize: "18px",
+              fontSize: "17.5px",
               position: "sticky",
               justifyContent: "center",
               top: 0,
@@ -168,7 +169,8 @@ export const createAppTheme = (currentPalette) =>
                 fontFamily: "Roboto, Helvetica, Aria, sans-serif",
                 fontWeight: 600,
                 height: "100%",
-                width: "150px",
+                textAlign: "center",
+                width: navbarWidth,
               },
               "&:after": {
                 content: '""',
@@ -188,7 +190,28 @@ export const createAppTheme = (currentPalette) =>
                 backgroundColor: currentPalette.background.default,
                 color: currentPalette.text.primary,
                 textDecorationThickness: "3px",
-                width: "150px",
+                width: navbarWidth,
+              },
+            },
+          },
+          {
+            props: { variant: "sibaAppBarAccountButton" }, // The "Account" button styling
+            style: {
+              backgroundColor: currentPalette.background.default,
+              borderRadius: "10px",
+              display: "flex",
+              justifyContent: "center",
+              margin: "auto",
+              marginTop: "10px",
+              padding: "5px",
+              textAlign: "center",
+              width: "130px",
+
+              "& a": {
+                color: currentPalette.primary.main,
+                fontSize: "17.5px",
+                fontWeight: 700,
+                textDecoration: "none",
               },
             },
           },

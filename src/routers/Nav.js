@@ -93,7 +93,14 @@ function NavBar() {
       showForCurrentUser: false,
     },
     {
+      name: "Userlist",
+      href: "/users",
+      forRoles: ["admin"],
+      showForCurrentUser: false,
+    },
+    {
       name: "Account",
+      href: "javascript:void(0);",
       forRoles: ["admin", "planner", "statist"],
       showForCurrentUser: false,
     },
@@ -104,14 +111,8 @@ function NavBar() {
       showForCurrentUser: false,
     },
     {
-      name: "User List",
-      href: "/users",
-      forRoles: ["admin"],
-      showForCurrentUser: false,
-    },
-    {
       name: "Log Out",
-      href: "#",
+      href: "javascript:void(0);",
       forRoles: ["admin", "planner", "statist"],
       showForCurrentUser: false,
       action() {
@@ -182,22 +183,28 @@ function NavBar() {
 
     return sibaPages
       .filter((page) => page.showForCurrentUser)
-      .map((page, index) => (
-        <ListItem variant="sibaAppBarVerticalNew" key={index}>
-          <NavLink
-            to={page.href}
-            end
-            activeclassname="active"
-            className="nav-links"
-            onClick={() => {
-              handleClick();
-              if (page.action) page.action(); // Execute the logout action if present
-            }}
-          >
-            {page.name}
-          </NavLink>
-        </ListItem>
-      ));
+      .map((page, index) => {
+        const variantValue =
+          page.name === "Account"
+            ? "sibaAppBarAccountButton"
+            : "sibaAppBarVerticalNew";
+        return (
+          <ListItem variant={variantValue} key={index}>
+            <NavLink
+              to={page.href}
+              end
+              activeclassname="active"
+              className="nav-links"
+              onClick={() => {
+                handleClick();
+                if (page.action) page.action(); // Execute the logout action if present
+              }}
+            >
+              {page.name}
+            </NavLink>
+          </ListItem>
+        );
+      });
   };
 
   return (
@@ -205,7 +212,7 @@ function NavBar() {
       <AppBar
         position="fixed"
         sx={{
-          width: "150px",
+          width: "170px",
           height: "100vh",
           top: 0,
           left: 0,
