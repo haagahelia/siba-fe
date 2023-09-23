@@ -82,22 +82,22 @@ export default function ProgramResult(props) {
   return (
     <>
       <AllocRoundControlPanel incrementResetCounter={incrementResetCounter} />
-      <Typography style={{ margin: 10, fontSize: 24 }}>
+      <Typography variant="h4" className="m-1">
         Programs (Aineryhmät)
       </Typography>
-      <Modal open={open} onClose={handleClose} style={{ overflow: "scroll" }}>
+      <Modal open={open} onClose={handleClose} sx={{ overflow: "scroll" }}>
         <Box
-          style={{
+          sx={{
             width: "80%",
             margin: "auto",
             borderRadius: 20,
             marginTop: 10,
-            backgroundColor: theme.palette.background.default,
+            backgroundColor: (theme) => theme.palette.background.default,
             position: "relative",
           }}
         >
           <div
-            style={{
+            sx={{
               position: "absolute",
               top: "10px",
               right: "10px",
@@ -125,7 +125,7 @@ export default function ProgramResult(props) {
             </svg>
           </div>
           <Typography
-            style={{
+            sx={{
               textAlign: "center",
               marginTop: "5%",
             }}
@@ -144,7 +144,7 @@ export default function ProgramResult(props) {
         rowSpacing={1}
         columnSpacing={{ xs: 1, sm: 2, md: 3 }}
         spacing={2}
-        style={{
+        sx={{
           //padding: 2,
           margin: "auto",
           width: "80%",
