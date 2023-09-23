@@ -2,7 +2,7 @@ import React from "react";
 import Grid2 from "@mui/material/Unstable_Grid2";
 import ProgressBar from "@ramonak/react-progress-bar";
 import Modal from "@mui/material/Modal";
-import { Box } from "@mui/material"; // Button???
+import { Box } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import SubjectResult from "./SubjectResult";
@@ -36,9 +36,7 @@ export default function ProgramResult(props) {
     Logger.debug("Running effect to fetch program data.");
     getProgramData();
 
-    return () => {
-      // cleanup function doing nothing
-    };
+    return () => {};
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [resetCounter]);
@@ -145,7 +143,6 @@ export default function ProgramResult(props) {
         columnSpacing={{ xs: 1, sm: 2, md: 3 }}
         spacing={2}
         sx={{
-          //padding: 2,
           margin: "auto",
           width: "80%",
           marginTop: 10,

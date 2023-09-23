@@ -1,9 +1,5 @@
-//import Grid2 from "@mui/material/Unstable_Grid2";
 import React from "react";
-//import ProgressBar from "@ramonak/react-progress-bar";
-//import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-//import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
-import { Typography } from "@mui/material"; //Box ???
+import { Box, Typography } from "@mui/material";
 import { useEffect, useState, useContext } from "react";
 import { useTheme } from "@mui/material/styles";
 import AllocRoundControlPanel from "../AllocRound/AllocRoundControlPanel";
@@ -45,33 +41,30 @@ export default function RoomResult(props) {
   return (
     <div style={{ width: "80%", margin: "auto" }}>
       <AllocRoundControlPanel incrementResetCounter={incrementResetCounter} />
-      <Typography style={{ marginTop: "5%", fontSize: 24 }}>
+      <Typography className="mt6" variant="h5">
         Spaces (Huoneet)
       </Typography>
-      <div
-        style={{
+      <Box
+        sx={{
           display: "flex",
-          gap: 100,
+          gap: 12,
           marginTop: "3%",
           marginBottom: "5%",
         }}
       >
         <div style={theme.components.IndexRooms.luentoluokkaindex}>
-          <Typography style={{ marginLeft: 40 }}> Lecture class </Typography>
+          <Typography sx={{ marginLeft: 5 }}> Lecture class </Typography>
         </div>
         <div style={theme.components.IndexRooms.studioindex}>
-          <Typography style={{ marginLeft: 40 }}> Studio </Typography>
+          <Typography sx={{ marginLeft: 5 }}> Studio </Typography>
         </div>
         <div style={theme.components.IndexRooms.esitystilaindex}>
-          <Typography style={{ marginLeft: 40 }}>
-            {" "}
-            Performance space{" "}
-          </Typography>
+          <Typography sx={{ marginLeft: 5 }}> Performance space </Typography>
         </div>
         <div style={theme.components.IndexRooms.musiikkiluokkaindex}>
-          <Typography style={{ marginLeft: 40 }}> Music class </Typography>
+          <Typography sx={{ marginLeft: 5 }}> Music class </Typography>
         </div>
-      </div>
+      </Box>
 
       <RoomsWithTimesList rooms={rooms} />
     </div>
