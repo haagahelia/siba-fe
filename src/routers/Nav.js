@@ -34,6 +34,10 @@ import { AppContext } from "../AppContext";
 import Logger from "../logger/logger";
 import logo from "../styles/SibeliusLogo.svg";
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faGear } from "@fortawesome/free-solid-svg-icons";
+import { faArrowRightFromBracket } from "@fortawesome/free-solid-svg-icons";
+
 function NavBar() {
   Logger.debug("NavBar initiated");
   const sibaPages = [
@@ -152,6 +156,16 @@ function NavBar() {
             if (page.action) page.action();
           }}
         >
+          {page.name === "Settings" && (
+            <span style={{ marginRight: "5px" }}>
+              <FontAwesomeIcon icon={faGear} />
+            </span>
+          )}
+          {page.name === "Log Out" && (
+            <span style={{ marginRight: "5px" }}>
+              <FontAwesomeIcon icon={faArrowRightFromBracket} />
+            </span>
+          )}
           {page.name}
         </NavLink>
       </ListItem>
