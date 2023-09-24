@@ -118,6 +118,7 @@ function NavBar() {
       action() {
         localStorage.clear();
         handleLoginChange();
+        setIsDropdownVisible(false);
       },
     },
   ];
@@ -129,12 +130,32 @@ function NavBar() {
     localStorage.getItem("email") ? localStorage.getItem("email") : "Not yet",
   );
 
+  const [isDropdownVisible, setIsDropdownVisible] = useState(false);
+
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
+  };
+
+  // Called to produce the down drop menu items
+  const renderDropdownMenu = (page, variant) => {
+    return (
+      <ListItem key={page.name} variant={variant}>
+        <NavLink
+          to={page.href}
+          activeclassname="active"
+          className="nav-links"
+          onClick={() => {
+            if (page.action) page.action();
+          }}
+        >
+          {page.name}
+        </NavLink>
+      </ListItem>
+    );
   };
 
   const updateAppContext = () => {
@@ -183,11 +204,53 @@ function NavBar() {
 
     return sibaPages
       .filter((page) => page.showForCurrentUser)
+      .filter((page) => page.name !== "Settings" && page.name !== "Log Out")
       .map((page, index) => {
         const variantValue =
-          page.name === "Account"
-            ? "sibaAppBarAccountButton"
-            : "sibaAppBarVerticalNew";
+          page.name === "Account" ? "navBarAccountButton" : "navBar";
+        if (page.name === "Account") {
+          return (
+            <div
+              onMouseEnter={() => setIsDropdownVisible(true)}
+              onMouseLeave={() => setIsDropdownVisible(false)}
+              style={{ width: "170px" }} // The hover area between the Account links and the drop down
+            >
+              <ListItem variant="navBarAccountButton" key={index}>
+                <NavLink
+                  to={page.href}
+                  end
+                  activeclassname="active"
+                  className="nav-links"
+                >
+                  {page.name}
+                </NavLink>
+
+                {isDropdownVisible && (
+                  <div
+                    className="dropdown"
+                    style={{
+                      backgroundColor: "rgb(85, 85, 85)",
+                      border: "2px solid black",
+                      borderRadius: "10px",
+                      bottom: "0px",
+                      left: "150px",
+                      position: "absolute",
+                    }}
+                  >
+                    {sibaPages
+                      .filter((page) =>
+                        ["Settings", "Log Out"].includes(page.name),
+                      )
+                      .map((page) =>
+                        renderDropdownMenu(page, "navBarDropDownLinks"),
+                      )}
+                  </div>
+                )}
+              </ListItem>
+            </div>
+          );
+        }
+
         return (
           <ListItem variant={variantValue} key={index}>
             <NavLink
@@ -269,7 +332,7 @@ function NavBar() {
               </Menu>
             </Box>
             <Box sx={{ flexGrow: 1, display: { xs: "none", lg: "flex" } }}>
-              <List variant="sibaAppBarVerticalNew">{renderNavLinks()}</List>
+              <List variant="navBar">{renderNavLinks()}</List>
             </Box>
           </Toolbar>
         </Container>

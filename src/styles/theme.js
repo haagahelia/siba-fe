@@ -104,31 +104,7 @@ export const createAppTheme = (currentPalette) =>
         },
         variants: [
           {
-            props: { variant: "sibaAppBarHorizontal" },
-            style: {
-              display: "flex",
-              flexDirection: "row",
-              flexWrap: "nowrap",
-              alignItems: "flex-start",
-              height: "80px",
-              fontSize: "1.2rem",
-              position: "sticky",
-              top: 0,
-              zIndex: 20,
-              marginRight: "2rem",
-            },
-          },
-          {
-            props: { variant: "sibaAppBarVertical" },
-            style: {
-              display: "flex",
-              flexDirection: "column",
-              opacity: 1,
-              transition: "all 0.5s ease",
-            },
-          },
-          {
-            props: { variant: "sibaAppBarVerticalNew" },
+            props: { variant: "navBar" },
             style: {
               backgroundColor: currentPalette.primary.main,
               display: "flex",
@@ -155,7 +131,7 @@ export const createAppTheme = (currentPalette) =>
         },
         variants: [
           {
-            props: { variant: "sibaAppBarVerticalNew" },
+            props: { variant: "navBar" },
             style: {
               borderColor: currentPalette.backgroundDarker.default,
               display: "contents",
@@ -195,7 +171,7 @@ export const createAppTheme = (currentPalette) =>
             },
           },
           {
-            props: { variant: "sibaAppBarAccountButton" }, // The "Account" button styling
+            props: { variant: "navBarAccountButton" }, // The "Account" button styling
             style: {
               backgroundColor: currentPalette.background.default,
               borderRadius: "10px",
@@ -206,11 +182,32 @@ export const createAppTheme = (currentPalette) =>
               padding: "5px",
               textAlign: "center",
               width: "130px",
+              //width: navbarWidth,
 
               "& a": {
                 color: currentPalette.primary.main,
                 fontSize: "17.5px",
                 fontWeight: 700,
+                textDecoration: "none",
+              },
+            },
+          },
+          {
+            props: { variant: "navBarDropDownLinks" }, // The drop down menu styling
+            style: {
+              backgroundColor: "transparent",
+              display: "flex",
+              borderRadius: "10px",
+              flexDirection: "column",
+              justifyContent: "center",
+              padding: "2px",
+              textAlign: "center",
+              width: "130px",
+
+              "& a": {
+                color: currentPalette.primary.main,
+                fontSize: "17.5px",
+                fontWeight: 600,
                 textDecoration: "none",
               },
             },
