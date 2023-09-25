@@ -2,7 +2,7 @@ import React from "react";
 import Grid2 from "@mui/material/Unstable_Grid2";
 import ProgressBar from "@ramonak/react-progress-bar";
 import Modal from "@mui/material/Modal";
-import { Box } from "@mui/material"; // Button???
+import { Box } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import SubjectResult from "./SubjectResult";
@@ -36,9 +36,7 @@ export default function ProgramResult(props) {
     Logger.debug("Running effect to fetch program data.");
     getProgramData();
 
-    return () => {
-      // cleanup function doing nothing
-    };
+    return () => {};
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [resetCounter]);
@@ -82,22 +80,22 @@ export default function ProgramResult(props) {
   return (
     <>
       <AllocRoundControlPanel incrementResetCounter={incrementResetCounter} />
-      <Typography style={{ margin: 10, fontSize: 24 }}>
+      <Typography variant="h4" className="m-1">
         Programs (Aineryhmät)
       </Typography>
-      <Modal open={open} onClose={handleClose} style={{ overflow: "scroll" }}>
+      <Modal open={open} onClose={handleClose} sx={{ overflow: "scroll" }}>
         <Box
-          style={{
+          sx={{
             width: "80%",
             margin: "auto",
             borderRadius: 20,
             marginTop: 10,
-            backgroundColor: theme.palette.background.default,
+            backgroundColor: (theme) => theme.palette.background.default,
             position: "relative",
           }}
         >
           <div
-            style={{
+            sx={{
               position: "absolute",
               top: "10px",
               right: "10px",
@@ -125,7 +123,7 @@ export default function ProgramResult(props) {
             </svg>
           </div>
           <Typography
-            style={{
+            sx={{
               textAlign: "center",
               marginTop: "5%",
             }}
@@ -144,8 +142,7 @@ export default function ProgramResult(props) {
         rowSpacing={1}
         columnSpacing={{ xs: 1, sm: 2, md: 3 }}
         spacing={2}
-        style={{
-          //padding: 2,
+        sx={{
           margin: "auto",
           width: "80%",
           marginTop: 10,
