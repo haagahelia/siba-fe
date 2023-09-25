@@ -476,6 +476,45 @@ export const createAppTheme = (currentPalette) =>
           },
         },
       },
+      MuiTableRow: {
+        styleOverrides: {
+          root: {
+            "&:nth-child(even)": {
+              backgroundColor: currentPalette.background.default,
+              borderBottom: "none",
+            },
+          },
+        },
+      },
+      MuiTableSortLabel: {
+        styleOverrides: {
+          root: {
+            color: currentPalette.common.white,
+            transition: "0.3s ease",
+
+            "&:hover": {
+              color: currentPalette.primary.main,
+              transition: "0.3s ease",
+            },
+
+            "& .MuiTableSortLabel-icon": {
+              color: currentPalette.primary.main, // Change to your desired icon color
+              transition: "color 0.5s ease", // Add a color transition
+            },
+
+            "&:not(:hover):not(:focus) .MuiTableSortLabel-icon": {
+              color: currentPalette.primary.main,
+            },
+          },
+        },
+      },
+      MuiIconButton: {
+        styleOverrides: {
+          root: {
+            color: currentPalette.infoIcon.main,
+          },
+        },
+      },
     },
   });
 
