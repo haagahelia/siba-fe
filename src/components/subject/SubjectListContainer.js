@@ -10,7 +10,7 @@ export default function SubjectListContainer(props) {
   const { getAllSubjects, allSubjectsList, paginateSubjects, open, setOpen } =
     props;
   return (
-    <Container maxWidth="md">
+    <Container maxWidth="lg">
       <SingleSubjectDialog
         getAllSubjects={getAllSubjects}
         open={open}
