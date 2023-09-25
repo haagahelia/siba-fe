@@ -29,8 +29,9 @@ export const postNewSetting = async (
 // update setting
 export const editSetting = async (
   editedSetting: Settings,
+  id: number,
 ): Promise<boolean> => {
-  const response = await update(`${baseUrl}/setting`, editedSetting);
+  const response = await update(`${baseUrl}/setting/:${id}`, editedSetting);
   if (response.status === 403) {
     return false;
   }
