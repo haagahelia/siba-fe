@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { CardHeader, Card, CardContent } from "@mui/material";
+import { CardHeader, Card, CardContent, IconButton } from "@mui/material";
 import AlertBox from "../common/AlertBox";
 import { useFormik } from "formik";
 import ConfirmationDialog from "../common/ConfirmationDialog";
@@ -9,6 +9,8 @@ import {
 } from "../../validation/ValidateAddEditSetting";
 import dao from "../../ajax/dao";
 import AddSettingForm from "./AddSettingForm";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 
 export default function AddSettingContainer(props) {
   // State for checking if Add Setting card is expanded
@@ -103,6 +105,16 @@ export default function AddSettingContainer(props) {
           <CardHeader
             title="Add Setting"
             onClick={() => setIsCardExpanded(!isCardExpanded)}
+            action={
+              <IconButton
+                onClick={() => setIsCardExpanded(!isCardExpanded)}
+                aria-expanded={isCardExpanded}
+                aria-label="expand/collapse"
+                color="primary"
+              >
+                {isCardExpanded ? <ExpandLessIcon /> : <ExpandMoreIcon />}
+              </IconButton>
+            }
           />
           {isCardExpanded && (
             <>
