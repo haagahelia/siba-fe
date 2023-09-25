@@ -116,7 +116,7 @@ function NavBar() {
     },
     {
       name: "Log Out",
-      href: "javascript:void(0);",
+      href: "/login",
       forRoles: ["admin", "planner", "statist"],
       showForCurrentUser: false,
       action() {
