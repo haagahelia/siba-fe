@@ -22,8 +22,7 @@ export const createAppTheme = (currentPalette) =>
       MuiCardHeader: {
         styleOverrides: {
           root: {
-            backgroundColor: currentPalette.background.default,
-            fontSize: 25,
+            fontSize: 40,
             color: currentPalette.fontColorDefault.default,
             marginBottom: "10px",
             padding: "10px",
@@ -93,11 +92,6 @@ export const createAppTheme = (currentPalette) =>
         },
       },
       MuiList: {
-        styleOverrides: {
-          root: {
-            backgroundColor: currentPalette.backgroundDarker.default,
-          },
-        },
         variants: [
           {
             props: { variant: "sibaAppBarHorizontal" },
@@ -142,13 +136,6 @@ export const createAppTheme = (currentPalette) =>
         ],
       },
       MuiListItem: {
-        styleOverrides: {
-          root: {
-            backgroundColor: currentPalette.backgroundDarker.default,
-            color: currentPalette.fontColorDefault.default,
-            border: `1px solid ${currentPalette.borderColor.cardBoder}`,
-          },
-        },
         variants: [
           {
             props: { variant: "sibaAppBarVerticalNew" },
@@ -451,6 +438,45 @@ export const createAppTheme = (currentPalette) =>
           root: {
             color: currentPalette.warning.contrastText,
             fontWeight: 700,
+          },
+        },
+      },
+      MuiTableRow: {
+        styleOverrides: {
+          root: {
+            "&:nth-child(even)": {
+              backgroundColor: currentPalette.background.default,
+              borderBottom: "none",
+            },
+          },
+        },
+      },
+      MuiTableSortLabel: {
+        styleOverrides: {
+          root: {
+            color: currentPalette.common.white,
+            transition: "0.3s ease",
+
+            "&:hover": {
+              color: currentPalette.primary.main,
+              transition: "0.3s ease",
+            },
+
+            "& .MuiTableSortLabel-icon": {
+              color: currentPalette.primary.main, // Change to your desired icon color
+              transition: "color 0.5s ease", // Add a color transition
+            },
+
+            "&:not(:hover):not(:focus) .MuiTableSortLabel-icon": {
+              color: currentPalette.primary.main,
+            },
+          },
+        },
+      },
+      MuiIconButton: {
+        styleOverrides: {
+          root: {
+            color: currentPalette.infoIcon.main,
           },
         },
       },

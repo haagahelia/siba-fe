@@ -24,6 +24,7 @@ export default function SubjectPagination({
     const from = (p - 1) * pageSize;
     const to = (p - 1) * pageSize + pageSize;
     setPagination({ from, to });
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   return (
