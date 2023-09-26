@@ -27,6 +27,7 @@ import NotFoundView from "../views/NotFoundView";
 import EquipmentView from "../views/EquipmentView";
 import BuildingView from "../views/BuildingView";
 import DepartmentView from "../views/DepartmentView";
+import SpaceView from "../views/SpaceView";
 import RegisterView from "../views/RegisterView";
 import LoginView from "../views/LoginView";
 import UserView from "../views/UserView";
@@ -75,6 +76,12 @@ function NavBar() {
     {
       name: "Equipment",
       href: "equipment",
+      forRoles: ["admin", "planner", "statist"],
+      showForCurrentUser: false,
+    },
+    {
+      name: "Spaces",
+      href: "space",
       forRoles: ["admin", "planner", "statist"],
       showForCurrentUser: false,
     },
@@ -365,6 +372,7 @@ function NavBar() {
         <Route path="/equipment" element={<EquipmentView />} />
         <Route path="/building" element={<BuildingView />} />
         <Route path="/department" element={<DepartmentView />} />
+        <Route path="/space" element={<SpaceView />} />
         <Route path="/allocation/addAllocRound" element={<AddAllocRound />} />
         <Route path="/settings" element={<Settings />} />
         <Route path="/users" element={<UserView />} />
