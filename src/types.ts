@@ -82,6 +82,12 @@ export interface Settings {
   textValue: string;
 }
 
+export interface Space {
+  id: number;
+  name: string;
+  area: number;
+}
+
 export interface SpaceType {
   id: number;
   name: string;
