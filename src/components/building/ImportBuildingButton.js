@@ -64,6 +64,21 @@ export default function ImportBuildingButton(props) {
       }),
     );
 
+    setFailedBuildings([...failedBuildings, ...tempFailedBuildings]);
+    Logger.debug("failed buildings", tempFailedBuildings);
+
+    //if the data is empty after validation, not sending to backend
+    if (buildingsToSend.length === 0) {
+      setAlertOptions({
+        severity: "error",
+        title: "Error!",
+        message: `Something wrong happened. ${failedCount} building failed to add.`,
+      });
+      setAlertOpen(true);
+
+      return;
+    }
+
     Logger.debug("buildingsToSend", buildingsToSend);
 
     let result = await dao.postNewBuildings(buildingsToSend);
@@ -85,8 +100,6 @@ export default function ImportBuildingButton(props) {
       });
       setAlertOpen(true);
     }
-
-    setFailedBuildings([...failedBuildings, ...tempFailedBuildings]);
   };
 
   return (
