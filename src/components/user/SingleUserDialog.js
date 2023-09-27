@@ -1,14 +1,34 @@
 import Grid from "@mui/material/Grid";
-import { Dialog, DialogContent, DialogTitle, Typography } from "@mui/material";
+import {
+  Dialog,
+  DialogContent,
+  DialogActions,
+  DialogTitle,
+  Typography,
+} from "@mui/material";
+import EditUserContainer from "./EditUserContainer";
+import DeleteUser from "./DeleteUser";
 
 export default function SingleUserDialog(props) {
-  const { open, setOpen, singleUser } = props;
+  const { open, setOpen, singleUser, getAllUsers, setSingleUser } = props;
 
   return (
     <div>
       <Dialog open={open} onClose={() => setOpen(false)} width="400px">
         <DialogTitle id="dialog-title">{singleUser?.email}</DialogTitle>
         <DialogContent>
+          <DialogActions>
+            <DeleteUser
+              singleUser={singleUser}
+              getAllUsers={getAllUsers}
+              setOpen={setOpen}
+            />
+            <EditUserContainer
+              singleUser={singleUser}
+              getAllUsers={getAllUsers}
+              setSingleUser={setSingleUser}
+            />
+          </DialogActions>
           <DialogContent>
             <Grid
               container
