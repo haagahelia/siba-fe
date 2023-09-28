@@ -1,5 +1,6 @@
-import React, { useState } from "react"; //useEffect
-import { styled } from "@mui/material/styles";
+// import SingleSubjectDialog from "./SingleSubjectDialog";
+import InfoIcon from "@mui/icons-material/Info";
+import IconButton from "@mui/material/IconButton";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -8,14 +9,14 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import TableSortLabel from "@mui/material/TableSortLabel";
-// import SingleSubjectDialog from "./SingleSubjectDialog";
-import InfoIcon from "@mui/icons-material/Info";
-import IconButton from "@mui/material/IconButton";
+import { styled } from "@mui/material/styles";
+import React, { useState } from "react"; //useEffect
 
 export default function SpaceListItems(props) {
-  const { getAllSpaces, paginateSpaces } = props;
-  const [open, setOpen] = useState(false);
-  const [singleSpace, setSingleSpace] = useState(null);
+  //const { getAllSpaces, paginateSpaces } = props;
+  const { paginateSpaces } = props;
+  //const [open, setOpen] = useState(false);
+  // const [singleSpace, setSingleSpace] = useState(null);
   const [order, setOrder] = useState("asc");
   const [orderBy, setOrderBy] = useState("SubjectName");
 
@@ -85,8 +86,8 @@ export default function SpaceListItems(props) {
                     <TableCell>
                       <IconButton
                         onClick={() => {
-                          setSingleSpace(value);
-                          setOpen(true);
+                          //setSingleSpace(value);
+                          //setOpen(true);
                         }}
                         aria-label="Open Info"
                       >
