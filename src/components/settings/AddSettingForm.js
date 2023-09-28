@@ -21,7 +21,7 @@ export default function AddSettingForm(props) {
               helperText={
                 formik.touched.name && formik.errors.name
                   ? formik.errors.name
-                  : null
+                  : ""
               }
             />
           </Grid>
@@ -41,7 +41,7 @@ export default function AddSettingForm(props) {
               helperText={
                 formik.touched.description && formik.errors.description
                   ? formik.errors.description
-                  : null
+                  : ""
               }
             />
           </Grid>
@@ -61,7 +61,7 @@ export default function AddSettingForm(props) {
               helperText={
                 formik.touched.numberValue && formik.errors.numberValue
                   ? formik.errors.numberValue
-                  : null
+                  : ""
               }
             />
           </Grid>
@@ -81,7 +81,7 @@ export default function AddSettingForm(props) {
               helperText={
                 formik.touched.textValue && formik.errors.textValue
                   ? formik.errors.textValue
-                  : null
+                  : ""
               }
             />
           </Grid>
