@@ -48,7 +48,9 @@ export default function EditSettingContainer(props) {
       textValue: values.textValue,
     };
     let result = await dao.editSetting(editedSetting);
-    Logger.debug(`Submitting edits for settings: ${JSON.stringify(result)}`);
+    Logger.debug(
+      `Submitting edits for settings: ${JSON.stringify(editedSetting)}`,
+    );
     if (!result) {
       setAlertOptions({
         severity: "error",

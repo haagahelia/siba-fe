@@ -23,7 +23,7 @@ export default function EditSettingForm(props) {
       </Button>
       <Dialog open={open}>
         <form onSubmit={formik.handleSubmit}>
-          {/* formik.initialValues?.subjectName} Here ? checks if the subjectName attribute can be found in the initialValues ​​object, if not found returns null and does not crash */}
+          {/* formik.initialValues?.subjectName} Here ? checks if the subjectName attribute can be found in the initialValues ​​object, if not found returns an empty string and does not crash */}
           <DialogTitle>Edit: {formik.initialValues?.name}</DialogTitle>
           <DialogContent>
             <Grid container variant="sibaGridEdit" spacing={3} column={7}>
@@ -34,7 +34,6 @@ export default function EditSettingForm(props) {
                   }
                   name="name"
                   label="Setting name"
-                  defaultValue={formik.initialValues?.name}
                   variant="outlined"
                   value={formik.values?.name}
                   onChange={formik.handleChange("name")}
@@ -42,7 +41,7 @@ export default function EditSettingForm(props) {
                   helperText={
                     formik.touched.name && formik.errors.name
                       ? formik.errors.name
-                      : null
+                      : ""
                   }
                 />
               </Grid>
@@ -55,7 +54,6 @@ export default function EditSettingForm(props) {
                   }
                   name="description"
                   label="Description"
-                  defaultValue={formik.initialValues?.description}
                   variant="outlined"
                   value={formik.values?.description}
                   onChange={formik.handleChange("description")}
@@ -63,7 +61,7 @@ export default function EditSettingForm(props) {
                   helperText={
                     formik.touched.description && formik.errors.description
                       ? formik.errors.description
-                      : null
+                      : ""
                   }
                 />
               </Grid>
@@ -76,7 +74,6 @@ export default function EditSettingForm(props) {
                   }
                   name="numberValue"
                   label="numberValue"
-                  defaultValue={formik.initialValues?.numberValue}
                   variant="outlined"
                   value={formik.values?.numberValue}
                   onChange={formik.handleChange("numberValue")}
@@ -84,7 +81,7 @@ export default function EditSettingForm(props) {
                   helperText={
                     formik.touched.numberValue && formik.errors.numberValue
                       ? formik.errors.numberValue
-                      : null
+                      : ""
                   }
                 />
               </Grid>
@@ -97,7 +94,6 @@ export default function EditSettingForm(props) {
                   }
                   name="textValue"
                   label="textValue"
-                  defaultValue={formik.initialValues?.textValue}
                   variant="outlined"
                   value={formik.values?.textValue}
                   onChange={formik.handleChange("textValue")}
@@ -105,7 +101,7 @@ export default function EditSettingForm(props) {
                   helperText={
                     formik.touched.numberValue && formik.errors.textValue
                       ? formik.errors.textValue
-                      : null
+                      : ""
                   }
                 />
               </Grid>

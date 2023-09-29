@@ -26,6 +26,9 @@ export async function validate(values) {
       }
     });
 
+    result = filteredList.some(
+      (building) => building.name.toLowerCase() === values.name.toLowerCase(),
+    );
     return result;
   };
 
