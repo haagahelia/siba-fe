@@ -1,4 +1,2 @@
-echo "Running formatter & linter.."
-rome check src/ --apply-suggested
-rome format src/ --write --indent-style space --indent-size 2
-git add .
+echo "Formatting and linting..."
+nano-staged

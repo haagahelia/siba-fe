@@ -1,6 +1,6 @@
 import Logger from "../logger/logger";
-import { User, UserLoggedIn, ResponseFiner } from "../types";
-import { create, get, update, remove } from "./request";
+import { ResponseFiner, User, UserLoggedIn } from "../types";
+import { create, get, remove, update } from "./request";
 
 const baseUrl = process.env.REACT_APP_BE_SERVER_BASE_URL;
 
@@ -53,6 +53,6 @@ export const editUser = async (editedUser: User): Promise<boolean> => {
 //removing an user
 export const deleteSingleUser = async (userId: number): Promise<boolean> => {
   const response = await remove(`${baseUrl}/user/${userId}`);
-  const data = await response.json();
+  //const data = await response.json();
   return response.ok;
 };
