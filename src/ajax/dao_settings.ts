@@ -3,7 +3,7 @@ import { create, get, remove, update } from "./request";
 
 const baseUrl = process.env.REACT_APP_BE_SERVER_BASE_URL;
 
-//fetching all settings
+// fetching all settings
 export const fetchSettings = async (): Promise<ResponseFiner<Settings>> => {
   const response = await get(`${baseUrl}/setting`);
   if (response.status === 200) {

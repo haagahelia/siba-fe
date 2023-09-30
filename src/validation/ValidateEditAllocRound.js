@@ -13,7 +13,7 @@ export async function validate(values) {
     let result;
     let id;
     let filteredList = [];
-    //Check if user enter an existed allocation round name
+    // Check if user enter an existed allocation round name
     allocRoundList.forEach((allocRound) => {
       if (values.id === allocRound.id) {
         id = allocRound.id;

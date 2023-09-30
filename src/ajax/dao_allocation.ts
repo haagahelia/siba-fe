@@ -1,14 +1,14 @@
 import {
-  ResponseFiner,
-  UnallocableSubject,
-  SubjectRoom,
   MissingEquipment,
+  ResponseFiner,
+  SubjectRoom,
+  UnallocableSubject,
 } from "../types";
 import { get } from "./request";
 
 const baseUrl = process.env.REACT_APP_BE_SERVER_BASE_URL;
 
-//fetching unAllocableSubjects
+// fetching unAllocableSubjects
 export const getUnAllocableSubjects = async (
   id: number,
 ): Promise<ResponseFiner<UnallocableSubject>> => {
@@ -21,7 +21,7 @@ export const getUnAllocableSubjects = async (
   }
 };
 
-//fetching SubjectRooms
+// fetching SubjectRooms
 export const getSubjectRooms = async (
   id: number,
 ): Promise<ResponseFiner<SubjectRoom>> => {
@@ -34,7 +34,7 @@ export const getSubjectRooms = async (
   }
 };
 
-//fetcing missingEquipmentForRoom
+// fetcing missingEquipmentForRoom
 export const getMissingEquipmentForRoom = async (
   subjectId: number,
   roomId: number,

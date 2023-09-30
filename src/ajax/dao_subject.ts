@@ -3,7 +3,7 @@ import { create, get, remove, update } from "./request";
 
 const baseUrl = process.env.REACT_APP_BE_SERVER_BASE_URL;
 
-//fetching all subjects
+// fetching all subjects
 export const fetchAllSubjects = async (): Promise<ResponseFiner<Subject>> => {
   const response = await get(`${baseUrl}/subject`);
   if (response.status === 200) {
@@ -14,7 +14,7 @@ export const fetchAllSubjects = async (): Promise<ResponseFiner<Subject>> => {
   }
 };
 
-//fetching all subject's names
+// fetching all subject's names
 export const fetchSubjectsNames = async (): Promise<
   ResponseFiner<SubjectName>
 > => {
@@ -27,19 +27,19 @@ export const fetchSubjectsNames = async (): Promise<
   }
 };
 
-//creating new subject
+// creating new subject
 export const postNewSubject = async (newSubject: Subject): Promise<boolean> => {
   const response = await create(`${baseUrl}/subject`, newSubject);
   return response.ok;
 };
 
-//updating subject
+// updating subject
 export const editSubject = async (editedSubject: Subject): Promise<boolean> => {
   const response = await update(`${baseUrl}/subject`, editedSubject);
   return response.ok;
 };
 
-//removing single subject
+// removing single subject
 export const deleteSingleSubject = async (
   subjectId: number,
 ): Promise<boolean> => {

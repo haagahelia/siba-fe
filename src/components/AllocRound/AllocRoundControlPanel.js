@@ -1,16 +1,16 @@
-import React from "react";
 import { Button, Typography, useTheme } from "@mui/material";
+import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
-import { useState, useContext } from "react";
-
-import allocationPost from "../../data/ResultAllocationStore";
 import { AppContext } from "../../AppContext";
+import allocationPost from "../../data/ResultAllocationStore";
 
-const AllocRoundControlPanel = ({ incrementResetCounter }) => {
-  const [isClicked, setIsClicked] = useState(true);
+export default function AllocRoundControlPanel({ incrementResetCounter }) {
   const appContext = useContext(AppContext);
-  //console.log("appContext 123: "+appContext);
+  // console.log("appContext 123: " + appContext);
+
   const theme = useTheme();
+
+  const [isClicked, setIsClicked] = useState(true);
 
   const setDelayedClickedToggle = () => {
     setTimeout(() => {
@@ -66,6 +66,4 @@ const AllocRoundControlPanel = ({ incrementResetCounter }) => {
       </Link>
     </Typography>
   );
-};
-
-export default AllocRoundControlPanel;
+}

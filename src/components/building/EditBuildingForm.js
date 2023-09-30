@@ -1,13 +1,10 @@
-import React, { useState } from "react";
-import { Button, Grid } from "@mui/material";
-import DialogTitle from "@mui/material/DialogTitle";
+import { Button, DialogActions, DialogContent, Grid } from "@mui/material";
 import Dialog from "@mui/material/Dialog";
-import { DialogActions, DialogContent } from "@mui/material";
+import DialogTitle from "@mui/material/DialogTitle";
+import { useState } from "react";
 import BuildingInputField from "./BuildingInputField";
 
-export default function EditBuildingForm(props) {
-  const { formik } = props;
-
+export default function EditBuildingForm({ formik }) {
   const [open, setOpen] = useState(false);
 
   return (
@@ -23,7 +20,10 @@ export default function EditBuildingForm(props) {
       </Button>
       <Dialog open={open}>
         <form onSubmit={formik.handleSubmit}>
-          {/* formik.initialValues?.subjectName} Here ? checks if the subjectName attribute can be found in the initialValues ​​object, if not found returns null and does not crash */}
+          {/* formik.initialValues?.subjectName} Here ? checks
+              if the subjectName attribute can be found
+              in the initialValues object,
+              if not found returns null and does not crash */}
           <DialogTitle>Edit: {formik.initialValues?.name}</DialogTitle>
           <DialogContent>
             <Grid

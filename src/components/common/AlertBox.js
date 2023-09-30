@@ -1,11 +1,9 @@
-import React from "react";
-import IconButton from "@mui/material/IconButton";
-import { Alert, AlertTitle, Snackbar } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
+import { Alert, AlertTitle, Snackbar } from "@mui/material";
+import IconButton from "@mui/material/IconButton";
 import { useTheme } from "@mui/material/styles";
 
-export default function AlertBox(props) {
-  const { alertOpen, alertOptions, setAlertOpen } = props;
+export default function AlertBox({ alertOpen, alertOptions, setAlertOpen }) {
   const theme = useTheme();
 
   return (

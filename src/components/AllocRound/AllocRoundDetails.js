@@ -1,27 +1,26 @@
-import { useState } from "react";
-import Grid from "@mui/material/Grid";
 import {
   Dialog,
+  DialogActions,
   DialogContent,
-  //DialogContentText,
+  // DialogContentText,
   DialogTitle,
   Typography,
-  DialogActions,
 } from "@mui/material";
+import Grid from "@mui/material/Grid";
+import { useState } from "react";
 import AlertBox from "../common/AlertBox";
 import DeleteAllocRound from "./DeleteAllocRound";
 import EditAllocRound from "./EditAllocRound";
 import SelectAllocRound from "./SelectAllocRound";
 
-export default function AllocRoundDetails(props) {
-  const {
-    open,
-    setOpen,
-    singleAllocRound,
-    getAllAllocRounds,
-    setSingleAllocRound,
-    incrementDataModifiedCounter,
-  } = props;
+export default function AllocRoundDetails({
+  open,
+  setOpen,
+  singleAllocRound,
+  getAllAllocRounds,
+  setSingleAllocRound,
+  incrementDataModifiedCounter,
+}) {
   const [alertOpen, setAlertOpen] = useState(false);
   const [alertOptions] = useState({
     title: "This is alert title",

@@ -1,22 +1,21 @@
-import React, { useState } from "react";
+import ExpandLessIcon from "@mui/icons-material/ExpandLess";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import {
-  CardHeader,
+  Button,
   Card,
   CardContent,
-  Button,
+  CardHeader,
   IconButton,
 } from "@mui/material";
 import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
+import { useState } from "react";
 import AddEquipmentDialogConfirmation from "./AddEquipmentDialogConfirmation";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 
-export default function AddEquipment(props) {
+export default function AddEquipment({ getAllEquipments }) {
   // State for checking if Add Equipment card is expanded
   const [isCardExpanded, setIsCardExpanded] = useState(false);
 
-  const { getAllEquipments } = props;
   const [open, setOpen] = useState(false);
   const [equipment, setEquipment] = useState({
     name: "",

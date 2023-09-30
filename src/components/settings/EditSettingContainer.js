@@ -1,17 +1,20 @@
-import React, { useState } from "react";
 import { useFormik } from "formik";
-import ConfirmationDialog from "../common/ConfirmationDialog";
+import { useState } from "react";
+import dao from "../../ajax/dao";
+import Logger from "../../logger/logger";
 import {
-  validate,
   capitalizeFirstLetter,
+  validate,
 } from "../../validation/ValidateAddEditSetting";
 import AlertBox from "../common/AlertBox";
-import dao from "../../ajax/dao";
+import ConfirmationDialog from "../common/ConfirmationDialog";
 import EditSettingForm from "./EditSettingForm";
-import Logger from "../../logger/logger";
 
-export default function EditSettingContainer(props) {
-  const { singleSetting, getAllSettings, setSingleSetting } = props;
+export default function EditSettingContainer({
+  singleSetting,
+  getAllSettings,
+  setSingleSetting,
+}) {
   const [alertOpen, setAlertOpen] = useState(false);
   const [alertOptions, setAlertOptions] = useState({
     title: "This is title",
@@ -25,7 +28,8 @@ export default function EditSettingContainer(props) {
   });
 
   const formik = useFormik({
-    // enableReinitialize checks if Formik needs to reset the form if the initial values ​​change
+    // enableReinitialize checks if Formik needs to reset the form
+    // if the initial values change
     enableReinitialize: true,
     initialValues: singleSetting,
     validate,

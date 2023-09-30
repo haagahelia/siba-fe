@@ -1,15 +1,16 @@
-import React, { useState } from "react";
+import { Button, DialogContent, DialogContentText, Grid } from "@mui/material";
 import Dialog from "@mui/material/Dialog";
 import DialogTitle from "@mui/material/DialogTitle";
 import TextField from "@mui/material/TextField";
-import { Button, Grid } from "@mui/material";
-import { DialogContent, DialogContentText } from "@mui/material";
+import { useState } from "react";
 import dao from "../../ajax/dao";
 import { validate } from "../../validation/ValidateAddEditDepartment";
 
-export default function EditDepartment(props) {
-  const { singleDepartment, getAllDepartments, setOpen } = props;
-
+export default function EditDepartment({
+  singleDepartment,
+  getAllDepartments,
+  setOpen,
+}) {
   const [editOpen, setEditOpen] = useState(false);
   const [department, setDepartment] = useState({
     id: singleDepartment?.id,

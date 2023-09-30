@@ -1,21 +1,21 @@
-import React, { useState } from "react";
-import { CardHeader, Card, CardContent, IconButton } from "@mui/material";
-import AlertBox from "../common/AlertBox";
-import { useFormik } from "formik";
-import ConfirmationDialog from "../common/ConfirmationDialog";
-import {
-  validate,
-  capitalizeFirstLetter,
-} from "../../validation/ValidateAddEditSetting";
-import dao from "../../ajax/dao";
-import AddSettingForm from "./AddSettingForm";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import { Card, CardContent, CardHeader, IconButton } from "@mui/material";
+import { useFormik } from "formik";
+import { useState } from "react";
+import dao from "../../ajax/dao";
+import {
+  capitalizeFirstLetter,
+  validate,
+} from "../../validation/ValidateAddEditSetting";
+import AlertBox from "../common/AlertBox";
+import ConfirmationDialog from "../common/ConfirmationDialog";
+import AddSettingForm from "./AddSettingForm";
 
-export default function AddSettingContainer(props) {
+export default function AddSettingContainer({ getAllSettings }) {
   // State for checking if Add Setting card is expanded
   const [isCardExpanded, setIsCardExpanded] = useState(false);
-  const { getAllSettings } = props;
+
   const [alertOpen, setAlertOpen] = useState(false);
   const [alertOptions, setAlertOptions] = useState({
     title: "This is title",
@@ -87,7 +87,7 @@ export default function AddSettingContainer(props) {
     getAllSettings();
   };
   return (
-    <React.Fragment>
+    <>
       <AlertBox
         alertOpen={alertOpen}
         alertOptions={alertOptions}
@@ -117,16 +117,14 @@ export default function AddSettingContainer(props) {
             }
           />
           {isCardExpanded && (
-            <>
-              <AddSettingForm
-                formik={formik}
-                submitValues={formik.values}
-                setInitialSetting={setInitialSetting}
-              />
-            </>
+            <AddSettingForm
+              formik={formik}
+              submitValues={formik.values}
+              setInitialSetting={setInitialSetting}
+            />
           )}
         </CardContent>
       </Card>
-    </React.Fragment>
+    </>
   );
 }

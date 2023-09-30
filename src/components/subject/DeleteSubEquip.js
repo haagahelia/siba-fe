@@ -1,12 +1,13 @@
-import React, { useState } from "react";
-import dao from "../../ajax/dao";
 import { Button } from "@mui/material";
-import ConfirmationDialog from "../common/ConfirmationDialog";
+import { useState } from "react";
+import dao from "../../ajax/dao";
 import AlertBox from "../common/AlertBox";
+import ConfirmationDialog from "../common/ConfirmationDialog";
 
-export default function DeleteSubEquip(props) {
-  const { singleEquipBySubId, getEquipmentsBySubId } = props;
-
+export default function DeleteSubEquip({
+  singleEquipBySubId,
+  getEquipmentsBySubId,
+}) {
   const [alertOpen, setAlertOpen] = useState(false);
   const [alertOptions, setAlertOptions] = useState({
     message: "This is an error alert — check it out!",
@@ -21,6 +22,7 @@ export default function DeleteSubEquip(props) {
     subjectId: 0,
     equipmentId: 0,
   });
+
   let id1 = singleEquipBySubId.subjectId;
   let id2 = singleEquipBySubId.equipmentId;
   let equipmentName = singleEquipBySubId.name;

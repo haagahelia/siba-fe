@@ -1,13 +1,15 @@
-import React from "react";
-import DialogTitle from "@mui/material/DialogTitle";
-import Dialog from "@mui/material/Dialog";
-import Button from "@mui/material/Button";
 import { DialogActions, DialogContent, DialogContentText } from "@mui/material";
+import Button from "@mui/material/Button";
+import Dialog from "@mui/material/Dialog";
+import DialogTitle from "@mui/material/DialogTitle";
 
-export default function ConfirmationDialog(props) {
-  const { dialogOpen, dialogOptions, setDialogOpen, submit, submitValues } =
-    props;
-
+export default function ConfirmationDialog({
+  dialogOpen,
+  dialogOptions,
+  setDialogOpen,
+  submit,
+  submitValues,
+}) {
   const handleClose = () => {
     setDialogOpen(false);
   };

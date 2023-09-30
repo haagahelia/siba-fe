@@ -1,22 +1,20 @@
-import React, { useState } from "react";
+import { Button, DialogContent, Grid } from "@mui/material";
 import Dialog from "@mui/material/Dialog";
 import DialogTitle from "@mui/material/DialogTitle";
 import TextField from "@mui/material/TextField";
-import { Button, Grid } from "@mui/material";
-import { DialogContent } from "@mui/material";
+import { useState } from "react";
 import dao from "../../ajax/dao";
-import ValidateEditEquipment from "../../validation/ValidateEditEquipment";
 import Logger from "../../logger/logger";
+import ValidateEditEquipment from "../../validation/ValidateEditEquipment";
 
-export default function EditEquipment(props) {
+export default function EditEquipment({
+  singleEquipment,
+  setSingleEquipment,
+  getAllEquipments,
+  // open,
+  setOpen,
+}) {
   Logger.logPrefix = "SingleEquipmentDialog";
-  const {
-    singleEquipment,
-    setSingleEquipment,
-    getAllEquipments,
-    /* open, */
-    setOpen,
-  } = props;
 
   const [editOpen, setEditOpen] = useState(false);
 
@@ -24,7 +22,7 @@ export default function EditEquipment(props) {
     Logger.debug(
       `Submitting edits for equipment: ${JSON.stringify(singleEquipment)}`,
     );
-    //extracting id from singleEquipment object
+    // extracting id from singleEquipment object
     const id = singleEquipment.id;
     let validation = ValidateEditEquipment(singleEquipment);
     if (Object.values(validation).length !== 0) {

@@ -1,23 +1,26 @@
-import React, { useEffect, useState } from "react";
-import Grid from "@mui/material/Grid";
 import {
   Dialog,
+  DialogActions,
   DialogContent,
   DialogTitle,
   Typography,
-  DialogActions,
 } from "@mui/material";
-import DeleteSubject from "./DeleteSubject";
-import EditSubjectContainer from "./EditSubjectContainer";
-import AddSubEquipContainer from "./AddSubEquipContainer";
-import SubjectEquipmentList from "./SubjectEquipmentList";
+import Grid from "@mui/material/Grid";
+import { useEffect, useState } from "react";
 import dao from "../../ajax/dao";
 import AlertBox from "../common/AlertBox";
+import AddSubEquipContainer from "./AddSubEquipContainer";
+import DeleteSubject from "./DeleteSubject";
+import EditSubjectContainer from "./EditSubjectContainer";
+import SubjectEquipmentList from "./SubjectEquipmentList";
 
-export default function SingleSubjectDialog(props) {
-  const { open, setOpen, singleSubject, getAllSubjects, setSingleSubject } =
-    props;
-
+export default function SingleSubjectDialog({
+  open,
+  setOpen,
+  singleSubject,
+  getAllSubjects,
+  setSingleSubject,
+}) {
   const [equipListBySubId, setEquipListBySubId] = useState([]);
   const [alertOpen, setAlertOpen] = useState(false);
   const [alertOptions, setAlertOptions] = useState({
@@ -38,16 +41,16 @@ export default function SingleSubjectDialog(props) {
       return;
     } else {
       setEquipListBySubId(result.data);
-      //console.log(`setEquipListBySubId(result): ${result.data.length}`);
+      // console.log(`setEquipListBySubId(result): ${result.data.length}`);
       return result.data;
     }
   };
 
   useEffect(() => {
-    //console.log(`singleSubject?.id${singleSubject?.id}`);
-    //console.log(`singleSubject?.name${singleSubject?.name}`);
+    // console.log(`singleSubject?.id${singleSubject?.id}`);
+    // console.log(`singleSubject?.name${singleSubject?.name}`);
     if (singleSubject && typeof singleSubject.id === "number") {
-      //console.log(`getEquipmentsBySubId(${singleSubject.id})`);
+      // console.log(`getEquipmentsBySubId(${singleSubject.id})`);
       getEquipmentsBySubId(singleSubject.id);
     }
   }, [singleSubject]);

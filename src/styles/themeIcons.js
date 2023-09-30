@@ -1,11 +1,10 @@
 export const SunIcon = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    fill="none"
     viewBox="0 0 24 24"
+    fill="none"
+    stroke="black" // you can change icon color here
     strokeWidth={1.5}
-    //you can change icon color here
-    stroke="black"
     className="w-6 h-6"
   >
     <path
@@ -19,11 +18,10 @@ export const SunIcon = () => (
 export const MoonIcon = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    fill="none"
     viewBox="0 0 24 24"
+    fill="none"
+    stroke="black" // you can change icon color here
     strokeWidth={1.5}
-    //you can change icon color here
-    stroke="black"
     className="w-6 h-6"
   >
     <path
@@ -34,7 +32,8 @@ export const MoonIcon = () => (
   </svg>
 );
 
-// checks "name" property of palette used, if not light shows sun(darkmode) and if lightmode shows moon icon.
+// checks "name" property of palette used,
+// if not light shows sun(darkmode) and if lightmode shows moon icon.
 export const ThemeIcon = ({ theme }) => {
   const isLightMode = theme.palette.name === "light";
   return isLightMode ? <MoonIcon /> : <SunIcon />;

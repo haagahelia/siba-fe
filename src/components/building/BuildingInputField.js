@@ -1,12 +1,9 @@
-import React from "react";
-import TextField from "@mui/material/TextField";
 import Grid from "@mui/material/Grid";
+import TextField from "@mui/material/TextField";
 
-export default function BuildingInputField(props) {
-  const { formik } = props;
-
+export default function BuildingInputField({ formik }) {
   return (
-    <React.Fragment>
+    <>
       <Grid item xs={12} sm={6} md={3}>
         <TextField
           error={formik.touched.name && formik.errors.name ? true : false}
@@ -43,6 +40,6 @@ export default function BuildingInputField(props) {
           }
         />
       </Grid>
-    </React.Fragment>
+    </>
   );
 }

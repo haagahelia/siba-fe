@@ -1,36 +1,37 @@
-import React from "react";
+import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
+import { Box, useTheme } from "@mui/material";
+import Modal from "@mui/material/Modal";
+import Typography from "@mui/material/Typography";
 import Grid2 from "@mui/material/Unstable_Grid2";
 import ProgressBar from "@ramonak/react-progress-bar";
-import Modal from "@mui/material/Modal";
-import { Box } from "@mui/material";
-import Typography from "@mui/material/Typography";
-import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
-import SubjectResult from "./SubjectResult";
-import testData from "../../data/testData";
-import AllocRoundControlPanel from "../AllocRound/AllocRoundControlPanel";
-import resultProgramStore from "../../data/ResultProgramStore";
-import CollapsedRow from "./CollapsedRow";
-import { useEffect, useState, useContext } from "react";
+import { Fragment, useContext, useEffect, useState } from "react";
 import { AppContext } from "../../AppContext";
-import { useTheme } from "@mui/material";
+import resultProgramStore from "../../data/ResultProgramStore";
+import testData from "../../data/testData";
 import Logger from "../../logger/logger";
+import AllocRoundControlPanel from "../AllocRound/AllocRoundControlPanel";
+import CollapsedRow from "./CollapsedRow";
+import SubjectResult from "./SubjectResult";
 
-//component for displaying the subject groups of the allocation result
-//shows:
-//the name of the subject groups
-//the hours needed by the subject group divided by the hours allocated to it %%
-//the name of the subject group rooms in the dropdown
-//popup button that shows the lessons of the subject group
+// component for displaying the subject groups of the allocation result shows:
+// the name of the subject groups
+// the hours needed by the subject group divided by the hours allocated to it %%
+// the name of the subject group rooms in the dropdown
+// popup button that shows the lessons of the subject group
 
-export default function ProgramResult(props) {
+export default function ProgramResult() {
   Logger.logPrefix = "ProgramResult";
   Logger.debug("ProgramResult component instantiated.");
 
-  const progStore = resultProgramStore;
-  const [progs, setProgs] = useState([]);
-  const [resetCounter, setResetCounter] = useState(0);
   const appContext = useContext(AppContext);
   const theme = useTheme();
+
+  const [progs, setProgs] = useState([]);
+  const [resetCounter, setResetCounter] = useState(0);
+  const [subProg, setSubProg] = useState({});
+  const [open, setOpen] = useState(false);
+
+  const progStore = resultProgramStore;
 
   useEffect(() => {
     Logger.debug("Running effect to fetch program data.");
@@ -50,9 +51,6 @@ export default function ProgramResult(props) {
     );
     setProgs(names);
   };
-
-  const [subProg, setSubProg] = React.useState({});
-  const [open, setOpen] = React.useState(false);
 
   const handleOpen = (prog) => {
     setSubProg(prog);
@@ -106,8 +104,8 @@ export default function ProgramResult(props) {
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              fill="none"
               viewBox="0 0 24 24"
+              fill="none"
               strokeWidth={1.5}
               style={{
                 width: "24px",
@@ -164,7 +162,7 @@ export default function ProgramResult(props) {
               : theme.palette.progressBarTextNonZero.main;
 
           return (
-            <React.Fragment key={prog.id}>
+            <Fragment key={prog.id}>
               <Grid2 xs={1.5}>
                 <InfoOutlinedIcon
                   sx={{ fontSize: 20, color: theme.palette.infoIcon.main }}
@@ -177,16 +175,16 @@ export default function ProgramResult(props) {
               <Grid2 xs={3} key={`${prog.id}-c`}>
                 <ProgressBar
                   baseBgColor={theme.palette.progressBarBackground.main}
-                  labelAlignment={"left"}
+                  labelAlignment="left"
                   labelColor={textColor}
                   bgColor={progressColor}
-                  padding={"3px"}
+                  padding="3px"
                   completed={progress}
                   maxCompleted={100}
                 />
                 <CollapsedRow prog1={prog} />
               </Grid2>
-            </React.Fragment>
+            </Fragment>
           );
         })}
       </Grid2>

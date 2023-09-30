@@ -1,28 +1,30 @@
-import React, { useState, useEffect } from "react";
-import { Card, CardHeader, CardContent } from "@mui/material";
-import AlertBox from "../common/AlertBox";
+import ExpandLessIcon from "@mui/icons-material/ExpandLess";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import { Card, CardContent, CardHeader } from "@mui/material";
+import IconButton from "@mui/material/IconButton";
 import { useFormik } from "formik";
-import ConfirmationDialog from "../common/ConfirmationDialog";
-import {
-  validate,
-  capitalizeFirstLetter,
-} from "../../validation/ValidateAddSubject";
-import dao from "../../ajax/dao";
-import AddSubjectForm from "./AddSubjectForm";
+import { useEffect, useState } from "react";
 import {
   ajaxRequestErrorHandler,
   getFunctionName,
 } from "../../ajax/ajaxRequestErrorHandler";
+import dao from "../../ajax/dao";
 import Logger from "../../logger/logger";
-import IconButton from "@mui/material/IconButton";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import ExpandLessIcon from "@mui/icons-material/ExpandLess";
+import {
+  capitalizeFirstLetter,
+  validate,
+} from "../../validation/ValidateAddSubject";
+import AlertBox from "../common/AlertBox";
+import ConfirmationDialog from "../common/ConfirmationDialog";
+import AddSubjectForm from "./AddSubjectForm";
 
-export default function AddSubjectContainer(props) {
+export default function AddSubjectContainer({
+  getAllSubjects,
+  allSubjectsList,
+}) {
   // State for checking if Add Lesson card is expanded
   const [isCardExpanded, setIsCardExpanded] = useState(false);
 
-  const { getAllSubjects, allSubjectsList } = props;
   const [programSelectList, setProgramSelectList] = useState([
     { id: 3009, name: "Globalist music" },
   ]);
@@ -163,7 +165,10 @@ export default function AddSubjectContainer(props) {
   const handleChange = (e) => {
     let selected = e.target.value;
     setInitialSubject({
-      name: formik.values.name, // This is so that the entered name does not change even if you select the data of an existing lesson
+      // This is so that the entered name does not change
+      // even if you select the data of an existing lesson
+      name: formik.values.name,
+
       groupSize: selected.groupSize,
       groupCount: selected.groupCount,
       sessionLength: selected.sessionLength,

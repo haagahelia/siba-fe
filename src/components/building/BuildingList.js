@@ -1,31 +1,30 @@
-import React, { useState, useEffect } from "react";
-import dao from "../../ajax/dao";
+import { Card, CardHeader, Container } from "@mui/material";
+import CardContent from "@mui/material/CardContent";
+import Grid from "@mui/material/Grid";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
-import CardContent from "@mui/material/CardContent";
-import { CardHeader, Card, Container } from "@mui/material";
-import Grid from "@mui/material/Grid";
-import AlertBox from "../common/AlertBox";
-import BuildingListItem from "./BuildingListItem";
-import AddBuildingContainer from "./AddBuildingContainer";
-import SingleBuildingDialog from "./SingleBuildingDialog";
+import { useEffect, useState } from "react";
+import dao from "../../ajax/dao";
 import { RoleLoggedIn } from "../../customhooks/RoleLoggedIn";
 import Logger from "../../logger/logger";
+import AlertBox from "../common/AlertBox";
+import AddBuildingContainer from "./AddBuildingContainer";
+import BuildingListItem from "./BuildingListItem";
+import SingleBuildingDialog from "./SingleBuildingDialog";
 
 export default function BuildingList() {
   Logger.logPrefix = "Buildings";
+
+  const { roles } = RoleLoggedIn();
+
   const [allBuildingsList, setAllBuildingsList] = useState([]);
   const [alertOpen, setAlertOpen] = useState(false);
   const [alertOptions, setAlertOptions] = useState({
     message: "This is an error alert — check it out!",
     severity: "error",
   });
-  const { roles } = RoleLoggedIn();
-
   const [open, setOpen] = useState(false);
-
   const [singleBuilding, setSingleBuilding] = useState(null);
-
   // State for checking if the card is expanded
   const [isCardExpanded, setIsCardExpanded] = useState(true);
 
@@ -55,7 +54,7 @@ export default function BuildingList() {
   }, []);
 
   return (
-    <React.Fragment>
+    <>
       <AlertBox
         alertOpen={alertOpen}
         alertOptions={alertOptions}
@@ -109,6 +108,6 @@ export default function BuildingList() {
           </Card>
         </Grid>
       </Container>
-    </React.Fragment>
+    </>
   );
 }

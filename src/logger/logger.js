@@ -6,7 +6,8 @@ const Logger = {
   logLevel: "debug", // "debug","info","warn"
   loggedEnv: "development", // "development" or "no logging"
 
-  // A prefix that will be prepended to all log messages. Should be set in the view logger is used in.
+  // A prefix that will be prepended to all log messages.
+  // Should be set in the view logger is used in.
   logPrefix: "CustomLogger",
   getFormattedTimestamp() {
     let time = new DateTime({});
@@ -19,9 +20,9 @@ const Logger = {
         `DEBU|${this.getFormattedTimestamp()}[${this.logPrefix}]`,
         ...params,
       );
-      //console.log("HEI DEBUG 1");
+      // console.log("HEI DEBUG 1");
     }
-    //console.log("HEI DEBUG 2");
+    // console.log("HEI DEBUG 2");
   },
 
   info(...params) {
@@ -33,9 +34,9 @@ const Logger = {
         `INFO|${this.getFormattedTimestamp()}[${this.logPrefix}]`,
         ...params,
       );
-      //console.log("HEI INFO 1");
+      // console.log("HEI INFO 1");
     }
-    //console.log("HEI INFO 2");
+    // console.log("HEI INFO 2");
   },
 
   warn(...params) {

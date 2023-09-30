@@ -1,5 +1,3 @@
-import { Color } from "@mui/material";
-
 export interface PaletteContract {
   name: string;
   common: any;

@@ -1,22 +1,20 @@
-import React, { useState } from "react";
-import TextField from "@mui/material/TextField";
-import { Button, Grid, FormHelperText, Typography } from "@mui/material";
-import Select from "@mui/material/Select";
+import { Button, FormHelperText, Grid, Typography } from "@mui/material";
+import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
-import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
+import TextField from "@mui/material/TextField";
+import { useState } from "react";
 
-export default function AddSubjectForm(props) {
-  const {
-    handleChange,
-    programSelectList,
-    formik,
-    submitValues,
-    setInitialSubject,
-    allSubjectsList,
-    spaceTypeSelectList,
-  } = props;
-
+export default function AddSubjectForm({
+  handleChange,
+  programSelectList,
+  formik,
+  submitValues,
+  setInitialSubject,
+  allSubjectsList,
+  spaceTypeSelectList,
+}) {
   const [selectedLesson, setSelectedLesson] = useState("");
 
   return (

@@ -1,21 +1,21 @@
-import React, { useState } from "react";
 import { useFormik } from "formik";
-import ConfirmationDialog from "../common/ConfirmationDialog";
+import { useState } from "react";
+import dao from "../../ajax/dao";
 import {
   capitalizeFirstLetter,
   validate,
 } from "../../validation/ValidateEditAllocRound";
 import AlertBox from "../common/AlertBox";
-import dao from "../../ajax/dao";
+import ConfirmationDialog from "../common/ConfirmationDialog";
 import EditAllocRoundForm from "./EditAllocRoundForm";
 
-export default function EditAllocRound(props) {
-  // Whenever the editAllocRound changes in the AllocRoundList.js file, that information comes here as singleAllocRound
-  const {
-    singleAllocRound,
-    incrementDataModifiedCounter,
-    setSingleAllocRound,
-  } = props;
+export default function EditAllocRound({
+  // Whenever the editAllocRound changes in the AllocRoundList.js file,
+  // that information comes here as singleAllocRound
+  singleAllocRound,
+  incrementDataModifiedCounter,
+  setSingleAllocRound,
+}) {
   const [alertOpen, setAlertOpen] = useState(false);
   const [alertOptions, setAlertOptions] = useState({
     title: "This is title",
@@ -29,7 +29,8 @@ export default function EditAllocRound(props) {
   });
 
   const formik = useFormik({
-    // enableReinitialize checks if Formik needs to reset the form if the initial values ​​change
+    // enableReinitialize checks if Formik needs to reset the form
+    // if the initial values change
     enableReinitialize: true,
     initialValues: singleAllocRound,
     validate,

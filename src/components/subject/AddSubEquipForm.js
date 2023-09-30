@@ -1,32 +1,35 @@
-import React, { useState, useEffect } from "react";
 import {
   Button,
-  Grid,
-  FormHelperText,
   Dialog,
-  DialogTitle,
+  DialogActions,
   DialogContent,
   DialogContentText,
-  TextField,
-  DialogActions,
+  DialogTitle,
+  FormHelperText,
+  Grid,
   RadioGroup,
+  TextField,
   Typography,
 } from "@mui/material";
-import Select from "@mui/material/Select";
-import InputLabel from "@mui/material/InputLabel";
-import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
-import Radio from "@mui/material/Radio";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormLabel from "@mui/material/FormLabel";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import Radio from "@mui/material/Radio";
+import Select from "@mui/material/Select";
+import { useEffect, useState } from "react";
 
-export default function AddSubEquipForm(props) {
-  const { equipmentSelectList, singleSubject, formik } = props;
+export default function AddSubEquipForm({
+  equipmentSelectList,
+  singleSubject,
+  formik,
+}) {
   const [open, setOpen] = useState(false);
   const [equipPriority, setEquipPriority] = useState(0);
 
   /* Here we look for the priority of the equipment selected in select,
-  so that the user can see what the equipment's default priority value is */
+     so that the user can see what the equipment's default priority value is */
   useEffect(() => {
     const prio = equipmentSelectList.find((obj) => {
       return obj.id === formik.values.equipmentId;
@@ -51,7 +54,9 @@ export default function AddSubEquipForm(props) {
         Add equipment
       </Button>
       <Dialog open={open}>
-        {/* formik.singleSubject?.subjectName} Here ? checks whether the singleSubject object has the subjectName attribute, if not found it returns the value null and does not crash */}
+        {/* formik.singleSubject?.subjectName} Here ? checks
+            whether the singleSubject object has the subjectName attribute,
+            if not found it returns the value null and does not crash */}
         <DialogTitle>{singleSubject?.subjectName}</DialogTitle>
         <form onSubmit={formik.handleSubmit}>
           <DialogContent>

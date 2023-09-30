@@ -1,17 +1,19 @@
-import React, { useState } from "react";
+import { Typography } from "@mui/material";
+import Divider from "@mui/material/Divider";
+import Grid from "@mui/material/Grid";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
-import Divider from "@mui/material/Divider";
-import Grid from "@mui/material/Grid";
-import { styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
-import { Typography } from "@mui/material";
+import { styled } from "@mui/material/styles";
+import { useState } from "react";
 import SettingsDetails from "./SettingsDetails";
 
-export default function SettingsList(props) {
-  const { paginateSettings, getAllSettings, incrementDataModifiedCounter } =
-    props;
+export default function SettingsList({
+  paginateSettings,
+  getAllSettings,
+  incrementDataModifiedCounter,
+}) {
   const [singleSetting, setSingleSetting] = useState(null);
   const [open, setOpen] = useState(false);
 

@@ -14,7 +14,8 @@ export async function validate(values) {
     const { httpStatus, data } = await dao.fetchSubjectsNames();
     if (httpStatus === 200) {
       subjectList = data;
-      // Here it is considered that the user does not enter the name of an already existing lesson.
+      // Here it is considered that the user does not enter
+      // the name of an already existing lesson.
       let result = subjectList.some(
         (names) => names.name.toLowerCase() === values.name.toLowerCase(),
       );

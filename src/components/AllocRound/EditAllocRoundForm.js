@@ -1,21 +1,18 @@
-import React, { useState } from "react";
-import { Button, Grid } from "@mui/material";
-import DialogTitle from "@mui/material/DialogTitle";
+import { Button, DialogActions, DialogContent, Grid } from "@mui/material";
 import Dialog from "@mui/material/Dialog";
-import { DialogActions, DialogContent } from "@mui/material";
+import DialogTitle from "@mui/material/DialogTitle";
 import { useTheme } from "@mui/material/styles";
+import { useState } from "react";
 import AllocRoundInputField from "./AllocRoundInputField";
 
-export default function EditAllocRoundForm(props) {
-  const { formik } = props;
+export default function EditAllocRoundForm({ formik }) {
+  const theme = useTheme();
 
   const [open, setOpen] = useState(false);
 
-  const theme = useTheme();
-
   return (
     <div>
-      <Button //theme button yellow
+      <Button // theme button yellow
         variant="contained"
         style={theme.components.MuiButton.editbutton}
         onClick={() => {
@@ -26,7 +23,10 @@ export default function EditAllocRoundForm(props) {
       </Button>
       <Dialog open={open}>
         <form onSubmit={formik.handleSubmit}>
-          {/* formik.initialValues?.name} Here ? checks if the AllocRoundName attribute can be found in the initialValues ​​object, if not found returns null and does not crash */}
+          {/* formik.initialValues?.name} Here ? checks
+              if the AllocRoundName attribute
+              can be found in the initialValues object,
+              if not found returns null and does not crash */}
           <DialogTitle>Edit: {formik.initialValues?.name}</DialogTitle>
           <DialogContent>
             <Grid
@@ -40,7 +40,7 @@ export default function EditAllocRoundForm(props) {
             </Grid>
           </DialogContent>
           <DialogActions sx={{ justifyContent: "space-evenly" }}>
-            <Button //theme button red
+            <Button // theme button red
               onClick={() => {
                 setOpen(false);
                 // Let's reset the form if you press cancel
@@ -51,7 +51,7 @@ export default function EditAllocRoundForm(props) {
             >
               Cancel
             </Button>
-            <Button //theme button green
+            <Button // theme button green
               type="submit"
               variant="contained"
               style={theme.components.MuiButton.greenbutton}

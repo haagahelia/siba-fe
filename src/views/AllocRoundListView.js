@@ -1,27 +1,30 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import AllocRoundListContainer from "../components/AllocRound/AllocRoundListContainer";
-import CardContent from "@mui/material/CardContent";
 import {
-  CardHeader,
-  Card,
-  Container /*, Typography*/,
   Button,
+  Card,
+  CardHeader,
+  Container, // Typography,
 } from "@mui/material";
+import CardContent from "@mui/material/CardContent";
 import Grid from "@mui/material/Grid";
-import dao from "../ajax/dao";
-import AlertBox from "../components/common/AlertBox";
 import { useTheme } from "@mui/material/styles";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import dao from "../ajax/dao";
+import AllocRoundListContainer from "../components/AllocRound/AllocRoundListContainer";
+import AlertBox from "../components/common/AlertBox";
 import Logger from "../logger/logger";
 
 export default function AllocRoundView() {
   Logger.logPrefix = "AllocRoundView";
 
+  const navigate = useNavigate();
+  const theme = useTheme();
+
   const [paginateAllocRounds, setpaginateAllocRounds] = useState([]);
   const [allAllocRoundsList, setallAllocRoundsList] = useState([]);
   const [dataModifiedCounter, setDataModifiedCounter] = useState(0);
-  //const [allocRoundId, setAllocRoundId] = useState("00000");
+  // const [allocRoundId, setAllocRoundId] = useState("00000");
   const [alertOpen, setAlertOpen] = useState(false);
   const [alertOptions, setAlertOptions] = useState({
     message: "This is an error alert — check it out!",
@@ -64,10 +67,6 @@ export default function AllocRoundView() {
   useEffect(() => {
     setpaginateAllocRounds(allAllocRoundsList.slice(0, 15));
   }, [allAllocRoundsList]);
-
-  const navigate = useNavigate();
-
-  const theme = useTheme();
 
   return (
     <div>

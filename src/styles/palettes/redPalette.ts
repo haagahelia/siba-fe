@@ -2,10 +2,10 @@ import { createTheme } from "@mui/material";
 import { PaletteContract } from "../../types";
 import {
   accentOrange,
-  white,
   black,
   darkestGrey,
   indicatorRed,
+  white,
 } from "./commonColors";
 
 // Color definitions for YELLOW TEST PALETTE
@@ -105,7 +105,7 @@ export const redPalette: PaletteContract = {
     activatedOpacity: 0.12,
   },
 
-  //own colors - RED
+  // own colors - RED
   activeLinkBackgroundColor: {
     main: accentOrange,
   },

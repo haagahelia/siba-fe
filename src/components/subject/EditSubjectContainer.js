@@ -1,21 +1,25 @@
-import React, { useState, useEffect } from "react";
 import { useFormik } from "formik";
-import ConfirmationDialog from "../common/ConfirmationDialog";
-import {
-  validate,
-  capitalizeFirstLetter,
-} from "../../validation/ValidateEditSubject";
-import AlertBox from "../common/AlertBox";
-import dao from "../../ajax/dao";
-import EditSubjectForm from "./EditSubjectForm";
+import { useEffect, useState } from "react";
 import {
   ajaxRequestErrorHandler,
   getFunctionName,
 } from "../../ajax/ajaxRequestErrorHandler";
+import dao from "../../ajax/dao";
+import {
+  capitalizeFirstLetter,
+  validate,
+} from "../../validation/ValidateEditSubject";
+import AlertBox from "../common/AlertBox";
+import ConfirmationDialog from "../common/ConfirmationDialog";
+import EditSubjectForm from "./EditSubjectForm";
 
-export default function EditSubjectContainer(props) {
-  // Whenever the editSubject changes in the subjectList.js file, that information comes here as singleSubject
-  const { singleSubject, getAllSubjects, setSingleSubject } = props;
+export default function EditSubjectContainer({
+  singleSubject,
+  getAllSubjects,
+  setSingleSubject,
+}) {
+  // Whenever the editSubject changes in the subjectList.js file,
+  // that information comes here as singleSubject
   const [programSelectList, setProgramSelectList] = useState([]);
   const [spaceTypeSelectList, setSpaceTypeSelectList] = useState([]);
   const [alertOpen, setAlertOpen] = useState(false);
@@ -31,7 +35,8 @@ export default function EditSubjectContainer(props) {
   });
 
   const formik = useFormik({
-    // enableReinitialize checks if Formik needs to reset the form if the initial values ​​change
+    // enableReinitialize checks if Formik needs to reset the form
+    // if the initial values change
     enableReinitialize: true,
     initialValues: singleSubject,
     validate,

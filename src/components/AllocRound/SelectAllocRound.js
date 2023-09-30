@@ -1,12 +1,14 @@
-import React, { useState, useContext } from "react";
 import { Button } from "@mui/material";
+import { useTheme } from "@mui/material/styles";
+import { useContext, useState } from "react";
 import { AppContext } from "../../AppContext";
 import AlertBox from "../common/AlertBox";
 import ConfirmationDialog from "../common/ConfirmationDialog";
-import { useTheme } from "@mui/material/styles";
 
-export default function SelectAllocRound(props) {
-  const { singleAllocRound } = props;
+export default function SelectAllocRound({ singleAllocRound }) {
+  const appContext = useContext(AppContext);
+  const theme = useTheme();
+
   const [alertOpen, setAlertOpen] = useState(false);
   const [alertOptions, setAlertOptions] = useState({
     message: "This is an error alert — check it out!",
@@ -17,16 +19,16 @@ export default function SelectAllocRound(props) {
     title: "this is dialog",
     content: "Something here",
   });
-  const appContext = useContext(AppContext);
 
   const setAllocRound = (allocRoundId) => {
-    //console.log ("allocRoundId 456: " +allocRoundId);
+    // console.log("allocRoundId 456: " + allocRoundId);
     appContext.allocRoundId = allocRoundId; // Works now! Updating app context.
-    // setAllocRoundId(allocRoundId); // Notifying grangrangranparent. Updating component state
+    // Notifying grangrangranparent. Updating component state
+    // setAllocRoundId(allocRoundId);
   };
 
   const allocationSelection = () => {
-    //call function to set alloc round here
+    // call function to set alloc round here
     setAllocRound(singleAllocRound.id);
 
     setAlertOptions({
@@ -36,7 +38,6 @@ export default function SelectAllocRound(props) {
     });
     setAlertOpen(true);
   };
-  const theme = useTheme();
 
   const confirmAllocationSelection = () => {
     setDialogOptions({

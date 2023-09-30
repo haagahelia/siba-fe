@@ -15,7 +15,7 @@ export async function validate(values) {
     let result;
     let id;
     let filteredList = [];
-    //Check if user enter an existed setting name
+    // Check if user enter an existed setting name
     settingList.forEach((setting) => {
       if (values.id === setting.id) {
         id = setting.id;

@@ -1,38 +1,33 @@
-import React from "react";
+import { Typography } from "@mui/material";
 import Grid from "@mui/material/Grid";
 import ListItemText from "@mui/material/ListItemText";
-import { Typography } from "@mui/material";
 
-export default function BuildingDisplay(props) {
-  const { singleBuilding, flexDirection } = props;
-
+export default function BuildingDisplay({ singleBuilding, flexDirection }) {
   return (
-    <React.Fragment>
-      <Grid
-        container
-        variant="sibaGridSingleItemDisplay"
-        spacing={1}
-        direction={flexDirection}
-      >
-        <Grid item md={3} xs={7}>
-          <Typography variant="boldTitle">Name:</Typography>
-          <ListItemText
-            primary={singleBuilding.name}
-            primaryTypographyProps={{
-              variant: "body2",
-            }}
-          />
-        </Grid>
-        <Grid item md={2} xs={3}>
-          <Typography variant="boldTitle">Description:</Typography>
-          <ListItemText
-            primary={singleBuilding.description}
-            primaryTypographyProps={{
-              variant: "body2",
-            }}
-          />
-        </Grid>
+    <Grid
+      container
+      variant="sibaGridSingleItemDisplay"
+      spacing={1}
+      direction={flexDirection}
+    >
+      <Grid item md={3} xs={7}>
+        <Typography variant="boldTitle">Name:</Typography>
+        <ListItemText
+          primary={singleBuilding.name}
+          primaryTypographyProps={{
+            variant: "body2",
+          }}
+        />
       </Grid>
-    </React.Fragment>
+      <Grid item md={2} xs={3}>
+        <Typography variant="boldTitle">Description:</Typography>
+        <ListItemText
+          primary={singleBuilding.description}
+          primaryTypographyProps={{
+            variant: "body2",
+          }}
+        />
+      </Grid>
+    </Grid>
   );
 }

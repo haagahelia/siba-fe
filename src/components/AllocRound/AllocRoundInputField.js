@@ -1,12 +1,9 @@
-import React from "react";
-import TextField from "@mui/material/TextField";
 import Grid from "@mui/material/Grid";
+import TextField from "@mui/material/TextField";
 
-export default function AllocRoundInputField(props) {
-  const { formik } = props;
-
+export default function AllocRoundInputField({ formik }) {
   return (
-    <React.Fragment>
+    <>
       <Grid item xs={12}>
         <TextField
           error={formik.touched.name && formik.errors.name ? true : false}
@@ -43,6 +40,6 @@ export default function AllocRoundInputField(props) {
           }
         />
       </Grid>
-    </React.Fragment>
+    </>
   );
 }

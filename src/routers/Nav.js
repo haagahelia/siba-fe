@@ -1,46 +1,42 @@
-import React, { useState, useContext } from "react";
 import {
-  NavLink,
-  BrowserRouter as Router,
-  Routes,
-  Route,
-} from "react-router-dom";
-
+  faArrowRightFromBracket,
+  faGear,
+} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import MenuIcon from "@mui/icons-material/Menu";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
-import Toolbar from "@mui/material/Toolbar";
-import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
-import Menu from "@mui/material/Menu";
 import Container from "@mui/material/Container";
+import IconButton from "@mui/material/IconButton";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
-import MenuIcon from "@mui/icons-material/Menu";
-import Settings from "../views/Settings";
-import RoomResultView from "../views/RoomResultView";
-import ProgramResultView from "../views/ProgramResultView";
-import SubjectView from "../views/SubjectView";
-import AllocRoundView from "../views/AllocRoundListView";
-import AddAllocRound from "../components/AllocRound/AddAllocRound";
-import AllocationSubjectFailureView from "../views/AllocationSubjectFailureView";
-import NotFoundView from "../views/NotFoundView";
-import EquipmentView from "../views/EquipmentView";
-import BuildingView from "../views/BuildingView";
-import DepartmentView from "../views/DepartmentView";
-import SpaceView from "../views/SpaceView";
-import RegisterView from "../views/RegisterView";
-import LoginView from "../views/LoginView";
-import UserView from "../views/UserView";
+import Menu from "@mui/material/Menu";
+import Toolbar from "@mui/material/Toolbar";
+import Typography from "@mui/material/Typography";
+import { useContext, useState } from "react";
+import { BrowserRouter, NavLink, Route, Routes } from "react-router-dom";
 import { AppContext } from "../AppContext";
+import AddAllocRound from "../components/AllocRound/AddAllocRound";
 import Logger from "../logger/logger";
 import logo from "../styles/SibeliusLogo.svg";
+import AllocRoundView from "../views/AllocRoundListView";
+import AllocationSubjectFailureView from "../views/AllocationSubjectFailureView";
+import BuildingView from "../views/BuildingView";
+import DepartmentView from "../views/DepartmentView";
+import EquipmentView from "../views/EquipmentView";
+import LoginView from "../views/LoginView";
+import NotFoundView from "../views/NotFoundView";
+import ProgramResultView from "../views/ProgramResultView";
+import RegisterView from "../views/RegisterView";
+import RoomResultView from "../views/RoomResultView";
+import Settings from "../views/Settings";
+import SpaceView from "../views/SpaceView";
+import SubjectView from "../views/SubjectView";
+import UserView from "../views/UserView";
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faGear } from "@fortawesome/free-solid-svg-icons";
-import { faArrowRightFromBracket } from "@fortawesome/free-solid-svg-icons";
-
-function NavBar() {
+export default function NavBar() {
   Logger.debug("NavBar initiated");
+
   const sibaPages = [
     {
       name: "Log In",
@@ -134,16 +130,18 @@ function NavBar() {
     },
   ];
 
+  const appContext = useContext(AppContext);
+
   const [click, setClick] = useState(false);
   const handleClick = () => setClick(!click);
-  const appContext = useContext(AppContext);
+
   const [loggedIn, setLoggedIn] = useState(
     localStorage.getItem("email") ? localStorage.getItem("email") : "Not yet",
   );
 
   const [isDropdownVisible, setIsDropdownVisible] = useState(false);
 
-  const [anchorElNav, setAnchorElNav] = React.useState(null);
+  const [anchorElNav, setAnchorElNav] = useState(null);
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
@@ -221,7 +219,7 @@ function NavBar() {
   const renderNavLinks = () => {
     updateAppContext();
     setSibaPages();
-    //Logger.debug("pages status 000:", sibaPages);
+    // Logger.debug("pages status 000:", sibaPages);
 
     return sibaPages
       .filter((page) => page.showForCurrentUser)
@@ -234,7 +232,8 @@ function NavBar() {
             <div
               onMouseEnter={() => setIsDropdownVisible(true)}
               onMouseLeave={() => setIsDropdownVisible(false)}
-              style={{ width: "170px" }} // The hover area between the Account links and the drop down
+              // The hover area between the Account links and the drop down
+              style={{ width: "170px" }}
             >
               <ListItem variant="navBarAccountButton" key={index}>
                 <NavLink
@@ -281,7 +280,8 @@ function NavBar() {
               className="nav-links"
               onClick={() => {
                 handleClick();
-                if (page.action) page.action(); // Execute the logout action if present
+                // Execute the logout action if present
+                if (page.action) page.action();
               }}
             >
               {page.name}
@@ -292,7 +292,7 @@ function NavBar() {
   };
 
   return (
-    <Router>
+    <BrowserRouter>
       <AppBar
         position="fixed"
         sx={{
@@ -301,7 +301,7 @@ function NavBar() {
           top: 0,
           left: 0,
           flexDirection: "column",
-          //backgroundColor: "#F4BF00",
+          // backgroundColor: "#F4BF00",
         }}
       >
         <NavLink to="/" className="nav-logo">
@@ -344,7 +344,8 @@ function NavBar() {
               >
                 <List variant="sibaAppBarVertival">
                   <NavLink to="/" className="nav-logo">
-                    {/* I didn't have logos, add them to the project and it works */}
+                    {/* I didn't have logos,
+                        add them to the project and it works */}
                     {/* <img src={logo} alt="Logo" /> */}
                     <i className="fas fa-code" />
                   </NavLink>
@@ -382,8 +383,6 @@ function NavBar() {
         />
         <Route path="*" element={<NotFoundView />} />
       </Routes>
-    </Router>
+    </BrowserRouter>
   );
 }
-
-export default NavBar;

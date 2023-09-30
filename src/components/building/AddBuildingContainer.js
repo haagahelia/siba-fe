@@ -1,22 +1,22 @@
-import React, { useState } from "react";
-import { CardHeader, Card, CardContent, IconButton } from "@mui/material";
-import AlertBox from "../common/AlertBox";
+import ExpandLessIcon from "@mui/icons-material/ExpandLess";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import { Card, CardContent, CardHeader, IconButton } from "@mui/material";
 import { useFormik } from "formik";
-import ConfirmationDialog from "../common/ConfirmationDialog";
-import {
-  validate,
-  capitalizeFirstLetter,
-} from "../../validation/ValidateAddBuilding";
+import { useState } from "react";
 import dao from "../../ajax/dao";
+import {
+  capitalizeFirstLetter,
+  validate,
+} from "../../validation/ValidateAddBuilding";
+import AlertBox from "../common/AlertBox";
+import ConfirmationDialog from "../common/ConfirmationDialog";
 import AddBuildingForm from "./AddBuildingForm";
 import ImportBuilding from "./ImportBuildingContainer";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 
-export default function AddBuildingContainer(props) {
+export default function AddBuildingContainer({ getAllBuildings }) {
   // State for checking if Add Building card is expanded
   const [isCardExpanded, setIsCardExpanded] = useState(false);
-  const { getAllBuildings } = props;
+
   const [alertOpen, setAlertOpen] = useState(false);
   const [alertOptions, setAlertOptions] = useState({
     title: "This is title",
@@ -28,7 +28,7 @@ export default function AddBuildingContainer(props) {
     title: "this is dialog",
     content: "Something here",
   });
-  // Here the initialvalues ​​of the form are stored in the state
+  // Here the initialvalues of the form are stored in the state
   const [initialBuilding, setInitialBuilding] = useState({
     name: "",
     description: "",
@@ -83,7 +83,7 @@ export default function AddBuildingContainer(props) {
   };
 
   return (
-    <React.Fragment>
+    <>
       <AlertBox
         alertOpen={alertOpen}
         alertOptions={alertOptions}
@@ -124,6 +124,6 @@ export default function AddBuildingContainer(props) {
           )}
         </CardContent>
       </Card>
-    </React.Fragment>
+    </>
   );
 }

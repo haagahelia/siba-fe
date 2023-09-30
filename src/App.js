@@ -1,9 +1,8 @@
-import "./App.css";
+import { Button, CssBaseline } from "@mui/material";
 import { ThemeProvider } from "@mui/material/styles";
-import Nav from "./routers/Nav";
-import { CssBaseline } from "@mui/material";
-import { Button } from "@mui/material";
+import "./App.css";
 import { useThemeSwitcher } from "./customhooks/useThemeSwitcher";
+import Nav from "./routers/Nav";
 import { ThemeIcon } from "./styles/themeIcons";
 
 function App() {

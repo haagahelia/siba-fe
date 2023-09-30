@@ -2,16 +2,16 @@ import { createTheme } from "@mui/material";
 import { PaletteContract } from "../../types";
 import {
   accentOrange,
-  white,
   black,
   darkestGrey,
   indicatorRed,
+  white,
 } from "./commonColors";
 
 // Color definitions for YELLOW TEST PALETTE
 
 const lightBlue = "#73FDFF";
-//const lightBlue2 = "#5DBCD2";   // removed
+// const lightBlue2 = "#5DBCD2"; // removed
 const canary = "#FFFF8F";
 const paleCanary = "#FFFFAA";
 const sahara = "#AAAA11";
@@ -22,7 +22,7 @@ const tangerineYellow = "#FFCC00";
 const eggWhite = "#F2F2BF";
 const greenYellow = "#CCFF33";
 const butteryWhite = "#FFFFE6";
-//const softPink = "#F2AEB8";
+// const softPink = "#F2AEB8";
 const mediumBrown = "#8C4B2D"; // borderColor
 const progressBarGreen = "#06FF00"; // Highlighter Green/Lime
 const progressBarYellow = "#FFE400"; // Golden Yellow
@@ -162,7 +162,7 @@ export const yellowPalette: PaletteContract = {
     default: paleCanary,
   },
 };
-/* More yellow tint values used from here: 
+/* More yellow tint values used from here:
   "#FFFF11" Sunny Yellow,  "#BB7700" Mustard Brown
 */
 

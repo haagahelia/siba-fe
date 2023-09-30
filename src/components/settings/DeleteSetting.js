@@ -1,11 +1,14 @@
-import React, { useState } from "react";
 import { Button } from "@mui/material";
+import { useState } from "react";
 import dao from "../../ajax/dao";
 import AlertBox from "../common/AlertBox";
 import ConfirmationDialog from "../common/ConfirmationDialog";
 
-export default function DeleteSetting(props) {
-  const { singleSetting, setOpen, incrementDataModifiedCounter } = props;
+export default function DeleteSetting({
+  singleSetting,
+  setOpen,
+  incrementDataModifiedCounter,
+}) {
   const [alertOpen, setAlertOpen] = useState(false);
   const [alertOptions, setAlertOptions] = useState({
     message: "This is an error alert — check it out!",
@@ -34,7 +37,7 @@ export default function DeleteSetting(props) {
       title: "Success!",
       message: `${value.name} removed.`,
     });
-    //getAllSettings();
+    // getAllSettings();
     setOpen(false);
     incrementDataModifiedCounter();
     setAlertOpen(true);
@@ -51,7 +54,7 @@ export default function DeleteSetting(props) {
   };
 
   return (
-    <React.Fragment>
+    <>
       <AlertBox
         alertOpen={alertOpen}
         alertOptions={alertOptions}
@@ -71,6 +74,6 @@ export default function DeleteSetting(props) {
       >
         Delete
       </Button>
-    </React.Fragment>
+    </>
   );
 }

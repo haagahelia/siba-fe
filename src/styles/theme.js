@@ -1,6 +1,7 @@
 import { createTheme } from "@mui/material";
 
-// Palettes are: darkPalette, lightPalette, redPalette (for testing), yellowPalette (for testing),
+// Palettes are: darkPalette, lightPalette,
+// redPalette (for testing), yellowPalette (for testing),
 
 export const lessPadding = "4px";
 export const morePadding = "16px";
@@ -139,7 +140,7 @@ export const createAppTheme = (currentPalette) =>
               "& a": {
                 padding: lessPadding,
                 borderBottom: "3px solid transparent",
-                //color: currentPalette.fontColorDefault.default,
+                // color: currentPalette.fontColorDefault.default,
                 color: currentPalette.primary.contrastText,
                 textDecoration: "none",
                 fontFamily: "Roboto, Helvetica, Aria, sans-serif",
@@ -171,7 +172,9 @@ export const createAppTheme = (currentPalette) =>
             },
           },
           {
-            props: { variant: "navBarAccountButton" }, // The "Account" button styling
+            // The "Account" button styling
+            props: { variant: "navBarAccountButton" },
+
             style: {
               backgroundColor: currentPalette.background.default,
               borderRadius: "10px",
@@ -182,7 +185,7 @@ export const createAppTheme = (currentPalette) =>
               padding: "5px",
               textAlign: "center",
               width: "130px",
-              //width: navbarWidth,
+              // width: navbarWidth,
 
               "& a": {
                 color: currentPalette.primary.main,
@@ -193,7 +196,9 @@ export const createAppTheme = (currentPalette) =>
             },
           },
           {
-            props: { variant: "navBarDropDownLinks" }, // The drop down menu styling
+            // The drop down menu styling
+            props: { variant: "navBarDropDownLinks" },
+
             style: {
               backgroundColor: "transparent",
               display: "flex",
@@ -498,8 +503,10 @@ export const createAppTheme = (currentPalette) =>
             },
 
             "& .MuiTableSortLabel-icon": {
-              color: currentPalette.primary.main, // Change to your desired icon color
-              transition: "color 0.5s ease", // Add a color transition
+              // Change to your desired icon color
+              color: currentPalette.primary.main,
+              // Add a color transition
+              transition: "color 0.5s ease",
             },
 
             "&:not(:hover):not(:focus) .MuiTableSortLabel-icon": {
@@ -521,8 +528,8 @@ export const createAppTheme = (currentPalette) =>
 export default createAppTheme;
 
 /* In other components, how to get access to the Theme and its settings?
-  
-     import { useTheme } from "@mui/material/styles";
-     ...
-       const theme = useTheme(); 
+
+    import { useTheme } from "@mui/material/styles";
+    ...
+    const theme = useTheme();
 */

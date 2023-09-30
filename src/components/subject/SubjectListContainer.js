@@ -1,14 +1,17 @@
-import React from "react";
+import { Container } from "@mui/material";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
 import Grid from "@mui/material/Grid";
 import SingleSubjectDialog from "./SingleSubjectDialog";
 import SubjectList from "./SubjectList";
-import CardContent from "@mui/material/CardContent";
-import Card from "@mui/material/Card";
-import { Container } from "@mui/material";
 
-export default function SubjectListContainer(props) {
-  const { getAllSubjects, allSubjectsList, paginateSubjects, open, setOpen } =
-    props;
+export default function SubjectListContainer({
+  getAllSubjects,
+  allSubjectsList,
+  paginateSubjects,
+  open,
+  setOpen,
+}) {
   return (
     <Container maxWidth="lg">
       <SingleSubjectDialog

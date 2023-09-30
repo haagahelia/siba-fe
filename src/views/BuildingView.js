@@ -1,7 +1,5 @@
 import BuildingList from "../components/building/BuildingList";
 
-const BuildingListView = () => {
+export default function BuildingListView() {
   return <BuildingList />;
-};
-
-export default BuildingListView;
+}

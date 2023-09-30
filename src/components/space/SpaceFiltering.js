@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
-import { TextField, InputAdornment, IconButton } from "@mui/material";
 import { Clear } from "@mui/icons-material";
+import { IconButton, InputAdornment, TextField } from "@mui/material";
+import { useEffect, useState } from "react";
 
 export default function SpaceFiltering({
   allSpacesList,

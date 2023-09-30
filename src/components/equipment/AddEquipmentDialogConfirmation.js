@@ -1,16 +1,20 @@
 import {
+  Button,
   Dialog,
   DialogContent,
   DialogContentText,
   DialogTitle,
 } from "@mui/material";
-import { Button } from "@mui/material";
 import dao from "../../ajax/dao";
 import ValidateAddEquipment from "../../validation/ValidateAddEquipment";
 
-export default function AddEquipmentDialogConfirmation(props) {
-  const { open, setOpen, equipment, setEquipment, getAllEquipments } = props;
-
+export default function AddEquipmentDialogConfirmation({
+  open,
+  setOpen,
+  equipment,
+  setEquipment,
+  getAllEquipments,
+}) {
   const addSingleEquipment = async () => {
     let validation = ValidateAddEquipment(equipment);
     if (validation) {

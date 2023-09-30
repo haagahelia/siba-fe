@@ -1,30 +1,32 @@
-import React, { useState, useEffect } from "react";
-import dao from "../../ajax/dao";
-import Grid from "@mui/material/Grid";
-import { CardHeader, Card, Container } from "@mui/material";
+import { Card, CardHeader, Container } from "@mui/material";
 import CardContent from "@mui/material/CardContent";
-import AddEquipment from "./AddEquipment";
-import EquipmentListContainer from "./EquipmentListContainer";
-import { RoleLoggedIn } from "../../customhooks/RoleLoggedIn";
-import Logger from "../../logger/logger";
+import Grid from "@mui/material/Grid";
+import { useEffect, useState } from "react";
 import {
   ajaxRequestErrorHandler,
   getFunctionName,
 } from "../../ajax/ajaxRequestErrorHandler";
+import dao from "../../ajax/dao";
+import { RoleLoggedIn } from "../../customhooks/RoleLoggedIn";
+import Logger from "../../logger/logger";
+import AddEquipment from "./AddEquipment";
+import EquipmentListContainer from "./EquipmentListContainer";
 
 export default function Equipments() {
-  //State for checking if Equipment card is expanded
-  const [isCardExpanded, setIsCardExpanded] = useState(true);
-
   Logger.logPrefix = "Equipments";
   Logger.debug("Equipments component instantiated.");
+
+  const { roles } = RoleLoggedIn();
+
+  // State for checking if Equipment card is expanded
+  const [isCardExpanded, setIsCardExpanded] = useState(true);
+
   const [equipmentList, setEquipmentList] = useState([]);
-  const [/*alertOptions,*/ setAlertOptions] = useState({
+  const [/* alertOptions, */ setAlertOptions] = useState({
     message: "This is an error alert — check it out!",
     severity: "error",
   });
-  const [/* alertOpen ,*/ setAlertOpen] = useState(false);
-  const { roles } = RoleLoggedIn();
+  const [/* alertOpen, */ setAlertOpen] = useState(false);
 
   const getAllEquipments = async function () {
     Logger.debug("getAllEquipments: fetching all equipments from server.");
@@ -64,12 +66,10 @@ export default function Equipments() {
                 onClick={() => setIsCardExpanded(!isCardExpanded)}
               />
               {isCardExpanded && (
-                <>
-                  <EquipmentListContainer
-                    getAllEquipments={getAllEquipments}
-                    equipmentList={equipmentList}
-                  />
-                </>
+                <EquipmentListContainer
+                  getAllEquipments={getAllEquipments}
+                  equipmentList={equipmentList}
+                />
               )}
             </CardContent>
           </Card>

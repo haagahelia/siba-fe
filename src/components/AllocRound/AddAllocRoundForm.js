@@ -1,10 +1,13 @@
-import React from "react"; // { useState, useEffect } ???
 import { Button, Grid } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
+// import { useEffect, useState } from "react"; ???
 import AllocRoundInputField from "./AllocRoundInputField";
-export default function AddAllocRoundForm(props) {
-  const { formik, submitValues, setInitialAllocRound } = props;
 
+export default function AddAllocRoundForm({
+  formik,
+  submitValues,
+  setInitialAllocRound,
+}) {
   const theme = useTheme();
 
   return (

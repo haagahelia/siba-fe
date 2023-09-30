@@ -4,7 +4,7 @@ import { create, get, remove, update } from "./request";
 
 const baseUrl = process.env.REACT_APP_BE_SERVER_BASE_URL;
 
-//fetching all users
+// fetching all users
 export const fetchAllUsers = async (): Promise<ResponseFiner<User>> => {
   const response = await get(`${baseUrl}/user`);
   if (response.status === 200) {
@@ -15,7 +15,7 @@ export const fetchAllUsers = async (): Promise<ResponseFiner<User>> => {
   }
 };
 
-//creating a new user
+// creating a new user
 export const postNewUser = async (newUser: User): Promise<boolean> => {
   const response = await create(`${baseUrl}/user`, newUser);
   return response.ok;
@@ -44,15 +44,15 @@ export const loginUser = async (
   }
 };
 
-//updating user
+// updating user
 export const editUser = async (editedUser: User): Promise<boolean> => {
   const response = await update(`${baseUrl}/user`, editedUser);
   return response.ok;
 };
 
-//removing an user
+// removing an user
 export const deleteSingleUser = async (userId: number): Promise<boolean> => {
   const response = await remove(`${baseUrl}/user/${userId}`);
-  //const data = await response.json();
+  // const data = await response.json();
   return response.ok;
 };

@@ -3,7 +3,7 @@ import { create, get, remove, update } from "./request";
 
 const baseUrl = process.env.REACT_APP_BE_SERVER_BASE_URL;
 
-//fetching all equipments
+// fetching all equipments
 export const fetchEquipmentData = async (): Promise<
   ResponseFiner<Equipment>
 > => {
@@ -16,7 +16,7 @@ export const fetchEquipmentData = async (): Promise<
   }
 };
 
-//fetching equipment by id
+// fetching equipment by id
 export const fetchEquipmentById = async (
   id: number,
 ): Promise<ResponseFiner<Equipment>> => {
@@ -29,7 +29,7 @@ export const fetchEquipmentById = async (
   }
 };
 
-//creating new equipment
+// creating new equipment
 export const postNewEquipment = async (
   newEquipment: Equipment,
 ): Promise<boolean> => {
@@ -37,7 +37,7 @@ export const postNewEquipment = async (
   return response.ok;
 };
 
-//updating equipment
+// updating equipment
 export const editEquipment = async (
   editedEquipment: Equipment,
   id: number,
@@ -46,7 +46,7 @@ export const editEquipment = async (
   return response.ok;
 };
 
-//removing a single equipment
+// removing a single equipment
 export const deleteSingleEquipment = async (
   equipmentId: number,
 ): Promise<boolean> => {

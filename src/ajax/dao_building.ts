@@ -1,16 +1,16 @@
-import { Response, Building } from "../types";
+import { Building, Response } from "../types";
 import { create, get, remove, update } from "./request";
 
 const baseUrl = process.env.REACT_APP_BE_SERVER_BASE_URL;
 
-//fetching all buildings
+// fetching all buildings
 export const fetchAllBuildings = async (): Promise<Response<Building>> => {
   const response = await get(`${baseUrl}/building`);
   const buildings: Building[] = await response.json();
   return { success: response.ok, data: buildings };
 };
 
-//creating new building
+// creating new building
 export const postNewBuilding = async (
   newBuilding: Building,
 ): Promise<boolean> => {
@@ -18,7 +18,7 @@ export const postNewBuilding = async (
   return response.ok;
 };
 
-//creating multiple buildings
+// creating multiple buildings
 export const postNewBuildings = async (
   newBuilding: Building[],
 ): Promise<boolean> => {
@@ -26,7 +26,7 @@ export const postNewBuildings = async (
   return response.ok;
 };
 
-//updating building
+// updating building
 export const editBuilding = async (
   editedBuilding: Building,
 ): Promise<boolean> => {
@@ -38,7 +38,7 @@ export const editBuilding = async (
   return data?.returnedNumberValue === 1;
 };
 
-//removing single building
+// removing single building
 export const deleteBuildingById = async (
   buildingId: number,
 ): Promise<boolean> => {

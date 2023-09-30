@@ -1,23 +1,26 @@
-import React from "react";
 import { Box, Typography } from "@mui/material";
-import { useEffect, useState, useContext } from "react";
 import { useTheme } from "@mui/material/styles";
-import AllocRoundControlPanel from "../AllocRound/AllocRoundControlPanel";
-import resultRoomsStore from "../../data/ResultRoomsStore";
-import RoomsWithTimesList from "../room/RoomsWithTimesList";
+import { useContext, useEffect, useState } from "react";
 import { AppContext } from "../../AppContext";
+import resultRoomsStore from "../../data/ResultRoomsStore";
 import Logger from "../../logger/logger";
-//a component for displaying allocation results
-//shows: 1.the name of the room 2. utilization rate 3. classes using the room
+import AllocRoundControlPanel from "../AllocRound/AllocRoundControlPanel";
+import RoomsWithTimesList from "../room/RoomsWithTimesList";
 
-export default function RoomResult(props) {
-  const roomStore = resultRoomsStore;
-  const [rooms, setRooms] = useState([]);
-  const [resetCounter, setResetCounter] = useState(0);
-  const appContext = useContext(AppContext);
-  const theme = useTheme();
+// a component for displaying allocation results
+// shows: 1. the name of the room 2. utilization rate 3. classes using the room
+
+export default function RoomResult() {
   Logger.logPrefix = "RoomResult";
   Logger.debug("RoomResult component instantiated.");
+
+  const appContext = useContext(AppContext);
+  const theme = useTheme();
+
+  const [rooms, setRooms] = useState([]);
+  const [resetCounter, setResetCounter] = useState(0);
+
+  const roomStore = resultRoomsStore;
 
   useEffect(() => {
     getRoomsData();

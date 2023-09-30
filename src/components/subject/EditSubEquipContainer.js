@@ -1,18 +1,23 @@
-import React, { useState, useEffect } from "react";
 import { useFormik } from "formik";
-import ConfirmationDialog from "../common/ConfirmationDialog";
-import { validate } from "../../validation/ValidateEditSubjectEquipment";
-import AlertBox from "../common/AlertBox";
-import dao from "../../ajax/dao";
-import EditSubEquipForm from "./EditSubEquipForm";
+import { useEffect, useState } from "react";
 import {
   ajaxRequestErrorHandler,
   getFunctionName,
 } from "../../ajax/ajaxRequestErrorHandler";
+import dao from "../../ajax/dao";
+import { validate } from "../../validation/ValidateEditSubjectEquipment";
+import AlertBox from "../common/AlertBox";
+import ConfirmationDialog from "../common/ConfirmationDialog";
+import EditSubEquipForm from "./EditSubEquipForm";
 
-export default function EditSubEquipContainer(props) {
-  const { subId, equipId, prio, obli, name, getEquipmentsBySubId } = props;
-
+export default function EditSubEquipContainer({
+  subId,
+  equipId,
+  prio,
+  obli,
+  name,
+  getEquipmentsBySubId,
+}) {
   const [equipmentPriorityList, setEquipmentPriorityList] = useState([]);
   const [alertOpen, setAlertOpen] = useState(false);
   const [alertOptions, setAlertOptions] = useState({
@@ -34,7 +39,8 @@ export default function EditSubEquipContainer(props) {
   });
 
   const formik = useFormik({
-    // enableReinitialize checks if Formik needs to reset the form if the initial values ​​change
+    // enableReinitialize checks if Formik needs to reset the form
+    // if the initial values change
     enableReinitialize: true,
     initialValues: initialEquipValues,
     validate,

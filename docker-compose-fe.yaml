@@ -4,7 +4,7 @@ services:
     build: .
     container_name: siba_fe
     env_file: .env
-    ports: 
+    ports:
       - '${PORT}:${PORT}'
     stdin_open: true
     tty: true

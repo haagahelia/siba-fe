@@ -1,6 +1,7 @@
 import Logger from "../logger/logger";
 
-// This code is from: https://stackoverflow.com/questions/2648293/how-to-get-the-function-name-from-within-that-function
+// This code is from:
+// https://stackoverflow.com/questions/2648293/how-to-get-the-function-name-from-within-that-function
 // Justine M.
 export const getFunctionName = (d) => {
   // d: 0=this function 1=caller 2=caller of caller  ...
@@ -42,7 +43,7 @@ export const ajaxRequestErrorHandler = (
   setAlertOptions,
   setAlertOpen,
 ) => {
-  //viewName = "S/SS/S//S//TestFunctionNameHere/SSS__d><<>|||";
+  // viewName = "S/SS/S//S//TestFunctionNameHere/SSS__d><<>|||";
   Logger.logPrefix = tidyUpFunctionName(viewName);
   const callerFuncName = getFunctionName(2);
 

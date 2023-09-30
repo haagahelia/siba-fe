@@ -1,14 +1,18 @@
-import React, { useState } from "react";
 import { useFormik } from "formik";
-import ConfirmationDialog from "../common/ConfirmationDialog";
+import { useState } from "react";
+import dao from "../../ajax/dao";
 import { validate } from "../../validation/ValidateEditUser";
 import AlertBox from "../common/AlertBox";
-import dao from "../../ajax/dao";
+import ConfirmationDialog from "../common/ConfirmationDialog";
 import EditUserForm from "./EditUserForm";
 
-export default function EditUserContainer(props) {
-  // Whenever the editUser changes in the userList.js file, that information comes here as singleUser
-  const { singleUser, getAllUsers, setSingleUser } = props;
+export default function EditUserContainer({
+  // Whenever the editUser changes in the userList.js file,
+  // that information comes here as singleUser
+  singleUser,
+  getAllUsers,
+  setSingleUser,
+}) {
   const [alertOpen, setAlertOpen] = useState(false);
   const [alertOptions, setAlertOptions] = useState({
     title: "This is title",
@@ -22,7 +26,8 @@ export default function EditUserContainer(props) {
   });
 
   const formik = useFormik({
-    // enableReinitialize checks if Formik needs to reset the form if the initial values ​​change
+    // enableReinitialize checks if Formik needs to reset the form
+    // if the initial values change
     enableReinitialize: true,
     initialValues: singleUser,
     validate,

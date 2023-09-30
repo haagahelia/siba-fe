@@ -1,11 +1,14 @@
-import React, { useState } from "react";
 import { Button } from "@mui/material";
+import { useState } from "react";
 import dao from "../../ajax/dao";
 import AlertBox from "../common/AlertBox";
 import ConfirmationDialog from "../common/ConfirmationDialog";
 
-export default function DeleteBuilding(props) {
-  const { singleBuilding, getAllBuildings, setOpen } = props;
+export default function DeleteBuilding({
+  singleBuilding,
+  getAllBuildings,
+  setOpen,
+}) {
   const [alertOpen, setAlertOpen] = useState(false);
   const [alertOptions, setAlertOptions] = useState({
     message: "This is an error alert — check it out!",
@@ -51,7 +54,7 @@ export default function DeleteBuilding(props) {
   };
 
   return (
-    <React.Fragment>
+    <>
       <AlertBox
         alertOpen={alertOpen}
         alertOptions={alertOptions}
@@ -71,6 +74,6 @@ export default function DeleteBuilding(props) {
       >
         Delete
       </Button>
-    </React.Fragment>
+    </>
   );
 }

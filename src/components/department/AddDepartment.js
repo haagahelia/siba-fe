@@ -1,6 +1,3 @@
-import React from "react";
-import Button from "@mui/material/Button";
-import { useState } from "react";
 import {
   Dialog,
   DialogActions,
@@ -9,17 +6,19 @@ import {
   DialogTitle,
   TextField,
 } from "@mui/material";
+import Button from "@mui/material/Button";
+import { useState } from "react";
 import dao from "../../ajax/dao";
 import { validate } from "../../validation/ValidateAddEditDepartment";
 
-function AddDepartment(props) {
-  const { getAllDepartments } = props;
+export default function AddDepartment({ getAllDepartments }) {
   const [open, setOpen] = useState(false);
   const [confirmationDialog, setConfirmationDialog] = useState(false);
   const [department, setDepartment] = useState({
     name: "",
     description: "",
   });
+
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -114,5 +113,3 @@ function AddDepartment(props) {
     </div>
   );
 }
-
-export default AddDepartment;

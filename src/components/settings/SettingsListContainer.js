@@ -1,12 +1,13 @@
-import React from "react";
+import { Card } from "@mui/material";
+import CardContent from "@mui/material/CardContent";
 import Grid from "@mui/material/Grid";
 import SettingsList from "./SettingsList";
-import CardContent from "@mui/material/CardContent";
-import { Card } from "@mui/material";
 
-export default function SettingsListContainer(props) {
-  const { getAllSettings, incrementDataModifiedCounter, paginateSettings } =
-    props;
+export default function SettingsListContainer({
+  getAllSettings,
+  incrementDataModifiedCounter,
+  paginateSettings,
+}) {
   return (
     <div>
       <Grid container rowSpacing={0.5}>
@@ -14,7 +15,7 @@ export default function SettingsListContainer(props) {
           <CardContent>
             <SettingsList
               getAllSettings={getAllSettings}
-              //allSettings={allSettings}
+              // allSettings={allSettings}
               incrementDataModifiedCounter={incrementDataModifiedCounter}
               paginateSettings={paginateSettings}
             />

@@ -3,7 +3,7 @@ import { get } from "./request";
 
 const baseUrl = process.env.REACT_APP_BE_SERVER_BASE_URL;
 
-//fetching all programs
+// fetching all programs
 export const fetchProgramsForSelect = async (): Promise<
   ResponseFiner<Program>
 > => {

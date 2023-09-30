@@ -1,19 +1,19 @@
-import React, { useState, useEffect, useContext } from "react";
-import SpaceListContainer from "../components/space/SpaceListContainer";
+import { Card, CardHeader, Container } from "@mui/material";
 import CardContent from "@mui/material/CardContent";
-import { CardHeader, Card, Container, Typography } from "@mui/material";
 import Grid from "@mui/material/Grid";
-//import AddSubjectContainer from "../components/subject/AddSubjectContainer";
-import dao from "../ajax/dao";
-import AlertBox from "../components/common/AlertBox";
-import SpaceFiltering from "../components/space/SpaceFiltering";
-import SpacePagination from "../components/space/SpacePagination";
+import { useContext, useEffect, useState } from "react";
 import { AppContext } from "../AppContext";
-import Logger from "../logger/logger";
 import {
   ajaxRequestErrorHandler,
   getFunctionName,
 } from "../ajax/ajaxRequestErrorHandler";
+import dao from "../ajax/dao";
+import AlertBox from "../components/common/AlertBox";
+import SpaceFiltering from "../components/space/SpaceFiltering";
+import SpaceListContainer from "../components/space/SpaceListContainer";
+import SpacePagination from "../components/space/SpacePagination";
+// import AddSubjectContainer from "../components/subject/AddSubjectContainer";
+import Logger from "../logger/logger";
 
 const pageSize = 15;
 

@@ -1,16 +1,15 @@
-import React from "react";
-import Grid2 from "@mui/material/Unstable_Grid2";
-//import Typography from "@mui/material/Typography";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import { Collapse, useTheme } from "@mui/material";
-
+// import Typography from "@mui/material/Typography";
+import Grid2 from "@mui/material/Unstable_Grid2";
+import { useState } from "react";
 import RoomList from "../room/RoomList";
 
-export default function CollapsedRow(props) {
-  const prog1 = props.prog1;
-  const [expand, setExpand] = React.useState(false);
+export default function CollapsedRow({ prog1 }) {
   const theme = useTheme();
+
+  const [expand, setExpand] = useState(false);
 
   return (
     <Grid2 container>

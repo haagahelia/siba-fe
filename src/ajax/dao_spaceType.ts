@@ -3,7 +3,7 @@ import { get } from "./request";
 
 const baseUrl = process.env.REACT_APP_BE_SERVER_BASE_URL;
 
-//fetching all spaceTypes
+// fetching all spaceTypes
 export const fetchSpacetypeForSelect = async (): Promise<
   ResponseFiner<SpaceType>
 > => {

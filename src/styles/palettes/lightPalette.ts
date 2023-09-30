@@ -1,20 +1,20 @@
 import { createTheme } from "@mui/material";
+// import { dark } from "@mui/material/styles/createPalette";
 import { PaletteContract } from "../../types";
 import {
-  accentYellow,
   accentOrange,
-  white,
+  accentYellow,
   black,
-  darkestGrey,
   darkGrey,
-  lightGrey,
+  darkestGrey,
   indicatorGreen,
-  indicatorRed,
   indicatorOrange,
+  indicatorRed,
   indicatorYellowDark,
+  lightGrey,
   transparentBlack,
+  white,
 } from "./commonColors";
-// import { dark } from "@mui/material/styles/createPalette";
 
 // Color definitions for LIGHT
 
