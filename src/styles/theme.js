@@ -131,40 +131,38 @@ export const createAppTheme = (currentPalette) =>
         },
         variants: [
           {
-            props: { variant: "navBar" },
+            props: { variant: "navBar" }, // The nav bar styling
             style: {
               borderColor: currentPalette.backgroundDarker.default,
               display: "contents",
-              // color: currentPalette.fontColorDefault.main,
-              "& a": {
-                padding: lessPadding,
+              "& a": { 
                 borderBottom: "3px solid transparent",
-                //color: currentPalette.fontColorDefault.default,
                 color: currentPalette.primary.contrastText,
-                textDecoration: "none",
                 fontFamily: "Roboto, Helvetica, Aria, sans-serif",
                 fontWeight: 600,
                 height: "100%",
+                padding: lessPadding,
                 textAlign: "center",
+                textDecoration: "none",
                 width: navbarWidth,
               },
               "&:after": {
+                background: "transparent",
+                backgroundColor: "0.5s ease",
                 content: '""',
                 display: "block",
                 height: "3px",
-                width: 0,
-                background: "transparent",
                 transition: "width 0.7s ease",
-                backgroundColor: "0.5s ease",
+                width: 0,
               },
               "&:hover a": {
                 borderBottom: "3px solid",
                 color: currentPalette.primary.contrastText,
               },
               "& a.nav-links.active": {
-                fontWeight: 800,
                 backgroundColor: currentPalette.background.default,
                 color: currentPalette.text.primary,
+                fontWeight: 800,
                 textDecorationThickness: "3px",
                 width: navbarWidth,
               },
@@ -182,7 +180,6 @@ export const createAppTheme = (currentPalette) =>
               padding: "5px",
               textAlign: "center",
               width: "130px",
-              //width: navbarWidth,
 
               "& a": {
                 color: currentPalette.primary.main,
@@ -196,8 +193,8 @@ export const createAppTheme = (currentPalette) =>
             props: { variant: "navBarDropDownLinks" }, // The drop down menu styling
             style: {
               backgroundColor: "transparent",
-              display: "flex",
               borderRadius: "10px",
+              display: "flex",
               flexDirection: "column",
               justifyContent: "center",
               padding: "2px",

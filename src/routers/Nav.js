@@ -9,13 +9,10 @@ import {
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
-import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
-import Menu from "@mui/material/Menu";
 import Container from "@mui/material/Container";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
-import MenuIcon from "@mui/icons-material/Menu";
 import Settings from "../views/Settings";
 import RoomResultView from "../views/RoomResultView";
 import ProgramResultView from "../views/ProgramResultView";
@@ -34,7 +31,6 @@ import UserView from "../views/UserView";
 import { AppContext } from "../AppContext";
 import Logger from "../logger/logger";
 import logo from "../styles/SibeliusLogo.svg";
-
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGear } from "@fortawesome/free-solid-svg-icons";
 import { faArrowRightFromBracket } from "@fortawesome/free-solid-svg-icons";
@@ -140,16 +136,7 @@ function NavBar() {
   const [loggedIn, setLoggedIn] = useState(
     localStorage.getItem("email") ? localStorage.getItem("email") : "Not yet",
   );
-
   const [isDropdownVisible, setIsDropdownVisible] = useState(false);
-
-  const [anchorElNav, setAnchorElNav] = React.useState(null);
-  const handleOpenNavMenu = (event) => {
-    setAnchorElNav(event.currentTarget);
-  };
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
-  };
 
   // Called to produce the down drop menu items
   const renderDropdownMenu = (page, variant) => {
@@ -313,46 +300,7 @@ function NavBar() {
             <Typography variant="sibaTypography">
               Logged in as: {loggedIn}
             </Typography>
-            <Box sx={{ flexGrow: 1, display: { xs: "flex", lg: "none" } }}>
-              <IconButton
-                size="large"
-                aria-label="account of current user"
-                aria-controls="menu-appbar"
-                aria-haspopup="true"
-                onClick={handleOpenNavMenu}
-                color="inherit"
-              >
-                <MenuIcon />
-              </IconButton>
-              <Menu
-                id="menu-appbar"
-                anchorEl={anchorElNav}
-                anchorOrigin={{
-                  vertical: "bottom",
-                  horizontal: "left",
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: "top",
-                  horizontal: "left",
-                }}
-                open={Boolean(anchorElNav)}
-                onClose={handleCloseNavMenu}
-                sx={{
-                  display: { xs: "block", lg: "none" },
-                }}
-              >
-                <List variant="sibaAppBarVertival">
-                  <NavLink to="/" className="nav-logo">
-                    {/* I didn't have logos, add them to the project and it works */}
-                    {/* <img src={logo} alt="Logo" /> */}
-                    <i className="fas fa-code" />
-                  </NavLink>
-                  {renderNavLinks()}
-                </List>
-              </Menu>
-            </Box>
-            <Box sx={{ flexGrow: 1, display: { xs: "none", lg: "flex" } }}>
+            <Box sx={{ flexGrow: 1 }}>
               <List variant="navBar">{renderNavLinks()}</List>
             </Box>
           </Toolbar>
