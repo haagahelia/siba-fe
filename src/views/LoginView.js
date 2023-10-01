@@ -2,6 +2,7 @@ import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AppContext } from "../AppContext";
 import dao from "../ajax/dao";
+import AlertBox from "../components/common/AlertBox";
 import Logger from "../logger/logger";
 
 import Button from "@mui/material/Button";
@@ -23,6 +24,13 @@ export default function LoginView({ handleLoginChange }) {
   const [errorMsg, setErrorMsg] = useState("");
   const [showError, setShowError] = useState(true);
 
+  const [alertOpen, setAlertOpen] = useState(false);
+  const [alertOptions, setAlertOptions] = useState({
+    message: "This is an error alert — check it out!",
+    severity: "error",
+  });
+
+  /*
   const errorShown = () => {
     if (showError === true) {
       setErrorMsg("Username or Password is wrong");
@@ -31,7 +39,7 @@ export default function LoginView({ handleLoginChange }) {
       setErrorMsg("");
     }
   };
-
+*/
   // one function used to serve both the functions login and error
   const loginAndError = async () => {
     try {
@@ -41,7 +49,7 @@ export default function LoginView({ handleLoginChange }) {
     }
 
     setTimeout(() => {
-      errorShown();
+      //errorShown();
     }, 500); // Add 1000ms delay before calling errorShown
   };
 
@@ -49,6 +57,12 @@ export default function LoginView({ handleLoginChange }) {
     // Logger.debug("Attempting to log in");
     const { httpStatus, data } = await dao.loginUser(loginForm);
     if (httpStatus !== 200) {
+      setAlertOptions({
+        severity: "error",
+        title: "Error",
+        message: "Username or Password is wrong",
+      });
+      setAlertOpen(true);
       Logger.error("Login failed:", data);
     } else {
       setErrorMsg("");
@@ -73,7 +87,15 @@ export default function LoginView({ handleLoginChange }) {
 
       // Logger.debug("Login info in appContext", appContext);
 
-      window.alert("Welcome!");
+      //Set alert description to describe the event
+      setAlertOptions({
+        severity: "success",
+        title: "Welcome!",
+        message: "Welcome to siba",
+      });
+
+      //Show popup
+      setAlertOpen(true);
 
       handleLoginChange();
 
@@ -82,48 +104,59 @@ export default function LoginView({ handleLoginChange }) {
         password: "",
       });
 
-      navigate("/");
+      //Timeout to show popup message before navigation
+      setTimeout(() => {
+        navigate("/");
+      }, 1500);
     }
   };
 
   return (
-    <Card
-      variant="outlined"
-      sx={{
-        width: "65%",
-        padding: 1,
-        margin: "auto",
-        marginTop: "100px",
-      }}
-    >
-      <CardContent>
-        <Grid>
-          <TextField
-            value={loginForm.email}
-            onChange={(event) =>
-              setLoginForm({ ...loginForm, email: event.target.value })
-            }
-            placeholder="email"
-          />
-        </Grid>
-        <Grid>
-          <TextField
-            value={loginForm.password}
-            onChange={(event) =>
-              setLoginForm({
-                ...loginForm,
-                password: event.target.value,
-              })
-            }
-            placeholder="password"
-            type="password"
-          />
-        </Grid>
-        <Grid>
-          <Button onClick={loginAndError}>Log In</Button>
-        </Grid>
-        {errorMsg}
-      </CardContent>
-    </Card>
+    <div>
+      <AlertBox
+        alertOpen={alertOpen}
+        alertOptions={alertOptions}
+        setAlertOpen={setAlertOpen}
+      />
+
+      <Card
+        variant="outlined"
+        sx={{
+          width: "65%",
+          padding: 1,
+          margin: "auto",
+          marginTop: "100px",
+        }}
+      >
+        <CardContent>
+          <Grid>
+            <TextField
+              value={loginForm.email}
+              onChange={(event) =>
+                setLoginForm({ ...loginForm, email: event.target.value })
+              }
+              placeholder="email"
+            />
+          </Grid>
+          <Grid>
+            <TextField
+              value={loginForm.password}
+              onChange={(event) =>
+                setLoginForm({
+                  ...loginForm,
+                  password: event.target.value,
+                })
+              }
+              placeholder="password"
+              type="password"
+            />
+          </Grid>
+          <Grid>
+            <Button onClick={loginAndError}>Log In</Button>
+          </Grid>
+          {errorMsg}
+        </CardContent>
+      </Card>
+    </div>
   );
 }
