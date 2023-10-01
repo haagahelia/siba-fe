@@ -19,7 +19,7 @@ export default function DeleteUser({ singleUser, getAllUsers, setOpen }) {
   const [deleteId, setDeleteId] = useState("");
 
   const deleteUser = async (value) => {
-    let result = await dao.deleteSingleUser(value);
+    const result = await dao.deleteSingleUser(value);
     if (result === false) {
       setAlertOptions({
         severity: "error",

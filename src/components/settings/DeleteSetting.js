@@ -23,7 +23,7 @@ export default function DeleteSetting({
   const [deleteId, setDeleteId] = useState("");
 
   const deleteSetting = async (value) => {
-    let result = await dao.deleteSettingById(value);
+    const result = await dao.deleteSettingById(value);
     if (result === false) {
       setAlertOptions({
         severity: "error",

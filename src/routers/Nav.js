@@ -53,31 +53,31 @@ export default function NavBar() {
     },
     {
       name: "Allocation",
-      href: "allocation",
+      href: "/allocation",
       forRoles: ["admin"],
       showForCurrentUser: false,
     },
     {
       name: "Buildings",
-      href: "building",
+      href: "/building",
       forRoles: ["admin", "statist"],
       showForCurrentUser: false,
     },
     {
       name: "Departments",
-      href: "department",
+      href: "/department",
       forRoles: ["admin", "planner", "statist"],
       showForCurrentUser: false,
     },
     {
       name: "Equipment",
-      href: "equipment",
+      href: "/equipment",
       forRoles: ["admin", "planner", "statist"],
       showForCurrentUser: false,
     },
     {
       name: "Spaces",
-      href: "space",
+      href: "/space",
       forRoles: ["admin", "planner", "statist"],
       showForCurrentUser: false,
     },
@@ -107,7 +107,7 @@ export default function NavBar() {
     },
     {
       name: "Account",
-      href: "javascript:void(0);",
+      href: "javascript:;",
       forRoles: ["admin", "planner", "statist"],
       showForCurrentUser: false,
     },
@@ -230,12 +230,13 @@ export default function NavBar() {
         if (page.name === "Account") {
           return (
             <div
+              key={page.name}
               onMouseEnter={() => setIsDropdownVisible(true)}
               onMouseLeave={() => setIsDropdownVisible(false)}
               // The hover area between the Account links and the drop down
               style={{ width: "170px" }}
             >
-              <ListItem variant="navBarAccountButton" key={index}>
+              <ListItem variant="navBarAccountButton">
                 <NavLink
                   to={page.href}
                   end
@@ -272,7 +273,7 @@ export default function NavBar() {
         }
 
         return (
-          <ListItem variant={variantValue} key={index}>
+          <ListItem variant={variantValue} key={page.name}>
             <NavLink
               to={page.href}
               end

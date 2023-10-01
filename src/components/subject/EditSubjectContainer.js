@@ -51,8 +51,8 @@ export default function EditSubjectContainer({
   });
 
   async function submitEditedSubject(values) {
-    let capitalName = capitalizeFirstLetter(values.subjectName);
-    let editedSubject = {
+    const capitalName = capitalizeFirstLetter(values.subjectName);
+    const editedSubject = {
       name: capitalName,
       groupSize: values.groupSize,
       groupCount: values.groupCount,
@@ -63,7 +63,7 @@ export default function EditSubjectContainer({
       spaceTypeId: values.spaceTypeId ? values.spaceTypeId : null,
       id: values.id,
     };
-    let result = await dao.editSubject(editedSubject);
+    const result = await dao.editSubject(editedSubject);
     if (!result) {
       setAlertOptions({
         severity: "error",

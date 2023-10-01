@@ -10,7 +10,7 @@ const Logger = {
   // Should be set in the view logger is used in.
   logPrefix: "CustomLogger",
   getFormattedTimestamp() {
-    let time = new DateTime({});
+    const time = new DateTime({});
     return time.toFormat("yyyyMMdd HH:mm:ss");
   },
 

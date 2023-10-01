@@ -26,7 +26,7 @@ export default function AddUser() {
       registerForm.email,
     );
     // const hashedPassword = bcrypt.hashSync(registerForm.password, 10);
-    let success = await dao.postNewUser({
+    const success = await dao.postNewUser({
       ...registerForm,
     });
     // password: hashedPassword,

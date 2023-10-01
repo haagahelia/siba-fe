@@ -44,14 +44,14 @@ export default function EditSettingContainer({
   });
 
   async function submitEditedSetting(values) {
-    let editedSetting = {
+    const editedSetting = {
       id: values.id,
       name: capitalizeFirstLetter(values.name),
       description: values.description,
       numberValue: values.numberValue,
       textValue: values.textValue,
     };
-    let result = await dao.editSetting(editedSetting);
+    const result = await dao.editSetting(editedSetting);
     Logger.debug(
       `Submitting edits for settings: ${JSON.stringify(editedSetting)}`,
     );

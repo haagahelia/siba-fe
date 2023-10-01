@@ -11,7 +11,7 @@ export async function validate(values) {
     const { data } = await dao.fetchDepartmentData();
     departmentList = data;
     // Check if user enter an existed building name
-    let result = departmentList.some(
+    const result = departmentList.some(
       (names) => names.name.toLowerCase() === values.name.toLowerCase(),
     );
 

@@ -55,14 +55,14 @@ export default function EditSubEquipContainer({
   });
 
   async function submitEditedSubjectEquip(values) {
-    let editedSubEquip = {
+    const editedSubEquip = {
       priority: values.priority,
       obligatory: values.obligatory,
       subjectId: values.subjectId,
       equipmentId: values.equipmentId,
     };
 
-    let success = await dao.editSubjectEquipment(editedSubEquip);
+    const success = await dao.editSubjectEquipment(editedSubEquip);
 
     if (!success) {
       setAlertOptions({

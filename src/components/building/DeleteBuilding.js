@@ -23,7 +23,7 @@ export default function DeleteBuilding({
   const [deleteId, setDeleteId] = useState("");
 
   const deleteBuilding = async (value) => {
-    let result = await dao.deleteBuildingById(value);
+    const result = await dao.deleteBuildingById(value);
     if (result === false) {
       setAlertOptions({
         severity: "error",

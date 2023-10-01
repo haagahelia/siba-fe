@@ -15,12 +15,12 @@ export default function AddEquipmentDialogConfirmation({
   getAllEquipments,
 }) {
   const addSingleEquipment = async () => {
-    let validation = ValidateAddEquipment(equipment);
+    const validation = ValidateAddEquipment(equipment);
     if (validation) {
       alert(Object.values(validation));
       return;
     }
-    let success = await dao.postNewEquipment(equipment);
+    const success = await dao.postNewEquipment(equipment);
     if (!success) {
       alert("Something went wrong!");
     } else {

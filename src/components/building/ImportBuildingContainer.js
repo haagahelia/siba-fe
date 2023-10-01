@@ -29,7 +29,7 @@ export default function ImportBuildingContainer({ getAllBuildings }) {
   };
 
   const handleFileUpload = (e) => {
-    let file = e.target.files[0];
+    const file = e.target.files[0];
 
     if (!isUploaded(file)) {
       return;

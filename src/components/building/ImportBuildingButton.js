@@ -24,13 +24,13 @@ export default function ImportBuildingButton({
   const importData = async () => {
     let successCount = 0;
     let failedCount = 0;
-    let tempFailedBuildings = [];
-    let buildingsToSend = [];
-    let buildingSet = new Set();
+    const tempFailedBuildings = [];
+    const buildingsToSend = [];
+    const buildingSet = new Set();
 
     await Promise.all(
       importBuildings.map(async (building) => {
-        let newBuilding = {
+        const newBuilding = {
           name: building.name ? capitalizeFirstLetter(building.name) : "",
           description: building.description ? building.description : "",
         };
@@ -80,7 +80,7 @@ export default function ImportBuildingButton({
 
     Logger.debug("buildingsToSend", buildingsToSend);
 
-    let result = await dao.postNewBuildings(buildingsToSend);
+    const result = await dao.postNewBuildings(buildingsToSend);
 
     if (result) {
       getAllBuildings();

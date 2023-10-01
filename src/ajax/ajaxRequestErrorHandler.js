@@ -24,7 +24,8 @@ export const getFunctionName = (d) => {
   return firefoxMatch || chromeMatch || safariMatch;
 };
 
-export const tidyUpFunctionName = (name) => {
+export const tidyUpFunctionName = (originalName) => {
+  let name = originalName;
   if (name.includes("/")) {
     let lastIndex = name.lastIndexOf("/");
     name = name.substring(0, lastIndex);

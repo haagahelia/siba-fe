@@ -19,7 +19,9 @@ class ResultRoomsStore {
           "Content-Type": "application/json",
         },
       })
-      .then((data) => (this.rooms = data.data))
+      .then((data) => {
+        this.rooms = data.data;
+      })
       .catch((e) => console.error(e));
   }
 
@@ -32,7 +34,9 @@ class ResultRoomsStore {
           "Content-Type": "application/json",
         },
       })
-      .then((data) => (this.subRooms = data.data))
+      .then((data) => {
+        this.subRooms = data.data;
+      })
       .catch((e) => console.error(e));
   }
 
@@ -45,7 +49,9 @@ class ResultRoomsStore {
           "Content-Type": "application/json",
         },
       })
-      .then((data) => (this.roomSubs = data.data))
+      .then((data) => {
+        this.roomSubs = data.data;
+      })
       .catch((e) => console.error(e));
   }
 }

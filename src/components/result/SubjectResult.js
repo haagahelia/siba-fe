@@ -103,9 +103,9 @@ function CollapsedRow(id) {
 
       <Collapse in={expand} style={{ width: "100%" }}>
         <Grid2 container />
-        {rooms?.map((dropdownItem, index) => {
+        {rooms?.map((dropdownItem) => {
           return (
-            <Grid2 container key={index}>
+            <Grid2 container key={dropdownItem.id}>
               <Grid2 xs={8}>
                 {" "}
                 <Typography

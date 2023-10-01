@@ -34,10 +34,10 @@ export default function AddSubEquipContainer({
     content: "Something here",
   });
 
-  let subId = singleSubject?.id;
+  const subId = singleSubject?.id;
 
   const getSubEquipBySubId = async function (subId) {
-    let result = await equipmentsBySubId(subId);
+    const result = await equipmentsBySubId(subId);
     getEquipmentsForSelect(result);
   };
 
@@ -95,13 +95,13 @@ export default function AddSubEquipContainer({
   });
 
   const addSubjectEquipment = async (values) => {
-    let newSubjectEquipment = {
+    const newSubjectEquipment = {
       subjectId: values.subjectId,
       equipmentId: values.equipmentId,
       priority: values.priority,
       obligatory: Number.parseInt(values.obligatory),
     };
-    let success = await dao.postNewSubjectEquipment(newSubjectEquipment);
+    const success = await dao.postNewSubjectEquipment(newSubjectEquipment);
     if (!success) {
       setAlertOptions({
         severity: "error",

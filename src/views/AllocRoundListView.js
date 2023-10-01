@@ -51,7 +51,7 @@ export default function AllocRoundView() {
   };
 
   const incrementDataModifiedCounter = () => {
-    let newValue = dataModifiedCounter + 1;
+    const newValue = dataModifiedCounter + 1;
     setDataModifiedCounter(newValue);
   };
 

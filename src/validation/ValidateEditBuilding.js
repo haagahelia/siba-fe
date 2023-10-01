@@ -9,7 +9,6 @@ export async function validate(values) {
     let buildingList = [];
     const { data } = await dao.fetchAllBuildings();
     buildingList = data;
-    let result;
     let id;
     let filteredList = [];
 
@@ -24,10 +23,9 @@ export async function validate(values) {
       }
     });
 
-    result = filteredList.some(
+    return filteredList.some(
       (building) => building.name.toLowerCase() === values.name.toLowerCase(),
     );
-    return result;
   };
 
   if (!values.name) {

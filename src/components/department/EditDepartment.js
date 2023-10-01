@@ -23,11 +23,11 @@ export default function EditDepartment({
   });
 
   const submitEdits = async () => {
-    let validation = validate(department);
+    const validation = validate(department);
     if (Object.values(validation).length !== 0) {
       alert(Object.values(validation));
     } else {
-      let result = await dao.editDepartment(department);
+      const result = await dao.editDepartment(department);
       if (!result) {
         alert("Something went wrong");
       } else {

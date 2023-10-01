@@ -33,12 +33,12 @@ export default function AddDepartment({ getAllDepartments }) {
     setDepartment({ ...department, [event.target.name]: event.target.value });
   };
   const AddDepartment = async () => {
-    let validation = validate(department);
+    const validation = validate(department);
     if (!validation) {
       alert(Object.values(validation));
       return;
     }
-    let success = await dao.addDepartment(department);
+    const success = await dao.addDepartment(department);
     if (!success) {
       alert("something went wrong!");
     } else {

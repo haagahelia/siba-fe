@@ -45,14 +45,14 @@ export default function EditAllocRound({
   });
 
   async function submitEditedAllocRound(values) {
-    let capitalName = capitalizeFirstLetter(values.name);
-    let editedAllocRound = {
+    const capitalName = capitalizeFirstLetter(values.name);
+    const editedAllocRound = {
       name: capitalName,
       description: values.description,
       lastModified: values.lastModified,
       id: values.id,
     };
-    let result = await dao.editAllocRound(editedAllocRound);
+    const result = await dao.editAllocRound(editedAllocRound);
     if (!result) {
       setAlertOptions({
         severity: "error",

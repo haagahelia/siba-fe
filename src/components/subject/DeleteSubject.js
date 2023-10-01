@@ -23,7 +23,7 @@ export default function DeleteSubject({
   const [deleteId, setDeleteId] = useState("");
 
   const deleteSubject = async (value) => {
-    let result = await dao.deleteSingleSubject(value);
+    const result = await dao.deleteSingleSubject(value);
     if (result === false) {
       setAlertOptions({
         severity: "error",

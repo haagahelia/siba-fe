@@ -131,8 +131,8 @@ export default function AddSubjectContainer({
   }, []);
 
   const addSubject = async (submitValues) => {
-    let capitalName = capitalizeFirstLetter(submitValues.name);
-    let newSubject = {
+    const capitalName = capitalizeFirstLetter(submitValues.name);
+    const newSubject = {
       name: capitalName,
       groupSize: submitValues.groupSize,
       groupCount: submitValues.groupCount,
@@ -143,7 +143,7 @@ export default function AddSubjectContainer({
       spaceTypeId: submitValues.spaceTypeId ? submitValues.spaceTypeId : null,
     };
 
-    let result = await dao.postNewSubject(newSubject);
+    const result = await dao.postNewSubject(newSubject);
     if (!result) {
       setAlertOptions({
         severity: "error",
@@ -166,7 +166,7 @@ export default function AddSubjectContainer({
   // Here is a list of lessons
   // When you choose a lesson, the information goes to the form's initial values
   const handleChange = (e) => {
-    let selected = e.target.value;
+    const selected = e.target.value;
     setInitialSubject({
       // This is so that the entered name does not change
       // even if you select the data of an existing lesson

@@ -36,11 +36,10 @@ export async function validate(values) {
       // Here we compare the lessons that did not match the id of the lesson
       // to be edited and see if the user's input matches
       // the name of an already existing lesson
-      result = filteredList.some(
+      return filteredList.some(
         (names) =>
           names.name.toLowerCase() === values.subjectName.toLowerCase(),
       );
-      return result;
     } else {
       Logger.error(`getSubjectNames failed, http status code: ${httpStatus}`);
     }

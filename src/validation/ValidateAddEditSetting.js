@@ -12,7 +12,6 @@ export async function validate(values) {
   const getSettingNames = async function () {
     const { data } = await dao.fetchSettings();
     settingList = data;
-    let result;
     let id;
     let filteredList = [];
     // Check if user enter an existed setting name
@@ -26,10 +25,9 @@ export async function validate(values) {
       }
     });
 
-    result = filteredList.some(
+    return filteredList.some(
       (building) => building.name.toLowerCase() === values.name.toLowerCase(),
     );
-    return result;
   };
 
   if (!values.name) {

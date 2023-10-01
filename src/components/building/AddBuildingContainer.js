@@ -61,12 +61,12 @@ export default function AddBuildingContainer({ getAllBuildings }) {
   });
 
   const addBuilding = async (submitValues) => {
-    let newBuilding = {
+    const newBuilding = {
       name: capitalizeFirstLetter(submitValues.name),
       description: submitValues.description,
     };
 
-    let result = await dao.postNewBuilding(newBuilding);
+    const result = await dao.postNewBuilding(newBuilding);
     if (!result) {
       setAlertOptions({
         severity: "error",

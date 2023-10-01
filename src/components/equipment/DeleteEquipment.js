@@ -23,7 +23,7 @@ export default function DeleteEquipment({
   const [deleteId, setDeleteId] = useState("");
 
   const deleteEquipment = async (value) => {
-    let result = await dao.deleteSingleEquipment(value);
+    const result = await dao.deleteSingleEquipment(value);
     if (result === false) {
       setAlertOptions({
         severity: "error",

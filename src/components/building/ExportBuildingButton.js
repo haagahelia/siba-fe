@@ -22,9 +22,9 @@ export default function ExportBuildingButton({ failedBuildings }) {
 
       return;
     } else {
-      let csv = Papa.unparse(failedBuildings);
-      let blob = new Blob([csv]);
-      let a = window.document.createElement("a");
+      const csv = Papa.unparse(failedBuildings);
+      const blob = new Blob([csv]);
+      const a = window.document.createElement("a");
       a.href = window.URL.createObjectURL(blob);
       a.download = "BuildingsFailedToImport.csv";
       document.body.appendChild(a);

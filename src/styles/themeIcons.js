@@ -1,4 +1,5 @@
 export const SunIcon = () => (
+  // biome-ignore lint/a11y/noSvgWithoutTitle: hidden from assistive tech
   <svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 24 24"
@@ -6,6 +7,7 @@ export const SunIcon = () => (
     stroke="black" // you can change icon color here
     strokeWidth={1.5}
     className="w-6 h-6"
+    aria-hidden="true"
   >
     <path
       strokeLinecap="round"
@@ -16,6 +18,7 @@ export const SunIcon = () => (
 );
 
 export const MoonIcon = () => (
+  // biome-ignore lint/a11y/noSvgWithoutTitle: hidden from assistive tech
   <svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 24 24"
@@ -23,6 +26,7 @@ export const MoonIcon = () => (
     stroke="black" // you can change icon color here
     strokeWidth={1.5}
     className="w-6 h-6"
+    aria-hidden="true"
   >
     <path
       strokeLinecap="round"

@@ -1,42 +1,4 @@
-export interface PaletteContract {
-  name: string;
-  common: any;
-  primary: any;
-  secondary: any;
-  error: any;
-  warning: any;
-  info: any;
-  success: any;
-  grey: any;
-  contrastThreshold: number;
-  tonalOffset: number;
-  text: any;
-  divider: string;
-  background: any;
-  action: any;
-
-  // own colors
-  activeLinkBackgroundColor: any;
-  AllocRoom: any;
-  backgroundDarker: any;
-  borderColor: any;
-  borderColorDark: any;
-  buttonThemeToggle: any;
-  edit: any;
-  fontColorDefault: any;
-  helperText: any;
-  infoIcon: any;
-
-  progressBarBackground: any;
-  progressBarGreen: any;
-  progressBarYellow: any;
-  progressBarRed: any;
-  progressBarTextNonZero: any;
-  progressBarTextZero: any;
-
-  red: any;
-  snackbarBackground: any;
-}
+export * from "./colors";
 
 export interface Response<T> {
   success: boolean;

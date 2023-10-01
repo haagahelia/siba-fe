@@ -43,12 +43,12 @@ export default function EditBuildingContainer({
   });
 
   async function submitEditedBuilding(values) {
-    let editedBuilding = {
+    const editedBuilding = {
       id: values.id,
       name: capitalizeFirstLetter(values.name),
       description: values.description,
     };
-    let result = await dao.editBuilding(editedBuilding);
+    const result = await dao.editBuilding(editedBuilding);
     if (!result) {
       setAlertOptions({
         severity: "error",

@@ -42,14 +42,14 @@ export default function EditUserContainer({
   });
 
   async function submitEditedUser(values) {
-    let editedUser = {
+    const editedUser = {
       id: values.id,
       email: values.email,
       isAdmin: values.isAdmin,
       isPlanner: values.isPlanner,
       isStatist: values.isStatist,
     };
-    let result = await dao.editUser(editedUser);
+    const result = await dao.editUser(editedUser);
     if (!result) {
       setAlertOptions({
         severity: "error",

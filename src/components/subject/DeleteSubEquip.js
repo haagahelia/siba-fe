@@ -24,14 +24,16 @@ export default function DeleteSubEquip({
     equipmentId: 0,
   });
 
-  let id1 = singleEquipBySubId.subjectId;
-  let id2 = singleEquipBySubId.equipmentId;
-  let equipmentName = singleEquipBySubId.name;
+  const id1 = singleEquipBySubId.subjectId;
+  const id2 = singleEquipBySubId.equipmentId;
+  const equipmentName = singleEquipBySubId.name;
 
   const deleteSubjectEquipment = async (subjectId, equipmentId) => {
+    // TODO: Why are we reassigning function parameters here?!
+    // The values of `subjectId` and `equipmentId` get always overwritten
     subjectId = id1;
     equipmentId = id2;
-    let success = await dao.deleteSingleSubjectEquipment(
+    const success = await dao.deleteSingleSubjectEquipment(
       subjectId,
       equipmentId,
     );

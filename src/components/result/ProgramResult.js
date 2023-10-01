@@ -103,7 +103,10 @@ export default function ProgramResult() {
               zIndex: 1000,
             }}
             onClick={handleClose}
+            onKeyDown={handleClose}
           >
+            {/* biome-ignore lint/a11y/noSvgWithoutTitle:
+                hidden from assistive tech */}
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
@@ -114,6 +117,7 @@ export default function ProgramResult() {
                 height: "24px",
                 stroke: theme.palette.infoIcon.main,
               }}
+              aria-hidden="true"
             >
               <path
                 strokeLinecap="round"

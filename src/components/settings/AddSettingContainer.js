@@ -64,14 +64,14 @@ export default function AddSettingContainer({ getAllSettings }) {
   });
 
   const addSetting = async (submitValues) => {
-    let newSetting = {
+    const newSetting = {
       name: capitalizeFirstLetter(submitValues.name),
       description: submitValues.description,
       numberValue: submitValues.numberValue,
       textValue: submitValues.textValue,
     };
 
-    let result = await dao.postNewSetting(newSetting);
+    const result = await dao.postNewSetting(newSetting);
     if (!result) {
       setAlertOptions({
         severity: "error",

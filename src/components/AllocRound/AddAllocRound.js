@@ -58,13 +58,13 @@ export default function AddAllocRound({ allAllocRoundsList }) {
   });
 
   const addAllocRound = async (submitValues) => {
-    let capitalName = capitalizeFirstLetter(submitValues.name);
-    let newAllocRound = {
+    const capitalName = capitalizeFirstLetter(submitValues.name);
+    const newAllocRound = {
       name: capitalName,
       description: submitValues.description,
     };
 
-    let result = await dao.postNewAllocRound(newAllocRound);
+    const result = await dao.postNewAllocRound(newAllocRound);
     if (!result) {
       setAlertOptions({
         severity: "error",
@@ -86,7 +86,7 @@ export default function AddAllocRound({ allAllocRoundsList }) {
   // Here is a list of lessons
   // When you choose a lesson, the information goes to the form's initialvalues
   const handleChange = (e) => {
-    let selected = e.target.value;
+    const selected = e.target.value;
     setInitialAllocRound({
       // This is so that the entered name does not change
       // even if you select the data of an existing lesson

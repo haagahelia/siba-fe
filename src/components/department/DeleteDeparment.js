@@ -23,7 +23,7 @@ export default function DeleteDepartment({
   const [deleteId, setDeleteId] = useState("");
 
   const deleteDepartment = async (value) => {
-    let result = await dao.deleteDepartment(value);
+    const result = await dao.deleteDepartment(value);
     console.log(result);
     if (result === false) {
       setAlertOptions({

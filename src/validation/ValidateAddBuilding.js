@@ -10,7 +10,7 @@ export async function validate(values) {
     const { data } = await dao.fetchAllBuildings();
     buildingList = data;
     // Check if user enter an existed building name
-    let result = buildingList.some(
+    const result = buildingList.some(
       (building) => building.name.toLowerCase() === values.name.toLowerCase(),
     );
 

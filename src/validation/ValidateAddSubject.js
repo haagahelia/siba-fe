@@ -16,7 +16,7 @@ export async function validate(values) {
       subjectList = data;
       // Here it is considered that the user does not enter
       // the name of an already existing lesson.
-      let result = subjectList.some(
+      const result = subjectList.some(
         (names) => names.name.toLowerCase() === values.name.toLowerCase(),
       );
       return result;

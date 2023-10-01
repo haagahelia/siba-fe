@@ -29,7 +29,7 @@ export default function DeleteAllocRound({
   const [deletedName, setDeletedName] = useState("");
 
   const deleteAllocRound = async (value) => {
-    let result = await dao.deleteSingleAllocRound(value);
+    const result = await dao.deleteSingleAllocRound(value);
     if (result === false) {
       setAlertOptions({
         severity: "error",
