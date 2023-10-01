@@ -1,7 +1,3 @@
-import ExpandLessIcon from "@mui/icons-material/ExpandLess";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import { Card, CardContent, CardHeader } from "@mui/material";
-import IconButton from "@mui/material/IconButton";
 import { useFormik } from "formik";
 import { useEffect, useState } from "react";
 import {
@@ -14,6 +10,13 @@ import {
   capitalizeFirstLetter,
   validate,
 } from "../../validation/ValidateAddSubject";
+
+import ExpandLessIcon from "@mui/icons-material/ExpandLess";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import CardHeader from "@mui/material/CardHeader";
+import IconButton from "@mui/material/IconButton";
 import AlertBox from "../common/AlertBox";
 import ConfirmationDialog from "../common/ConfirmationDialog";
 import AddSubjectForm from "./AddSubjectForm";

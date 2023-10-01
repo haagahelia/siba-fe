@@ -1,6 +1,12 @@
+import { useEffect, useRef, useState } from "react";
+import { useParams } from "react-router-dom";
+import { ajaxRequestErrorHandler } from "../ajax/ajaxRequestErrorHandler";
+import dao from "../ajax/dao";
+import Logger from "../logger/logger";
+import "../styles/AllocationFailure.css";
+
 import CheckIcon from "@mui/icons-material/Check";
 import CloseIcon from "@mui/icons-material/Close";
-import { Typography } from "@mui/material";
 import Button from "@mui/material/Button";
 import ClickAwayListener from "@mui/material/ClickAwayListener";
 import Dialog from "@mui/material/Dialog";
@@ -15,13 +21,8 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Tooltip from "@mui/material/Tooltip";
-import { useEffect, useRef, useState } from "react";
-import { useParams } from "react-router-dom";
-import { ajaxRequestErrorHandler } from "../ajax/ajaxRequestErrorHandler";
-import dao from "../ajax/dao";
+import Typography from "@mui/material/Typography";
 import AlertBox from "../components/common/AlertBox";
-import Logger from "../logger/logger";
-import "../styles/AllocationFailure.css";
 
 export function GetMissingEquipment({ subjId, roomId, item }) {
   const [missingEquipment, setMissingEquipment] = useState(

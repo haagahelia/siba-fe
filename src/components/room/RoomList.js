@@ -1,6 +1,7 @@
+import useTheme from "@mui/material/styles/useTheme";
+
 import Typography from "@mui/material/Typography";
 import Grid2 from "@mui/material/Unstable_Grid2";
-import { useTheme } from "@mui/material/styles";
 
 export default function RoomList({ rooms }) {
   const theme = useTheme();

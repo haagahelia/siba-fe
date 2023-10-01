@@ -1,11 +1,8 @@
-// import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-// import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
-// import { /* Box, */ Collapse } from "@mui/material";
-// import Typography from "@mui/material/Typography";
-import Grid2 from "@mui/material/Unstable_Grid2";
-import { useTheme } from "@mui/material/styles";
-import ProgressBar from "@ramonak/react-progress-bar";
+import useTheme from "@mui/material/styles/useTheme";
 import { Fragment } from "react";
+
+import Grid2 from "@mui/material/Unstable_Grid2";
+import ProgressBar from "@ramonak/react-progress-bar";
 import CollapsedRowB from "../result/CollapsedRowB";
 
 export default function RoomsWithTimesList({ rooms }) {

@@ -1,7 +1,8 @@
-import { Card } from "@mui/material";
+import { useState } from "react";
+
+import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Grid from "@mui/material/Grid";
-import { useState } from "react";
 import EquipmentList from "./EquipmentList";
 import SingleEquipmentDialog from "./SingleEquipmentDialog";
 

@@ -1,15 +1,14 @@
+import { useState } from "react";
+
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import {
-  Button,
-  Card,
-  CardContent,
-  CardHeader,
-  IconButton,
-} from "@mui/material";
+import Button from "@mui/material/Button";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import CardHeader from "@mui/material/CardHeader";
 import Grid from "@mui/material/Grid";
+import IconButton from "@mui/material/IconButton";
 import TextField from "@mui/material/TextField";
-import { useState } from "react";
 import AddEquipmentDialogConfirmation from "./AddEquipmentDialogConfirmation";
 
 export default function AddEquipment({ getAllEquipments }) {

@@ -1,15 +1,19 @@
-import { Card, CardHeader, Container, Typography } from "@mui/material";
+import { useEffect, useState } from "react";
+import dao from "../ajax/dao";
+import { RoleLoggedIn } from "../customhooks/RoleLoggedIn";
+import Logger from "../logger/logger";
+
+import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
+import CardHeader from "@mui/material/CardHeader";
+import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
-import { useEffect, useState } from "react";
-import dao from "../ajax/dao";
+import Typography from "@mui/material/Typography";
 import AddDepartment from "../components/department/AddDepartment";
 import DepartmentDialog from "../components/department/DepartmentDialog";
-import { RoleLoggedIn } from "../customhooks/RoleLoggedIn";
-import Logger from "../logger/logger";
 
 export default function DepartmentView() {
   Logger.logPrefix = "DepartmentView";

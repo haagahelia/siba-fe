@@ -1,18 +1,18 @@
-import { Typography } from "@mui/material";
-// import Divider from "@mui/material/Divider";
-import Grid from "@mui/material/Grid";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import ListItemText from "@mui/material/ListItemText";
-import Paper from "@mui/material/Paper";
-import { styled } from "@mui/material/styles";
-import { /* useEffect, */ useState } from "react";
+import styled from "@mui/material/styles/styled";
+import { useState } from "react";
 // import {
 //   ajaxRequestErrorHandler,
 //   getFunctionName,
 // } from "../../ajax/ajaxRequestErrorHandler";
 import dao from "../../ajax/dao";
 import Logger from "../../logger/logger";
+
+import Grid from "@mui/material/Grid";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import ListItemText from "@mui/material/ListItemText";
+import Paper from "@mui/material/Paper";
+import Typography from "@mui/material/Typography";
 import SingleEquipmentDialog from "./SingleEquipmentDialog";
 
 export default function EquipmentListItems({

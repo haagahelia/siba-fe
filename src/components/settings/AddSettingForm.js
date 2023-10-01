@@ -1,4 +1,5 @@
-import { Button, Grid } from "@mui/material";
+import Button from "@mui/material/Button";
+import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
 
 export default function AddSettingForm({

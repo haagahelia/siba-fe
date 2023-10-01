@@ -1,6 +1,8 @@
-import { Clear } from "@mui/icons-material";
-import { IconButton, TextField } from "@mui/material";
 import { useEffect, useState } from "react";
+
+import ClearIcon from "@mui/icons-material/Clear";
+import IconButton from "@mui/material/IconButton";
+import TextField from "@mui/material/TextField";
 
 export default function UserFiltering({
   allUsersList,
@@ -46,7 +48,7 @@ export default function UserFiltering({
             onClick={cancelSearch}
             sx={{ visibility: searched ? "visible" : "hidden" }}
           >
-            <Clear sx={{ color: "#ffffff " }} />
+            <ClearIcon sx={{ color: "#ffffff " }} />
           </IconButton>
         ),
       }}

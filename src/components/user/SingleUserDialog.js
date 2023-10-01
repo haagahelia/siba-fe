@@ -1,11 +1,9 @@
-import {
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogTitle,
-  Typography,
-} from "@mui/material";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogTitle from "@mui/material/DialogTitle";
 import Grid from "@mui/material/Grid";
+import Typography from "@mui/material/Typography";
 import DeleteUser from "./DeleteUser";
 import EditUserContainer from "./EditUserContainer";
 

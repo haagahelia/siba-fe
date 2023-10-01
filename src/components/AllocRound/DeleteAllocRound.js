@@ -1,8 +1,9 @@
-import { Button } from "@mui/material";
-import { useTheme } from "@mui/material/styles";
+import useTheme from "@mui/material/styles/useTheme";
 import { useContext, useState } from "react";
 import { AppContext } from "../../AppContext";
 import dao from "../../ajax/dao";
+
+import Button from "@mui/material/Button";
 import AlertBox from "../common/AlertBox";
 import ConfirmationDialog from "../common/ConfirmationDialog";
 

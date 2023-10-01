@@ -1,6 +1,9 @@
-import { Clear } from "@mui/icons-material";
-import { IconButton, InputAdornment, TextField } from "@mui/material";
 import { useEffect, useState } from "react";
+
+import ClearIcon from "@mui/icons-material/Clear";
+import IconButton from "@mui/material/IconButton";
+import InputAdornment from "@mui/material/InputAdornment";
+import TextField from "@mui/material/TextField";
 
 export default function SpaceFiltering({
   allSpacesList,
@@ -46,7 +49,7 @@ export default function SpaceFiltering({
               onClick={cancelSearch}
               sx={{ visibility: searched ? "visible" : "hidden" }}
             >
-              <Clear sx={{ color: "#ffffff" }} />
+              <ClearIcon sx={{ color: "#ffffff" }} />
             </IconButton>
           </InputAdornment>
         ),

@@ -1,6 +1,6 @@
-import { Typography } from "@mui/material";
 import Grid from "@mui/material/Grid";
 import ListItemText from "@mui/material/ListItemText";
+import Typography from "@mui/material/Typography";
 
 export default function BuildingDisplay({ singleBuilding, flexDirection }) {
   return (

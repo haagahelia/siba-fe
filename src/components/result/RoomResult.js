@@ -1,9 +1,11 @@
-import { Box, Typography } from "@mui/material";
-import { useTheme } from "@mui/material/styles";
+import useTheme from "@mui/material/styles/useTheme";
 import { useContext, useEffect, useState } from "react";
 import { AppContext } from "../../AppContext";
 import resultRoomsStore from "../../data/ResultRoomsStore";
 import Logger from "../../logger/logger";
+
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
 import AllocRoundControlPanel from "../AllocRound/AllocRoundControlPanel";
 import RoomsWithTimesList from "../room/RoomsWithTimesList";
 

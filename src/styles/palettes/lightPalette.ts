@@ -1,5 +1,5 @@
-import { createTheme } from "@mui/material";
 // import { dark } from "@mui/material/styles/createPalette";
+import createTheme from "@mui/material/styles/createTheme";
 import { PaletteContract } from "../../types";
 import {
   accentOrange,

@@ -1,13 +1,12 @@
-import {
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogTitle,
-  Typography,
-} from "@mui/material";
-import Grid from "@mui/material/Grid";
 import { useEffect, useState } from "react";
 import dao from "../../ajax/dao";
+
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogTitle from "@mui/material/DialogTitle";
+import Grid from "@mui/material/Grid";
+import Typography from "@mui/material/Typography";
 import AlertBox from "../common/AlertBox";
 import AddSubEquipContainer from "./AddSubEquipContainer";
 import DeleteSubject from "./DeleteSubject";

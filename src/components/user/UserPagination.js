@@ -1,5 +1,6 @@
-import { Pagination } from "@mui/material";
 import { useEffect, useState } from "react";
+
+import Pagination from "@mui/material/Pagination";
 
 const pageSize = 15;
 

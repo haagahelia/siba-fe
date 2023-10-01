@@ -1,5 +1,8 @@
-import { Dialog, DialogContent, DialogTitle } from "@mui/material";
 import { RoleLoggedIn } from "../../customhooks/RoleLoggedIn";
+
+import Dialog from "@mui/material/Dialog";
+import DialogContent from "@mui/material/DialogContent";
+import DialogTitle from "@mui/material/DialogTitle";
 import DeleteDepartment from "./DeleteDeparment";
 import EditDepartment from "./EditDepartment";
 

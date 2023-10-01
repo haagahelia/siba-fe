@@ -1,4 +1,4 @@
-import { createTheme } from "@mui/material";
+import createTheme from "@mui/material/styles/createTheme";
 
 // Palettes are: darkPalette, lightPalette,
 // redPalette (for testing), yellowPalette (for testing),
@@ -529,7 +529,7 @@ export default createAppTheme;
 
 /* In other components, how to get access to the Theme and its settings?
 
-    import { useTheme } from "@mui/material/styles";
+    import useTheme from "@mui/material/styles/useTheme";
     ...
     const theme = useTheme();
 */

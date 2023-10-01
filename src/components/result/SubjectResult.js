@@ -1,12 +1,14 @@
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
-import { Collapse, Typography } from "@mui/material";
-import Grid2 from "@mui/material/Unstable_Grid2";
-import { useTheme } from "@mui/material/styles";
-import ProgressBar from "@ramonak/react-progress-bar";
-import { Fragment, useContext, /* useEffect, */ useState } from "react";
+import useTheme from "@mui/material/styles/useTheme";
+import { Fragment, useContext, useState } from "react";
 import { AppContext } from "../../AppContext";
 import resultRoomsStore from "../../data/ResultRoomsStore";
+
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
+import Collapse from "@mui/material/Collapse";
+import Typography from "@mui/material/Typography";
+import Grid2 from "@mui/material/Unstable_Grid2";
+import ProgressBar from "@ramonak/react-progress-bar";
 
 // component for displaying the classes of the allocation result shows:
 // the name of the class

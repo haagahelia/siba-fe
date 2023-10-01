@@ -1,11 +1,13 @@
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
-import { /* Button, */ Collapse, useTheme } from "@mui/material";
-import Typography from "@mui/material/Typography";
-import Grid2 from "@mui/material/Unstable_Grid2";
+import useTheme from "@mui/material/styles/useTheme";
 import { useContext, useEffect, useState } from "react";
 import { AppContext } from "../../AppContext";
 import resultRoomsStore from "../../data/ResultRoomsStore";
+
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
+import Collapse from "@mui/material/Collapse";
+import Typography from "@mui/material/Typography";
+import Grid2 from "@mui/material/Unstable_Grid2";
 // import RoomsWithTimeList from "../room/RoomsWithTimesList";
 
 // have to edit when the correct data comes, for now an illustrative version.

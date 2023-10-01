@@ -1,6 +1,3 @@
-import { Card, CardHeader, Container, Typography } from "@mui/material";
-import CardContent from "@mui/material/CardContent";
-import Grid from "@mui/material/Grid";
 import { useContext, useEffect, useState } from "react";
 import { AppContext } from "../AppContext";
 import {
@@ -8,12 +5,19 @@ import {
   getFunctionName,
 } from "../ajax/ajaxRequestErrorHandler";
 import dao from "../ajax/dao";
+import Logger from "../logger/logger";
+
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import CardHeader from "@mui/material/CardHeader";
+import Container from "@mui/material/Container";
+import Grid from "@mui/material/Grid";
+import Typography from "@mui/material/Typography";
 import AlertBox from "../components/common/AlertBox";
 import AddSubjectContainer from "../components/subject/AddSubjectContainer";
 import SubjectFiltering from "../components/subject/SubjectFiltering";
 import SubjectListContainer from "../components/subject/SubjectListContainer";
 import SubjectPagination from "../components/subject/SubjectPagination";
-import Logger from "../logger/logger";
 
 const pageSize = 15;
 

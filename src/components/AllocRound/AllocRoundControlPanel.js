@@ -1,8 +1,11 @@
-import { Button, Typography, useTheme } from "@mui/material";
+import useTheme from "@mui/material/styles/useTheme";
 import { useContext, useState } from "react";
-import { Link } from "react-router-dom";
 import { AppContext } from "../../AppContext";
 import allocationPost from "../../data/ResultAllocationStore";
+
+import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
+import { Link } from "react-router-dom";
 
 export default function AllocRoundControlPanel({ incrementResetCounter }) {
   const appContext = useContext(AppContext);

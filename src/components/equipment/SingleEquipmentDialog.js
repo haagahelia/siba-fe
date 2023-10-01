@@ -1,12 +1,11 @@
-import {
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogTitle,
-} from "@mui/material";
 import { useEffect } from "react";
 import { RoleLoggedIn } from "../../customhooks/RoleLoggedIn";
 import Logger from "../../logger/logger";
+
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogTitle from "@mui/material/DialogTitle";
 import DeleteEquipment from "./DeleteEquipment";
 import EditEquipment from "./EditEquipment";
 

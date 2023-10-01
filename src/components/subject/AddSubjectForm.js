@@ -1,10 +1,14 @@
-import { Button, FormHelperText, Grid, Typography } from "@mui/material";
+import { useState } from "react";
+
+import Button from "@mui/material/Button";
 import FormControl from "@mui/material/FormControl";
+import FormHelperText from "@mui/material/FormHelperText";
+import Grid from "@mui/material/Grid";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import TextField from "@mui/material/TextField";
-import { useState } from "react";
+import Typography from "@mui/material/Typography";
 
 export default function AddSubjectForm({
   handleChange,

@@ -1,12 +1,11 @@
-import {
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogTitle,
-  List,
-  ListItem,
-} from "@mui/material";
 import { RoleLoggedIn } from "../../customhooks/RoleLoggedIn";
+
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogTitle from "@mui/material/DialogTitle";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
 import BuildingDisplay from "./BuildingDisplay";
 import DeleteBuilding from "./DeleteBuilding";
 import EditBuildingContainer from "./EditBuildingContainer";

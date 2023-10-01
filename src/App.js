@@ -1,7 +1,9 @@
-import { Button, CssBaseline } from "@mui/material";
-import { ThemeProvider } from "@mui/material/styles";
 import "./App.css";
 import { useThemeSwitcher } from "./customhooks/useThemeSwitcher";
+
+import Button from "@mui/material/Button";
+import CssBaseline from "@mui/material/CssBaseline";
+import ThemeProvider from "@mui/material/styles/ThemeProvider";
 import Nav from "./routers/Nav";
 import { ThemeIcon } from "./styles/themeIcons";
 
