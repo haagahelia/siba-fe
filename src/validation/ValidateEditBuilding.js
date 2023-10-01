@@ -9,11 +9,10 @@ export async function validate(values) {
     let buildingList = [];
     const { data } = await dao.fetchAllBuildings();
     buildingList = data;
-    let result;
     let id;
     let filteredList = [];
 
-    //Check if user enter an existed building name except the current one
+    // Check if user enter an existed building name except the current one
     buildingList.forEach((building) => {
       if (values.id === building.id) {
         id = building.id;
@@ -24,10 +23,9 @@ export async function validate(values) {
       }
     });
 
-    result = filteredList.some(
+    return filteredList.some(
       (building) => building.name.toLowerCase() === values.name.toLowerCase(),
     );
-    return result;
   };
 
   if (!values.name) {

@@ -1,20 +1,24 @@
-import React, { useState } from "react"; //useEffect
+import styled from "@mui/material/styles/styled";
+import { useState } from "react";
+// import {
+//   ajaxRequestErrorHandler,
+//   getFunctionName,
+// } from "../../ajax/ajaxRequestErrorHandler";
+import dao from "../../ajax/dao";
+import Logger from "../../logger/logger";
+
+import Grid from "@mui/material/Grid";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
-// import Divider from "@mui/material/Divider";
-import Grid from "@mui/material/Grid";
-import { styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
-import { Typography } from "@mui/material";
+import Typography from "@mui/material/Typography";
 import SingleEquipmentDialog from "./SingleEquipmentDialog";
-import dao from "../../ajax/dao";
-//import { ajaxRequestErrorHandler, getFunctionName } from "../../ajax/ajaxRequestErrorHandler";
-import Logger from "../../logger/logger";
 
-export default function EquipmentListItems(props) {
-  const { getAllEquipments, equipmentList } = props;
-
+export default function EquipmentListItems({
+  getAllEquipments,
+  equipmentList,
+}) {
   const [open, setOpen] = useState(false);
   const [singleEquipment, setSingleEquipment] = useState({});
 
@@ -69,7 +73,7 @@ export default function EquipmentListItems(props) {
                 <ListItem
                   onClick={() => {
                     getSingleEquipment(value.id);
-                    //setSingleEquipment(value);
+                    // setSingleEquipment(value);
                     setOpen(true);
                     getAllEquipments();
                   }}

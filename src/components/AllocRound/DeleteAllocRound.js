@@ -1,18 +1,20 @@
-import React, { useState, useContext } from "react";
-import { Button } from "@mui/material";
+import useTheme from "@mui/material/styles/useTheme";
+import { useContext, useState } from "react";
+import { AppContext } from "../../AppContext";
 import dao from "../../ajax/dao";
+
+import Button from "@mui/material/Button";
 import AlertBox from "../common/AlertBox";
 import ConfirmationDialog from "../common/ConfirmationDialog";
-import { useTheme } from "@mui/material/styles";
-import { AppContext } from "../../AppContext";
 
-export default function DeleteAllocRound(props) {
+export default function DeleteAllocRound({
+  singleAllocRound,
+  // getAllAllocRounds,
+  incrementDataModifiedCounter,
+}) {
   const appContext = useContext(AppContext);
-  const {
-    singleAllocRound,
-    //getAllAllocRounds,
-    incrementDataModifiedCounter,
-  } = props;
+  const theme = useTheme();
+
   const [alertOpen, setAlertOpen] = useState(false);
   const [alertOptions, setAlertOptions] = useState({
     message: "This is an error alert — check it out!",
@@ -27,7 +29,7 @@ export default function DeleteAllocRound(props) {
   const [deletedName, setDeletedName] = useState("");
 
   const deleteAllocRound = async (value) => {
-    let result = await dao.deleteSingleAllocRound(value);
+    const result = await dao.deleteSingleAllocRound(value);
     if (result === false) {
       setAlertOptions({
         severity: "error",
@@ -46,11 +48,10 @@ export default function DeleteAllocRound(props) {
     incrementDataModifiedCounter();
     // getAllAllocRounds();
   };
-  const theme = useTheme();
 
   const submitDelete = (data) => {
     if (data.id === appContext.allocRoundId) {
-      //Prevent deleting a selected allocation round
+      // Prevent deleting a selected allocation round
       setAlertOptions({
         severity: "error",
         title: "Error",
@@ -66,7 +67,7 @@ export default function DeleteAllocRound(props) {
     });
     setDialogOpen(true);
     setDeleteId(data.id);
-    setDeletedName(data.name); //store the name of the deleted object
+    setDeletedName(data.name); // store the name of the deleted object
     return;
   };
 
@@ -85,7 +86,7 @@ export default function DeleteAllocRound(props) {
         submitValues={deleteId}
       />
       <Button
-        //theme button red
+        // theme button red
         variant="contained"
         style={theme.components.MuiButton.redbutton}
         onClick={() => submitDelete(singleAllocRound)}

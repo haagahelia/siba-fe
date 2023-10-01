@@ -1,10 +1,9 @@
-import React, { useState } from "react";
-import Papa from "papaparse";
-import AlertBox from "../common/AlertBox";
 import Button from "@mui/material/Button";
+import Papa from "papaparse";
+import { useState } from "react";
+import AlertBox from "../common/AlertBox";
 
-export default function ExportBuildingButton(props) {
-  const { failedBuildings } = props;
+export default function ExportBuildingButton({ failedBuildings }) {
   const [alertOpen, setAlertOpen] = useState(false);
   const [alertOptions, setAlertOptions] = useState({
     title: "This is title",
@@ -23,9 +22,9 @@ export default function ExportBuildingButton(props) {
 
       return;
     } else {
-      let csv = Papa.unparse(failedBuildings);
-      let blob = new Blob([csv]);
-      let a = window.document.createElement("a");
+      const csv = Papa.unparse(failedBuildings);
+      const blob = new Blob([csv]);
+      const a = window.document.createElement("a");
       a.href = window.URL.createObjectURL(blob);
       a.download = "BuildingsFailedToImport.csv";
       document.body.appendChild(a);
@@ -35,7 +34,7 @@ export default function ExportBuildingButton(props) {
   };
 
   return (
-    <React.Fragment>
+    <>
       <AlertBox
         alertOpen={alertOpen}
         alertOptions={alertOptions}
@@ -50,6 +49,6 @@ export default function ExportBuildingButton(props) {
       >
         Export failed data
       </Button>
-    </React.Fragment>
+    </>
   );
 }

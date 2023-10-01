@@ -1,31 +1,34 @@
-import React, { useState, useContext } from "react";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import ListItemText from "@mui/material/ListItemText";
-import Divider from "@mui/material/Divider";
-import Grid from "@mui/material/Grid";
-import { styled } from "@mui/material/styles";
-import Paper from "@mui/material/Paper";
-import { Typography } from "@mui/material";
-import AllocRoundDetails from "./AllocRoundDetails";
+import styled from "@mui/material/styles/styled";
+import { useContext, useState } from "react";
 import { AppContext } from "../../AppContext";
 import Logger from "../../logger/logger";
 
-export default function AllocRoundListItems(props) {
-  const {
-    paginateAllocRounds,
-    getAllocRounds,
-    /*setAllocRoundId,*/
-    /* getAllAllocRounds, */
-    incrementDataModifiedCounter,
-  } = props;
+import Divider from "@mui/material/Divider";
+import Grid from "@mui/material/Grid";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import ListItemText from "@mui/material/ListItemText";
+import Paper from "@mui/material/Paper";
+import Typography from "@mui/material/Typography";
+import AllocRoundDetails from "./AllocRoundDetails";
+
+export default function AllocRoundListItems({
+  paginateAllocRounds,
+  getAllocRounds,
+  // setAllocRoundId,
+  // getAllAllocRounds,
+  incrementDataModifiedCounter,
+}) {
+  const appContext = useContext(AppContext);
+
   const [singleAllocRound, setSingleAllocRound] = useState(null);
   const [open, setOpen] = useState(false);
-  const appContext = useContext(AppContext);
+
   // STYLE
   const Box = styled(Paper)(({ theme }) => ({
     overflow: "auto",
   }));
+
   return (
     <div>
       <AllocRoundDetails
@@ -33,7 +36,7 @@ export default function AllocRoundListItems(props) {
         setOpen={setOpen}
         singleAllocRound={singleAllocRound}
         setSingleAllocRound={setSingleAllocRound}
-        //setAllocRoundId={setAllocRoundId}
+        // setAllocRoundId={setAllocRoundId}
         getAllocRounds={getAllocRounds}
         incrementDataModifiedCounter={incrementDataModifiedCounter}
       />

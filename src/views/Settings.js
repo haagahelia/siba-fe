@@ -1,21 +1,27 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-import React, { useState, useEffect } from "react";
-import CardContent from "@mui/material/CardContent";
-import SettingsListContainer from "../components/settings/SettingsListContainer";
-import AddSettingContainer from "../components/settings/AddSettingContainer";
-import { CardHeader, Card, Container, Grid } from "@mui/material";
-import AlertBox from "../components/common/AlertBox";
-import dao from "../ajax/dao";
-import { RoleLoggedIn } from "../customhooks/RoleLoggedIn";
-import Logger from "../logger/logger";
+import { useEffect, useState } from "react";
 import {
   ajaxRequestErrorHandler,
   getFunctionName,
 } from "../ajax/ajaxRequestErrorHandler";
+import dao from "../ajax/dao";
+import { RoleLoggedIn } from "../customhooks/RoleLoggedIn";
+import Logger from "../logger/logger";
+
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import CardHeader from "@mui/material/CardHeader";
+import Container from "@mui/material/Container";
+import Grid from "@mui/material/Grid";
+import AlertBox from "../components/common/AlertBox";
+import AddSettingContainer from "../components/settings/AddSettingContainer";
+import SettingsListContainer from "../components/settings/SettingsListContainer";
 
 export default function Settings() {
   Logger.logPrefix = "Settings";
-  //State for checking if Settings card is expanded
+
+  const { roles } = RoleLoggedIn();
+
+  // State for checking if Settings card is expanded
   const [isCardExpanded, setIsCardExpanded] = useState(true);
 
   const [paginateSettings, setPaginateSettings] = useState([]);
@@ -26,7 +32,6 @@ export default function Settings() {
     message: "This is an error alert — check it out!",
     severity: "error",
   });
-  const { roles } = RoleLoggedIn();
 
   const getAllSettings = async function () {
     Logger.debug("Fetching all settings");
@@ -47,7 +52,7 @@ export default function Settings() {
   };
 
   const incrementDataModifiedCounter = () => {
-    let newValue = dataModifiedCounter + 1;
+    const newValue = dataModifiedCounter + 1;
     setDataModifiedCounter(newValue);
   };
 
@@ -82,14 +87,12 @@ export default function Settings() {
                 onClick={() => setIsCardExpanded(!isCardExpanded)}
               />
               {isCardExpanded && (
-                <>
-                  <SettingsListContainer
-                    getAllSettings={getAllSettings}
-                    incrementDataModifiedCounter={incrementDataModifiedCounter}
-                    allSettings={settings}
-                    paginateSettings={paginateSettings}
-                  />
-                </>
+                <SettingsListContainer
+                  getAllSettings={getAllSettings}
+                  incrementDataModifiedCounter={incrementDataModifiedCounter}
+                  allSettings={settings}
+                  paginateSettings={paginateSettings}
+                />
               )}
             </CardContent>
           </Card>

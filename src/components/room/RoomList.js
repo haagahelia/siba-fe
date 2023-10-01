@@ -1,10 +1,11 @@
-import React from "react";
-import Grid2 from "@mui/material/Unstable_Grid2";
-import Typography from "@mui/material/Typography";
-import { useTheme } from "@mui/material/styles";
+import useTheme from "@mui/material/styles/useTheme";
 
-const RoomList = ({ rooms }) => {
+import Typography from "@mui/material/Typography";
+import Grid2 from "@mui/material/Unstable_Grid2";
+
+export default function RoomList({ rooms }) {
   const theme = useTheme();
+
   return (
     <>
       <Grid2 container key="collapse_container_row36">
@@ -43,6 +44,4 @@ const RoomList = ({ rooms }) => {
       ))}
     </>
   );
-};
-
-export default RoomList;
+}

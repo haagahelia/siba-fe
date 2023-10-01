@@ -1,20 +1,19 @@
-import React, { useState } from "react";
-import AlertBox from "../common/AlertBox";
-import {
-  validate,
-  capitalizeFirstLetter,
-} from "../../validation/ValidateAddBuilding";
-import Logger from "../../logger/logger";
-import dao from "../../ajax/dao";
 import Button from "@mui/material/Button";
+import { useState } from "react";
+import dao from "../../ajax/dao";
+import Logger from "../../logger/logger";
+import {
+  capitalizeFirstLetter,
+  validate,
+} from "../../validation/ValidateAddBuilding";
+import AlertBox from "../common/AlertBox";
 
-export default function ImportBuildingButton(props) {
-  const {
-    importBuildings,
-    failedBuildings,
-    setFailedBuildings,
-    getAllBuildings,
-  } = props;
+export default function ImportBuildingButton({
+  importBuildings,
+  failedBuildings,
+  setFailedBuildings,
+  getAllBuildings,
+}) {
   const [alertOpen, setAlertOpen] = useState(false);
   const [alertOptions, setAlertOptions] = useState({
     title: "This is title",
@@ -25,18 +24,18 @@ export default function ImportBuildingButton(props) {
   const importData = async () => {
     let successCount = 0;
     let failedCount = 0;
-    let tempFailedBuildings = [];
-    let buildingsToSend = [];
-    let buildingSet = new Set();
+    const tempFailedBuildings = [];
+    const buildingsToSend = [];
+    const buildingSet = new Set();
 
     await Promise.all(
       importBuildings.map(async (building) => {
-        let newBuilding = {
+        const newBuilding = {
           name: building.name ? capitalizeFirstLetter(building.name) : "",
           description: building.description ? building.description : "",
         };
 
-        //check if there is duplicated name of building after capitalization
+        // check if there is duplicated name of building after capitalization
         if (buildingSet.has(newBuilding.name)) {
           building.FailedReason = "Name of building is duplicated in the file";
           tempFailedBuildings.push(building);
@@ -67,7 +66,7 @@ export default function ImportBuildingButton(props) {
     setFailedBuildings([...failedBuildings, ...tempFailedBuildings]);
     Logger.debug("failed buildings", tempFailedBuildings);
 
-    //if the data is empty after validation, not sending to backend
+    // if the data is empty after validation, not sending to backend
     if (buildingsToSend.length === 0) {
       setAlertOptions({
         severity: "error",
@@ -81,7 +80,7 @@ export default function ImportBuildingButton(props) {
 
     Logger.debug("buildingsToSend", buildingsToSend);
 
-    let result = await dao.postNewBuildings(buildingsToSend);
+    const result = await dao.postNewBuildings(buildingsToSend);
 
     if (result) {
       getAllBuildings();
@@ -103,7 +102,7 @@ export default function ImportBuildingButton(props) {
   };
 
   return (
-    <React.Fragment>
+    <>
       <AlertBox
         alertOpen={alertOpen}
         alertOptions={alertOptions}
@@ -117,6 +116,6 @@ export default function ImportBuildingButton(props) {
       >
         Import data
       </Button>
-    </React.Fragment>
+    </>
   );
 }

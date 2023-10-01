@@ -6,7 +6,8 @@ export function validate(values) {
   if (!email) {
     errors.email = "Email required";
   }
-  //checks if the field is empty, but only for non 0 cases. (since 0 is used for no role)
+  // checks if the field is empty, but only for non 0 cases.
+  // (since 0 is used for no role)
   if (!isAdmin && isAdmin !== 0) {
     errors.isAdmin = "Admin status required";
   } else if (!regNumber.test(values.isAdmin)) {

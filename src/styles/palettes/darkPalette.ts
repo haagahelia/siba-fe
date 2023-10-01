@@ -1,19 +1,19 @@
-import { createTheme } from "@mui/material";
+import createTheme from "@mui/material/styles/createTheme";
 import { PaletteContract } from "../../types";
 import {
-  accentYellow,
   accentOrange,
-  white,
+  accentYellow,
   black,
-  darkestGrey,
   darkGrey,
-  mediumGrey,
-  lightGrey,
+  darkestGrey,
   indicatorGreen,
-  indicatorRed,
   indicatorOrange,
+  indicatorRed,
   indicatorYellowLight,
+  lightGrey,
+  mediumGrey,
   transparentBlack,
+  white,
 } from "./commonColors";
 
 // Color definitions for DARK
@@ -78,7 +78,7 @@ export const darkPalette: PaletteContract = {
     activatedOpacity: 0.12,
   },
 
-  //own colors - DARK
+  // own colors - DARK
   activeLinkBackgroundColor: {
     main: accentOrange,
   },

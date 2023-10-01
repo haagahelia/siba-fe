@@ -1,16 +1,23 @@
-import React, { useState } from "react";
-import TextField from "@mui/material/TextField";
-import { Button, Grid, FormHelperText } from "@mui/material";
-import Select from "@mui/material/Select";
-import MenuItem from "@mui/material/MenuItem";
-import FormControl from "@mui/material/FormControl";
-import DialogTitle from "@mui/material/DialogTitle";
+import { useState } from "react";
+
+import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
-import { DialogActions, DialogContent, DialogContentText } from "@mui/material";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
+import FormControl from "@mui/material/FormControl";
+import FormHelperText from "@mui/material/FormHelperText";
+import Grid from "@mui/material/Grid";
+import MenuItem from "@mui/material/MenuItem";
+import Select from "@mui/material/Select";
+import TextField from "@mui/material/TextField";
 
-export default function EditSubjectForm(props) {
-  const { programSelectList, formik, spaceTypeSelectList } = props;
-
+export default function EditSubjectForm({
+  programSelectList,
+  formik,
+  spaceTypeSelectList,
+}) {
   const [open, setOpen] = useState(false);
 
   return (
@@ -26,7 +33,10 @@ export default function EditSubjectForm(props) {
       </Button>
       <Dialog open={open}>
         <form onSubmit={formik.handleSubmit}>
-          {/* formik.initialValues?.subjectName} Here ? checks if the subjectName attribute can be found in the initialValues ​​object, if not found returns null and does not crash */}
+          {/* formik.initialValues?.subjectName} Here ? checks
+              if the subjectName attribute can be found
+              in the initialValues object,
+              if not found returns null and does not crash */}
           <DialogTitle sx={{ maxWidth: "300px" }}>
             Edit: {formik.initialValues?.subjectName}
           </DialogTitle>

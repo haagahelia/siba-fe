@@ -1,27 +1,24 @@
-import React, { useState } from "react";
+import { useState } from "react";
+import { RoleLoggedIn } from "../../customhooks/RoleLoggedIn";
+
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogTitle from "@mui/material/DialogTitle";
 import Grid from "@mui/material/Grid";
-import {
-  Dialog,
-  DialogContent,
-  //DialogContentText,
-  DialogTitle,
-  Typography,
-  DialogActions,
-} from "@mui/material";
+import Typography from "@mui/material/Typography";
 import AlertBox from "../common/AlertBox";
 import DeleteSetting from "./DeleteSetting";
 import EditSettingContainer from "./EditSettingContainer";
-import { RoleLoggedIn } from "../../customhooks/RoleLoggedIn";
 
-export default function SettingsDetails(props) {
-  const {
-    open,
-    setOpen,
-    singleSetting,
-    getAllSettings,
-    incrementDataModifiedCounter,
-    setSingleSetting,
-  } = props;
+export default function SettingsDetails({
+  open,
+  setOpen,
+  singleSetting,
+  getAllSettings,
+  incrementDataModifiedCounter,
+  setSingleSetting,
+}) {
   const { roles } = RoleLoggedIn();
 
   const [alertOpen, setAlertOpen] = useState(false);

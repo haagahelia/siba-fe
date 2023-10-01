@@ -1,13 +1,14 @@
-import React, { useState } from "react";
-import TextField from "@mui/material/TextField";
-import { Button, Grid } from "@mui/material";
-import DialogTitle from "@mui/material/DialogTitle";
+import { useState } from "react";
+
+import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
-import { DialogActions, DialogContent } from "@mui/material";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogTitle from "@mui/material/DialogTitle";
+import Grid from "@mui/material/Grid";
+import TextField from "@mui/material/TextField";
 
-export default function EditSettingForm(props) {
-  const { formik } = props;
-
+export default function EditSettingForm({ formik }) {
   const [open, setOpen] = useState(false);
 
   return (
@@ -23,7 +24,10 @@ export default function EditSettingForm(props) {
       </Button>
       <Dialog open={open}>
         <form onSubmit={formik.handleSubmit}>
-          {/* formik.initialValues?.subjectName} Here ? checks if the subjectName attribute can be found in the initialValues ​​object, if not found returns an empty string and does not crash */}
+          {/* formik.initialValues?.subjectName} Here ? checks
+              if the subjectName attribute can be found
+              in the initialValues object,
+              if not found returns an empty string and does not crash */}
           <DialogTitle>Edit: {formik.initialValues?.name}</DialogTitle>
           <DialogContent>
             <Grid container variant="sibaGridEdit" spacing={3} column={7}>

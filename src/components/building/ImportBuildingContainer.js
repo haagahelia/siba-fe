@@ -1,14 +1,14 @@
-import React, { useState } from "react";
 import Papa from "papaparse";
-import { Typography } from "@mui/material";
-import AlertBox from "../common/AlertBox";
+import { useState } from "react";
 import Logger from "../../logger/logger";
-import Input from "@mui/material/Input";
-import ImportBuildingButton from "./ImportBuildingButton";
-import ExportBuildingButton from "./ExportBuildingButton";
 
-export default function ImportBuildingContainer(props) {
-  const { getAllBuildings } = props;
+import Input from "@mui/material/Input";
+import Typography from "@mui/material/Typography";
+import AlertBox from "../common/AlertBox";
+import ExportBuildingButton from "./ExportBuildingButton";
+import ImportBuildingButton from "./ImportBuildingButton";
+
+export default function ImportBuildingContainer({ getAllBuildings }) {
   const [alertOpen, setAlertOpen] = useState(false);
   const [alertOptions, setAlertOptions] = useState({
     title: "This is title",
@@ -16,7 +16,7 @@ export default function ImportBuildingContainer(props) {
     severity: "error",
   });
 
-  //data import
+  // data import
   const [importBuildings, setImportBuildings] = useState([]);
   const [failedBuildings, setFailedBuildings] = useState([]);
 
@@ -29,7 +29,7 @@ export default function ImportBuildingContainer(props) {
   };
 
   const handleFileUpload = (e) => {
-    let file = e.target.files[0];
+    const file = e.target.files[0];
 
     if (!isUploaded(file)) {
       return;
@@ -45,10 +45,10 @@ export default function ImportBuildingContainer(props) {
 
       return;
     } else {
-      //use papaparse to transform file to array of objects
+      // use papaparse to transform file to array of objects
       Papa.parse(file, {
         header: true,
-        delimiter: "", //auto detect delimiter
+        delimiter: "", // auto detect delimiter
         complete: (result) => {
           setImportBuildings(result.data);
           Logger.debug("data from file", result.data);
@@ -58,7 +58,7 @@ export default function ImportBuildingContainer(props) {
   };
 
   return (
-    <React.Fragment>
+    <>
       <AlertBox
         alertOpen={alertOpen}
         alertOptions={alertOptions}
@@ -78,6 +78,6 @@ export default function ImportBuildingContainer(props) {
         getAllBuildings={getAllBuildings}
       />
       <ExportBuildingButton failedBuildings={failedBuildings} />
-    </React.Fragment>
+    </>
   );
 }

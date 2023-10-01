@@ -1,28 +1,33 @@
-import React, { useState, useEffect } from "react";
-import { Card, CardHeader, CardContent } from "@mui/material";
-import AlertBox from "../common/AlertBox";
 import { useFormik } from "formik";
-import ConfirmationDialog from "../common/ConfirmationDialog";
-import {
-  validate,
-  capitalizeFirstLetter,
-} from "../../validation/ValidateAddSubject";
-import dao from "../../ajax/dao";
-import AddSubjectForm from "./AddSubjectForm";
+import { useEffect, useState } from "react";
 import {
   ajaxRequestErrorHandler,
   getFunctionName,
 } from "../../ajax/ajaxRequestErrorHandler";
+import dao from "../../ajax/dao";
 import Logger from "../../logger/logger";
-import IconButton from "@mui/material/IconButton";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import ExpandLessIcon from "@mui/icons-material/ExpandLess";
+import {
+  capitalizeFirstLetter,
+  validate,
+} from "../../validation/ValidateAddSubject";
 
-export default function AddSubjectContainer(props) {
+import ExpandLessIcon from "@mui/icons-material/ExpandLess";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import CardHeader from "@mui/material/CardHeader";
+import IconButton from "@mui/material/IconButton";
+import AlertBox from "../common/AlertBox";
+import ConfirmationDialog from "../common/ConfirmationDialog";
+import AddSubjectForm from "./AddSubjectForm";
+
+export default function AddSubjectContainer({
+  getAllSubjects,
+  allSubjectsList,
+}) {
   // State for checking if Add Lesson card is expanded
   const [isCardExpanded, setIsCardExpanded] = useState(false);
 
-  const { getAllSubjects, allSubjectsList } = props;
   const [programSelectList, setProgramSelectList] = useState([
     { id: 3009, name: "Globalist music" },
   ]);
@@ -126,8 +131,8 @@ export default function AddSubjectContainer(props) {
   }, []);
 
   const addSubject = async (submitValues) => {
-    let capitalName = capitalizeFirstLetter(submitValues.name);
-    let newSubject = {
+    const capitalName = capitalizeFirstLetter(submitValues.name);
+    const newSubject = {
       name: capitalName,
       groupSize: submitValues.groupSize,
       groupCount: submitValues.groupCount,
@@ -138,7 +143,7 @@ export default function AddSubjectContainer(props) {
       spaceTypeId: submitValues.spaceTypeId ? submitValues.spaceTypeId : null,
     };
 
-    let result = await dao.postNewSubject(newSubject);
+    const result = await dao.postNewSubject(newSubject);
     if (!result) {
       setAlertOptions({
         severity: "error",
@@ -161,9 +166,12 @@ export default function AddSubjectContainer(props) {
   // Here is a list of lessons
   // When you choose a lesson, the information goes to the form's initial values
   const handleChange = (e) => {
-    let selected = e.target.value;
+    const selected = e.target.value;
     setInitialSubject({
-      name: formik.values.name, // This is so that the entered name does not change even if you select the data of an existing lesson
+      // This is so that the entered name does not change
+      // even if you select the data of an existing lesson
+      name: formik.values.name,
+
       groupSize: selected.groupSize,
       groupCount: selected.groupCount,
       sessionLength: selected.sessionLength,

@@ -10,8 +10,8 @@ export async function validate(values) {
   const getDepartmentNames = async function () {
     const { data } = await dao.fetchDepartmentData();
     departmentList = data;
-    //Check if user enter an existed building name
-    let result = departmentList.some(
+    // Check if user enter an existed building name
+    const result = departmentList.some(
       (names) => names.name.toLowerCase() === values.name.toLowerCase(),
     );
 

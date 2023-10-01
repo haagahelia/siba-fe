@@ -1,19 +1,22 @@
-import React, { useContext, useEffect } from "react";
-import Grid2 from "@mui/material/Unstable_Grid2";
-import Typography from "@mui/material/Typography";
+import useTheme from "@mui/material/styles/useTheme";
+import { useContext, useEffect, useState } from "react";
+import { AppContext } from "../../AppContext";
+import resultRoomsStore from "../../data/ResultRoomsStore";
+
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
-import { Collapse } from "@mui/material"; // Button???
+import Collapse from "@mui/material/Collapse";
+import Typography from "@mui/material/Typography";
+import Grid2 from "@mui/material/Unstable_Grid2";
 // import RoomsWithTimeList from "../room/RoomsWithTimesList";
-import resultRoomsStore from "../../data/ResultRoomsStore";
-import { AppContext } from "../../AppContext";
-import { useTheme } from "@mui/material";
-//have to edit when the correct data comes, for now an illustrative version.
+
+// have to edit when the correct data comes, for now an illustrative version.
 export default function CollapsedRowB({ id }) {
-  const [expand, setExpand] = React.useState(false);
-  const [subjects, setSubjects] = React.useState([]);
   const appContext = useContext(AppContext);
   const theme = useTheme();
+
+  const [expand, setExpand] = useState(false);
+  const [subjects, setSubjects] = useState([]);
 
   const handleExpandClick = () => {
     setExpand((prevExpand) => !prevExpand);

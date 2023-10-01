@@ -1,5 +1,6 @@
-import { Pagination } from "@mui/material";
 import { useEffect, useState } from "react";
+
+import Pagination from "@mui/material/Pagination";
 
 const pageSize = 15;
 
@@ -19,7 +20,6 @@ export default function UserPagination({
       const slicedUsers = allUsersList.slice(pagination.from, pagination.to);
       setPaginateUsers(slicedUsers);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pagination]);
 
   const handleChange = (e, p) => {

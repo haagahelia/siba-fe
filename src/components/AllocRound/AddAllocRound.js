@@ -1,21 +1,23 @@
-import React, { useState } from "react";
-import { CardHeader, Card, CardContent } from "@mui/material";
-import AlertBox from "../common/AlertBox";
 import { useFormik } from "formik";
-import ConfirmationDialog from "../common/ConfirmationDialog";
+import { useState } from "react";
+import dao from "../../ajax/dao";
 import {
   capitalizeFirstLetter,
   validate,
 } from "../../validation/ValidateAddAllocRound";
-import dao from "../../ajax/dao";
+
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import CardHeader from "@mui/material/CardHeader";
+import AlertBox from "../common/AlertBox";
+import ConfirmationDialog from "../common/ConfirmationDialog";
 import AddAllocRoundForm from "./AddAllocRoundForm";
 
-//const baseUrl = process.env.REACT_APP_BE_SERVER_BASE_URL;
-//import {BASEURL} from "../config/consts.js";
-//const baseUrl = BASEURL;
+// const baseUrl = process.env.REACT_APP_BE_SERVER_BASE_URL;
+// import { BASEURL } from "../config/consts.js";
+// const baseUrl = BASEURL;
 
-export default function AddAllocRound(props) {
-  const { allAllocRoundsList } = props;
+export default function AddAllocRound({ allAllocRoundsList }) {
   const [alertOpen, setAlertOpen] = useState(false);
   const [alertOptions, setAlertOptions] = useState({
     title: "This is title",
@@ -27,7 +29,7 @@ export default function AddAllocRound(props) {
     title: "this is dialog",
     content: "Something here",
   });
-  // Here the initialvalues ​​of the form are stored in the state
+  // Here the initialvalues of the form are stored in the state
   const [initialAllocRound, setInitialAllocRound] = useState({
     name: "",
     description: "",
@@ -56,13 +58,13 @@ export default function AddAllocRound(props) {
   });
 
   const addAllocRound = async (submitValues) => {
-    let capitalName = capitalizeFirstLetter(submitValues.name);
-    let newAllocRound = {
+    const capitalName = capitalizeFirstLetter(submitValues.name);
+    const newAllocRound = {
       name: capitalName,
       description: submitValues.description,
     };
 
-    let result = await dao.postNewAllocRound(newAllocRound);
+    const result = await dao.postNewAllocRound(newAllocRound);
     if (!result) {
       setAlertOptions({
         severity: "error",
@@ -79,14 +81,17 @@ export default function AddAllocRound(props) {
     });
     setAlertOpen(true);
     resetFormm();
-    //  getAllAllocRounds();
+    // getAllAllocRounds();
   };
   // Here is a list of lessons
   // When you choose a lesson, the information goes to the form's initialvalues
   const handleChange = (e) => {
-    let selected = e.target.value;
+    const selected = e.target.value;
     setInitialAllocRound({
-      name: formik.values.name, // This is so that the entered name does not change even if you select the data of an existing lesson
+      // This is so that the entered name does not change
+      // even if you select the data of an existing lesson
+      name: formik.values.name,
+
       description: selected.description,
     });
   };

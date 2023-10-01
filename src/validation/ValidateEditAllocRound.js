@@ -10,10 +10,9 @@ export async function validate(values) {
   const getAllocRoundNames = async function () {
     const { data } = await dao.fetchAllAllocRounds();
     allocRoundList = data;
-    let result;
     let id;
     let filteredList = [];
-    //Check if user enter an existed allocation round name
+    // Check if user enter an existed allocation round name
     allocRoundList.forEach((allocRound) => {
       if (values.id === allocRound.id) {
         id = allocRound.id;
@@ -24,12 +23,10 @@ export async function validate(values) {
       }
     });
 
-    result = filteredList.some(
+    return filteredList.some(
       (allocRound) =>
         allocRound.name.toLowerCase() === values.name.toLowerCase(),
     );
-
-    return result;
   };
 
   if (!values.name) {

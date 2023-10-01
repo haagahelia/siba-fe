@@ -1,27 +1,28 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-import React, { useState, useEffect } from "react";
+import useTheme from "@mui/material/styles/useTheme";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import AllocRoundListContainer from "../components/AllocRound/AllocRoundListContainer";
-import CardContent from "@mui/material/CardContent";
-import {
-  CardHeader,
-  Card,
-  Container /*, Typography*/,
-  Button,
-} from "@mui/material";
-import Grid from "@mui/material/Grid";
 import dao from "../ajax/dao";
-import AlertBox from "../components/common/AlertBox";
-import { useTheme } from "@mui/material/styles";
 import Logger from "../logger/logger";
+
+import Button from "@mui/material/Button";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import CardHeader from "@mui/material/CardHeader";
+import Container from "@mui/material/Container";
+import Grid from "@mui/material/Grid";
+import AllocRoundListContainer from "../components/AllocRound/AllocRoundListContainer";
+import AlertBox from "../components/common/AlertBox";
 
 export default function AllocRoundView() {
   Logger.logPrefix = "AllocRoundView";
 
+  const navigate = useNavigate();
+  const theme = useTheme();
+
   const [paginateAllocRounds, setpaginateAllocRounds] = useState([]);
   const [allAllocRoundsList, setallAllocRoundsList] = useState([]);
   const [dataModifiedCounter, setDataModifiedCounter] = useState(0);
-  //const [allocRoundId, setAllocRoundId] = useState("00000");
+  // const [allocRoundId, setAllocRoundId] = useState("00000");
   const [alertOpen, setAlertOpen] = useState(false);
   const [alertOptions, setAlertOptions] = useState({
     message: "This is an error alert — check it out!",
@@ -49,7 +50,7 @@ export default function AllocRoundView() {
   };
 
   const incrementDataModifiedCounter = () => {
-    let newValue = dataModifiedCounter + 1;
+    const newValue = dataModifiedCounter + 1;
     setDataModifiedCounter(newValue);
   };
 
@@ -64,10 +65,6 @@ export default function AllocRoundView() {
   useEffect(() => {
     setpaginateAllocRounds(allAllocRoundsList.slice(0, 15));
   }, [allAllocRoundsList]);
-
-  const navigate = useNavigate();
-
-  const theme = useTheme();
 
   return (
     <div>

@@ -1,6 +1,6 @@
 import axios from "axios";
-import resultRoomsStore from "./ResultRoomsStore";
 import resultProgramStore from "./ResultProgramStore";
+import resultRoomsStore from "./ResultRoomsStore";
 
 const baseUrl = process.env.REACT_APP_BE_SERVER_BASE_URL;
 

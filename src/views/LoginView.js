@@ -1,15 +1,21 @@
-import React from "react";
-import { useState, useContext } from "react";
-import { TextField, Card, CardContent, Grid, Button } from "@mui/material";
-import dao from "../ajax/dao";
-import { AppContext } from "../AppContext";
-import Logger from "../logger/logger";
+import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { AppContext } from "../AppContext";
+import dao from "../ajax/dao";
+import Logger from "../logger/logger";
 
-export default function LoginView(props) {
+import Button from "@mui/material/Button";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import Grid from "@mui/material/Grid";
+import TextField from "@mui/material/TextField";
+
+export default function LoginView({ handleLoginChange }) {
   Logger.logPrefix = "LoginView";
+
+  const appContext = useContext(AppContext);
   const navigate = useNavigate();
-  const { handleLoginChange } = props;
+
   const [loginForm, setLoginForm] = useState({
     email: "",
     password: "",
@@ -26,7 +32,7 @@ export default function LoginView(props) {
     }
   };
 
-  //one function used to serve both the functions login and error
+  // one function used to serve both the functions login and error
   const loginAndError = async () => {
     try {
       await handleLogin(); // Wait for loginUser to complete
@@ -39,10 +45,8 @@ export default function LoginView(props) {
     }, 500); // Add 1000ms delay before calling errorShown
   };
 
-  const appContext = useContext(AppContext);
-
   const handleLogin = async () => {
-    //Logger.debug("Attempting to log in");
+    // Logger.debug("Attempting to log in");
     const { httpStatus, data } = await dao.loginUser(loginForm);
     if (httpStatus !== 200) {
       Logger.error("Login failed:", data);
@@ -67,7 +71,7 @@ export default function LoginView(props) {
 
       Logger.debug("Login successful", data);
 
-      //Logger.debug("Login info in appContext", appContext);
+      // Logger.debug("Login info in appContext", appContext);
 
       window.alert("Welcome!");
 
@@ -83,45 +87,43 @@ export default function LoginView(props) {
   };
 
   return (
-    <>
-      <Card
-        variant="outlined"
-        sx={{
-          width: "65%",
-          padding: 1,
-          margin: "auto",
-          marginTop: "100px",
-        }}
-      >
-        <CardContent>
-          <Grid>
-            <TextField
-              value={loginForm.email}
-              onChange={(event) =>
-                setLoginForm({ ...loginForm, email: event.target.value })
-              }
-              placeholder="email"
-            />
-          </Grid>
-          <Grid>
-            <TextField
-              value={loginForm.password}
-              onChange={(event) =>
-                setLoginForm({
-                  ...loginForm,
-                  password: event.target.value,
-                })
-              }
-              placeholder="password"
-              type="password"
-            />
-          </Grid>
-          <Grid>
-            <Button onClick={loginAndError}>Log In</Button>
-          </Grid>
-          {errorMsg}
-        </CardContent>
-      </Card>
-    </>
+    <Card
+      variant="outlined"
+      sx={{
+        width: "65%",
+        padding: 1,
+        margin: "auto",
+        marginTop: "100px",
+      }}
+    >
+      <CardContent>
+        <Grid>
+          <TextField
+            value={loginForm.email}
+            onChange={(event) =>
+              setLoginForm({ ...loginForm, email: event.target.value })
+            }
+            placeholder="email"
+          />
+        </Grid>
+        <Grid>
+          <TextField
+            value={loginForm.password}
+            onChange={(event) =>
+              setLoginForm({
+                ...loginForm,
+                password: event.target.value,
+              })
+            }
+            placeholder="password"
+            type="password"
+          />
+        </Grid>
+        <Grid>
+          <Button onClick={loginAndError}>Log In</Button>
+        </Grid>
+        {errorMsg}
+      </CardContent>
+    </Card>
   );
 }

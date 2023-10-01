@@ -1,17 +1,20 @@
-import React, { useState, useEffect } from "react";
-import UserListContainer from "../components/user/UserListContainer";
-import CardContent from "@mui/material/CardContent";
-import { CardHeader, Card, Container } from "@mui/material";
-import Grid from "@mui/material/Grid";
-import dao from "../ajax/dao";
-import AlertBox from "../components/common/AlertBox";
-import UserFiltering from "../components/user/UserFiltering";
-import UserPagination from "../components/user/UserPagination";
-import Logger from "../logger/logger";
+import { useEffect, useState } from "react";
 import {
   ajaxRequestErrorHandler,
   getFunctionName,
 } from "../ajax/ajaxRequestErrorHandler";
+import dao from "../ajax/dao";
+import Logger from "../logger/logger";
+
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import CardHeader from "@mui/material/CardHeader";
+import Container from "@mui/material/Container";
+import Grid from "@mui/material/Grid";
+import AlertBox from "../components/common/AlertBox";
+import UserFiltering from "../components/user/UserFiltering";
+import UserListContainer from "../components/user/UserListContainer";
+import UserPagination from "../components/user/UserPagination";
 
 const pageSize = 15;
 
@@ -27,13 +30,12 @@ export default function UserView() {
     message: "This is an error alert — check it out!",
     severity: "error",
   });
-
-  Logger.debug("Initial state set.");
-
   const [pagination, setPagination] = useState({
     from: 0,
     to: pageSize,
   });
+
+  Logger.debug("Initial state set.");
 
   const getAllUsers = async function () {
     Logger.debug("getAllUsers: fetching all Users from server.");

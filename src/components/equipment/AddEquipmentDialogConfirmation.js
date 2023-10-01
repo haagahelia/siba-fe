@@ -1,23 +1,26 @@
-import {
-  Dialog,
-  DialogContent,
-  DialogContentText,
-  DialogTitle,
-} from "@mui/material";
-import { Button } from "@mui/material";
 import dao from "../../ajax/dao";
+
+import Button from "@mui/material/Button";
+import Dialog from "@mui/material/Dialog";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
 import ValidateAddEquipment from "../../validation/ValidateAddEquipment";
 
-export default function AddEquipmentDialogConfirmation(props) {
-  const { open, setOpen, equipment, setEquipment, getAllEquipments } = props;
-
+export default function AddEquipmentDialogConfirmation({
+  open,
+  setOpen,
+  equipment,
+  setEquipment,
+  getAllEquipments,
+}) {
   const addSingleEquipment = async () => {
-    let validation = ValidateAddEquipment(equipment);
+    const validation = ValidateAddEquipment(equipment);
     if (validation) {
       alert(Object.values(validation));
       return;
     }
-    let success = await dao.postNewEquipment(equipment);
+    const success = await dao.postNewEquipment(equipment);
     if (!success) {
       alert("Something went wrong!");
     } else {

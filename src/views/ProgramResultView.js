@@ -1,13 +1,7 @@
-import "../styles/ResultView.css";
 import ProgramResult from "../components/result/ProgramResult";
+import "../styles/ResultView.css";
 
 // component for displaying the calculation results, i.e. the allocation
-const ProgramResultView = function () {
-  return (
-    <>
-      <ProgramResult />
-    </>
-  );
-};
-
-export default ProgramResultView;
+export default function ProgramResultView() {
+  return <ProgramResult />;
+}

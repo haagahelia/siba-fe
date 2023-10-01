@@ -1,17 +1,19 @@
-import React, { useState, useEffect } from "react";
-import dao from "../../ajax/dao";
-import AddSubEquipForm from "./AddSubEquipForm";
 import { useFormik } from "formik";
-import ConfirmationDialog from "../common/ConfirmationDialog";
-import { validate } from "../../validation/ValidateAddSubjectEquipment";
-import AlertBox from "../common/AlertBox";
+import { useEffect, useState } from "react";
 import {
   ajaxRequestErrorHandler,
   getFunctionName,
 } from "../../ajax/ajaxRequestErrorHandler";
+import dao from "../../ajax/dao";
+import { validate } from "../../validation/ValidateAddSubjectEquipment";
+import AlertBox from "../common/AlertBox";
+import ConfirmationDialog from "../common/ConfirmationDialog";
+import AddSubEquipForm from "./AddSubEquipForm";
 
-export default function AddSubEquipContainer(props) {
-  const { singleSubject, equipmentsBySubId } = props;
+export default function AddSubEquipContainer({
+  singleSubject,
+  equipmentsBySubId,
+}) {
   const [equipmentSelectList, setEquipmentSelectList] = useState([]);
   const [initialSubEquip] = useState({
     subjectId: singleSubject?.id,
@@ -32,16 +34,15 @@ export default function AddSubEquipContainer(props) {
     content: "Something here",
   });
 
-  let subId = singleSubject?.id;
+  const subId = singleSubject?.id;
 
   const getSubEquipBySubId = async function (subId) {
-    let result = await equipmentsBySubId(subId);
+    const result = await equipmentsBySubId(subId);
     getEquipmentsForSelect(result);
   };
 
   useEffect(() => {
     getSubEquipBySubId(subId);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const getEquipmentsForSelect = async function (subEquipList) {
@@ -78,7 +79,8 @@ export default function AddSubEquipContainer(props) {
     validate,
     onSubmit: (values) => {
       setDialogOptions({
-        // Here we search for the name of the equipment whose id corresponds to values.id
+        // Here we search for the name of the equipment
+        // whose id corresponds to values.id
         title: `Are you sure you want to add ${
           equipmentSelectList.filter((i) => i.id === values.equipmentId)[0].name
         } ?`,
@@ -92,13 +94,13 @@ export default function AddSubEquipContainer(props) {
   });
 
   const addSubjectEquipment = async (values) => {
-    let newSubjectEquipment = {
+    const newSubjectEquipment = {
       subjectId: values.subjectId,
       equipmentId: values.equipmentId,
       priority: values.priority,
       obligatory: Number.parseInt(values.obligatory),
     };
-    let success = await dao.postNewSubjectEquipment(newSubjectEquipment);
+    const success = await dao.postNewSubjectEquipment(newSubjectEquipment);
     if (!success) {
       setAlertOptions({
         severity: "error",

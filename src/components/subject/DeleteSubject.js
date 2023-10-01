@@ -1,11 +1,15 @@
-import React, { useState } from "react";
-import { Button } from "@mui/material";
+import { useState } from "react";
 import dao from "../../ajax/dao";
+
+import Button from "@mui/material/Button";
 import AlertBox from "../common/AlertBox";
 import ConfirmationDialog from "../common/ConfirmationDialog";
 
-export default function DeleteSubject(props) {
-  const { singleSubject, getAllSubjects, setOpen } = props;
+export default function DeleteSubject({
+  singleSubject,
+  getAllSubjects,
+  setOpen,
+}) {
   const [alertOpen, setAlertOpen] = useState(false);
   const [alertOptions, setAlertOptions] = useState({
     message: "This is an error alert — check it out!",
@@ -19,7 +23,7 @@ export default function DeleteSubject(props) {
   const [deleteId, setDeleteId] = useState("");
 
   const deleteSubject = async (value) => {
-    let result = await dao.deleteSingleSubject(value);
+    const result = await dao.deleteSingleSubject(value);
     if (result === false) {
       setAlertOptions({
         severity: "error",

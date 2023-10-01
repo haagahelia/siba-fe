@@ -1,7 +1,5 @@
 import Equipments from "../components/equipment/Equipments";
 
-const EquipmentView = () => {
+export default function EquipmentView() {
   return <Equipments />;
-};
-
-export default EquipmentView;
+}

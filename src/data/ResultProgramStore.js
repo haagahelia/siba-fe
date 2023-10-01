@@ -1,5 +1,6 @@
-//import axios from "axios";
+// import axios from "axios";
 import Logger from "../logger/logger";
+
 const baseUrl = process.env.REACT_APP_BE_SERVER_BASE_URL;
 
 class ResultProgramStore {
@@ -9,9 +10,9 @@ class ResultProgramStore {
 
   async fetchNames(id) {
     // await axios
-    // .get(`${baseUrl}/allocation/${id}/program/`)
-    // .then((data) => (this.names = data.data))
-    // .catch((e) => console.error(e));
+    //   .get(`${baseUrl}/allocation/${id}/program/`)
+    //   .then((data) => (this.names = data.data))
+    //   .catch((e) => console.error(e));
     const request = new Request(`${baseUrl}/allocation/${id}/program/`, {
       method: "GET",
       headers: {

@@ -1,11 +1,11 @@
-import React, { useState } from "react";
-import { Button } from "@mui/material";
+import { useState } from "react";
 import dao from "../../ajax/dao";
+
+import Button from "@mui/material/Button";
 import AlertBox from "../common/AlertBox";
 import ConfirmationDialog from "../common/ConfirmationDialog";
 
-export default function DeleteUser(props) {
-  const { singleUser, getAllUsers, setOpen } = props;
+export default function DeleteUser({ singleUser, getAllUsers, setOpen }) {
   const [alertOpen, setAlertOpen] = useState(false);
   const [alertOptions, setAlertOptions] = useState({
     message: "This is an error alert — check it out!",
@@ -19,7 +19,7 @@ export default function DeleteUser(props) {
   const [deleteId, setDeleteId] = useState("");
 
   const deleteUser = async (value) => {
-    let result = await dao.deleteSingleUser(value);
+    const result = await dao.deleteSingleUser(value);
     if (result === false) {
       setAlertOptions({
         severity: "error",

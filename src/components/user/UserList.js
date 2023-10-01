@@ -1,17 +1,16 @@
+import styled from "@mui/material/styles/styled";
 import { useState } from "react";
+
+import Divider from "@mui/material/Divider";
+import Grid from "@mui/material/Grid";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
-import Divider from "@mui/material/Divider";
-import Grid from "@mui/material/Grid";
-import { styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
-import { Typography } from "@mui/material";
+import Typography from "@mui/material/Typography";
 import SingleUserDialog from "./SingleUserDialog";
 
-export default function UserListItems(props) {
-  const { getAllUsers, paginateUsers } = props;
-
+export default function UserListItems({ getAllUsers, paginateUsers }) {
   const [open, setOpen] = useState(false);
   const [singleUser, setSingleUser] = useState(null);
 

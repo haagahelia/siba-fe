@@ -1,11 +1,15 @@
-import React, { useState } from "react";
-import { Button } from "@mui/material";
+import { useState } from "react";
 import dao from "../../ajax/dao";
+
+import Button from "@mui/material/Button";
 import AlertBox from "../common/AlertBox";
 import ConfirmationDialog from "../common/ConfirmationDialog";
 
-export default function DeleteDepartment(props) {
-  const { singleDepartment, getAllDepartments, setOpen } = props;
+export default function DeleteDepartment({
+  singleDepartment,
+  getAllDepartments,
+  setOpen,
+}) {
   const [alertOpen, setAlertOpen] = useState(false);
   const [alertOptions, setAlertOptions] = useState({
     message: "This is an error alert — check it out!",
@@ -19,7 +23,7 @@ export default function DeleteDepartment(props) {
   const [deleteId, setDeleteId] = useState("");
 
   const deleteDepartment = async (value) => {
-    let result = await dao.deleteDepartment(value);
+    const result = await dao.deleteDepartment(value);
     console.log(result);
     if (result === false) {
       setAlertOptions({

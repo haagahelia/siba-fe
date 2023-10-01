@@ -1,22 +1,26 @@
-import React, { useState } from "react";
-import { CardHeader, Card, CardContent, IconButton } from "@mui/material";
-import AlertBox from "../common/AlertBox";
 import { useFormik } from "formik";
-import ConfirmationDialog from "../common/ConfirmationDialog";
-import {
-  validate,
-  capitalizeFirstLetter,
-} from "../../validation/ValidateAddBuilding";
+import { useState } from "react";
 import dao from "../../ajax/dao";
+import {
+  capitalizeFirstLetter,
+  validate,
+} from "../../validation/ValidateAddBuilding";
+
+import ExpandLessIcon from "@mui/icons-material/ExpandLess";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import CardHeader from "@mui/material/CardHeader";
+import IconButton from "@mui/material/IconButton";
+import AlertBox from "../common/AlertBox";
+import ConfirmationDialog from "../common/ConfirmationDialog";
 import AddBuildingForm from "./AddBuildingForm";
 import ImportBuilding from "./ImportBuildingContainer";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 
-export default function AddBuildingContainer(props) {
+export default function AddBuildingContainer({ getAllBuildings }) {
   // State for checking if Add Building card is expanded
   const [isCardExpanded, setIsCardExpanded] = useState(false);
-  const { getAllBuildings } = props;
+
   const [alertOpen, setAlertOpen] = useState(false);
   const [alertOptions, setAlertOptions] = useState({
     title: "This is title",
@@ -28,7 +32,7 @@ export default function AddBuildingContainer(props) {
     title: "this is dialog",
     content: "Something here",
   });
-  // Here the initialvalues ​​of the form are stored in the state
+  // Here the initialvalues of the form are stored in the state
   const [initialBuilding, setInitialBuilding] = useState({
     name: "",
     description: "",
@@ -57,12 +61,12 @@ export default function AddBuildingContainer(props) {
   });
 
   const addBuilding = async (submitValues) => {
-    let newBuilding = {
+    const newBuilding = {
       name: capitalizeFirstLetter(submitValues.name),
       description: submitValues.description,
     };
 
-    let result = await dao.postNewBuilding(newBuilding);
+    const result = await dao.postNewBuilding(newBuilding);
     if (!result) {
       setAlertOptions({
         severity: "error",
@@ -83,7 +87,7 @@ export default function AddBuildingContainer(props) {
   };
 
   return (
-    <React.Fragment>
+    <>
       <AlertBox
         alertOpen={alertOpen}
         alertOptions={alertOptions}
@@ -124,6 +128,6 @@ export default function AddBuildingContainer(props) {
           )}
         </CardContent>
       </Card>
-    </React.Fragment>
+    </>
   );
 }

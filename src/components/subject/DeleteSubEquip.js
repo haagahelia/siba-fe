@@ -1,12 +1,14 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import dao from "../../ajax/dao";
-import { Button } from "@mui/material";
-import ConfirmationDialog from "../common/ConfirmationDialog";
+
+import Button from "@mui/material/Button";
 import AlertBox from "../common/AlertBox";
+import ConfirmationDialog from "../common/ConfirmationDialog";
 
-export default function DeleteSubEquip(props) {
-  const { singleEquipBySubId, getEquipmentsBySubId } = props;
-
+export default function DeleteSubEquip({
+  singleEquipBySubId,
+  getEquipmentsBySubId,
+}) {
   const [alertOpen, setAlertOpen] = useState(false);
   const [alertOptions, setAlertOptions] = useState({
     message: "This is an error alert — check it out!",
@@ -21,14 +23,17 @@ export default function DeleteSubEquip(props) {
     subjectId: 0,
     equipmentId: 0,
   });
-  let id1 = singleEquipBySubId.subjectId;
-  let id2 = singleEquipBySubId.equipmentId;
-  let equipmentName = singleEquipBySubId.name;
+
+  const id1 = singleEquipBySubId.subjectId;
+  const id2 = singleEquipBySubId.equipmentId;
+  const equipmentName = singleEquipBySubId.name;
 
   const deleteSubjectEquipment = async (subjectId, equipmentId) => {
+    // TODO: Why are we reassigning function parameters here?!
+    // The values of `subjectId` and `equipmentId` get always overwritten
     subjectId = id1;
     equipmentId = id2;
-    let success = await dao.deleteSingleSubjectEquipment(
+    const success = await dao.deleteSingleSubjectEquipment(
       subjectId,
       equipmentId,
     );

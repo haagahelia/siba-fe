@@ -3,7 +3,7 @@ import { create, get, remove, update } from "./request";
 
 const baseUrl = process.env.REACT_APP_BE_SERVER_BASE_URL;
 
-//fetching SubjectEquipment by subjectId
+// fetching SubjectEquipment by subjectId
 export const fetchEquipmentBySubjectId = async (
   id: number,
 ): Promise<Response<SubjectEquipment>> => {
@@ -12,7 +12,7 @@ export const fetchEquipmentBySubjectId = async (
   return { success: response.ok, data: subjectEquipments };
 };
 
-//creating new SubjectEquipment
+// creating new SubjectEquipment
 export const postNewSubjectEquipment = async (
   newSubjectEquipment: SubjectEquipment,
 ): Promise<boolean> => {

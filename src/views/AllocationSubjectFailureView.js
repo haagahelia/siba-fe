@@ -1,37 +1,34 @@
-import { Typography } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { useParams } from "react-router-dom";
+import { ajaxRequestErrorHandler } from "../ajax/ajaxRequestErrorHandler";
+import dao from "../ajax/dao";
+import Logger from "../logger/logger";
+import "../styles/AllocationFailure.css";
+
+import CheckIcon from "@mui/icons-material/Check";
+import CloseIcon from "@mui/icons-material/Close";
+import Button from "@mui/material/Button";
+import ClickAwayListener from "@mui/material/ClickAwayListener";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogTitle from "@mui/material/DialogTitle";
+import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import Paper from "@mui/material/Paper";
-import Button from "@mui/material/Button";
-import Dialog from "@mui/material/Dialog";
-import DialogActions from "@mui/material/DialogActions";
-import DialogContent from "@mui/material/DialogContent";
-import DialogTitle from "@mui/material/DialogTitle";
-import CheckIcon from "@mui/icons-material/Check";
-import CloseIcon from "@mui/icons-material/Close";
 import Tooltip from "@mui/material/Tooltip";
-import ClickAwayListener from "@mui/material/ClickAwayListener";
-import { useParams } from "react-router-dom";
+import Typography from "@mui/material/Typography";
 import AlertBox from "../components/common/AlertBox";
-import "../styles/AllocationFailure.css";
-import dao from "../ajax/dao";
-import { ajaxRequestErrorHandler } from "../ajax/ajaxRequestErrorHandler";
-import Logger from "../logger/logger";
 
-export function GetMissingEquipment(idData) {
-  let subjId = idData.subjectId;
-  let roomId = idData.roomId;
-  let item = idData.item;
-
+export function GetMissingEquipment({ subjId, roomId, item }) {
   const [missingEquipment, setMissingEquipment] = useState(
     "No missing equipment",
   );
-  const [tooltipOpen, setTooltipOpen] = React.useState(false);
+  const [tooltipOpen, setTooltipOpen] = useState(false);
   const [, setAlertOpen] = useState(false);
   const [, setAlertOptions] = useState({
     message: "Whoops!",
@@ -107,11 +104,12 @@ export function GetMissingEquipment(idData) {
 }
 
 export default function AllocationSubjectFailureView() {
+  const { allocId } = useParams();
+
   const [unAllocableSubjects, setUnAllocableSubjects] = useState([]);
   const [unAllocSubjectRooms, setUnAllocSubjectRooms] = useState([]);
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
   const [currSubjId, setCurrSubjId] = useState();
-  const { allocId } = useParams();
   const [alertOpen, setAlertOpen] = useState(false);
   const [alertOptions, setAlertOptions] = useState({
     message: "Whoops!",
@@ -158,8 +156,8 @@ export default function AllocationSubjectFailureView() {
     setOpen(false);
   };
 
-  const descriptionElementRef = React.useRef(null);
-  React.useEffect(() => {
+  const descriptionElementRef = useRef(null);
+  useEffect(() => {
     if (open) {
       const { current: descriptionElement } = descriptionElementRef;
       if (descriptionElement !== null) {

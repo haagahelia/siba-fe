@@ -3,7 +3,7 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  
+
 <h1 align="center">Siba project - Frontend</h1>
 
 <h3 align="center">
@@ -55,13 +55,13 @@ Frontend side installation instructions
    cd siba-fe
    ```
 
-3. Create **.env.local** file. Add .env to the root of the project. 
+3. Create **.env.local** file. Add .env to the root of the project.
 
    ```sh
    REACT_APP_BE_SERVER_BASE_URL=http://...backend server address and port here.../api
    REACT_APP_BE_SERVER_BASE_URL2=http://someotherserver:3001/api
    ```
-   Basically start the backend, make sure it runs and copy the working address here, adding /api at the end. E.g. http://localhost:1234/api 
+   Basically start the backend, make sure it runs and copy the working address here, adding /api at the end. E.g. http://localhost:1234/api
 
 4. Install needed packages
 
@@ -80,7 +80,7 @@ Frontend side installation instructions
 1. Follow installation steps from 1 to 3
 
 2. Run this command to launch application
- 
+
    ```sh
    docker-compose -f docker-compose-fe.yaml up -d
    ```

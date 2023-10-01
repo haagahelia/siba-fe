@@ -1,16 +1,19 @@
-import React, { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import dao from "../ajax/dao";
+import { RoleLoggedIn } from "../customhooks/RoleLoggedIn";
+import Logger from "../logger/logger";
+
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import CardHeader from "@mui/material/CardHeader";
+import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
-import { Typography } from "@mui/material";
-import { CardHeader, Card, Container } from "@mui/material";
-import CardContent from "@mui/material/CardContent";
-import DepartmentDialog from "../components/department/DepartmentDialog";
+import Typography from "@mui/material/Typography";
 import AddDepartment from "../components/department/AddDepartment";
-import { RoleLoggedIn } from "../customhooks/RoleLoggedIn";
-import Logger from "../logger/logger";
+import DepartmentDialog from "../components/department/DepartmentDialog";
 
 export default function DepartmentView() {
   Logger.logPrefix = "DepartmentView";
@@ -24,6 +27,7 @@ export default function DepartmentView() {
     severity: "error",
   });
   const [setAlertOpen] = useState(false);
+
   const { roles } = RoleLoggedIn();
 
   const getAllDepartments = async function () {
@@ -50,87 +54,84 @@ export default function DepartmentView() {
   useEffect(() => {
     Logger.debug("Running effect to fetch all departments.");
     getAllDepartments();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <div style={{ marginLeft: "120px" }}>
-      <>
-        <DepartmentDialog
-          open={open}
-          setOpen={setOpen}
-          singleDepartment={singleDepartment}
-          setSingleDepartment={setSingleDepartment}
-          getAllDepartments={getAllDepartments}
-        />
-        <Container maxWidth="100%">
-          <Grid container rowSpacing={0.5}>
-            <Card variant="outlined">
-              <CardContent>
-                <CardHeader title="Department" />
-                {(roles.admin === "1" || roles.planner === "1") && (
-                  <AddDepartment getAllDepartments={getAllDepartments} />
-                )}
-                {DepartmentList.map((value) => {
-                  return (
-                    <List key={value.id}>
-                      <ListItem
-                        onClick={() => {
-                          setSingleDepartment(value);
-                          setOpen(true);
-                        }}
-                      >
-                        <Grid item md={3} xs={3}>
-                          <Typography
-                            variant="caption"
-                            sx={{ fontWeight: "bold" }}
-                          >
-                            Id:
-                          </Typography>
-                          <ListItemText
-                            primary={value.id}
-                            primaryTypographyProps={{
-                              variant: "body2",
-                            }}
-                          />
-                        </Grid>
-                        <Grid item md={3} xs={3}>
-                          <Typography
-                            variant="caption"
-                            sx={{ fontWeight: "bold" }}
-                          >
-                            Name:
-                          </Typography>
-                          <ListItemText
-                            primary={value.name}
-                            primaryTypographyProps={{
-                              variant: "body2",
-                            }}
-                          />
-                        </Grid>
-                        <Grid item md={1} xs={1}>
-                          <Typography
-                            variant="caption"
-                            sx={{ fontWeight: "bold" }}
-                          >
-                            Description:
-                          </Typography>
-                          <ListItemText
-                            primary={value.description}
-                            primaryTypographyProps={{
-                              variant: "body2",
-                            }}
-                          />
-                        </Grid>
-                      </ListItem>
-                    </List>
-                  );
-                })}
-              </CardContent>
-            </Card>
-          </Grid>
-        </Container>
-      </>
+      <DepartmentDialog
+        open={open}
+        setOpen={setOpen}
+        singleDepartment={singleDepartment}
+        setSingleDepartment={setSingleDepartment}
+        getAllDepartments={getAllDepartments}
+      />
+      <Container maxWidth="100%">
+        <Grid container rowSpacing={0.5}>
+          <Card variant="outlined">
+            <CardContent>
+              <CardHeader title="Department" />
+              {(roles.admin === "1" || roles.planner === "1") && (
+                <AddDepartment getAllDepartments={getAllDepartments} />
+              )}
+              {DepartmentList.map((value) => {
+                return (
+                  <List key={value.id}>
+                    <ListItem
+                      onClick={() => {
+                        setSingleDepartment(value);
+                        setOpen(true);
+                      }}
+                    >
+                      <Grid item md={3} xs={3}>
+                        <Typography
+                          variant="caption"
+                          sx={{ fontWeight: "bold" }}
+                        >
+                          Id:
+                        </Typography>
+                        <ListItemText
+                          primary={value.id}
+                          primaryTypographyProps={{
+                            variant: "body2",
+                          }}
+                        />
+                      </Grid>
+                      <Grid item md={3} xs={3}>
+                        <Typography
+                          variant="caption"
+                          sx={{ fontWeight: "bold" }}
+                        >
+                          Name:
+                        </Typography>
+                        <ListItemText
+                          primary={value.name}
+                          primaryTypographyProps={{
+                            variant: "body2",
+                          }}
+                        />
+                      </Grid>
+                      <Grid item md={1} xs={1}>
+                        <Typography
+                          variant="caption"
+                          sx={{ fontWeight: "bold" }}
+                        >
+                          Description:
+                        </Typography>
+                        <ListItemText
+                          primary={value.description}
+                          primaryTypographyProps={{
+                            variant: "body2",
+                          }}
+                        />
+                      </Grid>
+                    </ListItem>
+                  </List>
+                );
+              })}
+            </CardContent>
+          </Card>
+        </Grid>
+      </Container>
     </div>
   );
 }

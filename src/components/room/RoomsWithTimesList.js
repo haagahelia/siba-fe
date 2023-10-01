@@ -1,15 +1,13 @@
-import React from "react";
+import useTheme from "@mui/material/styles/useTheme";
+import { Fragment } from "react";
+
 import Grid2 from "@mui/material/Unstable_Grid2";
 import ProgressBar from "@ramonak/react-progress-bar";
-//import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-//import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
-//import { Collapse } from "@mui/material"; //Box ???
-//import Typography from "@mui/material/Typography";
-import { useTheme } from "@mui/material/styles";
 import CollapsedRowB from "../result/CollapsedRowB";
 
-const RoomsWithTimesList = ({ rooms }) => {
+export default function RoomsWithTimesList({ rooms }) {
   const theme = useTheme();
+
   return (
     <Grid2
       key="container for list"
@@ -38,7 +36,7 @@ const RoomsWithTimesList = ({ rooms }) => {
             : theme.palette.progressBarTextNonZero.main;
 
         return (
-          <React.Fragment key={room.id}>
+          <Fragment key={room.id}>
             <Grid2
               xs={3}
               style={
@@ -55,20 +53,18 @@ const RoomsWithTimesList = ({ rooms }) => {
             </Grid2>
             <Grid2 xs={3} key={`${room.id}-b`}>
               <ProgressBar
-                labelAlignment={"left"}
+                labelAlignment="left"
                 baseBgColor={theme.palette.progressBarBackground.main}
                 labelColor={progressBarTextColor}
                 bgColor={progressColor}
-                padding={"3px"}
+                padding="3px"
                 completed={Math.round(progress)}
               />
               <CollapsedRowB id={room.id} />
             </Grid2>
-          </React.Fragment>
+          </Fragment>
         );
       })}
     </Grid2>
   );
-};
-
-export default RoomsWithTimesList;
+}

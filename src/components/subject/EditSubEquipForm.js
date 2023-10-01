@@ -1,30 +1,26 @@
-import {
-  Button,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogContentText,
-  DialogTitle,
-  FormControl,
-  FormControlLabel,
-  FormLabel,
-  Grid,
-  RadioGroup,
-  TextField,
-  Typography,
-} from "@mui/material";
-import React, { useState } from "react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+
+import Button from "@mui/material/Button";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
+import FormControl from "@mui/material/FormControl";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import FormLabel from "@mui/material/FormLabel";
+import Grid from "@mui/material/Grid";
 import Radio from "@mui/material/Radio";
+import RadioGroup from "@mui/material/RadioGroup";
+import TextField from "@mui/material/TextField";
+import Typography from "@mui/material/Typography";
 
-export default function EditSubEquipForm(props) {
-  const { formik, equipmentPriorityList } = props;
-
+export default function EditSubEquipForm({ formik, equipmentPriorityList }) {
   const [open, setOpen] = useState(false);
   const [equipPriority, setEquipPriority] = useState(0);
 
   /* Here we look for the priority of the equipment selected in select,
-  so that the user can see what the equipment's default priority value is */
+     so that the user can see what the equipment's default priority value is */
   useEffect(() => {
     const prio = equipmentPriorityList.find((obj) => {
       return obj.id === formik.values.equipmentId;
@@ -33,7 +29,6 @@ export default function EditSubEquipForm(props) {
     if (prio?.equipmentPriority) {
       setEquipPriority(prio.equipmentPriority);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [equipmentPriorityList]);
 
   return (
@@ -50,7 +45,9 @@ export default function EditSubEquipForm(props) {
       </Button>
       <Dialog open={open}>
         <form onSubmit={formik.handleSubmit}>
-          {/* formik.initialValues?.name} Here ? checks if the name attribute can be found in the initialValues ​​object, if not found it returns the value null and does not crash */}
+          {/* formik.initialValues?.name} Here ? checks
+              if the name attribute can be found in the initialValues ​​object,
+              if not found it returns the value null and does not crash */}
           <DialogTitle>Edit: {formik.initialValues?.name}</DialogTitle>
           <DialogContent>
             <DialogContentText>

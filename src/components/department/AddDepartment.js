@@ -1,25 +1,23 @@
-import React from "react";
-import Button from "@mui/material/Button";
 import { useState } from "react";
-import {
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogContentText,
-  DialogTitle,
-  TextField,
-} from "@mui/material";
 import dao from "../../ajax/dao";
 import { validate } from "../../validation/ValidateAddEditDepartment";
 
-function AddDepartment(props) {
-  const { getAllDepartments } = props;
+import Button from "@mui/material/Button";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
+import TextField from "@mui/material/TextField";
+
+export default function AddDepartment({ getAllDepartments }) {
   const [open, setOpen] = useState(false);
   const [confirmationDialog, setConfirmationDialog] = useState(false);
   const [department, setDepartment] = useState({
     name: "",
     description: "",
   });
+
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -35,12 +33,12 @@ function AddDepartment(props) {
     setDepartment({ ...department, [event.target.name]: event.target.value });
   };
   const AddDepartment = async () => {
-    let validation = validate(department);
+    const validation = validate(department);
     if (!validation) {
       alert(Object.values(validation));
       return;
     }
-    let success = await dao.addDepartment(department);
+    const success = await dao.addDepartment(department);
     if (!success) {
       alert("something went wrong!");
     } else {
@@ -114,5 +112,3 @@ function AddDepartment(props) {
     </div>
   );
 }
-
-export default AddDepartment;

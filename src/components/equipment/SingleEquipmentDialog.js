@@ -1,24 +1,23 @@
-import React, { useEffect } from "react";
-import {
-  Dialog,
-  DialogContent,
-  DialogTitle,
-  DialogActions,
-} from "@mui/material";
-import EditEquipment from "./EditEquipment";
-import DeleteEquipment from "./DeleteEquipment";
+import { useEffect } from "react";
 import { RoleLoggedIn } from "../../customhooks/RoleLoggedIn";
 import Logger from "../../logger/logger";
 
-export default function SingleEquipmentDialog(props) {
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogTitle from "@mui/material/DialogTitle";
+import DeleteEquipment from "./DeleteEquipment";
+import EditEquipment from "./EditEquipment";
+
+export default function SingleEquipmentDialog({
+  open,
+  setOpen,
+  singleEquipment,
+  setSingleEquipment,
+  getAllEquipments,
+}) {
   Logger.logPrefix = "SingleEquipmentDialog";
-  const {
-    open,
-    setOpen,
-    singleEquipment,
-    setSingleEquipment,
-    getAllEquipments,
-  } = props;
+
   const { roles } = RoleLoggedIn();
 
   useEffect(() => {
@@ -32,38 +31,34 @@ export default function SingleEquipmentDialog(props) {
   }, [open, singleEquipment]);
 
   return (
-    <>
-      <Dialog
-        open={open}
-        onClose={() => {
-          setOpen(false);
-          getAllEquipments();
-        }}
-      >
-        <DialogTitle id="dialog-title">Equipment Info</DialogTitle>
-        {roles.admin === "1" && (
-          <DialogActions>
-            <EditEquipment
-              singleEquipment={singleEquipment}
-              setSingleEquipment={setSingleEquipment}
-              getAllEquipments={getAllEquipments}
-              open={open}
-              setOpen={setOpen}
-            />
-            <DeleteEquipment
-              singleEquipment={singleEquipment}
-              getAllEquipments={getAllEquipments}
-              setOpen={setOpen}
-            />
-          </DialogActions>
-        )}
-        <DialogContent>id: {singleEquipment?.id}</DialogContent>
-        <DialogContent>Name: {singleEquipment?.name}</DialogContent>
-        <DialogContent> Priority: {singleEquipment?.priority}</DialogContent>
-        <DialogContent>
-          Description: {singleEquipment?.description}
-        </DialogContent>
-      </Dialog>
-    </>
+    <Dialog
+      open={open}
+      onClose={() => {
+        setOpen(false);
+        getAllEquipments();
+      }}
+    >
+      <DialogTitle id="dialog-title">Equipment Info</DialogTitle>
+      {roles.admin === "1" && (
+        <DialogActions>
+          <EditEquipment
+            singleEquipment={singleEquipment}
+            setSingleEquipment={setSingleEquipment}
+            getAllEquipments={getAllEquipments}
+            open={open}
+            setOpen={setOpen}
+          />
+          <DeleteEquipment
+            singleEquipment={singleEquipment}
+            getAllEquipments={getAllEquipments}
+            setOpen={setOpen}
+          />
+        </DialogActions>
+      )}
+      <DialogContent>id: {singleEquipment?.id}</DialogContent>
+      <DialogContent>Name: {singleEquipment?.name}</DialogContent>
+      <DialogContent> Priority: {singleEquipment?.priority}</DialogContent>
+      <DialogContent>Description: {singleEquipment?.description}</DialogContent>
+    </Dialog>
   );
 }

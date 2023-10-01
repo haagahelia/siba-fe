@@ -1,13 +1,15 @@
-import React, { useState } from "react";
-import TextField from "@mui/material/TextField";
-import { Button, Grid } from "@mui/material";
-import DialogTitle from "@mui/material/DialogTitle";
+import { useState } from "react";
+
+import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
-import { DialogActions, DialogContent, DialogContentText } from "@mui/material";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
+import Grid from "@mui/material/Grid";
+import TextField from "@mui/material/TextField";
 
-export default function EditUserForm(props) {
-  const { formik } = props;
-
+export default function EditUserForm({ formik }) {
   const [open, setOpen] = useState(false);
 
   return (

@@ -1,32 +1,34 @@
-import React, { useState, useEffect } from "react";
-import {
-  Button,
-  Grid,
-  FormHelperText,
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  DialogContentText,
-  TextField,
-  DialogActions,
-  RadioGroup,
-  Typography,
-} from "@mui/material";
-import Select from "@mui/material/Select";
+import { useEffect, useState } from "react";
+
+import Button from "@mui/material/Button";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
+import FormControl from "@mui/material/FormControl";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import FormHelperText from "@mui/material/FormHelperText";
+import FormLabel from "@mui/material/FormLabel";
+import Grid from "@mui/material/Grid";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
-import FormControl from "@mui/material/FormControl";
 import Radio from "@mui/material/Radio";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import FormLabel from "@mui/material/FormLabel";
+import RadioGroup from "@mui/material/RadioGroup";
+import Select from "@mui/material/Select";
+import TextField from "@mui/material/TextField";
+import Typography from "@mui/material/Typography";
 
-export default function AddSubEquipForm(props) {
-  const { equipmentSelectList, singleSubject, formik } = props;
+export default function AddSubEquipForm({
+  equipmentSelectList,
+  singleSubject,
+  formik,
+}) {
   const [open, setOpen] = useState(false);
   const [equipPriority, setEquipPriority] = useState(0);
 
   /* Here we look for the priority of the equipment selected in select,
-  so that the user can see what the equipment's default priority value is */
+     so that the user can see what the equipment's default priority value is */
   useEffect(() => {
     const prio = equipmentSelectList.find((obj) => {
       return obj.id === formik.values.equipmentId;
@@ -36,7 +38,6 @@ export default function AddSubEquipForm(props) {
       // Sets the default priority value directly in the input field
       formik.setValues({ ...formik.values, priority: prio.equipmentPriority });
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [formik.values.equipmentId]);
 
   return (
@@ -51,7 +52,9 @@ export default function AddSubEquipForm(props) {
         Add equipment
       </Button>
       <Dialog open={open}>
-        {/* formik.singleSubject?.subjectName} Here ? checks whether the singleSubject object has the subjectName attribute, if not found it returns the value null and does not crash */}
+        {/* formik.singleSubject?.subjectName} Here ? checks
+            whether the singleSubject object has the subjectName attribute,
+            if not found it returns the value null and does not crash */}
         <DialogTitle>{singleSubject?.subjectName}</DialogTitle>
         <form onSubmit={formik.handleSubmit}>
           <DialogContent>

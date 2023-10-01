@@ -1,15 +1,20 @@
-import React, { useState } from "react";
-import Dialog from "@mui/material/Dialog";
-import DialogTitle from "@mui/material/DialogTitle";
-import TextField from "@mui/material/TextField";
-import { Button, Grid } from "@mui/material";
-import { DialogContent, DialogContentText } from "@mui/material";
+import { useState } from "react";
 import dao from "../../ajax/dao";
 import { validate } from "../../validation/ValidateAddEditDepartment";
 
-export default function EditDepartment(props) {
-  const { singleDepartment, getAllDepartments, setOpen } = props;
+import Button from "@mui/material/Button";
+import Dialog from "@mui/material/Dialog";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
+import Grid from "@mui/material/Grid";
+import TextField from "@mui/material/TextField";
 
+export default function EditDepartment({
+  singleDepartment,
+  getAllDepartments,
+  setOpen,
+}) {
   const [editOpen, setEditOpen] = useState(false);
   const [department, setDepartment] = useState({
     id: singleDepartment?.id,
@@ -18,11 +23,11 @@ export default function EditDepartment(props) {
   });
 
   const submitEdits = async () => {
-    let validation = validate(department);
+    const validation = validate(department);
     if (Object.values(validation).length !== 0) {
       alert(Object.values(validation));
     } else {
-      let result = await dao.editDepartment(department);
+      const result = await dao.editDepartment(department);
       if (!result) {
         alert("Something went wrong");
       } else {
