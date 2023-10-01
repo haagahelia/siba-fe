@@ -43,7 +43,9 @@
     "*.{js,ts}": "biome check --apply"
   },
   "eslintConfig": {
-    "ignorePatterns": ["**/*"]
+    "ignorePatterns": [
+      "**/*"
+    ]
   },
   "browserslist": {
     "production": [
