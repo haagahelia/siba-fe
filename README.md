@@ -136,3 +136,12 @@ In the addition of the teaching, there would be a function with which the form c
 dao.js file unifications
 
 <p align="right">(<a href="#top">back to top</a>)</p>
+
+## For Developers
+
+### Navigation Bar
+Structure: siba-fe\src\routers\Nav.js <br>
+Styling: siba-fe\src\styles\theme.js <br>
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
