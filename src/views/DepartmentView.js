@@ -54,7 +54,6 @@ export default function DepartmentView() {
   useEffect(() => {
     Logger.debug("Running effect to fetch all departments.");
     getAllDepartments();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

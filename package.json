@@ -34,8 +34,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "precommit": "sh ./pre-commit",
-    "lint": "eslint src/"
+    "precommit": "sh ./pre-commit"
   },
   "pre-commit": [
     "precommit"
@@ -44,10 +43,7 @@
     "*.{js,ts}": "biome check --apply"
   },
   "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
+    "ignorePatterns": ["**/*"]
   },
   "browserslist": {
     "production": [

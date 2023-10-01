@@ -24,7 +24,6 @@ export default function UserFiltering({
     if (searched === "") {
       setPaginateUsers(allUsersList.slice(pagination.from, pagination.to));
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searched]);
 
   const cancelSearch = () => {

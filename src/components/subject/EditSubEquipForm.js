@@ -29,7 +29,6 @@ export default function EditSubEquipForm({ formik, equipmentPriorityList }) {
     if (prio?.equipmentPriority) {
       setEquipPriority(prio.equipmentPriority);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [equipmentPriorityList]);
 
   return (

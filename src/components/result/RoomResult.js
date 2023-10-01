@@ -26,7 +26,6 @@ export default function RoomResult() {
 
   useEffect(() => {
     getRoomsData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [resetCounter]);
 
   const getRoomsData = async () => {

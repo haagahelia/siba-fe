@@ -52,7 +52,6 @@ export default function Equipments() {
   useEffect(() => {
     Logger.debug("Calling getAllEquipments in useEffect");
     getAllEquipments();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

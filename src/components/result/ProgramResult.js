@@ -40,8 +40,6 @@ export default function ProgramResult() {
     getProgramData();
 
     return () => {};
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [resetCounter]);
 
   const getProgramData = async () => {

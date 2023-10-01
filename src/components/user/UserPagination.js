@@ -20,7 +20,6 @@ export default function UserPagination({
       const slicedUsers = allUsersList.slice(pagination.from, pagination.to);
       setPaginateUsers(slicedUsers);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pagination]);
 
   const handleChange = (e, p) => {

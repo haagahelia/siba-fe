@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import useTheme from "@mui/material/styles/useTheme";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";

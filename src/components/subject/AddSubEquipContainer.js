@@ -43,7 +43,6 @@ export default function AddSubEquipContainer({
 
   useEffect(() => {
     getSubEquipBySubId(subId);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const getEquipmentsForSelect = async function (subEquipList) {
