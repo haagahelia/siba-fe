@@ -112,6 +112,11 @@ export default function LoginView({ handleLoginChange }) {
     }
   };
 
+  const handleReset = () => {
+    alert(`Huolto tilattu, have a patience please!`)
+    navigate('/forget-password')
+  }
+
   return (
     <div>
       <AlertBox
@@ -152,7 +157,7 @@ export default function LoginView({ handleLoginChange }) {
               type="password"
             />
           </Grid>
-          <Link onClick={() => alert(`Huolto tilattu, have a patience please!`)}>Forget your password?</Link>
+          <Link onClick={handleReset}>Forget your password?</Link>
           <Grid>
             <Button onClick={loginAndError}>Log In</Button>
           </Grid>

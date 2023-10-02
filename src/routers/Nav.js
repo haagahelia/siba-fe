@@ -33,6 +33,7 @@ import Settings from "../views/Settings";
 import SpaceView from "../views/SpaceView";
 import SubjectView from "../views/SubjectView";
 import UserView from "../views/UserView";
+import ForgetPassword from "../views/ForgetPassword";
 
 export default function NavBar() {
   Logger.debug("NavBar initiated");
@@ -383,6 +384,7 @@ export default function NavBar() {
           element={<AllocationSubjectFailureView />}
         />
         <Route path="*" element={<NotFoundView />} />
+        <Route path="/forget-password" element={<ForgetPassword />}/>
       </Routes>
     </BrowserRouter>
   );
