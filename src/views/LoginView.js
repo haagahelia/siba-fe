@@ -10,7 +10,7 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
-import { Alert, Link } from "@mui/material";
+import { Link } from "@mui/material";
 
 export default function LoginView({ handleLoginChange }) {
   Logger.logPrefix = "LoginView";
