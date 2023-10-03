@@ -9,7 +9,6 @@ import {
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
@@ -283,6 +282,7 @@ function NavBar() {
       style={{
         height: "100vh",
         left: 0,
+        overflowY: "scroll", // Stops the nav bar content from shifting, when pop up appears
         paddingLeft: '170px', // Nav bar width
         top: 0,
       }}>
