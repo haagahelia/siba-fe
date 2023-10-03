@@ -1,3 +1,4 @@
+import { common } from "@mui/material/colors";
 import createTheme from "@mui/material/styles/createTheme";
 
 // Palettes are: darkPalette, lightPalette,
@@ -6,6 +7,13 @@ import createTheme from "@mui/material/styles/createTheme";
 export const lessPadding = "4px";
 export const morePadding = "16px";
 export const navbarWidth = "170px";
+export const commonFont = "Roboto, Helvetica, Aria, sans-serif";
+export const indexRoomCommon = {
+  width: 15,
+  height: 15,
+  border: "3px solid",
+  marginLeft: 60,
+};
 
 export const createAppTheme = (currentPalette) =>
   createTheme({
@@ -143,7 +151,7 @@ export const createAppTheme = (currentPalette) =>
                 // color: currentPalette.fontColorDefault.default,
                 color: currentPalette.primary.contrastText,
                 textDecoration: "none",
-                fontFamily: "Roboto, Helvetica, Aria, sans-serif",
+                fontFamily: commonFont,
                 fontWeight: 600,
                 height: "100%",
                 textAlign: "center",
@@ -270,36 +278,24 @@ export const createAppTheme = (currentPalette) =>
       },
       IndexRooms: {
         studioindex: {
-          width: 15,
-          height: 15,
+          ...indexRoomCommon,
           backgroundColor: currentPalette.AllocRoom.studio.color,
-          border: "3px solid",
           borderColor: currentPalette.borderColorDark.main,
-          marginLeft: 60,
         },
         luentoluokkaindex: {
-          width: 15,
-          height: 15,
+          ...indexRoomCommon,
           backgroundColor: currentPalette.AllocRoom.luentoluokka.color,
-          border: "3px solid",
           borderColor: currentPalette.borderColorDark.main,
-          marginLeft: 60,
         },
         esitystilaindex: {
-          width: 15,
-          height: 15,
+          ...indexRoomCommon,
           backgroundColor: currentPalette.AllocRoom.esitystila.color,
-          border: "3px solid",
           borderColor: currentPalette.borderColorDark.main,
-          marginLeft: 60,
         },
         musiikkiluokkaindex: {
-          width: 15,
-          height: 15,
+          ...indexRoomCommon,
           backgroundColor: currentPalette.AllocRoom.musiikkiluokka.color,
-          border: "3px solid",
           borderColor: currentPalette.borderColorDark.main,
-          marginLeft: 60,
         },
       },
       MuiButton: {
@@ -363,7 +359,7 @@ export const createAppTheme = (currentPalette) =>
             props: { variant: "boldTitle" },
             style: {
               color: currentPalette.fontColorDefault.default,
-              fontFamily: "Roboto, Helvetica, Aria, sans-serif",
+              fontFamily: commonFont,
               fontWeight: 700,
               fontSize: "1rem",
               lineHeight: 1.5,
@@ -375,7 +371,7 @@ export const createAppTheme = (currentPalette) =>
             style: {
               color: currentPalette.fontColorDefault.default,
               textDecoration: "none",
-              fontFamily: "Roboto, Helvetica, Aria, sans-serif",
+              fontFamily: commonFont,
               fontWeight: 700,
               height: "100%",
               borderBottom: "3px solid transparent",
@@ -386,7 +382,7 @@ export const createAppTheme = (currentPalette) =>
             style: {
               color: currentPalette.fontColorDefault.default,
               textDecoration: "none",
-              fontFamily: "Roboto, Helvetica, Aria, sans-serif",
+              fontFamily: commonFont,
               fontWeight: 400,
               height: "100%",
               borderBottom: "3px solid transparent",

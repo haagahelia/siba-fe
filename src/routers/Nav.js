@@ -3,16 +3,12 @@ import {
   faGear,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import MenuIcon from "@mui/icons-material/Menu";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
-import IconButton from "@mui/material/IconButton";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
-import Menu from "@mui/material/Menu";
 import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
 import { useContext, useState } from "react";
 import { BrowserRouter, NavLink, Route, Routes } from "react-router-dom";
 import { AppContext } from "../AppContext";
@@ -143,14 +139,6 @@ export default function NavBar() {
 
   const [isDropdownVisible, setIsDropdownVisible] = useState(false);
 
-  const [anchorElNav, setAnchorElNav] = useState(null);
-  const handleOpenNavMenu = (event) => {
-    setAnchorElNav(event.currentTarget);
-  };
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
-  };
-
   // Called to produce the down drop menu items
   const renderDropdownMenu = (page, variant) => {
     return (
@@ -245,7 +233,7 @@ export default function NavBar() {
                   activeclassname="active"
                   className="nav-links"
                 >
-                  {page.name}
+                  {loggedIn} {/* The text which is returned to screen */}
                 </NavLink>
 
                 {isDropdownVisible && (
