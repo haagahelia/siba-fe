@@ -32,22 +32,20 @@ export default function BuildingList() {
   const [isCardExpanded, setIsCardExpanded] = useState(true);
 
   const getAllBuildings = async function () {
-    const { success, data } = await dao.fetchAllBuildings();
-    if (success) {
+    const { httpStatus, data } = await dao.fetchAllBuildings();
+    if (httpStatus === 200) {
       Logger.debug(`Fetched ${data.length} buildings.`);
+      setAllBuildingsList(data);
     } else {
-      Logger.error("Failed to fetch buildings.");
-    }
-    if (!success) {
+      Logger.error(
+        `fetchAllBuildings failed with http status code: ${httpStatus}`,
+      );
       setAlertOptions({
         severity: "error",
         title: "Error",
-        message: "Oops! Something went wrong on the server. No building found",
+        message: "Oops! Something went wrong. No building found!",
       });
       setAlertOpen(true);
-      return;
-    } else {
-      setAllBuildingsList(data);
     }
   };
 

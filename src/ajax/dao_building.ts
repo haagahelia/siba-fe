@@ -7,8 +7,8 @@ const baseUrl = process.env.REACT_APP_BE_SERVER_BASE_URL;
 export const fetchAllBuildings = async (): Promise<ResponseFiner<Building>> => {
   const response = await get(`${baseUrl}/building`);
   if (response.status === 200) {
-    const programs: Building[] = await response.json();
-    return { httpStatus: response.status, data: programs };
+    const buildings: Building[] = await response.json();
+    return { httpStatus: response.status, data: buildings };
   } else {
     return { httpStatus: response.status, data: [] };
   }
