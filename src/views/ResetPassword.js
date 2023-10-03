@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 import { Typography } from "@mui/material";
 import Button from "@mui/material/Button";
@@ -8,28 +8,27 @@ import CardContent from "@mui/material/CardContent";
 import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
 
-export default function ForgetPassword() {
+export default function ResetPassword() {
+  const { id, token } = useParams();
   const navigate = useNavigate();
-
-  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const handleReset = async () => {
     const response = await fetch(
-      "http://localhost:8764/api/user/forget-password",
+      `http://localhost:8764/api/user/reset-password/${id}/${token}`,
       {
         method: "POST",
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ email: email }),
+        body: JSON.stringify({ password: password }),
       },
     );
 
     if (response.status === 200) {
-      const data = await response.json();
-      const { id, token } = data;
-      navigate(`/reset-password/${id}/${token}`);
+      navigate("/login");
+      alert("Congratulations! Password updated successfully.");
     }
   };
 
@@ -45,17 +44,16 @@ export default function ForgetPassword() {
         }}
       >
         <CardContent>
-          <Typography>
-            Please enter your registered email to reset your password.
-          </Typography>
+          <Typography>Please enter your new password here.</Typography>
           <Grid>
             <TextField
-              value={email}
-              onChange={(event) => setEmail(event.target.value)}
-              placeholder="email"
+              value={password}
+              type="password"
+              onChange={(event) => setPassword(event.target.value)}
+              placeholder="New Password"
             />
           </Grid>
-          <Button onClick={handleReset}>Send</Button>
+          <Button onClick={handleReset}>Reset Password</Button>
         </CardContent>
       </Card>
     </div>

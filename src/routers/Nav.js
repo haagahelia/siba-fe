@@ -24,16 +24,17 @@ import AllocationSubjectFailureView from "../views/AllocationSubjectFailureView"
 import BuildingView from "../views/BuildingView";
 import DepartmentView from "../views/DepartmentView";
 import EquipmentView from "../views/EquipmentView";
+import ForgetPassword from "../views/ForgetPassword";
 import LoginView from "../views/LoginView";
 import NotFoundView from "../views/NotFoundView";
 import ProgramResultView from "../views/ProgramResultView";
 import RegisterView from "../views/RegisterView";
+import ResetPassword from "../views/ResetPassword";
 import RoomResultView from "../views/RoomResultView";
 import Settings from "../views/Settings";
 import SpaceView from "../views/SpaceView";
 import SubjectView from "../views/SubjectView";
 import UserView from "../views/UserView";
-import ForgetPassword from "../views/ForgetPassword";
 
 export default function NavBar() {
   Logger.debug("NavBar initiated");
@@ -384,7 +385,8 @@ export default function NavBar() {
           element={<AllocationSubjectFailureView />}
         />
         <Route path="*" element={<NotFoundView />} />
-        <Route path="/forget-password" element={<ForgetPassword />}/>
+        <Route path="/forget-password" element={<ForgetPassword />} />
+        <Route path="/reset-password/:id/:token" element={<ResetPassword />} />
       </Routes>
     </BrowserRouter>
   );
