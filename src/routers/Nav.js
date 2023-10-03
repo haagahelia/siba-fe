@@ -230,7 +230,7 @@ function NavBar() {
                   activeclassname="active"
                   className="nav-links"
                 >
-                  {page.name}
+                  {loggedIn} {/* The text which is returned to screen */}
                 </NavLink>
 
                 {isDropdownVisible && (
@@ -284,7 +284,7 @@ function NavBar() {
         height: "100vh",
         left: 0,
         paddingLeft: '170px', // Nav bar width
-        top: 0,  
+        top: 0,
       }}>
       <Router>
         <AppBar
@@ -303,9 +303,6 @@ function NavBar() {
           </NavLink>
           <Container maxWidth="xl">
             <Toolbar disableGutters sx={{ flexDirection: "column" }}>
-              <Typography variant="sibaTypography">
-                Logged in as: {loggedIn}
-              </Typography>
               <Box sx={{ flexGrow: 1 }}>
                 <List variant="navBar">{renderNavLinks()}</List>
               </Box>
