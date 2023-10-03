@@ -10,6 +10,7 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
+import { Link } from "@mui/material";
 
 export default function LoginView({ handleLoginChange }) {
   Logger.logPrefix = "LoginView";
@@ -111,6 +112,11 @@ export default function LoginView({ handleLoginChange }) {
     }
   };
 
+  const handleReset = () => {
+    alert(`Huolto tilattu, have a patience please!`)
+    navigate('/forget-password')
+  }
+
   return (
     <div>
       <AlertBox
@@ -151,6 +157,7 @@ export default function LoginView({ handleLoginChange }) {
               type="password"
             />
           </Grid>
+          <Link onClick={handleReset}>Forget your password?</Link>
           <Grid>
             <Button onClick={loginAndError}>Log In</Button>
           </Grid>
