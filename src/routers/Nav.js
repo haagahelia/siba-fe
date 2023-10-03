@@ -279,58 +279,65 @@ function NavBar() {
   };
 
   return (
-    <Router>
-      <AppBar
-        position="fixed"
-        sx={{
-          width: "170px",
-          height: "100vh",
-          top: 0,
-          left: 0,
-          flexDirection: "column",
-          //backgroundColor: "#F4BF00",
-        }}
-      >
-        <NavLink to="/" className="nav-logo">
-          <img src={logo} alt="" width="60" height="60" />
-          <i className="fas fa-code" />
-        </NavLink>
-        <Container maxWidth="xl">
-          <Toolbar disableGutters sx={{ flexDirection: "column" }}>
-            <Typography variant="sibaTypography">
-              Logged in as: {loggedIn}
-            </Typography>
-            <Box sx={{ flexGrow: 1 }}>
-              <List variant="navBar">{renderNavLinks()}</List>
-            </Box>
-          </Toolbar>
-        </Container>
-      </AppBar>
-      <Routes>
-        <Route
-          path="/login"
-          element={<LoginView handleLoginChange={handleLoginChange} />}
-        />
-        <Route path="/register" element={<RegisterView />} />
-        <Route path="/" element={<SubjectView />} />
-        <Route path="/subject" element={<SubjectView />} />
-        <Route path="/allocation" element={<AllocRoundView />} />
-        <Route path="/roomresult" element={<RoomResultView />} />
-        <Route path="/programresult" element={<ProgramResultView />} />
-        <Route path="/equipment" element={<EquipmentView />} />
-        <Route path="/building" element={<BuildingView />} />
-        <Route path="/department" element={<DepartmentView />} />
-        <Route path="/space" element={<SpaceView />} />
-        <Route path="/allocation/addAllocRound" element={<AddAllocRound />} />
-        <Route path="/settings" element={<Settings />} />
-        <Route path="/users" element={<UserView />} />
-        <Route
-          path="/alloc-fail/:allocId"
-          element={<AllocationSubjectFailureView />}
-        />
-        <Route path="*" element={<NotFoundView />} />
-      </Routes>
-    </Router>
+    <div className="navbar-spacing"
+      style={{
+        height: "100vh",
+        left: 0,
+        paddingLeft: '170px', // Nav bar width
+        top: 0,  
+      }}>
+      <Router>
+        <AppBar
+          position="fixed"
+          sx={{
+            flexDirection: "column",
+            height: "100vh",
+            left: 0,
+            top: 0,
+            width: "170px", // Nav bar width
+          }}
+        >
+          <NavLink to="/" className="nav-logo">
+            <img src={logo} alt="" width="60" height="60" />
+            <i className="fas fa-code" />
+          </NavLink>
+          <Container maxWidth="xl">
+            <Toolbar disableGutters sx={{ flexDirection: "column" }}>
+              <Typography variant="sibaTypography">
+                Logged in as: {loggedIn}
+              </Typography>
+              <Box sx={{ flexGrow: 1 }}>
+                <List variant="navBar">{renderNavLinks()}</List>
+              </Box>
+            </Toolbar>
+          </Container>
+        </AppBar>
+        <Routes>
+          <Route
+            path="/login"
+            element={<LoginView handleLoginChange={handleLoginChange} />}
+          />
+          <Route path="/register" element={<RegisterView />} />
+          <Route path="/" element={<SubjectView />} />
+          <Route path="/subject" element={<SubjectView />} />
+          <Route path="/allocation" element={<AllocRoundView />} />
+          <Route path="/roomresult" element={<RoomResultView />} />
+          <Route path="/programresult" element={<ProgramResultView />} />
+          <Route path="/equipment" element={<EquipmentView />} />
+          <Route path="/building" element={<BuildingView />} />
+          <Route path="/department" element={<DepartmentView />} />
+          <Route path="/space" element={<SpaceView />} />
+          <Route path="/allocation/addAllocRound" element={<AddAllocRound />} />
+          <Route path="/settings" element={<Settings />} />
+          <Route path="/users" element={<UserView />} />
+          <Route
+            path="/alloc-fail/:allocId"
+            element={<AllocationSubjectFailureView />}
+          />
+          <Route path="*" element={<NotFoundView />} />
+        </Routes>
+      </Router>
+    </div>
   );
 }
 
