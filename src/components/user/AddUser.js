@@ -7,10 +7,18 @@ import Button from "@mui/material/Button";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Grid from "@mui/material/Grid";
+import AlertBox from "../common/AlertBox";
 import TextField from "@mui/material/TextField";
 
 export default function AddUser() {
   Logger.logPrefix = "RegisterUser";
+
+  const [alertOpen, setAlertOpen] = useState(false);
+  const [alertOptions, setAlertOptions] = useState({
+    message: "This is an alert — check it out!",
+    severity: "error",
+  });
+
 
   const [registerForm, setRegisterForm] = useState({
     email: "",
@@ -35,6 +43,15 @@ export default function AddUser() {
       alert("Something went wrong");
     } else {
       Logger.debug("Registration successful for email:", registerForm.email);
+      
+      // Set the alert options for success
+      setAlertOptions({
+        severity: "success",
+        title: "Success!",
+        message: "User was successfully created.",
+      });
+      setAlertOpen(true); // Open the alert
+      
       setRegisterForm({
         email: "",
         password: "",
@@ -43,9 +60,15 @@ export default function AddUser() {
         isStatist: "",
       });
     }
-  };
-
+  }
   return (
+    <div>
+    <AlertBox
+        alertOpen={alertOpen}
+        alertOptions={alertOptions}
+        setAlertOpen={setAlertOpen}
+      />
+
     <Card
       variant="outlined"
       sx={{
@@ -118,5 +141,6 @@ export default function AddUser() {
         </Grid>
       </CardContent>
     </Card>
+    </div>
   );
 }
