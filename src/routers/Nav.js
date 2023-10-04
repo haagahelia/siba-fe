@@ -25,6 +25,7 @@ import LoginView from "../views/LoginView";
 import NotFoundView from "../views/NotFoundView";
 import ProgramResultView from "../views/ProgramResultView";
 import RegisterView from "../views/RegisterView";
+import ResetPassword from "../views/ResetPassword";
 import RoomResultView from "../views/RoomResultView";
 import Settings from "../views/Settings";
 import SpaceView from "../views/SpaceView";
@@ -354,6 +355,7 @@ export default function NavBar() {
           />
           <Route path="*" element={<NotFoundView />} />
           <Route path="/forget-password" element={<ForgetPassword />} />
+          <Route path="/reset-password/:id/:token" element={<ResetPassword />}/>
         </Routes>
       </BrowserRouter>
     </div>

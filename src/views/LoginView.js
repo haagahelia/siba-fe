@@ -5,12 +5,12 @@ import dao from "../ajax/dao";
 import AlertBox from "../components/common/AlertBox";
 import Logger from "../logger/logger";
 
+import { Link } from "@mui/material";
 import Button from "@mui/material/Button";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
-import { Link } from "@mui/material";
 
 export default function LoginView({ handleLoginChange }) {
   Logger.logPrefix = "LoginView";
@@ -113,9 +113,8 @@ export default function LoginView({ handleLoginChange }) {
   };
 
   const handleReset = () => {
-    alert(`Huolto tilattu, have a patience please!`)
-    navigate('/forget-password')
-  }
+    navigate("/forget-password");
+  };
 
   return (
     <div>
