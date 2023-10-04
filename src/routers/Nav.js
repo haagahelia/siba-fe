@@ -295,6 +295,7 @@ export default function NavBar() {
       <BrowserRouter>
         <AppBar
           position="fixed"
+          alt="Vertical navigation bar."
           sx={{
             width: "170px",
             height: "100vh",
@@ -316,7 +317,12 @@ export default function NavBar() {
                   }}
                 >
                   <NavLink to="/" className="nav-logo">
-                    <img src={logo} alt="" width="60" height="60" />
+                    <img
+                      src={logo}
+                      alt="Sibelius-Akatemia stylized logo."
+                      width="60"
+                      height="60"
+                    />
                   </NavLink>
                   {renderNavLinks()}
                 </List>
