@@ -355,10 +355,7 @@ export default function NavBar() {
           />
           <Route path="*" element={<NotFoundView />} />
           <Route path="/forget-password" element={<ForgetPassword />} />
-          <Route
-            path="/reset-password/:id/:token"
-            element={<ResetPassword />}
-          />
+          <Route path="/reset-password/:id/:token" element={<ResetPassword />}/>
         </Routes>
       </BrowserRouter>
     </div>
