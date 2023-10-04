@@ -13,10 +13,10 @@ import CardHeader from "@mui/material/CardHeader";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import AlertBox from "../components/common/AlertBox";
+import AddSpace from "../components/space/AddSpace";
 import SpaceFiltering from "../components/space/SpaceFiltering";
 import SpaceListContainer from "../components/space/SpaceListContainer";
 import SpacePagination from "../components/space/SpacePagination";
-// import AddSubjectContainer from "../components/subject/AddSubjectContainer";
 
 const pageSize = 15;
 
@@ -78,17 +78,13 @@ export default function SpaceView() {
         setAlertOpen={setAlertOpen}
       />
       <Container maxWidth="xl">
-        {/*
         {appContext.roles.admin ? (
-          <AddSubjectContainer
-            getAllSpaces={getAllSpaces}
-            allSpacesList={allSpacesList}
-        />
+          <AddSpace getAllSpaces={getAllSpaces} allSpacesList={allSpacesList} />
         ) : (
           <Typography variant="subtitle1" mt={3}>
             "Not showing add subject to your role"
           </Typography>
-        )}*/}
+        )}
         <Grid container rowSpacing={1}>
           <Card variant="outlined">
             <CardHeader

@@ -1,13 +1,17 @@
-import { Building, Response } from "../types";
+import { Building, Response, ResponseFiner } from "../types";
 import { create, get, remove, update } from "./request";
 
 const baseUrl = process.env.REACT_APP_BE_SERVER_BASE_URL;
 
 // fetching all buildings
-export const fetchAllBuildings = async (): Promise<Response<Building>> => {
+export const fetchAllBuildings = async (): Promise<ResponseFiner<Building>> => {
   const response = await get(`${baseUrl}/building`);
-  const buildings: Building[] = await response.json();
-  return { success: response.ok, data: buildings };
+  if (response.status === 200) {
+    const buildings: Building[] = await response.json();
+    return { httpStatus: response.status, data: buildings };
+  } else {
+    return { httpStatus: response.status, data: [] };
+  }
 };
 
 // creating new building

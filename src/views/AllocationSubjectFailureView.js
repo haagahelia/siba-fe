@@ -4,7 +4,6 @@ import { ajaxRequestErrorHandler } from "../ajax/ajaxRequestErrorHandler";
 import dao from "../ajax/dao";
 import Logger from "../logger/logger";
 import "../styles/AllocationFailure.css";
-
 import CheckIcon from "@mui/icons-material/Check";
 import CloseIcon from "@mui/icons-material/Close";
 import Button from "@mui/material/Button";
@@ -178,7 +177,7 @@ export default function AllocationSubjectFailureView() {
         setAlertOpen={setAlertOpen}
       />
 
-      <Typography style={{ color: "#F6E9E9", margin: 20 }}>
+      <Typography sx={{ color: "#F6E9E9", margin: 2 }}>
         Unallocated lessons (Click each to see reasons for failing to allocate)
       </Typography>
 
@@ -275,7 +274,10 @@ export default function AllocationSubjectFailureView() {
         <DialogActions>
           <Button
             onClick={handleClose}
-            style={{ backgroundColor: "#ff6d00", cursor: "pointer" }}
+            sx={{
+              backgroundColor: "#ff6d00",
+              cursor: "pointer"
+            }}
           >
             Exit
           </Button>

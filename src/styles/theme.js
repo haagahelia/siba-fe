@@ -1,3 +1,4 @@
+import { common } from "@mui/material/colors";
 import createTheme from "@mui/material/styles/createTheme";
 
 // Palettes are: darkPalette, lightPalette,
@@ -6,6 +7,13 @@ import createTheme from "@mui/material/styles/createTheme";
 export const lessPadding = "4px";
 export const morePadding = "16px";
 export const navbarWidth = "170px";
+export const commonFont = "Roboto, Helvetica, Aria, sans-serif";
+export const indexRoomCommon = {
+  width: 15,
+  height: 15,
+  border: "3px solid",
+  marginLeft: 60,
+};
 
 export const createAppTheme = (currentPalette) =>
   createTheme({
@@ -107,15 +115,17 @@ export const createAppTheme = (currentPalette) =>
           {
             props: { variant: "navBar" },
             style: {
+              alignItems: "flex-start",
               backgroundColor: currentPalette.primary.main,
               display: "flex",
               flexDirection: "column",
               flexWrap: "nowrap",
-              alignItems: "flex-start",
-              textAlign: "center",
               fontSize: "17.5px",
+              height: "100vh",
+              justifyContent: "space-evenly",
+              padding: "20px 0 20px 0",
               position: "sticky",
-              justifyContent: "center",
+              textAlign: "center",
               top: 0,
               zIndex: 20,
             },
@@ -126,46 +136,36 @@ export const createAppTheme = (currentPalette) =>
         styleOverrides: {
           root: {
             backgroundColor: currentPalette.backgroundDarker.default,
-            color: currentPalette.fontColorDefault.default,
             border: `1px solid ${currentPalette.borderColor.cardBoder}`,
+            color: currentPalette.fontColorDefault.default,
           },
         },
         variants: [
           {
             props: { variant: "navBar" },
             style: {
+              backgroundColor: currentPalette.primary.main,
               borderColor: currentPalette.backgroundDarker.default,
-              display: "contents",
-              // color: currentPalette.fontColorDefault.main,
+              padding: 0,
               "& a": {
-                padding: lessPadding,
                 borderBottom: "3px solid transparent",
-                // color: currentPalette.fontColorDefault.default,
                 color: currentPalette.primary.contrastText,
-                textDecoration: "none",
-                fontFamily: "Roboto, Helvetica, Aria, sans-serif",
+                fontFamily: commonFont,
                 fontWeight: 600,
-                height: "100%",
                 textAlign: "center",
+                textDecoration: "none",
+                padding: 0,
                 width: navbarWidth,
-              },
-              "&:after": {
-                content: '""',
-                display: "block",
-                height: "3px",
-                width: 0,
-                background: "transparent",
-                transition: "width 0.7s ease",
-                backgroundColor: "0.5s ease",
               },
               "&:hover a": {
                 borderBottom: "3px solid",
                 color: currentPalette.primary.contrastText,
               },
               "& a.nav-links.active": {
-                fontWeight: 800,
                 backgroundColor: currentPalette.background.default,
                 color: currentPalette.text.primary,
+                fontWeight: 800,
+                padding: lessPadding,
                 textDecorationThickness: "3px",
                 width: navbarWidth,
               },
@@ -181,11 +181,10 @@ export const createAppTheme = (currentPalette) =>
               display: "flex",
               justifyContent: "center",
               margin: "auto",
-              marginTop: "10px",
+              marginTop: "5vh",
               padding: "5px",
               textAlign: "center",
               width: "130px",
-              // width: navbarWidth,
 
               "& a": {
                 color: currentPalette.primary.main,
@@ -270,36 +269,24 @@ export const createAppTheme = (currentPalette) =>
       },
       IndexRooms: {
         studioindex: {
-          width: 15,
-          height: 15,
+          ...indexRoomCommon,
           backgroundColor: currentPalette.AllocRoom.studio.color,
-          border: "3px solid",
           borderColor: currentPalette.borderColorDark.main,
-          marginLeft: 60,
         },
         luentoluokkaindex: {
-          width: 15,
-          height: 15,
+          ...indexRoomCommon,
           backgroundColor: currentPalette.AllocRoom.luentoluokka.color,
-          border: "3px solid",
           borderColor: currentPalette.borderColorDark.main,
-          marginLeft: 60,
         },
         esitystilaindex: {
-          width: 15,
-          height: 15,
+          ...indexRoomCommon,
           backgroundColor: currentPalette.AllocRoom.esitystila.color,
-          border: "3px solid",
           borderColor: currentPalette.borderColorDark.main,
-          marginLeft: 60,
         },
         musiikkiluokkaindex: {
-          width: 15,
-          height: 15,
+          ...indexRoomCommon,
           backgroundColor: currentPalette.AllocRoom.musiikkiluokka.color,
-          border: "3px solid",
           borderColor: currentPalette.borderColorDark.main,
-          marginLeft: 60,
         },
       },
       MuiButton: {
@@ -363,7 +350,7 @@ export const createAppTheme = (currentPalette) =>
             props: { variant: "boldTitle" },
             style: {
               color: currentPalette.fontColorDefault.default,
-              fontFamily: "Roboto, Helvetica, Aria, sans-serif",
+              fontFamily: commonFont,
               fontWeight: 700,
               fontSize: "1rem",
               lineHeight: 1.5,
@@ -375,7 +362,7 @@ export const createAppTheme = (currentPalette) =>
             style: {
               color: currentPalette.fontColorDefault.default,
               textDecoration: "none",
-              fontFamily: "Roboto, Helvetica, Aria, sans-serif",
+              fontFamily: commonFont,
               fontWeight: 700,
               height: "100%",
               borderBottom: "3px solid transparent",
@@ -386,7 +373,7 @@ export const createAppTheme = (currentPalette) =>
             style: {
               color: currentPalette.fontColorDefault.default,
               textDecoration: "none",
-              fontFamily: "Roboto, Helvetica, Aria, sans-serif",
+              fontFamily: commonFont,
               fontWeight: 400,
               height: "100%",
               borderBottom: "3px solid transparent",
