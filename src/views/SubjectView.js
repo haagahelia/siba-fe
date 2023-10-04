@@ -81,7 +81,7 @@ export default function SubjectView() {
         setAlertOpen={setAlertOpen}
       />
       <Container maxWidth="xl">
-        {appContext.roles.admin ? (
+        {appContext.roles.admin || appContext.roles.planner ? (
           <AddSubjectContainer
             getAllSubjects={getAllSubjects}
             allSubjectsList={allSubjectsList}
