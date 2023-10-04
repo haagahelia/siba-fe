@@ -16,7 +16,7 @@ import BuildingListItem from "./BuildingListItem";
 import SingleBuildingDialog from "./SingleBuildingDialog";
 
 export default function BuildingList() {
-  Logger.logPrefix = "Buildings";
+  Logger.logPrefix = "BuildingList";
 
   const { roles } = useRoleLoggedIn();
 

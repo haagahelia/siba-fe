@@ -3,7 +3,7 @@ import { useRoleLoggedIn } from "../../hooks/useRoleLoggedIn";
 import Dialog from "@mui/material/Dialog";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
-import DeleteDepartment from "./DeleteDeparment";
+import DeleteDepartment from "./DeleteDepartment";
 import EditDepartment from "./EditDepartment";
 
 export default function DepartmentDialog({

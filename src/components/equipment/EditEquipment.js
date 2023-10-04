@@ -17,7 +17,7 @@ export default function EditEquipment({
   // open,
   setOpen,
 }) {
-  Logger.logPrefix = "SingleEquipmentDialog";
+  Logger.logPrefix = "EditEquipment";
 
   const [editOpen, setEditOpen] = useState(false);
 

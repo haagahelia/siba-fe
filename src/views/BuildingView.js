@@ -1,5 +1,5 @@
 import BuildingList from "../components/building/BuildingList";
 
-export default function BuildingListView() {
+export default function BuildingView() {
   return <BuildingList />;
 }

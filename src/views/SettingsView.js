@@ -16,8 +16,8 @@ import AlertBox from "../components/common/AlertBox";
 import AddSettingContainer from "../components/settings/AddSettingContainer";
 import SettingsListContainer from "../components/settings/SettingsListContainer";
 
-export default function Settings() {
-  Logger.logPrefix = "Settings";
+export default function SettingsView() {
+  Logger.logPrefix = "SettingsView";
 
   const { roles } = useRoleLoggedIn();
 

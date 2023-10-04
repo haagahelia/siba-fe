@@ -32,7 +32,7 @@ export default function AddDepartment({ getAllDepartments }) {
   const inputChanged = (event) => {
     setDepartment({ ...department, [event.target.name]: event.target.value });
   };
-  const AddDepartment = async () => {
+  const addDepartment = async () => {
     const validation = validate(department);
     if (!validation) {
       alert(Object.values(validation));
@@ -102,7 +102,7 @@ export default function AddDepartment({ getAllDepartments }) {
               >
                 Cancel
               </Button>
-              <Button variant="contained" onClick={AddDepartment}>
+              <Button variant="contained" onClick={addDepartment}>
                 Confirm
               </Button>
             </DialogActions>

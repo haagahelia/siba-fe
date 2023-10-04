@@ -15,10 +15,7 @@ import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
 import SingleEquipmentDialog from "./SingleEquipmentDialog";
 
-export default function EquipmentListItems({
-  getAllEquipments,
-  equipmentList,
-}) {
+export default function EquipmentList({ getAllEquipments, equipmentList }) {
   const [open, setOpen] = useState(false);
   const [singleEquipment, setSingleEquipment] = useState({});
 
