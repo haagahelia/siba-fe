@@ -4,7 +4,7 @@ import {
   getFunctionName,
 } from "../ajax/ajaxRequestErrorHandler";
 import dao from "../ajax/dao";
-import { RoleLoggedIn } from "../customhooks/RoleLoggedIn";
+import { useRoleLoggedIn } from "../hooks/useRoleLoggedIn";
 import Logger from "../logger/logger";
 
 import Card from "@mui/material/Card";
@@ -19,7 +19,7 @@ import SettingsListContainer from "../components/settings/SettingsListContainer"
 export default function Settings() {
   Logger.logPrefix = "Settings";
 
-  const { roles } = RoleLoggedIn();
+  const { roles } = useRoleLoggedIn();
 
   // State for checking if Settings card is expanded
   const [isCardExpanded, setIsCardExpanded] = useState(true);

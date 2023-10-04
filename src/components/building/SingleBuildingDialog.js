@@ -1,4 +1,4 @@
-import { RoleLoggedIn } from "../../customhooks/RoleLoggedIn";
+import { useRoleLoggedIn } from "../../hooks/useRoleLoggedIn";
 
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
@@ -17,7 +17,7 @@ export default function SingleBuildingDialog({
   getAllBuildings,
   setSingleBuilding,
 }) {
-  const { roles } = RoleLoggedIn();
+  const { roles } = useRoleLoggedIn();
 
   return (
     <Dialog open={open} onClose={() => setOpen(false)} width="400px">

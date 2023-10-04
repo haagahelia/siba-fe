@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { RoleLoggedIn } from "../../customhooks/RoleLoggedIn";
+import { useRoleLoggedIn } from "../../hooks/useRoleLoggedIn";
 import Logger from "../../logger/logger";
 
 import Dialog from "@mui/material/Dialog";
@@ -18,7 +18,7 @@ export default function SingleEquipmentDialog({
 }) {
   Logger.logPrefix = "SingleEquipmentDialog";
 
-  const { roles } = RoleLoggedIn();
+  const { roles } = useRoleLoggedIn();
 
   useEffect(() => {
     if (open && singleEquipment) {

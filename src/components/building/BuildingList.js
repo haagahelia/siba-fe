@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import dao from "../../ajax/dao";
-import { RoleLoggedIn } from "../../customhooks/RoleLoggedIn";
+import { useRoleLoggedIn } from "../../hooks/useRoleLoggedIn";
 import Logger from "../../logger/logger";
 
 import Card from "@mui/material/Card";
@@ -18,7 +18,7 @@ import SingleBuildingDialog from "./SingleBuildingDialog";
 export default function BuildingList() {
   Logger.logPrefix = "Buildings";
 
-  const { roles } = RoleLoggedIn();
+  const { roles } = useRoleLoggedIn();
 
   const [allBuildingsList, setAllBuildingsList] = useState([]);
   const [alertOpen, setAlertOpen] = useState(false);

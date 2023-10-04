@@ -4,7 +4,7 @@ import {
   getFunctionName,
 } from "../../ajax/ajaxRequestErrorHandler";
 import dao from "../../ajax/dao";
-import { RoleLoggedIn } from "../../customhooks/RoleLoggedIn";
+import { useRoleLoggedIn } from "../../hooks/useRoleLoggedIn";
 import Logger from "../../logger/logger";
 
 import Card from "@mui/material/Card";
@@ -19,7 +19,7 @@ export default function Equipments() {
   Logger.logPrefix = "Equipments";
   Logger.debug("Equipments component instantiated.");
 
-  const { roles } = RoleLoggedIn();
+  const { roles } = useRoleLoggedIn();
 
   // State for checking if Equipment card is expanded
   const [isCardExpanded, setIsCardExpanded] = useState(true);

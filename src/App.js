@@ -1,5 +1,5 @@
 import "./App.css";
-import { useThemeSwitcher } from "./customhooks/useThemeSwitcher";
+import { useThemeSwitcher } from "./hooks/useThemeSwitcher";
 
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";

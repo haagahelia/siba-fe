@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import dao from "../ajax/dao";
-import { RoleLoggedIn } from "../customhooks/RoleLoggedIn";
+import { useRoleLoggedIn } from "../hooks/useRoleLoggedIn";
 import Logger from "../logger/logger";
 
 import Box from "@mui/material/Box";
@@ -29,7 +29,7 @@ export default function DepartmentView() {
   });
   const [setAlertOpen] = useState(false);
 
-  const { roles } = RoleLoggedIn();
+  const { roles } = useRoleLoggedIn();
 
   const getAllDepartments = async function () {
     Logger.debug("getAllDepartments: fetching all departments from server.");
