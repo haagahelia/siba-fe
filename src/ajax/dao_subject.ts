@@ -33,6 +33,13 @@ export const postNewSubject = async (newSubject: Subject): Promise<boolean> => {
   return response.ok;
 };
 
+// import multiple subject
+export const postNewSubjects = async (newSubject: Subject[]): Promise<boolean> => {
+  console.log("ajax", newSubject)
+  const response = await create(`${baseUrl}/subject/multi`, newSubject);
+  return response.ok;
+};
+
 // updating subject
 export const editSubject = async (editedSubject: Subject): Promise<boolean> => {
   const response = await update(`${baseUrl}/subject`, editedSubject);
