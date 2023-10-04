@@ -115,15 +115,17 @@ export const createAppTheme = (currentPalette) =>
           {
             props: { variant: "navBar" },
             style: {
+              alignItems: "flex-start",
               backgroundColor: currentPalette.primary.main,
               display: "flex",
               flexDirection: "column",
               flexWrap: "nowrap",
-              alignItems: "flex-start",
-              textAlign: "center",
               fontSize: "17.5px",
+              height: "100vh", // Important
+              justifyContent: "space-between",
+              padding: "20px 0 20px 0",
               position: "sticky",
-              justifyContent: "center",
+              textAlign: "center",
               top: 0,
               zIndex: 20,
             },
@@ -134,46 +136,36 @@ export const createAppTheme = (currentPalette) =>
         styleOverrides: {
           root: {
             backgroundColor: currentPalette.backgroundDarker.default,
-            color: currentPalette.fontColorDefault.default,
             border: `1px solid ${currentPalette.borderColor.cardBoder}`,
+            color: currentPalette.fontColorDefault.default,
           },
         },
         variants: [
           {
             props: { variant: "navBar" },
             style: {
+              backgroundColor: currentPalette.primary.main,
               borderColor: currentPalette.backgroundDarker.default,
-              display: "contents",
-              // color: currentPalette.fontColorDefault.main,
+              padding: 0,
               "& a": {
-                padding: lessPadding,
                 borderBottom: "3px solid transparent",
-                // color: currentPalette.fontColorDefault.default,
                 color: currentPalette.primary.contrastText,
-                textDecoration: "none",
                 fontFamily: commonFont,
                 fontWeight: 600,
-                height: "100%",
                 textAlign: "center",
+                textDecoration: "none",
+                padding: 0,
                 width: navbarWidth,
-              },
-              "&:after": {
-                content: '""',
-                display: "block",
-                height: "3px",
-                width: 0,
-                background: "transparent",
-                transition: "width 0.7s ease",
-                backgroundColor: "0.5s ease",
               },
               "&:hover a": {
                 borderBottom: "3px solid",
                 color: currentPalette.primary.contrastText,
               },
               "& a.nav-links.active": {
-                fontWeight: 800,
                 backgroundColor: currentPalette.background.default,
                 color: currentPalette.text.primary,
+                fontWeight: 800,
+                padding: lessPadding,
                 textDecorationThickness: "3px",
                 width: navbarWidth,
               },
@@ -189,11 +181,10 @@ export const createAppTheme = (currentPalette) =>
               display: "flex",
               justifyContent: "center",
               margin: "auto",
-              marginTop: "10px",
+              marginTop: "10vh",
               padding: "5px",
               textAlign: "center",
               width: "130px",
-              // width: navbarWidth,
 
               "& a": {
                 color: currentPalette.primary.main,
