@@ -20,7 +20,7 @@ export default function SpaceListContainer({
           open={open}
           setOpen={setOpen}
         />
-    */}
+      */}
 
       <Grid container spacing={2}>
         <Card variant="outlined">

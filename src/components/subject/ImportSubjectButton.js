@@ -1,4 +1,3 @@
-import Button from "@mui/material/Button";
 import { useState } from "react";
 import dao from "../../ajax/dao";
 import Logger from "../../logger/logger";
@@ -6,6 +5,8 @@ import {
   capitalizeFirstLetter,
   validate,
 } from "../../validation/ValidateAddSubject";
+
+import Button from "@mui/material/Button";
 import AlertBox from "../common/AlertBox";
 
 export default function ImportSubjectButton({
@@ -31,13 +32,21 @@ export default function ImportSubjectButton({
     await Promise.all(
       importSubjects.map(async (subject) => {
         const newSubject = {
-          name: subject["Name of the lesson"] ? capitalizeFirstLetter(subject["Name of the lesson"]) : "",
+          name: subject["Name of the lesson"]
+            ? capitalizeFirstLetter(subject["Name of the lesson"])
+            : "",
           groupSize: subject["Group size"] ? subject["Group size"] : "",
           groupCount: subject["Group count"] ? subject["Group count"] : "",
-          sessionLength: subject["Length of session"] ? subject["Length of session"] : "",
-          sessionCount: subject["Number of lessons per week"] ? subject["Number of lessons per week"] : "",
-          area: subject["Required square meters"] ? subject["Required square meters"] : "",
-          major: subject["Major"] ? subject["Major"] : "",
+          sessionLength: subject["Length of session"]
+            ? subject["Length of session"]
+            : "",
+          sessionCount: subject["Number of lessons per week"]
+            ? subject["Number of lessons per week"]
+            : "",
+          area: subject["Required square meters"]
+            ? subject["Required square meters"]
+            : "",
+          major: subject.Major ? subject.Major : "",
           roomType: subject["Room type"] ? subject["Room type"] : "",
         };
 
@@ -82,8 +91,7 @@ export default function ImportSubjectButton({
           subject.FailedReason = validateResult.area;
           tempFailedSubjects.push(subject);
           failedCount++;
-        }
-        else {
+        } else {
           subjectsToSend.push(newSubject);
           successCount++;
         }

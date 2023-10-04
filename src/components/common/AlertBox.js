@@ -25,7 +25,7 @@ export default function AlertBox({ alertOpen, alertOptions, setAlertOpen }) {
             "& .MuiAlert-icon": {
               fontSize: "50px",
             },
-            "& 	.MuiAlert-message": {
+            "& .MuiAlert-message": {
               alignSelf: "center",
               width: "350px",
             },

@@ -1,4 +1,4 @@
-import { Building, Response, ResponseFiner } from "../types";
+import { Building, ResponseFiner } from "../types";
 import { create, get, remove, update } from "./request";
 
 const baseUrl = process.env.REACT_APP_BE_SERVER_BASE_URL;

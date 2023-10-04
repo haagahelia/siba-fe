@@ -56,7 +56,7 @@ export default function SpaceListItems({
           setSingleSubject={setSingleSubject}
           getAllSubjects={getAllSubjects}
         />
-    */}
+      */}
       <Box>
         <Paper>
           <TableContainer>
