@@ -10,7 +10,7 @@ import CardContent from "@mui/material/CardContent";
 import CardHeader from "@mui/material/CardHeader";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
-import AllocRoundListContainer from "../components/AllocRound/AllocRoundListContainer";
+import AllocRoundListContainer from "../components/allocRound/AllocRoundListContainer";
 import AlertBox from "../components/common/AlertBox";
 
 export default function AllocRoundView() {

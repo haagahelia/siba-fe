@@ -15,7 +15,7 @@ import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import Toolbar from "@mui/material/Toolbar";
 import { BrowserRouter, NavLink, Route, Routes } from "react-router-dom";
-import AddAllocRound from "../components/AllocRound/AddAllocRound";
+import AddAllocRound from "../components/allocRound/AddAllocRound";
 import AllocRoundView from "../views/AllocRoundView";
 import AllocationSubjectFailureView from "../views/AllocationSubjectFailureView";
 import BuildingView from "../views/BuildingView";
