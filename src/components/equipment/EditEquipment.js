@@ -1,6 +1,7 @@
 import { useState } from "react";
 import dao from "../../ajax/dao";
 import Logger from "../../logger/logger";
+import ValidateEditEquipment from "../../validation/ValidateEditEquipment";
 
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
@@ -8,7 +9,6 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
-import ValidateEditEquipment from "../../validation/ValidateEditEquipment";
 
 export default function EditEquipment({
   singleEquipment,

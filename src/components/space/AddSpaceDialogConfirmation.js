@@ -1,11 +1,11 @@
 import dao from "../../ajax/dao";
+import ValidateAddSpace from "../../validation/ValidateAddSpace";
 
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
-import ValidateAddSpace from "../../validation/ValidateAddSpace";
 
 export default function AddSpaceDialogConfirmation({
   open,

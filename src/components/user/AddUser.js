@@ -7,8 +7,8 @@ import Button from "@mui/material/Button";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Grid from "@mui/material/Grid";
-import AlertBox from "../common/AlertBox";
 import TextField from "@mui/material/TextField";
+import AlertBox from "../common/AlertBox";
 
 export default function AddUser() {
   Logger.logPrefix = "RegisterUser";
@@ -18,7 +18,6 @@ export default function AddUser() {
     message: "This is an alert — check it out!",
     severity: "error",
   });
-
 
   const [registerForm, setRegisterForm] = useState({
     email: "",
@@ -43,7 +42,7 @@ export default function AddUser() {
       alert("Something went wrong");
     } else {
       Logger.debug("Registration successful for email:", registerForm.email);
-      
+
       // Set the alert options for success
       setAlertOptions({
         severity: "success",
@@ -51,7 +50,7 @@ export default function AddUser() {
         message: "User was successfully created.",
       });
       setAlertOpen(true); // Open the alert
-      
+
       setRegisterForm({
         email: "",
         password: "",
@@ -60,87 +59,88 @@ export default function AddUser() {
         isStatist: "",
       });
     }
-  }
+  };
+
   return (
     <div>
-    <AlertBox
+      <AlertBox
         alertOpen={alertOpen}
         alertOptions={alertOptions}
         setAlertOpen={setAlertOpen}
       />
 
-    <Card
-      variant="outlined"
-      sx={{
-        width: "65%",
-        padding: 1,
-        margin: "auto",
-        marginTop: "85px",
-      }}
-    >
-      <CardContent>
-        <Grid>
-          <TextField
-            value={registerForm.email}
-            onChange={(event) =>
-              setRegisterForm({ ...registerForm, email: event.target.value })
-            }
-            placeholder="email"
-          />
-        </Grid>
-        <Grid>
-          <TextField
-            value={registerForm.password}
-            onChange={(event) =>
-              setRegisterForm({
-                ...registerForm,
-                password: event.target.value,
-              })
-            }
-            placeholder="password"
-          />
-        </Grid>
-        <Grid>
-          <TextField
-            value={registerForm.isAdmin}
-            onChange={(event) =>
-              setRegisterForm({
-                ...registerForm,
-                isAdmin: event.target.value,
-              })
-            }
-            placeholder="isAdmin"
-          />
-        </Grid>
-        <Grid>
-          <TextField
-            value={registerForm.isPlanner}
-            onChange={(event) =>
-              setRegisterForm({
-                ...registerForm,
-                isPlanner: event.target.value,
-              })
-            }
-            placeholder="isPlanner"
-          />
-        </Grid>
-        <Grid>
-          <TextField
-            value={registerForm.isStatist}
-            onChange={(event) =>
-              setRegisterForm({
-                ...registerForm,
-                isStatist: event.target.value,
-              })
-            }
-            placeholder="isStatist"
-          />
-        </Grid>
-        <Grid>
-          <Button onClick={registerUser}>Register</Button>
-        </Grid>
-      </CardContent>
-    </Card>
+      <Card
+        variant="outlined"
+        sx={{
+          width: "65%",
+          padding: 1,
+          margin: "auto",
+          marginTop: "85px",
+        }}
+      >
+        <CardContent>
+          <Grid>
+            <TextField
+              value={registerForm.email}
+              onChange={(event) =>
+                setRegisterForm({ ...registerForm, email: event.target.value })
+              }
+              placeholder="email"
+            />
+          </Grid>
+          <Grid>
+            <TextField
+              value={registerForm.password}
+              onChange={(event) =>
+                setRegisterForm({
+                  ...registerForm,
+                  password: event.target.value,
+                })
+              }
+              placeholder="password"
+            />
+          </Grid>
+          <Grid>
+            <TextField
+              value={registerForm.isAdmin}
+              onChange={(event) =>
+                setRegisterForm({
+                  ...registerForm,
+                  isAdmin: event.target.value,
+                })
+              }
+              placeholder="isAdmin"
+            />
+          </Grid>
+          <Grid>
+            <TextField
+              value={registerForm.isPlanner}
+              onChange={(event) =>
+                setRegisterForm({
+                  ...registerForm,
+                  isPlanner: event.target.value,
+                })
+              }
+              placeholder="isPlanner"
+            />
+          </Grid>
+          <Grid>
+            <TextField
+              value={registerForm.isStatist}
+              onChange={(event) =>
+                setRegisterForm({
+                  ...registerForm,
+                  isStatist: event.target.value,
+                })
+              }
+              placeholder="isStatist"
+            />
+          </Grid>
+          <Grid>
+            <Button onClick={registerUser}>Register</Button>
+          </Grid>
+        </CardContent>
+      </Card>
     </div>
   );
 }

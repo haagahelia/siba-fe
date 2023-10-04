@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import dao from "../../ajax/dao";
+import Logger from "../../logger/logger";
 
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
@@ -13,8 +15,6 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import TextField from "@mui/material/TextField";
-import dao from "../../ajax/dao";
-import Logger from "../../logger/logger";
 import AddSpaceDialogConfirmation from "./AddSpaceDialogConfirmation";
 
 export default function AddSpace({ getAllSpaces }) {
@@ -39,9 +39,10 @@ export default function AddSpace({ getAllSpaces }) {
     setOpen(true);
   };
 
-  /* 
-     Here we get space types and buildings for select list. These functions will possibly
-     be moved to their own component later. */
+  /*
+    Here we get space types and buildings for select list.
+    These functions will possibly be moved to their own component later.
+  */
 
   const [spaceTypeSelectList, setSpaceTypeSelectList] = useState([
     { id: 5004, name: "Musicalist room" },

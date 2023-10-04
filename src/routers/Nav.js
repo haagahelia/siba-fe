@@ -1,3 +1,8 @@
+import { useContext, useState } from "react";
+import { AppContext } from "../AppContext";
+import Logger from "../logger/logger";
+import logo from "../styles/SibeliusLogo.svg";
+
 import {
   faArrowRightFromBracket,
   faGear,
@@ -9,12 +14,8 @@ import Container from "@mui/material/Container";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import Toolbar from "@mui/material/Toolbar";
-import { useContext, useState } from "react";
 import { BrowserRouter, NavLink, Route, Routes } from "react-router-dom";
-import { AppContext } from "../AppContext";
 import AddAllocRound from "../components/AllocRound/AddAllocRound";
-import Logger from "../logger/logger";
-import logo from "../styles/SibeliusLogo.svg";
 import AllocRoundView from "../views/AllocRoundListView";
 import AllocationSubjectFailureView from "../views/AllocationSubjectFailureView";
 import BuildingView from "../views/BuildingView";
@@ -355,7 +356,10 @@ export default function NavBar() {
           />
           <Route path="*" element={<NotFoundView />} />
           <Route path="/forget-password" element={<ForgetPassword />} />
-          <Route path="/reset-password/:id/:token" element={<ResetPassword />}/>
+          <Route
+            path="/reset-password/:id/:token"
+            element={<ResetPassword />}
+          />
         </Routes>
       </BrowserRouter>
     </div>
