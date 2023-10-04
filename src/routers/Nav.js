@@ -20,6 +20,7 @@ import AllocationSubjectFailureView from "../views/AllocationSubjectFailureView"
 import BuildingView from "../views/BuildingView";
 import DepartmentView from "../views/DepartmentView";
 import EquipmentView from "../views/EquipmentView";
+import ForgetPassword from "../views/ForgetPassword";
 import LoginView from "../views/LoginView";
 import NotFoundView from "../views/NotFoundView";
 import ProgramResultView from "../views/ProgramResultView";
@@ -29,7 +30,6 @@ import Settings from "../views/Settings";
 import SpaceView from "../views/SpaceView";
 import SubjectView from "../views/SubjectView";
 import UserView from "../views/UserView";
-import ForgetPassword from "../views/ForgetPassword";
 
 export default function NavBar() {
   Logger.debug("NavBar initiated");
@@ -282,17 +282,20 @@ export default function NavBar() {
   };
 
   return (
-    <div className="navbar-spacing"
+    <div
+      className="navbar-spacing"
       style={{
         height: "100vh",
         left: 0,
         overflowY: "scroll", // Stops the nav bar content from shifting, when pop up appears
-        paddingLeft: '170px', // Nav bar width
+        paddingLeft: "170px", // Nav bar width
         top: 0,
-      }}>
+      }}
+    >
       <BrowserRouter>
         <AppBar
           position="fixed"
+          alt="Vertical navigation bar."
           sx={{
             width: "170px",
             height: "100vh",
@@ -302,14 +305,27 @@ export default function NavBar() {
             // backgroundColor: "#F4BF00",
           }}
         >
-          <NavLink to="/" className="nav-logo">
-            <img src={logo} alt="" width="60" height="60" />
-            <i className="fas fa-code" />
-          </NavLink>
           <Container maxWidth="xl">
             <Toolbar disableGutters sx={{ flexDirection: "column" }}>
               <Box sx={{ flexGrow: 1 }}>
-                <List variant="navBar">{renderNavLinks()}</List>
+                <List
+                  variant="navBar"
+                  sx={{
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                  }}
+                >
+                  <NavLink to="/" className="nav-logo">
+                    <img
+                      src={logo}
+                      alt="Sibelius-Akatemia stylized logo."
+                      width="60"
+                      height="60"
+                    />
+                  </NavLink>
+                  {renderNavLinks()}
+                </List>
               </Box>
             </Toolbar>
           </Container>
