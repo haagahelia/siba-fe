@@ -1,11 +1,11 @@
 import dao from "../../ajax/dao";
+import ValidateAddEquipment from "../../validation/ValidateAddEquipment";
 
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
-import ValidateAddEquipment from "../../validation/ValidateAddEquipment";
 
 export default function AddEquipmentDialogConfirmation({
   open,

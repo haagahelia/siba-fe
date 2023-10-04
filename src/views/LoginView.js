@@ -2,15 +2,15 @@ import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AppContext } from "../AppContext";
 import dao from "../ajax/dao";
-import AlertBox from "../components/common/AlertBox";
 import Logger from "../logger/logger";
 
-import { Link } from "@mui/material";
 import Button from "@mui/material/Button";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Grid from "@mui/material/Grid";
+import Link from "@mui/material/Link";
 import TextField from "@mui/material/TextField";
+import AlertBox from "../components/common/AlertBox";
 
 export default function LoginView({ handleLoginChange }) {
   Logger.logPrefix = "LoginView";
@@ -40,7 +40,8 @@ export default function LoginView({ handleLoginChange }) {
       setErrorMsg("");
     }
   };
-*/
+  */
+
   // one function used to serve both the functions login and error
   const loginAndError = async () => {
     try {
@@ -50,7 +51,7 @@ export default function LoginView({ handleLoginChange }) {
     }
 
     setTimeout(() => {
-      //errorShown();
+      // errorShown();
     }, 500); // Add 1000ms delay before calling errorShown
   };
 
@@ -88,14 +89,14 @@ export default function LoginView({ handleLoginChange }) {
 
       // Logger.debug("Login info in appContext", appContext);
 
-      //Set alert description to describe the event
+      // Set alert description to describe the event
       setAlertOptions({
         severity: "success",
         title: "Welcome!",
         message: "Welcome to siba",
       });
 
-      //Show popup
+      // Show popup
       setAlertOpen(true);
 
       handleLoginChange();
@@ -105,7 +106,7 @@ export default function LoginView({ handleLoginChange }) {
         password: "",
       });
 
-      //Timeout to show popup message before navigation
+      // Timeout to show popup message before navigation
       setTimeout(() => {
         navigate("/");
       }, 1500);

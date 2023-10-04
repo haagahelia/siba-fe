@@ -5,6 +5,7 @@ import {
   capitalizeFirstLetter,
   validate,
 } from "../../validation/ValidateEditBuilding";
+
 import AlertBox from "../common/AlertBox";
 import ConfirmationDialog from "../common/ConfirmationDialog";
 import EditBuildingForm from "./EditBuildingForm";
