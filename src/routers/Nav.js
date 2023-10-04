@@ -3,16 +3,12 @@ import {
   faGear,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import MenuIcon from "@mui/icons-material/Menu";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
-import IconButton from "@mui/material/IconButton";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
-import Menu from "@mui/material/Menu";
 import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
 import { useContext, useState } from "react";
 import { BrowserRouter, NavLink, Route, Routes } from "react-router-dom";
 import { AppContext } from "../AppContext";
@@ -143,14 +139,6 @@ export default function NavBar() {
 
   const [isDropdownVisible, setIsDropdownVisible] = useState(false);
 
-  const [anchorElNav, setAnchorElNav] = useState(null);
-  const handleOpenNavMenu = (event) => {
-    setAnchorElNav(event.currentTarget);
-  };
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
-  };
-
   // Called to produce the down drop menu items
   const renderDropdownMenu = (page, variant) => {
     return (
@@ -245,7 +233,7 @@ export default function NavBar() {
                   activeclassname="active"
                   className="nav-links"
                 >
-                  {page.name}
+                  {loggedIn} {/* The text which is returned to screen */}
                 </NavLink>
 
                 {isDropdownVisible && (
@@ -295,99 +283,84 @@ export default function NavBar() {
   };
 
   return (
-    <BrowserRouter>
-      <AppBar
-        position="fixed"
-        sx={{
-          width: "170px",
-          height: "100vh",
-          top: 0,
-          left: 0,
-          flexDirection: "column",
-          // backgroundColor: "#F4BF00",
-        }}
-      >
-        <NavLink to="/" className="nav-logo">
-          <img src={logo} alt="" width="60" height="60" />
-          <i className="fas fa-code" />
-        </NavLink>
-        <Container maxWidth="xl">
-          <Toolbar disableGutters sx={{ flexDirection: "column" }}>
-            <Typography variant="sibaTypography">
-              Logged in as: {loggedIn}
-            </Typography>
-            <Box sx={{ flexGrow: 1, display: { xs: "flex", lg: "none" } }}>
-              <IconButton
-                size="large"
-                aria-label="account of current user"
-                aria-controls="menu-appbar"
-                aria-haspopup="true"
-                onClick={handleOpenNavMenu}
-                color="inherit"
-              >
-                <MenuIcon />
-              </IconButton>
-              <Menu
-                id="menu-appbar"
-                anchorEl={anchorElNav}
-                anchorOrigin={{
-                  vertical: "bottom",
-                  horizontal: "left",
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: "top",
-                  horizontal: "left",
-                }}
-                open={Boolean(anchorElNav)}
-                onClose={handleCloseNavMenu}
-                sx={{
-                  display: { xs: "block", lg: "none" },
-                }}
-              >
-                <List variant="sibaAppBarVertival">
+    <div
+      className="navbar-spacing"
+      style={{
+        height: "100vh",
+        left: 0,
+        overflowY: "scroll", // Stops the nav bar content from shifting, when pop up appears
+        paddingLeft: "170px", // Nav bar width
+        top: 0,
+      }}
+    >
+      <BrowserRouter>
+        <AppBar
+          position="fixed"
+          alt="Vertical navigation bar."
+          sx={{
+            width: "170px",
+            height: "100vh",
+            top: 0,
+            left: 0,
+            flexDirection: "column",
+            // backgroundColor: "#F4BF00",
+          }}
+        >
+          <Container maxWidth="xl">
+            <Toolbar disableGutters sx={{ flexDirection: "column" }}>
+              <Box sx={{ flexGrow: 1 }}>
+                <List
+                  variant="navBar"
+                  sx={{
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                  }}
+                >
                   <NavLink to="/" className="nav-logo">
-                    {/* I didn't have logos,
-                        add them to the project and it works */}
-                    {/* <img src={logo} alt="Logo" /> */}
-                    <i className="fas fa-code" />
+                    <img
+                      src={logo}
+                      alt="Sibelius-Akatemia stylized logo."
+                      width="60"
+                      height="60"
+                    />
                   </NavLink>
                   {renderNavLinks()}
                 </List>
-              </Menu>
-            </Box>
-            <Box sx={{ flexGrow: 1, display: { xs: "none", lg: "flex" } }}>
-              <List variant="navBar">{renderNavLinks()}</List>
-            </Box>
-          </Toolbar>
-        </Container>
-      </AppBar>
-      <Routes>
-        <Route
-          path="/login"
-          element={<LoginView handleLoginChange={handleLoginChange} />}
-        />
-        <Route path="/register" element={<RegisterView />} />
-        <Route path="/" element={<SubjectView />} />
-        <Route path="/subject" element={<SubjectView />} />
-        <Route path="/allocation" element={<AllocRoundView />} />
-        <Route path="/roomresult" element={<RoomResultView />} />
-        <Route path="/programresult" element={<ProgramResultView />} />
-        <Route path="/equipment" element={<EquipmentView />} />
-        <Route path="/building" element={<BuildingView />} />
-        <Route path="/department" element={<DepartmentView />} />
-        <Route path="/space" element={<SpaceView />} />
-        <Route path="/allocation/addAllocRound" element={<AddAllocRound />} />
-        <Route path="/settings" element={<Settings />} />
-        <Route path="/users" element={<UserView />} />
-        <Route
-          path="/alloc-fail/:allocId"
-          element={<AllocationSubjectFailureView />}
-        />
-        <Route path="*" element={<NotFoundView />} />
-        <Route path="/forget-password" element={<ForgetPassword />} />
-        <Route path="/reset-password/:id/:token" element={<ResetPassword />} />
-      </Routes>
-    </BrowserRouter>
+              </Box>
+            </Toolbar>
+          </Container>
+        </AppBar>
+        <Routes>
+          <Route
+            path="/login"
+            element={<LoginView handleLoginChange={handleLoginChange} />}
+          />
+          <Route path="/register" element={<RegisterView />} />
+          <Route path="/" element={<SubjectView />} />
+          <Route path="/subject" element={<SubjectView />} />
+          <Route path="/allocation" element={<AllocRoundView />} />
+          <Route path="/roomresult" element={<RoomResultView />} />
+          <Route path="/programresult" element={<ProgramResultView />} />
+          <Route path="/equipment" element={<EquipmentView />} />
+          <Route path="/building" element={<BuildingView />} />
+          <Route path="/department" element={<DepartmentView />} />
+          <Route path="/space" element={<SpaceView />} />
+          <Route path="/allocation/addAllocRound" element={<AddAllocRound />} />
+          <Route path="/settings" element={<Settings />} />
+          <Route path="/users" element={<UserView />} />
+          <Route
+            path="/alloc-fail/:allocId"
+            element={<AllocationSubjectFailureView />}
+          />
+          <Route path="*" element={<NotFoundView />} />
+          <Route path="/forget-password" element={<ForgetPassword />} />
+          <Route
+            path="/reset-password/:id/:token"
+            element={<ResetPassword />}
+          />
+        </Routes>
+      </BrowserRouter>
+    </div>
   );
 }
