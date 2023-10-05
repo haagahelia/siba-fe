@@ -26,10 +26,12 @@ export default function ForgetPassword() {
       },
     );
 
-    if (response.status === 200) {
+    if (response.ok) {
       const data = await response.json();
       const { id, token } = data;
       navigate(`/reset-password/${id}/${token}`);
+    } else {
+      alert(`Email not registered yet!`)
     }
   };
 
