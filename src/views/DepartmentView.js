@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import dao from "../ajax/dao";
 import { RoleLoggedIn } from "../customhooks/RoleLoggedIn";
 import Logger from "../logger/logger";
-
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
