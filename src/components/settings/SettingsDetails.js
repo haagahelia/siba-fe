@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { RoleLoggedIn } from "../../customhooks/RoleLoggedIn";
+import { useRoleLoggedIn } from "../../hooks/useRoleLoggedIn";
 
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
@@ -19,7 +19,7 @@ export default function SettingsDetails({
   incrementDataModifiedCounter,
   setSingleSetting,
 }) {
-  const { roles } = RoleLoggedIn();
+  const { roles } = useRoleLoggedIn();
 
   const [alertOpen, setAlertOpen] = useState(false);
   const [alertOptions] = useState({

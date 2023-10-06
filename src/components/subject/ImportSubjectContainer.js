@@ -1,17 +1,17 @@
 import Papa from "papaparse";
-import { useState, useEffect } from "react";
-import dao from "../../ajax/dao";
-import Logger from "../../logger/logger";
+import { useEffect, useState } from "react";
 import {
   ajaxRequestErrorHandler,
   getFunctionName,
 } from "../../ajax/ajaxRequestErrorHandler";
+import dao from "../../ajax/dao";
+import Logger from "../../logger/logger";
 
+import FormControl from "@mui/material/FormControl";
 import Input from "@mui/material/Input";
 import InputLabel from "@mui/material/InputLabel";
-import FormControl from "@mui/material/FormControl";
-import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
+import Select from "@mui/material/Select";
 import Typography from "@mui/material/Typography";
 import AlertBox from "../common/AlertBox";
 import ExportSubjectButton from "./ExportSubjectButton";
@@ -25,13 +25,13 @@ export default function ImportSubjectContainer({ getAllSubjects }) {
     severity: "error",
   });
   const [departmentList, setDepartmentList] = useState([]);
-  const [department, setDepartment] = useState('');
+  const [department, setDepartment] = useState("");
   // data import
   const [importSubjects, setImportSubjects] = useState([]);
   const [failedSubjects, setFailedSubjects] = useState([]);
 
   const getDepartmentsForUser = async function () {
-    //user
+    // user
     // Logger.debug("getAllUsers: fetching all Users from server.");
     let currentUser = null;
     let currentRole = [];
@@ -45,13 +45,15 @@ export default function ImportSubjectContainer({ getAllSubjects }) {
       );
     } else {
       // Logger.debug(`getAllUsers: successfully fetched ${userData.length} Users.`);
-      currentUser = userData.find((user) => user.email === localStorage.getItem("email"));
-      if(currentRole.length !== 0)
-        currentRole = currentUser.plannerdepartment.split(' | ');
+      currentUser = userData.find(
+        (user) => user.email === localStorage.getItem("email"),
+      );
+      if (currentRole.length !== 0)
+        currentRole = currentUser.plannerdepartment.split(" | ");
       // console.log(currentUser)
     }
 
-    //dep
+    // dep
     // Logger.debug("getAllDepartments: fetching all departments from server.");
     const { success, data } = await dao.fetchDepartmentData();
     if (!success) {
@@ -68,8 +70,10 @@ export default function ImportSubjectContainer({ getAllSubjects }) {
       Logger.info(
         // `getAllDepartments: successfully fetched ${data.length} departments.`,
       );
-      const departmentsToShow = data.filter((dept) => currentRole.includes(dept.name));
-      setDepartmentList([...departmentList, ...departmentsToShow])
+      const departmentsToShow = data.filter((dept) =>
+        currentRole.includes(dept.name),
+      );
+      setDepartmentList([...departmentList, ...departmentsToShow]);
     }
   };
 
@@ -104,8 +108,11 @@ export default function ImportSubjectContainer({ getAllSubjects }) {
       // use papaparse to transform file to array of objects
       Papa.parse(file, {
         header: true,
-        delimiter: "", // auto detect delimiter
-        skipEmptyLines: 'greedy', //set to 'greedy', lines that don't have any content (those which have only whitespace after parsing) will be skipped.
+        // auto detect delimiter
+        delimiter: "",
+        // set to 'greedy', lines that don't have any content
+        // (those which have only whitespace after parsing) will be skipped.
+        skipEmptyLines: "greedy",
         dynamicTyping: true,
         complete: (result) => {
           setImportSubjects(result.data);
@@ -130,7 +137,7 @@ export default function ImportSubjectContainer({ getAllSubjects }) {
           value={department}
           onChange={(event) => {
             setDepartment(event.target.value);
-            console.log(event.target.value)
+            console.log(event.target.value);
           }}
           label="department"
         >
@@ -140,7 +147,7 @@ export default function ImportSubjectContainer({ getAllSubjects }) {
             </MenuItem>
           ))}
         </Select>
-      </FormControl >
+      </FormControl>
 
       <Typography>Import from .csv file</Typography>
       <Input
@@ -155,7 +162,7 @@ export default function ImportSubjectContainer({ getAllSubjects }) {
         setFailedSubjects={setFailedSubjects}
         getAllSubjects={getAllSubjects}
       />
-      <ExportSubjectButton failedSubjects={failedSubjects}/>
+      <ExportSubjectButton failedSubjects={failedSubjects} />
     </>
   );
 }

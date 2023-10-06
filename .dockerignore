@@ -122,6 +122,6 @@ dist
 # MS Office temp files
 ~$*
 
-#----------------------Above this line is a copy from .gitignore
-#Visual studio code files
+# ---------------------- Above this line is a copy from .gitignore
+# Visual studio code files
 .vscode

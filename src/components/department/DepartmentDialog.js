@@ -1,4 +1,4 @@
-import { RoleLoggedIn } from "../../customhooks/RoleLoggedIn";
+import { useRoleLoggedIn } from "../../hooks/useRoleLoggedIn";
 
 import Dialog from "@mui/material/Dialog";
 import DialogContent from "@mui/material/DialogContent";
@@ -12,7 +12,7 @@ export default function DepartmentDialog({
   singleDepartment,
   getAllDepartments,
 }) {
-  const { roles } = RoleLoggedIn();
+  const { roles } = useRoleLoggedIn();
 
   return (
     <Dialog open={open} onClose={() => setOpen(false)}>

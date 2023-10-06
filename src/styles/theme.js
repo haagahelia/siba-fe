@@ -1,4 +1,3 @@
-import { common } from "@mui/material/colors";
 import createTheme from "@mui/material/styles/createTheme";
 
 // Palettes are: darkPalette, lightPalette,

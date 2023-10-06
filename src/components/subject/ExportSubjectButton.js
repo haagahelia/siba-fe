@@ -1,6 +1,7 @@
-import Button from "@mui/material/Button";
 import Papa from "papaparse";
 import { useState } from "react";
+
+import Button from "@mui/material/Button";
 import AlertBox from "../common/AlertBox";
 
 export default function ExportSubjectButton({ failedSubjects }) {
@@ -22,7 +23,7 @@ export default function ExportSubjectButton({ failedSubjects }) {
 
       return;
     } else {
-      console.log("failedSubjects", failedSubjects)
+      console.log("failedSubjects", failedSubjects);
       const csv = Papa.unparse(failedSubjects);
       const blob = new Blob([csv]);
       const a = window.document.createElement("a");

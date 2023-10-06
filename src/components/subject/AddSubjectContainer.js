@@ -20,7 +20,7 @@ import IconButton from "@mui/material/IconButton";
 import AlertBox from "../common/AlertBox";
 import ConfirmationDialog from "../common/ConfirmationDialog";
 import AddSubjectForm from "./AddSubjectForm";
-import ImportSubject from "./ImportSubjectContainer"
+import ImportSubject from "./ImportSubjectContainer";
 
 export default function AddSubjectContainer({
   getAllSubjects,
@@ -224,7 +224,7 @@ export default function AddSubjectContainer({
                 allSubjectsList={allSubjectsList}
                 spaceTypeSelectList={spaceTypeSelectList}
               />
-              <ImportSubject getAllSubjects={getAllSubjects}/>
+              <ImportSubject getAllSubjects={getAllSubjects} />
             </>
           )}
         </CardContent>

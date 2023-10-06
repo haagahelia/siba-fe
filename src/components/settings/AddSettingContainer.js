@@ -31,7 +31,7 @@ export default function AddSettingContainer({ getAllSettings }) {
     title: "this is dialog",
     content: "Something here",
   });
-  // Here the initialvalues ​​of the form are stored in the state
+  // Here the initialvalues of the form are stored in the state
   const [initialSetting, setInitialSetting] = useState({
     name: "",
     description: "",

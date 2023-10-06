@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import { AppContext } from "../AppContext";
 
-export const RoleLoggedIn = () => {
+export const useRoleLoggedIn = () => {
   const [roles, setRoles] = useState({
     admin: localStorage.getItem("isAdmin"),
     planner: localStorage.getItem("isPlanner"),

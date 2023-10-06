@@ -4,6 +4,7 @@ import { ajaxRequestErrorHandler } from "../ajax/ajaxRequestErrorHandler";
 import dao from "../ajax/dao";
 import Logger from "../logger/logger";
 import "../styles/AllocationFailure.css";
+
 import CheckIcon from "@mui/icons-material/Check";
 import CloseIcon from "@mui/icons-material/Close";
 import Button from "@mui/material/Button";
