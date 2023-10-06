@@ -13,7 +13,7 @@ import TableRow from "@mui/material/TableRow";
 import TableSortLabel from "@mui/material/TableSortLabel";
 import SingleSubjectDialog from "./SingleSubjectDialog";
 
-export default function SubjectListItems({ getAllSubjects, paginateSubjects }) {
+export default function SubjectList({ getAllSubjects, paginateSubjects }) {
   const [open, setOpen] = useState(false);
   const [singleSubject, setSingleSubject] = useState(null);
   const [order, setOrder] = useState("asc");

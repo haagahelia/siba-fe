@@ -8,7 +8,7 @@ import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 
-export default function ForgetPassword() {
+export default function ForgetPasswordView() {
   const navigate = useNavigate();
 
   const [email, setEmail] = useState("");

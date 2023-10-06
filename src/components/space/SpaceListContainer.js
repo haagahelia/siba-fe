@@ -3,7 +3,7 @@ import CardContent from "@mui/material/CardContent";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 // import SingleSubjectDialog from "./SingleSubjectDialog";
-import SpaceListItems from "./SpaceList";
+import SpaceList from "./SpaceList";
 
 export default function SpaceListContainer({
   getAllSpaces,
@@ -25,7 +25,7 @@ export default function SpaceListContainer({
       <Grid container spacing={2}>
         <Card variant="outlined">
           <CardContent>
-            <SpaceListItems
+            <SpaceList
               getAllSpaces={getAllSpaces}
               allSpacesList={allSpacesList}
               paginateSpaces={paginateSpaces}

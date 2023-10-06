@@ -6,7 +6,7 @@ import Logger from "../../logger/logger";
 
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import AllocRoundControlPanel from "../AllocRound/AllocRoundControlPanel";
+import AllocRoundControlPanel from "../allocRound/AllocRoundControlPanel";
 import RoomsWithTimesList from "../room/RoomsWithTimesList";
 
 // a component for displaying allocation results

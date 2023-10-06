@@ -13,7 +13,7 @@ import TableRow from "@mui/material/TableRow";
 import TableSortLabel from "@mui/material/TableSortLabel";
 // import SingleSubjectDialog from "./SingleSubjectDialog";
 
-export default function SpaceListItems({
+export default function SpaceList({
   // getAllSpaces,
   paginateSpaces,
 }) {

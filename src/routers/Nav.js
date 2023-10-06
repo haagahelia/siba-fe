@@ -15,20 +15,20 @@ import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import Toolbar from "@mui/material/Toolbar";
 import { BrowserRouter, NavLink, Route, Routes } from "react-router-dom";
-import AddAllocRound from "../components/AllocRound/AddAllocRound";
-import AllocRoundView from "../views/AllocRoundListView";
+import AddAllocRound from "../components/allocRound/AddAllocRound";
+import AllocRoundView from "../views/AllocRoundView";
 import AllocationSubjectFailureView from "../views/AllocationSubjectFailureView";
 import BuildingView from "../views/BuildingView";
 import DepartmentView from "../views/DepartmentView";
 import EquipmentView from "../views/EquipmentView";
-import ForgetPassword from "../views/ForgetPassword";
+import ForgetPasswordView from "../views/ForgetPasswordView";
 import LoginView from "../views/LoginView";
 import NotFoundView from "../views/NotFoundView";
 import ProgramResultView from "../views/ProgramResultView";
 import RegisterView from "../views/RegisterView";
-import ResetPassword from "../views/ResetPassword";
+import ResetPasswordView from "../views/ResetPasswordView";
 import RoomResultView from "../views/RoomResultView";
-import Settings from "../views/Settings";
+import SettingsView from "../views/SettingsView";
 import SpaceView from "../views/SpaceView";
 import SubjectView from "../views/SubjectView";
 import UserView from "../views/UserView";
@@ -348,17 +348,17 @@ export default function NavBar() {
           <Route path="/department" element={<DepartmentView />} />
           <Route path="/space" element={<SpaceView />} />
           <Route path="/allocation/addAllocRound" element={<AddAllocRound />} />
-          <Route path="/settings" element={<Settings />} />
+          <Route path="/settings" element={<SettingsView />} />
           <Route path="/users" element={<UserView />} />
           <Route
             path="/alloc-fail/:allocId"
             element={<AllocationSubjectFailureView />}
           />
           <Route path="*" element={<NotFoundView />} />
-          <Route path="/forget-password" element={<ForgetPassword />} />
+          <Route path="/forget-password" element={<ForgetPasswordView />} />
           <Route
             path="/reset-password/:id/:token"
-            element={<ResetPassword />}
+            element={<ResetPasswordView />}
           />
         </Routes>
       </BrowserRouter>

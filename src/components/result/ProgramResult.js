@@ -11,7 +11,7 @@ import Modal from "@mui/material/Modal";
 import Typography from "@mui/material/Typography";
 import Grid2 from "@mui/material/Unstable_Grid2";
 import ProgressBar from "@ramonak/react-progress-bar";
-import AllocRoundControlPanel from "../AllocRound/AllocRoundControlPanel";
+import AllocRoundControlPanel from "../allocRound/AllocRoundControlPanel";
 import CollapsedRow from "./CollapsedRow";
 import SubjectResult from "./SubjectResult";
 

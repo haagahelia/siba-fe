@@ -12,7 +12,7 @@ import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
 import AllocRoundDetails from "./AllocRoundDetails";
 
-export default function AllocRoundListItems({
+export default function AllocRoundList({
   paginateAllocRounds,
   getAllocRounds,
   // setAllocRoundId,

@@ -15,7 +15,7 @@ import IconButton from "@mui/material/IconButton";
 import AlertBox from "../common/AlertBox";
 import ConfirmationDialog from "../common/ConfirmationDialog";
 import AddBuildingForm from "./AddBuildingForm";
-import ImportBuilding from "./ImportBuildingContainer";
+import ImportBuildingContainer from "./ImportBuildingContainer";
 
 export default function AddBuildingContainer({ getAllBuildings }) {
   // State for checking if Add Building card is expanded
@@ -123,7 +123,7 @@ export default function AddBuildingContainer({ getAllBuildings }) {
                 submitValues={formik.values}
                 setInitialBuilding={setInitialBuilding}
               />
-              <ImportBuilding getAllBuildings={getAllBuildings} />
+              <ImportBuildingContainer getAllBuildings={getAllBuildings} />
             </>
           )}
         </CardContent>

@@ -24,7 +24,7 @@ import Tooltip from "@mui/material/Tooltip";
 import Typography from "@mui/material/Typography";
 import AlertBox from "../components/common/AlertBox";
 
-export function GetMissingEquipment({ subjId, roomId, item }) {
+function GetMissingEquipment({ subjId, roomId, item }) {
   const [missingEquipment, setMissingEquipment] = useState(
     "No missing equipment",
   );

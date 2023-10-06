@@ -8,7 +8,7 @@ import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import Collapse from "@mui/material/Collapse";
 import Typography from "@mui/material/Typography";
 import Grid2 from "@mui/material/Unstable_Grid2";
-// import RoomsWithTimeList from "../room/RoomsWithTimesList";
+// import RoomsWithTimesList from "../room/RoomsWithTimesList";
 
 // have to edit when the correct data comes, for now an illustrative version.
 export default function CollapsedRowB({ id }) {

@@ -11,7 +11,7 @@ import TextField from "@mui/material/TextField";
 import AlertBox from "../common/AlertBox";
 
 export default function AddUser() {
-  Logger.logPrefix = "RegisterUser";
+  Logger.logPrefix = "AddUser";
 
   const [alertOpen, setAlertOpen] = useState(false);
   const [alertOptions, setAlertOptions] = useState({
