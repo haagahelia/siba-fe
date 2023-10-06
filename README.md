@@ -140,7 +140,7 @@ dao.js file unifications
 ## For Developers
 
 ### Navigation Bar
-Structure: siba-fe\src\routers\Nav.js <br>
+Structure: siba-fe\src\routers\Nav.jsx <br>
 Styling: siba-fe\src\styles\theme.js <br>
 
 <p align="right">(<a href="#top">back to top</a>)</p>

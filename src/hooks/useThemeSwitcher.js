@@ -1,5 +1,5 @@
 // custom hook to keep state and to switch theme between light and dark mode
-// this is exported to App.js
+// this is exported to App.jsx
 import { useState } from "react";
 import { darkPalette } from "../styles/palettes/darkPalette";
 import { lightPalette } from "../styles/palettes/lightPalette";

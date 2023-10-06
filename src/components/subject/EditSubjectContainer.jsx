@@ -19,7 +19,7 @@ export default function EditSubjectContainer({
   getAllSubjects,
   setSingleSubject,
 }) {
-  // Whenever the editSubject changes in the subjectList.js file,
+  // Whenever the editSubject changes in the SubjectList.jsx file,
   // that information comes here as singleSubject
   const [programSelectList, setProgramSelectList] = useState([]);
   const [spaceTypeSelectList, setSpaceTypeSelectList] = useState([]);

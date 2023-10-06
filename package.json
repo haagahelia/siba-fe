@@ -40,7 +40,7 @@
     "precommit"
   ],
   "nano-staged": {
-    "*.{js,ts}": "biome check --apply"
+    "*.{js,jsx,ts,tsx}": "biome check --apply"
   },
   "eslintConfig": {
     "ignorePatterns": [
