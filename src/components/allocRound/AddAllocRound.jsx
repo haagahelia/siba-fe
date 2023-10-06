@@ -13,7 +13,7 @@ import AlertBox from "../common/AlertBox";
 import ConfirmationDialog from "../common/ConfirmationDialog";
 import AddAllocRoundForm from "./AddAllocRoundForm";
 
-// const baseUrl = process.env.REACT_APP_BE_SERVER_BASE_URL;
+// const baseUrl = import.meta.env.VITE_BE_SERVER_BASE_URL;
 // import { BASEURL } from "../config/consts.js";
 // const baseUrl = BASEURL;
 

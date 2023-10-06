@@ -1,7 +1,7 @@
 import axios from "axios";
 // import React from "react"; ???
 
-const baseUrl = process.env.REACT_APP_BE_SERVER_BASE_URL;
+const baseUrl = import.meta.env.VITE_BE_SERVER_BASE_URL;
 
 class ResultRoomsStore {
   constructor(rooms, subRooms, roomSubs) {

@@ -2,7 +2,7 @@ import Logger from "../logger/logger";
 import { ResponseFiner, User, UserLoggedIn } from "../types";
 import { create, get, remove, update } from "./request";
 
-const baseUrl = process.env.REACT_APP_BE_SERVER_BASE_URL;
+const baseUrl = import.meta.env.VITE_BE_SERVER_BASE_URL;
 
 // fetching all users
 export const fetchAllUsers = async (): Promise<ResponseFiner<User>> => {

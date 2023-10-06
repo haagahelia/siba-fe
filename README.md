@@ -58,8 +58,8 @@ Frontend side installation instructions
 3. Create **.env.local** file. Add .env to the root of the project.
 
    ```sh
-   REACT_APP_BE_SERVER_BASE_URL=http://...backend server address and port here.../api
-   REACT_APP_BE_SERVER_BASE_URL2=http://someotherserver:3001/api
+   VITE_BE_SERVER_BASE_URL=http://...backend server address and port here.../api
+   VITE_BE_SERVER_BASE_URL2=http://someotherserver:3001/api
    ```
    Basically start the backend, make sure it runs and copy the working address here, adding /api at the end. E.g. http://localhost:1234/api
 

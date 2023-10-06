@@ -15,7 +15,7 @@ const Logger = {
   },
 
   debug(...params) {
-    if (process.env.NODE_ENV === this.loggedEnv && this.logLevel === "debug") {
+    if (import.meta.env.MODE === this.loggedEnv && this.logLevel === "debug") {
       console.log(
         `DEBU|${this.getFormattedTimestamp()}[${this.logPrefix}]`,
         ...params,
@@ -27,7 +27,7 @@ const Logger = {
 
   info(...params) {
     if (
-      process.env.NODE_ENV === this.loggedEnv &&
+      import.meta.env.MODE === this.loggedEnv &&
       ["debug", "info"].includes(this.logLevel)
     ) {
       console.info(
@@ -41,7 +41,7 @@ const Logger = {
 
   warn(...params) {
     if (
-      process.env.NODE_ENV === this.loggedEnv &&
+      import.meta.env.MODE === this.loggedEnv &&
       ["debug", "info", "warn"].includes(this.logLevel)
     ) {
       console.warn(
@@ -52,7 +52,7 @@ const Logger = {
   },
 
   error(...params) {
-    if (process.env.NODE_ENV === this.loggedEnv) {
+    if (import.meta.env.MODE === this.loggedEnv) {
       console.error(
         `ERRO|${this.getFormattedTimestamp()}[${this.logPrefix}]`,
         ...params,

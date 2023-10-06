@@ -6,7 +6,7 @@ import {
 } from "../types";
 import { get } from "./request";
 
-const baseUrl = process.env.REACT_APP_BE_SERVER_BASE_URL;
+const baseUrl = import.meta.env.VITE_BE_SERVER_BASE_URL;
 
 // fetching unAllocableSubjects
 export const getUnAllocableSubjects = async (

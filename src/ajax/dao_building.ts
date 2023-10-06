@@ -1,7 +1,7 @@
 import { Building, ResponseFiner } from "../types";
 import { create, get, remove, update } from "./request";
 
-const baseUrl = process.env.REACT_APP_BE_SERVER_BASE_URL;
+const baseUrl = import.meta.env.VITE_BE_SERVER_BASE_URL;
 
 // fetching all buildings
 export const fetchAllBuildings = async (): Promise<ResponseFiner<Building>> => {
