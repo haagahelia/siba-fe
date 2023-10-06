@@ -7,8 +7,9 @@ import ThemeProvider from "@mui/material/styles/ThemeProvider";
 import Nav from "./routers/Nav";
 import { ThemeIcon } from "./styles/themeIcons";
 
-function App() {
+export default function App() {
   const { theme, toggleTheme } = useThemeSwitcher();
+
   return (
     <div className="App">
       <ThemeProvider theme={theme}>
@@ -21,5 +22,3 @@ function App() {
     </div>
   );
 }
-
-export default App;

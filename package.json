@@ -2,72 +2,47 @@
   "name": "siba-fe",
   "version": "0.1.0",
   "private": true,
-  "dependencies": {
-    "@emotion/react": "^11.10.5",
-    "@emotion/styled": "^11.10.5",
-    "@fortawesome/fontawesome-svg-core": "^6.4.2",
-    "@fortawesome/free-solid-svg-icons": "^6.4.2",
-    "@fortawesome/react-fontawesome": "^0.2.0",
-    "@mui/icons-material": "^5.11.0",
-    "@mui/material": "^5.11.5",
-    "@ramonak/react-progress-bar": "^5.0.2",
-    "@testing-library/jest-dom": "^5.16.5",
-    "@testing-library/react": "^13.4.0",
-    "@testing-library/user-event": "^13.5.0",
-    "axios": "^0.27.2",
-    "buffer": "^6.0.3",
-    "formik": "^2.2.9",
-    "jwt-decode": "^3.1.2",
-    "luxon": "^3.4.0",
-    "papaparse": "^5.4.1",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-router-dom": "^6.4.2",
-    "react-scripts": "^5.0.1",
-    "styled-components": "^5.3.5",
-    "util": "^0.12.5",
-    "web-vitals": "^2.1.4"
-  },
+  "type": "module",
   "scripts": {
     "clean": "rimraf dist",
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
+    "start": "vite --open",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
     "precommit": "sh ./pre-commit"
   },
   "pre-commit": [
     "precommit"
   ],
   "nano-staged": {
-    "*.{js,ts}": "biome check --apply"
+    "*.{js,jsx,ts,tsx}": "biome check --apply"
   },
-  "eslintConfig": {
-    "ignorePatterns": [
-      "**/*"
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+  "dependencies": {
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
+    "@fortawesome/fontawesome-svg-core": "^6.4.2",
+    "@fortawesome/free-solid-svg-icons": "^6.4.2",
+    "@fortawesome/react-fontawesome": "^0.2.0",
+    "@mui/icons-material": "^5.14.12",
+    "@mui/material": "^5.14.12",
+    "@ramonak/react-progress-bar": "^5.0.3",
+    "axios": "^1.5.1",
+    "formik": "^2.4.5",
+    "luxon": "^3.4.3",
+    "papaparse": "^5.4.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.16.0"
   },
   "devDependencies": {
     "@biomejs/biome": "1.2.2",
-    "@types/react": "^18.0.27",
-    "@types/react-dom": "^18.0.10",
-    "concurrently": "^8.2.1",
-    "dotenv": "^16.0.1",
+    "@types/luxon": "^3.3.2",
+    "@types/react": "^18.2.25",
+    "@types/react-dom": "^18.2.10",
+    "@vitejs/plugin-react": "^4.1.0",
     "nano-staged": "^0.8.0",
     "pre-commit": "^1.2.2",
-    "rimraf": "^5.0.1",
-    "typescript": "^4.9.4"
+    "rimraf": "^5.0.5",
+    "typescript": "^5.2.2",
+    "vite": "^4.4.11"
   }
 }

@@ -1,7 +1,7 @@
 import { Department, Response } from "../types";
 import { create, get, remove, update } from "./request";
 
-const baseUrl = process.env.REACT_APP_BE_SERVER_BASE_URL;
+const baseUrl = import.meta.env.VITE_BE_SERVER_BASE_URL;
 
 // fetching all departments
 export const fetchDepartmentData = async (): Promise<Response<Department>> => {

@@ -1,21 +1,18 @@
 import { useFormik } from "formik";
 import { useState } from "react";
 import dao from "../../ajax/dao";
-import {
-  capitalizeFirstLetter,
-  validate,
-} from "../../validation/ValidateEditAllocRound";
+import { validate } from "../../validation/ValidateEditUser";
 
 import AlertBox from "../common/AlertBox";
 import ConfirmationDialog from "../common/ConfirmationDialog";
-import EditAllocRoundForm from "./EditAllocRoundForm";
+import EditUserForm from "./EditUserForm";
 
-export default function EditAllocRound({
-  // Whenever the editAllocRound changes in the AllocRoundList.js file,
-  // that information comes here as singleAllocRound
-  singleAllocRound,
-  incrementDataModifiedCounter,
-  setSingleAllocRound,
+export default function EditUserContainer({
+  // Whenever the editUser changes in the UserList.jsx file,
+  // that information comes here as singleUser
+  singleUser,
+  getAllUsers,
+  setSingleUser,
 }) {
   const [alertOpen, setAlertOpen] = useState(false);
   const [alertOptions, setAlertOptions] = useState({
@@ -33,27 +30,27 @@ export default function EditAllocRound({
     // enableReinitialize checks if Formik needs to reset the form
     // if the initial values change
     enableReinitialize: true,
-    initialValues: singleAllocRound,
+    initialValues: singleUser,
     validate,
     onSubmit: (values) => {
       setDialogOptions({
-        title: `Are you sure you want to edit ${values.name}?`,
-        content: `Press continue to save ${values.name} new information. `,
+        title: `Are you sure you want to edit ${values.email}?`,
+        content: `Press continue to save ${values.email} new information. `,
       });
       setDialogOpen(true);
       return;
     },
   });
 
-  async function submitEditedAllocRound(values) {
-    const capitalName = capitalizeFirstLetter(values.name);
-    const editedAllocRound = {
-      name: capitalName,
-      description: values.description,
-      lastModified: values.lastModified,
+  async function submitEditedUser(values) {
+    const editedUser = {
       id: values.id,
+      email: values.email,
+      isAdmin: values.isAdmin,
+      isPlanner: values.isPlanner,
+      isStatist: values.isStatist,
     };
-    const result = await dao.editAllocRound(editedAllocRound);
+    const result = await dao.editUser(editedUser);
     if (!result) {
       setAlertOptions({
         severity: "error",
@@ -66,12 +63,11 @@ export default function EditAllocRound({
     setAlertOptions({
       severity: "success",
       title: "Success!",
-      message: `${values.name} new information added.`,
+      message: `${values.email} new information added.`,
     });
     setAlertOpen(true);
-    setSingleAllocRound(formik.values);
-    // getAllAllocRounds();
-    incrementDataModifiedCounter();
+    setSingleUser(formik.values);
+    getAllUsers();
   }
 
   return (
@@ -85,10 +81,10 @@ export default function EditAllocRound({
         dialogOpen={dialogOpen}
         dialogOptions={dialogOptions}
         setDialogOpen={setDialogOpen}
-        submit={submitEditedAllocRound}
+        submit={submitEditedUser}
         submitValues={formik.values}
       />
-      <EditAllocRoundForm formik={formik} />
+      <EditUserForm formik={formik} />
     </div>
   );
 }

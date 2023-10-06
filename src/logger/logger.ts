@@ -10,12 +10,12 @@ const Logger = {
   // Should be set in the view logger is used in.
   logPrefix: "CustomLogger",
   getFormattedTimestamp() {
-    const time = new DateTime({});
+    const time = DateTime.now();
     return time.toFormat("yyyyMMdd HH:mm:ss");
   },
 
-  debug(...params) {
-    if (process.env.NODE_ENV === this.loggedEnv && this.logLevel === "debug") {
+  debug(...params: unknown[]) {
+    if (import.meta.env.MODE === this.loggedEnv && this.logLevel === "debug") {
       console.log(
         `DEBU|${this.getFormattedTimestamp()}[${this.logPrefix}]`,
         ...params,
@@ -25,9 +25,9 @@ const Logger = {
     // console.log("HEI DEBUG 2");
   },
 
-  info(...params) {
+  info(...params: unknown[]) {
     if (
-      process.env.NODE_ENV === this.loggedEnv &&
+      import.meta.env.MODE === this.loggedEnv &&
       ["debug", "info"].includes(this.logLevel)
     ) {
       console.info(
@@ -39,9 +39,9 @@ const Logger = {
     // console.log("HEI INFO 2");
   },
 
-  warn(...params) {
+  warn(...params: unknown[]) {
     if (
-      process.env.NODE_ENV === this.loggedEnv &&
+      import.meta.env.MODE === this.loggedEnv &&
       ["debug", "info", "warn"].includes(this.logLevel)
     ) {
       console.warn(
@@ -51,8 +51,8 @@ const Logger = {
     }
   },
 
-  error(...params) {
-    if (process.env.NODE_ENV === this.loggedEnv) {
+  error(...params: unknown[]) {
+    if (import.meta.env.MODE === this.loggedEnv) {
       console.error(
         `ERRO|${this.getFormattedTimestamp()}[${this.logPrefix}]`,
         ...params,
