@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import { AppContext } from "../AppContext";
 import dao from "../ajax/dao";
 import Logger from "../logger/logger";
-
 import Button from "@mui/material/Button";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
@@ -30,17 +29,6 @@ export default function LoginView({ handleLoginChange }) {
     message: "This is an error alert — check it out!",
     severity: "error",
   });
-
-  /*
-  const errorShown = () => {
-    if (showError === true) {
-      setErrorMsg("Username or Password is wrong");
-    }
-    if (showError === false) {
-      setErrorMsg("");
-    }
-  };
-  */
 
   // one function used to serve both the functions login and error
   const loginAndError = async () => {
