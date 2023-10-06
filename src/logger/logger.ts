@@ -10,11 +10,11 @@ const Logger = {
   // Should be set in the view logger is used in.
   logPrefix: "CustomLogger",
   getFormattedTimestamp() {
-    const time = new DateTime({});
+    const time = DateTime.now();
     return time.toFormat("yyyyMMdd HH:mm:ss");
   },
 
-  debug(...params) {
+  debug(...params: unknown[]) {
     if (import.meta.env.MODE === this.loggedEnv && this.logLevel === "debug") {
       console.log(
         `DEBU|${this.getFormattedTimestamp()}[${this.logPrefix}]`,
@@ -25,7 +25,7 @@ const Logger = {
     // console.log("HEI DEBUG 2");
   },
 
-  info(...params) {
+  info(...params: unknown[]) {
     if (
       import.meta.env.MODE === this.loggedEnv &&
       ["debug", "info"].includes(this.logLevel)
@@ -39,7 +39,7 @@ const Logger = {
     // console.log("HEI INFO 2");
   },
 
-  warn(...params) {
+  warn(...params: unknown[]) {
     if (
       import.meta.env.MODE === this.loggedEnv &&
       ["debug", "info", "warn"].includes(this.logLevel)
@@ -51,7 +51,7 @@ const Logger = {
     }
   },
 
-  error(...params) {
+  error(...params: unknown[]) {
     if (import.meta.env.MODE === this.loggedEnv) {
       console.error(
         `ERRO|${this.getFormattedTimestamp()}[${this.logPrefix}]`,
