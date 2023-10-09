@@ -82,7 +82,7 @@ export default function SpaceView() {
           <AddSpace getAllSpaces={getAllSpaces} allSpacesList={allSpacesList} />
         ) : (
           <Typography variant="subtitle1" mt={3}>
-            "Not showing add subject to your role"
+            "Not showing add space to your role"
           </Typography>
         )}
         <Grid container rowSpacing={1}>
