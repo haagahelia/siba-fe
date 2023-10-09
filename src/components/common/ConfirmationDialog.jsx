@@ -29,11 +29,11 @@ export default function ConfirmationDialog({
           <Button
             autoFocus
             variant="contained"
-            onClick={() => {
+            onClick={async () => {
               if (submitValues) {
-                submit(submitValues);
+                await submit(submitValues);
               } else {
-                submit();
+                await submit();
               }
               handleClose();
             }}
