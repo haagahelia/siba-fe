@@ -18,6 +18,8 @@ export default function DeleteUser({ singleUser, getAllUsers, setOpen }) {
   });
   const [deleteId, setDeleteId] = useState("");
 
+  const currentUserEmail = localStorage.getItem("email");
+
   const deleteUser = async (userId) => {
     const result = await dao.deleteSingleUser(userId);
     if (result === false) {
@@ -36,7 +38,6 @@ export default function DeleteUser({ singleUser, getAllUsers, setOpen }) {
     });
     setAlertOpen(true);
 
-    // Close the "single user dialog" after a delay to allow the alert to be shown
     setTimeout(() => {
       setOpen(false);
     }, 4000); // 4000ms (4 seconds) matches the autoHideDuration of the Snackbar
@@ -45,13 +46,25 @@ export default function DeleteUser({ singleUser, getAllUsers, setOpen }) {
   };
 
   const submitDelete = (data) => {
+    if (data.email === currentUserEmail) {
+      setDialogOptions({
+        title: "Confirm Deletion",
+        content: "Are you sure you want to delete your own profile?",
+      });
+      setDialogOpen(true);
+      setDeleteId(data.id);
+    } else {
+      proceedToDelete(data);
+    }
+  };
+
+  const proceedToDelete = (data) => {
     setDialogOptions({
       title: `Are you sure you want to delete ${data.email}?`,
       content: `Press continue to delete ${data.email} from the listing.`,
     });
     setDialogOpen(true);
     setDeleteId(data.id);
-    return;
   };
 
   return (
