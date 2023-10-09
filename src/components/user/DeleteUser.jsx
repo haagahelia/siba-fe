@@ -36,6 +36,11 @@ export default function DeleteUser({ singleUser, getAllUsers, setOpen }) {
     });
     setAlertOpen(true);
 
+    // Close the "single user dialog" after a delay to allow the alert to be shown
+    setTimeout(() => {
+      setOpen(false);
+    }, 4000); // 4000ms (4 seconds) matches the autoHideDuration of the Snackbar
+
     getAllUsers();
   };
 
