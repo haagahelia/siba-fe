@@ -2,7 +2,7 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
-// import SingleSubjectDialog from "./SingleSubjectDialog";
+import SingleSpaceDialog from "./SingleSpaceDialog";
 import SpaceList from "./SpaceList";
 
 export default function SpaceListContainer({
@@ -14,13 +14,11 @@ export default function SpaceListContainer({
 }) {
   return (
     <Container maxWidth="lg">
-      {/*
-        <SingleSubjectDialog
-          getAllSubjects={getAllSpaces}
-          open={open}
-          setOpen={setOpen}
-        />
-      */}
+      <SingleSpaceDialog
+        getAllSpaces={getAllSpaces}
+        open={open}
+        onClose={() => setOpen(false)}
+      />
 
       <Grid container spacing={2}>
         <Card variant="outlined">

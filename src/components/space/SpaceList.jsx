@@ -11,16 +11,13 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import TableSortLabel from "@mui/material/TableSortLabel";
-// import SingleSubjectDialog from "./SingleSubjectDialog";
+import SingleSpaceDialog from "./SingleSpaceDialog";
 
-export default function SpaceList({
-  // getAllSpaces,
-  paginateSpaces,
-}) {
-  // const [open, setOpen] = useState(false);
-  // const [singleSpace, setSingleSpace] = useState(null);
+export default function SpaceList({ getAllSpaces, paginateSpaces }) {
+  const [open, setOpen] = useState(false);
+  const [singleSpace, setSingleSpace] = useState(null);
   const [order, setOrder] = useState("asc");
-  const [orderBy, setOrderBy] = useState("SubjectName");
+  const [orderBy, setOrderBy] = useState("SpaceName");
 
   const handleRequestSort = (property) => {
     const isAsc = orderBy === property && order === "asc";
@@ -48,15 +45,14 @@ export default function SpaceList({
   }));
   return (
     <div>
-      {/*
-        <SingleSubjectDialog
-          open={open}
-          setOpen={setOpen}
-          singleSubject={singleSubject}
-          setSingleSubject={setSingleSubject}
-          getAllSubjects={getAllSubjects}
-        />
-      */}
+      <SingleSpaceDialog
+        open={open}
+        setOpen={setOpen}
+        singleSpace={singleSpace}
+        setSingleSpace={setSingleSpace}
+        getAllSpaces={getAllSpaces}
+      />
+
       <Box>
         <Paper>
           <TableContainer>
@@ -90,8 +86,8 @@ export default function SpaceList({
                     <TableCell>
                       <IconButton
                         onClick={() => {
-                          // setSingleSpace(value);
-                          // setOpen(true);
+                          setSingleSpace(value);
+                          setOpen(true);
                         }}
                         aria-label="Open Info"
                       >
