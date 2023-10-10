@@ -20,10 +20,10 @@ export default function DeleteSubject({
     title: "this is dialog",
     content: "Something here",
   });
-  const [deleteId, setDeleteId] = useState("");
+  const [deleteSubjectData, setDeleteSubjectData] = useState(null);
 
-  const deleteSubject = async (value) => {
-    const result = await dao.deleteSingleSubject(value);
+  const deleteSubject = async (subjectData) => {
+    const result = await dao.deleteSingleSubject(subjectData.id);
     if (result === false) {
       setAlertOptions({
         severity: "error",
@@ -36,10 +36,13 @@ export default function DeleteSubject({
     setAlertOptions({
       severity: "success",
       title: "Success!",
-      message: `${value.subjectName} removed.`,
+      message: `${subjectData.subjectName} removed successfully.`,
     });
     setAlertOpen(true);
-    setOpen(false);
+
+    setTimeout(() => {
+      setOpen(false);
+    }, 4000);
 
     getAllSubjects();
   };
@@ -50,7 +53,7 @@ export default function DeleteSubject({
       content: `Press continue to delete ${data.subjectName} from the listing.`,
     });
     setDialogOpen(true);
-    setDeleteId(data.id);
+    setDeleteSubjectData(data);
     return;
   };
 
@@ -66,7 +69,7 @@ export default function DeleteSubject({
         dialogOptions={dialogOptions}
         setDialogOpen={setDialogOpen}
         submit={deleteSubject}
-        submitValues={deleteId}
+        submitValues={deleteSubjectData}
       />
       <Button
         variant="contained"

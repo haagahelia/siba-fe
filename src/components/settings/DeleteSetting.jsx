@@ -20,10 +20,10 @@ export default function DeleteSetting({
     title: "this is dialog",
     content: "Something here",
   });
-  const [deleteId, setDeleteId] = useState("");
+  const [deleteSettingData, setDeleteSettingData] = useState(null);
 
-  const deleteSetting = async (value) => {
-    const result = await dao.deleteSettingById(value);
+  const deleteSetting = async (settingData) => {
+    const result = await dao.deleteSettingById(settingData.id);
     if (result === false) {
       setAlertOptions({
         severity: "error",
@@ -36,12 +36,13 @@ export default function DeleteSetting({
     setAlertOptions({
       severity: "success",
       title: "Success!",
-      message: `${value.name} removed.`,
+      message: `${settingData.name} removed.`,
     });
-    // getAllSettings();
-    setOpen(false);
-    incrementDataModifiedCounter();
     setAlertOpen(true);
+    setTimeout(() => {
+      setOpen(false);
+    }, 4000);
+    incrementDataModifiedCounter();
   };
 
   const submitDelete = (data) => {
@@ -50,7 +51,7 @@ export default function DeleteSetting({
       content: `Press continue to delete ${data.name} from the listing.`,
     });
     setDialogOpen(true);
-    setDeleteId(data.id);
+    setDeleteSettingData(data);
     return;
   };
 
@@ -66,7 +67,7 @@ export default function DeleteSetting({
         dialogOptions={dialogOptions}
         setDialogOpen={setDialogOpen}
         submit={deleteSetting}
-        submitValues={deleteId}
+        submitValues={deleteSettingData}
       />
       <Button
         variant="contained"
