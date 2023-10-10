@@ -47,7 +47,7 @@ export default function AddUser() {
       setAlertOptions({
         severity: "success",
         title: "Success!",
-        message: "User was successfully created.",
+        message: `A user ${registerForm.email} was successfully created.`,
       });
       setAlertOpen(true); // Open the alert
 
