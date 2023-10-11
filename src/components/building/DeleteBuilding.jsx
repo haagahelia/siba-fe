@@ -20,10 +20,10 @@ export default function DeleteBuilding({
     title: "this is dialog",
     content: "Something here",
   });
-  const [deleteId, setDeleteId] = useState("");
+  const [deleteBuildingData, setDeleteBuildingData] = useState(null);
 
-  const deleteBuilding = async (value) => {
-    const result = await dao.deleteBuildingById(value);
+  const deleteBuilding = async (buildingData) => {
+    const result = await dao.deleteBuildingById(buildingData.id);
     if (result === false) {
       setAlertOptions({
         severity: "error",
@@ -36,10 +36,13 @@ export default function DeleteBuilding({
     setAlertOptions({
       severity: "success",
       title: "Success!",
-      message: `${value.name} removed.`,
+      message: `${buildingData.name} removed successfully.`,
     });
     setAlertOpen(true);
-    setOpen(false);
+
+    setTimeout(() => {
+      setOpen(false);
+    }, 4000);
 
     getAllBuildings();
   };
@@ -50,7 +53,7 @@ export default function DeleteBuilding({
       content: `Press continue to delete ${data.name} from the listing.`,
     });
     setDialogOpen(true);
-    setDeleteId(data.id);
+    setDeleteBuildingData(data);
     return;
   };
 
@@ -66,7 +69,7 @@ export default function DeleteBuilding({
         dialogOptions={dialogOptions}
         setDialogOpen={setDialogOpen}
         submit={deleteBuilding}
-        submitValues={deleteId}
+        submitValues={deleteBuildingData}
       />
       <Button
         variant="contained"

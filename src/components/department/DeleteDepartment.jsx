@@ -20,10 +20,10 @@ export default function DeleteDepartment({
     title: "this is dialog",
     content: "Something here",
   });
-  const [deleteId, setDeleteId] = useState("");
+  const [deleteDepartmentData, setDeleteDepartmentData] = useState(null);
 
-  const deleteDepartment = async (value) => {
-    const result = await dao.deleteDepartment(value);
+  const deleteDepartment = async (departmentData) => {
+    const result = await dao.deleteDepartment(departmentData.id);
     console.log(result);
     if (result === false) {
       setAlertOptions({
@@ -37,10 +37,13 @@ export default function DeleteDepartment({
     setAlertOptions({
       severity: "success",
       title: "Success!",
-      message: `${value.subjectName} removed.`,
+      message: `${departmentData.name} removed successfully.`,
     });
     setAlertOpen(true);
-    setOpen(false);
+
+    setTimeout(() => {
+      setOpen(false);
+    }, 4000);
 
     getAllDepartments();
   };
@@ -51,7 +54,7 @@ export default function DeleteDepartment({
       content: `Press continue to delete ${data.name} from the listing.`,
     });
     setDialogOpen(true);
-    setDeleteId(data.id);
+    setDeleteDepartmentData(data);
     return;
   };
 
@@ -67,7 +70,7 @@ export default function DeleteDepartment({
         dialogOptions={dialogOptions}
         setDialogOpen={setDialogOpen}
         submit={deleteDepartment}
-        submitValues={deleteId}
+        submitValues={deleteDepartmentData}
       />
       <Button
         variant="contained"

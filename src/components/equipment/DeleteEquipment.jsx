@@ -20,10 +20,10 @@ export default function DeleteEquipment({
     title: "this is dialog",
     content: "Something here",
   });
-  const [deleteId, setDeleteId] = useState("");
+  const [deleteEquipmentData, setDeleteEquipmentData] = useState(null);
 
-  const deleteEquipment = async (value) => {
-    const result = await dao.deleteSingleEquipment(value);
+  const deleteEquipment = async (equipmentData) => {
+    const result = await dao.deleteSingleEquipment(equipmentData.id);
     if (result === false) {
       setAlertOptions({
         severity: "error",
@@ -36,10 +36,13 @@ export default function DeleteEquipment({
     setAlertOptions({
       severity: "success",
       title: "Success!",
-      message: `${value.name} removed.`,
+      message: `${equipmentData.name} removed successfully.`,
     });
     setAlertOpen(true);
-    setOpen(false);
+
+    setTimeout(() => {
+      setOpen(false);
+    }, 4000);
 
     getAllEquipments();
   };
@@ -50,7 +53,7 @@ export default function DeleteEquipment({
       content: `Press continue to delete ${data.name} from the listing.`,
     });
     setDialogOpen(true);
-    setDeleteId(data.id);
+    setDeleteEquipmentData(data);
     return;
   };
 
@@ -66,7 +69,7 @@ export default function DeleteEquipment({
         dialogOptions={dialogOptions}
         setDialogOpen={setDialogOpen}
         submit={deleteEquipment}
-        submitValues={deleteId}
+        submitValues={deleteEquipmentData}
       />
       <Button
         variant="contained"

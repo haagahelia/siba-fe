@@ -5,7 +5,11 @@ import Button from "@mui/material/Button";
 import AlertBox from "../common/AlertBox";
 import ConfirmationDialog from "../common/ConfirmationDialog";
 
-export default function DeleteUser({ singleUser, getAllUsers, setOpen }) {
+export default function DeleteSubject({
+  singleSubject,
+  getAllSubjects,
+  setOpen,
+}) {
   const [alertOpen, setAlertOpen] = useState(false);
   const [alertOptions, setAlertOptions] = useState({
     message: "This is an error alert — check it out!",
@@ -16,12 +20,10 @@ export default function DeleteUser({ singleUser, getAllUsers, setOpen }) {
     title: "this is dialog",
     content: "Something here",
   });
-  const [deleteId, setDeleteId] = useState("");
+  const [deleteSubjectData, setDeleteSubjectData] = useState(null);
 
-  const currentUserEmail = localStorage.getItem("email");
-
-  const deleteUser = async (userId) => {
-    const result = await dao.deleteSingleUser(userId);
+  const deleteSubject = async (subjectData) => {
+    const result = await dao.deleteSingleSubject(subjectData.id);
     if (result === false) {
       setAlertOptions({
         severity: "error",
@@ -34,37 +36,25 @@ export default function DeleteUser({ singleUser, getAllUsers, setOpen }) {
     setAlertOptions({
       severity: "success",
       title: "Success!",
-      message: `${singleUser.email} removed.`,
+      message: `${subjectData.subjectName} removed successfully.`,
     });
     setAlertOpen(true);
 
     setTimeout(() => {
       setOpen(false);
-    }, 4000); // 4000ms (4 seconds) matches the autoHideDuration of the Snackbar
+    }, 4000);
 
-    getAllUsers();
+    getAllSubjects();
   };
 
   const submitDelete = (data) => {
-    if (data.email === currentUserEmail) {
-      setDialogOptions({
-        title: "Confirm Deletion",
-        content: "Are you sure you want to delete your own profile?",
-      });
-      setDialogOpen(true);
-      setDeleteId(data.id);
-    } else {
-      proceedToDelete(data);
-    }
-  };
-
-  const proceedToDelete = (data) => {
     setDialogOptions({
-      title: `Are you sure you want to delete ${data.email}?`,
-      content: `Press continue to delete ${data.email} from the listing.`,
+      title: `Are you sure you want to delete ${data.subjectName}?`,
+      content: `Press continue to delete ${data.subjectName} from the listing.`,
     });
     setDialogOpen(true);
-    setDeleteId(data.id);
+    setDeleteSubjectData(data);
+    return;
   };
 
   return (
@@ -78,13 +68,13 @@ export default function DeleteUser({ singleUser, getAllUsers, setOpen }) {
         dialogOpen={dialogOpen}
         dialogOptions={dialogOptions}
         setDialogOpen={setDialogOpen}
-        submit={deleteUser}
-        submitValues={deleteId}
+        submit={deleteSubject}
+        submitValues={deleteSubjectData}
       />
       <Button
         variant="contained"
         color="red"
-        onClick={() => submitDelete(singleUser)}
+        onClick={() => submitDelete(singleSubject)}
       >
         Delete
       </Button>
