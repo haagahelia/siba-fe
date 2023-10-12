@@ -14,10 +14,12 @@ import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
+import useTheme from "@mui/material/styles/useTheme";
 
 export default function EditSubEquipForm({ formik, equipmentPriorityList }) {
   const [open, setOpen] = useState(false);
   const [equipPriority, setEquipPriority] = useState(0);
+  const theme = useTheme();
 
   /* Here we look for the priority of the equipment selected in select,
      so that the user can see what the equipment's default priority value is */
@@ -35,8 +37,8 @@ export default function EditSubEquipForm({ formik, equipmentPriorityList }) {
     <div>
       <Button
         variant="contained"
-        color="secondary"
-        style={{ maxWidth: "85px", margin: "5px" }}
+        style={theme.components.MuiButton.editbutton}
+        sx={{ maxWidth: "85px", margin: "5px" }}
         onClick={() => {
           setOpen(true);
         }}
@@ -101,12 +103,10 @@ export default function EditSubEquipForm({ formik, equipmentPriorityList }) {
               </Grid>
             </DialogContentText>
           </DialogContent>
-          <DialogActions
-            sx={{ justifyContent: "space-evenly", padding: "16px" }}
-          >
+          <DialogActions>
             <Button
               variant="contained"
-              color="red"
+              style={theme.components.MuiButton.redbutton}
               onClick={() => {
                 setOpen(false);
                 // Let's reset the form if you press cancel

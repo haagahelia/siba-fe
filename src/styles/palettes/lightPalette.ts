@@ -37,11 +37,11 @@ export const lightPalette: PaletteContract = {
   },
   error: {
     main: indicatorRed,
-    contrastText: white,
+    contrastText: black,
   },
   warning: {
     main: indicatorRed,
-    contrastText: white,
+    contrastText: black,
   },
   info: {
     main: indicatorOrange,
@@ -109,7 +109,7 @@ export const lightPalette: PaletteContract = {
   },
   edit: {
     main: indicatorOrange,
-    contrastText: white,
+    contrastText: black,
   },
   fontColorDefault: { default: black },
   helperText: {
