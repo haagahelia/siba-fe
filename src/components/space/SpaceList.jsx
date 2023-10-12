@@ -39,7 +39,7 @@ export default function SpaceList({ getAllSpaces, paginateSpaces }) {
   });
 
   // STYLE
-  const Box = styled(Table)(({ theme }) => ({
+  const StyledPaper = styled(Paper)(({ theme }) => ({
     overflow: "auto",
     borderCollapse: "collapse",
   }));
@@ -52,57 +52,54 @@ export default function SpaceList({ getAllSpaces, paginateSpaces }) {
         setSingleSpace={setSingleSpace}
         getAllSpaces={getAllSpaces}
       />
-
-      <Box>
-        <Paper>
-          <TableContainer>
-            <Table>
-              <TableHead>
-                <TableRow>
-                  <TableCell />
+      <StyledPaper>
+        <TableContainer>
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell />
+                <TableCell>
+                  <TableSortLabel
+                    active={orderBy === "name"}
+                    direction={order}
+                    onClick={() => handleRequestSort("name")}
+                  >
+                    Name
+                  </TableSortLabel>
+                </TableCell>
+                <TableCell>
+                  <TableSortLabel
+                    active={orderBy === "area"}
+                    direction={order}
+                    onClick={() => handleRequestSort("area")}
+                  >
+                    Area
+                  </TableSortLabel>
+                </TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {sortedSpaces.map((value) => (
+                <TableRow key={value.id}>
                   <TableCell>
-                    <TableSortLabel
-                      active={orderBy === "name"}
-                      direction={order}
-                      onClick={() => handleRequestSort("name")}
+                    <IconButton
+                      onClick={() => {
+                        setSingleSpace(value);
+                        setOpen(true);
+                      }}
+                      aria-label="Open Info"
                     >
-                      Name
-                    </TableSortLabel>
+                      <InfoIcon />
+                    </IconButton>
                   </TableCell>
-                  <TableCell>
-                    <TableSortLabel
-                      active={orderBy === "area"}
-                      direction={order}
-                      onClick={() => handleRequestSort("area")}
-                    >
-                      Area
-                    </TableSortLabel>
-                  </TableCell>
+                  <TableCell>{value.name}</TableCell>
+                  <TableCell>{value.area}</TableCell>
                 </TableRow>
-              </TableHead>
-              <TableBody>
-                {sortedSpaces.map((value) => (
-                  <TableRow key={value.id}>
-                    <TableCell>
-                      <IconButton
-                        onClick={() => {
-                          setSingleSpace(value);
-                          setOpen(true);
-                        }}
-                        aria-label="Open Info"
-                      >
-                        <InfoIcon />
-                      </IconButton>
-                    </TableCell>
-                    <TableCell>{value.name}</TableCell>
-                    <TableCell>{value.area}</TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </TableContainer>
-        </Paper>
-      </Box>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </StyledPaper>
     </div>
   );
 }
