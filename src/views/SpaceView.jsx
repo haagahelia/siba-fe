@@ -12,6 +12,7 @@ import CardContent from "@mui/material/CardContent";
 import CardHeader from "@mui/material/CardHeader";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
+import Typography from "@mui/material/Typography";
 import AlertBox from "../components/common/AlertBox";
 import AddSpace from "../components/space/AddSpace";
 import SpaceFiltering from "../components/space/SpaceFiltering";
