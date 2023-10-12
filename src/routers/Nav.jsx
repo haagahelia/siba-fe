@@ -1,3 +1,4 @@
+// The Navigation Bar Component
 import { useContext, useState } from "react";
 import { AppContext } from "../AppContext";
 import Logger from "../logger/logger";
