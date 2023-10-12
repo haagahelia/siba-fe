@@ -1,3 +1,4 @@
+// The Register Page
 // import bcrypt from "bcryptjs";
 import { useState } from "react";
 import dao from "../../ajax/dao";
@@ -72,7 +73,7 @@ export default function AddUser() {
       <Card
         variant="outlined"
         sx={{
-          width: "65%",
+          maxWidth: "100%",
           padding: 1,
           margin: "auto",
           marginTop: "85px",

@@ -1,3 +1,4 @@
+// The Lessons Page
 import { useContext, useEffect, useState } from "react";
 import { AppContext } from "../AppContext";
 import {
@@ -80,7 +81,7 @@ export default function SubjectView() {
         alertOptions={alertOptions}
         setAlertOpen={setAlertOpen}
       />
-      <Container maxWidth="xl">
+      <Container maxWidth="100%">
         {appContext.roles.admin || appContext.roles.planner ? (
           <AddSubjectContainer
             getAllSubjects={getAllSubjects}

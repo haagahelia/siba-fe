@@ -1,3 +1,4 @@
+// The Equipment Page
 import { useEffect, useState } from "react";
 import {
   ajaxRequestErrorHandler,
@@ -55,7 +56,7 @@ export default function Equipments() {
   }, []);
 
   return (
-    <div style={{ marginLeft: "120px" }}>
+    <div>
       <Container maxWidth="100%">
         {(roles.admin === "1" || roles.planner === "1") && (
           <AddEquipment getAllEquipments={getAllEquipments} />

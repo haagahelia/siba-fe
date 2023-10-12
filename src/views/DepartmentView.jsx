@@ -1,3 +1,4 @@
+// The Departments Page
 import { useEffect, useState } from "react";
 import dao from "../ajax/dao";
 import { useRoleLoggedIn } from "../hooks/useRoleLoggedIn";
@@ -58,7 +59,7 @@ export default function DepartmentView() {
   }, []);
 
   return (
-    <Box sx={{ marginLeft: 8 }}>
+    <Box>
       <DepartmentDialog
         open={open}
         setOpen={setOpen}
