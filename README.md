@@ -137,10 +137,48 @@ dao.js file unifications
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-## For Developers
+## For Front-end Developers
+
+### Styling
+siba-fe\src\styles\theme.js <br>
 
 ### Navigation Bar
-Structure: siba-fe\src\routers\Nav.jsx <br>
-Styling: siba-fe\src\styles\theme.js <br>
+siba-fe\src\routers\Nav.jsx <br>
+
+### Lessons Page
+siba-fe\src\views\SubjectView.jsx <br>
+
+### Allocation Page
+siba-fe\src\views\AllocRoundView.jsx <br>
+
+### Buildings Page
+siba-fe\src\components\building\BuildingList.jsx <br>
+
+### Departments Page
+siba-fe\src\views\DepartmentView.jsx <br>
+
+### Equipment Page
+siba-fe\src\components\equipment\Equipments.jsx <br>
+
+### Spaces Page
+siba-fe\src\views\SpaceView.jsx <br>
+
+### Program Results Page
+siba-fe\src\components\result\ProgramResult.jsx <br>
+
+### Room Results Page
+siba-fe\src\components\result\RoomResult.jsx <br>
+
+### Register Page
+siba-fe\src\components\user\AddUser.jsx <br>
+
+### User List Page
+siba-fe\src\views\UserView.jsx <br>
+
+### Settings Page
+siba-fe\src\views\SettingsView.jsx <br>
+
+### Log In Page
+siba-fe\src\views\LoginView.jsx <br>
 
 <p align="right">(<a href="#top">back to top</a>)</p>

@@ -1,3 +1,4 @@
+// The Buildings Page
 import { useEffect, useState } from "react";
 import dao from "../../ajax/dao";
 import { useRoleLoggedIn } from "../../hooks/useRoleLoggedIn";
@@ -61,7 +62,7 @@ export default function BuildingList() {
         alertOptions={alertOptions}
         setAlertOpen={setAlertOpen}
       />
-      <Container>
+      <Container maxWidth="100%">
         {(roles.admin === "1" || roles.planner === "1") && (
           <AddBuildingContainer getAllBuildings={getAllBuildings} />
         )}

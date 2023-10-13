@@ -1,16 +1,20 @@
+// The Log In page
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AppContext } from "../AppContext";
 import dao from "../ajax/dao";
 import Logger from "../logger/logger";
 
+import { navbarWidth } from "/src/styles/theme.js";
 import Button from "@mui/material/Button";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Grid from "@mui/material/Grid";
 import Link from "@mui/material/Link";
 import TextField from "@mui/material/TextField";
+import Typography from "@mui/material/Typography";
 import AlertBox from "../components/common/AlertBox";
+import logo from "../styles/SibeliusLogoLoginPage.svg";
 
 export default function LoginView({ handleLoginChange }) {
   Logger.logPrefix = "LoginView";
@@ -113,17 +117,34 @@ export default function LoginView({ handleLoginChange }) {
         alertOptions={alertOptions}
         setAlertOpen={setAlertOpen}
       />
-
+      <img
+        src={logo}
+        alt="Sibelius-Akatemia logo in the background."
+        style={{
+          height: "95%",
+          position: "absolute",
+          top: "50%",
+          transform: "translate(-50%, -50%)",
+          width: `calc(95% - ${navbarWidth})`,
+        }}
+      />
       <Card
-        variant="outlined"
         sx={{
-          width: "65%",
-          padding: 1,
+          alignItems: "center",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          height: "100vh",
           margin: "auto",
-          marginTop: "100px",
+          width: "100%",
         }}
       >
-        <CardContent>
+        <CardContent
+          style={{
+            zIndex: 1,
+          }}
+        >
+          <Typography variant="h4">Login</Typography>
           <Grid>
             <TextField
               value={loginForm.email}
@@ -146,10 +167,10 @@ export default function LoginView({ handleLoginChange }) {
               type="password"
             />
           </Grid>
-          <Link onClick={handleReset}>Forget your password?</Link>
           <Grid>
             <Button onClick={loginAndError}>Log In</Button>
           </Grid>
+          <Link onClick={handleReset}>Forget your password?</Link>
           {errorMsg}
         </CardContent>
       </Card>

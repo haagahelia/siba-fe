@@ -22,6 +22,7 @@ export const createAppTheme = (currentPalette) =>
       MuiCard: {
         styleOverrides: {
           root: {
+            // Affects Page components
             backgroundColor: currentPalette.backgroundDarker.default,
             borderColor: currentPalette.borderColor.cardBoder,
             width: "85%",
