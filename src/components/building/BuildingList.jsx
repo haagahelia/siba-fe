@@ -12,15 +12,11 @@ import TableSortLabel from "@mui/material/TableSortLabel";
 import styled from "@mui/material/styles/styled";
 import React, { useEffect, useState } from "react";
 import dao from "../../ajax/dao";
-import { useRoleLoggedIn } from "../../hooks/useRoleLoggedIn";
 import Logger from "../../logger/logger";
-import AddBuildingContainer from "./AddBuildingContainer";
 import SingleBuildingDialog from "./SingleBuildingDialog";
 
 export default function BuildingList() {
   Logger.logPrefix = "BuildingList";
-
-  const { roles } = useRoleLoggedIn();
   const [allBuildingsList, setAllBuildingsList] = useState([]);
   const [open, setOpen] = useState(false);
   const [singleBuilding, setSingleBuilding] = useState(null);
@@ -75,9 +71,6 @@ export default function BuildingList() {
   return (
     <div>
       <Container>
-        {(roles.admin === "1" || roles.planner === "1") && (
-          <AddBuildingContainer getAllBuildings={getAllBuildings} />
-        )}
         <SingleBuildingDialog
           open={open}
           setOpen={setOpen}
