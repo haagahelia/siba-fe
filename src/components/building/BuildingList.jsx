@@ -1,35 +1,31 @@
-import { useEffect, useState } from "react";
+import InfoIcon from "@mui/icons-material/Info";
+import Container from "@mui/material/Container";
+import IconButton from "@mui/material/IconButton";
+import Paper from "@mui/material/Paper";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import TableSortLabel from "@mui/material/TableSortLabel";
+import styled from "@mui/material/styles/styled";
+import React, { useEffect, useState } from "react";
 import dao from "../../ajax/dao";
 import { useRoleLoggedIn } from "../../hooks/useRoleLoggedIn";
 import Logger from "../../logger/logger";
-
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
-import CardHeader from "@mui/material/CardHeader";
-import Container from "@mui/material/Container";
-import Grid from "@mui/material/Grid";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import AlertBox from "../common/AlertBox";
 import AddBuildingContainer from "./AddBuildingContainer";
-import BuildingListItem from "./BuildingListItem";
 import SingleBuildingDialog from "./SingleBuildingDialog";
 
 export default function BuildingList() {
   Logger.logPrefix = "BuildingList";
 
   const { roles } = useRoleLoggedIn();
-
   const [allBuildingsList, setAllBuildingsList] = useState([]);
-  const [alertOpen, setAlertOpen] = useState(false);
-  const [alertOptions, setAlertOptions] = useState({
-    message: "This is an error alert — check it out!",
-    severity: "error",
-  });
   const [open, setOpen] = useState(false);
   const [singleBuilding, setSingleBuilding] = useState(null);
-  // State for checking if the card is expanded
-  const [isCardExpanded, setIsCardExpanded] = useState(true);
+  const [order, setOrder] = useState("asc");
+  const [orderBy, setOrderBy] = useState("Name");
 
   const getAllBuildings = async function () {
     const { httpStatus, data } = await dao.fetchAllBuildings();
@@ -49,18 +45,35 @@ export default function BuildingList() {
     }
   };
 
+  const handleRequestSort = (property) => {
+    const isAsc = orderBy === property && order === "asc";
+    setOrder(isAsc ? "desc" : "asc");
+    setOrderBy(property);
+  };
+
+  const sortedBuildingsList = allBuildingsList.sort((a, b) => {
+    switch (orderBy) {
+      case "Name":
+        return order === "asc"
+          ? a.name.localeCompare(b.name)
+          : b.name.localeCompare(a.name);
+      default:
+        return 0;
+    }
+  });
+
+  // STYLE
+  const Box = styled(TableContainer)(({ theme }) => ({
+    overflow: "auto",
+  }));
+
   useEffect(() => {
     Logger.debug("Buildings component instantiated.");
     getAllBuildings();
   }, []);
 
   return (
-    <>
-      <AlertBox
-        alertOpen={alertOpen}
-        alertOptions={alertOptions}
-        setAlertOpen={setAlertOpen}
-      />
+    <div>
       <Container>
         {(roles.admin === "1" || roles.planner === "1") && (
           <AddBuildingContainer getAllBuildings={getAllBuildings} />
@@ -72,43 +85,49 @@ export default function BuildingList() {
           setSingleBuilding={setSingleBuilding}
           getAllBuildings={getAllBuildings}
         />
-        <Grid container rowSpacing={1}>
-          <Card variant="outlined">
-            <CardHeader
-              title="Buildings"
-              onClick={() => setIsCardExpanded(!isCardExpanded)}
-            />
-            <CardContent style={{ display: isCardExpanded ? "block" : "none" }}>
-              {allBuildingsList.map((buildingDetail) => {
-                return (
-                  <List key={buildingDetail.id}>
-                    <ListItem
-                      disablePadding
-                      onClick={() => {
-                        setSingleBuilding(buildingDetail);
-                        Logger.debug(
-                          `Building selected: ${JSON.stringify(
-                            buildingDetail,
-                          )}`,
-                        );
-                        setOpen(true);
-                      }}
-                    >
-                      <BuildingListItem
-                        open={open}
-                        setOpen={setOpen}
-                        singleBuilding={buildingDetail}
-                        setSingleBuilding={setSingleBuilding}
-                        getAllBuildings={getAllBuildings}
-                      />
-                    </ListItem>
-                  </List>
-                );
-              })}
-            </CardContent>
-          </Card>
-        </Grid>
+        <Box>
+          <Paper>
+            <TableContainer>
+              <Table>
+                <TableHead>
+                  <TableRow>
+                    <TableCell />
+                    <TableCell>
+                      <TableSortLabel
+                        active={orderBy === "Name"}
+                        direction={order}
+                        onClick={() => handleRequestSort("Name")}
+                      >
+                        Name
+                      </TableSortLabel>
+                    </TableCell>
+                    <TableCell>Description</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {sortedBuildingsList.map((value) => (
+                    <TableRow key={value.id}>
+                      <TableCell>
+                        <IconButton
+                          onClick={() => {
+                            setSingleBuilding(value);
+                            setOpen(true);
+                          }}
+                          aria-label="Open Info"
+                        >
+                          <InfoIcon />
+                        </IconButton>
+                      </TableCell>
+                      <TableCell>{value.name}</TableCell>
+                      <TableCell>{value.description}</TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </TableContainer>
+          </Paper>
+        </Box>
       </Container>
-    </>
+    </div>
   );
 }
