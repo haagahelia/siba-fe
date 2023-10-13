@@ -1,31 +1,66 @@
+import InfoIcon from "@mui/icons-material/Info";
+import IconButton from "@mui/material/IconButton";
+import Paper from "@mui/material/Paper";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import TableSortLabel from "@mui/material/TableSortLabel";
 import styled from "@mui/material/styles/styled";
 import { useContext, useState } from "react";
 import { AppContext } from "../../AppContext";
 import Logger from "../../logger/logger";
-
-import Divider from "@mui/material/Divider";
-import Grid from "@mui/material/Grid";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import ListItemText from "@mui/material/ListItemText";
-import Paper from "@mui/material/Paper";
-import Typography from "@mui/material/Typography";
 import AllocRoundDetails from "./AllocRoundDetails";
 
 export default function AllocRoundList({
   paginateAllocRounds,
   getAllocRounds,
-  // setAllocRoundId,
-  // getAllAllocRounds,
   incrementDataModifiedCounter,
 }) {
   const appContext = useContext(AppContext);
 
   const [singleAllocRound, setSingleAllocRound] = useState(null);
   const [open, setOpen] = useState(false);
+  const [order, setOrder] = useState("asc");
+  const [orderBy, setOrderBy] = useState("ID");
+
+  const handleRequestSort = (property) => {
+    const isAsc = orderBy === property && order === "asc";
+    setOrder(isAsc ? "desc" : "asc");
+    setOrderBy(property);
+  };
+
+  const sortedAllocRounds = paginateAllocRounds.sort((a, b) => {
+    switch (orderBy) {
+      case "ID":
+        return order === "asc" ? a.id - b.id : b.id - a.id;
+      case "Name":
+        return order === "asc"
+          ? a.name.localeCompare(b.name)
+          : b.name.localeCompare(a.name);
+      case "Description":
+        return order === "asc"
+          ? a.description.localeCompare(b.description)
+          : b.description.localeCompare(a.description);
+      case "LastModified":
+        return order === "asc"
+          ? a.lastModified.localeCompare(b.lastModified)
+          : b.lastModified.localeCompare(a.lastModified);
+      default:
+        return 0;
+    }
+  });
+
+  const handleRowClick = (allocRound) => {
+    setSingleAllocRound(allocRound);
+    setOpen(true);
+    Logger.debug(`Allocation round chosen: ${allocRound.name}`);
+  };
 
   // STYLE
-  const Box = styled(Paper)(({ theme }) => ({
+  const Box = styled(TableContainer)(({ theme }) => ({
     overflow: "auto",
   }));
 
@@ -36,90 +71,78 @@ export default function AllocRoundList({
         setOpen={setOpen}
         singleAllocRound={singleAllocRound}
         setSingleAllocRound={setSingleAllocRound}
-        // setAllocRoundId={setAllocRoundId}
         getAllocRounds={getAllocRounds}
         incrementDataModifiedCounter={incrementDataModifiedCounter}
       />
-      <Box>
-        <nav>
-          {paginateAllocRounds.map((value) => {
-            return (
-              <List key={value.id}>
-                <ListItem
-                  disablePadding
-                  onClick={() => {
-                    setSingleAllocRound(value);
-                    // setAllocRoundId(value.id);
-                    setOpen(true);
-                    Logger.debug(`Allocation round chosen: ${value.name}`);
-                  }}
+      <Box component={Paper}>
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableCell />
+              <TableCell>
+                <TableSortLabel
+                  active={orderBy === "ID"}
+                  direction={order}
+                  onClick={() => handleRequestSort("ID")}
                 >
-                  <Grid item md={3} xs={2}>
-                    <Typography
-                      variant="caption"
-                      style={{ fontWeight: "bold" }}
-                    >
-                      ID:
-                    </Typography>
-                    <ListItemText
-                      primary={
-                        value.id === appContext.allocRoundId
-                          ? `${value.id} ✅`
-                          : value.id
-                      }
-                      primaryTypographyProps={{
-                        variant: "body2",
-                      }}
-                    />
-                  </Grid>
-                  <Grid item md={3} xs={4}>
-                    <Typography
-                      variant="caption"
-                      style={{ fontWeight: "bold" }}
-                    >
-                      Name:
-                    </Typography>
-                    <ListItemText
-                      primary={value.name}
-                      primaryTypographyProps={{
-                        variant: "body2",
-                      }}
-                    />
-                  </Grid>
-                  <Grid item md={10} xs={7}>
-                    <Typography
-                      variant="caption"
-                      style={{ fontWeight: "bold" }}
-                    >
-                      Description:
-                    </Typography>
-                    <ListItemText
-                      primary={value.description}
-                      primaryTypographyProps={{
-                        variant: "body2",
-                      }}
-                    />
-                  </Grid>
-                  <Grid item md={3} xs={3}>
-                    <Typography
-                      variant="caption"
-                      style={{ fontWeight: "bold" }}
-                    >
-                      Last modified:
-                    </Typography>
-                    <ListItemText
-                      primary={value.lastModified}
-                      primaryTypographyProps={{
-                        variant: "body2",
-                      }}
-                    />
-                  </Grid>
-                </ListItem>
-                <Divider />
-              </List>
-            );
-          })}
-        </nav>
+                  ID
+                </TableSortLabel>
+              </TableCell>
+              <TableCell>
+                <TableSortLabel
+                  active={orderBy === "Name"}
+                  direction={order}
+                  onClick={() => handleRequestSort("Name")}
+                >
+                  Name
+                </TableSortLabel>
+              </TableCell>
+              <TableCell>
+                <TableSortLabel
+                  active={orderBy === "Description"}
+                  direction={order}
+                  onClick={() => handleRequestSort("Description")}
+                >
+                  Description
+                </TableSortLabel>
+              </TableCell>
+              <TableCell>
+                <TableSortLabel
+                  active={orderBy === "LastModified"}
+                  direction={order}
+                  onClick={() => handleRequestSort("LastModified")}
+                >
+                  Last Modified
+                </TableSortLabel>
+              </TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {sortedAllocRounds.map((value) => (
+              <TableRow key={value.id}>
+                <TableCell>
+                  <IconButton
+                    onClick={() => {
+                      handleRowClick(value);
+                      setOpen(true);
+                    }}
+                    aria-label="Open Info"
+                  >
+                    <InfoIcon />
+                  </IconButton>
+                </TableCell>
+                <TableCell>
+                  {value.id === appContext.allocRoundId
+                    ? `${value.id}✅`
+                    : value.id}
+                </TableCell>
+                <TableCell>{value.name}</TableCell>
+                <TableCell>{value.description}</TableCell>
+                <TableCell>{value.lastModified}</TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
       </Box>
     </div>
   );

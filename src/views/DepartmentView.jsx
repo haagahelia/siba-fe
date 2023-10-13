@@ -1,27 +1,29 @@
-// The Departments Page
+import InfoIcon from "@mui/icons-material/Info";
+import { Card, CardContent, CardHeader, Container, Grid } from "@mui/material";
+import {
+  Paper,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+} from "@mui/material";
+import IconButton from "@mui/material/IconButton";
+import TableSortLabel from "@mui/material/TableSortLabel";
+import { styled } from "@mui/material/styles";
 import { useEffect, useState } from "react";
 import dao from "../ajax/dao";
-import { useRoleLoggedIn } from "../hooks/useRoleLoggedIn";
-import Logger from "../logger/logger";
-
-import Box from "@mui/material/Box";
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
-import CardHeader from "@mui/material/CardHeader";
-import Container from "@mui/material/Container";
-import Grid from "@mui/material/Grid";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import ListItemText from "@mui/material/ListItemText";
-import Typography from "@mui/material/Typography";
 import AddDepartment from "../components/department/AddDepartment";
 import DepartmentDialog from "../components/department/DepartmentDialog";
+import { useRoleLoggedIn } from "../hooks/useRoleLoggedIn";
+import Logger from "../logger/logger";
 
 export default function DepartmentView() {
   Logger.logPrefix = "DepartmentView";
   Logger.debug("DepartmentView component instantiated.");
 
-  const [DepartmentList, setDepartmentList] = useState([]);
+  const [departmentList, setDepartmentList] = useState([]);
   const [singleDepartment, setSingleDepartment] = useState();
   const [open, setOpen] = useState(false);
   const [setAlertOptions] = useState({
@@ -31,9 +33,13 @@ export default function DepartmentView() {
   const [setAlertOpen] = useState(false);
 
   const { roles } = useRoleLoggedIn();
+  const [order, setOrder] = useState("asc");
+  const [orderBy, setOrderBy] = useState("id");
 
   const getAllDepartments = async function () {
-    Logger.debug("getAllDepartments: fetching all departments from server.");
+    Logger.debug(
+      "getAllDepartments: fetching all departments from the server.",
+    );
     const { success, data } = await dao.fetchDepartmentData();
     if (!success) {
       Logger.error("getAllDepartments: failed to fetch all departments.");
@@ -53,13 +59,38 @@ export default function DepartmentView() {
     }
   };
 
+  const handleRequestSort = (property) => {
+    const isAsc = orderBy === property && order === "asc";
+    setOrder(isAsc ? "desc" : "asc");
+    setOrderBy(property);
+  };
+
+  const sortedDepartmentList = departmentList.sort((a, b) => {
+    if (orderBy === "id") {
+      return order === "asc" ? a.id - b.id : b.id - a.id;
+    } else if (orderBy === "name") {
+      return order === "asc"
+        ? a.name.localeCompare(b.name)
+        : b.name.localeCompare(a.name);
+    } else if (orderBy === "description") {
+      return order === "asc"
+        ? a.description.localeCompare(b.description)
+        : b.description.localeCompare(a.description);
+    }
+  });
+
+  const Box = styled(Table)(({ theme }) => ({
+    overflow: "auto",
+    borderCollapse: "collapse",
+  }));
+
   useEffect(() => {
     Logger.debug("Running effect to fetch all departments.");
     getAllDepartments();
   }, []);
 
   return (
-    <Box>
+    <Box sx={{ marginLeft: 8 }}>
       <DepartmentDialog
         open={open}
         setOpen={setOpen}
@@ -75,61 +106,62 @@ export default function DepartmentView() {
               {(roles.admin === "1" || roles.planner === "1") && (
                 <AddDepartment getAllDepartments={getAllDepartments} />
               )}
-              {DepartmentList.map((value) => {
-                return (
-                  <List key={value.id}>
-                    <ListItem
-                      onClick={() => {
-                        setSingleDepartment(value);
-                        setOpen(true);
-                      }}
-                    >
-                      <Grid item md={3} xs={3}>
-                        <Typography
-                          variant="caption"
-                          sx={{ fontWeight: "bold" }}
+              <TableContainer component={Paper}>
+                <Table>
+                  <TableHead>
+                    <TableRow>
+                      <TableCell />
+                      <TableCell>
+                        <TableSortLabel
+                          active={orderBy === "id"}
+                          direction={orderBy === "id" ? order : "asc"}
+                          onClick={() => handleRequestSort("id")}
                         >
-                          Id:
-                        </Typography>
-                        <ListItemText
-                          primary={value.id}
-                          primaryTypographyProps={{
-                            variant: "body2",
-                          }}
-                        />
-                      </Grid>
-                      <Grid item md={3} xs={3}>
-                        <Typography
-                          variant="caption"
-                          sx={{ fontWeight: "bold" }}
+                          Id
+                        </TableSortLabel>
+                      </TableCell>
+                      <TableCell>
+                        <TableSortLabel
+                          active={orderBy === "name"}
+                          direction={orderBy === "name" ? order : "asc"}
+                          onClick={() => handleRequestSort("name")}
                         >
-                          Name:
-                        </Typography>
-                        <ListItemText
-                          primary={value.name}
-                          primaryTypographyProps={{
-                            variant: "body2",
-                          }}
-                        />
-                      </Grid>
-                      <Grid item md={1} xs={1}>
-                        <Typography
-                          variant="caption"
-                          sx={{ fontWeight: "bold" }}
+                          Name
+                        </TableSortLabel>
+                      </TableCell>
+                      <TableCell>
+                        <TableSortLabel
+                          active={orderBy === "description"}
+                          direction={orderBy === "description" ? order : "asc"}
+                          onClick={() => handleRequestSort("description")}
                         >
-                          Description:
-                        </Typography>
-                        <ListItemText
-                          primary={value.description}
-                          primaryTypographyProps={{
-                            variant: "body2",
-                          }}
-                        />
-                      </Grid>
-                    </ListItem>
-                  </List>
-                );
-              })}
+                          Description
+                        </TableSortLabel>
+                      </TableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    {sortedDepartmentList.map((value) => (
+                      <TableRow key={value.id}>
+                        <TableCell>
+                          <IconButton
+                            onClick={() => {
+                              setSingleDepartment(value);
+                              setOpen(true);
+                            }}
+                            aria-label="Open Info"
+                          >
+                            <InfoIcon />
+                          </IconButton>
+                        </TableCell>
+                        <TableCell>{value.id}</TableCell>
+                        <TableCell>{value.name}</TableCell>
+                        <TableCell>{value.description}</TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              </TableContainer>
             </CardContent>
           </Card>
         </Grid>

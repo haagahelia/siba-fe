@@ -1,6 +1,3 @@
-import styled from "@mui/material/styles/styled";
-import { useState } from "react";
-
 import InfoIcon from "@mui/icons-material/Info";
 import IconButton from "@mui/material/IconButton";
 import Paper from "@mui/material/Paper";
@@ -11,6 +8,8 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import TableSortLabel from "@mui/material/TableSortLabel";
+import styled from "@mui/material/styles/styled";
+import { useState } from "react";
 import SingleSubjectDialog from "./SingleSubjectDialog";
 
 export default function SubjectList({ getAllSubjects, paginateSubjects }) {

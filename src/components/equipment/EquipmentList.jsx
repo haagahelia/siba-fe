@@ -1,55 +1,57 @@
+import InfoIcon from "@mui/icons-material/Info";
+import IconButton from "@mui/material/IconButton";
+import Paper from "@mui/material/Paper";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import TableSortLabel from "@mui/material/TableSortLabel";
 import styled from "@mui/material/styles/styled";
 import { useState } from "react";
-// import {
-//   ajaxRequestErrorHandler,
-//   getFunctionName,
-// } from "../../ajax/ajaxRequestErrorHandler";
-import dao from "../../ajax/dao";
-import Logger from "../../logger/logger";
-
-import Grid from "@mui/material/Grid";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import ListItemText from "@mui/material/ListItemText";
-import Paper from "@mui/material/Paper";
-import Typography from "@mui/material/Typography";
 import SingleEquipmentDialog from "./SingleEquipmentDialog";
 
 export default function EquipmentList({ getAllEquipments, equipmentList }) {
   const [open, setOpen] = useState(false);
-  const [singleEquipment, setSingleEquipment] = useState({});
+  const [singleEquipment, setSingleEquipment] = useState(null);
+  const [order, setOrder] = useState("asc");
+  const [orderBy, setOrderBy] = useState("Id");
 
-  const getSingleEquipment = async (value) => {
-    const { httpStatus, data } = await dao.fetchEquipmentById(value);
-    if (httpStatus !== 200) {
-      // ajaxRequestErrorHandler(
-      //   httpStatus,
-      //   getFunctionName(2),
-      //   setAlertOptions,
-      //   setAlertOpen,
-      // );
-      Logger.debug(
-        `fetchEquipmentById failed with http status code: ${httpStatus}`,
-      );
-      alert(`Could not fetch equipment. Code: ${httpStatus}`);
-    } else if (data[0] === undefined) {
-      Logger.debug(
-        `fetchEquipmentById data retrieval failed with http status code: ${httpStatus}`,
-      );
-      alert(`Equipment was not found. Code: ${httpStatus}`);
-      getAllEquipments();
-    } else {
-      console.log(data);
-      setSingleEquipment({
-        id: data[0].id,
-        name: data[0].name,
-        priority: data[0].priority,
-        description: data[0].description,
-      });
-    }
+  const handleRequestSort = (property) => {
+    const isAsc = orderBy === property && order === "asc";
+    setOrder(isAsc ? "desc" : "asc");
+    setOrderBy(property);
   };
 
-  const Box = styled(Paper)(({ theme }) => ({
+  const sortedEquipmentList = equipmentList.sort((a, b) => {
+    switch (orderBy) {
+      case "Id":
+        return order === "asc" ? a.id - b.id : b.id - a.id;
+      case "Name":
+        return order === "asc"
+          ? a.name.localeCompare(b.name)
+          : b.name.localeCompare(a.name);
+      case "Priority":
+        return order === "asc"
+          ? a.equipmentPriority - b.equipmentPriority
+          : b.equipmentPriority - a.equipmentPriority;
+      case "Description":
+        return order === "asc"
+          ? a.description.localeCompare(b.description)
+          : b.description.localeCompare(a.description);
+      default:
+        return 0;
+    }
+  });
+
+  const handleRowClick = (equipment) => {
+    setSingleEquipment(equipment);
+    setOpen(true);
+  };
+
+  // STYLE
+  const Box = styled(TableContainer)(({ theme }) => ({
     overflow: "auto",
   }));
 
@@ -63,79 +65,72 @@ export default function EquipmentList({ getAllEquipments, equipmentList }) {
         getAllEquipments={getAllEquipments}
       />
       <Box>
-        <nav>
-          {equipmentList.map((value) => {
-            return (
-              <List key={value.id}>
-                <ListItem
-                  onClick={() => {
-                    getSingleEquipment(value.id);
-                    // setSingleEquipment(value);
-                    setOpen(true);
-                    getAllEquipments();
-                  }}
-                >
-                  <Grid item md={3} xs={3}>
-                    <Typography
-                      variant="caption"
-                      style={{ fontWeight: "bold" }}
-                    >
-                      Id:
-                    </Typography>
-                    <ListItemText
-                      primary={value.id}
-                      primaryTypographyProps={{
-                        variant: "body2",
+        <Paper>
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell />
+                <TableCell>
+                  <TableSortLabel
+                    active={orderBy === "Id"}
+                    direction={order}
+                    onClick={() => handleRequestSort("Id")}
+                  >
+                    ID
+                  </TableSortLabel>
+                </TableCell>
+                <TableCell>
+                  <TableSortLabel
+                    active={orderBy === "Name"}
+                    direction={order}
+                    onClick={() => handleRequestSort("Name")}
+                  >
+                    Name
+                  </TableSortLabel>
+                </TableCell>
+                <TableCell>
+                  <TableSortLabel
+                    active={orderBy === "Priority"}
+                    direction={order}
+                    onClick={() => handleRequestSort("Priority")}
+                  >
+                    Priority
+                  </TableSortLabel>
+                </TableCell>
+                <TableCell>
+                  <TableSortLabel
+                    active={orderBy === "Description"}
+                    direction={order}
+                    onClick={() => handleRequestSort("Description")}
+                  >
+                    Description
+                  </TableSortLabel>
+                </TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {sortedEquipmentList.map((value) => (
+                <TableRow key={value.id}>
+                  <TableCell>
+                    <IconButton
+                      onClick={() => {
+                        setSingleEquipment(value);
+                        setOpen(true);
                       }}
-                    />
-                  </Grid>
-                  <Grid item md={3} xs={3}>
-                    <Typography
-                      variant="caption"
-                      style={{ fontWeight: "bold" }}
+                      aria-label="Open Info"
                     >
-                      Name:
-                    </Typography>
-                    <ListItemText
-                      primary={value.name}
-                      primaryTypographyProps={{
-                        variant: "body2",
-                      }}
-                    />
-                  </Grid>
-                  <Grid item md={3} xs={7}>
-                    <Typography
-                      variant="caption"
-                      style={{ fontWeight: "bold" }}
-                    >
-                      Priority:
-                    </Typography>
-                    <ListItemText
-                      primary={value.equipmentPriority}
-                      primaryTypographyProps={{
-                        variant: "body2",
-                      }}
-                    />
-                  </Grid>
-                  <Grid item md={1} xs={1}>
-                    <Typography
-                      variant="caption"
-                      style={{ fontWeight: "bold" }}
-                    >
-                      Description:
-                    </Typography>
-                    <ListItemText
-                      primary={value.description}
-                      primaryTypographyProps={{
-                        variant: "body2",
-                      }}
-                    />
-                  </Grid>
-                </ListItem>
-              </List>
-            );
-          })}
-        </nav>
+                      <InfoIcon />
+                    </IconButton>
+                  </TableCell>
+                  <TableCell>{value.id}</TableCell>
+                  <TableCell>{value.name}</TableCell>
+                  <TableCell>{value.equipmentPriority}</TableCell>
+                  <TableCell>{value.description}</TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </Paper>
       </Box>
     </div>
   );
