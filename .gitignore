@@ -27,3 +27,7 @@ package-lock.json
 
 # MS Office temp files
 ~$*
+
+# dotenv environment variables file
+.env
+.env.local
