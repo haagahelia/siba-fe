@@ -1,5 +1,3 @@
-// The Register Page
-// import bcrypt from "bcryptjs";
 import { useState } from "react";
 import dao from "../../ajax/dao";
 import Logger from "../../logger/logger";
@@ -8,11 +6,16 @@ import Button from "@mui/material/Button";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Grid from "@mui/material/Grid";
+import Link from "@mui/material/Link";
 import TextField from "@mui/material/TextField";
+import Typography from "@mui/material/Typography"; // Add Typography component
 import AlertBox from "../common/AlertBox";
 
-export default function AddUser() {
-  Logger.logPrefix = "AddUser";
+// Import the background image from the Login page
+import loginBackgroundImage from "../../styles/SibeliusLogoLoginPage.svg";
+
+export default function RegisterView({ handleLoginChange }) {
+  Logger.logPrefix = "RegisterView";
 
   const [alertOpen, setAlertOpen] = useState(false);
   const [alertOptions, setAlertOptions] = useState({
@@ -59,6 +62,9 @@ export default function AddUser() {
         isPlanner: "",
         isStatist: "",
       });
+
+      // Trigger login change after registration
+      handleLoginChange();
     }
   };
 
@@ -70,16 +76,36 @@ export default function AddUser() {
         setAlertOpen={setAlertOpen}
       />
 
+      {/* Use the same background image as the Login page */}
+      <img
+        src={loginBackgroundImage}
+        alt="Sibelius-Akatemia logo in the background."
+        style={{
+          height: "95%",
+          position: "absolute",
+          top: "50%",
+          transform: "translate(-50%, -50%)",
+          width: "100%",
+        }}
+      />
+
       <Card
-        variant="outlined"
         sx={{
-          maxWidth: "100%",
-          padding: 1,
+          alignItems: "center",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          height: "100vh",
           margin: "auto",
-          marginTop: "85px",
+          width: "100%",
         }}
       >
-        <CardContent>
+        <CardContent
+          style={{
+            zIndex: 1,
+          }}
+        >
+          <Typography variant="h4">Register</Typography>
           <Grid>
             <TextField
               value={registerForm.email}
