@@ -1,3 +1,4 @@
+// The Log In page
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AppContext } from "../AppContext";

@@ -1,3 +1,4 @@
+// The Settings Page
 import { useEffect, useState } from "react";
 import {
   ajaxRequestErrorHandler,

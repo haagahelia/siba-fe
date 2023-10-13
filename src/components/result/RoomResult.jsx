@@ -1,3 +1,4 @@
+// The Room Results Page
 import useTheme from "@mui/material/styles/useTheme";
 import { useContext, useEffect, useState } from "react";
 import { AppContext } from "../../AppContext";
