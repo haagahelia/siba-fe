@@ -9,7 +9,6 @@ const BuildingTemplate = () => {
       responseType: "blob",
     });
 
-    console.log("res", response);
     if (response.ok) {
       const data = await response.data;
       FileDownload(data, "template.xlsx");
