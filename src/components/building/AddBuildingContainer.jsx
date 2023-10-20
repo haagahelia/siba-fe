@@ -15,6 +15,7 @@ import IconButton from "@mui/material/IconButton";
 import AlertBox from "../common/AlertBox";
 import ConfirmationDialog from "../common/ConfirmationDialog";
 import AddBuildingForm from "./AddBuildingForm";
+import BuildingTemplate from "./BuildingTemplate";
 import ImportBuildingContainer from "./ImportBuildingContainer";
 
 export default function AddBuildingContainer({ getAllBuildings }) {
@@ -124,6 +125,7 @@ export default function AddBuildingContainer({ getAllBuildings }) {
                 setInitialBuilding={setInitialBuilding}
               />
               <ImportBuildingContainer getAllBuildings={getAllBuildings} />
+              <BuildingTemplate />
             </>
           )}
         </CardContent>
