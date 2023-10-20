@@ -9,8 +9,11 @@ const BuildingTemplate = () => {
       responseType: "blob",
     });
 
+    console.log("res", response);
+
     if (response.ok) {
-      const data = await response.data;
+      const data = await response.blob();
+      console.log("data", data);
       FileDownload(data, "template.xlsx");
     }
   };
