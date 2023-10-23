@@ -1,5 +1,5 @@
-import { ResponseFiner, Space } from "../types";
-import { create, get } from "./request";
+import { ResponseFiner, Space, SpaceName } from "../types";
+import { create, get, remove } from "./request";
 
 const baseUrl = import.meta.env.VITE_BE_SERVER_BASE_URL;
 
@@ -18,4 +18,22 @@ export const fetchAllSpaces = async (): Promise<ResponseFiner<Space>> => {
 export const postNewSpace = async (newSpace: Space): Promise<boolean> => {
   const response = await create(`${baseUrl}/space`, newSpace);
   return response.ok;
+};
+
+// fetching all space's names
+export const fetchSpacesNames = async (): Promise<ResponseFiner<SpaceName>> => {
+  const response = await get(`${baseUrl}/space/getNames`);
+  if (response.status === 200) {
+    const spaces: SpaceName[] = await response.json();
+    return { httpStatus: response.status, data: spaces };
+  } else {
+    return { httpStatus: response.status, data: [] };
+  }
+};
+
+// removing single space
+export const deleteSingleSpace = async (spaceId: number): Promise<boolean> => {
+  const response = await remove(`${baseUrl}/space/${spaceId}`);
+  const data = await response.json();
+  return data?.affectedRows === 1;
 };

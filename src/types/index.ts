@@ -48,6 +48,11 @@ export interface Space {
   area: number;
 }
 
+export interface SpaceName {
+  id: number;
+  name: string;
+}
+
 export interface SpaceType {
   id: number;
   name: string;
