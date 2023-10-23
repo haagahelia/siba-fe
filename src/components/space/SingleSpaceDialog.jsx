@@ -10,6 +10,7 @@ import Grid from "@mui/material/Grid";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import AlertBox from "../common/AlertBox";
+import DeleteSpace from "./DeleteSpace";
 
 export default function SingleSpaceDialog({
   open,
@@ -69,7 +70,13 @@ export default function SingleSpaceDialog({
           {singleSpace?.name}
         </DialogTitle>
         <DialogContent>
-          <DialogActions>{/* Add actions or buttons here */}</DialogActions>
+          <DialogActions>
+            <DeleteSpace
+              singleSpace={singleSpace}
+              getAllSpaces={getAllSpaces}
+              setOpen={setOpen}
+            />
+          </DialogActions>
           <DialogContent>
             <Grid
               container
