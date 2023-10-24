@@ -4,6 +4,7 @@ import { AppContext } from "../AppContext";
 import Logger from "../logger/logger";
 import logo from "../styles/SibeliusLogo.svg";
 
+import { navbarWidth } from "/src/styles/theme.js";
 import {
   faArrowRightFromBracket,
   faGear,
@@ -214,19 +215,22 @@ export default function NavBar() {
     // Logger.debug("pages status 000:", sibaPages);
 
     return sibaPages
-      .filter((page) => page.showForCurrentUser)
-      .filter((page) => page.name !== "Settings" && page.name !== "Log Out")
-      .map((page, index) => {
+      .filter(
+        (page) =>
+          page.showForCurrentUser &&
+          page.name !== "Settings" &&
+          page.name !== "Log Out",
+      )
+      .map((page) => {
         const variantValue =
           page.name === "Account" ? "navBarAccountButton" : "navBar";
         if (page.name === "Account") {
           return (
-            <div
+            <div // Account link drop down
               key={page.name}
               onMouseEnter={() => setIsDropdownVisible(true)}
               onMouseLeave={() => setIsDropdownVisible(false)}
-              // The hover area between the Account links and the drop down
-              style={{ width: "170px" }}
+              style={{ width: `${navbarWidth}` }}
             >
               <ListItem variant="navBarAccountButton">
                 <NavLink
@@ -246,7 +250,7 @@ export default function NavBar() {
                       border: "2px solid black",
                       borderRadius: "10px",
                       bottom: "0px",
-                      left: "150px",
+                      left: `calc(${navbarWidth} - 20px)`,
                       position: "absolute",
                     }}
                   >
@@ -291,7 +295,7 @@ export default function NavBar() {
         height: "100vh",
         left: 0,
         overflowY: "scroll", // Stops the nav bar content from shifting, when pop up appears
-        paddingLeft: "170px", // Nav bar width
+        paddingLeft: `${navbarWidth}`,
         top: 0,
       }}
     >
@@ -300,11 +304,10 @@ export default function NavBar() {
           position="fixed"
           alt="Vertical navigation bar."
           sx={{
-            width: "170px",
+            width: `${navbarWidth}`,
             height: "100vh",
             top: 0,
             left: 0,
-            flexDirection: "column",
             // backgroundColor: "#F4BF00",
           }}
         >
@@ -315,7 +318,6 @@ export default function NavBar() {
                   variant="navBar"
                   sx={{
                     display: "flex",
-                    flexDirection: "column",
                     alignItems: "center",
                   }}
                 >
