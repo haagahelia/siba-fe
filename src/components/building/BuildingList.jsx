@@ -10,36 +10,16 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import TableSortLabel from "@mui/material/TableSortLabel";
 import styled from "@mui/material/styles/styled";
-import React, { useEffect, useState } from "react";
-import dao from "../../ajax/dao";
+import React, { useState } from "react";
 import Logger from "../../logger/logger";
 import SingleBuildingDialog from "./SingleBuildingDialog";
 
-export default function BuildingList() {
+export default function BuildingList({ getAllBuildings, allBuildingsList }) {
   Logger.logPrefix = "BuildingList";
-  const [allBuildingsList, setAllBuildingsList] = useState([]);
   const [open, setOpen] = useState(false);
   const [singleBuilding, setSingleBuilding] = useState(null);
   const [order, setOrder] = useState("asc");
   const [orderBy, setOrderBy] = useState("Name");
-
-  const getAllBuildings = async function () {
-    const { httpStatus, data } = await dao.fetchAllBuildings();
-    if (httpStatus === 200) {
-      Logger.debug(`Fetched ${data.length} buildings.`);
-      setAllBuildingsList(data);
-    } else {
-      Logger.error(
-        `fetchAllBuildings failed with http status code: ${httpStatus}`,
-      );
-      setAlertOptions({
-        severity: "error",
-        title: "Error",
-        message: "Oops! Something went wrong. No building found!",
-      });
-      setAlertOpen(true);
-    }
-  };
 
   const handleRequestSort = (property) => {
     const isAsc = orderBy === property && order === "asc";
@@ -63,10 +43,10 @@ export default function BuildingList() {
     overflow: "auto",
   }));
 
-  useEffect(() => {
-    Logger.debug("Buildings component instantiated.");
-    getAllBuildings();
-  }, []);
+  // useEffect(() => {
+  //   Logger.debug("Buildings component instantiated.");
+  //   getAllBuildings();
+  // }, []);
 
   return (
     <div>
