@@ -10,9 +10,9 @@ class ResultRoomsStore {
     this.roomSubs = roomSubs;
   }
 
-  async fetchRooms(id) {
+  async fetchRooms(allocationRoundId) {
     await axios
-      .get(`${baseUrl}/allocation/${id}/rooms`, {
+      .get(`${baseUrl}/allocation/${allocationRoundId}/rooms`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("sessionToken")}`,
           Accept: "application/json",
@@ -25,9 +25,9 @@ class ResultRoomsStore {
       .catch((e) => console.error(e));
   }
 
-  async fetchSubRooms(subjectId, allocationId) {
+  async fetchSubRooms(subjectId, allocationRoundId) {
     await axios
-      .get(`${baseUrl}/allocation/${allocationId}/rooms/${subjectId}`, {
+      .get(`${baseUrl}/allocation/${allocationRoundId}/rooms/${subjectId}`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("sessionToken")}`,
           Accept: "application/json",
@@ -40,9 +40,9 @@ class ResultRoomsStore {
       .catch((e) => console.error(e));
   }
 
-  async fetchRoomSubs(roomId, allocationId) {
+  async fetchRoomSubs(roomId, allocationRoundId) {
     await axios
-      .get(`${baseUrl}/allocation/${allocationId}/subjects/${roomId}`, {
+      .get(`${baseUrl}/allocation/${allocationRoundId}/subjects/${roomId}`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("sessionToken")}`,
           Accept: "application/json",
