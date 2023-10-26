@@ -1,9 +1,7 @@
-import Papa from "papaparse";
-import { useState } from "react";
-import Logger from "../../logger/logger";
-
 import Input from "@mui/material/Input";
 import Typography from "@mui/material/Typography";
+import { useState } from "react";
+import { processFile } from "../../importDataFunctions/processFile";
 import AlertBox from "../common/AlertBox";
 import ExportBuildingButton from "./ExportBuildingButton";
 import ImportBuildingButton from "./ImportBuildingButton";
@@ -15,46 +13,11 @@ export default function ImportBuildingContainer({ getAllBuildings }) {
     message: "This is an error alert — check it out!",
     severity: "error",
   });
+  const [buildingToImport, setBuildingToImport] = useState([]);
+  const [buildingFailedToImport, setBuildingFailedToImport] = useState([]);
 
-  // data import
-  const [importBuildings, setImportBuildings] = useState([]);
-  const [failedBuildings, setFailedBuildings] = useState([]);
-
-  const isUploaded = (file) => {
-    return file;
-  };
-
-  const isValidType = (file) => {
-    return file.type === "text/csv";
-  };
-
-  const handleFileUpload = (e) => {
-    const file = e.target.files[0];
-
-    if (!isUploaded(file)) {
-      return;
-    } else if (!isValidType(file)) {
-      setImportBuildings([]);
-
-      setAlertOptions({
-        severity: "error",
-        title: "Invalid file type",
-        message: "Please upload a .csv file.",
-      });
-      setAlertOpen(true);
-
-      return;
-    } else {
-      // use papaparse to transform file to array of objects
-      Papa.parse(file, {
-        header: true,
-        delimiter: "", // auto detect delimiter
-        complete: (result) => {
-          setImportBuildings(result.data);
-          Logger.debug("data from file", result.data);
-        },
-      });
-    }
+  const handleUploadeFiled = (e) => {
+    processFile(e, setBuildingToImport, setAlertOpen, setAlertOptions);
   };
 
   return (
@@ -64,20 +27,20 @@ export default function ImportBuildingContainer({ getAllBuildings }) {
         alertOptions={alertOptions}
         setAlertOpen={setAlertOpen}
       />
-      <Typography>Import from .xlsx or .csv file</Typography>
+      <Typography>Import data from .csv file</Typography>
       <Input
         variant="sibaInputFileName"
         type="file"
         accept=".xlsx, .xls, .csv"
-        onChange={handleFileUpload}
+        onChange={handleUploadeFiled}
       />
       <ImportBuildingButton
-        importBuildings={importBuildings}
-        setFailedBuildings={setFailedBuildings}
-        failedBuildings={failedBuildings}
+        buildingToImport={buildingToImport}
+        buildingFailedToImport={buildingFailedToImport}
+        setBuildingFailedToImport={setBuildingFailedToImport}
         getAllBuildings={getAllBuildings}
       />
-      <ExportBuildingButton failedBuildings={failedBuildings} />
+      <ExportBuildingButton buildingFailedToImport={buildingFailedToImport} />
     </>
   );
 }
