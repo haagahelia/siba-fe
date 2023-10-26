@@ -44,3 +44,13 @@ export const remove = async (url: string) => {
   });
   return response;
 };
+
+export const getById = async (url: string) => {
+  const response = await fetch(url, {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("sessionToken")}`,
+    },
+  });
+  return response;
+};

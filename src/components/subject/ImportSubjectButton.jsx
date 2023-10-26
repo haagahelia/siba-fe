@@ -1,6 +1,6 @@
 import { useState } from "react";
 import dao from "../../ajax/dao";
-import Logger from "../../logger/logger";
+import { importData } from "../../importDataFunctions/importData";
 import {
   capitalizeFirstLetter,
   validate,
@@ -10,10 +10,12 @@ import Button from "@mui/material/Button";
 import AlertBox from "../common/AlertBox";
 
 export default function ImportSubjectButton({
-  importSubjects,
-  failedSubjects,
-  setFailedSubjects,
+  progNameList,
+  subjectToImport,
+  subjectFailedToImport,
+  setSubjectFailedToImport,
   getAllSubjects,
+  spaceTypeSelectList,
 }) {
   const [alertOpen, setAlertOpen] = useState(false);
   const [alertOptions, setAlertOptions] = useState({
@@ -22,118 +24,75 @@ export default function ImportSubjectButton({
     severity: "error",
   });
 
-  const importData = async () => {
-    let successCount = 0;
-    let failedCount = 0;
-    const tempFailedSubjects = [];
-    const subjectsToSend = [];
-    const subjectSet = new Set();
+  const isProgramAuthorized = (subject) => {
+    return progNameList.includes(subject.Major);
+  };
 
-    await Promise.all(
-      importSubjects.map(async (subject) => {
-        const newSubject = {
-          name: subject["Name of the lesson"]
-            ? capitalizeFirstLetter(subject["Name of the lesson"])
-            : "",
-          groupSize: subject["Group size"] ? subject["Group size"] : "",
-          groupCount: subject["Group count"] ? subject["Group count"] : "",
-          sessionLength: subject["Length of session"]
-            ? subject["Length of session"]
-            : "",
-          sessionCount: subject["Number of lessons per week"]
-            ? subject["Number of lessons per week"]
-            : "",
-          area: subject["Required square meters"]
-            ? subject["Required square meters"]
-            : "",
-          major: subject.Major ? subject.Major : "",
-          roomType: subject["Room type"] ? subject["Room type"] : "",
-        };
-
-        // check if there is duplicated name of building after capitalization
-        if (subjectSet.has(newSubject.name)) {
-          subject.FailedReason = "Name of lesson is duplicated in the file";
-          tempFailedSubjects.push(subject);
-          failedCount++;
-
-          return;
-        } else {
-          subjectSet.add(newSubject.name);
-        }
-
-        const validateResult = await validate(newSubject);
-
-        if (validateResult.name) {
-          subject.FailedReason = validateResult.name;
-          tempFailedSubjects.push(subject);
-          failedCount++;
-        } else if (validateResult.description) {
-          subject.FailedReason = validateResult.description;
-          tempFailedSubjects.push(subject);
-          failedCount++;
-        } else if (validateResult.groupSize) {
-          subject.FailedReason = validateResult.groupSize;
-          tempFailedSubjects.push(subject);
-          failedCount++;
-        } else if (validateResult.groupCount) {
-          subject.FailedReason = validateResult.groupCount;
-          tempFailedSubjects.push(subject);
-          failedCount++;
-        } else if (validateResult.sessionLength) {
-          subject.FailedReason = validateResult.sessionLength;
-          tempFailedSubjects.push(subject);
-          failedCount++;
-        } else if (validateResult.sessionCount) {
-          subject.FailedReason = validateResult.sessionCount;
-          tempFailedSubjects.push(subject);
-          failedCount++;
-        } else if (validateResult.area) {
-          subject.FailedReason = validateResult.area;
-          tempFailedSubjects.push(subject);
-          failedCount++;
-        } else {
-          subjectsToSend.push(newSubject);
-          successCount++;
-        }
-      }),
+  const isSpaceNameCorrect = (subject) =>
+    spaceTypeSelectList.some((space) =>
+      space.name.includes(subject["Room type"]),
     );
 
-    setFailedSubjects([...failedSubjects, ...tempFailedSubjects]);
-    Logger.debug("failed lessons", tempFailedSubjects);
-
-    // if the data is empty after validation, not sending to backend
-    if (subjectsToSend.length === 0) {
-      setAlertOptions({
-        severity: "error",
-        title: "Error!",
-        message: `Something wrong happened. ${failedCount} lesson failed to add.`,
-      });
-      setAlertOpen(true);
-
-      return;
-    }
-
-    Logger.debug("subjectsToSend", subjectsToSend);
-
-    const result = await dao.postNewSubjects(subjectsToSend);
-
-    if (result) {
-      getAllSubjects();
-
-      setAlertOptions({
-        severity: "success",
-        title: "Success!",
-        message: `${successCount} lessons added and ${failedCount} lesson failed to add.`,
-      });
-      setAlertOpen(true);
+  const processSubject = async (subject, subjectSet) => {
+    if (!isProgramAuthorized(subject)) {
+      subject.FailedReason = "Not authorized for this program";
+      return subject;
+    } else if (!isSpaceNameCorrect(subject)) {
+      subject.FailedReason = "Non-existent Room type";
+      return subject;
     } else {
-      setAlertOptions({
-        severity: "error",
-        title: "Error!",
-        message: `Something wrong happened. ${failedCount} lesson failed to add.`,
-      });
-      setAlertOpen(true);
+      const newSubject = {
+        name: subject["Name of the lesson"]
+          ? capitalizeFirstLetter(subject["Name of the lesson"])
+          : "",
+        groupSize: subject["Group size"] ? subject["Group size"] : "",
+        groupCount: subject["Group count"] ? subject["Group count"] : "",
+        sessionLength: subject["Length of session"]
+          ? subject["Length of session"]
+          : "",
+        sessionCount: subject["Number of lessons per week"]
+          ? subject["Number of lessons per week"]
+          : "",
+        area: subject["Required square meters"]
+          ? subject["Required square meters"]
+          : "",
+        major: subject.Major ? subject.Major : "",
+        roomType: subject["Room type"] ? subject["Room type"] : "",
+      };
+
+      if (subjectSet.has(newSubject.name)) {
+        subject.FailedReason = "Name of lesson is duplicated in the file";
+        return subject;
+      } else {
+        subjectSet.add(newSubject.name);
+      }
+
+      const validateResult = await validate(newSubject);
+
+      subject.FailedReason =
+        validateResult.name ||
+        validateResult.description ||
+        validateResult.groupSize ||
+        validateResult.groupCount ||
+        validateResult.sessionLength ||
+        validateResult.sessionCount ||
+        validateResult.area;
+
+      return subject.FailedReason ? subject : newSubject;
     }
+  };
+
+  const handleClick = async () => {
+    await importData(
+      subjectToImport,
+      subjectFailedToImport,
+      setSubjectFailedToImport,
+      getAllSubjects,
+      processSubject,
+      dao.postNewSubjects,
+      setAlertOpen,
+      setAlertOptions,
+    );
   };
 
   return (
@@ -146,7 +105,7 @@ export default function ImportSubjectButton({
       <Button
         variant="contained"
         onClick={() => {
-          importData();
+          handleClick();
         }}
       >
         Import data
