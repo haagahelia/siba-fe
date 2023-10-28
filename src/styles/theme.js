@@ -442,6 +442,17 @@ export const createAppTheme = (currentPalette) =>
             fontSize: "1.2rem",
           },
         },
+        variants: [
+          {
+            props: { variant: "verticalNavigationBar" },
+            style: {
+              width: navbarWidth,
+              height: "100vh",
+              top: 0,
+              left: 0,
+            },
+          },
+        ],
       },
       MuiInput: {
         variants: [
@@ -506,6 +517,17 @@ export const createAppTheme = (currentPalette) =>
         styleOverrides: {
           root: {
             color: currentPalette.infoIcon.main,
+          },
+        },
+      },
+      MuiCssBaseline: {
+        styleOverrides: {
+          ".navbar-spacing": {
+            height: "100vh",
+            left: 0,
+            overflowY: "scroll",
+            paddingLeft: navbarWidth,
+            top: 0,
           },
         },
       },

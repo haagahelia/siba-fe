@@ -37,7 +37,7 @@ import UserView from "../views/UserView";
 
 export default function NavBar() {
   Logger.debug("NavBar initiated");
-
+  // The routes (pages) and the roles which can see them
   const sibaPages = [
     {
       name: "Log In",
@@ -142,7 +142,7 @@ export default function NavBar() {
 
   const [isDropdownVisible, setIsDropdownVisible] = useState(false);
 
-  // Called to produce the down drop menu items
+  // Called to produce the drop-down menu items
   const renderDropdownMenu = (page, variant) => {
     return (
       <ListItem key={page.name} variant={variant}>
@@ -289,28 +289,9 @@ export default function NavBar() {
   };
 
   return (
-    <div
-      className="navbar-spacing"
-      style={{
-        height: "100vh",
-        left: 0,
-        overflowY: "scroll", // Stops the nav bar content from shifting, when pop up appears
-        paddingLeft: `${navbarWidth}`,
-        top: 0,
-      }}
-    >
+    <div className="navbar-spacing">
       <BrowserRouter>
-        <AppBar
-          position="fixed"
-          alt="Vertical navigation bar."
-          sx={{
-            width: `${navbarWidth}`,
-            height: "100vh",
-            top: 0,
-            left: 0,
-            // backgroundColor: "#F4BF00",
-          }}
-        >
+        <AppBar variant="verticalNavigationBar" alt="Vertical navigation bar.">
           <Container maxWidth="xl">
             <Toolbar disableGutters sx={{ flexDirection: "column" }}>
               <Box sx={{ flexGrow: 1 }}>

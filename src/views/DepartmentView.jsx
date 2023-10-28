@@ -90,7 +90,7 @@ export default function DepartmentView() {
   }, []);
 
   return (
-    <Box sx={{ marginLeft: 8 }}>
+    <Box>
       <DepartmentDialog
         open={open}
         setOpen={setOpen}
