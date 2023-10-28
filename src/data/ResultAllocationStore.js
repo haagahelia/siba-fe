@@ -9,7 +9,7 @@ class AllocationPost {
     axios
       .post(
         `${baseUrl}/allocation/start`,
-        { allocRound: allocRoundId },
+        { allocRoundId: allocRoundId },
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("sessionToken")}`,
@@ -36,7 +36,7 @@ class AllocationPost {
       .post(
         `${baseUrl}/allocation/reset`,
         {
-          allocRound: allocRoundId,
+          allocRoundId: allocRoundId,
         },
         {
           headers: {
