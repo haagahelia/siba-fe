@@ -46,7 +46,7 @@ export default function NavBar() {
     },
     {
       name: "Lessons",
-      href: "/",
+      href: "/subject",
       forRoles: ["admin", "planner", "statist"],
       showForCurrentUser: false,
     },
@@ -300,7 +300,10 @@ export default function NavBar() {
             element={<LoginView handleLoginChange={handleLoginChange} />}
           />
           <Route path="/register" element={<RegisterView />} />
-          <Route path="/" element={<SubjectView />} />
+          <Route
+            path="/"
+            element={<LoginView handleLoginChange={handleLoginChange} />}
+          />
           <Route path="/subject" element={<SubjectView />} />
           <Route path="/allocation" element={<AllocRoundView />} />
           <Route path="/roomresult" element={<RoomResultView />} />
