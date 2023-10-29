@@ -115,7 +115,7 @@ export const createAppTheme = (currentPalette) =>
           {
             props: { variant: "navBar" },
             style: {
-              alignItems: "flex-start",
+              alignItems: "center",
               backgroundColor: currentPalette.primary.main,
               display: "flex",
               flexDirection: "column",
@@ -520,14 +520,35 @@ export const createAppTheme = (currentPalette) =>
           },
         },
       },
+      // Enables CSS styling
       MuiCssBaseline: {
         styleOverrides: {
+          ".dropDown": {
+            backgroundColor: "rgb(85, 85, 85)",
+            border: "2px solid black",
+            borderRadius: "10px",
+            bottom: "0px",
+            left: `calc(${navbarWidth} - 20px)`,
+            position: "absolute",
+          },
+          ".dropDownHoverArea": {
+            width: navbarWidth,
+          },
           ".navbar-spacing": {
             height: "100vh",
             left: 0,
             overflowY: "scroll",
             paddingLeft: navbarWidth,
             top: 0,
+          },
+          ".navIconSpacing": {
+            marginRight: "5px",
+          },
+          ".navLogo": {
+            "& img": {
+              width: 60,
+              height: 60,
+            },
           },
         },
       },
