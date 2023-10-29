@@ -1,9 +1,3 @@
-// The Navigation Bar Component
-import { useContext, useState } from "react";
-import { AppContext } from "../AppContext";
-import Logger from "../logger/logger";
-import logo from "../styles/SibeliusLogo.svg";
-
 import {
   faArrowRightFromBracket,
   faGear,
@@ -15,8 +9,13 @@ import Container from "@mui/material/Container";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import Toolbar from "@mui/material/Toolbar";
+// The Navigation Bar Component
+import { useContext, useState } from "react";
 import { BrowserRouter, NavLink, Route, Routes } from "react-router-dom";
+import { AppContext } from "../AppContext";
 import AddAllocRound from "../components/allocRound/AddAllocRound";
+import Logger from "../logger/logger";
+import logo from "../styles/SibeliusLogo.svg";
 import AllocRoundView from "../views/AllocRoundView";
 import AllocationSubjectFailureView from "../views/AllocationSubjectFailureView";
 import BuildingView from "../views/BuildingView";
@@ -36,7 +35,7 @@ import UserView from "../views/UserView";
 
 export default function NavBar() {
   Logger.debug("NavBar initiated");
-
+  // The routes (pages) and the roles which can see them
   const sibaPages = [
     {
       name: "Log In",
@@ -131,7 +130,6 @@ export default function NavBar() {
   ];
 
   const appContext = useContext(AppContext);
-
   const [click, setClick] = useState(false);
   const handleClick = () => setClick(!click);
 
@@ -141,7 +139,7 @@ export default function NavBar() {
 
   const [isDropdownVisible, setIsDropdownVisible] = useState(false);
 
-  // Called to produce the down drop menu items
+  // Called to produce the drop-down menu items
   const renderDropdownMenu = (page, variant) => {
     return (
       <ListItem key={page.name} variant={variant}>
@@ -154,13 +152,15 @@ export default function NavBar() {
           }}
         >
           {page.name === "Settings" && (
-            <span style={{ marginRight: "5px" }}>
-              <FontAwesomeIcon icon={faGear} />
+            <span className="navIconSpacing">
+              {" "}
+              <FontAwesomeIcon icon={faGear} />{" "}
             </span>
           )}
           {page.name === "Log Out" && (
-            <span style={{ marginRight: "5px" }}>
-              <FontAwesomeIcon icon={faArrowRightFromBracket} />
+            <span className="navIconSpacing">
+              {" "}
+              <FontAwesomeIcon icon={faArrowRightFromBracket} />{" "}
             </span>
           )}
           {page.name}
@@ -214,19 +214,22 @@ export default function NavBar() {
     // Logger.debug("pages status 000:", sibaPages);
 
     return sibaPages
-      .filter((page) => page.showForCurrentUser)
-      .filter((page) => page.name !== "Settings" && page.name !== "Log Out")
-      .map((page, index) => {
+      .filter(
+        (page) =>
+          page.showForCurrentUser &&
+          page.name !== "Settings" &&
+          page.name !== "Log Out",
+      )
+      .map((page) => {
         const variantValue =
           page.name === "Account" ? "navBarAccountButton" : "navBar";
         if (page.name === "Account") {
           return (
             <div
               key={page.name}
+              className="dropDownHoverArea"
               onMouseEnter={() => setIsDropdownVisible(true)}
               onMouseLeave={() => setIsDropdownVisible(false)}
-              // The hover area between the Account links and the drop down
-              style={{ width: "170px" }}
             >
               <ListItem variant="navBarAccountButton">
                 <NavLink
@@ -239,17 +242,7 @@ export default function NavBar() {
                 </NavLink>
 
                 {isDropdownVisible && (
-                  <div
-                    className="dropdown"
-                    style={{
-                      backgroundColor: "rgb(85, 85, 85)",
-                      border: "2px solid black",
-                      borderRadius: "10px",
-                      bottom: "0px",
-                      left: "150px",
-                      position: "absolute",
-                    }}
-                  >
+                  <div className="dropDown">
                     {sibaPages
                       .filter((page) =>
                         ["Settings", "Log Out"].includes(page.name),
@@ -285,47 +278,15 @@ export default function NavBar() {
   };
 
   return (
-    <div
-      className="navbar-spacing"
-      style={{
-        height: "100vh",
-        left: 0,
-        overflowY: "scroll", // Stops the nav bar content from shifting, when pop up appears
-        paddingLeft: "170px", // Nav bar width
-        top: 0,
-      }}
-    >
+    <div className="navbar-spacing">
       <BrowserRouter>
-        <AppBar
-          position="fixed"
-          alt="Vertical navigation bar."
-          sx={{
-            width: "170px",
-            height: "100vh",
-            top: 0,
-            left: 0,
-            flexDirection: "column",
-            // backgroundColor: "#F4BF00",
-          }}
-        >
+        <AppBar variant="verticalNavigationBar" alt="Vertical navigation bar.">
           <Container maxWidth="xl">
             <Toolbar disableGutters sx={{ flexDirection: "column" }}>
               <Box sx={{ flexGrow: 1 }}>
-                <List
-                  variant="navBar"
-                  sx={{
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
-                  }}
-                >
-                  <NavLink to="/" className="nav-logo">
-                    <img
-                      src={logo}
-                      alt="Sibelius-Akatemia stylized logo."
-                      width="60"
-                      height="60"
-                    />
+                <List variant="navBar">
+                  <NavLink to="/" className="navLogo">
+                    <img src={logo} alt="Sibelius-Akatemia stylized logo." />
                   </NavLink>
                   {renderNavLinks()}
                 </List>
