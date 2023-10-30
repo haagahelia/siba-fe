@@ -1,11 +1,4 @@
 // The Log In page
-import { useContext, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { AppContext } from "../AppContext";
-import dao from "../ajax/dao";
-import Logger from "../logger/logger";
-
-import { navbarWidth } from "/src/styles/theme.js";
 import Button from "@mui/material/Button";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
@@ -13,7 +6,12 @@ import Grid from "@mui/material/Grid";
 import Link from "@mui/material/Link";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
+import { useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { AppContext } from "../AppContext";
+import dao from "../ajax/dao";
 import AlertBox from "../components/common/AlertBox";
+import Logger from "../logger/logger";
 import logo from "../styles/SibeliusLogoLoginPage.svg";
 
 export default function LoginView({ handleLoginChange }) {
@@ -120,33 +118,14 @@ export default function LoginView({ handleLoginChange }) {
       <img
         src={logo}
         alt="Sibelius-Akatemia logo in the background."
-        style={{
-          height: "95%",
-          position: "absolute",
-          top: "50%",
-          transform: "translate(-50%, -50%)",
-          width: `calc(95% - ${navbarWidth})`,
-        }}
+        className="logInPageBackgroundLogo"
       />
-      <Card
-        sx={{
-          alignItems: "center",
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          height: "100vh",
-          margin: "auto",
-          width: "100%",
-        }}
-      >
-        <CardContent
-          style={{
-            zIndex: 1,
-          }}
-        >
-          <Typography variant="h4">Login</Typography>
+      <Card variant="logInPageContent">
+        <CardContent variant="logInPageTransparencyFix">
+          <Typography variant="logInPageTitle">Login</Typography>
           <Grid>
             <TextField
+              className="logInTextInput"
               value={loginForm.email}
               onChange={(event) =>
                 setLoginForm({ ...loginForm, email: event.target.value })
@@ -156,6 +135,7 @@ export default function LoginView({ handleLoginChange }) {
           </Grid>
           <Grid>
             <TextField
+              className="logInTextInput"
               value={loginForm.password}
               onChange={(event) =>
                 setLoginForm({
@@ -168,9 +148,13 @@ export default function LoginView({ handleLoginChange }) {
             />
           </Grid>
           <Grid>
-            <Button onClick={loginAndError}>Log In</Button>
+            <Button variant="logInPageButton" onClick={loginAndError}>
+              Log In
+            </Button>
           </Grid>
-          <Link onClick={handleReset}>Forget your password?</Link>
+          <Link style={{ cursor: "pointer" }} onClick={handleReset}>
+            Forgot your password?
+          </Link>
           {errorMsg}
         </CardContent>
       </Card>

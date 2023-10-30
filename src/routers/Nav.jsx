@@ -1,3 +1,4 @@
+// The Navigation Bar Component
 import {
   faArrowRightFromBracket,
   faGear,
@@ -9,7 +10,6 @@ import Container from "@mui/material/Container";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import Toolbar from "@mui/material/Toolbar";
-// The Navigation Bar Component
 import { useContext, useState } from "react";
 import { BrowserRouter, NavLink, Route, Routes } from "react-router-dom";
 import { AppContext } from "../AppContext";

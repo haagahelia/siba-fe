@@ -1,3 +1,4 @@
+// Platform styling
 import createTheme from "@mui/material/styles/createTheme";
 
 // Palettes are: darkPalette, lightPalette,
@@ -17,7 +18,6 @@ export const indexRoomCommon = {
 export const createAppTheme = (currentPalette) =>
   createTheme({
     palette: currentPalette,
-
     components: {
       MuiCard: {
         styleOverrides: {
@@ -31,6 +31,30 @@ export const createAppTheme = (currentPalette) =>
             padding: lessPadding,
           },
         },
+        variants: [
+          {
+            props: { variant: "logInPageContent" },
+            style: {
+              alignItems: "center",
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              height: "100vh",
+              margin: "auto",
+              width: "100%",
+            },
+          },
+        ],
+      },
+      MuiCardContent: {
+        variants: [
+          {
+            props: { variant: "logInPageTransparencyFix" },
+            style: {
+              zIndex: 1,
+            },
+          },
+        ],
       },
       MuiCardHeader: {
         styleOverrides: {
@@ -163,7 +187,7 @@ export const createAppTheme = (currentPalette) =>
               },
               "& a.nav-links.active": {
                 backgroundColor: currentPalette.background.default,
-                color: currentPalette.text.primary,
+                color: currentPalette.fontColorDefault.default,
                 fontWeight: 800,
                 padding: lessPadding,
                 textDecorationThickness: "3px",
@@ -174,7 +198,6 @@ export const createAppTheme = (currentPalette) =>
           {
             // The "Account" button styling
             props: { variant: "navBarAccountButton" },
-
             style: {
               backgroundColor: currentPalette.background.default,
               borderRadius: "10px",
@@ -197,7 +220,6 @@ export const createAppTheme = (currentPalette) =>
           {
             // The drop down menu styling
             props: { variant: "navBarDropDownLinks" },
-
             style: {
               backgroundColor: "transparent",
               display: "flex",
@@ -209,7 +231,7 @@ export const createAppTheme = (currentPalette) =>
               width: "130px",
 
               "& a": {
-                color: currentPalette.primary.main,
+                color: currentPalette.fontColorDefault.default,
                 fontSize: "17.5px",
                 fontWeight: 600,
                 textDecoration: "none",
@@ -302,6 +324,29 @@ export const createAppTheme = (currentPalette) =>
               color: currentPalette.fontColorDefault.default,
             },
           },
+          {
+            props: { variant: "logInPageButton" },
+            style: {
+              background: `linear-gradient(to right, ${currentPalette.background.default} 50%, ${currentPalette.primary.main} 50%)`,
+              backgroundPosition: "right bottom",
+              backgroundSize: "200% 100%",
+              border: `1px solid ${currentPalette.primary.main}`,
+              borderRadius: "7.5px",
+              color: currentPalette.primary.contrastText,
+              fontSize: "1.25rem",
+              fontWeight: "bold",
+              height: "40px",
+              marginBottom: "15px",
+              transition: "all .5s ease-out",
+              width: "130px",
+
+              "&:hover": {
+                backgroundColor: currentPalette.primary.main,
+                backgroundPosition: "left bottom",
+                color: currentPalette.primary.main,
+              },
+            },
+          },
         ],
         styleOverrides: {
           contained: {
@@ -355,6 +400,14 @@ export const createAppTheme = (currentPalette) =>
               fontSize: "1rem",
               lineHeight: 1.5,
               letterSpacing: "0.00938em",
+            },
+          },
+          {
+            props: { variant: "logInPageTitle" },
+            style: {
+              color: currentPalette.primary.main,
+              fontSize: "2.5rem",
+              fontWeight: 900,
             },
           },
           {
@@ -524,7 +577,7 @@ export const createAppTheme = (currentPalette) =>
       MuiCssBaseline: {
         styleOverrides: {
           ".dropDown": {
-            backgroundColor: "rgb(85, 85, 85)",
+            backgroundColor: currentPalette.backgroundDarker.default,
             border: "2px solid black",
             borderRadius: "10px",
             bottom: "0px",
@@ -533,6 +586,20 @@ export const createAppTheme = (currentPalette) =>
           },
           ".dropDownHoverArea": {
             width: navbarWidth,
+          },
+          ".logInPageBackgroundLogo": {
+            height: "95%",
+            position: "absolute",
+            top: "50%",
+            transform: "translate(-50%, -50%)",
+            width: `calc(95% - ${navbarWidth})`,
+          },
+          ".logInTextInput": {
+            width: "300px",
+
+            "&:hover fieldset": {
+              borderWidth: "2px",
+            },
           },
           ".navbar-spacing": {
             height: "100vh",
