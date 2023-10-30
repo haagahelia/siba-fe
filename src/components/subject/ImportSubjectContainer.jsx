@@ -27,10 +27,10 @@ export default function ImportSubjectContainer({
   const [subjectToImport, setSubjectToImport] = useState([]);
   const [subjectFailedToImport, setSubjectFailedToImport] = useState([]);
 
-  const getDepartmentsForUser = async function () {
-    let currentUser = null;
-    let currentRole = [];
-    const { httpStatus, data: userData } = await dao.fetchAllUsers();
+  const getAuthorizedProgramForUser = async function () {
+    let { httpStatus, data } = await dao.getProgramByUserEmail(
+      localStorage.getItem("email"),
+    );
     if (httpStatus !== 200) {
       ajaxRequestErrorHandler(
         httpStatus,
@@ -39,20 +39,13 @@ export default function ImportSubjectContainer({
         setAlertOpen,
       );
     } else {
-      currentUser = userData.find(
-        (user) => user.email === localStorage.getItem("email"),
-      );
-      if (currentUser.plannerdepartment)
-        currentRole = currentUser.plannerdepartment.split(" | ");
+      data = data.map((item) => item.name);
+      setProgNameList(...[data]);
     }
-
-    let { data: progName } = await dao.getProgramByUserId(currentUser.id);
-    progName = progName.map((item) => item.name);
-    setProgNameList(...[progName]);
   };
 
   useEffect(() => {
-    getDepartmentsForUser();
+    getAuthorizedProgramForUser();
   }, []);
 
   const handleUploadeFiled = (e) => {
