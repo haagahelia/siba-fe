@@ -1,4 +1,5 @@
 import InfoIcon from "@mui/icons-material/Info";
+import { Pagination } from "@mui/material";
 import IconButton from "@mui/material/IconButton";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
@@ -17,6 +18,15 @@ export default function EquipmentList({ getAllEquipments, equipmentList }) {
   const [singleEquipment, setSingleEquipment] = useState(null);
   const [order, setOrder] = useState("asc");
   const [orderBy, setOrderBy] = useState("Id");
+
+  const [page, setPage] = useState(1);
+  const rowsPerPage = 15;
+  const startIndex = (page - 1) * rowsPerPage;
+  const endIndex = startIndex + rowsPerPage;
+
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
 
   const handleRequestSort = (property) => {
     const isAsc = orderBy === property && order === "asc";
@@ -45,13 +55,15 @@ export default function EquipmentList({ getAllEquipments, equipmentList }) {
     }
   });
 
+  const paginatedData = sortedEquipmentList.slice(startIndex, endIndex);
+
   const handleRowClick = (equipment) => {
     setSingleEquipment(equipment);
     setOpen(true);
   };
 
   // STYLE
-  const Box = styled(TableContainer)(({ theme }) => ({
+  const Box = styled(Table)(({ theme }) => ({
     overflow: "auto",
   }));
 
@@ -97,19 +109,11 @@ export default function EquipmentList({ getAllEquipments, equipmentList }) {
                     Priority
                   </TableSortLabel>
                 </TableCell>
-                <TableCell>
-                  <TableSortLabel
-                    active={orderBy === "Description"}
-                    direction={order}
-                    onClick={() => handleRequestSort("Description")}
-                  >
-                    Description
-                  </TableSortLabel>
-                </TableCell>
+                <TableCell>Description</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
-              {sortedEquipmentList.map((value) => (
+              {paginatedData.map((value) => (
                 <TableRow key={value.id}>
                   <TableCell>
                     <IconButton
@@ -132,6 +136,16 @@ export default function EquipmentList({ getAllEquipments, equipmentList }) {
           </Table>
         </Paper>
       </Box>
+
+      <div>
+        <Pagination
+          count={Math.ceil(sortedEquipmentList.length / rowsPerPage)}
+          page={page}
+          onChange={handleChangePage}
+          color="primary"
+          variant="outlined"
+        />
+      </div>
     </div>
   );
 }

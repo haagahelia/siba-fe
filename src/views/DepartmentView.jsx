@@ -1,7 +1,13 @@
 import InfoIcon from "@mui/icons-material/Info";
-import { Card, CardContent, CardHeader, Container, Grid } from "@mui/material";
 import {
+  Card,
+  CardContent,
+  CardHeader,
+  Container,
+  Grid,
   Paper,
+} from "@mui/material";
+import {
   Table,
   TableBody,
   TableCell,
@@ -10,6 +16,7 @@ import {
   TableRow,
 } from "@mui/material";
 import IconButton from "@mui/material/IconButton";
+import Pagination from "@mui/material/Pagination";
 import TableSortLabel from "@mui/material/TableSortLabel";
 import { styled } from "@mui/material/styles";
 import { useEffect, useState } from "react";
@@ -35,6 +42,9 @@ export default function DepartmentView() {
   const { roles } = useRoleLoggedIn();
   const [order, setOrder] = useState("asc");
   const [orderBy, setOrderBy] = useState("id");
+
+  const rowsPerPage = 15;
+  const [page, setPage] = useState(1);
 
   const getAllDepartments = async function () {
     Logger.debug(
@@ -65,24 +75,18 @@ export default function DepartmentView() {
     setOrderBy(property);
   };
 
-  const sortedDepartmentList = departmentList.sort((a, b) => {
-    if (orderBy === "id") {
-      return order === "asc" ? a.id - b.id : b.id - a.id;
-    } else if (orderBy === "name") {
-      return order === "asc"
-        ? a.name.localeCompare(b.name)
-        : b.name.localeCompare(a.name);
-    } else if (orderBy === "description") {
-      return order === "asc"
-        ? a.description.localeCompare(b.description)
-        : b.description.localeCompare(a.description);
-    }
-  });
-
   const Box = styled(Table)(({ theme }) => ({
     overflow: "auto",
     borderCollapse: "collapse",
   }));
+
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
+
+  const startIndex = (page - 1) * rowsPerPage;
+  const endIndex = startIndex + rowsPerPage;
+  const paginatedData = departmentList.slice(startIndex, endIndex);
 
   useEffect(() => {
     Logger.debug("Running effect to fetch all departments.");
@@ -90,82 +94,70 @@ export default function DepartmentView() {
   }, []);
 
   return (
-    <Box>
-      <DepartmentDialog
-        open={open}
-        setOpen={setOpen}
-        singleDepartment={singleDepartment}
-        setSingleDepartment={setSingleDepartment}
-        getAllDepartments={getAllDepartments}
-      />
-      <Container maxWidth="100%">
-        <Grid container rowSpacing={0.5}>
-          <Card variant="outlined">
-            <CardContent>
-              <CardHeader title="Department" />
-              {(roles.admin === "1" || roles.planner === "1") && (
-                <AddDepartment getAllDepartments={getAllDepartments} />
-              )}
-              <TableContainer component={Paper}>
-                <Table>
-                  <TableHead>
-                    <TableRow>
-                      <TableCell />
-                      <TableCell>
-                        <TableSortLabel
-                          active={orderBy === "id"}
-                          direction={orderBy === "id" ? order : "asc"}
-                          onClick={() => handleRequestSort("id")}
-                        >
-                          Id
-                        </TableSortLabel>
-                      </TableCell>
-                      <TableCell>
-                        <TableSortLabel
-                          active={orderBy === "name"}
-                          direction={orderBy === "name" ? order : "asc"}
-                          onClick={() => handleRequestSort("name")}
-                        >
-                          Name
-                        </TableSortLabel>
-                      </TableCell>
-                      <TableCell>
-                        <TableSortLabel
-                          active={orderBy === "description"}
-                          direction={orderBy === "description" ? order : "asc"}
-                          onClick={() => handleRequestSort("description")}
-                        >
-                          Description
-                        </TableSortLabel>
-                      </TableCell>
-                    </TableRow>
-                  </TableHead>
-                  <TableBody>
-                    {sortedDepartmentList.map((value) => (
-                      <TableRow key={value.id}>
-                        <TableCell>
-                          <IconButton
-                            onClick={() => {
-                              setSingleDepartment(value);
-                              setOpen(true);
-                            }}
-                            aria-label="Open Info"
-                          >
-                            <InfoIcon />
-                          </IconButton>
-                        </TableCell>
-                        <TableCell>{value.id}</TableCell>
-                        <TableCell>{value.name}</TableCell>
-                        <TableCell>{value.description}</TableCell>
-                      </TableRow>
-                    ))}
-                  </TableBody>
-                </Table>
-              </TableContainer>
-            </CardContent>
-          </Card>
-        </Grid>
-      </Container>
-    </Box>
+    <Container maxWidth="xl">
+      <Card variant="outlined">
+        <CardContent>
+          <CardHeader title="Department" />
+          {(roles.admin === "1" || roles.planner === "1") && (
+            <AddDepartment getAllDepartments={getAllDepartments} />
+          )}
+          <TableContainer component={Paper}>
+            <Table>
+              <TableHead>
+                <TableRow>
+                  <TableCell />
+                  <TableCell>
+                    <TableSortLabel
+                      active={orderBy === "id"}
+                      direction={orderBy === "id" ? order : "asc"}
+                      onClick={() => handleRequestSort("id")}
+                    >
+                      Id
+                    </TableSortLabel>
+                  </TableCell>
+                  <TableCell>
+                    <TableSortLabel
+                      active={orderBy === "name"}
+                      direction={orderBy === "name" ? order : "asc"}
+                      onClick={() => handleRequestSort("name")}
+                    >
+                      Name
+                    </TableSortLabel>
+                  </TableCell>
+                  <TableCell>Description</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {paginatedData.map((value) => (
+                  <TableRow key={value.id}>
+                    <TableCell>
+                      <IconButton
+                        onClick={() => {
+                          setSingleDepartment(value);
+                          setOpen(true);
+                        }}
+                        aria-label="Open Info"
+                      >
+                        <InfoIcon />
+                      </IconButton>
+                    </TableCell>
+                    <TableCell>{value.id}</TableCell>
+                    <TableCell>{value.name}</TableCell>
+                    <TableCell>{value.description}</TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+          <Pagination
+            count={Math.ceil(departmentList.length / rowsPerPage)}
+            page={page}
+            onChange={handleChangePage}
+            color="primary"
+            variant="outlined"
+          />
+        </CardContent>
+      </Card>
+    </Container>
   );
 }

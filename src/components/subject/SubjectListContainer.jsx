@@ -13,7 +13,7 @@ export default function SubjectListContainer({
   setOpen,
 }) {
   return (
-    <Container maxWidth="lg">
+    <Container maxWidth="xl">
       <SingleSubjectDialog
         getAllSubjects={getAllSubjects}
         open={open}
