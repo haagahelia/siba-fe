@@ -45,7 +45,7 @@ export const remove = async (url: string) => {
   return response;
 };
 
-export const getById = async (url: string) => {
+export const getByEmail = async (url: string) => {
   const response = await fetch(url, {
     method: "GET",
     headers: {
