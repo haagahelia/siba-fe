@@ -1,10 +1,3 @@
-// The Log In page
-import { useContext, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { AppContext } from "../AppContext";
-import dao from "../ajax/dao";
-import Logger from "../logger/logger";
-
 import { navbarWidth } from "/src/styles/theme.js";
 import Button from "@mui/material/Button";
 import Card from "@mui/material/Card";
@@ -13,7 +6,13 @@ import Grid from "@mui/material/Grid";
 import Link from "@mui/material/Link";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
+// The Log In page
+import { useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { AppContext } from "../AppContext";
+import dao from "../ajax/dao";
 import AlertBox from "../components/common/AlertBox";
+import Logger from "../logger/logger";
 import logo from "../styles/SibeliusLogoLoginPage.svg";
 
 export default function LoginView({ handleLoginChange }) {
@@ -120,30 +119,10 @@ export default function LoginView({ handleLoginChange }) {
       <img
         src={logo}
         alt="Sibelius-Akatemia logo in the background."
-        style={{
-          height: "95%",
-          position: "absolute",
-          top: "50%",
-          transform: "translate(-50%, -50%)",
-          width: `calc(95% - ${navbarWidth})`,
-        }}
+        className="logInPageBackgroundLogo"
       />
-      <Card
-        sx={{
-          alignItems: "center",
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          height: "100vh",
-          margin: "auto",
-          width: "100%",
-        }}
-      >
-        <CardContent
-          style={{
-            zIndex: 1,
-          }}
-        >
+      <Card variant="logInPageContent">
+        <CardContent variant="logInPageTransparencyFix">
           <Typography variant="h4">Login</Typography>
           <Grid>
             <TextField

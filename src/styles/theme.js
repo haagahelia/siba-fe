@@ -1,3 +1,4 @@
+// Platform styling
 import createTheme from "@mui/material/styles/createTheme";
 
 // Palettes are: darkPalette, lightPalette,
@@ -17,7 +18,6 @@ export const indexRoomCommon = {
 export const createAppTheme = (currentPalette) =>
   createTheme({
     palette: currentPalette,
-
     components: {
       MuiCard: {
         styleOverrides: {
@@ -31,6 +31,30 @@ export const createAppTheme = (currentPalette) =>
             padding: lessPadding,
           },
         },
+        variants: [
+          {
+            props: { variant: "logInPageContent" },
+            style: {
+              alignItems: "center",
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              height: "100vh",
+              margin: "auto",
+              width: "100%",
+            },
+          },
+        ],
+      },
+      MuiCardContent: {
+        variants: [
+          {
+            props: { variant: "logInPageTransparencyFix" },
+            style: {
+              zIndex: 1,
+            },
+          },
+        ],
       },
       MuiCardHeader: {
         styleOverrides: {
@@ -174,7 +198,6 @@ export const createAppTheme = (currentPalette) =>
           {
             // The "Account" button styling
             props: { variant: "navBarAccountButton" },
-
             style: {
               backgroundColor: currentPalette.background.default,
               borderRadius: "10px",
@@ -197,7 +220,6 @@ export const createAppTheme = (currentPalette) =>
           {
             // The drop down menu styling
             props: { variant: "navBarDropDownLinks" },
-
             style: {
               backgroundColor: "transparent",
               display: "flex",
@@ -533,6 +555,13 @@ export const createAppTheme = (currentPalette) =>
           },
           ".dropDownHoverArea": {
             width: navbarWidth,
+          },
+          ".logInPageBackgroundLogo": {
+            height: "95%",
+            position: "absolute",
+            top: "50%",
+            transform: "translate(-50%, -50%)",
+            width: `calc(95% - ${navbarWidth})`,
           },
           ".navbar-spacing": {
             height: "100vh",
