@@ -1,4 +1,4 @@
-import { navbarWidth } from "/src/styles/theme.js";
+// The Log In page
 import Button from "@mui/material/Button";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
@@ -6,7 +6,6 @@ import Grid from "@mui/material/Grid";
 import Link from "@mui/material/Link";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
-// The Log In page
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AppContext } from "../AppContext";
@@ -123,9 +122,10 @@ export default function LoginView({ handleLoginChange }) {
       />
       <Card variant="logInPageContent">
         <CardContent variant="logInPageTransparencyFix">
-          <Typography variant="h4">Login</Typography>
+          <Typography variant="logInPageTitle">Login</Typography>
           <Grid>
             <TextField
+              className="logInTextInput"
               value={loginForm.email}
               onChange={(event) =>
                 setLoginForm({ ...loginForm, email: event.target.value })
@@ -135,6 +135,7 @@ export default function LoginView({ handleLoginChange }) {
           </Grid>
           <Grid>
             <TextField
+              className="logInTextInput"
               value={loginForm.password}
               onChange={(event) =>
                 setLoginForm({
@@ -147,9 +148,13 @@ export default function LoginView({ handleLoginChange }) {
             />
           </Grid>
           <Grid>
-            <Button onClick={loginAndError}>Log In</Button>
+            <Button variant="logInPageButton" onClick={loginAndError}>
+              Log In
+            </Button>
           </Grid>
-          <Link onClick={handleReset}>Forget your password?</Link>
+          <Link style={{ cursor: "pointer" }} onClick={handleReset}>
+            Forgot your password?
+          </Link>
           {errorMsg}
         </CardContent>
       </Card>

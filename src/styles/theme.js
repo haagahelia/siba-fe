@@ -324,6 +324,29 @@ export const createAppTheme = (currentPalette) =>
               color: currentPalette.fontColorDefault.default,
             },
           },
+          {
+            props: { variant: "logInPageButton" },
+            style: {
+              background: `linear-gradient(to right, ${currentPalette.background.default} 50%, ${currentPalette.primary.main} 50%)`,
+              backgroundPosition: "right bottom",
+              backgroundSize: "200% 100%",
+              border: `1px solid ${currentPalette.primary.main}`,
+              borderRadius: "7.5px",
+              color: currentPalette.primary.contrastText,
+              fontSize: "1.25rem",
+              fontWeight: "bold",
+              height: "40px",
+              marginBottom: "15px",
+              transition: "all .5s ease-out",
+              width: "130px",
+
+              "&:hover": {
+                backgroundColor: currentPalette.primary.main,
+                backgroundPosition: "left bottom",
+                color: currentPalette.primary.main,
+              },
+            },
+          },
         ],
         styleOverrides: {
           contained: {
@@ -377,6 +400,14 @@ export const createAppTheme = (currentPalette) =>
               fontSize: "1rem",
               lineHeight: 1.5,
               letterSpacing: "0.00938em",
+            },
+          },
+          {
+            props: { variant: "logInPageTitle" },
+            style: {
+              color: currentPalette.primary.main,
+              fontSize: "2.5rem",
+              fontWeight: 900,
             },
           },
           {
@@ -562,6 +593,13 @@ export const createAppTheme = (currentPalette) =>
             top: "50%",
             transform: "translate(-50%, -50%)",
             width: `calc(95% - ${navbarWidth})`,
+          },
+          ".logInTextInput": {
+            width: "300px",
+
+            "&:hover fieldset": {
+              borderWidth: "2px",
+            },
           },
           ".navbar-spacing": {
             height: "100vh",
