@@ -1,6 +1,6 @@
 import { useState } from "react";
 import dao from "../../ajax/dao";
-import Logger from "../../logger/logger";
+import { importData } from "../../importDataFunctions/importData";
 import {
   capitalizeFirstLetter,
   validate,
@@ -10,9 +10,9 @@ import Button from "@mui/material/Button";
 import AlertBox from "../common/AlertBox";
 
 export default function ImportBuildingButton({
-  importBuildings,
-  failedBuildings,
-  setFailedBuildings,
+  buildingToImport,
+  buildingFailedToImport,
+  setBuildingFailedToImport,
   getAllBuildings,
 }) {
   const [alertOpen, setAlertOpen] = useState(false);
@@ -22,84 +22,37 @@ export default function ImportBuildingButton({
     severity: "error",
   });
 
-  const importData = async () => {
-    let successCount = 0;
-    let failedCount = 0;
-    const tempFailedBuildings = [];
-    const buildingsToSend = [];
-    const buildingSet = new Set();
+  const processBuilding = async (building, buildingSet) => {
+    const newBuilding = {
+      name: building.name ? capitalizeFirstLetter(building.name) : "",
+      description: building.description ? building.description : "",
+    };
 
-    await Promise.all(
-      importBuildings.map(async (building) => {
-        const newBuilding = {
-          name: building.name ? capitalizeFirstLetter(building.name) : "",
-          description: building.description ? building.description : "",
-        };
-
-        // check if there is duplicated name of building after capitalization
-        if (buildingSet.has(newBuilding.name)) {
-          building.FailedReason = "Name of building is duplicated in the file";
-          tempFailedBuildings.push(building);
-          failedCount++;
-
-          return;
-        } else {
-          buildingSet.add(newBuilding.name);
-        }
-
-        const validateResult = await validate(newBuilding);
-
-        if (validateResult.name) {
-          building.FailedReason = validateResult.name;
-          tempFailedBuildings.push(building);
-          failedCount++;
-        } else if (validateResult.description) {
-          building.FailedReason = validateResult.description;
-          tempFailedBuildings.push(building);
-          failedCount++;
-        } else {
-          buildingsToSend.push(newBuilding);
-          successCount++;
-        }
-      }),
-    );
-
-    setFailedBuildings([...failedBuildings, ...tempFailedBuildings]);
-    Logger.debug("failed buildings", tempFailedBuildings);
-
-    // if the data is empty after validation, not sending to backend
-    if (buildingsToSend.length === 0) {
-      setAlertOptions({
-        severity: "error",
-        title: "Error!",
-        message: `Something wrong happened. ${failedCount} building failed to add.`,
-      });
-      setAlertOpen(true);
-
-      return;
-    }
-
-    Logger.debug("buildingsToSend", buildingsToSend);
-
-    const result = await dao.postNewBuildings(buildingsToSend);
-
-    if (result) {
-      getAllBuildings();
-
-      setAlertOptions({
-        severity: "success",
-        title: "Success!",
-        message: `${successCount} building added and ${failedCount} building failed to add.`,
-      });
-      setAlertOpen(true);
+    if (buildingSet.has(newBuilding.name)) {
+      building.FailedReason = "Name of building is duplicated in the file";
+      return building;
     } else {
-      setAlertOptions({
-        severity: "error",
-        title: "Error!",
-        message: `Something wrong happened. ${failedCount} building failed to add.`,
-      });
-      setAlertOpen(true);
+      buildingSet.add(newBuilding.name);
     }
+
+    const validateResult = await validate(newBuilding);
+
+    building.FailedReason = validateResult.name || validateResult.description;
+
+    return building.FailedReason ? building : newBuilding;
+  };
+
+  const handleClick = async () => {
+    await importData(
+      buildingToImport,
+      buildingFailedToImport,
+      setBuildingFailedToImport,
+      getAllBuildings,
+      processBuilding,
+      dao.postNewBuildings,
+      setAlertOpen,
+      setAlertOptions,
+    );
   };
 
   return (
@@ -112,7 +65,7 @@ export default function ImportBuildingButton({
       <Button
         variant="contained"
         onClick={() => {
-          importData();
+          handleClick();
         }}
       >
         Import data

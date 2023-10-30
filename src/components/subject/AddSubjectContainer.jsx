@@ -224,7 +224,10 @@ export default function AddSubjectContainer({
                 allSubjectsList={allSubjectsList}
                 spaceTypeSelectList={spaceTypeSelectList}
               />
-              <ImportSubjectContainer getAllSubjects={getAllSubjects} />
+              <ImportSubjectContainer
+                getAllSubjects={getAllSubjects}
+                spaceTypeSelectList={spaceTypeSelectList}
+              />
             </>
           )}
         </CardContent>
