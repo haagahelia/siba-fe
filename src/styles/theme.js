@@ -187,7 +187,7 @@ export const createAppTheme = (currentPalette) =>
               },
               "& a.nav-links.active": {
                 backgroundColor: currentPalette.background.default,
-                color: currentPalette.text.primary,
+                color: currentPalette.fontColorDefault.default,
                 fontWeight: 800,
                 padding: lessPadding,
                 textDecorationThickness: "3px",
@@ -231,7 +231,7 @@ export const createAppTheme = (currentPalette) =>
               width: "130px",
 
               "& a": {
-                color: currentPalette.primary.main,
+                color: currentPalette.fontColorDefault.default,
                 fontSize: "17.5px",
                 fontWeight: 600,
                 textDecoration: "none",
@@ -546,7 +546,7 @@ export const createAppTheme = (currentPalette) =>
       MuiCssBaseline: {
         styleOverrides: {
           ".dropDown": {
-            backgroundColor: "rgb(85, 85, 85)",
+            backgroundColor: currentPalette.backgroundDarker.default,
             border: "2px solid black",
             borderRadius: "10px",
             bottom: "0px",
