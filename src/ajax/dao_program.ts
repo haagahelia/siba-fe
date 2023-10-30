@@ -1,5 +1,5 @@
 import { Program, ResponseFiner } from "../types";
-import { get, getById } from "./request";
+import { get, getByEmail } from "./request";
 
 const baseUrl = import.meta.env.VITE_BE_SERVER_BASE_URL;
 
@@ -16,10 +16,10 @@ export const fetchProgramsForSelect = async (): Promise<
   }
 };
 
-export const getProgramByUserId = async (
-  departmentId: number,
+export const getProgramByUserEmail = async (
+  email: string,
 ): Promise<ResponseFiner<Program>> => {
-  const response = await getById(`${baseUrl}/program/progName/${departmentId}`);
+  const response = await getByEmail(`${baseUrl}/program/programName/${email}`);
   if (response.status === 200) {
     const programs: Program[] = await response.json();
     return { httpStatus: response.status, data: programs };
