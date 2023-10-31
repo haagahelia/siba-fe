@@ -1,6 +1,7 @@
 import InfoIcon from "@mui/icons-material/Info";
 import Container from "@mui/material/Container";
 import IconButton from "@mui/material/IconButton";
+import Pagination from "@mui/material/Pagination";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -21,6 +22,13 @@ export default function BuildingList({ getAllBuildings, allBuildingsList }) {
   const [order, setOrder] = useState("asc");
   const [orderBy, setOrderBy] = useState("Name");
 
+  const rowsPerPage = 15;
+  const [page, setPage] = useState(1);
+
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
+
   const handleRequestSort = (property) => {
     const isAsc = orderBy === property && order === "asc";
     setOrder(isAsc ? "desc" : "asc");
@@ -38,8 +46,12 @@ export default function BuildingList({ getAllBuildings, allBuildingsList }) {
     }
   });
 
+  const startIndex = (page - 1) * rowsPerPage;
+  const endIndex = startIndex + rowsPerPage;
+  const paginatedData = sortedBuildingsList.slice(startIndex, endIndex);
+
   // STYLE
-  const Box = styled(TableContainer)(({ theme }) => ({
+  const Box = styled(Table)(({ theme }) => ({
     overflow: "auto",
   }));
 
@@ -50,7 +62,7 @@ export default function BuildingList({ getAllBuildings, allBuildingsList }) {
 
   return (
     <div>
-      <Container>
+      <Container component={Paper} variant="outlined">
         <SingleBuildingDialog
           open={open}
           setOpen={setOpen}
@@ -101,6 +113,15 @@ export default function BuildingList({ getAllBuildings, allBuildingsList }) {
           </Paper>
         </Box>
       </Container>
+      <div>
+        <Pagination
+          count={Math.ceil(sortedBuildingsList.length / rowsPerPage)}
+          page={page}
+          onChange={handleChangePage}
+          color="primary"
+          variant="outlined"
+        />
+      </div>
     </div>
   );
 }

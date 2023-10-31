@@ -1,22 +1,46 @@
+import InfoIcon from "@mui/icons-material/Info";
+import IconButton from "@mui/material/IconButton";
+import Paper from "@mui/material/Paper";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import TableSortLabel from "@mui/material/TableSortLabel";
 import styled from "@mui/material/styles/styled";
 import { useState } from "react";
-
-import Divider from "@mui/material/Divider";
-import Grid from "@mui/material/Grid";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import ListItemText from "@mui/material/ListItemText";
-import Paper from "@mui/material/Paper";
-import Typography from "@mui/material/Typography";
 import SingleUserDialog from "./SingleUserDialog";
 
 export default function UserList({ getAllUsers, paginateUsers }) {
   const [open, setOpen] = useState(false);
   const [singleUser, setSingleUser] = useState(null);
+  const [order, setOrder] = useState("asc");
+  const [orderBy, setOrderBy] = useState("id");
+
+  const handleRequestSort = (property) => {
+    const isAsc = orderBy === property && order === "asc";
+    setOrder(isAsc ? "desc" : "asc");
+    setOrderBy(property);
+  };
+
+  const sortedUsers = paginateUsers.sort((a, b) => {
+    switch (orderBy) {
+      case "id":
+        return order === "asc" ? a.id - b.id : b.id - a.id;
+      case "email":
+        return order === "asc"
+          ? a.email.localeCompare(b.email)
+          : b.email.localeCompare(a.email);
+      default:
+        return 0;
+    }
+  });
 
   // STYLE
-  const Box = styled(Paper)(({ theme }) => ({
+  const Box = styled(Table)(({ theme }) => ({
     overflow: "auto",
+    borderCollapse: "collapse",
   }));
 
   return (
@@ -29,108 +53,62 @@ export default function UserList({ getAllUsers, paginateUsers }) {
         getAllUsers={getAllUsers}
       />
       <Box>
-        <nav>
-          {paginateUsers.map((value) => {
-            return (
-              <List key={value.id}>
-                <ListItem
-                  disablePadding
-                  onClick={() => {
-                    setSingleUser(value);
-
-                    setOpen(true);
-                  }}
-                >
-                  <Grid item md={3} xs={7}>
-                    <Typography
-                      variant="caption"
-                      style={{ fontWeight: "bold" }}
+        <Paper>
+          <TableContainer>
+            <Table>
+              <TableHead>
+                <TableRow>
+                  <TableCell />
+                  <TableCell>
+                    <TableSortLabel
+                      active={orderBy === "id"}
+                      direction={order}
+                      onClick={() => handleRequestSort("id")}
                     >
-                      id:
-                    </Typography>
-                    <ListItemText
-                      primary={value.id}
-                      primaryTypographyProps={{
-                        variant: "body2",
-                      }}
-                    />
-                  </Grid>
-                  <Grid item md={2} xs={3}>
-                    <Typography
-                      variant="caption"
-                      style={{ fontWeight: "bold" }}
+                      ID
+                    </TableSortLabel>
+                  </TableCell>
+                  <TableCell>
+                    <TableSortLabel
+                      active={orderBy === "email"}
+                      direction={order}
+                      onClick={() => handleRequestSort("email")}
                     >
-                      Email:
-                    </Typography>
-                    <ListItemText
-                      primary={value.email}
-                      primaryTypographyProps={{
-                        variant: "body2",
-                      }}
-                    />
-                  </Grid>
-                  <Grid item md={2} xs={2}>
-                    <Typography
-                      variant="caption"
-                      style={{ fontWeight: "bold" }}
-                    >
-                      isAdmin:
-                    </Typography>
-                    <ListItemText
-                      primary={value.isAdmin}
-                      primaryTypographyProps={{
-                        variant: "body2",
-                      }}
-                    />
-                  </Grid>
-                  <Grid item md={2} xs={2}>
-                    <Typography
-                      variant="caption"
-                      style={{ fontWeight: "bold" }}
-                    >
-                      isPlanner:
-                    </Typography>
-                    <ListItemText
-                      primary={value.isPlanner}
-                      primaryTypographyProps={{
-                        variant: "body2",
-                      }}
-                    />
-                  </Grid>
-                  <Grid item md={3} xs={7}>
-                    <Typography
-                      variant="caption"
-                      style={{ fontWeight: "bold" }}
-                    >
-                      isStatist:
-                    </Typography>
-                    <ListItemText
-                      primary={value.isStatist}
-                      primaryTypographyProps={{
-                        variant: "body2",
-                      }}
-                    />
-                  </Grid>
-                  <Grid item md={3} xs={7}>
-                    <Typography
-                      variant="caption"
-                      style={{ fontWeight: "bold" }}
-                    >
-                      Planner for:
-                    </Typography>
-                    <ListItemText
-                      primary={value.plannerdepartment}
-                      primaryTypographyProps={{
-                        variant: "body2",
-                      }}
-                    />
-                  </Grid>
-                </ListItem>
-                <Divider />
-              </List>
-            );
-          })}
-        </nav>
+                      Email
+                    </TableSortLabel>
+                  </TableCell>
+                  <TableCell>isAdmin</TableCell>
+                  <TableCell>isPlanner</TableCell>
+                  <TableCell>isStatist</TableCell>
+                  <TableCell>Planner for</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {sortedUsers.map((value) => (
+                  <TableRow key={value.id}>
+                    <TableCell>
+                      <IconButton
+                        onClick={() => {
+                          setSingleUser(value);
+                          setOpen(true);
+                        }}
+                        aria-label="Open Info"
+                      >
+                        <InfoIcon />
+                      </IconButton>
+                    </TableCell>
+                    <TableCell>{value.id}</TableCell>
+                    <TableCell>{value.email}</TableCell>
+                    <TableCell>{value.isAdmin}</TableCell>
+                    <TableCell>{value.isPlanner}</TableCell>
+                    <TableCell>{value.isStatist}</TableCell>
+                    <TableCell>{value.plannerdepartment}</TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+        </Paper>
       </Box>
     </div>
   );

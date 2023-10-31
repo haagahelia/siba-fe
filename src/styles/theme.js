@@ -535,7 +535,7 @@ export const createAppTheme = (currentPalette) =>
       MuiTableRow: {
         styleOverrides: {
           root: {
-            "&:nth-child(even)": {
+            "&:nth-of-type(even)": {
               backgroundColor: currentPalette.background.default,
               borderBottom: "none",
             },
