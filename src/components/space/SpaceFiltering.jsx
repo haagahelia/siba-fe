@@ -48,8 +48,9 @@ export default function SpaceFiltering({
             <IconButton
               onClick={cancelSearch}
               sx={{ visibility: searched ? "visible" : "hidden" }}
+              variant="clearFilterButton"
             >
-              <ClearIcon sx={{ color: "#ffffff" }} />
+              <ClearIcon />
             </IconButton>
           </InputAdornment>
         ),
