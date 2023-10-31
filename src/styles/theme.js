@@ -572,6 +572,14 @@ export const createAppTheme = (currentPalette) =>
             color: currentPalette.infoIcon.main,
           },
         },
+        variants: [
+          {
+            props: { variant: "clearFilterButton" },
+            style: {
+              color: currentPalette.text.primary,
+            },
+          },
+        ],
       },
       // Enables CSS styling
       MuiCssBaseline: {

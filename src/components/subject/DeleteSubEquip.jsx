@@ -2,6 +2,7 @@ import { useState } from "react";
 import dao from "../../ajax/dao";
 
 import Button from "@mui/material/Button";
+import useTheme from "@mui/material/styles/useTheme";
 import AlertBox from "../common/AlertBox";
 import ConfirmationDialog from "../common/ConfirmationDialog";
 
@@ -27,6 +28,8 @@ export default function DeleteSubEquip({
   const id1 = singleEquipBySubId.subjectId;
   const id2 = singleEquipBySubId.equipmentId;
   const equipmentName = singleEquipBySubId.name;
+
+  const theme = useTheme();
 
   const deleteSubjectEquipment = async (subjectId, equipmentId) => {
     // TODO: Why are we reassigning function parameters here?!
@@ -83,7 +86,7 @@ export default function DeleteSubEquip({
       />
       <Button
         variant="contained"
-        color="error"
+        style={theme.components.MuiButton.redbutton}
         sx={{ margin: "5px", maxWidth: "85px" }}
         onClick={() => {
           submitDelete(singleEquipBySubId);
