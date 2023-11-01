@@ -1,4 +1,4 @@
-import { Department, Response } from "../types";
+import { Department, Response, ResponseFiner } from "../types";
 import { create, get, remove, update } from "./request";
 
 const baseUrl = import.meta.env.VITE_BE_SERVER_BASE_URL;
@@ -8,6 +8,19 @@ export const fetchDepartmentData = async (): Promise<Response<Department>> => {
   const response = await get(`${baseUrl}/department`);
   const departments: Department[] = await response.json();
   return { success: response.ok, data: departments };
+};
+
+// fetching all departments finer
+export const fetchAllDepartmentData = async (): Promise<
+  ResponseFiner<Department>
+> => {
+  const response = await get(`${baseUrl}/department`);
+  if (response.status === 200) {
+    const departments: Department[] = await response.json();
+    return { httpStatus: response.status, data: departments };
+  } else {
+    return { httpStatus: response.status, data: [] };
+  }
 };
 
 // create department

@@ -91,6 +91,11 @@ export interface Department {
   description: string;
 }
 
+export interface Departmentplanner {
+  departmentId: number;
+  userId: number;
+}
+
 export interface User {
   id: number;
   email: string;

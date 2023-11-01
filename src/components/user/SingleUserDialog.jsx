@@ -1,11 +1,17 @@
+import { useEffect, useState } from "react";
+import dao from "../../ajax/dao";
+
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
+import AlertBox from "../common/AlertBox";
+import AddDepartmentPlannerContainer from "./AddDepartmentPlannerContainer";
 import DeleteUser from "./DeleteUser";
 import EditUserContainer from "./EditUserContainer";
+import UserDepartmentList from "./UserDepartmentList";
 
 export default function SingleUserDialog({
   open,
@@ -14,8 +20,44 @@ export default function SingleUserDialog({
   getAllUsers,
   setSingleUser,
 }) {
+  const [departmentListByUserId, setDepartmentListByUserId] = useState([]);
+  const [alertOpen, setAlertOpen] = useState(false);
+  const [alertOptions, setAlertOptions] = useState({
+    title: "This is title",
+    message: "This is an error alert — check it out!",
+    severity: "error",
+  });
+
+  const getDepartmentListByUserId = async function (userId) {
+    const result = await dao.fetchDepartmentplannerByUserId(userId);
+    if (result.success === false) {
+      setAlertOptions({
+        severity: "error",
+        title: "Error",
+        message:
+          "Something went wrong on the server. No departmentplanners found",
+      });
+      setAlertOpen(true);
+      return;
+    } else {
+      setDepartmentListByUserId(result.data);
+      return result.data;
+    }
+  };
+
+  useEffect(() => {
+    if (singleUser && typeof singleUser.id === "number") {
+      getDepartmentListByUserId(singleUser.id);
+    }
+  }, [singleUser]);
+
   return (
     <div>
+      <AlertBox
+        alertOpen={alertOpen}
+        alertOptions={alertOptions}
+        open={setAlertOpen}
+      />
       <Dialog open={open} onClose={() => setOpen(false)} width="400px">
         <DialogTitle id="dialog-title">{singleUser?.email}</DialogTitle>
         <DialogContent>
@@ -29,6 +71,11 @@ export default function SingleUserDialog({
               singleUser={singleUser}
               getAllUsers={getAllUsers}
               setSingleUser={setSingleUser}
+            />
+            <AddDepartmentPlannerContainer
+              singleUser={singleUser}
+              getDeparmentsByUserId={getDepartmentListByUserId}
+              getAllUsers={getAllUsers}
             />
           </DialogActions>
           <DialogContent>
@@ -70,10 +117,13 @@ export default function SingleUserDialog({
                 </Typography>
               </Grid>
               <Grid item s={6}>
-                <Typography variant="subtitle1">
-                  Planner for:&nbsp;
-                  {singleUser?.plannerdepartment}
-                </Typography>
+                <Typography variant="subtitle1"> Planner for:&nbsp;</Typography>
+                <UserDepartmentList
+                  departmentListByUserId={departmentListByUserId}
+                  getDeparmentsByUserId={getDepartmentListByUserId}
+                  getAllUsers={getAllUsers}
+                  setOpen={setOpen}
+                />
               </Grid>
             </Grid>
           </DialogContent>

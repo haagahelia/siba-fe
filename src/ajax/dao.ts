@@ -2,6 +2,7 @@ import * as dao_allocRound from "./dao_allocRound";
 import * as dao_allocation from "./dao_allocation";
 import * as dao_building from "./dao_building";
 import * as dao_department from "./dao_department";
+import * as dao_departmentplanner from "./dao_departmentplanner";
 import * as dao_equipment from "./dao_equipment";
 import * as dao_program from "./dao_program";
 import * as dao_settings from "./dao_settings";
@@ -24,6 +25,7 @@ const dao = {
   ...dao_building,
   ...dao_department,
   ...dao_user,
+  ...dao_departmentplanner,
 };
 
 export default dao;
