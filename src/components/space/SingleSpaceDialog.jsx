@@ -11,6 +11,7 @@ import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import AlertBox from "../common/AlertBox";
 import DeleteSpace from "./DeleteSpace";
+import EditSpaceContainer from "./EditSpaceContainer";
 
 export default function SingleSpaceDialog({
   open,
@@ -76,6 +77,11 @@ export default function SingleSpaceDialog({
               getAllSpaces={getAllSpaces}
               setOpen={setOpen}
             />
+            <EditSpaceContainer
+              singleSpace={singleSpace}
+              getAllSpaces={getAllSpaces}
+              setSingleSpace={setSingleSpace}
+            />
           </DialogActions>
           <DialogContent>
             <Grid
@@ -97,6 +103,70 @@ export default function SingleSpaceDialog({
                   {singleSpace?.area}
                 </Typography>
               </Grid>
+
+              <Grid item xs={12} sm={6}>
+                <Typography variant="subtitle1">
+                  Information:&nbsp;
+                  {singleSpace?.info}
+                </Typography>
+              </Grid>
+
+              <Grid item xs={12} sm={6}>
+                <Typography variant="subtitle1">
+                  Maximum Persons Allowed:&nbsp;
+                  {singleSpace?.personLimit}
+                </Typography>
+              </Grid>
+
+              <Grid item xs={12} sm={6}>
+                <Typography variant="subtitle1">
+                  Available From:&nbsp;
+                  {singleSpace?.availableFrom}
+                </Typography>
+              </Grid>
+
+              <Grid item xs={12} sm={6}>
+                <Typography variant="subtitle1">
+                  Available To:&nbsp;
+                  {singleSpace?.availableTo}
+                </Typography>
+              </Grid>
+
+              <Grid item xs={12} sm={6}>
+                <Typography variant="subtitle1">
+                  Classes From:&nbsp;
+                  {singleSpace?.classesFrom}
+                </Typography>
+              </Grid>
+
+              <Grid item xs={12} sm={6}>
+                <Typography variant="subtitle1">
+                  Classes To:&nbsp;
+                  {singleSpace?.classesTo}
+                </Typography>
+              </Grid>
+
+              <Grid item xs={12} sm={6}>
+                <Typography variant="subtitle1">
+                  In Use:&nbsp;
+                  {singleSpace?.inUse ? "Yes" : "No"}
+                </Typography>
+              </Grid>
+
+              <Grid item xs={12} sm={6}>
+                <Typography variant="subtitle1">
+                  Space Type:&nbsp;
+                  {singleSpace?.spaceTypeName}{" "}
+                </Typography>
+              </Grid>
+
+              <Grid item xs={12} sm={6}>
+                <Typography variant="subtitle1">
+                  Building:&nbsp;
+                  {singleSpace?.buildingName}{" "}
+                </Typography>
+              </Grid>
+
               {/* Add more space details here */}
             </Grid>
             <Typography variant="subtitle1">Equipment List:</Typography>
