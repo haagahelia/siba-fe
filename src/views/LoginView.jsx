@@ -110,7 +110,7 @@ export default function LoginView({ handleLoginChange }) {
   };
 
   return (
-    <div>
+    <div className="sibeliusCursor">
       <AlertBox
         alertOpen={alertOpen}
         alertOptions={alertOptions}
@@ -119,7 +119,7 @@ export default function LoginView({ handleLoginChange }) {
       <img
         src={backgroundImage}
         alt="Sibelius-Akatemia logo in the background."
-        className="logInPageBackgroundLogo sibeliusCursor"
+        className="logInPageBackgroundLogo"
       />
       <Card variant="logInPageContent">
         <CardContent variant="logInPageTransparencyFix">

@@ -1,6 +1,6 @@
 // Platform styling
 import createTheme from "@mui/material/styles/createTheme";
-import logo from "../styles/SibeliusLogo.svg";
+import logo from "../styles/SibeliusLogoSmall.svg";
 
 // Palettes are: darkPalette, lightPalette,
 // redPalette (for testing), yellowPalette (for testing),
