@@ -7,7 +7,7 @@ export interface Response<T> {
 
 export interface ResponseFiner<T> {
   httpStatus: number;
-  data: T[];
+  data: T[] | Blob;
 }
 
 export interface Subject {

@@ -8,7 +8,7 @@ import {
 import dao from "../../ajax/dao";
 import AlertBox from "../../components/common/AlertBox";
 
-const BuildingTemplate = () => {
+const SubjectTemplate = () => {
   const [alertOpen, setAlertOpen] = useState(false);
   const [alertOptions, setAlertOptions] = useState({
     title: "This is title",
@@ -16,8 +16,8 @@ const BuildingTemplate = () => {
     severity: "error",
   });
 
-  const downloadBuildingTemplate = async () => {
-    const { httpStatus, data } = await dao.downloadBuildingTemplate();
+  const downloadSubjectTemplate = async () => {
+    const { httpStatus, data } = await dao.downloadSubjectTemplate();
     if (httpStatus !== 200) {
       ajaxRequestErrorHandler(
         httpStatus,
@@ -26,7 +26,7 @@ const BuildingTemplate = () => {
         setAlertOpen,
       );
     } else {
-      FileDownload(data, "building_template.xlsx");
+      FileDownload(data, "lesson_template.xlsx");
     }
   };
 
@@ -37,9 +37,9 @@ const BuildingTemplate = () => {
         alertOptions={alertOptions}
         setAlertOpen={setAlertOpen}
       />
-      <Button onClick={downloadBuildingTemplate}>Download template</Button>
+      <Button onClick={downloadSubjectTemplate}>Download template</Button>
     </>
   );
 };
 
-export default BuildingTemplate;
+export default SubjectTemplate;
