@@ -53,3 +53,15 @@ export const deleteBuildingById = async (
   const data = await response.json();
   return data?.returnedNumberValue === 1;
 };
+
+export const downloadBuildingTemplate = async (): Promise<
+  ResponseFiner<Building>
+> => {
+  const response = await get(`${baseUrl}/template/building`);
+  if (response.status === 200) {
+    const templateFile = await response.blob();
+    return { httpStatus: response.status, data: templateFile };
+  } else {
+    return { httpStatus: response.status, data: [] };
+  }
+};
