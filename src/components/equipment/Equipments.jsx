@@ -67,6 +67,7 @@ export default function Equipments() {
               <CardHeader
                 title="Equipment"
                 onClick={() => setIsCardExpanded(!isCardExpanded)}
+                variant="pageHeader"
               />
               {isCardExpanded && (
                 <EquipmentListContainer

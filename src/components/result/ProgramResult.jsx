@@ -79,7 +79,7 @@ export default function ProgramResult() {
   return (
     <>
       <AllocRoundControlPanel incrementResetCounter={incrementResetCounter} />
-      <Typography variant="h4" className="m-1">
+      <Typography className="m-1" variant="pageHeader">
         Programs (Aineryhmät)
       </Typography>
       <Modal open={open} onClose={handleClose} sx={{ overflow: "scroll" }}>

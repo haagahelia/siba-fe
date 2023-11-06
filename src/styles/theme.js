@@ -67,6 +67,22 @@ export const createAppTheme = (currentPalette) =>
             padding: lessPadding,
           },
         },
+        variants: [
+          {
+            props: { variant: "pageHeader" },
+            style: {
+              backgroundColor: "transparent",
+              //backgroundColor: "red",
+              borderBottom: `4px solid ${currentPalette.primary.main}`,
+
+              "& .MuiCardHeader-title": {
+                fontSize: "30px",
+                fontWeight: "bold",
+                margin: 0,
+              },
+            },
+          },
+        ],
       },
       MuiTextField: {
         styleOverrides: {
@@ -409,6 +425,19 @@ export const createAppTheme = (currentPalette) =>
               color: currentPalette.primary.main,
               fontSize: "2.5rem",
               fontWeight: 900,
+            },
+          },
+          {
+            props: { variant: "pageHeader" },
+            style: {
+              backgroundColor: "transparent",
+              borderBottom: `4px solid ${currentPalette.primary.main}`,
+              display: "block",
+              fontSize: "30px",
+              fontWeight: "bold",
+              margin: "auto",
+              paddingBottom: "5px",
+              width: "90%",
             },
           },
           {

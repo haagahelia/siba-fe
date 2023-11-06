@@ -97,6 +97,7 @@ export default function SubjectView() {
             <CardHeader
               title="Lessons"
               onClick={() => setIsCardExpanded(!isCardExpanded)}
+              variant="pageHeader"
             />
             <CardContent>
               {isCardExpanded && (

@@ -92,6 +92,7 @@ export default function SpaceView() {
             <CardHeader
               title="Spaces"
               onClick={() => setIsCardExpanded(!isCardExpanded)}
+              variant="pageHeader"
             />
             <CardContent>
               {isCardExpanded && (

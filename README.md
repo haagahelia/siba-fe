@@ -155,7 +155,7 @@ siba-fe\src\views\AllocRoundView.jsx <br>
 siba-fe\src\components\building\BuildingList.jsx <br>
 
 ### Departments Page
-siba-fe\src\views\DepartmentView.jsx <br>
+siba-fe\src\components\department\Departments.jsx <br>
 
 ### Equipment Page
 siba-fe\src\components\equipment\Equipments.jsx <br>

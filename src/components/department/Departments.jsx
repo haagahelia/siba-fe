@@ -66,6 +66,7 @@ export default function Departments() {
               <CardHeader
                 title="Department"
                 onClick={() => setIsCardExpanded(!isCardExpanded)}
+                variant="pageHeader"
               />
               {isCardExpanded && (
                 <DepartmentListContainer

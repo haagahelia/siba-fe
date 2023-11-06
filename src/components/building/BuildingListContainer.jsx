@@ -11,7 +11,7 @@ export default function BuildingListContainer({
     <Grid container rowSpacing={1}>
       <Card variant="outlined">
         <CardContent>
-          <CardHeader title="Building List" />
+          <CardHeader title="Building List" variant="pageHeader" />
           <BuildingList
             getAllBuildings={getAllBuildings}
             allBuildingsList={allBuildingsList}
