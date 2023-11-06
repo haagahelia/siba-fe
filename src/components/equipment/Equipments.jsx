@@ -19,13 +19,9 @@ import EquipmentListContainer from "./EquipmentListContainer";
 export default function Equipments() {
   Logger.logPrefix = "Equipments";
   Logger.debug("Equipments component instantiated.");
-
   const { roles } = useRoleLoggedIn();
-
-  // State for checking if Equipment card is expanded
-  const [isCardExpanded, setIsCardExpanded] = useState(true);
-
   const [equipmentList, setEquipmentList] = useState([]);
+
   const [/* alertOptions, */ setAlertOptions] = useState({
     message: "This is an error alert — check it out!",
     severity: "error",
@@ -64,17 +60,11 @@ export default function Equipments() {
         <Grid container rowSpacing={0.5}>
           <Card variant="outlined">
             <CardContent>
-              <CardHeader
-                title="Equipment"
-                onClick={() => setIsCardExpanded(!isCardExpanded)}
-                variant="pageHeader"
+              <CardHeader title="Equipment" variant="pageHeader" />
+              <EquipmentListContainer
+                getAllEquipments={getAllEquipments}
+                equipmentList={equipmentList}
               />
-              {isCardExpanded && (
-                <EquipmentListContainer
-                  getAllEquipments={getAllEquipments}
-                  equipmentList={equipmentList}
-                />
-              )}
             </CardContent>
           </Card>
         </Grid>

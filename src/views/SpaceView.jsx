@@ -36,7 +36,6 @@ export default function SpaceView() {
     message: "This is an error alert — check it out!",
     severity: "error",
   });
-  const [isCardExpanded, setIsCardExpanded] = useState(true);
 
   Logger.debug("Initial state set.");
 
@@ -89,37 +88,29 @@ export default function SpaceView() {
         )}
         <Grid container rowSpacing={1}>
           <Card variant="outlined">
-            <CardHeader
-              title="Spaces"
-              onClick={() => setIsCardExpanded(!isCardExpanded)}
-              variant="pageHeader"
-            />
+            <CardHeader title="Spaces" variant="pageHeader" />
             <CardContent>
-              {isCardExpanded && (
-                <>
-                  <SpaceFiltering
-                    allSpacesList={allSpacesList}
-                    setAllSpacesList={setAllSpacesList}
-                    paginateSpaces={paginateSpaces}
-                    setPaginateSpaces={setPaginateSpaces}
-                    pagination={pagination}
-                  />
-                  <SpaceListContainer
-                    getAllSpaces={getAllSpaces}
-                    allSpacesList={allSpacesList}
-                    paginateSpaces={paginateSpaces}
-                    open={open}
-                    setOpen={setOpen}
-                  />
-                  <SpacePagination
-                    pagination={pagination}
-                    setPagination={setPagination}
-                    allSpacesList={allSpacesList}
-                    paginateSpaces={paginateSpaces}
-                    setPaginateSpaces={setPaginateSpaces}
-                  />
-                </>
-              )}
+              <SpaceFiltering
+                allSpacesList={allSpacesList}
+                setAllSpacesList={setAllSpacesList}
+                paginateSpaces={paginateSpaces}
+                setPaginateSpaces={setPaginateSpaces}
+                pagination={pagination}
+              />
+              <SpaceListContainer
+                getAllSpaces={getAllSpaces}
+                allSpacesList={allSpacesList}
+                paginateSpaces={paginateSpaces}
+                open={open}
+                setOpen={setOpen}
+              />
+              <SpacePagination
+                pagination={pagination}
+                setPagination={setPagination}
+                allSpacesList={allSpacesList}
+                paginateSpaces={paginateSpaces}
+                setPaginateSpaces={setPaginateSpaces}
+              />
             </CardContent>
           </Card>
         </Grid>

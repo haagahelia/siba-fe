@@ -21,10 +21,8 @@ export default function Departments() {
   Logger.debug("Departments component instantiated.");
 
   const { roles } = useRoleLoggedIn();
-
-  const [isCardExpanded, setIsCardExpanded] = useState(true);
-
   const [departmentList, setDepartmentList] = useState([]);
+
   const [/* alertOptions, */ setAlertOptions] = useState({
     message: "This is an error alert — check it out!",
     severity: "error",
@@ -63,17 +61,11 @@ export default function Departments() {
         <Grid container rowSpacing={0.5}>
           <Card variant="outlined">
             <CardContent>
-              <CardHeader
-                title="Department"
-                onClick={() => setIsCardExpanded(!isCardExpanded)}
-                variant="pageHeader"
+              <CardHeader title="Department" variant="pageHeader" />
+              <DepartmentListContainer
+                getAllDepartments={getAllDepartments}
+                departmentList={departmentList}
               />
-              {isCardExpanded && (
-                <DepartmentListContainer
-                  getAllDepartments={getAllDepartments}
-                  departmentList={departmentList}
-                />
-              )}
             </CardContent>
           </Card>
         </Grid>
