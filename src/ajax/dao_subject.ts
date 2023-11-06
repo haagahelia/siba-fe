@@ -56,3 +56,15 @@ export const deleteSingleSubject = async (
   const data = await response.json();
   return data?.affectedRows === 1;
 };
+
+export const downloadSubjectTemplate = async (): Promise<
+  ResponseFiner<Subject>
+> => {
+  const response = await get(`${baseUrl}/template/subject`);
+  if (response.status === 200) {
+    const templateFile = await response.blob();
+    return { httpStatus: response.status, data: templateFile };
+  } else {
+    return { httpStatus: response.status, data: [] };
+  }
+};

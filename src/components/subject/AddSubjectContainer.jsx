@@ -21,6 +21,7 @@ import AlertBox from "../common/AlertBox";
 import ConfirmationDialog from "../common/ConfirmationDialog";
 import AddSubjectForm from "./AddSubjectForm";
 import ImportSubjectContainer from "./ImportSubjectContainer";
+import SubjectTemplate from "./SubjectTemplate";
 
 export default function AddSubjectContainer({
   getAllSubjects,
@@ -228,6 +229,7 @@ export default function AddSubjectContainer({
                 getAllSubjects={getAllSubjects}
                 spaceTypeSelectList={spaceTypeSelectList}
               />
+              <SubjectTemplate />
             </>
           )}
         </CardContent>
