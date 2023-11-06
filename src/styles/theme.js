@@ -34,7 +34,7 @@ export const createAppTheme = (currentPalette) =>
         },
         variants: [
           {
-            props: { variant: "logInPageContent" },
+            props: { variant: "formContent" },
             style: {
               alignItems: "center",
               display: "flex",
@@ -342,7 +342,7 @@ export const createAppTheme = (currentPalette) =>
             },
           },
           {
-            props: { variant: "logInPageButton" },
+            props: { variant: "formButton" },
             style: {
               background: `linear-gradient(to right, ${currentPalette.background.default} 50%, ${currentPalette.primary.main} 50%)`,
               backgroundPosition: "right bottom",
@@ -632,7 +632,7 @@ export const createAppTheme = (currentPalette) =>
             transform: "translate(-50%, -50%)",
             width: `calc(95% - ${navbarWidth})`,
           },
-          ".logInTextInput": {
+          ".formTextInput": {
             width: "300px",
 
             "&:hover fieldset": {

@@ -121,12 +121,12 @@ export default function LoginView({ handleLoginChange }) {
         alt="Sibelius-Akatemia logo in the background."
         className="logInPageBackgroundLogo"
       />
-      <Card variant="logInPageContent">
+      <Card variant="formContent">
         <CardContent variant="logInPageTransparencyFix">
           <Typography variant="logInPageTitle">Login</Typography>
           <Grid>
             <TextField
-              className="logInTextInput"
+              className="formTextInput"
               value={loginForm.email}
               onChange={(event) =>
                 setLoginForm({ ...loginForm, email: event.target.value })
@@ -136,7 +136,7 @@ export default function LoginView({ handleLoginChange }) {
           </Grid>
           <Grid>
             <TextField
-              className="logInTextInput"
+              className="formTextInput"
               value={loginForm.password}
               onChange={(event) =>
                 setLoginForm({
@@ -149,7 +149,7 @@ export default function LoginView({ handleLoginChange }) {
             />
           </Grid>
           <Grid>
-            <Button variant="logInPageButton" onClick={loginAndError}>
+            <Button variant="formButton" onClick={loginAndError}>
               Log In
             </Button>
           </Grid>
