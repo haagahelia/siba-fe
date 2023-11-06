@@ -1,5 +1,6 @@
 // Platform styling
 import createTheme from "@mui/material/styles/createTheme";
+import logo from "../styles/SibeliusLogo.svg";
 
 // Palettes are: darkPalette, lightPalette,
 // redPalette (for testing), yellowPalette (for testing),
@@ -625,8 +626,12 @@ export const createAppTheme = (currentPalette) =>
               height: 60,
             },
           },
+          ".sibeliusCursor": {
+            cursor: `url(${logo}) 24 24, auto`,
+          },
+          // Hide the page scrollbar. Currently only used on the "Log in" page
           ".no-scrollbar": {
-            overflow: "hidden", // Hide the page scrollbar. Currently only used on the "Log in" page
+            overflow: "hidden",
           },
         },
       },

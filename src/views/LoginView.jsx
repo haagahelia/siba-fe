@@ -12,7 +12,8 @@ import { AppContext } from "../AppContext";
 import dao from "../ajax/dao";
 import AlertBox from "../components/common/AlertBox";
 import Logger from "../logger/logger";
-import logo from "../styles/SibeliusLogoLoginPage.svg";
+import logo from "../styles/SibeliusLogo.svg";
+import backgroundImage from "../styles/SibeliusLogoLoginPage.svg";
 
 export default function LoginView({ handleLoginChange }) {
   Logger.logPrefix = "LoginView";
@@ -116,9 +117,9 @@ export default function LoginView({ handleLoginChange }) {
         setAlertOpen={setAlertOpen}
       />
       <img
-        src={logo}
+        src={backgroundImage}
         alt="Sibelius-Akatemia logo in the background."
-        className="logInPageBackgroundLogo"
+        className="logInPageBackgroundLogo sibeliusCursor"
       />
       <Card variant="logInPageContent">
         <CardContent variant="logInPageTransparencyFix">
