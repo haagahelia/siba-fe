@@ -625,6 +625,9 @@ export const createAppTheme = (currentPalette) =>
               height: 60,
             },
           },
+          ".no-scrollbar": {
+            overflow: "hidden", // Hide the page scrollbar. Currently only used on the "Log in" page
+          },
         },
       },
     },

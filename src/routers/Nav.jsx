@@ -16,6 +16,7 @@ import { AppContext } from "../AppContext";
 import AddAllocRound from "../components/allocRound/AddAllocRound";
 import Logger from "../logger/logger";
 import logo from "../styles/SibeliusLogo.svg";
+// The different pages/views
 import AllocRoundView from "../views/AllocRoundView";
 import AllocationSubjectFailureView from "../views/AllocationSubjectFailureView";
 import BuildingView from "../views/BuildingView";
@@ -204,13 +205,25 @@ export default function NavBar() {
 
   // Determines the correct nav image link
   const navImageRoute = () => {
-    const loggedInUserEmail = localStorage.getItem("email"); // Get logged-in username
+    const loggedInUser = localStorage.getItem("email"); // Wont work if global variable
     // If a user is signed in
-    if (loggedInUserEmail) {
+    if (loggedInUser) {
       return "/subject";
       // If a user is not signed in
     } else {
       return "/";
+    }
+  };
+
+  // Hides the scroll bar for the "Log in" page
+  const showOrHideScrollBar = () => {
+    const loggedInUser = localStorage.getItem("email"); // Wont work if global variable
+    // If a user is signed in, show the scroll bar
+    if (loggedInUser) {
+      return "";
+      // If a user is not signed in, hide the scroll bar
+    } else {
+      return "no-scrollbar";
     }
   };
 
@@ -290,7 +303,7 @@ export default function NavBar() {
   };
 
   return (
-    <div className="navbar-spacing">
+    <div className={`navbar-spacing ${showOrHideScrollBar()}`}>
       <BrowserRouter>
         <AppBar variant="verticalNavigationBar" alt="Vertical navigation bar.">
           <Container maxWidth="xl">
