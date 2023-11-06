@@ -78,7 +78,10 @@ export default function AllocRoundView() {
         <Grid container rowSpacing={1}>
           <Card variant="outlined">
             <CardContent>
-              <CardHeader title="Allocation rounds (Select to change)" />
+              <CardHeader
+                title="Allocation rounds (Select to change)"
+                variant="pageHeader"
+              />
               <Button
                 sx={theme.components.MuiButton.greenbutton}
                 onClick={() => navigate("addAllocRound")}

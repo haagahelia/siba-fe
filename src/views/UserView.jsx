@@ -76,7 +76,7 @@ export default function UserView() {
         <Grid container rowSpacing={1}>
           <Card variant="outlined">
             <CardContent>
-              <CardHeader title="Users" />
+              <CardHeader title="Users" variant="pageHeader" />
               <UserFiltering
                 allUsersList={allUsersList}
                 setAllUsersList={setAllUsersList}

@@ -46,7 +46,7 @@ export default function RoomResult() {
   return (
     <div style={{ width: "80%", margin: "auto" }}>
       <AllocRoundControlPanel incrementResetCounter={incrementResetCounter} />
-      <Typography className="mt6" variant="h5">
+      <Typography className="mt6" variant="pageHeader">
         Spaces (Huoneet)
       </Typography>
       <Box

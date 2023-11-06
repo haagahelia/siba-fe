@@ -12,7 +12,8 @@ import { AppContext } from "../AppContext";
 import dao from "../ajax/dao";
 import AlertBox from "../components/common/AlertBox";
 import Logger from "../logger/logger";
-import logo from "../styles/SibeliusLogoLoginPage.svg";
+import logo from "../styles/SibeliusLogo.svg";
+import backgroundImage from "../styles/SibeliusLogoLoginPage.svg";
 
 export default function LoginView({ handleLoginChange }) {
   Logger.logPrefix = "LoginView";
@@ -109,23 +110,23 @@ export default function LoginView({ handleLoginChange }) {
   };
 
   return (
-    <div>
+    <div className="sibeliusCursor">
       <AlertBox
         alertOpen={alertOpen}
         alertOptions={alertOptions}
         setAlertOpen={setAlertOpen}
       />
       <img
-        src={logo}
+        src={backgroundImage}
         alt="Sibelius-Akatemia logo in the background."
         className="logInPageBackgroundLogo"
       />
-      <Card variant="logInPageContent">
+      <Card variant="formContent">
         <CardContent variant="logInPageTransparencyFix">
           <Typography variant="logInPageTitle">Login</Typography>
           <Grid>
             <TextField
-              className="logInTextInput"
+              className="formTextInput"
               value={loginForm.email}
               onChange={(event) =>
                 setLoginForm({ ...loginForm, email: event.target.value })
@@ -135,7 +136,7 @@ export default function LoginView({ handleLoginChange }) {
           </Grid>
           <Grid>
             <TextField
-              className="logInTextInput"
+              className="formTextInput"
               value={loginForm.password}
               onChange={(event) =>
                 setLoginForm({
@@ -148,7 +149,7 @@ export default function LoginView({ handleLoginChange }) {
             />
           </Grid>
           <Grid>
-            <Button variant="logInPageButton" onClick={loginAndError}>
+            <Button variant="formButton" onClick={loginAndError}>
               Log In
             </Button>
           </Grid>

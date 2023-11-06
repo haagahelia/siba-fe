@@ -1,5 +1,6 @@
 // Platform styling
 import createTheme from "@mui/material/styles/createTheme";
+import logo from "../styles/SibeliusLogoSmall.svg";
 
 // Palettes are: darkPalette, lightPalette,
 // redPalette (for testing), yellowPalette (for testing),
@@ -33,7 +34,7 @@ export const createAppTheme = (currentPalette) =>
         },
         variants: [
           {
-            props: { variant: "logInPageContent" },
+            props: { variant: "formContent" },
             style: {
               alignItems: "center",
               display: "flex",
@@ -66,6 +67,22 @@ export const createAppTheme = (currentPalette) =>
             padding: lessPadding,
           },
         },
+        variants: [
+          {
+            props: { variant: "pageHeader" },
+            style: {
+              backgroundColor: "transparent",
+              //backgroundColor: "red",
+              borderBottom: `4px solid ${currentPalette.primary.main}`,
+
+              "& .MuiCardHeader-title": {
+                fontSize: "30px",
+                fontWeight: "bold",
+                margin: 0,
+              },
+            },
+          },
+        ],
       },
       MuiTextField: {
         styleOverrides: {
@@ -325,7 +342,7 @@ export const createAppTheme = (currentPalette) =>
             },
           },
           {
-            props: { variant: "logInPageButton" },
+            props: { variant: "formButton" },
             style: {
               background: `linear-gradient(to right, ${currentPalette.background.default} 50%, ${currentPalette.primary.main} 50%)`,
               backgroundPosition: "right bottom",
@@ -408,6 +425,19 @@ export const createAppTheme = (currentPalette) =>
               color: currentPalette.primary.main,
               fontSize: "2.5rem",
               fontWeight: 900,
+            },
+          },
+          {
+            props: { variant: "pageHeader" },
+            style: {
+              backgroundColor: "transparent",
+              borderBottom: `4px solid ${currentPalette.primary.main}`,
+              display: "block",
+              fontSize: "30px",
+              fontWeight: "bold",
+              margin: "auto",
+              paddingBottom: "5px",
+              width: "90%",
             },
           },
           {
@@ -602,7 +632,7 @@ export const createAppTheme = (currentPalette) =>
             transform: "translate(-50%, -50%)",
             width: `calc(95% - ${navbarWidth})`,
           },
-          ".logInTextInput": {
+          ".formTextInput": {
             width: "300px",
 
             "&:hover fieldset": {
@@ -624,6 +654,13 @@ export const createAppTheme = (currentPalette) =>
               width: 60,
               height: 60,
             },
+          },
+          ".sibeliusCursor": {
+            cursor: `url(${logo}) 24 24, auto`,
+          },
+          // Hide the page scrollbar. Currently only used on the "Log in" page
+          ".no-scrollbar": {
+            overflow: "hidden",
           },
         },
       },
