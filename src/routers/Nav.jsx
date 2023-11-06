@@ -202,6 +202,18 @@ export default function NavBar() {
     });
   };
 
+  // Determines the correct nav image link
+  const navImageRoute = () => {
+    const loggedInUserEmail = localStorage.getItem("email"); // Get logged-in username
+    // If a user is signed in
+    if (loggedInUserEmail) {
+      return "/subject";
+      // If a user is not signed in
+    } else {
+      return "/";
+    }
+  };
+
   const handleLoginChange = () => {
     setLoggedIn(
       localStorage.getItem("email") ? localStorage.getItem("email") : "No more",
@@ -285,7 +297,9 @@ export default function NavBar() {
             <Toolbar disableGutters sx={{ flexDirection: "column" }}>
               <Box sx={{ flexGrow: 1 }}>
                 <List variant="navBar">
-                  <NavLink to="/" className="navLogo">
+                  <NavLink to={navImageRoute()} className="navLogo">
+                    {/* <NavLink to="/" className="navLogo"> */}
+
                     <img src={logo} alt="Sibelius-Akatemia stylized logo." />
                   </NavLink>
                   {renderNavLinks()}
