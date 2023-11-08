@@ -72,6 +72,11 @@ export interface SubjectEquipment {
   obligatory: number;
 }
 
+export interface SpaceEquipment {
+  spaceId: number;
+  equipmentId: number;
+}
+
 export interface AllocRound {
   id: number;
   name: string;
