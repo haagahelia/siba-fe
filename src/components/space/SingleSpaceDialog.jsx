@@ -12,6 +12,7 @@ import Typography from "@mui/material/Typography";
 import AlertBox from "../common/AlertBox";
 import DeleteSpace from "./DeleteSpace";
 import EditSpaceContainer from "./EditSpaceContainer";
+import SpaceEquipmentList from "./SpaceEquipmentList";
 
 export default function SingleSpaceDialog({
   open,
@@ -46,7 +47,7 @@ export default function SingleSpaceDialog({
 
   useEffect(() => {
     if (singleSpace && typeof singleSpace.id === "number") {
-      //getEquipmentsBySpaceId(singleSpace.id);
+      getEquipmentsBySpaceId(singleSpace.id);
     }
   }, [singleSpace]);
 
@@ -166,11 +167,13 @@ export default function SingleSpaceDialog({
                   {singleSpace?.buildingName}{" "}
                 </Typography>
               </Grid>
-
-              {/* Add more space details here */}
             </Grid>
             <Typography variant="subtitle1">Equipment List:</Typography>
-            {/* Render equipment list here */}
+            <SpaceEquipmentList
+                  equipListBySpaceId={equipListBySpaceId}
+                  getEquipmentsBySpaceId={getEquipmentsBySpaceId}
+                />
+            
           </DialogContent>
         </DialogContent>
       </Dialog>
