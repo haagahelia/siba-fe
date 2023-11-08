@@ -32,10 +32,11 @@ import SettingsView from "../views/SettingsView";
 import SpaceView from "../views/SpaceView";
 import SubjectView from "../views/SubjectView";
 import UserView from "../views/UserView";
-
 export default function NavBar() {
   Logger.debug("NavBar initiated");
   // The routes (pages) and the roles which can see them
+  const appContext = useContext(AppContext);
+
   const sibaPages = [
     {
       name: "Log In",
@@ -117,8 +118,8 @@ export default function NavBar() {
       showForCurrentUser: false,
     },
     {
-      name: "Log Out",
-      href: "/login",
+      name: `${appContext.allocRoundId}✅`,
+      href: "/subject",
       forRoles: ["admin", "planner", "statist"],
       showForCurrentUser: false,
       action() {
@@ -129,7 +130,6 @@ export default function NavBar() {
     },
   ];
 
-  const appContext = useContext(AppContext);
   const [click, setClick] = useState(false);
   const handleClick = () => setClick(!click);
 
