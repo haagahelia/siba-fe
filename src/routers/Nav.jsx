@@ -118,7 +118,7 @@ export default function NavBar() {
       showForCurrentUser: false,
     },
     {
-      name: `${appContext.allocRoundId}✅`,
+      name: `${appContext.allocRoundId}`,
       href: "/subject",
       forRoles: ["admin", "planner", "statist"],
       showForCurrentUser: false,
