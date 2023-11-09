@@ -16,6 +16,8 @@ import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import TextField from "@mui/material/TextField";
 import AddSpaceDialogConfirmation from "./AddSpaceDialogConfirmation";
+import ImportSpaceContainer from "./ImportSpaceContainer";
+import SpaceTemplate from "./SpaceTemplate";
 
 export default function AddSpace({ getAllSpaces }) {
   // State for checking if Add Equipment card is expanded
@@ -27,6 +29,7 @@ export default function AddSpace({ getAllSpaces }) {
     area: "0",
     personLimit: "0",
     buildingId: "400",
+    buildingName: "Musiikkitalo",
     availableFrom: "",
     availableTo: "",
     classesFrom: "",
@@ -173,11 +176,18 @@ export default function AddSpace({ getAllSpaces }) {
                   <InputLabel>Building</InputLabel>
                   <Select
                     name="buildingId"
-                    onChange={(event) =>
+                    onChange={(event) => {
                       setSpace({
                         ...space,
                         buildingId: event.target.value,
                       })
+                      setSpace({
+                        ...space,
+                        buildingName: buildingSelectList
+                          .find(building => building.id === event.target.value)
+                          .name
+                      })
+                    }
                     }
                     value={space.buildingId}
                   >
@@ -289,6 +299,12 @@ export default function AddSpace({ getAllSpaces }) {
               <Button onClick={() => openDialogBox()} variant="contained">
                 Add Space
               </Button>
+              <ImportSpaceContainer
+                getAllSpaces={getAllSpaces}
+                buildingSelectList={buildingSelectList}
+                spaceTypeSelectList={spaceTypeSelectList}
+              />
+              <SpaceTemplate />
             </>
           )}
         </CardContent>
