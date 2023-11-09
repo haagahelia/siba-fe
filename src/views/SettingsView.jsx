@@ -86,6 +86,7 @@ export default function SettingsView() {
               <CardHeader
                 title="Settings"
                 onClick={() => setIsCardExpanded(!isCardExpanded)}
+                variant="pageHeader"
               />
               {isCardExpanded && (
                 <SettingsListContainer
