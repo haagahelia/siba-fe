@@ -8,6 +8,7 @@ import * as dao_program from "./dao_program";
 import * as dao_settings from "./dao_settings";
 import * as dao_space from "./dao_space";
 import * as dao_spaceType from "./dao_spaceType";
+import * as dao_spaceEquipment from "./dao_spaceEquipment";
 import * as dao_subject from "./dao_subject";
 import * as dao_subjectEquipment from "./dao_subjectEquipment";
 import * as dao_user from "./dao_user";
@@ -19,6 +20,7 @@ const dao = {
   ...dao_allocation,
   ...dao_spaceType,
   ...dao_space,
+  ...dao_spaceEquipment,
   ...dao_subject,
   ...dao_subjectEquipment,
   ...dao_allocRound,
