@@ -2,22 +2,17 @@
 import Button from "@mui/material/Button";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
+import Checkbox from "@mui/material/Checkbox";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import FormGroup from "@mui/material/FormGroup";
 import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import { useState } from "react";
 import dao from "../../ajax/dao";
 import Logger from "../../logger/logger";
-import AlertBox from "../common/AlertBox";
 import backgroundImage from "../../styles/SibeliusLogoLoginPage.svg";
-
-import FormControl from '@mui/material/FormControl';
-import RadioGroup from '@mui/material/RadioGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Radio from '@mui/material/Radio';
-
-import Checkbox from '@mui/material/Checkbox';
-import FormGroup from '@mui/material/FormGroup';
+import AlertBox from "../common/AlertBox";
 
 export default function RegisterView({ handleLoginChange }) {
   Logger.logPrefix = "RegisterView";
