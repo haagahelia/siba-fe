@@ -61,7 +61,7 @@ export default function BuildingList({ getAllBuildings, allBuildingsList }) {
   // }, []);
 
   return (
-    <div>
+    <div style={{ marginTop: "80px" }}>
       <Container component={Paper} variant="outlined">
         <SingleBuildingDialog
           open={open}
