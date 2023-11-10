@@ -20,6 +20,21 @@ export const createAppTheme = (currentPalette) =>
   createTheme({
     palette: currentPalette,
     components: {
+      MuiCheckbox: {
+        styleOverrides: {
+          root: {
+            color: currentPalette.fontColorDefault.default,
+
+            '& .MuiSvgIcon-root': {
+              fontSize: 30, // Button size
+            },
+
+            '&.Mui-checked': {
+              color: "#FDA826", // Active button colour
+            },
+          },
+        }
+      },
       MuiCard: {
         styleOverrides: {
           root: {
@@ -46,6 +61,18 @@ export const createAppTheme = (currentPalette) =>
             },
           },
         ],
+      },
+      MuiFormControlLabel: {
+        styleOverrides: {
+          root: {
+            '& .MuiTypography-body1': {
+              margin: 0,
+            },
+            '& .MuiCheckbox-root': {
+              alignItems: 'center',
+            },
+          },
+        },
       },
       MuiCardContent: {
         variants: [
@@ -354,8 +381,9 @@ export const createAppTheme = (currentPalette) =>
               fontWeight: "bold",
               height: "40px",
               marginBottom: "15px",
+              marginTop: "10px",
               transition: "all .5s ease-out",
-              width: "130px",
+              width: "150px",
 
               "&:hover": {
                 backgroundColor: currentPalette.primary.main,
@@ -646,6 +674,10 @@ export const createAppTheme = (currentPalette) =>
             paddingLeft: navbarWidth,
             top: 0,
           },
+          ".formCheckBoxButtons": {
+            justifyContent: 'space-between',
+            display: 'flex'
+          },
           ".navIconSpacing": {
             marginRight: "5px",
           },
@@ -656,7 +688,7 @@ export const createAppTheme = (currentPalette) =>
             },
           },
           ".sibeliusCursor": {
-            cursor: `url(${logo}) 24 24, auto`,
+            cursor: `url(${logo}) 12 12, auto`,
           },
           // Hide the page scrollbar. Currently only used on the "Log in" page
           ".no-scrollbar": {
