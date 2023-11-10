@@ -92,6 +92,11 @@ export default function AddSpace({ getAllSpaces }) {
     }
   };
 
+  //useEffect(() => {
+  //  getSpaceTypesForSelect();
+  //  getBuildingsForSelect();
+  //}, []);
+
   const handleInUseChange = () => {
     const value = event.target.value === "yes";
     setSpace({ ...space, inUse: value });
