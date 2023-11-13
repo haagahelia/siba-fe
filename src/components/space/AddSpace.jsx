@@ -95,15 +95,10 @@ export default function AddSpace({ getAllSpaces }) {
     }
   };
 
-  //useEffect(() => {
-  //  getSpaceTypesForSelect();
-  //  getBuildingsForSelect();
-  //}, []);
-
-  const handleInUseChange = () => {
-    const value = event.target.value === "yes";
-    setSpace({ ...space, inUse: value });
-  };
+  useEffect(() => {
+    getSpaceTypesForSelect();
+    getBuildingsForSelect();
+  }, []);
 
   return (
     <>
@@ -172,20 +167,16 @@ export default function AddSpace({ getAllSpaces }) {
                   <InputLabel>Building</InputLabel>
                   <Select
                     name="buildingId"
-                    onChange={(event) => {
-                      setSpace({
-                        ...space,
-                        buildingId: event.target.value,
-                      })
-                      setSpace({
-                        ...space,
-                        buildingName: buildingSelectList
-                          .find(building => building.id === event.target.value)
-                          .name
-                      })
-                    }
-                    }
                     value={space.buildingId}
+                    onChange={(event) => {
+                      setSpace((prevSpace) => ({
+                        ...prevSpace,
+                        buildingId: event.target.value,
+                        buildingName: buildingSelectList.find(
+                          (building) => building.id === event.target.value
+                        ).name,
+                      }));
+                    }}
                   >
                     {buildingSelectList.map((building) => (
                       <MenuItem key={building.id} value={building.id}>
@@ -245,7 +236,12 @@ export default function AddSpace({ getAllSpaces }) {
                   <Select
                     name="inUse"
                     value={space.inUse}
-                    onChange={handleInUseChange}
+                    onChange={(event) =>
+                      setSpace({
+                        ...space,
+                        inUse: event.target.value,
+                      })
+                    }
                   >
                     <MenuItem value="1">Yes</MenuItem>
                     <MenuItem value="0">No</MenuItem>
