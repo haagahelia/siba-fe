@@ -16,6 +16,8 @@ import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import TextField from "@mui/material/TextField";
 import AddSpaceDialogConfirmation from "./AddSpaceDialogConfirmation";
+import ImportSpaceContainer from "./ImportSpaceContainer";
+import SpaceTemplate from "./SpaceTemplate";
 
 export default function AddSpace({ getAllSpaces }) {
   // State for checking if Add Equipment card is expanded
@@ -27,6 +29,7 @@ export default function AddSpace({ getAllSpaces }) {
     area: "0",
     personLimit: "0",
     buildingId: "400",
+    buildingName: "Musiikkitalo",
     availableFrom: "",
     availableTo: "",
     classesFrom: "",
@@ -92,15 +95,10 @@ export default function AddSpace({ getAllSpaces }) {
     }
   };
 
-  //useEffect(() => {
-  //  getSpaceTypesForSelect();
-  //  getBuildingsForSelect();
-  //}, []);
-
-  const handleInUseChange = () => {
-    const value = event.target.value === "yes";
-    setSpace({ ...space, inUse: value });
-  };
+  useEffect(() => {
+    getSpaceTypesForSelect();
+    getBuildingsForSelect();
+  }, []);
 
   return (
     <>
@@ -170,9 +168,15 @@ export default function AddSpace({ getAllSpaces }) {
                   <Select
                     name="buildingId"
                     value={space.buildingId}
-                    onChange={(event) =>
-                      setSpace({ ...space, buildingId: event.target.value })
-                    }
+                    onChange={(event) => {
+                      setSpace((prevSpace) => ({
+                        ...prevSpace,
+                        buildingId: event.target.value,
+                        buildingName: buildingSelectList.find(
+                          (building) => building.id === event.target.value
+                        ).name,
+                      }));
+                    }}
                   >
                     {buildingSelectList.map((building) => (
                       <MenuItem key={building.id} value={building.id}>
@@ -232,7 +236,12 @@ export default function AddSpace({ getAllSpaces }) {
                   <Select
                     name="inUse"
                     value={space.inUse}
-                    onChange={handleInUseChange}
+                    onChange={(event) =>
+                      setSpace({
+                        ...space,
+                        inUse: event.target.value,
+                      })
+                    }
                   >
                     <MenuItem value="1">Yes</MenuItem>
                     <MenuItem value="0">No</MenuItem>
@@ -261,6 +270,12 @@ export default function AddSpace({ getAllSpaces }) {
                 <Button onClick={openDialogBox} variant="contained">
                   Add Space
                 </Button>
+                <ImportSpaceContainer
+                  getAllSpaces={getAllSpaces}
+                  buildingSelectList={buildingSelectList}
+                  spaceTypeSelectList={spaceTypeSelectList}
+                />
+                <SpaceTemplate />
               </Grid>
             </Grid>
           )}

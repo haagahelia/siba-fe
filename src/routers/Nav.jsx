@@ -34,6 +34,7 @@ import SpaceView from "../views/SpaceView";
 import SubjectView from "../views/SubjectView";
 import UserView from "../views/UserView";
 import dao from "../ajax/dao";
+import { Typography } from "@mui/material";
 
 export default function NavBar() {
   Logger.debug("NavBar initiated");
@@ -180,7 +181,7 @@ export default function NavBar() {
     );
   };
 
-  const updateAppContext = () => {
+  const updateAppContextUser = () => {
     appContext.userEmail = localStorage.getItem("email");
     appContext.sessionToken = localStorage.getItem("sessionToken");
     appContext.roles.admin = Number(localStorage.getItem("isAdmin"));
@@ -244,7 +245,7 @@ export default function NavBar() {
   };
 
   const renderNavLinks = () => {
-    updateAppContext();
+    updateAppContextUser();
     setSibaPages();
     // Logger.debug("pages status 000:", sibaPages);
 
@@ -326,7 +327,10 @@ export default function NavBar() {
                     <img src={logo} alt="Sibelius-Akatemia stylized logo." />
                   </NavLink>
                   {renderNavLinks()}
-                </List>
+                  <ListItem variant={"navBar"} key={"allocRoundInfoItem"}>
+                    <Typography>{`${appContext.allocRoundId} : ${appContext.allocRoundName.substring(0,12)}`}</Typography>
+                  </ListItem>
+                </List> 
               </Box>
             </Toolbar>
           </Container>
@@ -364,6 +368,7 @@ export default function NavBar() {
           />
         </Routes>
       </BrowserRouter>
+
     </div>
   );
 }

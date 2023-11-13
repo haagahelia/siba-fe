@@ -15,7 +15,7 @@ export default function AddSpaceDialogConfirmation({
   getAllSpaces,
 }) {
   const addSingleSpace = async () => {
-    const validation = ValidateAddSpace(space);
+    const validation = await ValidateAddSpace(space);
     if (validation) {
       alert(Object.values(validation));
       return;
