@@ -21,21 +21,20 @@ export default function SelectAllocRound({ singleAllocRound }) {
     content: "Something here",
   });
 
-  const setAllocRound = (allocRoundId) => {
+  const setAllocRound = (allocRoundObj) => {
     // console.log("allocRoundId 456: " + allocRoundId);
-    appContext.allocRoundId = allocRoundId; // Works now! Updating app context.
-    // Notifying grangrangranparent. Updating component state
-    // setAllocRoundId(allocRoundId);
+    appContext.allocRoundId = allocRoundObj.id; // Works now! Updating app context.
+    appContext.allocRoundName = allocRoundObj.name;
   };
 
   const allocationSelection = () => {
     // call function to set alloc round here
-    setAllocRound(singleAllocRound.id);
+    setAllocRound(singleAllocRound);
 
     setAlertOptions({
       severity: "success",
       title: "Success!",
-      message: `Alloc round ${singleAllocRound.id} selected.`,
+      message: `Alloc round ${singleAllocRound.id} - ${singleAllocRound.name} selected.`,
     });
     setAlertOpen(true);
   };
