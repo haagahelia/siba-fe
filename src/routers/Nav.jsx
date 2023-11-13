@@ -33,6 +33,7 @@ import SettingsView from "../views/SettingsView";
 import SpaceView from "../views/SpaceView";
 import SubjectView from "../views/SubjectView";
 import UserView from "../views/UserView";
+import dao from "../ajax/dao";
 
 export default function NavBar() {
   Logger.debug("NavBar initiated");
@@ -126,6 +127,15 @@ export default function NavBar() {
         localStorage.clear();
         handleLoginChange();
         setIsDropdownVisible(false);
+      },
+    },
+    {
+      name: "Reset Data",
+      forRoles: ["admin"],
+      showForCurrentUser: false,
+      action() {
+        const confirmation = confirm('Are you sure that you want to reset database to test data?')
+        confirmation && dao.resetDatabase() && alert('Database reset success!')
       },
     },
   ];
