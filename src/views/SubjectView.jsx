@@ -93,7 +93,8 @@ export default function SubjectView() {
         )}
         <Grid container rowSpacing={1}>
           <Card variant="outlined">
-            <CardHeader title="Lessons" variant="pageHeader" />
+            <CardHeader title={`Lessons - ${appContext.allocRoundId} : ${appContext.allocRoundName}`}
+             variant="pageHeader" />
             <CardContent>
               <SubjectFiltering
                 allSubjectsList={allSubjectsList}
