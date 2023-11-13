@@ -53,6 +53,10 @@ export interface SpaceName {
   name: string;
 }
 
+export interface SpaceBuildingName {
+  name: string;
+}
+
 export interface SpaceType {
   id: number;
   name: string;
