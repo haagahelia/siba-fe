@@ -1,19 +1,19 @@
-import { useState } from "react";
-
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
+import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import DepartmentList from "./DepartmentList";
 import SingleDepartmentDialog from "./SingleDepartmentDialog";
 
 export default function DepartmentListContainer({
   getAllDepartments,
-  departmentList,
+  allDepartmentsList,
+  paginateDepartments,
+  open,
+  setOpen,
 }) {
-  const [open, setOpen] = useState(false);
-
   return (
-    <div>
+    <Container maxWidth="xl">
       <SingleDepartmentDialog
         open={open}
         setOpen={setOpen}
@@ -24,11 +24,12 @@ export default function DepartmentListContainer({
           <CardContent>
             <DepartmentList
               getAllDepartments={getAllDepartments}
-              departmentList={departmentList}
+              allDepartmentsList={allDepartmentsList}
+              paginateDepartments={paginateDepartments}
             />
           </CardContent>
         </Card>
       </Grid>
-    </div>
+    </Container>
   );
 }

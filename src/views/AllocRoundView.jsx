@@ -1,10 +1,8 @@
-// The Allocation Page
 import useTheme from "@mui/material/styles/useTheme";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import dao from "../ajax/dao";
 import Logger from "../logger/logger";
-
 import Button from "@mui/material/Button";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
@@ -12,7 +10,10 @@ import CardHeader from "@mui/material/CardHeader";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import AllocRoundListContainer from "../components/allocRound/AllocRoundListContainer";
+import AllocRoundPagination from "../components/allocRound/AllocRoundPagination";
 import AlertBox from "../components/common/AlertBox";
+
+const pageSize = 15;
 
 export default function AllocRoundView() {
   Logger.logPrefix = "AllocRoundView";
@@ -27,6 +28,11 @@ export default function AllocRoundView() {
   const [alertOptions, setAlertOptions] = useState({
     message: "This is an error alert — check it out!",
     severity: "error",
+  });
+
+  const [pagination, setPagination] = useState({
+    from: 0,
+    to: pageSize,
   });
 
   const getAllAllocRounds = async function () {
@@ -94,6 +100,13 @@ export default function AllocRoundView() {
                 allAllocRoundsList={allAllocRoundsList}
                 paginateAllocRounds={paginateAllocRounds}
                 incrementDataModifiedCounter={incrementDataModifiedCounter}
+              />
+              <AllocRoundPagination
+                pagination={pagination}
+                setPagination={setPagination}
+                allAllocRoundsList={allAllocRoundsList}
+                paginateAllocRounds={paginateAllocRounds}
+                setPaginateAllocRounds={setpaginateAllocRounds}
               />
             </CardContent>
           </Card>

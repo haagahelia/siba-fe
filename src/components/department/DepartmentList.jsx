@@ -1,5 +1,4 @@
 import InfoIcon from "@mui/icons-material/Info";
-import { Pagination } from "@mui/material";
 import IconButton from "@mui/material/IconButton";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
@@ -13,20 +12,14 @@ import styled from "@mui/material/styles/styled";
 import { useState } from "react";
 import SingleDepartmentDialog from "./SingleDepartmentDialog";
 
-export default function DepartmentList({ getAllDepartments, departmentList }) {
+export default function DepartmentList({
+  getAllDepartments,
+  paginateDepartments,
+}) {
   const [open, setOpen] = useState(false);
   const [singleDepartment, setSingleDepartment] = useState(null);
   const [order, setOrder] = useState("asc");
   const [orderBy, setOrderBy] = useState("Id");
-
-  const [page, setPage] = useState(1);
-  const rowsPerPage = 15;
-  const startIndex = (page - 1) * rowsPerPage;
-  const endIndex = startIndex + rowsPerPage;
-
-  const handleChangePage = (event, newPage) => {
-    setPage(newPage);
-  };
 
   const handleRequestSort = (property) => {
     const isAsc = orderBy === property && order === "asc";
@@ -34,7 +27,7 @@ export default function DepartmentList({ getAllDepartments, departmentList }) {
     setOrderBy(property);
   };
 
-  const sortedDepartmentList = departmentList.sort((a, b) => {
+  const sortedDepartments = paginateDepartments.sort((a, b) => {
     switch (orderBy) {
       case "Id":
         return order === "asc" ? a.id - b.id : b.id - a.id;
@@ -50,8 +43,6 @@ export default function DepartmentList({ getAllDepartments, departmentList }) {
         return 0;
     }
   });
-
-  const paginatedData = sortedDepartmentList.slice(startIndex, endIndex);
 
   const handleRowClick = (department) => {
     setSingleDepartment(department);
@@ -101,7 +92,7 @@ export default function DepartmentList({ getAllDepartments, departmentList }) {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {paginatedData.map((department) => (
+                {sortedDepartments.map((department) => (
                   <TableRow key={department.id}>
                     <TableCell>
                       <IconButton
@@ -121,16 +112,6 @@ export default function DepartmentList({ getAllDepartments, departmentList }) {
           </TableContainer>
         </Paper>
       </Box>
-
-      <div>
-        <Pagination
-          count={Math.ceil(sortedDepartmentList.length / rowsPerPage)}
-          page={page}
-          onChange={handleChangePage}
-          color="primary"
-          variant="outlined"
-        />
-      </div>
     </div>
   );
 }
