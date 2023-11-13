@@ -1,16 +1,18 @@
+// The "Register page"
 import Button from "@mui/material/Button";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
+import Checkbox from "@mui/material/Checkbox";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import FormGroup from "@mui/material/FormGroup";
 import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
-import Typography from "@mui/material/Typography"; // Add Typography component
+import Typography from "@mui/material/Typography";
 import { useState } from "react";
 import dao from "../../ajax/dao";
 import Logger from "../../logger/logger";
-import AlertBox from "../common/AlertBox";
-
-// Import the background image from the Login page
 import backgroundImage from "../../styles/SibeliusLogoLoginPage.svg";
+import AlertBox from "../common/AlertBox";
 
 export default function RegisterView({ handleLoginChange }) {
   Logger.logPrefix = "RegisterView";
@@ -24,9 +26,9 @@ export default function RegisterView({ handleLoginChange }) {
   const [registerForm, setRegisterForm] = useState({
     email: "",
     password: "",
-    isAdmin: "",
-    isPlanner: "",
-    isStatist: "",
+    isAdmin: 0,
+    isPlanner: 0,
+    isStatist: 0,
   });
 
   const registerUser = async () => {
@@ -56,9 +58,9 @@ export default function RegisterView({ handleLoginChange }) {
       setRegisterForm({
         email: "",
         password: "",
-        isAdmin: "",
-        isPlanner: "",
-        isStatist: "",
+        isAdmin: 0,
+        isPlanner: 0,
+        isStatist: 0,
       });
 
       // Trigger login change after registration
@@ -73,8 +75,6 @@ export default function RegisterView({ handleLoginChange }) {
         alertOptions={alertOptions}
         setAlertOpen={setAlertOpen}
       />
-
-      {/* Use the same background image as the Login page */}
       <img
         src={backgroundImage}
         alt="Sibelius-Akatemia logo in the background."
@@ -83,7 +83,7 @@ export default function RegisterView({ handleLoginChange }) {
 
       <Card variant="formContent">
         <CardContent style={{ zIndex: 1 }}>
-          <Typography variant="logInPageTitle">Register</Typography>
+          <Typography variant="logInPageTitle">Add User</Typography>
           <Grid>
             <TextField
               className="formTextInput"
@@ -108,47 +108,52 @@ export default function RegisterView({ handleLoginChange }) {
             />
           </Grid>
           <Grid>
-            <TextField
-              className="formTextInput"
-              value={registerForm.isAdmin}
-              onChange={(event) =>
-                setRegisterForm({
-                  ...registerForm,
-                  isAdmin: event.target.value,
-                })
-              }
-              placeholder="isAdmin"
-            />
-          </Grid>
-          <Grid>
-            <TextField
-              className="formTextInput"
-              value={registerForm.isPlanner}
-              onChange={(event) =>
-                setRegisterForm({
-                  ...registerForm,
-                  isPlanner: event.target.value,
-                })
-              }
-              placeholder="isPlanner"
-            />
-          </Grid>
-          <Grid>
-            <TextField
-              className="formTextInput"
-              value={registerForm.isStatist}
-              onChange={(event) =>
-                setRegisterForm({
-                  ...registerForm,
-                  isStatist: event.target.value,
-                })
-              }
-              placeholder="isStatist"
-            />
-          </Grid>
-          <Grid>
+            <FormGroup>
+              <FormControlLabel
+                control={<Checkbox />}
+                label="Admin"
+                labelPlacement="start"
+                className="formCheckBoxButtons"
+                name="isAdmin"
+                checked={registerForm.isAdmin === 1}
+                onChange={(event) =>
+                  setRegisterForm({
+                    ...registerForm,
+                    isAdmin: event.target.checked ? 1 : 0,
+                  })
+                }
+              />
+              <FormControlLabel
+                control={<Checkbox />}
+                label="Planner"
+                labelPlacement="start"
+                className="formCheckBoxButtons"
+                name="isPlanner"
+                checked={registerForm.isPlanner === 1}
+                onChange={(event) =>
+                  setRegisterForm({
+                    ...registerForm,
+                    isPlanner: event.target.checked ? 1 : 0,
+                  })
+                }
+              />
+              <FormControlLabel
+                control={<Checkbox />}
+                label="Statist"
+                labelPlacement="start"
+                className="formCheckBoxButtons"
+                name="isStatist"
+                checked={registerForm.isStatist === 1}
+                onChange={(event) =>
+                  setRegisterForm({
+                    ...registerForm,
+                    isStatist: event.target.checked ? 1 : 0,
+                  })
+                }
+              />
+            </FormGroup>
             <Button variant="formButton" onClick={registerUser}>
-              Register
+              Add User
             </Button>
           </Grid>
         </CardContent>

@@ -95,10 +95,10 @@ export default function AddSpace({ getAllSpaces }) {
     }
   };
 
-  useEffect(() => {
-    getSpaceTypesForSelect();
-    getBuildingsForSelect();
-  }, []);
+  //useEffect(() => {
+  //  getSpaceTypesForSelect();
+  //  getBuildingsForSelect();
+  //}, []);
 
   const handleInUseChange = () => {
     const value = event.target.value === "yes";
@@ -124,55 +124,51 @@ export default function AddSpace({ getAllSpaces }) {
             }
           />
           {isCardExpanded && (
-            <>
-              <Grid>
+            <Grid container spacing={2}>
+              <Grid item xs={12} sm={6} md={4}>
                 <TextField
+                  fullWidth
+                  label="Name"
                   value={space.name}
                   onChange={(event) =>
                     setSpace({ ...space, name: event.target.value })
                   }
-                  label="Name"
                 />
               </Grid>
-              <Grid>
+              <Grid item xs={12} sm={6} md={4}>
                 <TextField
-                  value={space.area}
+                  fullWidth
+                  label="Area"
                   type="number"
+                  value={space.area}
                   onChange={(event) =>
                     setSpace({ ...space, area: event.target.value })
                   }
-                  label="Area"
                 />
               </Grid>
-              <Grid>
+              <Grid item xs={12} sm={6} md={4}>
                 <TextField
+                  fullWidth
+                  label="Info"
                   value={space.info}
                   onChange={(event) =>
-                    setSpace({
-                      ...space,
-                      info: event.target.value,
-                    })
+                    setSpace({ ...space, info: event.target.value })
                   }
-                  label="Info"
                 />
               </Grid>
-              <Grid>
+              <Grid item xs={12} sm={6} md={4}>
                 <TextField
-                  value={space.personLimit}
-                  type="number"
-                  onChange={(event) =>
-                    setSpace({
-                      ...space,
-                      personLimit: event.target.value,
-                    })
-                  }
+                  fullWidth
                   label="Person limit"
+                  type="number"
+                  value={space.personLimit}
+                  onChange={(event) =>
+                    setSpace({ ...space, personLimit: event.target.value })
+                  }
                 />
               </Grid>
-              <Grid item xs={12} sm={12} md={3}>
-                <FormControl
-                  sx={{ maxWidth: 220, maxHeight: 58, minWidth: 120 }}
-                >
+              <Grid item xs={12} sm={6} md={4}>
+                <FormControl fullWidth>
                   <InputLabel>Building</InputLabel>
                   <Select
                     name="buildingId"
@@ -199,93 +195,72 @@ export default function AddSpace({ getAllSpaces }) {
                   </Select>
                 </FormControl>
               </Grid>
-
-              <Grid>
+              <Grid item xs={12} sm={6} md={4}>
                 <TextField
-                  value={space.availableFrom}
-                  type="time"
-                  onChange={(event) =>
-                    setSpace({
-                      ...space,
-                      availableFrom: event.target.value,
-                    })
-                  }
+                  fullWidth
                   label="Available From"
+                  type="time"
+                  value={space.availableFrom}
+                  onChange={(event) =>
+                    setSpace({ ...space, availableFrom: event.target.value })
+                  }
                 />
               </Grid>
-              <Grid>
+              <Grid item xs={12} sm={6} md={4}>
                 <TextField
-                  value={space.availableTo}
-                  type="time"
-                  onChange={(event) =>
-                    setSpace({
-                      ...space,
-                      availableTo: event.target.value,
-                    })
-                  }
+                  fullWidth
                   label="Available To"
+                  type="time"
+                  value={space.availableTo}
+                  onChange={(event) =>
+                    setSpace({ ...space, availableTo: event.target.value })
+                  }
                 />
               </Grid>
-              <Grid>
+              <Grid item xs={12} sm={6} md={4}>
                 <TextField
-                  value={space.classesFrom}
-                  type="time"
-                  onChange={(event) =>
-                    setSpace({
-                      ...space,
-                      classesFrom: event.target.value,
-                    })
-                  }
+                  fullWidth
                   label="Classes From"
-                />
-              </Grid>
-              <Grid>
-                <TextField
-                  value={space.classesTo}
                   type="time"
+                  value={space.classesFrom}
                   onChange={(event) =>
-                    setSpace({
-                      ...space,
-                      classesTo: event.target.value,
-                    })
+                    setSpace({ ...space, classesFrom: event.target.value })
                   }
-                  label="Classes To"
                 />
               </Grid>
-              <Grid item xs={12} sm={12} md={3}>
-                <FormControl
-                  sx={{ maxWidth: 220, maxHeight: 58, minWidth: 120 }}
-                >
+              <Grid item xs={12} sm={6} md={4}>
+                <TextField
+                  fullWidth
+                  label="Classes To"
+                  type="time"
+                  value={space.classesTo}
+                  onChange={(event) =>
+                    setSpace({ ...space, classesTo: event.target.value })
+                  }
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <FormControl fullWidth>
                   <InputLabel>Is in use</InputLabel>
                   <Select
                     name="inUse"
-                    onChange={(event) =>
-                      setSpace({
-                        ...space,
-                        inUse: event.target.value,
-                      })
-                    }
                     value={space.inUse}
+                    onChange={handleInUseChange}
                   >
                     <MenuItem value="1">Yes</MenuItem>
                     <MenuItem value="0">No</MenuItem>
                   </Select>
                 </FormControl>
               </Grid>
-              <Grid item xs={12} sm={12} md={3}>
-                <FormControl
-                  sx={{ maxWidth: 220, maxHeight: 58, minWidth: 120 }}
-                >
+              <Grid item xs={12} sm={6}>
+                <FormControl fullWidth>
                   <InputLabel>Space type</InputLabel>
                   <Select
                     name="spaceTypeId"
-                    onChange={(event) =>
-                      setSpace({
-                        ...space,
-                        spaceTypeId: event.target.value,
-                      })
-                    }
                     value={space.spaceTypeId}
+                    onChange={(event) =>
+                      setSpace({ ...space, spaceTypeId: event.target.value })
+                    }
                   >
                     {spaceTypeSelectList.map((spaceType) => (
                       <MenuItem key={spaceType.id} value={spaceType.id}>
@@ -295,17 +270,18 @@ export default function AddSpace({ getAllSpaces }) {
                   </Select>
                 </FormControl>
               </Grid>
-
-              <Button onClick={() => openDialogBox()} variant="contained">
-                Add Space
-              </Button>
-              <ImportSpaceContainer
-                getAllSpaces={getAllSpaces}
-                buildingSelectList={buildingSelectList}
-                spaceTypeSelectList={spaceTypeSelectList}
-              />
-              <SpaceTemplate />
-            </>
+              <Grid item xs={12}>
+                <Button onClick={openDialogBox} variant="contained">
+                  Add Space
+                </Button>
+                <ImportSpaceContainer
+                  getAllSpaces={getAllSpaces}
+                  buildingSelectList={buildingSelectList}
+                  spaceTypeSelectList={spaceTypeSelectList}
+                />
+                <SpaceTemplate />
+              </Grid>
+            </Grid>
           )}
         </CardContent>
       </Card>

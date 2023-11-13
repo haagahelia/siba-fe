@@ -141,6 +141,7 @@ dao.js file unifications
 
 ### Styling
 siba-fe\src\styles\theme.js <br>
+[The Design](https://www.figma.com/file/c46uL5QTgbCKJAV2PyWUry/Soft-Dev-Project-Prototype?type=design&node-id=0-1&mode=design&t=52coA80ZYzrb7Dox-0) <br>
 
 ### Navigation Bar
 siba-fe\src\routers\Nav.jsx <br>
