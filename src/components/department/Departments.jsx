@@ -1,4 +1,3 @@
-// The Department Page
 import { useEffect, useState } from "react";
 import {
   ajaxRequestErrorHandler,
@@ -64,7 +63,7 @@ export default function Departments() {
   useEffect(() => {
     Logger.debug("Calling getAllDepartments in useEffect");
     getAllDepartments();
-  }, [getAllDepartments]);
+  }, []);
 
   return (
     <div>
