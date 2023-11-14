@@ -127,6 +127,7 @@ export const createAppTheme = (currentPalette) =>
               },
               "&:hover fieldset": {
                 borderColor: currentPalette.borderColor.main,
+                borderWidth: "2px",
               },
               "&.Mui-focused fieldset": {
                 borderColor: currentPalette.borderColor.main,
