@@ -10,6 +10,7 @@ import Grid from "@mui/material/Grid";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import AlertBox from "../common/AlertBox";
+import AddSpaceEquipContainer from "./AddSpaceEquipContainer";
 import DeleteSpace from "./DeleteSpace";
 import EditSpaceContainer from "./EditSpaceContainer";
 import SpaceEquipmentList from "./SpaceEquipmentList";
@@ -82,6 +83,10 @@ export default function SingleSpaceDialog({
               singleSpace={singleSpace}
               getAllSpaces={getAllSpaces}
               setSingleSpace={setSingleSpace}
+            />
+            <AddSpaceEquipContainer
+              singleSpace={singleSpace}
+              equipmentsBySpaceId={getEquipmentsBySpaceId}
             />
           </DialogActions>
           <DialogContent>
