@@ -37,6 +37,14 @@ export const postNewEquipment = async (
   return response.ok;
 };
 
+//add multiple equipments
+export const postNewEquipments = async (
+  newEquipment: Equipment[],
+): Promise<boolean> => {
+  const response = await create(`${baseUrl}/equipment/multi`, newEquipment);
+  return response.ok;
+};
+
 // updating equipment
 export const editEquipment = async (
   editedEquipment: Equipment,
@@ -56,4 +64,16 @@ export const deleteSingleEquipment = async (
   }
   const data = await response.json();
   return data?.returnedNumberValue === 1;
+};
+
+export const downloadEquipmentTemplate = async (): Promise<
+  ResponseFiner<Equipment>
+> => {
+  const response = await get(`${baseUrl}/template/equipment`);
+  if (response.status === 200) {
+    const templateFile = await response.blob();
+    return { httpStatus: response.status, data: templateFile };
+  } else {
+    return { httpStatus: response.status, data: [] };
+  }
 };

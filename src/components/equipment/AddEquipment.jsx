@@ -10,6 +10,8 @@ import Grid from "@mui/material/Grid";
 import IconButton from "@mui/material/IconButton";
 import TextField from "@mui/material/TextField";
 import AddEquipmentDialogConfirmation from "./AddEquipmentDialogConfirmation";
+import EquipmentTemplate from "./EquipmentTemplate";
+import ImportEquipmentContainer from "./ImportEquipmentContainer";
 
 export default function AddEquipment({ getAllEquipments }) {
   // State for checking if Add Equipment card is expanded
@@ -94,6 +96,8 @@ export default function AddEquipment({ getAllEquipments }) {
               <Button onClick={() => openDialogBox()} variant="contained">
                 Add Equipment
               </Button>
+              <ImportEquipmentContainer getAllEquipments={getAllEquipments} />
+              <EquipmentTemplate />
             </>
           )}
         </CardContent>
