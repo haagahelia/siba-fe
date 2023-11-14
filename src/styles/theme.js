@@ -437,6 +437,15 @@ export const createAppTheme = (currentPalette) =>
         },
         variants: [
           {
+            props: { variant: "navAllocInfo" },
+            style: {
+              color: currentPalette.primary.contrastText,
+              fontFamily: commonFont,
+              fontWeight: 700,
+              fontSize: "12.5px",
+            },
+          },
+          {
             props: { variant: "boldTitle" },
             style: {
               color: currentPalette.fontColorDefault.default,

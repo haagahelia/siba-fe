@@ -330,13 +330,12 @@ export default function NavBar() {
                 <List variant="navBar">
                   <NavLink to={navImageRoute()} className="navLogo">
                     {/* <NavLink to="/" className="navLogo"> */}
-
                     <img src={logo} alt="Sibelius-Akatemia stylized logo." />
                   </NavLink>
                   {renderNavLinks()}
-                  <ListItem variant={"navBar"} key={"allocRoundInfoItem"}>
-                    <Typography>{`${appContext.allocRoundId} : ${appContext.allocRoundName.substring(0, 12)}`}</Typography>
-                  </ListItem>
+                  <Typography variant="navAllocInfo">
+                    {`${appContext.allocRoundId} : ${appContext.allocRoundName.substring(0, 12)}`}
+                  </Typography>
                 </List>
               </Box>
             </Toolbar>
@@ -375,7 +374,6 @@ export default function NavBar() {
           />
         </Routes>
       </BrowserRouter>
-
     </div>
   );
 }
