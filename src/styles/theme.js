@@ -358,6 +358,25 @@ export const createAppTheme = (currentPalette) =>
       MuiButton: {
         variants: [
           {
+            props: { variant: "componentAddButton" },
+            style: {
+              backgroundColor: currentPalette.primary.main,
+              border: `1px solid ${currentPalette.primary.main}`,
+              borderRadius: "7.5px",
+              color: currentPalette.primary.contrastText,
+              fontSize: "1.25rem",
+              fontWeight: "bold",
+              height: "40px",
+              marginTop: "10px",
+              width: "125px",
+
+              "&:hover": {
+                backgroundColor: currentPalette.background.default,
+                color: currentPalette.primary.main,
+              },
+            },
+          },
+          {
             props: { variant: "themeToggle" },
             style: {
               position: "fixed",
