@@ -8,6 +8,8 @@ import dao from "../../ajax/dao";
 import { useRoleLoggedIn } from "../../hooks/useRoleLoggedIn";
 import Logger from "../../logger/logger";
 
+import { Pagination } from "@mui/material";
+
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardHeader from "@mui/material/CardHeader";
@@ -22,6 +24,18 @@ export default function Departments() {
 
   const { roles } = useRoleLoggedIn();
   const [departmentList, setDepartmentList] = useState([]);
+
+  const [page, setPage] = useState(1);
+  const rowsPerPage = 15;
+  const startIndex = (page - 1) * rowsPerPage;
+  const endIndex = startIndex + rowsPerPage;
+  const currentData = departmentList.slice(startIndex, endIndex);
+
+  const handlePageChange = (event, newPage) => {
+    setPage(newPage);
+  };
+
+  const totalCount = Math.ceil(departmentList.length / rowsPerPage);
 
   const [/* alertOptions, */ setAlertOptions] = useState({
     message: "This is an error alert — check it out!",
@@ -50,7 +64,7 @@ export default function Departments() {
   useEffect(() => {
     Logger.debug("Calling getAllDepartments in useEffect");
     getAllDepartments();
-  }, []);
+  }, [getAllDepartments]);
 
   return (
     <div>
@@ -65,6 +79,18 @@ export default function Departments() {
               <DepartmentListContainer
                 getAllDepartments={getAllDepartments}
                 departmentList={departmentList}
+                onPageChange={handlePageChange}
+                page={page}
+                totalCount={totalCount}
+                rowsPerPage={rowsPerPage}
+              />
+              <Pagination
+                count={totalCount}
+                page={page}
+                onChange={handlePageChange}
+                color="primary"
+                variant="outlined"
+                sx={{ marginTop: 2 }}
               />
             </CardContent>
           </Card>
