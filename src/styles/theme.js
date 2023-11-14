@@ -99,7 +99,6 @@ export const createAppTheme = (currentPalette) =>
             props: { variant: "pageHeader" },
             style: {
               backgroundColor: "transparent",
-              //backgroundColor: "red",
               borderBottom: `4px solid ${currentPalette.primary.main}`,
 
               "& .MuiCardHeader-title": {

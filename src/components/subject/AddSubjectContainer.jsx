@@ -202,6 +202,7 @@ export default function AddSubjectContainer({
         <CardContent>
           <CardHeader
             title="Add lesson"
+            variant="pageHeader"
             action={
               <IconButton
                 onClick={() => setIsCardExpanded(!isCardExpanded)}

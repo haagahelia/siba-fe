@@ -107,6 +107,7 @@ export default function AddSpace({ getAllSpaces }) {
           <CardHeader
             title="Add Space"
             onClick={() => setIsCardExpanded(!isCardExpanded)}
+            variant="pageHeader"
             action={
               <IconButton
                 onClick={() => setIsCardExpanded(!isCardExpanded)}

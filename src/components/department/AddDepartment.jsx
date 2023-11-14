@@ -53,6 +53,7 @@ export default function AddDepartment({ getAllDepartments }) {
           <CardHeader
             title="Add Department"
             onClick={() => setIsCardExpanded(!isCardExpanded)}
+            variant="pageHeader"
             action={
               <IconButton
                 onClick={() => setIsCardExpanded(!isCardExpanded)}
