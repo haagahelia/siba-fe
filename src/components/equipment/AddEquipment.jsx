@@ -34,6 +34,7 @@ export default function AddEquipment({ getAllEquipments }) {
           <CardHeader
             title="Add Equipment"
             onClick={() => setIsCardExpanded(!isCardExpanded)}
+            variant="pageHeader"
             action={
               <IconButton
                 onClick={() => setIsCardExpanded(!isCardExpanded)}

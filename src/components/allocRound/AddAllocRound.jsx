@@ -112,7 +112,7 @@ export default function AddAllocRound({ allAllocRoundsList }) {
       />
       <Card variant="outlined">
         <CardContent>
-          <CardHeader title="Add allocation round" />
+          <CardHeader title="Add allocation round" variant="pageHeader"/>
           <AddAllocRoundForm
             handleChange={handleChange}
             formik={formik}

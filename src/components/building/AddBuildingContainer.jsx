@@ -106,6 +106,7 @@ export default function AddBuildingContainer({ getAllBuildings }) {
           <CardHeader
             title="Add Building"
             onClick={() => setIsCardExpanded(!isCardExpanded)}
+            variant="pageHeader"
             action={
               <IconButton
                 onClick={() => setIsCardExpanded(!isCardExpanded)}

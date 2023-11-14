@@ -99,7 +99,6 @@ export const createAppTheme = (currentPalette) =>
             props: { variant: "pageHeader" },
             style: {
               backgroundColor: "transparent",
-              //backgroundColor: "red",
               borderBottom: `4px solid ${currentPalette.primary.main}`,
 
               "& .MuiCardHeader-title": {
@@ -128,6 +127,7 @@ export const createAppTheme = (currentPalette) =>
               },
               "&:hover fieldset": {
                 borderColor: currentPalette.borderColor.main,
+                borderWidth: "2px",
               },
               "&.Mui-focused fieldset": {
                 borderColor: currentPalette.borderColor.main,
@@ -223,17 +223,20 @@ export const createAppTheme = (currentPalette) =>
                 textAlign: "center",
                 textDecoration: "none",
                 padding: 0,
+                padding: lessPadding,
                 width: navbarWidth,
               },
               "&:hover a": {
-                borderBottom: "3px solid",
-                color: currentPalette.primary.contrastText,
+                // borderBottom: "3px solid",
+                backgroundColor: currentPalette.background.default,
+                color: currentPalette.fontColorDefault.default,
+                fontWeight: 800,
               },
               "& a.nav-links.active": {
                 backgroundColor: currentPalette.background.default,
                 color: currentPalette.fontColorDefault.default,
                 fontWeight: 800,
-                padding: lessPadding,
+                //padding: lessPadding,
                 textDecorationThickness: "3px",
                 width: navbarWidth,
               },
@@ -259,6 +262,11 @@ export const createAppTheme = (currentPalette) =>
                 fontWeight: 700,
                 textDecoration: "none",
               },
+
+              "&:hover a": {
+                // borderBottom: "3px solid",
+                color: currentPalette.fontColorDefault.default,
+              },
             },
           },
           {
@@ -279,6 +287,10 @@ export const createAppTheme = (currentPalette) =>
                 fontSize: "17.5px",
                 fontWeight: 600,
                 textDecoration: "none",
+              },
+
+              "&:hover a": {
+                color: currentPalette.primary.main,
               },
             },
           },
@@ -358,6 +370,25 @@ export const createAppTheme = (currentPalette) =>
       MuiButton: {
         variants: [
           {
+            props: { variant: "componentAddButton" },
+            style: {
+              backgroundColor: currentPalette.primary.main,
+              border: `1px solid ${currentPalette.primary.main}`,
+              borderRadius: "7.5px",
+              color: currentPalette.primary.contrastText,
+              fontSize: "1.25rem",
+              fontWeight: "bold",
+              height: "40px",
+              marginTop: "10px",
+              width: "125px",
+
+              "&:hover": {
+                backgroundColor: currentPalette.background.default,
+                color: currentPalette.primary.main,
+              },
+            },
+          },
+          {
             props: { variant: "themeToggle" },
             style: {
               position: "fixed",
@@ -436,6 +467,15 @@ export const createAppTheme = (currentPalette) =>
           },
         },
         variants: [
+          {
+            props: { variant: "navAllocInfo" },
+            style: {
+              color: currentPalette.primary.contrastText,
+              fontFamily: commonFont,
+              fontWeight: 700,
+              fontSize: "12.5px",
+            },
+          },
           {
             props: { variant: "boldTitle" },
             style: {
