@@ -126,6 +126,7 @@ export default function LoginView({ handleLoginChange }) {
           <Typography variant="logInPageTitle">Login</Typography>
           <Grid>
             <TextField
+              id="loginEmail"
               className="formTextInput"
               value={loginForm.email}
               onChange={(event) =>
@@ -136,6 +137,7 @@ export default function LoginView({ handleLoginChange }) {
           </Grid>
           <Grid>
             <TextField
+              id="loginPassword"
               className="formTextInput"
               value={loginForm.password}
               onChange={(event) =>
@@ -149,7 +151,11 @@ export default function LoginView({ handleLoginChange }) {
             />
           </Grid>
           <Grid>
-            <Button variant="formButton" onClick={loginAndError}>
+            <Button
+              id="loginButton"
+              variant="formButton"
+              onClick={loginAndError}
+            >
               Log In
             </Button>
           </Grid>
