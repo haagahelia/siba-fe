@@ -223,17 +223,20 @@ export const createAppTheme = (currentPalette) =>
                 textAlign: "center",
                 textDecoration: "none",
                 padding: 0,
+                padding: lessPadding,
                 width: navbarWidth,
               },
               "&:hover a": {
-                borderBottom: "3px solid",
-                color: currentPalette.primary.contrastText,
+                // borderBottom: "3px solid",
+                backgroundColor: currentPalette.background.default,
+                color: currentPalette.fontColorDefault.default,
+                fontWeight: 800,
               },
               "& a.nav-links.active": {
                 backgroundColor: currentPalette.background.default,
                 color: currentPalette.fontColorDefault.default,
                 fontWeight: 800,
-                padding: lessPadding,
+                //padding: lessPadding,
                 textDecorationThickness: "3px",
                 width: navbarWidth,
               },
@@ -259,6 +262,11 @@ export const createAppTheme = (currentPalette) =>
                 fontWeight: 700,
                 textDecoration: "none",
               },
+
+              "&:hover a": {
+                // borderBottom: "3px solid",
+                color: currentPalette.fontColorDefault.default,
+              },
             },
           },
           {
@@ -279,6 +287,10 @@ export const createAppTheme = (currentPalette) =>
                 fontSize: "17.5px",
                 fontWeight: 600,
                 textDecoration: "none",
+              },
+
+              "&:hover a": {
+                color: currentPalette.primary.main,
               },
             },
           },
