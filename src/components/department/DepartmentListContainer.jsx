@@ -9,6 +9,10 @@ import SingleDepartmentDialog from "./SingleDepartmentDialog";
 export default function DepartmentListContainer({
   getAllDepartments,
   departmentList,
+  onPageChange,
+  page,
+  totalCount,
+  rowsPerPage,
 }) {
   const [open, setOpen] = useState(false);
 
@@ -25,6 +29,10 @@ export default function DepartmentListContainer({
             <DepartmentList
               getAllDepartments={getAllDepartments}
               departmentList={departmentList}
+              onPageChange={onPageChange}
+              page={page}
+              totalCount={totalCount}
+              rowsPerPage={rowsPerPage}
             />
           </CardContent>
         </Card>
