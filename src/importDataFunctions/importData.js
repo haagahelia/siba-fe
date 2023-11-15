@@ -57,7 +57,9 @@ export const importData = async (
       setAlertOptions({
         severity: "error",
         title: "Error!",
-        message: `Something wrong happened. ${failedCount} row failed to add.`,
+        message: `Something wrong happened. ${
+          failedCount + successCount
+        } row failed to add.`,
       });
       setAlertOpen(true);
     }
