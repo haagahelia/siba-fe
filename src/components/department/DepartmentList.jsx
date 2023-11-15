@@ -14,20 +14,29 @@ import SingleDepartmentDialog from "./SingleDepartmentDialog";
 
 export default function DepartmentList({
   getAllDepartments,
-  paginateDepartments,
+  departmentList,
+  onPageChange,
+  page,
+  rowsPerPage,
 }) {
   const [open, setOpen] = useState(false);
   const [singleDepartment, setSingleDepartment] = useState(null);
   const [order, setOrder] = useState("asc");
   const [orderBy, setOrderBy] = useState("Id");
 
+  const startIndex = (page - 1) * rowsPerPage;
+  const endIndex = startIndex + rowsPerPage;
+
+  const handleChangePage = (event, newPage) => {
+    onPageChange(newPage);
+  };
   const handleRequestSort = (property) => {
     const isAsc = orderBy === property && order === "asc";
     setOrder(isAsc ? "desc" : "asc");
     setOrderBy(property);
   };
 
-  const sortedDepartments = paginateDepartments.sort((a, b) => {
+  const sortedDepartmentList = [...departmentList].sort((a, b) => {
     switch (orderBy) {
       case "Id":
         return order === "asc" ? a.id - b.id : b.id - a.id;
@@ -43,6 +52,8 @@ export default function DepartmentList({
         return 0;
     }
   });
+
+  const paginatedData = sortedDepartmentList.slice(startIndex, endIndex);
 
   const handleRowClick = (department) => {
     setSingleDepartment(department);
@@ -92,7 +103,7 @@ export default function DepartmentList({
                 </TableRow>
               </TableHead>
               <TableBody>
-                {sortedDepartments.map((department) => (
+                {paginatedData.map((department) => (
                   <TableRow key={department.id}>
                     <TableCell>
                       <IconButton

@@ -13,14 +13,18 @@ import styled from "@mui/material/styles/styled";
 import { useState } from "react";
 import SingleEquipmentDialog from "./SingleEquipmentDialog";
 
-export default function EquipmentList({ getAllEquipments, equipmentList }) {
+export default function EquipmentList({
+  getAllEquipments,
+  equipmentList,
+  onPageChange,
+  page,
+  rowsPerPage,
+}) {
   const [open, setOpen] = useState(false);
   const [singleEquipment, setSingleEquipment] = useState(null);
   const [order, setOrder] = useState("asc");
   const [orderBy, setOrderBy] = useState("Id");
 
-  const [page, setPage] = useState(1);
-  const rowsPerPage = 15;
   const startIndex = (page - 1) * rowsPerPage;
   const endIndex = startIndex + rowsPerPage;
 
@@ -136,16 +140,6 @@ export default function EquipmentList({ getAllEquipments, equipmentList }) {
           </Table>
         </Paper>
       </Box>
-
-      <div>
-        <Pagination
-          count={Math.ceil(sortedEquipmentList.length / rowsPerPage)}
-          page={page}
-          onChange={handleChangePage}
-          color="primary"
-          variant="outlined"
-        />
-      </div>
     </div>
   );
 }

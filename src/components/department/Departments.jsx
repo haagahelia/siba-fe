@@ -1,4 +1,3 @@
-// The Equipment Page
 import { useEffect, useState } from "react";
 import {
   ajaxRequestErrorHandler,
@@ -8,33 +7,34 @@ import dao from "../../ajax/dao";
 import { useRoleLoggedIn } from "../../hooks/useRoleLoggedIn";
 import Logger from "../../logger/logger";
 
+import { Pagination } from "@mui/material";
+
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardHeader from "@mui/material/CardHeader";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
-import AddEquipment from "./AddEquipment";
-import EquipmentListContainer from "./EquipmentListContainer";
-import { Pagination } from "@mui/material";
+import AddDepartment from "./AddDepartment";
+import DepartmentListContainer from "./DepartmentListContainer";
 
-export default function Equipments() {
-  Logger.logPrefix = "Equipments";
-  Logger.debug("Equipments component instantiated.");
+export default function Departments() {
+  Logger.logPrefix = "Departments";
+  Logger.debug("Departments component instantiated.");
 
   const { roles } = useRoleLoggedIn();
-  const [equipmentList, setEquipmentList] = useState([]);
+  const [departmentList, setDepartmentList] = useState([]);
 
   const [page, setPage] = useState(1);
   const rowsPerPage = 15;
   const startIndex = (page - 1) * rowsPerPage;
   const endIndex = startIndex + rowsPerPage;
-  const currentData = equipmentList.slice(startIndex, endIndex);
+  const currentData = departmentList.slice(startIndex, endIndex);
 
   const handlePageChange = (event, newPage) => {
     setPage(newPage);
   };
 
-  const totalCount = Math.ceil(equipmentList.length / rowsPerPage);
+  const totalCount = Math.ceil(departmentList.length / rowsPerPage);
 
   const [/* alertOptions, */ setAlertOptions] = useState({
     message: "This is an error alert — check it out!",
@@ -42,9 +42,9 @@ export default function Equipments() {
   });
   const [/* alertOpen, */ setAlertOpen] = useState(false);
 
-  const getAllEquipments = async function () {
-    Logger.debug("getAllEquipments: fetching all equipments from server.");
-    const { httpStatus, data } = await dao.fetchEquipmentData();
+  const getAllDepartments = async function () {
+    Logger.debug("getAllDepartments: fetching all departments from server.");
+    const { httpStatus, data } = await dao.fetchAllDepartmentData();
     if (httpStatus !== 200) {
       ajaxRequestErrorHandler(
         httpStatus,
@@ -53,31 +53,31 @@ export default function Equipments() {
         setAlertOpen
       );
     } else {
-      setEquipmentList(data);
+      setDepartmentList(data);
       Logger.info(
-        `getAllEquipments: successfully fetched ${data.length} subjects.`
+        `getAllDepartments: successfully fetched ${data.length} departments.`
       );
     }
   };
 
   useEffect(() => {
-    Logger.debug("Calling getAllEquipments in useEffect");
-    getAllEquipments();
+    Logger.debug("Calling getAllDepartments in useEffect");
+    getAllDepartments();
   }, []);
 
   return (
     <div>
       <Container maxWidth="100%">
         {(roles.admin === "1" || roles.planner === "1") && (
-          <AddEquipment getAllEquipments={getAllEquipments} />
+          <AddDepartment getAllDepartments={getAllDepartments} />
         )}
         <Grid container rowSpacing={0.5}>
           <Card variant="outlined">
             <CardContent>
-              <CardHeader title="Equipment" variant="pageHeader" />
-              <EquipmentListContainer
-                getAllEquipments={getAllEquipments}
-                equipmentList={equipmentList}
+              <CardHeader title="Department" variant="pageHeader" />
+              <DepartmentListContainer
+                getAllDepartments={getAllDepartments}
+                departmentList={departmentList}
                 onPageChange={handlePageChange}
                 page={page}
                 totalCount={totalCount}
