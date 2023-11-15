@@ -1,0 +1,87 @@
+import { useState } from "react";
+import dao from "../../ajax/dao";
+import { importData } from "../../importDataFunctions/importData";
+import ValidateAddEquipment, {
+  capitalizeFirstLetter,
+} from "../../validation/ValidateAddEquipment";
+
+import Button from "@mui/material/Button";
+import AlertBox from "../common/AlertBox";
+
+export default function ImportEquipmentButton({
+  equipmentToImport,
+  equipmentFailedToImport,
+  setEquipmentFailedToImport,
+  getAllEquipments,
+}) {
+  const [alertOpen, setAlertOpen] = useState(false);
+  const [alertOptions, setAlertOptions] = useState({
+    title: "This is title",
+    message: "This is an error alert — check it out!",
+    severity: "error",
+  });
+
+  const processEquipment = async (equipment, equipmentSet) => {
+    const newEquipment = {
+      name: equipment.name ? capitalizeFirstLetter(equipment.name) : "",
+      priority: equipment.priority ? equipment.priority : "",
+      description: equipment.description ? equipment.description : "",
+      isMovable:
+        equipment.isMovable === 0 || equipment.isMovable
+          ? equipment.isMovable.toString()
+          : "",
+    };
+
+    if (equipmentSet.has(newEquipment.name)) {
+      equipment.FailedReason = "Name of equipment is duplicated in the file";
+      return equipment;
+    } else {
+      equipmentSet.add(newEquipment.name);
+    }
+
+    const validateResult = await ValidateAddEquipment(newEquipment);
+
+    if (validateResult) {
+      equipment.FailedReason =
+        validateResult.name ||
+        validateResult.priority ||
+        validateResult.description ||
+        validateResult.isMovable;
+
+      return equipment;
+    } else {
+      return newEquipment;
+    }
+  };
+
+  const handleClick = async () => {
+    await importData(
+      equipmentToImport,
+      equipmentFailedToImport,
+      setEquipmentFailedToImport,
+      getAllEquipments,
+      processEquipment,
+      dao.postNewEquipments,
+      setAlertOpen,
+      setAlertOptions,
+    );
+  };
+
+  return (
+    <>
+      <AlertBox
+        alertOpen={alertOpen}
+        alertOptions={alertOptions}
+        setAlertOpen={setAlertOpen}
+      />
+      <Button
+        variant="contained"
+        onClick={() => {
+          handleClick();
+        }}
+      >
+        Import data
+      </Button>
+    </>
+  );
+}

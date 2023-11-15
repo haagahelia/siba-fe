@@ -12,6 +12,7 @@ import * as dao_spaceEquipment from "./dao_spaceEquipment";
 import * as dao_subject from "./dao_subject";
 import * as dao_subjectEquipment from "./dao_subjectEquipment";
 import * as dao_user from "./dao_user";
+import * as dao_resetDatabase from "./dao_resetDatabase"
 
 const dao = {
   ...dao_settings,
@@ -28,6 +29,7 @@ const dao = {
   ...dao_department,
   ...dao_user,
   ...dao_departmentplanner,
+  ...dao_resetDatabase
 };
 
 export default dao;

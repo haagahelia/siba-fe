@@ -109,6 +109,7 @@ export default function AddSettingContainer({ getAllSettings }) {
           <CardHeader
             title="Add Setting"
             onClick={() => setIsCardExpanded(!isCardExpanded)}
+            variant="pageHeader"
             action={
               <IconButton
                 onClick={() => setIsCardExpanded(!isCardExpanded)}

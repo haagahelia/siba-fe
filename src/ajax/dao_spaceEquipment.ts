@@ -1,5 +1,5 @@
 import { Response, SpaceEquipment } from "../types";
-import { get } from "./request";
+import { get, create } from "./request";
 
 const baseUrl = import.meta.env.VITE_BE_SERVER_BASE_URL;
 
@@ -10,4 +10,16 @@ export const fetchEquipmentBySpaceId = async (
   const response = await get(`${baseUrl}/spaceequipment/getEquipment/${id}`);
   const spaceEquipments: SpaceEquipment[] = await response.json();
   return { success: response.ok, data: spaceEquipments };
+};
+
+// creating new SpaceEquipment
+export const postNewSpaceEquipment = async (
+  newSpaceEquipment: SpaceEquipment,
+): Promise<boolean> => {
+  const response = await create(
+    `${baseUrl}/spaceequipment/post`,
+    newSpaceEquipment,
+  );
+  const data = await response.json();
+  return data;
 };

@@ -2,6 +2,7 @@
 import {
   faArrowRightFromBracket,
   faGear,
+  faTriangleExclamation
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import AppBar from "@mui/material/AppBar";
@@ -33,6 +34,7 @@ import SettingsView from "../views/SettingsView";
 import SpaceView from "../views/SpaceView";
 import SubjectView from "../views/SubjectView";
 import UserView from "../views/UserView";
+import dao from "../ajax/dao";
 import { Typography } from "@mui/material";
 
 export default function NavBar() {
@@ -113,6 +115,15 @@ export default function NavBar() {
       showForCurrentUser: false,
     },
     {
+      name: "Reset Data",
+      forRoles: ["admin"],
+      showForCurrentUser: false,
+      action() {
+        const confirmation = confirm('Are you sure that you want to reset database to test data?')
+        confirmation && dao.resetDatabase() && alert('Database reset success!')
+      },
+    },
+    {
       name: "Settings",
       href: "/settings",
       forRoles: ["admin"],
@@ -153,6 +164,12 @@ export default function NavBar() {
             if (page.action) page.action();
           }}
         >
+          {page.name === "Reset Data" && (
+            <span className="navIconSpacing">
+              {" "}
+              <FontAwesomeIcon icon={faTriangleExclamation} />{" "}
+            </span>
+          )}
           {page.name === "Settings" && (
             <span className="navIconSpacing">
               {" "}
@@ -193,8 +210,7 @@ export default function NavBar() {
       element.showForCurrentUser = false;
       if (
         (element.forRoles.includes("admin") && appContext.roles.admin === 1) ||
-        (element.forRoles.includes("planner") &&
-          appContext.roles.planner === 1) ||
+        (element.forRoles.includes("planner") && appContext.roles.planner === 1) ||
         (element.forRoles.includes("statist") && appContext.roles.statist === 1)
       ) {
         element.showForCurrentUser = true;
@@ -243,6 +259,7 @@ export default function NavBar() {
       .filter(
         (page) =>
           page.showForCurrentUser &&
+          page.name !== "Reset Data" &&
           page.name !== "Settings" &&
           page.name !== "Log Out",
       )
@@ -271,7 +288,7 @@ export default function NavBar() {
                   <div className="dropDown">
                     {sibaPages
                       .filter((page) =>
-                        ["Settings", "Log Out"].includes(page.name),
+                        ["Reset Data", "Settings", "Log Out"].includes(page.name),
                       )
                       .map((page) =>
                         renderDropdownMenu(page, "navBarDropDownLinks"),
@@ -313,14 +330,13 @@ export default function NavBar() {
                 <List variant="navBar">
                   <NavLink to={navImageRoute()} className="navLogo">
                     {/* <NavLink to="/" className="navLogo"> */}
-
                     <img src={logo} alt="Sibelius-Akatemia stylized logo." />
                   </NavLink>
                   {renderNavLinks()}
-                  <ListItem variant={"navBar"} key={"allocRoundInfoItem"}>
-                    <Typography>{`${appContext.allocRoundId} : ${appContext.allocRoundName.substring(0,12)}`}</Typography>
-                  </ListItem>
-                </List> 
+                  <Typography variant="navAllocInfo">
+                    {`${appContext.allocRoundId} : ${appContext.allocRoundName.substring(0, 12)}`}
+                  </Typography>
+                </List>
               </Box>
             </Toolbar>
           </Container>
@@ -358,7 +374,6 @@ export default function NavBar() {
           />
         </Routes>
       </BrowserRouter>
-
     </div>
   );
 }

@@ -15,7 +15,7 @@ export default function AddEquipmentDialogConfirmation({
   getAllEquipments,
 }) {
   const addSingleEquipment = async () => {
-    const validation = ValidateAddEquipment(equipment);
+    const validation = await ValidateAddEquipment(equipment);
     if (validation) {
       alert(Object.values(validation));
       return;
