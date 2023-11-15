@@ -50,12 +50,12 @@ export default function Departments() {
         httpStatus,
         getFunctionName(2),
         setAlertOptions,
-        setAlertOpen,
+        setAlertOpen
       );
     } else {
       setDepartmentList(data);
       Logger.info(
-        `getAllDepartments: successfully fetched ${data.length} departments.`,
+        `getAllDepartments: successfully fetched ${data.length} departments.`
       );
     }
   };

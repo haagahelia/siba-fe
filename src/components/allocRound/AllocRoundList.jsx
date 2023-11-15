@@ -1,11 +1,9 @@
 import InfoIcon from "@mui/icons-material/Info";
 import IconButton from "@mui/material/IconButton";
-import Pagination from "@mui/material/Pagination";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import TableSortLabel from "@mui/material/TableSortLabel";
@@ -26,14 +24,6 @@ export default function AllocRoundList({
   const [open, setOpen] = useState(false);
   const [order, setOrder] = useState("asc");
   const [orderBy, setOrderBy] = useState("ID");
-
-  const [page, setPage] = useState(1);
-  const rowsPerPage = 15;
-  const pageCount = Math.ceil(paginateAllocRounds.length / rowsPerPage);
-
-  const handleChangePage = (event, newPage) => {
-    setPage(newPage);
-  };
 
   const handleRequestSort = (property) => {
     const isAsc = orderBy === property && order === "asc";
@@ -61,11 +51,6 @@ export default function AllocRoundList({
         return 0;
     }
   });
-
-  const paginatedData = sortedAllocRounds.slice(
-    (page - 1) * rowsPerPage,
-    page * rowsPerPage,
-  );
 
   const handleRowClick = (allocRound) => {
     setSingleAllocRound(allocRound);
@@ -132,7 +117,7 @@ export default function AllocRoundList({
             </TableRow>
           </TableHead>
           <TableBody>
-            {paginatedData.map((value) => (
+            {sortedAllocRounds.map((value) => (
               <TableRow key={value.id}>
                 <TableCell>
                   <IconButton
@@ -158,16 +143,6 @@ export default function AllocRoundList({
           </TableBody>
         </Table>
       </Box>
-
-      <div>
-        <Pagination
-          count={pageCount}
-          page={page}
-          onChange={handleChangePage}
-          color="primary"
-          variant="outlined"
-        />
-      </div>
     </div>
   );
 }

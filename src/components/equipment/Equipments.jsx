@@ -15,12 +15,26 @@ import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import AddEquipment from "./AddEquipment";
 import EquipmentListContainer from "./EquipmentListContainer";
+import { Pagination } from "@mui/material";
 
 export default function Equipments() {
   Logger.logPrefix = "Equipments";
   Logger.debug("Equipments component instantiated.");
+
   const { roles } = useRoleLoggedIn();
   const [equipmentList, setEquipmentList] = useState([]);
+
+  const [page, setPage] = useState(1);
+  const rowsPerPage = 15;
+  const startIndex = (page - 1) * rowsPerPage;
+  const endIndex = startIndex + rowsPerPage;
+  const currentData = equipmentList.slice(startIndex, endIndex);
+
+  const handlePageChange = (event, newPage) => {
+    setPage(newPage);
+  };
+
+  const totalCount = Math.ceil(equipmentList.length / rowsPerPage);
 
   const [/* alertOptions, */ setAlertOptions] = useState({
     message: "This is an error alert — check it out!",
@@ -36,12 +50,12 @@ export default function Equipments() {
         httpStatus,
         getFunctionName(2),
         setAlertOptions,
-        setAlertOpen,
+        setAlertOpen
       );
     } else {
       setEquipmentList(data);
       Logger.info(
-        `getAllEquipments: successfully fetched ${data.length} subjects.`,
+        `getAllEquipments: successfully fetched ${data.length} subjects.`
       );
     }
   };
@@ -64,6 +78,18 @@ export default function Equipments() {
               <EquipmentListContainer
                 getAllEquipments={getAllEquipments}
                 equipmentList={equipmentList}
+                onPageChange={handlePageChange}
+                page={page}
+                totalCount={totalCount}
+                rowsPerPage={rowsPerPage}
+              />
+              <Pagination
+                count={totalCount}
+                page={page}
+                onChange={handlePageChange}
+                color="primary"
+                variant="outlined"
+                sx={{ marginTop: 2 }}
               />
             </CardContent>
           </Card>
