@@ -7,7 +7,7 @@ import logo from "../styles/SibeliusLogoSmall.svg";
 
 export const lessPadding = "4px";
 export const morePadding = "16px";
-export const navbarWidth = "170px";
+export const navbarWidth = "171px";
 export const commonFont = "Roboto, Helvetica, Aria, sans-serif";
 export const indexRoomCommon = {
   width: 15,
@@ -185,6 +185,7 @@ export const createAppTheme = (currentPalette) =>
             style: {
               alignItems: "center",
               backgroundColor: currentPalette.primary.main,
+              borderRight: `1px solid ${currentPalette.primary.main}`, 
               display: "flex",
               flexDirection: "column",
               flexWrap: "nowrap",
@@ -250,9 +251,10 @@ export const createAppTheme = (currentPalette) =>
               borderRadius: "10px",
               display: "flex",
               justifyContent: "center",
+              left: "20px",
               margin: "auto",
-              marginTop: "5vh",
               padding: "5px",
+              position: "absolute",
               textAlign: "center",
               width: "130px",
 
@@ -264,7 +266,6 @@ export const createAppTheme = (currentPalette) =>
               },
 
               "&:hover a": {
-                // borderBottom: "3px solid",
                 color: currentPalette.fontColorDefault.default,
               },
             },
@@ -281,9 +282,9 @@ export const createAppTheme = (currentPalette) =>
               padding: "2px",
               textAlign: "center",
               width: "130px",
+              color: currentPalette.primary.main,
 
               "& a": {
-                color: currentPalette.fontColorDefault.default,
                 fontSize: "17.5px",
                 fontWeight: 600,
                 textDecoration: "none",
@@ -682,16 +683,25 @@ export const createAppTheme = (currentPalette) =>
       // Enables CSS styling
       MuiCssBaseline: {
         styleOverrides: {
+          ".allocRoundHeader": {
+            fontWeight: "normal",
+          },
           ".dropDown": {
             backgroundColor: currentPalette.backgroundDarker.default,
             border: "2px solid black",
             borderRadius: "10px",
             bottom: "0px",
-            left: `calc(${navbarWidth} - 20px)`,
+            left: `calc(${navbarWidth} - 19px)`,
             position: "absolute",
           },
           ".dropDownHoverArea": {
+            height: "36px",
+            marginTop: "5vh",
             width: navbarWidth,
+
+            "&:hover a": {
+              color: currentPalette.fontColorDefault.default,
+            },
           },
           ".logInPageBackgroundLogo": {
             height: "95%",
