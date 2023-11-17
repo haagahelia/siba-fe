@@ -54,7 +54,7 @@ export default function AddEquipment({ getAllEquipments }) {
           />
           {isCardExpanded && (
             <Grid container spacing={2}>
-              <Grid item xs={12} sm={6} md={4}>
+              <Grid item xs={12} sm={6} md={5}>
                 <FormControl fullWidth>
                   <TextField
                     value={equipment.name}
@@ -65,7 +65,7 @@ export default function AddEquipment({ getAllEquipments }) {
                   />
                 </FormControl>
               </Grid>
-              <Grid item xs={12} sm={6} md={4}>
+              <Grid item xs={12} sm={6} md={5}>
                 <FormControl fullWidth>
                   <TextField
                     value={equipment.priority}
@@ -80,7 +80,7 @@ export default function AddEquipment({ getAllEquipments }) {
                   />
                 </FormControl>
               </Grid>
-              <Grid item xs={12} sm={6} md={4}>
+              <Grid item xs={12} sm={6} md={5}>
                 <FormControl fullWidth>
                   <TextField
                     value={equipment.description}
@@ -94,7 +94,7 @@ export default function AddEquipment({ getAllEquipments }) {
                   />
                 </FormControl>
               </Grid>
-              <Grid item xs={12} sm={6}>
+              <Grid item xs={12} sm={6} md={5}>
                 <FormControl fullWidth>
                   <InputLabel>Is movable</InputLabel>
                   <Select

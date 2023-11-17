@@ -28,14 +28,14 @@ export default function AddSpace({ getAllSpaces }) {
     name: "",
     area: "0",
     personLimit: "0",
-    buildingId: "400",
+    buildingId: '',
     buildingName: "Musiikkitalo",
     availableFrom: "",
     availableTo: "",
     classesFrom: "",
     classesTo: "",
     inUse: "",
-    spaceTypeId: "0",
+    spaceTypeId: '',
   });
 
   const openDialogBox = () => {
