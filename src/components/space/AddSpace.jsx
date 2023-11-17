@@ -28,14 +28,14 @@ export default function AddSpace({ getAllSpaces }) {
     name: "",
     area: "0",
     personLimit: "0",
-    buildingId: "400",
+    buildingId: '',
     buildingName: "Musiikkitalo",
     availableFrom: "",
     availableTo: "",
     classesFrom: "",
     classesTo: "",
     inUse: "",
-    spaceTypeId: "0",
+    spaceTypeId: '',
   });
 
   const openDialogBox = () => {
@@ -168,6 +168,7 @@ export default function AddSpace({ getAllSpaces }) {
                   <InputLabel>Building</InputLabel>
                   <Select
                     name="buildingId"
+                    type="number"
                     value={space.buildingId}
                     onChange={(event) => {
                       setSpace((prevSpace) => ({
@@ -254,6 +255,7 @@ export default function AddSpace({ getAllSpaces }) {
                   <InputLabel>Space type</InputLabel>
                   <Select
                     name="spaceTypeId"
+                    type="number"
                     value={space.spaceTypeId}
                     onChange={(event) =>
                       setSpace({ ...space, spaceTypeId: event.target.value })
