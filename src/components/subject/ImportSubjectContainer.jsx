@@ -59,10 +59,10 @@ export default function ImportSubjectContainer({
         alertOptions={alertOptions}
         setAlertOpen={setAlertOpen}
       />
-      <Typography variant="sibaTypography">
-        Import data from .csv file
-      </Typography>
-      <Grid container direction="column" variant="sibaGridAddForm">
+      <Grid container direction="column" variant="AddLessonForm">
+        <Typography variant="addComponentSubHeader">
+          Import Data From .csv File
+        </Typography>
         <Grid item>
           <Input
             variant="sibaInputFileName"

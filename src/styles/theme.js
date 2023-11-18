@@ -516,6 +516,14 @@ export const createAppTheme = (currentPalette) =>
             },
           },
           {
+            props: { variant: "addComponentSubHeader" },
+            style: {
+              fontSize: "17.5px",
+              fontWeight: "bold",
+              paddingBottom: "10px",
+            },
+          },
+          {
             props: { variant: "sibaNavLink" },
             style: {
               color: currentPalette.fontColorDefault.default,
@@ -554,6 +562,17 @@ export const createAppTheme = (currentPalette) =>
             style: {
               // columnGap: 8,
               // rowGap: 8,
+              padding: lessPadding,
+              alignItems: "center",
+              justifyContent: "space-evenly",
+            },
+          },
+          {
+            props: { variant: "AddLessonForm" },
+            style: {
+              // columnGap: 8,
+              // rowGap: 8,
+              borderTop: `1px solid ${currentPalette.borderColor.main}`,
               padding: lessPadding,
               alignItems: "center",
               justifyContent: "space-evenly",
