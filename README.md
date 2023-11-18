@@ -163,6 +163,7 @@ siba-fe\src\components\equipment\Equipments.jsx <br>
 
 ### Spaces Page
 siba-fe\src\views\SpaceView.jsx <br>
+siba-fe\src\components\space\AddSpace.jsx <br>
 
 ### Program Results Page
 siba-fe\src\components\result\ProgramResult.jsx <br>

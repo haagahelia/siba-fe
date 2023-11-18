@@ -132,6 +132,11 @@ export const createAppTheme = (currentPalette) =>
               "&.Mui-focused fieldset": {
                 borderColor: currentPalette.borderColor.main,
               },
+              input: {
+                '&::placeholder': {
+                  opacity: 1,
+                },
+              },
             },
           },
         },
@@ -164,10 +169,11 @@ export const createAppTheme = (currentPalette) =>
                 borderColor: currentPalette.borderColor.main,
               },
               "&:hover fieldset": {
-                borderColor: currentPalette.primary.main,
+                borderColor: currentPalette.borderColor.main,
+                borderWidth: "2px",
               },
               "&.Mui-focused fieldset": {
-                borderColor: currentPalette.primary.main,
+                borderColor: currentPalette.borderColor.main,
               },
             },
           },
@@ -185,7 +191,7 @@ export const createAppTheme = (currentPalette) =>
             style: {
               alignItems: "center",
               backgroundColor: currentPalette.primary.main,
-              borderRight: `1px solid ${currentPalette.primary.main}`, 
+              borderRight: `1px solid ${currentPalette.primary.main}`,
               display: "flex",
               flexDirection: "column",
               flexWrap: "nowrap",
