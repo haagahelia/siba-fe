@@ -6,8 +6,12 @@ import Button from "@mui/material/Button";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardHeader from "@mui/material/CardHeader";
+import FormControl from "@mui/material/FormControl";
 import Grid from "@mui/material/Grid";
 import IconButton from "@mui/material/IconButton";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import Select from "@mui/material/Select";
 import TextField from "@mui/material/TextField";
 import AddEquipmentDialogConfirmation from "./AddEquipmentDialogConfirmation";
 import EquipmentTemplate from "./EquipmentTemplate";
@@ -49,57 +53,74 @@ export default function AddEquipment({ getAllEquipments }) {
             }
           />
           {isCardExpanded && (
-            <>
-              <Grid>
-                <TextField
-                  value={equipment.name}
-                  onChange={(event) =>
-                    setEquipment({ ...equipment, name: event.target.value })
-                  }
-                  label="Name"
-                />
+            <Grid container spacing={2}>
+              <Grid item xs={12} sm={6} md={5}>
+                <FormControl fullWidth>
+                  <TextField
+                    value={equipment.name}
+                    onChange={(event) =>
+                      setEquipment({ ...equipment, name: event.target.value })
+                    }
+                    label="Name"
+                  />
+                </FormControl>
               </Grid>
-              <Grid>
-                <TextField
-                  value={equipment.priority}
-                  type="number"
-                  onChange={(event) =>
-                    setEquipment({ ...equipment, priority: event.target.value })
-                  }
-                  label="Priority"
-                />
+              <Grid item xs={12} sm={6} md={5}>
+                <FormControl fullWidth>
+                  <TextField
+                    value={equipment.priority}
+                    type="number"
+                    onChange={(event) =>
+                      setEquipment({
+                        ...equipment,
+                        priority: event.target.value,
+                      })
+                    }
+                    label="Priority"
+                  />
+                </FormControl>
               </Grid>
-              <Grid>
-                <TextField
-                  value={equipment.description}
-                  onChange={(event) =>
-                    setEquipment({
-                      ...equipment,
-                      description: event.target.value,
-                    })
-                  }
-                  label="Description"
-                />
+              <Grid item xs={12} sm={6} md={5}>
+                <FormControl fullWidth>
+                  <TextField
+                    value={equipment.description}
+                    onChange={(event) =>
+                      setEquipment({
+                        ...equipment,
+                        description: event.target.value,
+                      })
+                    }
+                    label="Description"
+                  />
+                </FormControl>
               </Grid>
-              <Grid>
-                <TextField
-                  value={equipment.isMovable}
-                  type="number"
-                  onChange={(event) =>
-                    setEquipment({
-                      ...equipment,
-                      isMovable: event.target.value,
-                    })
-                  }
-                  label="isMovable (VALUE 0 OR 1)"
-                />
+              <Grid item xs={12} sm={6} md={5}>
+                <FormControl fullWidth>
+                  <InputLabel>Is movable</InputLabel>
+                  <Select
+                    name="isMovable"
+                    value={equipment.isMovable}
+                    onChange={(event) =>
+                      setEquipment({
+                        ...equipment,
+                        isMovable: event.target.value,
+                      })
+                    }
+                  >
+                    <MenuItem value="1">Yes</MenuItem>
+                    <MenuItem value="0">No</MenuItem>
+                  </Select>
+                </FormControl>
               </Grid>
-              <Button onClick={() => openDialogBox()} variant="contained">
-                Add Equipment
-              </Button>
-              <ImportEquipmentContainer getAllEquipments={getAllEquipments} />
-              <EquipmentTemplate />
-            </>
+
+              <Grid item xs={12}>
+                <Button onClick={() => openDialogBox()} variant="contained">
+                  Add Equipment
+                </Button>
+                <ImportEquipmentContainer getAllEquipments={getAllEquipments} />
+                <EquipmentTemplate />
+              </Grid>
+            </Grid>
           )}
         </CardContent>
       </Card>
