@@ -208,7 +208,7 @@ export default function NavBar() {
       sibaPages[sibaPages.length - 1].showForCurrentUser = false;
     }
 
-    sibaPages.forEach((element) => {
+    for (const element of sibaPages) {
       element.showForCurrentUser = false;
       if (
         (element.forRoles.includes("admin") && appContext.roles.admin === 1) ||
@@ -220,7 +220,7 @@ export default function NavBar() {
       } else if (element.forRoles.includes("guest") && !appContext.userEmail) {
         element.showForCurrentUser = true;
       }
-    });
+    }
   };
 
   // Determines the correct nav image link

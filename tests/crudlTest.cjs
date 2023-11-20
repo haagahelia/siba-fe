@@ -2,20 +2,20 @@ const assert = require("node:assert");
 const { Builder, By, until } = require("selenium-webdriver");
 
 (async function example() {
-  let driver = await new Builder().forBrowser("chrome").build();
+  const driver = await new Builder().forBrowser("chrome").build();
   try {
     await driver.get("http://localhost:8753/login");
-    let title = await driver.getTitle();
+    const title = await driver.getTitle();
     await driver.manage().setTimeouts({ implicit: 500 });
 
     // Login
-    let loginEmail = await driver.findElement(By.id("loginEmail"));
+    const loginEmail = await driver.findElement(By.id("loginEmail"));
     await loginEmail.sendKeys("admin");
 
-    let loginPassword = await driver.findElement(By.id("loginPassword"));
+    const loginPassword = await driver.findElement(By.id("loginPassword"));
     await loginPassword.sendKeys("admin");
 
-    let submitButton = await driver.findElement(By.id("loginButton"));
+    const submitButton = await driver.findElement(By.id("loginButton"));
     await submitButton.click();
 
     await driver.wait(until.urlIs("http://localhost:8753/subject"), 5000);
@@ -29,10 +29,10 @@ const { Builder, By, until } = require("selenium-webdriver");
     );
 
     // Log Out
-    let adminLink = await driver.findElement(By.linkText("admin"));
+    const adminLink = await driver.findElement(By.linkText("admin"));
     await adminLink.click();
 
-    let logOut = await driver.findElement(By.linkText("Log Out"));
+    const logOut = await driver.findElement(By.linkText("Log Out"));
     await logOut.click();
 
     //Test log out

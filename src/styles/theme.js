@@ -229,7 +229,6 @@ export const createAppTheme = (currentPalette) =>
                 fontWeight: 600,
                 textAlign: "center",
                 textDecoration: "none",
-                padding: 0,
                 padding: lessPadding,
                 width: navbarWidth,
               },
