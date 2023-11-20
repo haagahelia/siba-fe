@@ -37,7 +37,7 @@ const SubjectTemplate = () => {
         alertOptions={alertOptions}
         setAlertOpen={setAlertOpen}
       />
-      <Button onClick={downloadSubjectTemplate}>Download template</Button>
+      <Button variant="contained" onClick={downloadSubjectTemplate}>Download template</Button>
     </>
   );
 };

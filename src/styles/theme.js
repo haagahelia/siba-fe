@@ -434,6 +434,7 @@ export const createAppTheme = (currentPalette) =>
         styleOverrides: {
           contained: {
             color: currentPalette.fontColorDefault.default,
+            width: "210px",
           },
           text: {
             backgroundColor: currentPalette.primary.main,
@@ -570,8 +571,6 @@ export const createAppTheme = (currentPalette) =>
           {
             props: { variant: "AddLessonForm" },
             style: {
-              // columnGap: 8,
-              // rowGap: 8,
               borderTop: `1px solid ${currentPalette.borderColor.main}`,
               padding: lessPadding,
               alignItems: "center",
@@ -638,6 +637,7 @@ export const createAppTheme = (currentPalette) =>
             style: {
               color: currentPalette.fontColorDefault.default,
               background: currentPalette.primary.backgroundDarker,
+              width: "210px",
             },
           },
         ],

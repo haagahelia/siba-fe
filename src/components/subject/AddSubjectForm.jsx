@@ -165,10 +165,10 @@ export default function AddSubjectForm({
           </Grid>
           <Grid item xs={12} sm={12} md={3}>
             <FormControl fullWidth>
-              <InputLabel>Copy Existing Lesson</InputLabel>
+              <InputLabel>Fill with Existing Lesson</InputLabel>
               <Select
                 name="copyLesson"
-                label="Copy Existing Lesson"
+                label="Fill with Existing Lesson"
                 onChange={(e) => {
                   handleChange(e);
                   setSelectedLesson(e.target.value);
