@@ -1,4 +1,4 @@
-const assert = require("assert");
+const assert = require("node:assert");
 const { Builder, By, until } = require("selenium-webdriver");
 
 (async function example() {
