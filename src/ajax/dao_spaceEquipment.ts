@@ -1,5 +1,5 @@
 import { Response, SpaceEquipment } from "../types";
-import { get, create } from "./request";
+import { get, create, remove } from "./request";
 
 const baseUrl = import.meta.env.VITE_BE_SERVER_BASE_URL;
 
@@ -22,4 +22,16 @@ export const postNewSpaceEquipment = async (
   );
   const data = await response.json();
   return data;
+};
+
+// removing single SpaceEquipment
+export const deleteSingleSpaceEquipment = async (
+  spaceId: number,
+  equipmentId: number,
+): Promise<boolean> => {
+  const response = await remove(
+    `${baseUrl}/spaceequipment/delete/${spaceId}/${equipmentId}`,
+  );
+  const data = await response.json();
+  return data?.affectedRows === 1;
 };
