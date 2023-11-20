@@ -8,6 +8,7 @@ import dao from "../../ajax/dao";
 import { useRoleLoggedIn } from "../../hooks/useRoleLoggedIn";
 import Logger from "../../logger/logger";
 
+import { Pagination } from "@mui/material";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardHeader from "@mui/material/CardHeader";
@@ -15,7 +16,6 @@ import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import AddEquipment from "./AddEquipment";
 import EquipmentListContainer from "./EquipmentListContainer";
-import { Pagination } from "@mui/material";
 
 export default function Equipments() {
   Logger.logPrefix = "Equipments";
@@ -50,12 +50,12 @@ export default function Equipments() {
         httpStatus,
         getFunctionName(2),
         setAlertOptions,
-        setAlertOpen
+        setAlertOpen,
       );
     } else {
       setEquipmentList(data);
       Logger.info(
-        `getAllEquipments: successfully fetched ${data.length} subjects.`
+        `getAllEquipments: successfully fetched ${data.length} subjects.`,
       );
     }
   };

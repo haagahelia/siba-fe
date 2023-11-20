@@ -16,7 +16,7 @@ export default function AllocRoundPagination({
     if (!pagination.from) return;
     const slicedAllocRounds = allAllocRoundsList.slice(
       pagination.from,
-      pagination.to
+      pagination.to,
     );
     setPaginateAllocRounds(slicedAllocRounds);
   }, [pagination, allAllocRoundsList, setPaginateAllocRounds]);

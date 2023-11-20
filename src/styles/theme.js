@@ -25,15 +25,15 @@ export const createAppTheme = (currentPalette) =>
           root: {
             color: currentPalette.fontColorDefault.default,
 
-            '& .MuiSvgIcon-root': {
+            "& .MuiSvgIcon-root": {
               fontSize: 30, // Button size
             },
 
-            '&.Mui-checked': {
+            "&.Mui-checked": {
               color: "#FDA826", // Active button colour
             },
           },
-        }
+        },
       },
       MuiCard: {
         styleOverrides: {
@@ -65,11 +65,11 @@ export const createAppTheme = (currentPalette) =>
       MuiFormControlLabel: {
         styleOverrides: {
           root: {
-            '& .MuiTypography-body1': {
+            "& .MuiTypography-body1": {
               margin: 0,
             },
-            '& .MuiCheckbox-root': {
-              alignItems: 'center',
+            "& .MuiCheckbox-root": {
+              alignItems: "center",
             },
           },
         },
@@ -133,7 +133,7 @@ export const createAppTheme = (currentPalette) =>
                 borderColor: currentPalette.borderColor.main,
               },
               input: {
-                '&::placeholder': {
+                "&::placeholder": {
                   opacity: 1,
                 },
               },
@@ -769,8 +769,8 @@ export const createAppTheme = (currentPalette) =>
             top: 0,
           },
           ".formCheckBoxButtons": {
-            justifyContent: 'space-between',
-            display: 'flex'
+            justifyContent: "space-between",
+            display: "flex",
           },
           ".navIconSpacing": {
             marginRight: "5px",

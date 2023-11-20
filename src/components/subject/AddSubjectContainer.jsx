@@ -1,6 +1,6 @@
-import { AppContext } from "../../AppContext";
 import { useFormik } from "formik";
 import { useContext, useEffect, useState } from "react";
+import { AppContext } from "../../AppContext";
 import {
   ajaxRequestErrorHandler,
   getFunctionName,
@@ -28,7 +28,6 @@ export default function AddSubjectContainer({
   getAllSubjects,
   allSubjectsList,
 }) {
-
   const appContext = useContext(AppContext);
   // State for checking if Add Lesson card is expanded
   const [isCardExpanded, setIsCardExpanded] = useState(false);

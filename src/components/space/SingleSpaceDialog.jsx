@@ -175,10 +175,9 @@ export default function SingleSpaceDialog({
             </Grid>
             <Typography variant="subtitle1">Equipment List:</Typography>
             <SpaceEquipmentList
-                  equipListBySpaceId={equipListBySpaceId}
-                  getEquipmentsBySpaceId={getEquipmentsBySpaceId}
-                />
-            
+              equipListBySpaceId={equipListBySpaceId}
+              getEquipmentsBySpaceId={getEquipmentsBySpaceId}
+            />
           </DialogContent>
         </DialogContent>
       </Dialog>

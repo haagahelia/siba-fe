@@ -45,7 +45,9 @@ export default function AddSubjectForm({
           <Grid item xs={12} sm={6} md={4} lg={3}>
             <TextField
               fullWidth
-              error={formik.touched.groupSize && Boolean(formik.errors.groupSize)}
+              error={
+                formik.touched.groupSize && Boolean(formik.errors.groupSize)
+              }
               name="groupSize"
               label="Group size"
               value={formik.values.groupSize}
