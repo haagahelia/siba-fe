@@ -275,13 +275,8 @@ export default function NavBar() {
               onMouseLeave={() => setIsDropdownVisible(false)}
             >
               <ListItem variant="navBarAccountButton">
-                <NavLink
-                  to={page.href}
-                  end
-                  activeclassname="active"
-                  className="nav-links"
-                >
-                  {loggedIn} {/* The text which is returned to screen */}
+                <NavLink>
+                  {loggedIn} {/* The username which apperas in the account button */}
                 </NavLink>
 
                 {isDropdownVisible && (
