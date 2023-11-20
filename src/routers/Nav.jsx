@@ -119,8 +119,12 @@ export default function NavBar() {
       forRoles: ["admin"],
       showForCurrentUser: false,
       action() {
-        const confirmation = confirm('Are you sure that you want to reset database to test data?')
-        confirmation && dao.resetDatabase() && alert('Database reset success!')
+        if(process.env.NODE_ENV === 'development') {
+          const confirmation = confirm('Are you sure that you want to reset database to test data?')
+          confirmation && dao.resetDatabase() && alert('Database reset success!')
+        } else {
+          alert('Not in development mode!')
+        }
       },
     },
     {
