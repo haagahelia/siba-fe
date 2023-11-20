@@ -36,6 +36,21 @@ export default function RegisterView({ handleLoginChange }) {
       "Attempting to register a user with email:",
       registerForm.email,
     );
+
+    if (
+      registerForm.isAdmin === 0 &&
+      registerForm.isPlanner === 0 &&
+      registerForm.isStatist === 0
+    ) {
+      setAlertOptions({
+        severity: "error",
+        title: "Error!",
+        message: "Please select at least one role.",
+      });
+      setAlertOpen(true);
+      return;
+    }
+
     // const hashedPassword = bcrypt.hashSync(registerForm.password, 10);
     const success = await dao.postNewUser({
       ...registerForm,

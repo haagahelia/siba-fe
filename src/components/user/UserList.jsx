@@ -77,9 +77,9 @@ export default function UserList({ getAllUsers, paginateUsers }) {
                       Email
                     </TableSortLabel>
                   </TableCell>
-                  <TableCell>isAdmin</TableCell>
-                  <TableCell>isPlanner</TableCell>
-                  <TableCell>isStatist</TableCell>
+                  <TableCell>Admin</TableCell>
+                  <TableCell>Planner</TableCell>
+                  <TableCell>Statist</TableCell>
                   <TableCell>Planner for</TableCell>
                 </TableRow>
               </TableHead>
@@ -99,9 +99,10 @@ export default function UserList({ getAllUsers, paginateUsers }) {
                     </TableCell>
                     <TableCell>{value.id}</TableCell>
                     <TableCell>{value.email}</TableCell>
-                    <TableCell>{value.isAdmin}</TableCell>
-                    <TableCell>{value.isPlanner}</TableCell>
-                    <TableCell>{value.isStatist}</TableCell>
+                    <TableCell>{value.isAdmin ? "✅" : "❌"}</TableCell>
+                    <TableCell>{value.isPlanner ? "✅" : "❌"}</TableCell>
+                    <TableCell>{value.isStatist ? "✅" : "❌"}</TableCell>
+
                     <TableCell>{value.plannerdepartment}</TableCell>
                   </TableRow>
                 ))}
