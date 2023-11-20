@@ -26,7 +26,7 @@ export default function AddSubjectForm({
     <div>
       <form onSubmit={formik.handleSubmit}>
         <Grid container spacing={2}>
-          <Grid item xs={12} sm={6} md={3}>
+          <Grid item xs={12} sm={6} md={4} lg={3}>
             <TextField
               fullWidth
               error={formik.touched.name && Boolean(formik.errors.name)}
@@ -42,7 +42,7 @@ export default function AddSubjectForm({
               }}
             />
           </Grid>
-          <Grid item xs={12} sm={6} md={3}>
+          <Grid item xs={12} sm={6} md={4} lg={3}>
             <TextField
               fullWidth
               error={formik.touched.groupSize && Boolean(formik.errors.groupSize)}
@@ -57,7 +57,7 @@ export default function AddSubjectForm({
               }}
             />
           </Grid>
-          <Grid item xs={12} sm={6} md={3}>
+          <Grid item xs={12} sm={6} md={4} lg={3}>
             <TextField
               fullWidth
               error={
@@ -71,7 +71,7 @@ export default function AddSubjectForm({
               helperText={formik.touched.groupCount && formik.errors.groupCount}
             />
           </Grid>
-          <Grid item xs={12} sm={6} md={3}>
+          <Grid item xs={12} sm={6} md={4} lg={3}>
             <TextField
               fullWidth
               error={
@@ -92,7 +92,7 @@ export default function AddSubjectForm({
               }}
             />
           </Grid>
-          <Grid item xs={12} sm={6} md={3}>
+          <Grid item xs={12} sm={6} md={4} lg={3}>
             <TextField
               fullWidth
               error={
@@ -109,7 +109,7 @@ export default function AddSubjectForm({
               }
             />
           </Grid>
-          <Grid item xs={12} sm={6} md={3}>
+          <Grid item xs={12} sm={6} md={4} lg={3}>
             <TextField
               fullWidth
               error={formik.touched.area && Boolean(formik.errors.area)}
@@ -121,7 +121,7 @@ export default function AddSubjectForm({
               helperText={formik.touched.area && formik.errors.area}
             />
           </Grid>
-          <Grid item xs={12} sm={12} md={3}>
+          <Grid item xs={12} sm={12} md={6} lg={3}>
             <FormControl fullWidth>
               <InputLabel>Major</InputLabel>
               <Select
@@ -145,7 +145,7 @@ export default function AddSubjectForm({
               </FormHelperText>
             </FormControl>
           </Grid>
-          <Grid item xs={12} sm={12} md={3}>
+          <Grid item xs={12} sm={12} md={6} lg={3}>
             <FormControl fullWidth>
               <InputLabel>Room type</InputLabel>
               <Select
@@ -163,12 +163,12 @@ export default function AddSubjectForm({
               </Select>
             </FormControl>
           </Grid>
-          <Grid item xs={12} sm={12} md={4}>
+          <Grid item xs={12} sm={6} md={4} lg={3}>
             <FormControl fullWidth>
-              <InputLabel>Fill with Existing Lesson</InputLabel>
+              <InputLabel>Copy Existing Lesson</InputLabel>
               <Select
                 name="copyLesson"
-                label="Fill with Existing Lesson"
+                label="Copy Existing Lesson"
                 onChange={(e) => {
                   handleChange(e);
                   setSelectedLesson(e.target.value);
