@@ -23,6 +23,233 @@
 
 Copyrights reserved. This Project is collaborative work, which aims at building an information system that makes it possible to calculate and optimize teaching space and equipment usage for different lessons.
 
+## Project overview structure
+This is the current structure of front-end development. 
+<pre>
+├── App.css
+├── App.jsx
+├── AppContext.js
+├── ajax
+│   ├── ajaxRequestErrorHandler.js
+│   ├── dao.ts
+│   ├── dao_allocRound.ts
+│   ├── dao_allocation.ts
+│   ├── dao_building.ts
+│   ├── dao_department.ts
+│   ├── dao_departmentplanner.ts
+│   ├── dao_equipment.ts
+│   ├── dao_program.ts
+│   ├── dao_resetDatabase.ts
+│   ├── dao_settings.ts
+│   ├── dao_space.ts
+│   ├── dao_spaceEquipment.ts
+│   ├── dao_spaceType.ts
+│   ├── dao_subject.ts
+│   ├── dao_subjectEquipment.ts
+│   ├── dao_user.ts
+│   └── request.ts
+├── components
+│   ├── allocRound
+│   │   ├── AddAllocRound.jsx
+│   │   ├── AddAllocRoundForm.jsx
+│   │   ├── AllocRoundControlPanel.jsx
+│   │   ├── AllocRoundDetails.jsx
+│   │   ├── AllocRoundInputField.jsx
+│   │   ├── AllocRoundList.jsx
+│   │   ├── AllocRoundListContainer.jsx
+│   │   ├── AllocRoundPagination.jsx
+│   │   ├── DeleteAllocRound.jsx
+│   │   ├── EditAllocRound.jsx
+│   │   ├── EditAllocRoundForm.jsx
+│   │   └── SelectAllocRound.jsx
+│   ├── building
+│   │   ├── AddBuildingContainer.jsx
+│   │   ├── AddBuildingForm.jsx
+│   │   ├── BuildingDisplay.jsx
+│   │   ├── BuildingInputField.jsx
+│   │   ├── BuildingList.jsx
+│   │   ├── BuildingListContainer.jsx
+│   │   ├── BuildingListItem.jsx
+│   │   ├── BuildingListPagination.jsx
+│   │   ├── BuildingTemplate.jsx
+│   │   ├── DeleteBuilding.jsx
+│   │   ├── EditBuildingContainer.jsx
+│   │   ├── EditBuildingForm.jsx
+│   │   ├── ExportBuildingButton.jsx
+│   │   ├── ImportBuildingButton.jsx
+│   │   ├── ImportBuildingContainer.jsx
+│   │   └── SingleBuildingDialog.jsx
+│   ├── common
+│   │   ├── AlertBox.jsx
+│   │   └── ConfirmationDialog.jsx
+│   ├── department
+│   │   ├── AddDepartment.jsx
+│   │   ├── AddDepartmentDialogConfirmation.jsx
+│   │   ├── DeleteDepartment.jsx
+│   │   ├── DepartmentDialog.jsx
+│   │   ├── DepartmentList.jsx
+│   │   ├── DepartmentListContainer.jsx
+│   │   ├── Departments.jsx
+│   │   ├── EditDepartment.jsx
+│   │   └── SingleDepartmentDialog.jsx
+│   ├── equipment
+│   │   ├── AddEquipment.jsx
+│   │   ├── AddEquipmentDialogConfirmation.jsx
+│   │   ├── DeleteEquipment.jsx
+│   │   ├── EditEquipment.jsx
+│   │   ├── EquipmentList.jsx
+│   │   ├── EquipmentListContainer.jsx
+│   │   ├── EquipmentTemplate.jsx
+│   │   ├── Equipments.jsx
+│   │   ├── ExportEquipmentButton.jsx
+│   │   ├── ImportEquipmentButton.jsx
+│   │   ├── ImportEquipmentContainer.jsx
+│   │   └── SingleEquipmentDialog.jsx
+│   ├── program
+│   ├── result
+│   │   ├── CollapsedRow.jsx
+│   │   ├── CollapsedRowB.jsx
+│   │   ├── ProgramResult.jsx
+│   │   ├── RoomResult.jsx
+│   │   └── SubjectResult.jsx
+│   ├── room
+│   │   ├── RoomList.jsx
+│   │   └── RoomsWithTimesList.jsx
+│   ├── settings
+│   │   ├── AddSettingContainer.jsx
+│   │   ├── AddSettingForm.jsx
+│   │   ├── DeleteSetting.jsx
+│   │   ├── EditSettingContainer.jsx
+│   │   ├── EditSettingForm.jsx
+│   │   ├── SettingsDetails.jsx
+│   │   ├── SettingsList.jsx
+│   │   └── SettingsListContainer.jsx
+│   ├── space
+│   │   ├── AddSpace.jsx
+│   │   ├── AddSpaceDialogConfirmation.jsx
+│   │   ├── AddSpaceEquipContainer.jsx
+│   │   ├── AddSpaceEquipForm.jsx
+│   │   ├── DeleteSpace.jsx
+│   │   ├── EditSpaceContainer.jsx
+│   │   ├── EditSpaceForm.jsx
+│   │   ├── ExportSpaceButton.jsx
+│   │   ├── ImportSpaceButton.jsx
+│   │   ├── ImportSpaceContainer.jsx
+│   │   ├── SingleSpaceDialog.jsx
+│   │   ├── SpaceEquipmentList.jsx
+│   │   ├── SpaceFiltering.jsx
+│   │   ├── SpaceList.jsx
+│   │   ├── SpaceListContainer.jsx
+│   │   ├── SpacePagination.jsx
+│   │   └── SpaceTemplate.jsx
+│   ├── subject
+│   │   ├── AddSubEquipContainer.jsx
+│   │   ├── AddSubEquipForm.jsx
+│   │   ├── AddSubjectContainer.jsx
+│   │   ├── AddSubjectForm.jsx
+│   │   ├── DeleteSubEquip.jsx
+│   │   ├── DeleteSubject.jsx
+│   │   ├── EditSubEquipContainer.jsx
+│   │   ├── EditSubEquipForm.jsx
+│   │   ├── EditSubjectContainer.jsx
+│   │   ├── EditSubjectForm.jsx
+│   │   ├── ExportSubjectButton.jsx
+│   │   ├── ImportSubjectButton.jsx
+│   │   ├── ImportSubjectContainer.jsx
+│   │   ├── SingleSubjectDialog.jsx
+│   │   ├── SubjectEquipmentList.jsx
+│   │   ├── SubjectFiltering.jsx
+│   │   ├── SubjectList.jsx
+│   │   ├── SubjectListContainer.jsx
+│   │   ├── SubjectPagination.jsx
+│   │   └── SubjectTemplate.jsx
+│   └── user
+│       ├── AddDepartmentPlannerContainer.jsx
+│       ├── AddDepartmentPlannerForm.jsx
+│       ├── AddUser.jsx
+│       ├── DeleteUser.jsx
+│       ├── DeleteUserPlanner.jsx
+│       ├── EditUserContainer.jsx
+│       ├── EditUserForm.jsx
+│       ├── SingleUserDialog.jsx
+│       ├── UserDepartmentList.jsx
+│       ├── UserFiltering.jsx
+│       ├── UserList.jsx
+│       ├── UserListContainer.jsx
+│       └── UserPagination.jsx
+├── data
+│   ├── ResultAllocationStore.js
+│   ├── ResultProgramStore.js
+│   ├── ResultRoomsStore.js
+│   └── testData.js
+├── hooks
+│   ├── useRoleLoggedIn.js
+│   └── useThemeSwitcher.js
+├── importDataFunctions
+│   ├── exportData.js
+│   ├── importData.js
+│   └── processFile.js
+├── logger
+│   └── logger.ts
+├── main.jsx
+├── routers
+│   └── Nav.jsx
+├── styles
+│   ├── AllocationFailure.css
+│   ├── ColorModelFrom_2022FallGroup.png
+│   ├── ColorModelFrom_2022FallGroup_3.png
+│   ├── ResultView.css
+│   ├── SibeliusLogo.svg
+│   ├── SibeliusLogoLoginPage.svg
+│   ├── SibeliusLogoSmall.svg
+│   ├── palettes
+│   │   ├── commonColors.ts
+│   │   ├── darkPalette.ts
+│   │   ├── lightPalette.ts
+│   │   ├── redPalette.ts
+│   │   └── yellowPalette.ts
+│   ├── theme.js
+│   └── themeIcons.jsx
+├── types
+│   ├── colors.ts
+│   └── index.ts
+├── validation
+│   ├── ValidateAddAllocRound.js
+│   ├── ValidateAddBuilding.js
+│   ├── ValidateAddEditDepartment.js
+│   ├── ValidateAddEditSetting.js
+│   ├── ValidateAddEquipment.js
+│   ├── ValidateAddSpace.js
+│   ├── ValidateAddSpaceEquipment.js
+│   ├── ValidateAddSubject.js
+│   ├── ValidateAddSubjectEquipment.js
+│   ├── ValidateEditAllocRound.js
+│   ├── ValidateEditBuilding.js
+│   ├── ValidateEditEquipment.js
+│   ├── ValidateEditSpace.js
+│   ├── ValidateEditSubject.js
+│   ├── ValidateEditSubjectEquipment.js
+│   └── ValidateEditUser.js
+├── views
+│   ├── AllocRoundView.jsx
+│   ├── AllocationSubjectFailureView.jsx
+│   ├── BuildingView.jsx
+│   ├── DepartmentView.jsx
+│   ├── EquipmentView.jsx
+│   ├── ForgetPasswordView.jsx
+│   ├── LoginView.jsx
+│   ├── NotFoundView.jsx
+│   ├── ProgramResultView.jsx
+│   ├── RegisterView.jsx
+│   ├── ResetPasswordView.jsx
+│   ├── RoomResultView.jsx
+│   ├── SettingsView.jsx
+│   ├── SpaceView.jsx
+│   ├── SubjectView.jsx
+│   └── UserView.jsx
+└── vite-env.d.ts
+</pre>
+
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 ### Frontend technology and other useful resources
