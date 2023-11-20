@@ -375,6 +375,27 @@ export const createAppTheme = (currentPalette) =>
         },
       },
       MuiButton: {
+        styleOverrides: {
+          contained: {
+            color: currentPalette.fontColorDefault.default,
+          },
+          text: {
+            backgroundColor: currentPalette.primary.main,
+            color: currentPalette.primary.contrastText,
+          },
+        },
+        redbutton: {
+          backgroundColor: currentPalette.warning.main,
+          color: currentPalette.warning.contrastText,
+        },
+        editbutton: {
+          backgroundColor: currentPalette.edit.main,
+          color: currentPalette.edit.contrastText,
+        },
+        greenbutton: {
+          backgroundColor: currentPalette.success.main,
+          color: currentPalette.success.contrastText,
+        },
         variants: [
           {
             props: { variant: "componentAddButton" },
@@ -430,29 +451,27 @@ export const createAppTheme = (currentPalette) =>
               },
             },
           },
+          {
+            props: { variant: "addComponentFormButton" },
+            style: {
+              backgroundColor: currentPalette.primary.main,
+              border: `1px solid ${currentPalette.primary.main}`,
+              borderRadius: "7.5px",
+              fontSize: "15 rem",
+              fontWeight: "bold",
+              width: "210px",
+
+              "&.redButton": {
+                backgroundColor: currentPalette.warning.main,
+                border: `1px solid ${currentPalette.warning.main}`,
+              },
+              "&:hover": {
+                backgroundColor: currentPalette.background.default,
+                color: currentPalette.primary.main,
+              },
+            },
+          },
         ],
-        styleOverrides: {
-          contained: {
-            color: currentPalette.fontColorDefault.default,
-            width: "210px",
-          },
-          text: {
-            backgroundColor: currentPalette.primary.main,
-            color: currentPalette.primary.contrastText,
-          },
-        },
-        redbutton: {
-          backgroundColor: currentPalette.warning.main,
-          color: currentPalette.warning.contrastText,
-        },
-        editbutton: {
-          backgroundColor: currentPalette.edit.main,
-          color: currentPalette.edit.contrastText,
-        },
-        greenbutton: {
-          backgroundColor: currentPalette.success.main,
-          color: currentPalette.success.contrastText,
-        },
       },
       MuiPagination: {
         styleOverrides: {
@@ -521,7 +540,7 @@ export const createAppTheme = (currentPalette) =>
             style: {
               fontSize: "17.5px",
               fontWeight: "bold",
-              paddingBottom: "10px",
+              paddingBottom: "15px",
             },
           },
           {

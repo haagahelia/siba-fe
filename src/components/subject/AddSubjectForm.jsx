@@ -163,7 +163,7 @@ export default function AddSubjectForm({
               </Select>
             </FormControl>
           </Grid>
-          <Grid item xs={12} sm={12} md={3}>
+          <Grid item xs={12} sm={12} md={4}>
             <FormControl fullWidth>
               <InputLabel>Fill with Existing Lesson</InputLabel>
               <Select
@@ -188,7 +188,7 @@ export default function AddSubjectForm({
         <Grid item xs={3} padding={2}>
           <Button
             type="submit"
-            variant="contained"
+            variant="addComponentFormButton"
             onClick={() => {
               setInitialSubject(submitValues);
             }}

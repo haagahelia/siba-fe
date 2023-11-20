@@ -103,7 +103,7 @@ export default function ImportSubjectButton({
         setAlertOpen={setAlertOpen}
       />
       <Button
-        variant="contained"
+        variant="addComponentFormButton"
         onClick={() => {
           handleClick();
         }}
