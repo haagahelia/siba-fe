@@ -1,4 +1,4 @@
-// The "Register page"
+import { Visibility, VisibilityOff } from "@mui/icons-material";
 import Button from "@mui/material/Button";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
@@ -6,6 +6,8 @@ import Checkbox from "@mui/material/Checkbox";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormGroup from "@mui/material/FormGroup";
 import Grid from "@mui/material/Grid";
+import IconButton from "@mui/material/IconButton";
+import InputAdornment from "@mui/material/InputAdornment";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import { useState } from "react";
@@ -31,6 +33,12 @@ export default function RegisterView({ handleLoginChange }) {
     isStatist: 0,
   });
 
+  const [showPassword, setShowPassword] = useState(false);
+
+  const handlePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+
   const registerUser = async () => {
     Logger.debug(
       "Attempting to register a user with email:",
@@ -38,14 +46,17 @@ export default function RegisterView({ handleLoginChange }) {
     );
 
     if (
-      registerForm.isAdmin === 0 &&
-      registerForm.isPlanner === 0 &&
-      registerForm.isStatist === 0
+      !registerForm.email.trim() || // Check for empty or whitespace-only email
+      !registerForm.password.trim() || // Check for empty or whitespace-only password
+      (registerForm.isAdmin === 0 &&
+        registerForm.isPlanner === 0 &&
+        registerForm.isStatist === 0)
     ) {
       setAlertOptions({
         severity: "error",
         title: "Error!",
-        message: "Please select at least one role.",
+        message:
+          "Please provide valid email and password, and select at least one role.",
       });
       setAlertOpen(true);
       return;
@@ -58,7 +69,14 @@ export default function RegisterView({ handleLoginChange }) {
     // password: hashedPassword,
     if (!success) {
       Logger.error("Registration failed for email:", registerForm.email);
-      alert("Something went wrong");
+
+      // Use setAlertOptions instead of alert
+      setAlertOptions({
+        severity: "error",
+        title: "Error!",
+        message: "Something went wrong during registration.",
+      });
+      setAlertOpen(true);
     } else {
       Logger.debug("Registration successful for email:", registerForm.email);
 
@@ -119,7 +137,21 @@ export default function RegisterView({ handleLoginChange }) {
                   password: event.target.value,
                 })
               }
+              type={showPassword ? "text" : "password"}
               placeholder="password"
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton
+                      onClick={handlePasswordVisibility}
+                      edge="end"
+                      style={{ backgroundColor: "transparent" }}
+                    >
+                      {showPassword ? <Visibility /> : <VisibilityOff />}
+                    </IconButton>
+                  </InputAdornment>
+                ),
+              }}
             />
           </Grid>
           <Grid>
