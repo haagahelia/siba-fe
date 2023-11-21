@@ -10,7 +10,7 @@ import IconButton from "@mui/material/IconButton";
 import InputAdornment from "@mui/material/InputAdornment";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
-import React, { useState } from "react";
+import { useState } from "react";
 import dao from "../../ajax/dao";
 import Logger from "../../logger/logger";
 import backgroundImage from "../../styles/SibeliusLogoLoginPage.svg";
@@ -28,54 +28,56 @@ export default function RegisterView({ handleLoginChange }) {
   const [registerForm, setRegisterForm] = useState({
     email: "",
     password: "",
-    showPassword: false,
     isAdmin: 0,
     isPlanner: 0,
     isStatist: 0,
   });
 
+  const [showPassword, setShowPassword] = useState(false);
+
   const handlePasswordVisibility = () => {
-    setRegisterForm({
-      ...registerForm,
-      showPassword: !registerForm.showPassword,
-    });
+    setShowPassword(!showPassword);
   };
 
   const registerUser = async () => {
-    try {
-      // Input Validation
-      if (!registerForm || !registerForm.email || !registerForm.password) {
-        throw new Error(
-          "Invalid registration data. Please provide email and password.",
-        );
-      }
+    Logger.debug(
+      "Attempting to register a user with email:",
+      registerForm.email,
+    );
 
-      Logger.debug(
-        "Attempting to register a user with email:",
-        registerForm.email,
-      );
-
-      if (
-        registerForm.isAdmin === 0 &&
+    if (
+      !registerForm.email.trim() || // Check for empty or whitespace-only email
+      !registerForm.password.trim() || // Check for empty or whitespace-only password
+      (registerForm.isAdmin === 0 &&
         registerForm.isPlanner === 0 &&
-        registerForm.isStatist === 0
-      ) {
-        throw new Error("Please select at least one role.");
-      }
-
-      // Password Hashing
-      // const hashedPassword = bcrypt.hashSync(registerForm.password, 10);
-
-      // Register User
-      const success = await dao.postNewUser({
-        ...registerForm,
-        // password: hashedPassword,
+        registerForm.isStatist === 0)
+    ) {
+      setAlertOptions({
+        severity: "error",
+        title: "Error!",
+        message:
+          "Please provide valid email and password, and select at least one role.",
       });
+      setAlertOpen(true);
+      return;
+    }
 
-      if (!success) {
-        throw new Error(` ${registerForm.email} was already created.`);
-      }
+    // const hashedPassword = bcrypt.hashSync(registerForm.password, 10);
+    const success = await dao.postNewUser({
+      ...registerForm,
+    });
+    // password: hashedPassword,
+    if (!success) {
+      Logger.error("Registration failed for email:", registerForm.email);
 
+      // Use setAlertOptions instead of alert
+      setAlertOptions({
+        severity: "error",
+        title: "Error!",
+        message: "Something went wrong during registration.",
+      });
+      setAlertOpen(true);
+    } else {
       Logger.debug("Registration successful for email:", registerForm.email);
 
       // Set the alert options for success
@@ -96,21 +98,6 @@ export default function RegisterView({ handleLoginChange }) {
 
       // Trigger login change after registration
       handleLoginChange();
-    } catch (error) {
-      Logger.error(
-        "Registration failed for email:",
-        registerForm.email,
-        "Error:",
-        error.message,
-      );
-
-      // Set the alert options for failure
-      setAlertOptions({
-        severity: "error",
-        title: "Error!",
-        message: `Registration failed! ${error.message}`,
-      });
-      setAlertOpen(true);
     }
   };
 
@@ -150,17 +137,17 @@ export default function RegisterView({ handleLoginChange }) {
                   password: event.target.value,
                 })
               }
-              type={registerForm.showPassword ? "text" : "password"} // Change input type dynamically
+              type={showPassword ? "text" : "password"}
               placeholder="password"
               InputProps={{
                 endAdornment: (
                   <InputAdornment position="end">
-                    <IconButton onClick={handlePasswordVisibility} edge="end">
-                      {registerForm.showPassword ? (
-                        <Visibility />
-                      ) : (
-                        <VisibilityOff />
-                      )}
+                    <IconButton
+                      onClick={handlePasswordVisibility}
+                      edge="end"
+                      style={{ backgroundColor: "transparent" }}
+                    >
+                      {showPassword ? <Visibility /> : <VisibilityOff />}
                     </IconButton>
                   </InputAdornment>
                 ),
@@ -171,7 +158,6 @@ export default function RegisterView({ handleLoginChange }) {
             <FormGroup>
               <FormControlLabel
                 control={<Checkbox />}
-                style={{ marginLeft: "10px" }}
                 label="Admin"
                 labelPlacement="start"
                 className="formCheckBoxButtons"
@@ -186,7 +172,6 @@ export default function RegisterView({ handleLoginChange }) {
               />
               <FormControlLabel
                 control={<Checkbox />}
-                style={{ marginLeft: "10px" }}
                 label="Planner"
                 labelPlacement="start"
                 className="formCheckBoxButtons"
@@ -201,7 +186,6 @@ export default function RegisterView({ handleLoginChange }) {
               />
               <FormControlLabel
                 control={<Checkbox />}
-                style={{ marginLeft: "10px" }}
                 label="Statist"
                 labelPlacement="start"
                 className="formCheckBoxButtons"
