@@ -4,6 +4,7 @@ const baseUrl = import.meta.env.VITE_BE_SERVER_BASE_URL;
 
 export const resetDatabase = async () => {
   const response = await get(`${baseUrl}/resetDatabase`);
+  
   if(process.env.NODE_ENV === 'development') {
     if (response.status === 200) {
       const data = await response.json();
@@ -12,4 +13,5 @@ export const resetDatabase = async () => {
       return { httpStatus: response.status, data: [] };
     }
   }
-}
+  
+};

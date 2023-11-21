@@ -3,6 +3,7 @@ import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import Typography from "@mui/material/Typography";
+import DeleteSpaceEquip from "./DeleteSpaceEquip";
 
 export default function SpaceEquipmentList({
   equipListBySpaceId,
@@ -23,7 +24,13 @@ export default function SpaceEquipmentList({
                     marginRight: "10px",
                   }}
                 >
+                  <DeleteSpaceEquip
+                    singleEquipBySpaceId={value}
+                    getEquipmentsBySpaceId={getEquipmentsBySpaceId}
+                    subId={value.spaceId}
+                  />
                 </Grid>
+
                 <Grid
                   container
                   variant="sibaGridSingleItemDisplay"

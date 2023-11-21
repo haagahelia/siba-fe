@@ -6,7 +6,11 @@ import AlertBox from "../common/AlertBox";
 import ExportSpaceButton from "./ExportSpaceButton";
 import ImportSpaceButton from "./ImportSpaceButton";
 
-export default function ImportSpaceContainer({ getAllSpaces, buildingSelectList, spaceTypeSelectList }) {
+export default function ImportSpaceContainer({
+  getAllSpaces,
+  buildingSelectList,
+  spaceTypeSelectList,
+}) {
   const [alertOpen, setAlertOpen] = useState(false);
   const [alertOptions, setAlertOptions] = useState({
     title: "This is title",

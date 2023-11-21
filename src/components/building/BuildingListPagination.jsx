@@ -16,7 +16,7 @@ export default function BuildingPagination({
     if (!pagination.from) return;
     const slicedBuildings = allBuildingsList.slice(
       pagination.from,
-      pagination.to
+      pagination.to,
     );
     setPaginateBuildings(slicedBuildings);
   }, [pagination, allBuildingsList, setPaginateBuildings]);
