@@ -12,7 +12,6 @@ import { AppContext } from "../AppContext";
 import dao from "../ajax/dao";
 import AlertBox from "../components/common/AlertBox";
 import Logger from "../logger/logger";
-import logo from "../styles/SibeliusLogo.svg";
 import backgroundImage from "../styles/SibeliusLogoLoginPage.svg";
 
 export default function LoginView({ handleLoginChange }) {

@@ -1,3 +1,4 @@
+// The Add Lesson Form
 import { useState } from "react";
 
 import Button from "@mui/material/Button";
@@ -19,78 +20,89 @@ export default function AddSubjectForm({
   allSubjectsList,
   spaceTypeSelectList,
 }) {
-  const [selectedLesson, setSelectedLesson] = useState("");
+  const [selectedLesson, setSelectedLesson] = useState(" ");
 
   return (
     <div>
       <form onSubmit={formik.handleSubmit}>
-        <Grid container variant="sibaGridAddForm" column={8}>
-          <Grid item xs={12} sm={6} md={3}>
+        <Grid container spacing={2}>
+          <Grid item xs={12} sm={6} md={4} lg={3}>
             <TextField
+              fullWidth
               error={formik.touched.name && Boolean(formik.errors.name)}
               name="name"
-              label="Name of the lesson"
-              variant="outlined"
+              label="Name"
+              placeholder="Name..."
               value={formik.values.name}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               helperText={formik.touched.name && formik.errors.name}
+              InputLabelProps={{
+                shrink: true,
+              }}
             />
           </Grid>
-          <Grid item xs={12} sm={6} md={3}>
+          <Grid item xs={12} sm={6} md={4} lg={3}>
             <TextField
+              fullWidth
               error={
                 formik.touched.groupSize && Boolean(formik.errors.groupSize)
               }
               name="groupSize"
               label="Group size"
-              variant="outlined"
               value={formik.values.groupSize}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               helperText={formik.touched.groupSize && formik.errors.groupSize}
+              InputLabelProps={{
+                shrink: true,
+              }}
             />
           </Grid>
-          <Grid item xs={12} sm={6} md={3}>
+          <Grid item xs={12} sm={6} md={4} lg={3}>
             <TextField
+              fullWidth
               error={
                 formik.touched.groupCount && Boolean(formik.errors.groupCount)
               }
               name="groupCount"
               label="Group count"
-              variant="outlined"
               value={formik.values.groupCount}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               helperText={formik.touched.groupCount && formik.errors.groupCount}
             />
           </Grid>
-          <Grid item xs={12} sm={6} md={3}>
+          <Grid item xs={12} sm={6} md={4} lg={3}>
             <TextField
+              fullWidth
               error={
                 formik.touched.sessionLength &&
                 Boolean(formik.errors.sessionLength)
               }
               name="sessionLength"
-              label="Length of lesson(hh:mm)"
-              variant="outlined"
+              label="Lesson Length"
               value={formik.values.sessionLength}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
+              placeholder="hh:mm:ss"
               helperText={
                 formik.touched.sessionLength && formik.errors.sessionLength
               }
+              InputLabelProps={{
+                shrink: true,
+              }}
             />
           </Grid>
-          <Grid item xs={12} sm={6} md={3}>
+          <Grid item xs={12} sm={6} md={4} lg={3}>
             <TextField
+              fullWidth
               error={
                 formik.touched.sessionCount &&
                 Boolean(formik.errors.sessionCount)
               }
               name="sessionCount"
               label="Number of lessons per week"
-              variant="outlined"
               value={formik.values.sessionCount}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
@@ -99,22 +111,23 @@ export default function AddSubjectForm({
               }
             />
           </Grid>
-          <Grid item xs={12} sm={6} md={3}>
+          <Grid item xs={12} sm={6} md={4} lg={3}>
             <TextField
+              fullWidth
               error={formik.touched.area && Boolean(formik.errors.area)}
               name="area"
               label="Required square meters"
-              variant="outlined"
               value={formik.values.area}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               helperText={formik.touched.area && formik.errors.area}
             />
           </Grid>
-          <Grid item xs={12} sm={12} md={3}>
-            <FormControl sx={{ maxWidth: 220, maxHeight: 58, minWidth: 120 }}>
+          <Grid item xs={12} sm={12} md={6} lg={3}>
+            <FormControl fullWidth>
               <InputLabel>Major</InputLabel>
               <Select
+                label="Major"
                 name="programId"
                 onChange={formik.handleChange}
                 value={formik.values.programId || ""}
@@ -134,11 +147,12 @@ export default function AddSubjectForm({
               </FormHelperText>
             </FormControl>
           </Grid>
-          <Grid item xs={12} sm={12} md={3}>
-            <FormControl sx={{ maxWidth: 220, maxHeight: 58, minWidth: 120 }}>
+          <Grid item xs={12} sm={12} md={6} lg={3}>
+            <FormControl fullWidth>
               <InputLabel>Room type</InputLabel>
               <Select
                 name="spaceTypeId"
+                label="Room Type"
                 onChange={formik.handleChange}
                 value={formik.values.spaceTypeId || ""}
                 onBlur={formik.handleBlur}
@@ -151,20 +165,18 @@ export default function AddSubjectForm({
               </Select>
             </FormControl>
           </Grid>
-          <Grid item xs={12}>
-            <Typography variant="sibaTypography">
-              Copy the information from another lesson
-            </Typography>
-          </Grid>
-          <Grid item xs={12}>
-            <FormControl sx={{ maxWidth: 340, minWidth: 270 }}>
-              <InputLabel>Copy data from an existing lesson</InputLabel>
+          <Grid item xs={12} sm={6} md={4} lg={3}>
+            <FormControl fullWidth>
+              <InputLabel>Copy Existing Lesson</InputLabel>
               <Select
-                value={selectedLesson}
+                name="copyLesson"
+                label="Copy Existing Lesson"
                 onChange={(e) => {
                   handleChange(e);
                   setSelectedLesson(e.target.value);
                 }}
+                value={selectedLesson}
+                onBlur={formik.handleBlur}
               >
                 {allSubjectsList.map((value) => (
                   <MenuItem key={value.id} value={value}>
@@ -178,12 +190,12 @@ export default function AddSubjectForm({
         <Grid item xs={3} padding={2}>
           <Button
             type="submit"
-            variant="contained"
+            variant="addComponentFormButton"
             onClick={() => {
               setInitialSubject(submitValues);
             }}
           >
-            Add
+            Add Lesson
           </Button>
         </Grid>
       </form>

@@ -23,8 +23,8 @@ export default function ExportSubjectButton({ subjectFailedToImport }) {
         setAlertOpen={setAlertOpen}
       />
       <Button
-        variant="contained"
-        color="red"
+        variant="addComponentFormButton"
+        className="redButton"
         onClick={() => {
           clickHandle();
         }}

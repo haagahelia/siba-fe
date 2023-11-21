@@ -24,7 +24,7 @@ export default function AddDepartmentPlannerForm({
     <div>
       <Button
         variant="contained"
-        color="secondary"
+        color="primary"
         onClick={() => {
           setOpen(true);
         }}
@@ -40,6 +40,7 @@ export default function AddDepartmentPlannerForm({
                 container
                 variant="sibaGridAddFormInDialog"
                 spacing={1}
+                width={250}
                 column={3}
                 direction="column"
               >
@@ -47,6 +48,7 @@ export default function AddDepartmentPlannerForm({
                   <FormControl>
                     <InputLabel>Department</InputLabel>
                     <Select
+                      sx={{ minWidth: "200px", textAlign: "center" }}
                       error={
                         formik.touched.id && formik.errors.id ? true : false
                       }
