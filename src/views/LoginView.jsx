@@ -6,7 +6,7 @@ import Grid from "@mui/material/Grid";
 import Link from "@mui/material/Link";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AppContext } from "../AppContext";
 import dao from "../ajax/dao";
@@ -108,6 +108,10 @@ export default function LoginView({ handleLoginChange }) {
     navigate("/forget-password");
   };
 
+  useEffect(() => {
+    document.title = 'Log In';
+  }, []);
+
   return (
     <div className="sibeliusCursor">
       <AlertBox
@@ -122,7 +126,7 @@ export default function LoginView({ handleLoginChange }) {
       />
       <Card variant="formContent">
         <CardContent variant="logInPageTransparencyFix">
-          <Typography variant="logInPageTitle">Login</Typography>
+          <Typography variant="logInPageTitle">Log In</Typography>
           <Grid>
             <TextField
               id="loginEmail"
@@ -155,7 +159,7 @@ export default function LoginView({ handleLoginChange }) {
               variant="formButton"
               onClick={loginAndError}
             >
-              Log In
+              Login
             </Button>
           </Grid>
           <Link style={{ cursor: "pointer" }} onClick={handleReset}>

@@ -76,6 +76,10 @@ export default function ProgramResult() {
       : 0;
   };
 
+  useEffect(() => {
+    document.title = 'Program Results';
+  }, []);
+
   return (
     <>
       <AllocRoundControlPanel incrementResetCounter={incrementResetCounter} />

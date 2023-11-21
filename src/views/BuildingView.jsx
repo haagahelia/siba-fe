@@ -57,6 +57,10 @@ export default function BuildingView() {
     setPaginateBuildings(allBuildingsList.slice(0, 15));
   }, [allBuildingsList]);
 
+  useEffect(() => {
+    document.title = 'Buildings';
+  }, []);
+
   return (
     <div>
       <AlertBox

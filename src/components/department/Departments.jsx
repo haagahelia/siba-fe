@@ -65,6 +65,10 @@ export default function Departments() {
     getAllDepartments();
   }, []);
 
+  useEffect(() => {
+    document.title = 'Departments';
+  }, []);
+
   return (
     <div>
       <Container maxWidth="100%">

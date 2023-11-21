@@ -8,7 +8,7 @@ import FormGroup from "@mui/material/FormGroup";
 import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import dao from "../../ajax/dao";
 import Logger from "../../logger/logger";
 import backgroundImage from "../../styles/SibeliusLogoLoginPage.svg";
@@ -82,6 +82,10 @@ export default function RegisterView({ handleLoginChange }) {
       handleLoginChange();
     }
   };
+
+  useEffect(() => {
+    document.title = 'Add User';
+  }, []);
 
   return (
     <div>

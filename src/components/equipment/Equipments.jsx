@@ -65,6 +65,10 @@ export default function Equipments() {
     getAllEquipments();
   }, []);
 
+  useEffect(() => {
+    document.title = 'Equipment';
+  }, []);
+
   return (
     <div>
       <Container maxWidth="100%">

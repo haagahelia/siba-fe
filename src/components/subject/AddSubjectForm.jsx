@@ -20,7 +20,7 @@ export default function AddSubjectForm({
   allSubjectsList,
   spaceTypeSelectList,
 }) {
-  const [selectedLesson, setSelectedLesson] = useState(" ");
+  const [selectedLesson, setSelectedLesson] = useState("");
 
   return (
     <div>
