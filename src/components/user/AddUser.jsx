@@ -1,4 +1,4 @@
-// The "Register page"
+import { Visibility, VisibilityOff } from "@mui/icons-material";
 import Button from "@mui/material/Button";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
@@ -6,9 +6,11 @@ import Checkbox from "@mui/material/Checkbox";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormGroup from "@mui/material/FormGroup";
 import Grid from "@mui/material/Grid";
+import IconButton from "@mui/material/IconButton";
+import InputAdornment from "@mui/material/InputAdornment";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
-import { useState } from "react";
+import React, { useState } from "react";
 import dao from "../../ajax/dao";
 import Logger from "../../logger/logger";
 import backgroundImage from "../../styles/SibeliusLogoLoginPage.svg";
@@ -26,10 +28,18 @@ export default function RegisterView({ handleLoginChange }) {
   const [registerForm, setRegisterForm] = useState({
     email: "",
     password: "",
+    showPassword: false,
     isAdmin: 0,
     isPlanner: 0,
     isStatist: 0,
   });
+
+  const handlePasswordVisibility = () => {
+    setRegisterForm({
+      ...registerForm,
+      showPassword: !registerForm.showPassword,
+    });
+  };
 
   const registerUser = async () => {
     try {
@@ -140,13 +150,28 @@ export default function RegisterView({ handleLoginChange }) {
                   password: event.target.value,
                 })
               }
+              type={registerForm.showPassword ? "text" : "password"} // Change input type dynamically
               placeholder="password"
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton onClick={handlePasswordVisibility} edge="end">
+                      {registerForm.showPassword ? (
+                        <Visibility />
+                      ) : (
+                        <VisibilityOff />
+                      )}
+                    </IconButton>
+                  </InputAdornment>
+                ),
+              }}
             />
           </Grid>
           <Grid>
             <FormGroup>
               <FormControlLabel
                 control={<Checkbox />}
+                style={{ marginLeft: "10px" }}
                 label="Admin"
                 labelPlacement="start"
                 className="formCheckBoxButtons"
@@ -161,6 +186,7 @@ export default function RegisterView({ handleLoginChange }) {
               />
               <FormControlLabel
                 control={<Checkbox />}
+                style={{ marginLeft: "10px" }}
                 label="Planner"
                 labelPlacement="start"
                 className="formCheckBoxButtons"
@@ -175,6 +201,7 @@ export default function RegisterView({ handleLoginChange }) {
               />
               <FormControlLabel
                 control={<Checkbox />}
+                style={{ marginLeft: "10px" }}
                 label="Statist"
                 labelPlacement="start"
                 className="formCheckBoxButtons"
