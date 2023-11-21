@@ -1,17 +1,17 @@
-import useTheme from "@mui/material/styles/useTheme";
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import dao from "../ajax/dao";
-import Logger from "../logger/logger";
 import Button from "@mui/material/Button";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardHeader from "@mui/material/CardHeader";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
+import useTheme from "@mui/material/styles/useTheme";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import dao from "../ajax/dao";
 import AllocRoundListContainer from "../components/allocRound/AllocRoundListContainer";
 import AllocRoundPagination from "../components/allocRound/AllocRoundPagination";
 import AlertBox from "../components/common/AlertBox";
+import Logger from "../logger/logger";
 
 const pageSize = 15;
 
@@ -84,12 +84,9 @@ export default function AllocRoundView() {
         <Grid container rowSpacing={1}>
           <Card variant="outlined">
             <CardContent>
-              <CardHeader
-                title="Allocation Rounds"
-                variant="pageHeader"
-              />
+              <CardHeader title="Allocation Rounds" variant="pageHeader" />
               <Button
-                variant= "componentAddButton"
+                variant="componentAddButton"
                 onClick={() => navigate("addAllocRound")}
               >
                 + Add

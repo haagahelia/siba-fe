@@ -66,10 +66,10 @@ export default function ProgramResult() {
   const calculateProsent = (array) => {
     let allocatedHours = 0;
     let requiredHours = 0;
-    array.forEach((element) => {
+    for (const element of array) {
       allocatedHours += element.allocatedHours;
       requiredHours += element.requiredHours;
-    });
+    }
 
     return requiredHours && allocatedHours !== null
       ? Math.round((allocatedHours / requiredHours) * 100)

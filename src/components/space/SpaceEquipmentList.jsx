@@ -30,6 +30,7 @@ export default function SpaceEquipmentList({
                     subId={value.spaceId}
                   />
                 </Grid>
+
                 <Grid
                   container
                   variant="sibaGridSingleItemDisplay"

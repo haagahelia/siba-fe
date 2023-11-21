@@ -1,5 +1,5 @@
 import { Response, SpaceEquipment } from "../types";
-import { get, create, remove } from "./request";
+import { create, get, remove } from "./request";
 
 const baseUrl = import.meta.env.VITE_BE_SERVER_BASE_URL;
 
