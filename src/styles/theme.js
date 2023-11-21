@@ -312,6 +312,21 @@ export const createAppTheme = (currentPalette) =>
               gap: "1rem",
             },
           },
+          {
+            props: { variant: "sibaDialogContent2" },
+            style: {
+              width: "100%",
+              justifyContent: "center",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              padding: morePadding,
+               "&:nth-of-type(odd)": {
+              backgroundColor: currentPalette.background.default,
+              borderBottom: "none",
+            },
+            },
+          },
         ],
       },
       MuiDialog: {
@@ -514,6 +529,17 @@ export const createAppTheme = (currentPalette) =>
             },
           },
           {
+            props: { variant: "boldTitle2" },
+            style: {
+              color: currentPalette.fontColorDefault.default,
+              fontFamily: commonFont,
+              fontWeight: 700,
+              fontSize: "1.1rem",
+              lineHeight: 1.5,
+              letterSpacing: "0.00938em",
+            },
+          },
+          {
             props: { variant: "logInPageTitle" },
             style: {
               color: currentPalette.primary.main,
@@ -573,6 +599,7 @@ export const createAppTheme = (currentPalette) =>
             alignItems: "flex-start",
             marginTop: 0,
             padding: lessPadding,
+            
           },
         },
         variants: [
@@ -622,6 +649,19 @@ export const createAppTheme = (currentPalette) =>
               padding: morePadding,
             },
           },
+
+          // Placeholder variant for EditSpaceForm only,
+          // will apply this to other edit-components too later
+          {
+            props: { variant: "sibaGridEditSpace" },
+            style: {
+              flexDirection: "row",
+              justifyContent: "center",
+              alignItems: "center",
+              padding: morePadding,
+            },
+          },
+
         ],
       },
       MuiAppBar: {
@@ -723,6 +763,7 @@ export const createAppTheme = (currentPalette) =>
           },
         ],
       },
+      
       // Enables CSS styling
       MuiCssBaseline: {
         styleOverrides: {
