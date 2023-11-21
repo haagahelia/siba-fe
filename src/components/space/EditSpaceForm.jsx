@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import { InputLabel } from "@mui/material";
 import Button from "@mui/material/Button";
@@ -14,7 +14,6 @@ import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import TextField from "@mui/material/TextField";
 import useTheme from "@mui/material/styles/useTheme";
-import dao from "../../ajax/dao";
 
 export default function EditSpaceForm({
   buildingSelectList,

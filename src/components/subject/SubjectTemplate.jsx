@@ -37,7 +37,12 @@ const SubjectTemplate = () => {
         alertOptions={alertOptions}
         setAlertOpen={setAlertOpen}
       />
-      <Button variant="addComponentFormButton" onClick={downloadSubjectTemplate}>Download template</Button>
+      <Button
+        variant="addComponentFormButton"
+        onClick={downloadSubjectTemplate}
+      >
+        Download template
+      </Button>
     </>
   );
 };

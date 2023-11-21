@@ -40,7 +40,7 @@ export default function BuildingView() {
         httpStatus,
         getFunctionName(2),
         setAlertOptions,
-        setAlertOpen
+        setAlertOpen,
       );
     } else {
       Logger.debug(`Fetched ${data.length} buildings.`);

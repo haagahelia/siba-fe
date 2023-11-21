@@ -22,8 +22,7 @@ export default function SpaceEquipmentList({
                     alignItems: "center",
                     marginRight: "10px",
                   }}
-                >
-                </Grid>
+                />
                 <Grid
                   container
                   variant="sibaGridSingleItemDisplay"

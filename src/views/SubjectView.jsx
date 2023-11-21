@@ -102,7 +102,8 @@ export default function SubjectView() {
                   </span>
                 </>
               }
-              variant="pageHeader" />
+              variant="pageHeader"
+            />
             <CardContent>
               <SubjectFiltering
                 allSubjectsList={allSubjectsList}

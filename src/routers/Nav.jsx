@@ -2,9 +2,10 @@
 import {
   faArrowRightFromBracket,
   faGear,
-  faTriangleExclamation
+  faTriangleExclamation,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Typography } from "@mui/material";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
@@ -14,6 +15,7 @@ import Toolbar from "@mui/material/Toolbar";
 import { useContext, useState } from "react";
 import { BrowserRouter, NavLink, Route, Routes } from "react-router-dom";
 import { AppContext } from "../AppContext";
+import dao from "../ajax/dao";
 import AddAllocRound from "../components/allocRound/AddAllocRound";
 import Logger from "../logger/logger";
 import logo from "../styles/SibeliusLogo.svg";
@@ -34,8 +36,6 @@ import SettingsView from "../views/SettingsView";
 import SpaceView from "../views/SpaceView";
 import SubjectView from "../views/SubjectView";
 import UserView from "../views/UserView";
-import dao from "../ajax/dao";
-import { Typography } from "@mui/material";
 
 export default function NavBar() {
   Logger.debug("NavBar initiated");
@@ -119,8 +119,10 @@ export default function NavBar() {
       forRoles: ["admin"],
       showForCurrentUser: false,
       action() {
-        const confirmation = confirm('Are you sure that you want to reset database to test data?')
-        confirmation && dao.resetDatabase() && alert('Database reset success!')
+        const confirmation = confirm(
+          "Are you sure that you want to reset database to test data?",
+        );
+        confirmation && dao.resetDatabase() && alert("Database reset success!");
       },
     },
     {
@@ -206,18 +208,19 @@ export default function NavBar() {
       sibaPages[sibaPages.length - 1].showForCurrentUser = false;
     }
 
-    sibaPages.forEach((element) => {
+    for (const element of sibaPages) {
       element.showForCurrentUser = false;
       if (
         (element.forRoles.includes("admin") && appContext.roles.admin === 1) ||
-        (element.forRoles.includes("planner") && appContext.roles.planner === 1) ||
+        (element.forRoles.includes("planner") &&
+          appContext.roles.planner === 1) ||
         (element.forRoles.includes("statist") && appContext.roles.statist === 1)
       ) {
         element.showForCurrentUser = true;
       } else if (element.forRoles.includes("guest") && !appContext.userEmail) {
         element.showForCurrentUser = true;
       }
-    });
+    }
   };
 
   // Determines the correct nav image link
@@ -276,14 +279,17 @@ export default function NavBar() {
             >
               <ListItem variant="navBarAccountButton">
                 <NavLink>
-                  {loggedIn} {/* The username which apperas in the account button */}
+                  {loggedIn}{" "}
+                  {/* The username which apperas in the account button */}
                 </NavLink>
 
                 {isDropdownVisible && (
                   <div className="dropDown">
                     {sibaPages
                       .filter((page) =>
-                        ["Reset Data", "Settings", "Log Out"].includes(page.name),
+                        ["Reset Data", "Settings", "Log Out"].includes(
+                          page.name,
+                        ),
                       )
                       .map((page) =>
                         renderDropdownMenu(page, "navBarDropDownLinks"),
@@ -329,7 +335,9 @@ export default function NavBar() {
                   </NavLink>
                   {renderNavLinks()}
                   <Typography variant="navAllocInfo">
-                    {`${appContext.allocRoundId} : ${appContext.allocRoundName.substring(0, 12)}`}
+                    {`${
+                      appContext.allocRoundId
+                    } : ${appContext.allocRoundName.substring(0, 12)}`}
                   </Typography>
                 </List>
               </Box>
