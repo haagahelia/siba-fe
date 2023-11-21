@@ -32,34 +32,40 @@ export default function RegisterView({ handleLoginChange }) {
   });
 
   const registerUser = async () => {
-    Logger.debug(
-      "Attempting to register a user with email:",
-      registerForm.email,
-    );
+    try {
+      // Input Validation
+      if (!registerForm || !registerForm.email || !registerForm.password) {
+        throw new Error(
+          "Invalid registration data. Please provide email and password.",
+        );
+      }
 
-    if (
-      registerForm.isAdmin === 0 &&
-      registerForm.isPlanner === 0 &&
-      registerForm.isStatist === 0
-    ) {
-      setAlertOptions({
-        severity: "error",
-        title: "Error!",
-        message: "Please select at least one role.",
+      Logger.debug(
+        "Attempting to register a user with email:",
+        registerForm.email,
+      );
+
+      if (
+        registerForm.isAdmin === 0 &&
+        registerForm.isPlanner === 0 &&
+        registerForm.isStatist === 0
+      ) {
+        throw new Error("Please select at least one role.");
+      }
+
+      // Password Hashing
+      // const hashedPassword = bcrypt.hashSync(registerForm.password, 10);
+
+      // Register User
+      const success = await dao.postNewUser({
+        ...registerForm,
+        // password: hashedPassword,
       });
-      setAlertOpen(true);
-      return;
-    }
 
-    // const hashedPassword = bcrypt.hashSync(registerForm.password, 10);
-    const success = await dao.postNewUser({
-      ...registerForm,
-    });
-    // password: hashedPassword,
-    if (!success) {
-      Logger.error("Registration failed for email:", registerForm.email);
-      alert("Something went wrong");
-    } else {
+      if (!success) {
+        throw new Error(` ${registerForm.email} was already created.`);
+      }
+
       Logger.debug("Registration successful for email:", registerForm.email);
 
       // Set the alert options for success
@@ -80,6 +86,21 @@ export default function RegisterView({ handleLoginChange }) {
 
       // Trigger login change after registration
       handleLoginChange();
+    } catch (error) {
+      Logger.error(
+        "Registration failed for email:",
+        registerForm.email,
+        "Error:",
+        error.message,
+      );
+
+      // Set the alert options for failure
+      setAlertOptions({
+        severity: "error",
+        title: "Error!",
+        message: `Registration failed! ${error.message}`,
+      });
+      setAlertOpen(true);
     }
   };
 
