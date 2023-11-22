@@ -77,7 +77,7 @@ export default function AddSubjectContainer({
   const formik = useFormik({
     enableReinitialize: true,
     initialValues: initialSubject,
-    validate,
+    validate:(values)=>{validate(values,appContext.allocRoundId)} ,
     onSubmit: (values) => {
       setDialogOptions({
         title: `Are you sure you want to add ${values.name}?`,
@@ -145,6 +145,7 @@ export default function AddSubjectContainer({
       area: submitValues.area,
       programId: submitValues.programId,
       spaceTypeId: submitValues.spaceTypeId ? submitValues.spaceTypeId : null,
+      allocRoundId: appContext.allocRoundId,
     };
 
     const result = await dao.postNewSubject(newSubject);

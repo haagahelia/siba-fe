@@ -4,8 +4,8 @@ import { create, get, remove, update } from "./request";
 const baseUrl = import.meta.env.VITE_BE_SERVER_BASE_URL;
 
 // fetching all subjects
-export const fetchAllSubjects = async (): Promise<ResponseFiner<Subject>> => {
-  const response = await get(`${baseUrl}/subject`);
+export const fetchAllSubjects = async (allocRoundId:number): Promise<ResponseFiner<Subject>> => {
+  const response = await get(`${baseUrl}/subject/byAllocationId/${allocRoundId}`);
   if (response.status === 200) {
     const subjects: Subject[] = await response.json();
     return { httpStatus: response.status, data: subjects };
@@ -15,10 +15,10 @@ export const fetchAllSubjects = async (): Promise<ResponseFiner<Subject>> => {
 };
 
 // fetching all subject's names
-export const fetchSubjectsNames = async (): Promise<
+export const fetchSubjectsNames = async (allocRoundId:number): Promise<
   ResponseFiner<SubjectName>
 > => {
-  const response = await get(`${baseUrl}/subject/getNames`);
+  const response = await get(`${baseUrl}/subject/getNames/${allocRoundId}`);
   if (response.status === 200) {
     const subjects: SubjectName[] = await response.json();
     return { httpStatus: response.status, data: subjects };

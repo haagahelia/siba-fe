@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { AppContext } from "../../AppContext";
 import dao from "../../ajax/dao";
 import { importData } from "../../importDataFunctions/importData";
 import {
@@ -23,6 +24,8 @@ export default function ImportSubjectButton({
     message: "This is an error alert — check it out!",
     severity: "error",
   });
+
+  const appContext = useContext(AppContext);
 
   const isProgramAuthorized = (subject) => {
     return progNameList.includes(subject.Major);
@@ -67,7 +70,7 @@ export default function ImportSubjectButton({
         subjectSet.add(newSubject.name);
       }
 
-      const validateResult = await validate(newSubject);
+      const validateResult = await validate(newSubject, appContext.allocRoundId);
 
       subject.FailedReason =
         validateResult.name ||
