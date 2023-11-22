@@ -213,6 +213,7 @@ export const createAppTheme = (currentPalette) =>
             backgroundColor: currentPalette.backgroundDarker.default,
             border: `1px solid ${currentPalette.borderColor.cardBoder}`,
             color: currentPalette.fontColorDefault.default,
+          
           },
         },
         variants: [
@@ -310,6 +311,34 @@ export const createAppTheme = (currentPalette) =>
               display: "flex",
               flexDirection: "row",
               gap: "1rem",
+            },
+          },
+          {
+            props: { variant: "sibaDialogContent2" },
+            style: {
+              width: "100%",
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "center",
+              padding: lessPadding,
+               "&:nth-of-type(odd)": {
+              backgroundColor: currentPalette.background.default,
+              borderBottom: "none",
+            },
+            },
+          },
+          {
+            props: { variant: "sibaDialogContent3" },
+            style: {
+              width: "100%",
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "center",
+              padding: lessPadding,
+               "&:nth-of-type(odd)": {
+              backgroundColor: currentPalette.background.default,
+              borderBottom: "none",
+            },
             },
           },
         ],
@@ -503,12 +532,30 @@ export const createAppTheme = (currentPalette) =>
             },
           },
           {
+            props: { variant: "singleDialogSubtitle" },
+            style: {
+              marginBottom: 10,
+              color: currentPalette.fontColorDefault.default,
+            },
+          },
+          {
             props: { variant: "boldTitle" },
             style: {
               color: currentPalette.fontColorDefault.default,
               fontFamily: commonFont,
               fontWeight: 700,
               fontSize: "1rem",
+              lineHeight: 1.5,
+              letterSpacing: "0.00938em",
+            },
+          },
+          {
+            props: { variant: "boldTitle2" },
+            style: {
+              color: currentPalette.fontColorDefault.default,
+              fontFamily: commonFont,
+              fontWeight: 700,
+              fontSize: "1.1rem",
               lineHeight: 1.5,
               letterSpacing: "0.00938em",
             },
@@ -573,6 +620,7 @@ export const createAppTheme = (currentPalette) =>
             alignItems: "flex-start",
             marginTop: 0,
             padding: lessPadding,
+            
           },
         },
         variants: [
@@ -622,6 +670,19 @@ export const createAppTheme = (currentPalette) =>
               padding: morePadding,
             },
           },
+
+          // Placeholder variant for EditSpaceForm only,
+          // will apply this to other edit-components too later
+          {
+            props: { variant: "sibaGridEditSpace" },
+            style: {
+              flexDirection: "row",
+              justifyContent: "center",
+              alignItems: "center",
+              padding: morePadding,
+            },
+          },
+
         ],
       },
       MuiAppBar: {
@@ -723,6 +784,7 @@ export const createAppTheme = (currentPalette) =>
           },
         ],
       },
+      
       // Enables CSS styling
       MuiCssBaseline: {
         styleOverrides: {

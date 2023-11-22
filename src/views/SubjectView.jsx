@@ -45,8 +45,8 @@ export default function SubjectView() {
   });
 
   const getAllSubjects = async function () {
-    Logger.debug("getAllSubjects: fetching all subjects from server.");
-    const { httpStatus, data } = await dao.fetchAllSubjects();
+    Logger.debug("getAllSubjects: fetching all subjects in allocRound, from server.");
+    const { httpStatus, data } = await dao.fetchAllSubjects(appContext.allocRoundId);
     if (httpStatus !== 200) {
       ajaxRequestErrorHandler(
         httpStatus,

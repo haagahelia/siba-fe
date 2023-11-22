@@ -7,6 +7,7 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import Grid from "@mui/material/Grid";
+import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import AlertBox from "../common/AlertBox";
@@ -59,7 +60,7 @@ export default function SingleSpaceDialog({
         alertOptions={alertOptions}
         open={setAlertOpen}
       />
-      <Dialog open={open} onClose={() => setOpen(false)} width="400px">
+      <Dialog open={open} onClose={() => setOpen(false)} maxWidth="md" fullWidth>
         <DialogTitle id="dialog-title">
           <IconButton
             edge="end"
@@ -93,87 +94,155 @@ export default function SingleSpaceDialog({
             <Grid
               container
               variant="sibaGridSingleItemDisplay"
-              spacing={1}
               column={14}
-              direction="column"
             >
-              <Grid item xs={12} sm={6}>
-                <Typography variant="subtitle1">
-                  Name:&nbsp;
-                  {singleSpace?.name}
-                </Typography>
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <Typography variant="subtitle1">
-                  Area:&nbsp;
-                  {singleSpace?.area}
-                </Typography>
-              </Grid>
+              <DialogContent variant="sibaDialogContent2">
+                <Grid item xs={12} sm={6}>
+                  <Typography variant="singleDialogSubtitle">
+                    Name:&nbsp;
+                  </Typography>
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <Typography variant="singleDialogSubtitle">
+                    {singleSpace?.name}
+                  </Typography>
+                </Grid>
+              </DialogContent>
 
-              <Grid item xs={12} sm={6}>
-                <Typography variant="subtitle1">
-                  Information:&nbsp;
-                  {singleSpace?.info}
-                </Typography>
-              </Grid>
+              <DialogContent variant="sibaDialogContent2">
+                <Grid item xs={12} sm={6}>
+                  <Typography variant="singleDialogSubtitle">
+                    Area:&nbsp;
+                  </Typography>
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <Typography variant="singleDialogSubtitle">
+                    {singleSpace?.area}
+                  </Typography>
+                </Grid>
+              </DialogContent>
 
-              <Grid item xs={12} sm={6}>
-                <Typography variant="subtitle1">
-                  Maximum Persons Allowed:&nbsp;
-                  {singleSpace?.personLimit}
-                </Typography>
-              </Grid>
+              <DialogContent variant="sibaDialogContent2">
+                <Grid item xs={12} sm={6}>
+                  <Typography variant="singleDialogSubtitle">
+                    Information:&nbsp;
+                  </Typography>
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <Typography variant="singleDialogSubtitle">
+                    {singleSpace?.info}
+                  </Typography>
+                </Grid>
+              </DialogContent>
 
-              <Grid item xs={12} sm={6}>
-                <Typography variant="subtitle1">
-                  Available From:&nbsp;
-                  {singleSpace?.availableFrom}
-                </Typography>
-              </Grid>
+              <DialogContent variant="sibaDialogContent2">
+                <Grid item xs={12} sm={6}>
+                  <Typography variant="singleDialogSubtitle">
+                    Maximum Persons Allowed:&nbsp;
+                  </Typography>
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <Typography variant="singleDialogSubtitle">
+                    {singleSpace?.personLimit}
+                  </Typography>
+                </Grid>
+              </DialogContent>
 
-              <Grid item xs={12} sm={6}>
-                <Typography variant="subtitle1">
-                  Available To:&nbsp;
-                  {singleSpace?.availableTo}
-                </Typography>
-              </Grid>
+              <DialogContent variant="sibaDialogContent2">
+                <Grid item xs={12} sm={6}>
+                  <Typography variant="singleDialogSubtitle">
+                    Available From:&nbsp;
+                  </Typography>
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <Typography variant="singleDialogSubtitle">
+                    {singleSpace?.availableFrom}
+                  </Typography>
+                </Grid>
+              </DialogContent>
 
-              <Grid item xs={12} sm={6}>
-                <Typography variant="subtitle1">
-                  Classes From:&nbsp;
-                  {singleSpace?.classesFrom}
-                </Typography>
-              </Grid>
+              <DialogContent variant="sibaDialogContent2">
+                <Grid item xs={12} sm={6}>
+                  <Typography variant="singleDialogSubtitle">
+                    Available To:&nbsp;
+                  </Typography>
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <Typography variant="singleDialogSubtitle">
+                    {singleSpace?.availableTo}
+                  </Typography>
+                </Grid>
+              </DialogContent>
 
-              <Grid item xs={12} sm={6}>
-                <Typography variant="subtitle1">
-                  Classes To:&nbsp;
-                  {singleSpace?.classesTo}
-                </Typography>
-              </Grid>
+              <DialogContent variant="sibaDialogContent2">
+                <Grid item xs={12} sm={6}>
+                  <Typography variant="singleDialogSubtitle">
+                    Classes From:&nbsp;
+                  </Typography>
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <Typography variant="singleDialogSubtitle">
+                    {singleSpace?.classesFrom}
+                  </Typography>
+                </Grid>
+              </DialogContent>
 
-              <Grid item xs={12} sm={6}>
-                <Typography variant="subtitle1">
-                  In Use:&nbsp;
-                  {singleSpace?.inUse ? "Yes" : "No"}
-                </Typography>
-              </Grid>
+              <DialogContent variant="sibaDialogContent2">
+                <Grid item xs={12} sm={6}>
+                  <Typography variant="singleDialogSubtitle">
+                    Classes To:&nbsp;
+                  </Typography>
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <Typography variant="singleDialogSubtitle">
+                    {singleSpace?.classesTo}
+                  </Typography>
+                </Grid>
+              </DialogContent>
 
-              <Grid item xs={12} sm={6}>
-                <Typography variant="subtitle1">
-                  Space Type:&nbsp;
-                  {singleSpace?.spaceTypeName}{" "}
-                </Typography>
-              </Grid>
+              <DialogContent variant="sibaDialogContent2">
+                <Grid item xs={12} sm={6}>
+                  <Typography variant="singleDialogSubtitle">
+                    In Use:&nbsp;
+                  </Typography>
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <Typography variant="singleDialogSubtitle">
+                    {singleSpace?.inUse ? "Yes" : "No"}
+                  </Typography>
+                </Grid>
+              </DialogContent>
 
-              <Grid item xs={12} sm={6}>
-                <Typography variant="subtitle1">
-                  Building:&nbsp;
-                  {singleSpace?.buildingName}{" "}
-                </Typography>
-              </Grid>
+              <DialogContent variant="sibaDialogContent2">
+                <Grid item xs={12} sm={6}>
+                  <Typography variant="singleDialogSubtitle">
+                    Space Type:&nbsp;
+                  </Typography>
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <Typography variant="singleDialogSubtitle">
+                    {singleSpace?.spaceTypeName}{" "}
+                  </Typography>
+                </Grid>
+              </DialogContent>
+
+              <DialogContent variant="sibaDialogContent2">
+                <Grid item xs={12} sm={6}>
+                  <Typography variant="singleDialogSubtitle">
+                    Building:&nbsp;
+                  </Typography>
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <Typography variant="singleDialogSubtitle">
+                    {singleSpace?.buildingName}{" "}
+                  </Typography>
+                </Grid>
+              </DialogContent>
+
             </Grid>
-            <Typography variant="subtitle1">Equipment List:</Typography>
+          </DialogContent>
+          <DialogContent>
+            <Typography variant="boldTitle2">Equipment List:</Typography>
             <SpaceEquipmentList
               equipListBySpaceId={equipListBySpaceId}
               getEquipmentsBySpaceId={getEquipmentsBySpaceId}

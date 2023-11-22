@@ -35,15 +35,21 @@ export default function EditSpaceForm({
       >
         Edit
       </Button>
-      <Dialog open={open}>
+      <Dialog open={open} maxWidth="md" fullWidth>
         <form onSubmit={formik.handleSubmit}>
           <DialogTitle sx={{ maxWidth: "300px" }}>
             Edit: {formik.initialValues?.name}
           </DialogTitle>
           <DialogContent>
             <DialogContentText>
-              <Grid container variant="sibaGridEdit" spacing={3} column={7}>
-                <Grid item xs={12}>
+              <Grid
+                container
+                variant="sibaGridEditSpace"  //placeholder variant, see theme.js
+                spacing={3}
+                column={7}
+                
+              >
+                <Grid item xs={12} sm={6} md={4}>
                   <TextField
                     error={
                       formik.touched.name && formik.errors.name ? true : false
@@ -58,7 +64,7 @@ export default function EditSpaceForm({
                     helperText={formik.touched.name && formik.errors.name}
                   />
                 </Grid>
-                <Grid item xs={12}>
+                <Grid item xs={12} sm={6} md={4}>
                   <TextField
                     error={
                       formik.touched.area && formik.errors.area ? true : false
@@ -73,7 +79,7 @@ export default function EditSpaceForm({
                     helperText={formik.touched.area && formik.errors.area}
                   />
                 </Grid>
-                <Grid item xs={12}>
+                <Grid item xs={12} sm={6} md={4}>
                   <TextField
                     error={
                       formik.touched.info && formik.errors.info ? true : false
@@ -88,7 +94,7 @@ export default function EditSpaceForm({
                     helperText={formik.touched.info && formik.errors.info}
                   />
                 </Grid>
-                <Grid item xs={12}>
+                <Grid item xs={12} sm={6} md={4}>
                   <TextField
                     error={
                       formik.touched.personLimit && formik.errors.personLimit
@@ -107,11 +113,11 @@ export default function EditSpaceForm({
                     }
                   />
                 </Grid>
-                <Grid item xs={12}>
+                <Grid item xs={12} sm={6} md={4}>
                   <TextField
                     error={
                       formik.touched.availableFrom &&
-                      formik.errors.availableFrom
+                        formik.errors.availableFrom
                         ? true
                         : false
                     }
@@ -128,7 +134,7 @@ export default function EditSpaceForm({
                     }
                   />
                 </Grid>
-                <Grid item xs={12}>
+                <Grid item xs={12} sm={6} md={4}>
                   <TextField
                     error={
                       formik.touched.availableTo && formik.errors.availableTo
@@ -147,7 +153,7 @@ export default function EditSpaceForm({
                     }
                   />
                 </Grid>
-                <Grid item xs={12}>
+                <Grid item xs={12} sm={6} md={4}>
                   <TextField
                     error={
                       formik.touched.classesFrom && formik.errors.classesFrom
@@ -166,7 +172,7 @@ export default function EditSpaceForm({
                     }
                   />
                 </Grid>
-                <Grid item xs={12}>
+                <Grid item xs={12} sm={6} md={4}>
                   <TextField
                     error={
                       formik.touched.classesTo && formik.errors.classesTo
@@ -186,7 +192,7 @@ export default function EditSpaceForm({
                   />
                 </Grid>
 
-                <Grid item xs={12}>
+                <Grid item xs={12} sm={6} md={4}>
                   <FormControl sx={{ minWidth: 200 }}>
                     <InputLabel id="building-label">Building</InputLabel>
                     <Select
@@ -204,7 +210,7 @@ export default function EditSpaceForm({
                   </FormControl>
                 </Grid>
 
-                <Grid item xs={12}>
+                <Grid item xs={12} sm={6} md={4}>
                   <FormControl sx={{ minWidth: 200 }}>
                     <InputLabel id="spaceType-label">Space type</InputLabel>
                     <Select
@@ -226,7 +232,7 @@ export default function EditSpaceForm({
                   </FormControl>
                 </Grid>
 
-                <Grid item xs={12}>
+                <Grid item xs={12} sm={6} md={4}>
                   <FormControl sx={{ minWidth: 200 }}>
                     <InputLabel id="inUse-label">In Use</InputLabel>
                     <Select
@@ -250,6 +256,9 @@ export default function EditSpaceForm({
                     </FormHelperText>
                   </FormControl>
                 </Grid>
+
+                <Grid item xs={12} sm={6} md={4}></Grid>
+
               </Grid>
             </DialogContentText>
           </DialogContent>
