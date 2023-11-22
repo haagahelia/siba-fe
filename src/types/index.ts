@@ -88,6 +88,11 @@ export interface AllocRound {
   lastModified: string;
 }
 
+export interface ActiveAllocRound {
+  id: number;
+  name: string;
+}
+
 export interface Building {
   id: number;
   name: string;

@@ -6,9 +6,11 @@ import allocationPost from "../../data/ResultAllocationStore";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { Link } from "react-router-dom";
+import { useActiveAllocRound } from "../../hooks/useActiveAllocRound";
 
 export default function AllocRoundControlPanel({ incrementResetCounter }) {
-  const appContext = useContext(AppContext);
+  //const appContext = useContext(AppContext);
+  const allocRound = useActiveAllocRound();
   // console.log("appContext 123: " + appContext);
 
   const theme = useTheme();
@@ -28,14 +30,14 @@ export default function AllocRoundControlPanel({ incrementResetCounter }) {
 
   return (
     <Typography component="p" style={{ marginTop: 80 }}>
-      Current allocation round: {appContext.allocRoundId} &nbsp; After Start and
-      Reset wait for few seconds.
+      Current allocation round: {allocRound.id} &nbsp; After Start and Reset
+      wait for few seconds.
       <Button
         type="submit"
         variant="contained"
         style={{ color: theme.palette.primary.contrastText }}
         onClick={() => {
-          allocationPost.startAlloc(appContext.allocRoundId);
+          allocationPost.startAlloc(allocRound.id);
           setDelayedClickedToggle();
         }}
         disabled={isClicked}
@@ -47,7 +49,7 @@ export default function AllocRoundControlPanel({ incrementResetCounter }) {
         variant="contained"
         color="red"
         onClick={() => {
-          allocationPost.resetAlloc(appContext.allocRoundId);
+          allocationPost.resetAlloc(allocRound.id);
           setDelayedClickedToggle();
         }}
         disabled={!isClicked}
@@ -55,7 +57,7 @@ export default function AllocRoundControlPanel({ incrementResetCounter }) {
         Reset Allocation
       </Button>
       <Link
-        to={isClicked ? `/alloc-fail/${appContext.allocRoundId}` : ""}
+        to={isClicked ? `/alloc-fail/${allocRound.id}` : ""}
         disabled={!isClicked}
       >
         <Button

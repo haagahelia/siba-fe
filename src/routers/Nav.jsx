@@ -17,6 +17,7 @@ import { BrowserRouter, NavLink, Route, Routes } from "react-router-dom";
 import { AppContext } from "../AppContext";
 import dao from "../ajax/dao";
 import AddAllocRound from "../components/allocRound/AddAllocRound";
+import { useActiveAllocRound } from "../hooks/useActiveAllocRound";
 import Logger from "../logger/logger";
 import logo from "../styles/SibeliusLogo.svg";
 // The different pages/views
@@ -152,6 +153,8 @@ export default function NavBar() {
   ];
 
   const appContext = useContext(AppContext);
+  const allocRound = useActiveAllocRound();
+
   const [click, setClick] = useState(false);
   const handleClick = () => setClick(!click);
 
@@ -342,9 +345,7 @@ export default function NavBar() {
                   </NavLink>
                   {renderNavLinks()}
                   <Typography variant="navAllocInfo">
-                    {`${
-                      appContext.allocRoundId
-                    } : ${appContext.allocRoundName.substring(0, 12)}`}
+                    {`${allocRound.id} : ${allocRound.name.substring(0, 12)}`}
                   </Typography>
                 </List>
               </Box>

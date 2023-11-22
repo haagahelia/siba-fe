@@ -8,9 +8,10 @@ import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { AppContext } from "../AppContext";
+import { AppContext } from "../AppContext.ts";
 import dao from "../ajax/dao";
 import AlertBox from "../components/common/AlertBox";
+import { useActiveAllocRound } from "../hooks/useActiveAllocRound.ts";
 import Logger from "../logger/logger";
 import backgroundImage from "../styles/SibeliusLogoLoginPage.svg";
 
@@ -18,6 +19,7 @@ export default function LoginView({ handleLoginChange }) {
   Logger.logPrefix = "LoginView";
 
   const appContext = useContext(AppContext);
+  const activeAllocRound = useActiveAllocRound();
   const navigate = useNavigate();
 
   const [loginForm, setLoginForm] = useState({
