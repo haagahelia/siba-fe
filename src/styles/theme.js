@@ -213,6 +213,7 @@ export const createAppTheme = (currentPalette) =>
             backgroundColor: currentPalette.backgroundDarker.default,
             border: `1px solid ${currentPalette.borderColor.cardBoder}`,
             color: currentPalette.fontColorDefault.default,
+          
           },
         },
         variants: [
@@ -316,11 +317,24 @@ export const createAppTheme = (currentPalette) =>
             props: { variant: "sibaDialogContent2" },
             style: {
               width: "100%",
-              justifyContent: "center",
               display: "flex",
-              flexDirection: "column",
+              flexDirection: "row",
               alignItems: "center",
-              padding: morePadding,
+              padding: lessPadding,
+               "&:nth-of-type(odd)": {
+              backgroundColor: currentPalette.background.default,
+              borderBottom: "none",
+            },
+            },
+          },
+          {
+            props: { variant: "sibaDialogContent3" },
+            style: {
+              width: "100%",
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "center",
+              padding: lessPadding,
                "&:nth-of-type(odd)": {
               backgroundColor: currentPalette.background.default,
               borderBottom: "none",
@@ -515,6 +529,13 @@ export const createAppTheme = (currentPalette) =>
               fontFamily: commonFont,
               fontWeight: 700,
               fontSize: "12.5px",
+            },
+          },
+          {
+            props: { variant: "singleDialogSubtitle" },
+            style: {
+              marginBottom: 10,
+              color: currentPalette.fontColorDefault.default,
             },
           },
           {

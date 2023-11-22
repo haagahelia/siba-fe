@@ -95,17 +95,15 @@ export default function SingleSpaceDialog({
               container
               variant="sibaGridSingleItemDisplay"
               column={14}
-              direction="column"
-
             >
               <DialogContent variant="sibaDialogContent2">
                 <Grid item xs={12} sm={6}>
-                  <Typography variant="boldTitle">
+                  <Typography variant="singleDialogSubtitle">
                     Name:&nbsp;
                   </Typography>
                 </Grid>
                 <Grid item xs={12} sm={6}>
-                  <Typography variant="subtitle1">
+                  <Typography variant="singleDialogSubtitle">
                     {singleSpace?.name}
                   </Typography>
                 </Grid>
@@ -113,12 +111,12 @@ export default function SingleSpaceDialog({
 
               <DialogContent variant="sibaDialogContent2">
                 <Grid item xs={12} sm={6}>
-                  <Typography variant="boldTitle">
+                  <Typography variant="singleDialogSubtitle">
                     Area:&nbsp;
                   </Typography>
                 </Grid>
                 <Grid item xs={12} sm={6}>
-                  <Typography variant="subtitle1">
+                  <Typography variant="singleDialogSubtitle">
                     {singleSpace?.area}
                   </Typography>
                 </Grid>
@@ -126,12 +124,12 @@ export default function SingleSpaceDialog({
 
               <DialogContent variant="sibaDialogContent2">
                 <Grid item xs={12} sm={6}>
-                  <Typography variant="boldTitle">
+                  <Typography variant="singleDialogSubtitle">
                     Information:&nbsp;
                   </Typography>
                 </Grid>
                 <Grid item xs={12} sm={6}>
-                  <Typography variant="subtitle1">
+                  <Typography variant="singleDialogSubtitle">
                     {singleSpace?.info}
                   </Typography>
                 </Grid>
@@ -139,12 +137,12 @@ export default function SingleSpaceDialog({
 
               <DialogContent variant="sibaDialogContent2">
                 <Grid item xs={12} sm={6}>
-                  <Typography variant="boldTitle">
+                  <Typography variant="singleDialogSubtitle">
                     Maximum Persons Allowed:&nbsp;
                   </Typography>
                 </Grid>
                 <Grid item xs={12} sm={6}>
-                  <Typography variant="subtitle1">
+                  <Typography variant="singleDialogSubtitle">
                     {singleSpace?.personLimit}
                   </Typography>
                 </Grid>
@@ -152,12 +150,12 @@ export default function SingleSpaceDialog({
 
               <DialogContent variant="sibaDialogContent2">
                 <Grid item xs={12} sm={6}>
-                  <Typography variant="boldTitle">
+                  <Typography variant="singleDialogSubtitle">
                     Available From:&nbsp;
                   </Typography>
                 </Grid>
                 <Grid item xs={12} sm={6}>
-                  <Typography variant="subtitle1">
+                  <Typography variant="singleDialogSubtitle">
                     {singleSpace?.availableFrom}
                   </Typography>
                 </Grid>
@@ -165,12 +163,12 @@ export default function SingleSpaceDialog({
 
               <DialogContent variant="sibaDialogContent2">
                 <Grid item xs={12} sm={6}>
-                  <Typography variant="boldTitle">
+                  <Typography variant="singleDialogSubtitle">
                     Available To:&nbsp;
                   </Typography>
                 </Grid>
                 <Grid item xs={12} sm={6}>
-                  <Typography variant="subtitle1">
+                  <Typography variant="singleDialogSubtitle">
                     {singleSpace?.availableTo}
                   </Typography>
                 </Grid>
@@ -178,12 +176,12 @@ export default function SingleSpaceDialog({
 
               <DialogContent variant="sibaDialogContent2">
                 <Grid item xs={12} sm={6}>
-                  <Typography variant="boldTitle">
+                  <Typography variant="singleDialogSubtitle">
                     Classes From:&nbsp;
                   </Typography>
                 </Grid>
                 <Grid item xs={12} sm={6}>
-                  <Typography variant="subtitle1">
+                  <Typography variant="singleDialogSubtitle">
                     {singleSpace?.classesFrom}
                   </Typography>
                 </Grid>
@@ -191,12 +189,12 @@ export default function SingleSpaceDialog({
 
               <DialogContent variant="sibaDialogContent2">
                 <Grid item xs={12} sm={6}>
-                  <Typography variant="boldTitle">
+                  <Typography variant="singleDialogSubtitle">
                     Classes To:&nbsp;
                   </Typography>
                 </Grid>
                 <Grid item xs={12} sm={6}>
-                  <Typography variant="subtitle1">
+                  <Typography variant="singleDialogSubtitle">
                     {singleSpace?.classesTo}
                   </Typography>
                 </Grid>
@@ -204,12 +202,12 @@ export default function SingleSpaceDialog({
 
               <DialogContent variant="sibaDialogContent2">
                 <Grid item xs={12} sm={6}>
-                  <Typography variant="boldTitle">
+                  <Typography variant="singleDialogSubtitle">
                     In Use:&nbsp;
                   </Typography>
                 </Grid>
                 <Grid item xs={12} sm={6}>
-                  <Typography variant="subtitle1">
+                  <Typography variant="singleDialogSubtitle">
                     {singleSpace?.inUse ? "Yes" : "No"}
                   </Typography>
                 </Grid>
@@ -217,12 +215,12 @@ export default function SingleSpaceDialog({
 
               <DialogContent variant="sibaDialogContent2">
                 <Grid item xs={12} sm={6}>
-                  <Typography variant="boldTitle">
+                  <Typography variant="singleDialogSubtitle">
                     Space Type:&nbsp;
                   </Typography>
                 </Grid>
                 <Grid item xs={12} sm={6}>
-                  <Typography variant="subtitle1">
+                  <Typography variant="singleDialogSubtitle">
                     {singleSpace?.spaceTypeName}{" "}
                   </Typography>
                 </Grid>
@@ -230,12 +228,12 @@ export default function SingleSpaceDialog({
 
               <DialogContent variant="sibaDialogContent2">
                 <Grid item xs={12} sm={6}>
-                  <Typography variant="boldTitle">
+                  <Typography variant="singleDialogSubtitle">
                     Building:&nbsp;
                   </Typography>
                 </Grid>
                 <Grid item xs={12} sm={6}>
-                  <Typography variant="subtitle1">
+                  <Typography variant="singleDialogSubtitle">
                     {singleSpace?.buildingName}{" "}
                   </Typography>
                 </Grid>
