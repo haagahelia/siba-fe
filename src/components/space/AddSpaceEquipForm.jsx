@@ -48,8 +48,8 @@ export default function AddSpaceEquipForm({
                 column={3}
                 direction="column"
               >
-                <Grid item xs={12}>
-                  <FormControl>
+                <Grid item xs={12} sm={6} md={4}>
+                  <FormControl sx={{ minWidth: 200 }}>
                     <InputLabel>Equipment</InputLabel>
                     <Select
                       error={
