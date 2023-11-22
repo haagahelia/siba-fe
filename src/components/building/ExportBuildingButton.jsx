@@ -23,8 +23,8 @@ export default function ExportBuildingButton({ buildingFailedToImport }) {
         setAlertOpen={setAlertOpen}
       />
       <Button
-        variant="contained"
-        color="red"
+        variant="addComponentFormButton"
+        className="redButton"
         onClick={() => {
           clickHandle();
         }}
