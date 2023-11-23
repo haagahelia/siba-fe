@@ -1,7 +1,7 @@
 // The Program Results Page
 import useTheme from "@mui/material/styles/useTheme";
 import { Fragment, useContext, useEffect, useState } from "react";
-import { AppContext } from "../../AppContext";
+import { AllocRoundContext } from "../../AppContext";
 import resultProgramStore from "../../data/ResultProgramStore";
 import testData from "../../data/testData";
 import Logger from "../../logger/logger";
@@ -26,7 +26,7 @@ export default function ProgramResult() {
   Logger.logPrefix = "ProgramResult";
   Logger.debug("ProgramResult component instantiated.");
 
-  const appContext = useContext(AppContext);
+  const { allocRoundContext } = useContext(AllocRoundContext);
   const theme = useTheme();
 
   const [progs, setProgs] = useState([]);
@@ -45,7 +45,7 @@ export default function ProgramResult() {
 
   const getProgramData = async () => {
     Logger.debug("getProgramData: fetching program names.");
-    await progStore.fetchNames(appContext.allocRoundId);
+    await progStore.fetchNames(allocRoundContext.allocRoundId);
     const names = progStore.getNames();
     Logger.debug(
       `getProgramData: successfully fetched ${names.length} program names.`,

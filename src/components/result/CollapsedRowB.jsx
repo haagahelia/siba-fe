@@ -1,6 +1,6 @@
 import useTheme from "@mui/material/styles/useTheme";
 import { useContext, useEffect, useState } from "react";
-import { AppContext } from "../../AppContext";
+import { AllocRoundContext } from "../../AppContext";
 import resultRoomsStore from "../../data/ResultRoomsStore";
 
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
@@ -12,7 +12,7 @@ import Grid2 from "@mui/material/Unstable_Grid2";
 
 // have to edit when the correct data comes, for now an illustrative version.
 export default function CollapsedRowB({ id }) {
-  const appContext = useContext(AppContext);
+  const { allocRoundContext } = useContext(AllocRoundContext);
   const theme = useTheme();
 
   const [expand, setExpand] = useState(false);
@@ -24,14 +24,14 @@ export default function CollapsedRowB({ id }) {
 
   useEffect(() => {
     const getSubjects = async () => {
-      await resultRoomsStore.fetchRoomSubs(id, appContext.allocRoundId);
+      await resultRoomsStore.fetchRoomSubs(id, allocRoundContext.allocRoundId);
       setSubjects(resultRoomsStore.roomSubs);
     };
 
     if (expand) {
       getSubjects();
     }
-  }, [expand, id, appContext.allocRoundId]);
+  }, [expand, id, allocRoundContext.allocRoundId]);
 
   return (
     <Grid2 container>

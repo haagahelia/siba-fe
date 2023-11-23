@@ -1,6 +1,6 @@
 // The Lessons Page
 import { useContext, useEffect, useState } from "react";
-import { AppContext } from "../AppContext";
+import { AppContext, AllocRoundContext } from "../AppContext";
 import {
   ajaxRequestErrorHandler,
   getFunctionName,
@@ -27,6 +27,7 @@ export default function SubjectView() {
   Logger.debug("SubjectView component instantiated.");
 
   const appContext = useContext(AppContext);
+  const { allocRoundContext } = useContext(AllocRoundContext);
 
   const [paginateSubjects, setPaginateSubjects] = useState([]);
   const [allSubjectsList, setAllSubjectsList] = useState([]);
@@ -46,7 +47,8 @@ export default function SubjectView() {
 
   const getAllSubjects = async function () {
     Logger.debug("getAllSubjects: fetching all subjects in allocRound, from server.");
-    const { httpStatus, data } = await dao.fetchAllSubjects(appContext.allocRoundId);
+    console.log("allocRoundId", allocRoundContext.allocRoundId)
+    const { httpStatus, data } = await dao.fetchAllSubjects(allocRoundContext.allocRoundId);
     if (httpStatus !== 200) {
       ajaxRequestErrorHandler(
         httpStatus,
@@ -98,7 +100,7 @@ export default function SubjectView() {
                 <>
                   Lessons -
                   <span className="allocRoundHeader">
-                    {` ${appContext.allocRoundId} : ${appContext.allocRoundName}`}
+                    {` ${allocRoundContext.allocRoundId} : ${allocRoundContext.allocRoundName}`}
                   </span>
                 </>
               }

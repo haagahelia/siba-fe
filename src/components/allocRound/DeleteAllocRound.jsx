@@ -1,6 +1,6 @@
 import useTheme from "@mui/material/styles/useTheme";
 import { useContext, useState } from "react";
-import { AppContext } from "../../AppContext";
+import { AllocRoundContext } from "../../AppContext";
 import dao from "../../ajax/dao";
 
 import Button from "@mui/material/Button";
@@ -12,7 +12,7 @@ export default function DeleteAllocRound({
   // getAllAllocRounds,
   incrementDataModifiedCounter,
 }) {
-  const appContext = useContext(AppContext);
+  const { allocRoundContext } = useContext(AllocRoundContext);
   const theme = useTheme();
 
   const [alertOpen, setAlertOpen] = useState(false);
@@ -50,7 +50,7 @@ export default function DeleteAllocRound({
   };
 
   const submitDelete = (data) => {
-    if (data.id === appContext.allocRoundId) {
+    if (data.id === allocRoundContext.allocRoundId) {
       // Prevent deleting a selected allocation round
       setAlertOptions({
         severity: "error",

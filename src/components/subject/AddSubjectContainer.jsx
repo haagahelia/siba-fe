@@ -1,6 +1,6 @@
 import { useFormik } from "formik";
 import { useContext, useEffect, useState } from "react";
-import { AppContext } from "../../AppContext";
+import { AllocRoundContext } from "../../AppContext";
 import {
   ajaxRequestErrorHandler,
   getFunctionName,
@@ -28,7 +28,7 @@ export default function AddSubjectContainer({
   getAllSubjects,
   allSubjectsList,
 }) {
-  const appContext = useContext(AppContext);
+  const { allocRoundContext } = useContext(AllocRoundContext);
   // State for checking if Add Lesson card is expanded
   const [isCardExpanded, setIsCardExpanded] = useState(false);
 
@@ -77,7 +77,7 @@ export default function AddSubjectContainer({
   const formik = useFormik({
     enableReinitialize: true,
     initialValues: initialSubject,
-    validate:(values)=>{validate(values,appContext.allocRoundId)} ,
+    validate:(values)=>{validate(values,allocRoundContext.allocRoundId)} ,
     onSubmit: (values) => {
       setDialogOptions({
         title: `Are you sure you want to add ${values.name}?`,
@@ -145,7 +145,7 @@ export default function AddSubjectContainer({
       area: submitValues.area,
       programId: submitValues.programId,
       spaceTypeId: submitValues.spaceTypeId ? submitValues.spaceTypeId : null,
-      allocRoundId: appContext.allocRoundId,
+      allocRoundId: allocRoundContext.allocRoundId,
     };
 
     const result = await dao.postNewSubject(newSubject);
@@ -208,7 +208,7 @@ export default function AddSubjectContainer({
               <>
                 Add Lesson -
                 <span className="allocRoundHeader">
-                  {` ${appContext.allocRoundId} : ${appContext.allocRoundName}`}
+                  {` ${allocRoundContext.allocRoundId} : ${allocRoundContext.allocRoundName}`}
                 </span>
               </>
             }
