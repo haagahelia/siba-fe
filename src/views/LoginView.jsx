@@ -64,6 +64,9 @@ export default function LoginView({ handleLoginChange }) {
       localStorage.setItem("sessionToken", data[0].token);
       appContext.sessionToken = data[0].token;
 
+      localStorage.setItem("userId", data[0].id);
+      appContext.userId = data[0].id;
+
       localStorage.setItem("email", data[0].email);
       appContext.userEmail = data[0].email;
 

@@ -198,6 +198,7 @@ export default function NavBar() {
   };
 
   const updateAppContextUser = () => {
+    appContext.userId = localStorage.getItem("userId");
     appContext.userEmail = localStorage.getItem("email");
     appContext.sessionToken = localStorage.getItem("sessionToken");
     appContext.roles.admin = Number(localStorage.getItem("isAdmin"));
