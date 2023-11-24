@@ -36,6 +36,7 @@ import SettingsView from "../views/SettingsView";
 import SpaceView from "../views/SpaceView";
 import SubjectView from "../views/SubjectView";
 import UserView from "../views/UserView";
+import ProgramView from "../views/ProgramView";
 
 export default function NavBar() {
   Logger.debug("NavBar initiated");
@@ -81,6 +82,12 @@ export default function NavBar() {
     {
       name: "Spaces",
       href: "/space",
+      forRoles: ["admin", "planner", "statist"],
+      showForCurrentUser: false,
+    },
+    {
+      name: "Programs",
+      href: "/program",
       forRoles: ["admin", "planner", "statist"],
       showForCurrentUser: false,
     },
@@ -370,6 +377,7 @@ export default function NavBar() {
           <Route path="/building" element={<BuildingView />} />
           <Route path="/department" element={<DepartmentView />} />
           <Route path="/space" element={<SpaceView />} />
+          <Route path="/program" element={<ProgramView />} />
           <Route path="/allocation/addAllocRound" element={<AddAllocRound />} />
           <Route path="/settings" element={<SettingsView />} />
           <Route path="/users" element={<UserView />} />
