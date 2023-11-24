@@ -15,6 +15,7 @@ import Toolbar from "@mui/material/Toolbar";
 import { useContext, useState } from "react";
 import { BrowserRouter, NavLink, Route, Routes } from "react-router-dom";
 import { AppContext } from "../AppContext";
+import { AllocRoundContext } from "../AppContext.js";
 import dao from "../ajax/dao";
 import AddAllocRound from "../components/allocRound/AddAllocRound";
 import Logger from "../logger/logger";
@@ -158,6 +159,7 @@ export default function NavBar() {
     },
   ];
 
+  const { allocRoundContext } = useContext(AllocRoundContext);
   const appContext = useContext(AppContext);
   const [click, setClick] = useState(false);
   const handleClick = () => setClick(!click);
@@ -351,8 +353,8 @@ export default function NavBar() {
                   {renderNavLinks()}
                   <Typography variant="navAllocInfo">
                     {`${
-                      appContext.allocRoundId
-                    } : ${appContext.allocRoundName.substring(0, 12)}`}
+                      allocRoundContext.allocRoundId
+                    } : ${allocRoundContext.allocRoundName.substring(0, 12)}`}
                   </Typography>
                 </List>
               </Box>
