@@ -65,6 +65,10 @@ export default function UserView() {
     setPaginateUsers(allUsersList.slice(0, 15));
   }, [allUsersList]);
 
+  useEffect(() => {
+    document.title = 'User List';
+  }, []);
+
   return (
     <div>
       <AlertBox

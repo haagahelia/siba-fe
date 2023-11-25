@@ -9,18 +9,18 @@ export default function AddBuildingForm({
 }) {
   return (
     <form onSubmit={formik.handleSubmit}>
-      <Grid container variant="sibaGridAddForm" column={8}>
+      <Grid container spacing={2}>
         <BuildingInputField formik={formik} />
       </Grid>
-      <Grid item xs={3}>
+      <Grid item xs={3} padding={2}>
         <Button
           type="submit"
-          variant="contained"
+          variant="addComponentFormButton"
           onClick={() => {
             setInitialBuilding(submitValues);
           }}
         >
-          Add
+          Add Building
         </Button>
       </Grid>
     </form>

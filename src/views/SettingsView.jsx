@@ -69,6 +69,10 @@ export default function SettingsView() {
     setPaginateSettings(settings.slice(0, 15));
   }, [settings]);
 
+  useEffect(() => {
+    document.title = 'Settings';
+  }, []);
+
   return (
     <div>
       <AlertBox

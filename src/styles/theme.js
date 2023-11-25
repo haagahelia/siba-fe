@@ -635,7 +635,7 @@ export const createAppTheme = (currentPalette) =>
             },
           },
           {
-            props: { variant: "AddLessonForm" },
+            props: { variant: "AddComponentFormButtonSection" },
             style: {
               borderTop: `1px solid ${currentPalette.borderColor.main}`,
               padding: lessPadding,

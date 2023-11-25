@@ -5,6 +5,7 @@ import { processFile } from "../../importDataFunctions/processFile";
 import AlertBox from "../common/AlertBox";
 import ExportBuildingButton from "./ExportBuildingButton";
 import ImportBuildingButton from "./ImportBuildingButton";
+import Grid from "@mui/material/Grid";
 
 export default function ImportBuildingContainer({ getAllBuildings }) {
   const [alertOpen, setAlertOpen] = useState(false);
@@ -27,20 +28,31 @@ export default function ImportBuildingContainer({ getAllBuildings }) {
         alertOptions={alertOptions}
         setAlertOpen={setAlertOpen}
       />
-      <Typography>Import data from .csv file</Typography>
-      <Input
-        variant="sibaInputFileName"
-        type="file"
-        accept=".xlsx, .xls, .csv"
-        onChange={handleUploadeFiled}
-      />
-      <ImportBuildingButton
-        buildingToImport={buildingToImport}
-        buildingFailedToImport={buildingFailedToImport}
-        setBuildingFailedToImport={setBuildingFailedToImport}
-        getAllBuildings={getAllBuildings}
-      />
-      <ExportBuildingButton buildingFailedToImport={buildingFailedToImport} />
+      <Grid container direction="column" variant="AddComponentFormButtonSection">
+        <Typography
+          variant="addComponentSubHeader">
+          Import data from .csv file
+        </Typography>
+        <Grid item>
+          <Input
+            variant="sibaInputFileName"
+            type="file"
+            accept=".xlsx, .xls, .csv"
+            onChange={handleUploadeFiled}
+          />
+        </Grid>
+        <Grid item>
+          <ImportBuildingButton
+            buildingToImport={buildingToImport}
+            buildingFailedToImport={buildingFailedToImport}
+            setBuildingFailedToImport={setBuildingFailedToImport}
+            getAllBuildings={getAllBuildings}
+          />
+        </Grid>
+        <Grid item>
+          <ExportBuildingButton buildingFailedToImport={buildingFailedToImport} />
+        </Grid>
+      </Grid>
     </>
   );
 }

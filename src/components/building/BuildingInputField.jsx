@@ -4,10 +4,12 @@ import TextField from "@mui/material/TextField";
 export default function BuildingInputField({ formik }) {
   return (
     <>
-      <Grid item xs={12} sm={6} md={3}>
+      <Grid item xs={12} sm={12} md={4} lg={4}>
         <TextField
+          fullWidth
           error={formik.touched.name && formik.errors.name ? true : false}
           name="name"
+          placeholder="Name..."
           label="Building name"
           variant="outlined"
           value={formik.values.name}
@@ -18,10 +20,14 @@ export default function BuildingInputField({ formik }) {
               ? formik.errors.name
               : null
           }
+          InputLabelProps={{
+            shrink: true,
+          }}
         />
       </Grid>
-      <Grid item xs={12} sm={6} md={3}>
+      <Grid item xs={12} sm={12} md={8} lg={8}>
         <TextField
+          fullWidth
           error={
             formik.touched.description && formik.errors.description
               ? true
@@ -29,6 +35,7 @@ export default function BuildingInputField({ formik }) {
           }
           name="description"
           label="Description"
+          placeholder="Some description..."
           variant="outlined"
           value={formik.values.description}
           onChange={formik.handleChange("description")}
@@ -38,6 +45,9 @@ export default function BuildingInputField({ formik }) {
               ? formik.errors.description
               : null
           }
+          InputLabelProps={{
+            shrink: true,
+          }}
         />
       </Grid>
     </>

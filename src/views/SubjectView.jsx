@@ -75,6 +75,10 @@ export default function SubjectView() {
     setPaginateSubjects(allSubjectsList.slice(0, 15));
   }, [allSubjectsList]);
 
+  useEffect(() => {
+    document.title = 'Lessons';
+  }, []);
+
   return (
     <div>
       <AlertBox

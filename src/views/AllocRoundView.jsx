@@ -72,6 +72,10 @@ export default function AllocRoundView() {
     setpaginateAllocRounds(allAllocRoundsList.slice(0, 15));
   }, [allAllocRoundsList]);
 
+  useEffect(() => {
+    document.title = 'Allocation';
+  }, []);
+
   return (
     <div>
       <AlertBox

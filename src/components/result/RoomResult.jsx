@@ -43,6 +43,10 @@ export default function RoomResult() {
     setResetCounter(resetCounter + 1);
   };
 
+  useEffect(() => {
+    document.title = 'Room Results';
+  }, []);
+
   return (
     <div style={{ width: "80%", margin: "auto" }}>
       <AllocRoundControlPanel incrementResetCounter={incrementResetCounter} />

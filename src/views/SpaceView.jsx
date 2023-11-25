@@ -71,6 +71,10 @@ export default function SpaceView() {
     setPaginateSpaces(allSpacesList.slice(0, 15));
   }, [allSpacesList]);
 
+  useEffect(() => {
+    document.title = 'Spaces';
+  }, []);
+
   return (
     <div>
       <AlertBox

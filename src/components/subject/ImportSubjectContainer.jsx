@@ -5,7 +5,6 @@ import {
 } from "../../ajax/ajaxRequestErrorHandler";
 import dao from "../../ajax/dao";
 import { processFile } from "../../importDataFunctions/processFile";
-
 import Grid from "@mui/material/Grid";
 import Input from "@mui/material/Input";
 import Typography from "@mui/material/Typography";
@@ -59,8 +58,9 @@ export default function ImportSubjectContainer({
         alertOptions={alertOptions}
         setAlertOpen={setAlertOpen}
       />
-      <Grid container direction="column" variant="AddLessonForm">
-        <Typography variant="addComponentSubHeader">
+      <Grid container direction="column" variant="AddComponentFormButtonSection">
+        <Typography
+          variant="addComponentSubHeader">
           Import Data From .csv File
         </Typography>
         <Grid item>

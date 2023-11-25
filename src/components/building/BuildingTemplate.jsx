@@ -37,7 +37,7 @@ const BuildingTemplate = () => {
         alertOptions={alertOptions}
         setAlertOpen={setAlertOpen}
       />
-      <Button onClick={downloadBuildingTemplate}>Download template</Button>
+      <Button  variant="addComponentFormButton" onClick={downloadBuildingTemplate}>Download template</Button>
     </>
   );
 };
