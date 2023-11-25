@@ -1,7 +1,7 @@
 // The Room Results Page
 import useTheme from "@mui/material/styles/useTheme";
 import { useContext, useEffect, useState } from "react";
-import { AppContext } from "../../AppContext";
+import { AllocRoundContext } from "../../AppContext";
 import resultRoomsStore from "../../data/ResultRoomsStore";
 import Logger from "../../logger/logger";
 
@@ -17,7 +17,7 @@ export default function RoomResult() {
   Logger.logPrefix = "RoomResult";
   Logger.debug("RoomResult component instantiated.");
 
-  const appContext = useContext(AppContext);
+  const { allocRoundContext } = useContext(AllocRoundContext);
   const theme = useTheme();
 
   const [rooms, setRooms] = useState([]);
@@ -31,7 +31,7 @@ export default function RoomResult() {
 
   const getRoomsData = async () => {
     Logger.debug("getRoomsData: fetching room data from server.");
-    await roomStore.fetchRooms(appContext.allocRoundId);
+    await roomStore.fetchRooms(allocRoundContext.allocRoundId);
     Logger.debug(
       `getRoomsData: successfully fetched ${roomStore.rooms.length} rooms.`,
     );

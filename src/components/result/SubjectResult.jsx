@@ -1,6 +1,6 @@
 import useTheme from "@mui/material/styles/useTheme";
 import { Fragment, useContext, useState } from "react";
-import { AppContext } from "../../AppContext";
+import { AllocRoundContext } from "../../AppContext";
 import resultRoomsStore from "../../data/ResultRoomsStore";
 
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
@@ -68,7 +68,7 @@ export default function SubjectResult({ data }) {
 
 // have to edit when the correct data comes, for now an illustrative version.
 function CollapsedRow(id) {
-  const appContext = useContext(AppContext);
+  const { allocRoundContext } = useContext(AllocRoundContext);
   const theme = useTheme();
 
   const [expand, setExpand] = useState(false);
@@ -76,7 +76,7 @@ function CollapsedRow(id) {
 
   const getRoomsData = async () => {
     console.log(id);
-    await resultRoomsStore.fetchSubRooms(id, appContext.allocRoundId);
+    await resultRoomsStore.fetchSubRooms(id, allocRoundContext.allocRoundId);
     setRooms(resultRoomsStore.subRooms);
   };
 

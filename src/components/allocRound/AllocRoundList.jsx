@@ -9,7 +9,7 @@ import TableRow from "@mui/material/TableRow";
 import TableSortLabel from "@mui/material/TableSortLabel";
 import styled from "@mui/material/styles/styled";
 import { useContext, useState } from "react";
-import { AppContext } from "../../AppContext";
+import { AllocRoundContext } from "../../AppContext";
 import Logger from "../../logger/logger";
 import AllocRoundDetails from "./AllocRoundDetails";
 
@@ -18,7 +18,7 @@ export default function AllocRoundList({
   getAllocRounds,
   incrementDataModifiedCounter,
 }) {
-  const appContext = useContext(AppContext);
+  const { allocRoundContext } = useContext(AllocRoundContext);
 
   const [singleAllocRound, setSingleAllocRound] = useState(null);
   const [open, setOpen] = useState(false);
@@ -131,7 +131,7 @@ export default function AllocRoundList({
                   </IconButton>
                 </TableCell>
                 <TableCell>
-                  {value.id === appContext.allocRoundId
+                  {value.id === allocRoundContext.allocRoundId
                     ? `${value.id}✅`
                     : value.id}
                 </TableCell>

@@ -1,12 +1,14 @@
 import useTheme from "@mui/material/styles/useTheme";
 import { useContext, useState } from "react";
 import { AppContext } from "../../AppContext";
+import {AllocRoundContext} from "../../AppContext.js";
 
 import Button from "@mui/material/Button";
 import AlertBox from "../common/AlertBox";
 import ConfirmationDialog from "../common/ConfirmationDialog";
 
 export default function SelectAllocRound({ singleAllocRound }) {
+  const {allocRoundContext, setAllocRoundContext} = useContext(AllocRoundContext);
   const appContext = useContext(AppContext);
   const theme = useTheme();
 
@@ -23,8 +25,9 @@ export default function SelectAllocRound({ singleAllocRound }) {
 
   const setAllocRound = (allocRoundObj) => {
     // console.log("allocRoundId 456: " + allocRoundId);
-    appContext.allocRoundId = allocRoundObj.id; // Works now! Updating app context.
-    appContext.allocRoundName = allocRoundObj.name;
+    // appContext.allocRoundId = allocRoundObj.id; // Works now! Updating app context.
+    // appContext.allocRoundName = allocRoundObj.name; // Now using AllocRoundContext
+    setAllocRoundContext({allocRoundId: allocRoundObj.id, allocRoundName: allocRoundObj.name});
   };
 
   const allocationSelection = () => {

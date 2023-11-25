@@ -15,6 +15,7 @@ import Toolbar from "@mui/material/Toolbar";
 import { useContext, useState } from "react";
 import { BrowserRouter, NavLink, Route, Routes } from "react-router-dom";
 import { AppContext } from "../AppContext";
+import { AllocRoundContext } from "../AppContext.js";
 import dao from "../ajax/dao";
 import AddAllocRound from "../components/allocRound/AddAllocRound";
 import Logger from "../logger/logger";
@@ -36,6 +37,7 @@ import SettingsView from "../views/SettingsView";
 import SpaceView from "../views/SpaceView";
 import SubjectView from "../views/SubjectView";
 import UserView from "../views/UserView";
+import ProgramView from "../views/ProgramView";
 
 export default function NavBar() {
   Logger.debug("NavBar initiated");
@@ -81,6 +83,12 @@ export default function NavBar() {
     {
       name: "Spaces",
       href: "/space",
+      forRoles: ["admin", "planner", "statist"],
+      showForCurrentUser: false,
+    },
+    {
+      name: "Programs",
+      href: "/program",
       forRoles: ["admin", "planner", "statist"],
       showForCurrentUser: false,
     },
@@ -151,6 +159,7 @@ export default function NavBar() {
     },
   ];
 
+  const { allocRoundContext } = useContext(AllocRoundContext);
   const appContext = useContext(AppContext);
   const [click, setClick] = useState(false);
   const handleClick = () => setClick(!click);
@@ -198,6 +207,7 @@ export default function NavBar() {
   };
 
   const updateAppContextUser = () => {
+    appContext.userId = localStorage.getItem("userId");
     appContext.userEmail = localStorage.getItem("email");
     appContext.sessionToken = localStorage.getItem("sessionToken");
     appContext.roles.admin = Number(localStorage.getItem("isAdmin"));
@@ -343,8 +353,8 @@ export default function NavBar() {
                   {renderNavLinks()}
                   <Typography variant="navAllocInfo">
                     {`${
-                      appContext.allocRoundId
-                    } : ${appContext.allocRoundName.substring(0, 12)}`}
+                      allocRoundContext.allocRoundId
+                    } : ${allocRoundContext.allocRoundName.substring(0, 12)}`}
                   </Typography>
                 </List>
               </Box>
@@ -369,6 +379,7 @@ export default function NavBar() {
           <Route path="/building" element={<BuildingView />} />
           <Route path="/department" element={<DepartmentView />} />
           <Route path="/space" element={<SpaceView />} />
+          <Route path="/program" element={<ProgramView />} />
           <Route path="/allocation/addAllocRound" element={<AddAllocRound />} />
           <Route path="/settings" element={<SettingsView />} />
           <Route path="/users" element={<UserView />} />

@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { AppContext } from "../../AppContext";
+import { AllocRoundContext } from "../../AppContext";
 import dao from "../../ajax/dao";
 import { importData } from "../../importDataFunctions/importData";
 import {
@@ -25,7 +25,7 @@ export default function ImportSubjectButton({
     severity: "error",
   });
 
-  const appContext = useContext(AppContext);
+  const { allocRoundContext } = useContext(AllocRoundContext);
 
   const isProgramAuthorized = (subject) => {
     return progNameList.includes(subject.Major);
@@ -70,7 +70,7 @@ export default function ImportSubjectButton({
         subjectSet.add(newSubject.name);
       }
 
-      const validateResult = await validate(newSubject, appContext.allocRoundId);
+      const validateResult = await validate(newSubject, allocRoundContext.allocRoundId);
 
       subject.FailedReason =
         validateResult.name ||
