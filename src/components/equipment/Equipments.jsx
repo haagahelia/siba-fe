@@ -93,7 +93,6 @@ export default function Equipments() {
                 onChange={handlePageChange}
                 color="primary"
                 variant="outlined"
-                sx={{ marginTop: 2 }}
               />
             </CardContent>
           </Card>

@@ -27,7 +27,7 @@ export default function AllocRoundControlPanel({ incrementResetCounter }) {
   };
 
   return (
-    <Typography component="p" style={{ marginTop: 80 }}>
+    <Typography component="p" variant="allocRoundControlPanel">
       Current allocation round: {allocRoundContext.allocRoundId} &nbsp; After Start and
       Reset wait for few seconds.
       <Button

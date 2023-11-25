@@ -149,13 +149,7 @@ export default function ProgramResult() {
         rowSpacing={1}
         columnSpacing={{ xs: 1, sm: 2, md: 3 }}
         spacing={2}
-        sx={{
-          margin: "auto",
-          width: "80%",
-          marginTop: 10,
-          padding: 10,
-          borderRadius: 20,
-        }}
+        variant="programResultContainer"
       >
         {progs.map((prog) => {
           const progress = calculateProsent(prog.subjects);
