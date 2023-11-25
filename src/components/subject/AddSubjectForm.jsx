@@ -25,6 +25,29 @@ export default function AddSubjectForm({
   return (
     <div>
       <form onSubmit={formik.handleSubmit}>
+        <Grid container spacing={2} justifyContent="flex-end">
+          <Grid item xs={12} sm={12} md={6} lg={3} style={{ border: '5px solid #FDA826', padding: "10px" }}>
+            <FormControl fullWidth>
+              <InputLabel>Copy Existing Lesson?</InputLabel>
+              <Select
+                name="copyLesson"
+                label="Copy Existing Lesson"
+                onChange={(e) => {
+                  handleChange(e);
+                  setSelectedLesson(e.target.value);
+                }}
+                value={selectedLesson}
+                onBlur={formik.handleBlur}
+              >
+                {allSubjectsList.map((value) => (
+                  <MenuItem key={value.id} value={value}>
+                    {value.subjectName}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          </Grid>
+        </Grid>
         <Grid container spacing={2}>
           <Grid item xs={12} sm={6} md={4} lg={3}>
             <TextField
@@ -160,27 +183,6 @@ export default function AddSubjectForm({
                 {spaceTypeSelectList.map((spaceType) => (
                   <MenuItem key={spaceType.id} value={spaceType.id}>
                     {spaceType.name}
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
-          </Grid>
-          <Grid item xs={12} sm={6} md={4} lg={3}>
-            <FormControl fullWidth>
-              <InputLabel>Copy Existing Lesson</InputLabel>
-              <Select
-                name="copyLesson"
-                label="Copy Existing Lesson"
-                onChange={(e) => {
-                  handleChange(e);
-                  setSelectedLesson(e.target.value);
-                }}
-                value={selectedLesson}
-                onBlur={formik.handleBlur}
-              >
-                {allSubjectsList.map((value) => (
-                  <MenuItem key={value.id} value={value}>
-                    {value.subjectName}
                   </MenuItem>
                 ))}
               </Select>
