@@ -9,12 +9,25 @@ export const lessPadding = "4px";
 export const morePadding = "16px";
 export const navbarWidth = "171px";
 export const commonFont = "Roboto, Helvetica, Aria, sans-serif";
+export const margins = {
+  auto: "auto",
+  none: 0,
+  small: 5,
+  medium: 16,
+  large: 30,
+  roomAndProgramResults: {
+    roomIndex: 50,
+    dropdownContent: 10,
+  },
+};
+
 export const indexRoomCommon = {
   width: 15,
   height: 15,
   border: "3px solid",
-  marginLeft: 60,
+  marginLeft: margins.roomAndProgramResults.roomIndex,
 };
+
 
 export const createAppTheme = (currentPalette) =>
   createTheme({
@@ -42,8 +55,8 @@ export const createAppTheme = (currentPalette) =>
             backgroundColor: currentPalette.backgroundDarker.default,
             borderColor: currentPalette.borderColor.cardBoder,
             width: "85%",
-            margin: "auto",
-            marginTop: "70px",
+            margin: margins.auto,
+            marginTop: margins.large,
             padding: lessPadding,
           },
         },
@@ -66,7 +79,7 @@ export const createAppTheme = (currentPalette) =>
         styleOverrides: {
           root: {
             "& .MuiTypography-body1": {
-              margin: 0,
+              margin: margins.none,
             },
             "& .MuiCheckbox-root": {
               alignItems: "center",
@@ -90,7 +103,7 @@ export const createAppTheme = (currentPalette) =>
             backgroundColor: currentPalette.background.default,
             fontSize: 25,
             color: currentPalette.fontColorDefault.default,
-            marginBottom: "10px",
+            marginBottom: margins.medium,
             padding: lessPadding,
           },
         },
@@ -104,7 +117,7 @@ export const createAppTheme = (currentPalette) =>
               "& .MuiCardHeader-title": {
                 fontSize: "30px",
                 fontWeight: "bold",
-                margin: 0,
+                margin: margins.none,
               },
             },
           },
@@ -449,7 +462,7 @@ export const createAppTheme = (currentPalette) =>
               fontSize: "1.25rem",
               fontWeight: "bold",
               height: "40px",
-              marginTop: "10px",
+              marginTop: margins.small,
               width: "125px",
 
               "&:hover": {
@@ -481,8 +494,7 @@ export const createAppTheme = (currentPalette) =>
               fontSize: "1.25rem",
               fontWeight: "bold",
               height: "40px",
-              marginBottom: "15px",
-              marginTop: "10px",
+              margin: margins.small,
               transition: "all .5s ease-out",
               width: "150px",
 
@@ -518,7 +530,7 @@ export const createAppTheme = (currentPalette) =>
       MuiPagination: {
         styleOverrides: {
           root: {
-            marginTop: "1rem",
+            marginTop: margins.medium,
             display: "flex",
             justifyContent: "center",
             button: {
@@ -531,7 +543,7 @@ export const createAppTheme = (currentPalette) =>
       MuiTypography: {
         styleOverrides: {
           root: {
-            marginBottom: 16,
+            marginBottom: margins.small,
             color: currentPalette.fontColorDefault.default,
           },
         },
@@ -548,7 +560,6 @@ export const createAppTheme = (currentPalette) =>
           {
             props: { variant: "singleDialogSubtitle" },
             style: {
-              marginBottom: 10,
               color: currentPalette.fontColorDefault.default,
             },
           },
@@ -596,7 +607,7 @@ export const createAppTheme = (currentPalette) =>
               display: "block",
               fontSize: "30px",
               fontWeight: "bold",
-              margin: "auto",
+              margin: margins.auto,
               paddingBottom: "5px",
               width: "90%",
             },
@@ -631,14 +642,37 @@ export const createAppTheme = (currentPalette) =>
               borderBottom: "3px solid transparent",
             },
           },
+          {
+            props: { variant: "allocRoundControlPanel" },
+            style: {
+              marginTop: margins.large,
+            },
+          },
         ],
+      },
+      MuiGrid2: {
+        styleOverrides: {
+          root: {
+          }
+        },
+        variants: [
+          {
+            props: { variant: "programResultContainer" },
+            style: {
+              margin: margins.auto,
+              width: "80%",
+              marginTop: margins.medium,
+              padding: 10,
+              borderRadius: 20,
+            },
+          },
+        ]
       },
       MuiGrid: {
         styleOverrides: {
           root: {
             justifyContent: "space-evenly",
             alignItems: "flex-start",
-            marginTop: 0,
             padding: lessPadding,
             
           },
