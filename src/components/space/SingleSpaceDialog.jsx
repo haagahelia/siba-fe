@@ -7,7 +7,6 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import Grid from "@mui/material/Grid";
-import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import AlertBox from "../common/AlertBox";
@@ -238,7 +237,6 @@ export default function SingleSpaceDialog({
                   </Typography>
                 </Grid>
               </DialogContent>
-
             </Grid>
           </DialogContent>
           <DialogContent>

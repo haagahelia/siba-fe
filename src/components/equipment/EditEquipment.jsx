@@ -9,6 +9,7 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
+import useTheme from "@mui/material/styles/useTheme";
 
 export default function EditEquipment({
   singleEquipment,
@@ -18,6 +19,8 @@ export default function EditEquipment({
   setOpen,
 }) {
   Logger.logPrefix = "EditEquipment";
+
+  const theme = useTheme();
 
   const [editOpen, setEditOpen] = useState(false);
 
@@ -44,6 +47,7 @@ export default function EditEquipment({
           name: "",
           priority: "",
           description: "",
+          isMovable: "",
         });
         getAllEquipments();
       }
@@ -54,7 +58,7 @@ export default function EditEquipment({
     <div>
       <Button
         variant="contained"
-        color="secondary"
+        style={theme.components.MuiButton.editbutton}
         onClick={() => setEditOpen(true)}
       >
         Edit

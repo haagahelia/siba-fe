@@ -1,6 +1,6 @@
 import { useState } from "react";
 import dao from "../../ajax/dao";
-
+import useTheme from "@mui/material/styles/useTheme";
 import Button from "@mui/material/Button";
 import AlertBox from "../common/AlertBox";
 import ConfirmationDialog from "../common/ConfirmationDialog";
@@ -10,6 +10,7 @@ export default function DeleteBuilding({
   getAllBuildings,
   setOpen,
 }) {
+  const theme = useTheme();
   const [alertOpen, setAlertOpen] = useState(false);
   const [alertOptions, setAlertOptions] = useState({
     message: "This is an error alert — check it out!",
@@ -73,7 +74,7 @@ export default function DeleteBuilding({
       />
       <Button
         variant="contained"
-        color="red"
+        style={theme.components.MuiButton.redbutton}
         onClick={() => submitDelete(singleBuilding)}
       >
         Delete

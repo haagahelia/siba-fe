@@ -9,6 +9,7 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
+import useTheme from "@mui/material/styles/useTheme";
 
 export default function EditDepartment({
   singleDepartment,
@@ -21,6 +22,8 @@ export default function EditDepartment({
     name: singleDepartment?.name,
     description: singleDepartment?.description,
   });
+
+  const theme = useTheme();
 
   const submitEdits = async () => {
     const validation = validate(department);
@@ -43,7 +46,7 @@ export default function EditDepartment({
     <div>
       <Button
         variant="contained"
-        color="secondary"
+        style={theme.components.MuiButton.editbutton}
         onClick={() => {
           setEditOpen(true);
         }}

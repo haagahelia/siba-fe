@@ -1,33 +1,34 @@
 import Grid from "@mui/material/Grid";
 import ListItemText from "@mui/material/ListItemText";
 import Typography from "@mui/material/Typography";
+import DialogContent from "@mui/material/DialogContent";
 
-export default function BuildingDisplay({ singleBuilding, flexDirection }) {
+export default function BuildingDisplay({ singleBuilding }) {
   return (
     <Grid
       container
       variant="sibaGridSingleItemDisplay"
-      spacing={1}
-      direction={flexDirection}
     >
-      <Grid item md={3} xs={7}>
-        <Typography variant="boldTitle">Name:</Typography>
-        <ListItemText
-          primary={singleBuilding.name}
-          primaryTypographyProps={{
-            variant: "body2",
-          }}
-        />
-      </Grid>
-      <Grid item md={2} xs={3}>
-        <Typography variant="boldTitle">Description:</Typography>
-        <ListItemText
-          primary={singleBuilding.description}
-          primaryTypographyProps={{
-            variant: "body2",
-          }}
-        />
-      </Grid>
+      <DialogContent variant="sibaDialogContent2">
+        <Grid item xs={12} sm={6}>
+          <Typography variant="singleDialogSubtitle">Name:&nbsp;</Typography>
+        </Grid>
+        <Grid item xs={12} sm={6}>
+          <Typography variant="singleDialogSubtitle">
+            {singleBuilding?.name}
+          </Typography>
+        </Grid>
+      </DialogContent>
+      <DialogContent variant="sibaDialogContent2">
+        <Grid item xs={12} sm={6}>
+          <Typography variant="singleDialogSubtitle">Description:&nbsp;</Typography>
+        </Grid>
+        <Grid item xs={12} sm={6}>
+          <Typography variant="singleDialogSubtitle">
+          {singleBuilding?.description}
+          </Typography>
+        </Grid>
+      </DialogContent>
     </Grid>
   );
 }
