@@ -8,6 +8,8 @@ import DialogTitle from "@mui/material/DialogTitle";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import AlertBox from "../common/AlertBox";
+import CloseIcon from "@mui/icons-material/Close";
+import IconButton from "@mui/material/IconButton";
 import AddSubEquipContainer from "./AddSubEquipContainer";
 import DeleteSubject from "./DeleteSubject";
 import EditSubjectContainer from "./EditSubjectContainer";
@@ -61,10 +63,19 @@ export default function SingleSubjectDialog({
         alertOptions={alertOptions}
         open={setAlertOpen}
       />
-      <Dialog open={open} onClose={() => setOpen(false)} width="400px">
+      <Dialog open={open} onClose={() => setOpen(false)} maxWidth="md" fullWidth>
         <DialogTitle id="dialog-title">
           {singleSubject?.subjectName}
         </DialogTitle>
+        <IconButton
+          edge="end"
+          color="inherit"
+          onClick={() => setOpen(false)}
+          aria-label="close"
+          style={{ position: "absolute", top: "10px", right: "20px" }}
+        >
+          <CloseIcon />
+        </IconButton>
         <DialogContent>
           <DialogActions>
             <DeleteSubject
@@ -86,66 +97,113 @@ export default function SingleSubjectDialog({
             <Grid
               container
               variant="sibaGridSingleItemDisplay"
-              spacing={1}
               column={14}
-              direction="column"
             >
-              <Grid item s={6}>
-                <Typography variant="subtitle1">
-                  Name:&nbsp;
-                  {singleSubject?.subjectName}
-                </Typography>
-              </Grid>
-              <Grid item s={6}>
-                <Typography variant="subtitle1">
-                  Group size:&nbsp;
-                  {singleSubject?.groupSize}
-                </Typography>
-              </Grid>
-              <Grid item s={6}>
-                <Typography variant="subtitle1">
-                  Group count:&nbsp;
-                  {singleSubject?.groupCount}
-                </Typography>
-              </Grid>
-              <Grid item s={6}>
-                <Typography variant="subtitle1">
-                  Length of lessons:&nbsp;
-                  {singleSubject?.sessionLength}
-                </Typography>
-              </Grid>
-              <Grid item s={6}>
-                <Typography variant="subtitle1">
-                  Number of hours:&nbsp;
-                  {singleSubject?.sessionCount}
-                </Typography>
-              </Grid>
-              <Grid item s={6}>
-                <Typography variant="subtitle1">
-                  Required square meters:&nbsp;
-                  {singleSubject?.area}
-                </Typography>
-              </Grid>
-              <Grid item s={6}>
-                <Typography variant="subtitle1">
-                  Major:&nbsp;
-                  {singleSubject?.programName}
-                </Typography>
-              </Grid>
-              <Grid item s={6}>
-                <Typography variant="subtitle1">
-                  Room type:&nbsp;
-                  {singleSubject?.spaceTypeName}
-                </Typography>
-              </Grid>
-              <Grid item s={6}>
-                <Typography variant="subtitle1">Equipment needs:</Typography>
-                <SubjectEquipmentList
-                  equipListBySubId={equipListBySubId}
-                  getEquipmentsBySubId={getEquipmentsBySubId}
-                />
-              </Grid>
+              <DialogContent variant="sibaDialogContent2">
+                <Grid item xs={12} sm={6}>
+                  <Typography variant="singleDialogSubtitle">
+                    Name:&nbsp;
+                  </Typography>
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <Typography variant="singleDialogSubtitle">
+                    {singleSubject?.subjectName}
+                  </Typography>
+                </Grid>
+              </DialogContent>
+              <DialogContent variant="sibaDialogContent2">
+                <Grid item xs={12} sm={6}>
+                  <Typography variant="singleDialogSubtitle">
+                    Group size:&nbsp;
+                  </Typography>
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <Typography variant="singleDialogSubtitle">
+                    {singleSubject?.groupSize}
+                  </Typography>
+                </Grid>
+              </DialogContent>
+              <DialogContent variant="sibaDialogContent2">
+                <Grid item xs={12} sm={6}>
+                  <Typography variant="singleDialogSubtitle">
+                    Group count:&nbsp;
+                  </Typography>
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <Typography variant="singleDialogSubtitle">
+                    {singleSubject?.groupCount}
+                  </Typography>
+                </Grid>
+              </DialogContent>
+              <DialogContent variant="sibaDialogContent2">
+                <Grid item xs={12} sm={6}>
+                  <Typography variant="singleDialogSubtitle">
+                    Length of lessons:&nbsp;
+                  </Typography>
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <Typography variant="singleDialogSubtitle">
+                    {singleSubject?.sessionLength}
+                  </Typography>
+                </Grid>
+              </DialogContent>
+              <DialogContent variant="sibaDialogContent2">
+                <Grid item xs={12} sm={6}>
+                  <Typography variant="singleDialogSubtitle">
+                    Number of hours:&nbsp;
+                  </Typography>
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <Typography variant="singleDialogSubtitle">
+                    {singleSubject?.sessionCount}
+                  </Typography>
+                </Grid>
+              </DialogContent>
+              <DialogContent variant="sibaDialogContent2">
+                <Grid item xs={12} sm={6}>
+                  <Typography variant="singleDialogSubtitle">
+                    Required square meters:&nbsp;
+                  </Typography>
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <Typography variant="singleDialogSubtitle">
+                    {singleSubject?.area}
+                  </Typography>
+                </Grid>
+              </DialogContent>
+              <DialogContent variant="sibaDialogContent2">
+                <Grid item xs={12} sm={6}>
+                  <Typography variant="singleDialogSubtitle">
+                    Major:&nbsp;
+                  </Typography>
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <Typography variant="singleDialogSubtitle">
+                    {singleSubject?.programName}
+                  </Typography>
+                </Grid>
+              </DialogContent>
+              <DialogContent variant="sibaDialogContent2">
+                <Grid item xs={12} sm={6}>
+                  <Typography variant="singleDialogSubtitle">
+                    Room type:&nbsp;
+                  </Typography>
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <Typography variant="singleDialogSubtitle">
+                    {singleSubject?.spaceTypeName}
+                  </Typography>
+                </Grid>
+              </DialogContent>
+
             </Grid>
+            <DialogContent>
+              <Typography variant="boldTitle2">Equipment needs:</Typography>
+              <SubjectEquipmentList
+                equipListBySubId={equipListBySubId}
+                getEquipmentsBySubId={getEquipmentsBySubId}
+              />
+            </DialogContent>
           </DialogContent>
         </DialogContent>
       </Dialog>

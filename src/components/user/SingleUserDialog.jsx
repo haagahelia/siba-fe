@@ -8,6 +8,8 @@ import DialogTitle from "@mui/material/DialogTitle";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import AlertBox from "../common/AlertBox";
+import CloseIcon from "@mui/icons-material/Close";
+import IconButton from "@mui/material/IconButton";
 import AddDepartmentPlannerContainer from "./AddDepartmentPlannerContainer";
 import DeleteUser from "./DeleteUser";
 import EditUserContainer from "./EditUserContainer";
@@ -58,8 +60,17 @@ export default function SingleUserDialog({
         alertOptions={alertOptions}
         open={setAlertOpen}
       />
-      <Dialog open={open} onClose={() => setOpen(false)} width="400px">
+      <Dialog open={open} onClose={() => setOpen(false)} maxWidth="md" fullWidth>
         <DialogTitle id="dialog-title">{singleUser?.email}</DialogTitle>
+        <IconButton
+          edge="end"
+          color="inherit"
+          onClick={() => setOpen(false)}
+          aria-label="close"
+          style={{ position: "absolute", top: "10px", right: "20px" }}
+        >
+          <CloseIcon />
+        </IconButton>
         <DialogContent>
           <DialogActions>
             <DeleteUser
@@ -82,49 +93,77 @@ export default function SingleUserDialog({
             <Grid
               container
               variant="sibaGridSingleItemDisplay"
-              spacing={1}
               column={14}
-              direction="column"
             >
-              <Grid item s={6}>
-                <Typography variant="subtitle1">
-                  id:&nbsp;
-                  {singleUser?.id}
-                </Typography>
-              </Grid>
-              <Grid item s={6}>
-                <Typography variant="subtitle1">
-                  Email:&nbsp;
-                  {singleUser?.email}
-                </Typography>
-              </Grid>
-              <Grid item s={6}>
-                <Typography variant="subtitle1">
-                  isAdmin:&nbsp;
-                  {singleUser?.isAdmin}
-                </Typography>
-              </Grid>
-              <Grid item s={6}>
-                <Typography variant="subtitle1">
-                  isPlanner:&nbsp;
-                  {singleUser?.isPlanner}
-                </Typography>
-              </Grid>
-              <Grid item s={6}>
-                <Typography variant="subtitle1">
-                  isStatist:&nbsp;
-                  {singleUser?.isStatist}
-                </Typography>
-              </Grid>
-              <Grid item s={6}>
-                <Typography variant="subtitle1"> Planner for:&nbsp;</Typography>
+              <DialogContent variant="sibaDialogContent2">
+                <Grid item xs={12} sm={6}>
+                  <Typography variant="singleDialogSubtitle">
+                    id:&nbsp;
+                  </Typography>
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <Typography variant="singleDialogSubtitle">
+                    {singleUser?.id}
+                  </Typography>
+                </Grid>
+              </DialogContent>
+              <DialogContent variant="sibaDialogContent2">
+                <Grid item xs={12} sm={6}>
+                  <Typography variant="singleDialogSubtitle">
+                    Email:&nbsp;
+                  </Typography>
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <Typography variant="singleDialogSubtitle">
+                    {singleUser?.email}
+                  </Typography>
+                </Grid>
+              </DialogContent>
+              <DialogContent variant="sibaDialogContent2">
+                <Grid item xs={12} sm={6}>
+                  <Typography variant="singleDialogSubtitle">
+                    isAdmin:&nbsp;
+                  </Typography>
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <Typography variant="singleDialogSubtitle">
+                    {singleUser?.isAdmin ? "Yes" : "No"}
+                  </Typography>
+                </Grid>
+              </DialogContent>
+              <DialogContent variant="sibaDialogContent2">
+                <Grid item xs={12} sm={6}>
+                  <Typography variant="singleDialogSubtitle">
+                    isPlanner:&nbsp;
+                  </Typography>
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <Typography variant="singleDialogSubtitle">
+                    {singleUser?.isPlanner ? "Yes" : "No"}
+                  </Typography>
+                </Grid>
+              </DialogContent>
+              <DialogContent variant="sibaDialogContent2">
+                <Grid item xs={12} sm={6}>
+                  <Typography variant="singleDialogSubtitle">
+                    isStatist:&nbsp;
+                  </Typography>
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <Typography variant="singleDialogSubtitle">
+                    {singleUser?.isStatist ? "Yes" : "No"}
+                  </Typography>
+                </Grid>
+              </DialogContent>
+              <DialogContent>
+                <Typography variant="boldTitle2"> Planner for:</Typography>
                 <UserDepartmentList
                   departmentListByUserId={departmentListByUserId}
                   getDeparmentsByUserId={getDepartmentListByUserId}
                   getAllUsers={getAllUsers}
                   setOpen={setOpen}
                 />
-              </Grid>
+              </DialogContent>
             </Grid>
           </DialogContent>
         </DialogContent>

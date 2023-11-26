@@ -2,6 +2,8 @@ import { useEffect } from "react";
 import { useRoleLoggedIn } from "../../hooks/useRoleLoggedIn";
 import Logger from "../../logger/logger";
 
+import Grid from "@mui/material/Grid";
+import Typography from "@mui/material/Typography";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
@@ -55,10 +57,62 @@ export default function SingleEquipmentDialog({
           />
         </DialogActions>
       )}
-      <DialogContent>id: {singleEquipment?.id}</DialogContent>
-      <DialogContent>Name: {singleEquipment?.name}</DialogContent>
-      <DialogContent> Priority: {singleEquipment?.priority}</DialogContent>
-      <DialogContent>Description: {singleEquipment?.description}</DialogContent>
+      <DialogContent>
+        <Grid
+          container
+          variant="sibaGridSingleItemDisplay"
+          column={14}
+        >
+          <DialogContent variant="sibaDialogContent2">
+          <Grid item xs={12} sm={6}>
+          <Typography variant="singleDialogSubtitle">
+            id:
+          </Typography>
+          </Grid>
+          <Grid item xs={12} sm={6}>
+          <Typography variant="singleDialogSubtitle">
+            {singleEquipment?.id}
+          </Typography>
+          </Grid>
+          </DialogContent>
+          <DialogContent variant="sibaDialogContent2">
+          <Grid item xs={12} sm={6}>
+          <Typography variant="singleDialogSubtitle">
+            Name:
+          </Typography>
+          </Grid>
+          <Grid item xs={12} sm={6}>
+          <Typography variant="singleDialogSubtitle">
+            {singleEquipment?.name}
+          </Typography>
+          </Grid>
+          </DialogContent>
+          <DialogContent variant="sibaDialogContent2">
+          <Grid item xs={12} sm={6}>
+          <Typography variant="singleDialogSubtitle">
+            Priority:
+          </Typography>
+          </Grid>
+          <Grid item xs={12} sm={6}>
+          <Typography variant="singleDialogSubtitle">
+            {singleEquipment?.equipmentPriority}
+          </Typography>
+          </Grid>
+          </DialogContent>
+          <DialogContent variant="sibaDialogContent2">
+          <Grid item xs={12} sm={6}>
+          <Typography variant="singleDialogSubtitle">
+            Description:
+          </Typography>
+          </Grid>
+          <Grid item xs={12} sm={6}>
+          <Typography variant="singleDialogSubtitle">
+            {singleEquipment?.description}
+          </Typography>
+          </Grid>
+          </DialogContent>
+        </Grid>
+      </DialogContent>
     </Dialog>
   );
 }

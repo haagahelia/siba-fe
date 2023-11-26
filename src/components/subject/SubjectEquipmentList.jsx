@@ -5,6 +5,7 @@ import ListItemText from "@mui/material/ListItemText";
 import Typography from "@mui/material/Typography";
 import DeleteSubEquip from "./DeleteSubEquip";
 import EditSubEquipContainer from "./EditSubEquipContainer";
+import DialogContent from "@mui/material/DialogContent";
 
 export default function SubjectEquipmentList({
   equipListBySubId,
@@ -12,19 +13,12 @@ export default function SubjectEquipmentList({
 }) {
   return (
     <div>
-      {equipListBySubId.length &&
+      {equipListBySubId.length ? (
         equipListBySubId.map((value) => {
           return (
-            <List key={value.equipmentId}>
-              <ListItem>
-                <Grid
-                  item
-                  xs={3}
-                  sx={{
-                    alignItems: "center",
-                    marginRight: "10px",
-                  }}
-                >
+            <div key={value.equipmentId}>
+              <List>
+                <ListItem>
                   <EditSubEquipContainer
                     subId={value.subjectId}
                     equipId={value.equipmentId}
@@ -38,51 +32,64 @@ export default function SubjectEquipmentList({
                     getEquipmentsBySubId={getEquipmentsBySubId}
                     subId={value.subjectId}
                   />
-                </Grid>
-                <Grid
-                  container
-                  variant="sibaGridSingleItemDisplay"
-                  column={4}
-                  direction="column"
-                >
-                  <Grid item xs={6}>
-                    <ListItemText>
-                      <Typography variant="subtitle1">
-                        Equipment name:&nbsp; {value.name}
-                      </Typography>
-                    </ListItemText>
-                  </Grid>
-                  <Grid item xs={6}>
-                    <ListItemText>
-                      <Typography variant="subtitle1">
-                        Equipment information:&nbsp; {value.description}
-                      </Typography>
-                    </ListItemText>
-                  </Grid>
-                  <Grid item xs={6}>
-                    <ListItemText>
-                      <Typography variant="subtitle1">
-                        Equipment priority value:&nbsp; {value.priority}
-                      </Typography>
-                    </ListItemText>
-                  </Grid>
-                  <Grid item xs={6}>
-                    <ListItemText>
-                      <Typography variant="subtitle1">
-                        Equipment mandatority :&nbsp;{" "}
-                        {value.obligatory === 1
-                          ? "Yes"
-                          : value.obligatory === 0
-                          ? "No"
-                          : null}
-                      </Typography>
-                    </ListItemText>
-                  </Grid>
-                </Grid>
-              </ListItem>
-            </List>
+                  <DialogContent>
+                    <DialogContent variant="sibaDialogContentSubjectEquipment">
+                      <Grid item xs={12} sm={6}>
+                        <Typography variant="singleDialogSubtitle2">
+                          Name:&nbsp;&nbsp;
+                        </Typography>
+                        <Typography variant="singleDialogSubtitle2">
+                          {value.name}
+                        </Typography>
+                      </Grid>
+                    </DialogContent>
+                    <DialogContent variant="sibaDialogContentSubjectEquipment">
+                      <Grid item xs={12} sm={6}>
+                        <Typography variant="singleDialogSubtitle2">
+                          Information:&nbsp;&nbsp;
+                        </Typography>
+                        <Typography variant="singleDialogSubtitle2">
+                          {value.description}
+                        </Typography>
+                      </Grid>
+                    </DialogContent>
+                    <DialogContent variant="sibaDialogContentSubjectEquipment">
+                      <Grid item xs={12} sm={6}>
+                        <Typography variant="singleDialogSubtitle2">
+                          Priority value:&nbsp;&nbsp;
+                        </Typography>
+                        <Typography variant="singleDialogSubtitle2">
+                          {value.priority}
+                        </Typography>
+                      </Grid>
+                    </DialogContent>
+                    <DialogContent variant="sibaDialogContentSubjectEquipment">
+                      <Grid item xs={12} sm={6}>
+                        <Typography variant="singleDialogSubtitle2">
+                          Mandatority :&nbsp;&nbsp;
+                        </Typography>
+                        <Typography variant="singleDialogSubtitle2">
+                          {" "}
+                          {value.obligatory === 1
+                            ? "Yes"
+                            : value.obligatory === 0
+                              ? "No"
+                              : null}
+                        </Typography>
+                      </Grid>
+                    </DialogContent>
+                  </DialogContent>
+                </ListItem>
+              </List>
+            </div>
           );
-        })}
+        })
+      ) : (
+        <Grid item xs={12} sm={6}>
+          <Typography>No equipment added</Typography>
+        </Grid>
+      )
+      }
     </div>
   );
 }

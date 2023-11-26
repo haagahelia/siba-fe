@@ -341,6 +341,20 @@ export const createAppTheme = (currentPalette) =>
             },
             },
           },
+          {
+            props: { variant: "sibaDialogContentSubjectEquipment" },
+            style: {
+              width: "100%",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "flex-start",
+              padding: lessPadding,
+               "&:nth-of-type(odd)": {
+              backgroundColor: currentPalette.background.default,
+              borderBottom: "none",
+            },
+            },
+          },
         ],
       },
       MuiDialog: {
@@ -535,6 +549,12 @@ export const createAppTheme = (currentPalette) =>
             props: { variant: "singleDialogSubtitle" },
             style: {
               marginBottom: 10,
+              color: currentPalette.fontColorDefault.default,
+            },
+          },
+          {
+            props: { variant: "singleDialogSubtitle2" },
+            style: {
               color: currentPalette.fontColorDefault.default,
             },
           },

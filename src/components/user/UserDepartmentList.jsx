@@ -4,6 +4,7 @@ import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import Typography from "@mui/material/Typography";
 import DeleteUserPlanner from "./DeleteUserPlanner";
+import { DialogContent } from "@mui/material";
 
 export default function UserDepartmentList({
   departmentListByUserId,
@@ -12,44 +13,40 @@ export default function UserDepartmentList({
 }) {
   return (
     <div>
-      {departmentListByUserId.length &&
+      {departmentListByUserId.length ? (
         departmentListByUserId.map((value) => {
           return (
-            <List key={value.id}>
-              <ListItem>
-                <Grid
-                  item
-                  xs={3}
-                  sx={{
-                    alignItems: "center",
-                    marginRight: "10px",
-                  }}
-                >
+            <div key={value.id}>
+              <List>
+                <ListItem>
                   <DeleteUserPlanner
                     singleDepartmentByUserId={value}
                     getDeparmentsByUserId={getDeparmentsByUserId}
                     userId={value.userId}
                     getAllUsers={getAllUsers}
                   />
-                </Grid>
-                <Grid
-                  container
-                  variant="sibaGridSingleItemDisplay"
-                  column={4}
-                  direction="column"
-                >
-                  <Grid item xs={6}>
-                    <ListItemText>
-                      <Typography variant="subtitle1">
-                        Department:&nbsp; {value.name}
-                      </Typography>
-                    </ListItemText>
-                  </Grid>
-                </Grid>
-              </ListItem>
-            </List>
+                  <DialogContent>
+                    <DialogContent variant="sibaDialogContent3">
+                      <Grid item xs={12} sm={6}>
+                        <Typography variant="boldTitle">
+                          Department:&nbsp;&nbsp;
+                        </Typography>
+                        <Typography variant="singleDialogSubtitle">
+                          {value.name}
+                        </Typography>
+                      </Grid>
+                    </DialogContent>
+                  </DialogContent>
+                </ListItem>
+              </List>
+            </div>
           );
-        })}
+        })
+      ) : (
+        <Grid item xs={12} sm={6}>
+          <Typography>None</Typography>
+        </Grid>
+      )}
     </div>
   );
 }

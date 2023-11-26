@@ -7,15 +7,18 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import Grid from "@mui/material/Grid";
 import BuildingInputField from "./BuildingInputField";
+import useTheme from "@mui/material/styles/useTheme";
 
 export default function EditBuildingForm({ formik }) {
   const [open, setOpen] = useState(false);
+
+  const theme= useTheme();
 
   return (
     <div>
       <Button
         variant="contained"
-        color="secondary"
+        style={theme.components.MuiButton.editbutton}
         onClick={() => {
           setOpen(true);
         }}
