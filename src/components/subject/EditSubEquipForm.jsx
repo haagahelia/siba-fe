@@ -16,7 +16,7 @@ import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import useTheme from "@mui/material/styles/useTheme";
 
-export default function EditSubEquipForm({ formik, equipmentPriorityList }) {
+export default function EditSubEquipForm({ formik, priorityList }) {
   const [open, setOpen] = useState(false);
   const [equipPriority, setEquipPriority] = useState(0);
   const theme = useTheme();
@@ -24,14 +24,14 @@ export default function EditSubEquipForm({ formik, equipmentPriorityList }) {
   /* Here we look for the priority of the equipment selected in select,
      so that the user can see what the equipment's default priority value is */
   useEffect(() => {
-    const prio = equipmentPriorityList.find((obj) => {
+    const prio = priorityList.find((obj) => {
       return obj.id === formik.values.equipmentId;
     });
 
-    if (prio?.equipmentPriority) {
-      setEquipPriority(prio.equipmentPriority);
+    if (prio?.priority) {
+      setEquipPriority(prio.priority);
     }
-  }, [equipmentPriorityList]);
+  }, [priorityList]);
 
   return (
     <div>

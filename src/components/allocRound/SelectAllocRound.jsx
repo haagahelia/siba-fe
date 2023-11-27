@@ -27,6 +27,8 @@ export default function SelectAllocRound({ singleAllocRound }) {
     // console.log("allocRoundId 456: " + allocRoundId);
     // appContext.allocRoundId = allocRoundObj.id; // Works now! Updating app context.
     // appContext.allocRoundName = allocRoundObj.name; // Now using AllocRoundContext
+    localStorage.setItem("allocRoundId", allocRoundObj.id);
+    localStorage.setItem("allocRoundName", allocRoundObj.name);
     setAllocRoundContext({allocRoundId: allocRoundObj.id, allocRoundName: allocRoundObj.name});
   };
 

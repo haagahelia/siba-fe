@@ -65,7 +65,7 @@ export interface SpaceType {
 export interface Equipment {
   id: number;
   name: string;
-  equipmentPriority: number;
+  priority: number;
   description: string;
 }
 

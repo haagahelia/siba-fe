@@ -95,7 +95,7 @@ export default function SingleEquipmentDialog({
           </Grid>
           <Grid item xs={12} sm={6}>
           <Typography variant="singleDialogSubtitle">
-            {singleEquipment?.equipmentPriority}
+            {singleEquipment?.priority}
           </Typography>
           </Grid>
           </DialogContent>
