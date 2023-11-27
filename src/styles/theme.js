@@ -665,6 +665,7 @@ export const createAppTheme = (currentPalette) =>
           },
         ],
       },
+
       MuiGrid: {
         styleOverrides: {
           root: {
