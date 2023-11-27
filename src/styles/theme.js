@@ -28,7 +28,6 @@ export const indexRoomCommon = {
   marginLeft: margins.roomAndProgramResults.roomIndex,
 };
 
-
 export const createAppTheme = (currentPalette) =>
   createTheme({
     palette: currentPalette,
@@ -226,7 +225,6 @@ export const createAppTheme = (currentPalette) =>
             backgroundColor: currentPalette.backgroundDarker.default,
             border: `1px solid ${currentPalette.borderColor.cardBoder}`,
             color: currentPalette.fontColorDefault.default,
-          
           },
         },
         variants: [
@@ -334,10 +332,10 @@ export const createAppTheme = (currentPalette) =>
               flexDirection: "row",
               alignItems: "center",
               padding: lessPadding,
-               "&:nth-of-type(odd)": {
-              backgroundColor: currentPalette.background.default,
-              borderBottom: "none",
-            },
+              "&:nth-of-type(odd)": {
+                backgroundColor: currentPalette.background.default,
+                borderBottom: "none",
+              },
             },
           },
           {
@@ -348,10 +346,10 @@ export const createAppTheme = (currentPalette) =>
               flexDirection: "row",
               alignItems: "center",
               padding: lessPadding,
-               "&:nth-of-type(odd)": {
-              backgroundColor: currentPalette.background.default,
-              borderBottom: "none",
-            },
+              "&:nth-of-type(odd)": {
+                backgroundColor: currentPalette.background.default,
+                borderBottom: "none",
+              },
             },
           },
           {
@@ -362,10 +360,10 @@ export const createAppTheme = (currentPalette) =>
               flexDirection: "column",
               alignItems: "flex-start",
               padding: lessPadding,
-               "&:nth-of-type(odd)": {
-              backgroundColor: currentPalette.background.default,
-              borderBottom: "none",
-            },
+              "&:nth-of-type(odd)": {
+                backgroundColor: currentPalette.background.default,
+                borderBottom: "none",
+              },
             },
           },
         ],
@@ -652,8 +650,7 @@ export const createAppTheme = (currentPalette) =>
       },
       MuiGrid2: {
         styleOverrides: {
-          root: {
-          }
+          root: {},
         },
         variants: [
           {
@@ -666,7 +663,7 @@ export const createAppTheme = (currentPalette) =>
               borderRadius: 20,
             },
           },
-        ]
+        ],
       },
       MuiGrid: {
         styleOverrides: {
@@ -674,7 +671,6 @@ export const createAppTheme = (currentPalette) =>
             justifyContent: "space-evenly",
             alignItems: "flex-start",
             padding: lessPadding,
-            
           },
         },
         variants: [
@@ -736,7 +732,6 @@ export const createAppTheme = (currentPalette) =>
               padding: morePadding,
             },
           },
-
         ],
       },
       MuiAppBar: {
@@ -789,6 +784,21 @@ export const createAppTheme = (currentPalette) =>
           },
         },
       },
+      MuiTable: {
+        styleOverrides: {
+          root: {
+            overflowX: "auto !important",
+            display: "block",
+          },
+        },
+      },
+      MuiTableContainer: {
+        styleOverrides: {
+          root: {
+            overflowX: "auto !important",
+          },
+        },
+      },
       MuiTableRow: {
         styleOverrides: {
           root: {
@@ -838,7 +848,7 @@ export const createAppTheme = (currentPalette) =>
           },
         ],
       },
-      
+
       // Enables CSS styling
       MuiCssBaseline: {
         styleOverrides: {
