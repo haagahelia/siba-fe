@@ -4,7 +4,7 @@ import logo from "../styles/SibeliusLogoSmall.svg";
 
 // Palettes are: darkPalette, lightPalette,
 // redPalette (for testing), yellowPalette (for testing),
-
+const theme = createTheme();
 export const lessPadding = "4px";
 export const morePadding = "16px";
 export const navbarWidth = "171px";
@@ -788,15 +788,22 @@ export const createAppTheme = (currentPalette) =>
       MuiTable: {
         styleOverrides: {
           root: {
-            overflowX: "auto !important",
-            display: "block",
+            [theme.breakpoints.down("lg")]: {
+              overflowX: "auto",
+              display: "block",
+              width: "100%",
+            },
           },
         },
       },
       MuiTableContainer: {
         styleOverrides: {
           root: {
-            overflowX: "auto !important",
+            [theme.breakpoints.down("lg")]: {
+              overflowX: "auto",
+              display: "block",
+              width: "100%",
+            },
           },
         },
       },
