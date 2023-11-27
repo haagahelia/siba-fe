@@ -46,8 +46,8 @@ export default function EquipmentList({
           : b.name.localeCompare(a.name);
       case "Priority":
         return order === "asc"
-          ? a.equipmentPriority - b.equipmentPriority
-          : b.equipmentPriority - a.equipmentPriority;
+          ? a.priority - b.priority
+          : b.priority - a.priority;
       case "Description":
         return order === "asc"
           ? a.description.localeCompare(b.description)
@@ -130,7 +130,7 @@ export default function EquipmentList({
                   </TableCell>
                   <TableCell>{value.id}</TableCell>
                   <TableCell>{value.name}</TableCell>
-                  <TableCell>{value.equipmentPriority}</TableCell>
+                  <TableCell>{value.priority}</TableCell>
                   <TableCell>{value.description}</TableCell>
                 </TableRow>
               ))}

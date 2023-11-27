@@ -36,10 +36,10 @@ export default function AddSubEquipForm({
     const prio = equipmentSelectList.find((obj) => {
       return obj.id === formik.values.equipmentId;
     });
-    if (prio?.equipmentPriority) {
-      setEquipPriority(prio.equipmentPriority);
+    if (prio?.priority) {
+      setEquipPriority(prio.priority);
       // Sets the default priority value directly in the input field
-      formik.setValues({ ...formik.values, priority: prio.equipmentPriority });
+      formik.setValues({ ...formik.values, priority: prio.priority });
     }
   }, [formik.values.equipmentId]);
 

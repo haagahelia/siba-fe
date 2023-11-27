@@ -19,7 +19,7 @@ export default function EditSubEquipContainer({
   name,
   getEquipmentsBySubId,
 }) {
-  const [equipmentPriorityList, setEquipmentPriorityList] = useState([]);
+  const [priorityList, setpriorityList] = useState([]);
   const [alertOpen, setAlertOpen] = useState(false);
   const [alertOptions, setAlertOptions] = useState({
     title: "This is title",
@@ -84,7 +84,7 @@ export default function EditSubEquipContainer({
     formik.resetForm(setInitialEquipValues(formik.values));
     getEquipmentsBySubId(subId);
   }
-  const getEquipmentPriority = async function () {
+  const getpriority = async function () {
     const { httpStatus, data } = await dao.fetchEquipmentData();
     if (httpStatus !== 200) {
       ajaxRequestErrorHandler(
@@ -94,12 +94,12 @@ export default function EditSubEquipContainer({
         setAlertOpen,
       );
     } else {
-      setEquipmentPriorityList(data);
+      setpriorityList(data);
     }
   };
 
   useEffect(() => {
-    getEquipmentPriority();
+    getpriority();
   }, []);
 
   return (
@@ -118,7 +118,7 @@ export default function EditSubEquipContainer({
       />
       <EditSubEquipForm
         formik={formik}
-        equipmentPriorityList={equipmentPriorityList}
+        priorityList={priorityList}
         subId={subId}
       />
     </div>

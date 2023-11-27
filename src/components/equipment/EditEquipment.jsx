@@ -45,9 +45,9 @@ export default function EditEquipment({
         setSingleEquipment({
           id: "",
           name: "",
-          priority: "",
+          priority: 0,
           description: "",
-          isMovable: "",
+          isMovable: 0,
         });
         getAllEquipments();
       }

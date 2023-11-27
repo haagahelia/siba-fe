@@ -50,7 +50,7 @@ export const editEquipment = async (
   editedEquipment: Equipment,
   id: number,
 ): Promise<boolean> => {
-  const response = await update(`${baseUrl}/equipment/:${id}`, editedEquipment);
+  const response = await update(`${baseUrl}/equipment/${id}`, editedEquipment);
   return response.ok;
 };
 

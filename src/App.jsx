@@ -5,7 +5,7 @@ import { useThemeSwitcher } from "./hooks/useThemeSwitcher";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import ThemeProvider from "@mui/material/styles/ThemeProvider";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Nav from "./routers/Nav";
 import { ThemeIcon } from "./styles/themeIcons";
 
@@ -15,6 +15,16 @@ export default function App() {
     allocRoundId: 10004,
     allocRoundName: "Demo",
   });
+
+  useEffect(() => {
+
+    setAllocRoundContext({
+      allocRoundId: Number(localStorage.getItem("allocRoundId")) || 10007,
+      allocRoundName: localStorage.getItem("allocRoundName") || "N/A",
+    })
+  }
+
+    , []);
 
   return (
     <div className="App">
