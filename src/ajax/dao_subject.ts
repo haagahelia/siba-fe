@@ -35,10 +35,10 @@ export const postNewSubject = async (newSubject: Subject): Promise<boolean> => {
 
 // import multiple subject
 export const postNewSubjects = async (
-  newSubject: Subject[],
+  newSubject: Subject[], allocRoundId: number
 ): Promise<boolean> => {
   console.log("ajax", newSubject);
-  const response = await create(`${baseUrl}/subject/multi`, newSubject);
+  const response = await create(`${baseUrl}/subject/multi/${allocRoundId}`, newSubject);
   return response.ok;
 };
 

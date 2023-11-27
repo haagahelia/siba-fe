@@ -9,6 +9,7 @@ import {
 
 import Button from "@mui/material/Button";
 import AlertBox from "../common/AlertBox";
+import Logger from "../../logger/logger";
 
 export default function ImportSubjectButton({
   progNameList,
@@ -25,7 +26,8 @@ export default function ImportSubjectButton({
     severity: "error",
   });
 
-  const { allocRoundContext } = useContext(AllocRoundContext);
+  const {allocRoundContext} = useContext(AllocRoundContext);
+  Logger.debug('allocRoundId', allocRoundContext.allocRoundId)
 
   const isProgramAuthorized = (subject) => {
     return progNameList.includes(subject.Major);
@@ -92,7 +94,7 @@ export default function ImportSubjectButton({
       setSubjectFailedToImport,
       getAllSubjects,
       processSubject,
-      dao.postNewSubjects,
+      (importedSubjectList) => dao.postNewSubjects(importedSubjectList, allocRoundContext.allocRoundId),
       setAlertOpen,
       setAlertOptions,
     );
