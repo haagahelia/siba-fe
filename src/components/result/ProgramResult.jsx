@@ -48,7 +48,7 @@ export default function ProgramResult() {
     await progStore.fetchNames(allocRoundContext.allocRoundId);
     const names = progStore.getNames();
     Logger.debug(
-      `getProgramData: successfully fetched ${names.length} program names.`,
+      `getProgramData: successfully fetched ${names.length} program names.`
     );
     setProgs(names);
   };
@@ -77,7 +77,7 @@ export default function ProgramResult() {
   };
 
   useEffect(() => {
-    document.title = 'Program Results';
+    document.title = "Program Results";
   }, []);
 
   return (
@@ -146,7 +146,11 @@ export default function ProgramResult() {
 
       <Grid2
         container
-        rowSpacing={1}
+        rowSpacing={{
+          md: 3,
+          lg: 2,
+          xl: 1,
+        }}
         columnSpacing={{ xs: 1, sm: 2, md: 3 }}
         spacing={2}
         variant="programResultContainer"

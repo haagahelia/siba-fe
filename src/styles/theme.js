@@ -4,7 +4,7 @@ import logo from "../styles/SibeliusLogoSmall.svg";
 
 // Palettes are: darkPalette, lightPalette,
 // redPalette (for testing), yellowPalette (for testing),
-
+const theme = createTheme();
 export const lessPadding = "4px";
 export const morePadding = "16px";
 export const navbarWidth = "171px";
@@ -27,7 +27,6 @@ export const indexRoomCommon = {
   border: "3px solid",
   marginLeft: margins.roomAndProgramResults.roomIndex,
 };
-
 
 export const createAppTheme = (currentPalette) =>
   createTheme({
@@ -226,7 +225,6 @@ export const createAppTheme = (currentPalette) =>
             backgroundColor: currentPalette.backgroundDarker.default,
             border: `1px solid ${currentPalette.borderColor.cardBoder}`,
             color: currentPalette.fontColorDefault.default,
-          
           },
         },
         variants: [
@@ -334,10 +332,10 @@ export const createAppTheme = (currentPalette) =>
               flexDirection: "row",
               alignItems: "center",
               padding: lessPadding,
-               "&:nth-of-type(odd)": {
-              backgroundColor: currentPalette.background.default,
-              borderBottom: "none",
-            },
+              "&:nth-of-type(odd)": {
+                backgroundColor: currentPalette.background.default,
+                borderBottom: "none",
+              },
             },
           },
           {
@@ -348,10 +346,10 @@ export const createAppTheme = (currentPalette) =>
               flexDirection: "row",
               alignItems: "center",
               padding: lessPadding,
-               "&:nth-of-type(odd)": {
-              backgroundColor: currentPalette.background.default,
-              borderBottom: "none",
-            },
+              "&:nth-of-type(odd)": {
+                backgroundColor: currentPalette.background.default,
+                borderBottom: "none",
+              },
             },
           },
           {
@@ -362,10 +360,10 @@ export const createAppTheme = (currentPalette) =>
               flexDirection: "column",
               alignItems: "flex-start",
               padding: lessPadding,
-               "&:nth-of-type(odd)": {
-              backgroundColor: currentPalette.background.default,
-              borderBottom: "none",
-            },
+              "&:nth-of-type(odd)": {
+                backgroundColor: currentPalette.background.default,
+                borderBottom: "none",
+              },
             },
           },
         ],
@@ -652,8 +650,7 @@ export const createAppTheme = (currentPalette) =>
       },
       MuiGrid2: {
         styleOverrides: {
-          root: {
-          }
+          root: {},
         },
         variants: [
           {
@@ -666,15 +663,15 @@ export const createAppTheme = (currentPalette) =>
               borderRadius: 20,
             },
           },
-        ]
+        ],
       },
+
       MuiGrid: {
         styleOverrides: {
           root: {
             justifyContent: "space-evenly",
             alignItems: "flex-start",
             padding: lessPadding,
-            
           },
         },
         variants: [
@@ -736,7 +733,6 @@ export const createAppTheme = (currentPalette) =>
               padding: morePadding,
             },
           },
-
         ],
       },
       MuiAppBar: {
@@ -789,6 +785,28 @@ export const createAppTheme = (currentPalette) =>
           },
         },
       },
+      MuiTable: {
+        styleOverrides: {
+          root: {
+            [theme.breakpoints.down("lg")]: {
+              overflowX: "auto",
+              display: "block",
+              width: "100%",
+            },
+          },
+        },
+      },
+      MuiTableContainer: {
+        styleOverrides: {
+          root: {
+            [theme.breakpoints.down("lg")]: {
+              overflowX: "auto",
+              display: "block",
+              width: "100%",
+            },
+          },
+        },
+      },
       MuiTableRow: {
         styleOverrides: {
           root: {
@@ -838,7 +856,7 @@ export const createAppTheme = (currentPalette) =>
           },
         ],
       },
-      
+
       // Enables CSS styling
       MuiCssBaseline: {
         styleOverrides: {
