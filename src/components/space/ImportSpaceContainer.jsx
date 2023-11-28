@@ -5,6 +5,7 @@ import { processFile } from "../../importDataFunctions/processFile";
 import AlertBox from "../common/AlertBox";
 import ExportSpaceButton from "./ExportSpaceButton";
 import ImportSpaceButton from "./ImportSpaceButton";
+import Grid from "@mui/material/Grid";
 
 export default function ImportSpaceContainer({
   getAllSpaces,
@@ -31,22 +32,30 @@ export default function ImportSpaceContainer({
         alertOptions={alertOptions}
         setAlertOpen={setAlertOpen}
       />
-      <Typography>Import data from .csv file</Typography>
-      <Input
-        variant="sibaInputFileName"
-        type="file"
-        accept=".xlsx, .xls, .csv"
-        onChange={handleUploadeFiled}
-      />
-      <ImportSpaceButton
-        spaceToImport={spaceToImport}
-        spaceFailedToImport={spaceFailedToImport}
-        setSpaceFailedToImport={setSpaceFailedToImport}
-        getAllSpaces={getAllSpaces}
-        buildingSelectList={buildingSelectList}
-        spaceTypeSelectList={spaceTypeSelectList}
-      />
-      <ExportSpaceButton spaceFailedToImport={spaceFailedToImport} />
+      <Grid container direction="column" variant="AddComponentFormButtonSection">
+        <Typography variant="addComponentSubHeader">Import data from .csv file</Typography>
+        <Grid item>
+          <Input
+            variant="sibaInputFileName"
+            type="file"
+            accept=".xlsx, .xls, .csv"
+            onChange={handleUploadeFiled}
+          />
+        </Grid>
+        <Grid item>
+          <ImportSpaceButton
+            spaceToImport={spaceToImport}
+            spaceFailedToImport={spaceFailedToImport}
+            setSpaceFailedToImport={setSpaceFailedToImport}
+            getAllSpaces={getAllSpaces}
+            buildingSelectList={buildingSelectList}
+            spaceTypeSelectList={spaceTypeSelectList}
+          />
+        </Grid>
+        <Grid item>
+          <ExportSpaceButton spaceFailedToImport={spaceFailedToImport} />
+        </Grid>
+      </Grid>
     </>
   );
 }

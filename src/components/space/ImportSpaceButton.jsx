@@ -109,7 +109,7 @@ export default function ImportSpaceButton({
         setAlertOpen={setAlertOpen}
       />
       <Button
-        variant="contained"
+        variant="addComponentFormButton"
         onClick={() => {
           handleClick();
         }}

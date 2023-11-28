@@ -37,7 +37,11 @@ const EquipmentTemplate = () => {
         alertOptions={alertOptions}
         setAlertOpen={setAlertOpen}
       />
-      <Button onClick={downloadEquipmentTemplate}>Download template</Button>
+      <Button
+        variant="addComponentFormButton"
+        onClick={downloadEquipmentTemplate}>
+        Download template
+      </Button>
     </>
   );
 };

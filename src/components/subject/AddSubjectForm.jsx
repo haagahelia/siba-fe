@@ -189,7 +189,7 @@ export default function AddSubjectForm({
             </FormControl>
           </Grid>
         </Grid>
-        <Grid item xs={3} padding={2}>
+        <Grid padding={2}>
           <Button
             type="submit"
             variant="addComponentFormButton"
