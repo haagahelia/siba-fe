@@ -5,6 +5,7 @@ import { processFile } from "../../importDataFunctions/processFile";
 import AlertBox from "../common/AlertBox";
 import ExportEquipmentButton from "./ExportEquipmentButton";
 import ImportEquipmentButton from "./ImportEquipmentButton";
+import Grid from "@mui/material/Grid";
 
 export default function ImportEquipmentContainer({ getAllEquipments }) {
   const [alertOpen, setAlertOpen] = useState(false);
@@ -27,22 +28,32 @@ export default function ImportEquipmentContainer({ getAllEquipments }) {
         alertOptions={alertOptions}
         setAlertOpen={setAlertOpen}
       />
-      <Typography>Import data from .csv file</Typography>
-      <Input
-        variant="sibaInputFileName"
-        type="file"
-        accept=".xlsx, .xls, .csv"
-        onChange={handleUploadeFiled}
-      />
-      <ImportEquipmentButton
-        equipmentToImport={equipmentToImport}
-        equipmentFailedToImport={equipmentFailedToImport}
-        setEquipmentFailedToImport={setEquipmentFailedToImport}
-        getAllEquipments={getAllEquipments}
-      />
-      <ExportEquipmentButton
-        equipmentFailedToImport={equipmentFailedToImport}
-      />
+      <Grid container direction="column" variant="AddComponentFormButtonSection">
+        <Typography variant="addComponentSubHeader">
+          Import data from .csv file
+        </Typography>
+        <Grid item>
+          <Input
+            variant="sibaInputFileName"
+            type="file"
+            accept=".xlsx, .xls, .csv"
+            onChange={handleUploadeFiled}
+          />
+        </Grid>
+        <Grid item>
+          <ImportEquipmentButton
+            equipmentToImport={equipmentToImport}
+            equipmentFailedToImport={equipmentFailedToImport}
+            setEquipmentFailedToImport={setEquipmentFailedToImport}
+            getAllEquipments={getAllEquipments}
+          />
+        </Grid>
+        <Grid item>
+          <ExportEquipmentButton
+            equipmentFailedToImport={equipmentFailedToImport}
+          />
+        </Grid>
+      </Grid>
     </>
   );
 }

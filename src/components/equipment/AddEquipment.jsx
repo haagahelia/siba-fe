@@ -54,7 +54,7 @@ export default function AddEquipment({ getAllEquipments }) {
           />
           {isCardExpanded && (
             <Grid container spacing={2}>
-              <Grid item xs={12} sm={6} md={5}>
+              <Grid item xs={12} sm={12} md={4} lg={4}>
                 <FormControl fullWidth>
                   <TextField
                     value={equipment.name}
@@ -62,43 +62,19 @@ export default function AddEquipment({ getAllEquipments }) {
                       setEquipment({ ...equipment, name: event.target.value })
                     }
                     label="Name"
+                    placeholder="Name..."
+                    InputLabelProps={{
+                      shrink: true,
+                    }}
                   />
                 </FormControl>
               </Grid>
-              <Grid item xs={12} sm={6} md={5}>
-                <FormControl fullWidth>
-                  <TextField
-                    value={equipment.priority}
-                    type="number"
-                    onChange={(event) =>
-                      setEquipment({
-                        ...equipment,
-                        priority: event.target.value,
-                      })
-                    }
-                    label="Priority"
-                  />
-                </FormControl>
-              </Grid>
-              <Grid item xs={12} sm={6} md={5}>
-                <FormControl fullWidth>
-                  <TextField
-                    value={equipment.description}
-                    onChange={(event) =>
-                      setEquipment({
-                        ...equipment,
-                        description: event.target.value,
-                      })
-                    }
-                    label="Description"
-                  />
-                </FormControl>
-              </Grid>
-              <Grid item xs={12} sm={6} md={5}>
+              <Grid item xs={12} sm={12} md={4} lg={4}>
                 <FormControl fullWidth>
                   <InputLabel>Is movable</InputLabel>
                   <Select
                     name="isMovable"
+                    label="Is Movable"
                     value={equipment.isMovable}
                     onChange={(event) =>
                       setEquipment({
@@ -112,11 +88,49 @@ export default function AddEquipment({ getAllEquipments }) {
                   </Select>
                 </FormControl>
               </Grid>
-
+              <Grid item xs={12} sm={12} md={4} lg={4}>
+                <FormControl fullWidth>
+                  <TextField
+                    value={equipment.priority}
+                    type="number"
+                    onChange={(event) =>
+                      setEquipment({
+                        ...equipment,
+                        priority: event.target.value,
+                      })
+                    }
+                    label="Priority"
+                    placeholder="0"
+                    InputLabelProps={{
+                      shrink: true,
+                    }}
+                  />
+                </FormControl>
+              </Grid>
+              <Grid item xs={12} sm={12} md={12} lg={12}>
+                <FormControl fullWidth>
+                  <TextField
+                    value={equipment.description}
+                    onChange={(event) =>
+                      setEquipment({
+                        ...equipment,
+                        description: event.target.value,
+                      })
+                    }
+                    label="Description"
+                    placeholder="Something about the equipment..."
+                    InputLabelProps={{
+                      shrink: true,
+                    }}
+                  />
+                </FormControl>
+              </Grid>
               <Grid item xs={12}>
-                <Button onClick={() => openDialogBox()} variant="contained">
+                <Button onClick={() => openDialogBox()} variant="addComponentFormButton">
                   Add Equipment
                 </Button>
+              </Grid>
+              <Grid item xs={12}>
                 <ImportEquipmentContainer getAllEquipments={getAllEquipments} />
                 <EquipmentTemplate />
               </Grid>

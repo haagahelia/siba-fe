@@ -75,7 +75,7 @@ export default function ImportEquipmentButton({
         setAlertOpen={setAlertOpen}
       />
       <Button
-        variant="contained"
+        variant="addComponentFormButton"
         onClick={() => {
           handleClick();
         }}

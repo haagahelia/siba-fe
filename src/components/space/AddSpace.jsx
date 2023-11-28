@@ -125,10 +125,14 @@ export default function AddSpace({ getAllSpaces }) {
                 <TextField
                   fullWidth
                   label="Name"
+                  placeholder="Name..."
                   value={space.name}
                   onChange={(event) =>
                     setSpace({ ...space, name: event.target.value })
                   }
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
                 />
               </Grid>
               <Grid item xs={12} sm={6} md={4}>
@@ -146,10 +150,14 @@ export default function AddSpace({ getAllSpaces }) {
                 <TextField
                   fullWidth
                   label="Info"
+                  placeholder="Some info..."
                   value={space.info}
                   onChange={(event) =>
                     setSpace({ ...space, info: event.target.value })
                   }
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
                 />
               </Grid>
               <Grid item xs={12} sm={6} md={4}>
@@ -169,6 +177,7 @@ export default function AddSpace({ getAllSpaces }) {
                   <Select
                     name="buildingId"
                     type="number"
+                    label="Building"
                     value={space.buildingId}
                     onChange={(event) => {
                       setSpace((prevSpace) => ({
@@ -237,6 +246,7 @@ export default function AddSpace({ getAllSpaces }) {
                   <InputLabel>Is in use</InputLabel>
                   <Select
                     name="inUse"
+                    label="Is in use"
                     value={space.inUse}
                     onChange={(event) =>
                       setSpace({
@@ -255,6 +265,7 @@ export default function AddSpace({ getAllSpaces }) {
                   <InputLabel>Space type</InputLabel>
                   <Select
                     name="spaceTypeId"
+                    label="Space type"
                     type="number"
                     value={space.spaceTypeId}
                     onChange={(event) =>
@@ -269,17 +280,17 @@ export default function AddSpace({ getAllSpaces }) {
                   </Select>
                 </FormControl>
               </Grid>
-              <Grid item xs={12}>
-                <Button onClick={openDialogBox} variant="contained">
+              <Grid xs={12} padding={2}>
+                <Button onClick={openDialogBox} variant="addComponentFormButton">
                   Add Space
                 </Button>
-                <ImportSpaceContainer
-                  getAllSpaces={getAllSpaces}
-                  buildingSelectList={buildingSelectList}
-                  spaceTypeSelectList={spaceTypeSelectList}
-                />
-                <SpaceTemplate />
               </Grid>
+              <ImportSpaceContainer
+                getAllSpaces={getAllSpaces}
+                buildingSelectList={buildingSelectList}
+                spaceTypeSelectList={spaceTypeSelectList}
+              />
+              <SpaceTemplate />
             </Grid>
           )}
         </CardContent>

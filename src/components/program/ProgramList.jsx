@@ -10,6 +10,7 @@ import TableRow from "@mui/material/TableRow";
 import TableSortLabel from "@mui/material/TableSortLabel";
 import styled from "@mui/material/styles/styled";
 import { useState } from "react";
+import SingleProgramDialog from "./SingleProgramDialog";
 
 export default function ProgramList({ getAllPrograms, paginatePrograms }) {
   const [open, setOpen] = useState(false);
@@ -45,6 +46,13 @@ export default function ProgramList({ getAllPrograms, paginatePrograms }) {
   }));
   return (
     <div>
+      <SingleProgramDialog
+        open={open}
+        setOpen={setOpen}
+        singleProgram={singleProgram}
+        setSingleProgram={setSingleProgram}
+        getAllPrograms={getAllPrograms}
+      />
       <Box>
         <Paper>
           <TableContainer>
