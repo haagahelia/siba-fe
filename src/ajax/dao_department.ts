@@ -23,6 +23,19 @@ export const fetchAllDepartmentData = async (): Promise<
   }
 };
 
+// fetching all departments for select
+export const fetchDepartmentForSelect = async (): Promise<
+  ResponseFiner<Department>
+> => {
+  const response = await get(`${baseUrl}/department`);
+  if (response.status === 200) {
+    const programs: Department[] = await response.json();
+    return { httpStatus: response.status, data: programs };
+  } else {
+    return { httpStatus: response.status, data: [] };
+  }
+};
+
 // create department
 export const addDepartment = async (
   newDepartment: Department,

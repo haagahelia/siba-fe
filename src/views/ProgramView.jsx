@@ -15,6 +15,7 @@ import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import AlertBox from "../components/common/AlertBox";
+import AddProgramContainer from "../components/program/AddProgramContainer";
 import ProgramFiltering from "../components/program/ProgramFiltering";
 import ProgramListContainer from "../components/program/ProgramListContainer";
 import ProgramPagination from "../components/program/ProgramPagination";
@@ -80,7 +81,16 @@ export default function ProgramView() {
         setAlertOpen={setAlertOpen}
       />
       <Container maxWidth="100%">
-        
+      {appContext.roles.admin || appContext.roles.planner ? (
+          <AddProgramContainer
+            getAllPrograms={getAllPrograms}
+            allProgramsList={allProgramsList}
+          />
+        ) : (
+          <Typography variant="subtitle1" mt={3}>
+            "Not showing add program to your role"
+          </Typography>
+        )}
         <Grid container rowSpacing={1}>
           <Card variant="outlined">
             <CardHeader

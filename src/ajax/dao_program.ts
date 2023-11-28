@@ -28,6 +28,12 @@ export const getProgramByUserEmail = async (
   }
 };
 
+// creating new program
+export const postNewProgram = async (newProgram: Program): Promise<boolean> => {
+  const response = await create(`${baseUrl}/program`, newProgram);
+  return response.ok;
+};
+
 // update program
 export const editProgram = async (
   editedProgram: Program,
