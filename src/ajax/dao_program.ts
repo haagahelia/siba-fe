@@ -1,5 +1,5 @@
 import { Program, ResponseFiner } from "../types";
-import { get, getByEmail } from "./request";
+import { create, get, getByEmail } from "./request";
 
 const baseUrl = import.meta.env.VITE_BE_SERVER_BASE_URL;
 
@@ -26,4 +26,10 @@ export const getProgramByUserEmail = async (
   } else {
     return { httpStatus: response.status, data: [] };
   }
+};
+
+// creating new program
+export const postNewProgram = async (newProgram: Program): Promise<boolean> => {
+  const response = await create(`${baseUrl}/program`, newProgram);
+  return response.ok;
 };
