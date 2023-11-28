@@ -18,6 +18,24 @@ export const postNewAllocRound = async (
   return response.ok;
 };
 
+// copy exsisting  allocRound
+export const copyAllocRound = async (
+  name: string,
+  description: string,
+  userId: number,
+  copiedAllocRoundId: number,
+): Promise<boolean> => {
+  const requestBody = {
+    name,
+    description,
+    userId,
+    copiedAllocRoundId
+  };
+
+  const response = await create(`${baseUrl}/allocRound/copyAllocRound`, requestBody);
+  return response.ok;
+};
+
 // updating allocRound
 export const editAllocRound = async (
   editedAllocRound: AllocRound,

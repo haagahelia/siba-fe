@@ -91,7 +91,7 @@ export default function AllocRoundView() {
               <CardHeader title="Allocation Rounds" variant="pageHeader" />
               <Button
                 variant="componentAddButton"
-                onClick={() => navigate("addAllocRound")}
+                onClick={() => navigate("addAllocRound", { state: { allAllocRoundsList } })}
               >
                 + Add
               </Button>
