@@ -80,7 +80,7 @@ export default function DeleteUserPlanner({
       <Button
         variant="contained"
         color="error"
-        sx={{ margin: "5px", maxWidth: "85px" }}
+        sx={{ maxWidth: "85px" }}
         onClick={() => {
           submitDelete(singleDepartmentByUserId);
         }}

@@ -15,12 +15,7 @@ export default function RoomsWithTimesList({ rooms }) {
       rowSpacing={1}
       columnSpacing={{ xs: 1, sm: 2, md: 3 }}
       spacing={2}
-      style={{
-        margin: "auto",
-        marginTop: 20,
-        padding: 10,
-        borderRadius: 20,
-      }}
+      variant="resultContainer"
     >
       {rooms.map((room) => {
         const progress = (room.allocatedHours / room.requiredHours) * 100;

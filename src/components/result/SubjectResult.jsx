@@ -24,13 +24,7 @@ export default function SubjectResult({ data }) {
       rowSpacing={1}
       columnSpacing={{ xs: 1, sm: 2, md: 3 }}
       spacing={2}
-      style={{
-        margin: "auto",
-        marginTop: 10,
-        padding: 10,
-        borderRadius: 20,
-        color: "#000000",
-      }}
+      variant="resultContainer"
     >
       {data.map((prog) => {
         const progress = (prog.allocatedHours / prog.requiredHours) * 100;
@@ -106,15 +100,11 @@ function CollapsedRow(id) {
         {rooms?.map((dropdownItem) => {
           return (
             <Grid2 container key={dropdownItem.id}>
-              <Grid2 xs={8}>
+              <Grid2 xs={8} 
+              //variant="resultsDropdown"
+              >
                 {" "}
-                <Typography
-                  style={{
-                    textAlign: "left",
-                    marginTop: 10,
-                    color: "#F6E9E9",
-                  }}
-                >
+                <Typography>
                   {dropdownItem.name}
                 </Typography>
               </Grid2>

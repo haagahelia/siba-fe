@@ -34,15 +34,7 @@ export default function ResetPasswordView() {
 
   return (
     <div>
-      <Card
-        variant="outlined"
-        sx={{
-          width: "65%",
-          padding: 1,
-          margin: "auto",
-          marginTop: "100px",
-        }}
-      >
+      <Card variant="outlined">
         <CardContent>
           <Typography>Please enter your new password here.</Typography>
           <Grid>

@@ -38,7 +38,7 @@ export default function EditSubEquipForm({ formik, priorityList }) {
       <Button
         variant="contained"
         style={theme.components.MuiButton.editbutton}
-        sx={{ maxWidth: "85px", margin: "5px" }}
+        sx={{ maxWidth: "85px"}}
         onClick={() => {
           setOpen(true);
         }}
@@ -55,7 +55,7 @@ export default function EditSubEquipForm({ formik, priorityList }) {
             <DialogContentText>
               <Grid container variant="sibaGridEdit" spacing={3} column={3}>
                 <Grid item xs={12}>
-                  <Typography sx={{ marginBottom: 2 }}>
+                  <Typography>
                     Default value for priority: {equipPriority}
                   </Typography>
                   <TextField
