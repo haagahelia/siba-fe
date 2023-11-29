@@ -1,5 +1,5 @@
 import { ResponseFiner, Space, SpaceBuildingName, SpaceName } from "../types";
-import { create, get, remove, update } from "./request";
+import { create, download, get, remove, update } from "./request";
 
 const baseUrl = import.meta.env.VITE_BE_SERVER_BASE_URL;
 
@@ -65,11 +65,5 @@ export const deleteSingleSpace = async (spaceId: number): Promise<boolean> => {
 export const downloadSpaceTemplate = async (): Promise<
   ResponseFiner<Space>
 > => {
-  const response = await get(`${baseUrl}/template/space`);
-  if (response.status === 200) {
-    const templateFile = await response.blob();
-    return { httpStatus: response.status, data: templateFile };
-  } else {
-    return { httpStatus: response.status, data: [] };
-  }
+  return download<Space>("space", baseUrl);
 };
