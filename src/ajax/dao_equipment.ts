@@ -1,5 +1,5 @@
 import { Equipment, ResponseFiner } from "../types";
-import { create, get, remove, update } from "./request";
+import { create, download, get, remove, update } from "./request";
 
 const baseUrl = import.meta.env.VITE_BE_SERVER_BASE_URL;
 
@@ -69,11 +69,5 @@ export const deleteSingleEquipment = async (
 export const downloadEquipmentTemplate = async (): Promise<
   ResponseFiner<Equipment>
 > => {
-  const response = await get(`${baseUrl}/template/equipment`);
-  if (response.status === 200) {
-    const templateFile = await response.blob();
-    return { httpStatus: response.status, data: templateFile };
-  } else {
-    return { httpStatus: response.status, data: [] };
-  }
+  return download<Equipment>("equipment", baseUrl);
 };

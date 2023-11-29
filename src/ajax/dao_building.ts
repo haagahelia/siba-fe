@@ -1,5 +1,5 @@
 import { Building, ResponseFiner } from "../types";
-import { create, get, remove, update } from "./request";
+import { create, download, get, remove, update } from "./request";
 
 const baseUrl = import.meta.env.VITE_BE_SERVER_BASE_URL;
 
@@ -57,11 +57,5 @@ export const deleteBuildingById = async (
 export const downloadBuildingTemplate = async (): Promise<
   ResponseFiner<Building>
 > => {
-  const response = await get(`${baseUrl}/template/building`);
-  if (response.status === 200) {
-    const templateFile = await response.blob();
-    return { httpStatus: response.status, data: templateFile };
-  } else {
-    return { httpStatus: response.status, data: [] };
-  }
+  return download<Building>("building", baseUrl);
 };
