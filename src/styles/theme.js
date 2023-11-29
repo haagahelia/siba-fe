@@ -15,17 +15,12 @@ export const margins = {
   small: "5px",
   medium: "16px",
   large: "30px",
-  roomAndProgramResults: {
-    roomIndex: "50px",
-    dropdownContent: "10px",
-  },
 };
 
 export const indexRoomCommon = {
   width: 15,
   height: 15,
   border: "3px solid",
-  //marginLeft: margins.roomAndProgramResults.roomIndex,
   marginTop: margins.large,
   marginBottom: margins.large,
 };
