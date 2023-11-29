@@ -1,4 +1,4 @@
-import { AllocRound, Response } from "../types";
+import { AllocRound, CopyAllocRound, Response, ResponseFiner } from "../types";
 import { create, get, remove, update } from "./request";
 
 const baseUrl = import.meta.env.VITE_BE_SERVER_BASE_URL;
@@ -24,17 +24,22 @@ export const copyAllocRound = async (
   description: string,
   userId: number,
   copiedAllocRoundId: number,
-): Promise<boolean> => {
+): Promise<Response<CopyAllocRound>> => {
   const requestBody = {
     name,
     description,
     userId,
     copiedAllocRoundId
   };
+  
+    const response = await create(`${baseUrl}/allocRound/copyAllocRound`, requestBody);
+    const data: CopyAllocRound[] = await response.json();
 
-  const response = await create(`${baseUrl}/allocRound/copyAllocRound`, requestBody);
-  return response.ok;
-};
+
+    return { success: response.ok, data: data }
+  
+}
+
 
 // updating allocRound
 export const editAllocRound = async (
