@@ -87,6 +87,10 @@ export interface AllocRound {
   description: string;
   lastModified: string;
 }
+export interface CopyAllocRound {
+ name: string;  
+}
+
 
 export interface Building {
   id: number;

@@ -1,209 +1,27 @@
-import { useFormik } from "formik";
-import { AppContext } from "../../AppContext";
-import { useState, useContext } from "react";
 import { useLocation } from "react-router-dom";
-import dao from "../../ajax/dao";
-import {
-  capitalizeFirstLetter,
-  validate,
-} from "../../validation/ValidateAddAllocRound";
 
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
-import CardHeader from "@mui/material/CardHeader";
-import AlertBox from "../common/AlertBox";
-import ConfirmationDialog from "../common/ConfirmationDialog";
-import AddAllocRoundForm from "./AddAllocRoundForm";
-import CopyAllocRoundForm from "./CopyAllocRoundForm";
+import { AddEmptyAllocRound } from "./AddEmptyAllocRound";
+import { CopyAllocRound } from "./CopyAllocRound";
 
 // const baseUrl = import.meta.env.VITE_BE_SERVER_BASE_URL;
 // import { BASEURL } from "../config/consts.js";
 // const baseUrl = BASEURL;
 
 export default function AddAllocRound() {
-  const { userId } = useContext(AppContext);
-  const [alertOpen, setAlertOpen] = useState(false);
-  const [alertOptions, setAlertOptions] = useState({
-    title: "This is title",
-    message: "This is an error alert — check it out!",
-    severity: "error",
-  });
-  const [dialogOpen, setDialogOpen] = useState(false);
-  const [dialogOptions, setDialogOptions] = useState({
-    title: "this is dialog",
-    content: "Something here",
-  });
   
-  // Here the initialvalues of the form are stored in the state
-  const [initialAllocRound, setInitialAllocRound] = useState({
-    name: "",
-    description: "",
-  });
-
-  const [copyAllocRound, setCopyAllocRound] = useState({
-    name: "",
-    description: "",
-    copiedAllocRoundId: "",
-  });
-
-  const resetFormm = () => {
-    setInitialAllocRound({
-      name: "",
-      description: "",
-    });
-  };
-
-  const resetCopyForm = () => {
-    setCopyAllocRound({
-      name: "",
-      description: "",
-      copiedAllocRoundId: ""
-    });
-  };
-
-
   const location = useLocation();
   const allAllocRoundsList = location.state?.allAllocRoundsList;
 
-  const formik = useFormik({
-    enableReinitialize: true,
-    initialValues: initialAllocRound,
-    validate,
-    onSubmit: (values) => {
-      setDialogOptions({
-        title: `Are you sure you want to add ${values.name}?`,
-        content: `By clicking continue, ${values.name} will be added to the allocation round list`,
-      });
-      setDialogOpen(true);
-
-      return;
-    },
-  });
-
-  const formikCopy = useFormik({
-    enableReinitialize: true,
-    initialValues: copyAllocRound,
-    validate,
-    onSubmit: (values) => {
-      setDialogOptions({
-        title: `Are you sure you want to add ${values.name}?`,
-        content: `By clicking continue, ${values.name} will be added to the allocation round list`,
-      });
-      setDialogOpen(true);
-
-      return;
-    },
-  });
-
-  const addAllocRound = async (submitValues) => {
-    const capitalName = capitalizeFirstLetter(submitValues.name);
-    const newAllocRound = {
-      name: capitalName,
-      description: submitValues.description,
-    };
-
-    const result = await dao.postNewAllocRound(newAllocRound);
-    if (!result) {
-      setAlertOptions({
-        severity: "error",
-        title: "Error",
-        message: "Something went wrong - please try again later.",
-      });
-      setAlertOpen(true);
-      return;
-    }
-    setAlertOptions({
-      severity: "success",
-      title: "Success!",
-      message: `${submitValues.name} added.`,
-    });
-    setAlertOpen(true);
-    resetFormm();
-    // getAllAllocRounds();
-  };
-
-  
-
-
-  const handleCopyAllocRoundSubmit = async (event) => {
-    event.preventDefault(); 
-    const { name, description, copiedAllocRoundId } = formikCopy.values;
-
-    
-    
-   
-    
-    console.log(name, description, copiedAllocRoundId, userId);
-    const success = await dao.copyAllocRound(name, description, userId, copiedAllocRoundId);
-    if (success) {
-      setAlertOptions({
-        severity: "success",
-        title: "Success",
-        message: `${name} copied successfully.`,
-      });
-    } else {
-      setAlertOptions({
-        severity: "error",
-        title: "Error",
-        message: "Failed to copy allocation round.",
-      });
-    }
-    setAlertOpen(true);
-  };
-  // Here is a list of lessons
-  // When you choose a lesson, the information goes to the form's initialvalues
-  const handleChange = (e) => {
-    const selected = e.target.value;
-    setInitialAllocRound({
-      // This is so that the entered name does not change
-      // even if you select the data of an existing lesson
-      name: formik.values.name,
-
-      description: selected.description,
-    });
-  };
-  
   return (
-    <div>
-      <AlertBox
-        alertOpen={alertOpen}
-        alertOptions={alertOptions}
-        setAlertOpen={setAlertOpen}
+    <>
+      <AddEmptyAllocRound
+        allAllocRoundsList={allAllocRoundsList}
       />
-      <ConfirmationDialog
-        dialogOpen={dialogOpen}
-        dialogOptions={dialogOptions}
-        setDialogOpen={setDialogOpen}
-        submit={addAllocRound}
-        submitValues={formik.values}
+      
+      <CopyAllocRound
+        allAllocRoundsList={allAllocRoundsList}
       />
-      <Card variant="outlined">
-        <CardContent>
-          <CardHeader title="Add empty allocation round" variant="pageHeader"/>
-          <AddAllocRoundForm
-            handleChange={handleChange}
-            formik={formik}
-            submitValues={formik.values}
-            setInitialAllocRound={setInitialAllocRound}
-            allAllocRoundsList={allAllocRoundsList}
-          />
-          
-        </CardContent>
-      </Card>
 
-      <Card variant="outlined">
-        <CardContent>
-          <CardHeader title="Copy existing allocation " variant="pageHeader"/>
-          <CopyAllocRoundForm
-            formik={formikCopy}
-            submitValues={formik.values}
-            setInitialAllocRound={setInitialAllocRound}
-            allAllocRoundsList={allAllocRoundsList}
-            handleCopyAllocRoundSubmit={handleCopyAllocRoundSubmit}
-          />
-          
-        </CardContent>
-      </Card>
-    </div>
+    </>
   );
 }
