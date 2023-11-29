@@ -11,13 +11,13 @@ export const navbarWidth = "171px";
 export const commonFont = "Roboto, Helvetica, Aria, sans-serif";
 export const margins = {
   auto: "auto",
-  none: 0,
-  small: 5,
-  medium: 16,
-  large: 30,
+  none: "0px",
+  small: "5px",
+  medium: "16px",
+  large: "30px",
   roomAndProgramResults: {
-    roomIndex: 50,
-    dropdownContent: 10,
+    roomIndex: "50px",
+    dropdownContent: "10px",
   },
 };
 
@@ -25,7 +25,9 @@ export const indexRoomCommon = {
   width: 15,
   height: 15,
   border: "3px solid",
-  marginLeft: margins.roomAndProgramResults.roomIndex,
+  //marginLeft: margins.roomAndProgramResults.roomIndex,
+  marginTop: margins.large,
+  marginBottom: margins.large,
 };
 
 export const createAppTheme = (currentPalette) =>
@@ -405,6 +407,7 @@ export const createAppTheme = (currentPalette) =>
           color: currentPalette.AllocRoom.musiikkiluokka.color,
         },
       },
+
       IndexRooms: {
         studioindex: {
           ...indexRoomCommon,
@@ -547,6 +550,14 @@ export const createAppTheme = (currentPalette) =>
         },
         variants: [
           {
+            props: { variant: "roomIndex" },
+            style: {
+              marginRight: margins.large,
+              marginTop: margins.large,
+              marginBottom: margins.large,
+            },
+          },
+          {
             props: { variant: "navAllocInfo" },
             style: {
               color: currentPalette.primary.contrastText,
@@ -643,7 +654,7 @@ export const createAppTheme = (currentPalette) =>
           {
             props: { variant: "allocRoundControlPanel" },
             style: {
-              marginTop: margins.large,
+              marginTop: margins.small,
             },
           },
         ],
@@ -654,13 +665,21 @@ export const createAppTheme = (currentPalette) =>
         },
         variants: [
           {
-            props: { variant: "programResultContainer" },
+            props: { variant: "resultContainer" },
             style: {
               margin: margins.auto,
               width: "80%",
               marginTop: margins.medium,
               padding: 10,
               borderRadius: 20,
+            },
+          },
+          {
+            props: { variant: "resultsDropdown" },
+            style: {
+              textAlign: "center",
+                marginTop: margins.small,
+                color: theme.baseBgColor,
             },
           },
         ],

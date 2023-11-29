@@ -87,7 +87,7 @@ export default function DeleteSpaceEquip({
       <Button
         variant="contained"
         style={theme.components.MuiButton.redbutton}
-        sx={{ margin: "5px", maxWidth: "85px" }}
+        sx={{ maxWidth: "85px" }}
         onClick={() => {
           submitDelete(singleEquipBySpaceId);
         }}
