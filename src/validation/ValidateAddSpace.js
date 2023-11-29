@@ -70,25 +70,25 @@ export default async function ValidateAddSpace(values) {
   if (!availableFrom) {
     errors.availableFrom = "Required field available from";
   } else if (!regTime.test(availableFrom)) {
-    errors.availableFrom = "Allowed format is 00:00 or 00:00:00";
+    errors.availableFrom = "\"Available From\": Allowed format is 00:00 or 00:00:00\n";
   }
 
   if (!availableTo) {
     errors.availableTo = "Required field available to";
   } else if (!regTime.test(availableTo)) {
-    errors.availableTo = "Allowed format is 00:00 or 00:00:00";
+    errors.availableTo = "\"Available To\": Allowed format is 00:00 or 00:00:00\n";
   }
 
   if (!classesFrom) {
     errors.classesFrom = "Required field classes from";
   } else if (!regTime.test(classesFrom)) {
-    errors.classesFrom = "Allowed format is 00:00 or 00:00:00";
+    errors.classesFrom = "\"Classes From\": Allowed format is 00:00 or 00:00:00\n";
   }
 
   if (!classesTo) {
     errors.classesTo = "Required field classes to";
   } else if (!regTime.test(classesTo)) {
-    errors.classesTo = "Allowed format is 00:00 or 00:00:00";
+    errors.classesTo = "\"Classes To\": Allowed format is 00:00 or 00:00:00\n";
   }
 
   if (inUse === undefined && inUse === null) {
