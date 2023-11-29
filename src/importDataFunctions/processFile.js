@@ -6,7 +6,12 @@ const isUploaded = (file) => {
 };
 
 const isValidType = (file) => {
-  return file.type === "text/csv";
+  if (file.name.substring(file.name.lastIndexOf(".") + 1) === "csv") {
+    return file.type === "text/csv" || file.type === "application/vnd.ms-excel";
+  } else {
+    Logger.debug("File type error, type: ", file.type);
+    return false;
+  }
 };
 
 const fileToArray = (file, setDataToImport) => {
