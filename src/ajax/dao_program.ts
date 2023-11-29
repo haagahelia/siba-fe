@@ -1,5 +1,5 @@
 import { Program, ResponseFiner } from "../types";
-import { get, getByEmail, create, remove, update } from "./request";
+import { create, get, remove, update } from "./request";
 
 const baseUrl = import.meta.env.VITE_BE_SERVER_BASE_URL;
 
@@ -19,7 +19,7 @@ export const fetchProgramsForSelect = async (): Promise<
 export const getProgramByUserEmail = async (
   email: string,
 ): Promise<ResponseFiner<Program>> => {
-  const response = await getByEmail(`${baseUrl}/program/programName/${email}`);
+  const response = await get(`${baseUrl}/program/programName/${email}`);
   if (response.status === 200) {
     const programs: Program[] = await response.json();
     return { httpStatus: response.status, data: programs };
@@ -35,17 +35,13 @@ export const postNewProgram = async (newProgram: Program): Promise<boolean> => {
 };
 
 // update program
-export const editProgram = async (
-  editedProgram: Program,
-): Promise<boolean> => {
+export const editProgram = async (editedProgram: Program): Promise<boolean> => {
   const response = await update(`${baseUrl}/program`, editedProgram);
   return response.ok;
 };
 
 // remove single program
-export const deleteProgram = async (
-  programId: number,
-): Promise<boolean> => {
+export const deleteProgram = async (programId: number): Promise<boolean> => {
   const response = await remove(`${baseUrl}/program/${programId}`);
   if (response.status === 403) {
     return false;
