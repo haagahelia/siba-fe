@@ -1,3 +1,4 @@
+import { ResponseFiner } from "../types/index";
 // CRUD operations
 
 export const get = async (url: string) => {
@@ -45,12 +46,16 @@ export const remove = async (url: string) => {
   return response;
 };
 
-export const getByEmail = async (url: string) => {
-  const response = await fetch(url, {
-    method: "GET",
-    headers: {
-      Authorization: `Bearer ${localStorage.getItem("sessionToken")}`,
-    },
-  });
-  return response;
+//download template
+export const download = async <T>(
+  viewName: string,
+  url: string,
+): Promise<ResponseFiner<T>> => {
+  const response = await get(`${url}/template/${viewName}`);
+  if (response.status === 200) {
+    const templateFile = await response.blob();
+    return { httpStatus: response.status, data: templateFile };
+  } else {
+    return { httpStatus: response.status, data: [] };
+  }
 };
