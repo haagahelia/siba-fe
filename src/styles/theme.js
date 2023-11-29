@@ -678,8 +678,8 @@ export const createAppTheme = (currentPalette) =>
             props: { variant: "resultsDropdown" },
             style: {
               textAlign: "center",
-                marginTop: margins.small,
-                color: theme.baseBgColor,
+              marginTop: margins.small,
+              color: theme.baseBgColor,
             },
           },
         ],
@@ -892,7 +892,7 @@ export const createAppTheme = (currentPalette) =>
           },
           ".dropDownHoverArea": {
             height: "36px",
-            marginTop: "5vh",
+            marginTop: margins.large,
             width: navbarWidth,
 
             "&:hover a": {
@@ -925,7 +925,7 @@ export const createAppTheme = (currentPalette) =>
             display: "flex",
           },
           ".navIconSpacing": {
-            marginRight: "5px",
+            marginRight: margins.small,
           },
           ".navLogo": {
             "& img": {
