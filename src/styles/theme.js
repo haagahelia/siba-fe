@@ -402,7 +402,10 @@ export const createAppTheme = (currentPalette) =>
           color: currentPalette.AllocRoom.musiikkiluokka.color,
         },
       },
-
+      RoomResultsContainer:{
+        margin: margins.auto,
+        width: "80%",
+      },
       IndexRooms: {
         studioindex: {
           ...indexRoomCommon,

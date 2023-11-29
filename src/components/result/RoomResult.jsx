@@ -48,7 +48,7 @@ export default function RoomResult() {
   }, []);
 
   return (
-    <div style={{ width: "80%", margin: "auto" }}>
+    <div style={theme.components.RoomResultsContainer}>
       <AllocRoundControlPanel incrementResetCounter={incrementResetCounter} />
       <Typography className="mt6" variant="pageHeader">
         Spaces (Huoneet)
