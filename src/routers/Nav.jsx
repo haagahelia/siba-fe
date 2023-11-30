@@ -105,12 +105,6 @@ export default function NavBar() {
       showForCurrentUser: false,
     },
     {
-      name: "Add User",
-      href: "/addUser",
-      forRoles: ["admin"],
-      showForCurrentUser: false,
-    },
-    {
       name: "User List",
       href: "/users",
       forRoles: ["admin"],
@@ -366,7 +360,6 @@ export default function NavBar() {
             path="/login"
             element={<LoginView handleLoginChange={handleLoginChange} />}
           />
-          <Route path="/addUser" element={<RegisterView />} />
           <Route
             path="/"
             element={<LoginView handleLoginChange={handleLoginChange} />}
