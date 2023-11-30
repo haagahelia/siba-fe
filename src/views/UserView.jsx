@@ -1,5 +1,6 @@
 // The User List Page
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { AppContext } from "../AppContext";
 import {
   ajaxRequestErrorHandler,
   getFunctionName,
@@ -12,7 +13,9 @@ import CardContent from "@mui/material/CardContent";
 import CardHeader from "@mui/material/CardHeader";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
+import Typography from "@mui/material/Typography";
 import AlertBox from "../components/common/AlertBox";
+import AddUser from "../components/user/AddUser";
 import UserFiltering from "../components/user/UserFiltering";
 import UserListContainer from "../components/user/UserListContainer";
 import UserPagination from "../components/user/UserPagination";
@@ -23,6 +26,8 @@ export default function UserView() {
   Logger.logPrefix = "UserView";
   Logger.debug("UserView component instantiated.");
 
+  const appContext = useContext(AppContext);
+
   const [paginateUsers, setPaginateUsers] = useState([]);
   const [allUsersList, setAllUsersList] = useState([]);
   const [alertOpen, setAlertOpen] = useState(false);
@@ -31,12 +36,13 @@ export default function UserView() {
     message: "This is an error alert — check it out!",
     severity: "error",
   });
+
+  Logger.debug("Initial state set.");
+
   const [pagination, setPagination] = useState({
     from: 0,
     to: pageSize,
   });
-
-  Logger.debug("Initial state set.");
 
   const getAllUsers = async function () {
     Logger.debug("getAllUsers: fetching all Users from server.");
@@ -77,34 +83,41 @@ export default function UserView() {
         setAlertOpen={setAlertOpen}
       />
       <Container maxWidth="100%">
-        <Grid container rowSpacing={1}>
-          <Card variant="outlined">
-            <CardContent>
-              <CardHeader title="Users" variant="pageHeader" />
-              <UserFiltering
-                allUsersList={allUsersList}
-                setAllUsersList={setAllUsersList}
-                paginateUsers={paginateUsers}
-                setPaginateUsers={setPaginateUsers}
-                pagination={pagination}
-              />
-              <UserListContainer
-                getAllUsers={getAllUsers}
-                allUsersList={allUsersList}
-                paginateUsers={paginateUsers}
-                open={open}
-                setOpen={setOpen}
-              />
-              <UserPagination
-                pagination={pagination}
-                setPagination={setPagination}
-                allUsersList={allUsersList}
-                paginateUsers={paginateUsers}
-                setPaginateUsers={setPaginateUsers}
-              />
-            </CardContent>
-          </Card>
-        </Grid>
+        {appContext.roles.admin ? (
+            <AddUser getAllUsers={getAllUsers} allUsersList={allUsersList}/>
+          ) : (
+            <Typography variant="subtitle1" mt={3}>
+              "Not showing add user to your role"
+            </Typography>
+          )}
+          <Grid container rowSpacing={1}>
+            <Card variant="outlined">
+              <CardContent>
+                <CardHeader title="Users" variant="pageHeader" />
+                <UserFiltering
+                  allUsersList={allUsersList}
+                  setAllUsersList={setAllUsersList}
+                  paginateUsers={paginateUsers}
+                  setPaginateUsers={setPaginateUsers}
+                  pagination={pagination}
+                />
+                <UserListContainer
+                  getAllUsers={getAllUsers}
+                  allUsersList={allUsersList}
+                  paginateUsers={paginateUsers}
+                  open={open}
+                  setOpen={setOpen}
+                />
+                <UserPagination
+                  pagination={pagination}
+                  setPagination={setPagination}
+                  allUsersList={allUsersList}
+                  paginateUsers={paginateUsers}
+                  setPaginateUsers={setPaginateUsers}
+                />
+              </CardContent>
+            </Card>
+          </Grid>
       </Container>
     </div>
   );
