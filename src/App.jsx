@@ -17,14 +17,12 @@ export default function App() {
   });
 
   useEffect(() => {
-
     setAllocRoundContext({
-      allocRoundId: Number(localStorage.getItem("allocRoundId")) || 10007,
-      allocRoundName: localStorage.getItem("allocRoundName") || "N/A",
-    })
-  }
-
-    , []);
+      allocRoundId: Number(localStorage.getItem("allocRoundId")) || 0,
+      allocRoundName:
+        localStorage.getItem("allocRoundName") || "Pick Allocation!",
+    });
+  }, []);
 
   return (
     <div className="App">
