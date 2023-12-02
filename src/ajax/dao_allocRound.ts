@@ -1,4 +1,4 @@
-import { AllocRound, CopyAllocRound, Response, ResponseFiner } from "../types";
+import { AllocRound, CopyAllocRound, Response, } from "../types";
 import { create, get, remove, update } from "./request";
 
 const baseUrl = import.meta.env.VITE_BE_SERVER_BASE_URL;

@@ -1,7 +1,7 @@
 import dao from "../ajax/dao";
 import Logger from "../logger/logger";
 
-export async function validate(values) {
+export async function validate(values,allocRoundId) {
   const errors = {};
   const regName = new RegExp(/^[A-Za-zäöåÄÖÅ0-9\s-]*$/);
   const regNumber = new RegExp(/^[0-9]+$/);
@@ -10,8 +10,8 @@ export async function validate(values) {
 
   let subjectList = [];
 
-  const getSubjectNames = async function () {
-    const { httpStatus, data } = await dao.fetchSubjectsNames();
+  const getSubjectNames = async function (allocRoundId) {
+    const { httpStatus, data } = await dao.fetchSubjectsNames(allocRoundId);
     if (httpStatus === 200) {
       subjectList = data;
       let result;
@@ -47,7 +47,7 @@ export async function validate(values) {
 
   if (!values.subjectName) {
     errors.subjectName = "Required field";
-  } else if (await getSubjectNames()) {
+  } else if (await getSubjectNames(allocRoundId)) {
     errors.subjectName = "The name already exists";
   } else if (values.subjectName.length < 2 || values.subjectName.length > 255) {
     errors.subjectName = "The name must be 2-255 characters long";
