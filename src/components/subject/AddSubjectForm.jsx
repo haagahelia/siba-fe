@@ -26,7 +26,14 @@ export default function AddSubjectForm({
     <div>
       <form onSubmit={formik.handleSubmit}>
         <Grid container spacing={2} justifyContent="flex-end">
-          <Grid item xs={12} sm={12} md={6} lg={3} style={{ border: '5px solid #FDA826', padding: "10px" }}>
+          <Grid
+            item
+            xs={12}
+            sm={12}
+            md={6}
+            lg={3}
+            style={{ border: "5px solid #FDA826", padding: "10px" }}
+          >
             <FormControl fullWidth>
               <InputLabel>Copy Existing Lesson?</InputLabel>
               <Select
@@ -161,7 +168,7 @@ export default function AddSubjectForm({
               >
                 {programSelectList.map((program) => (
                   <MenuItem key={program.id} value={program.id}>
-                    {program.name}
+                    {program.programName}
                   </MenuItem>
                 ))}
               </Select>

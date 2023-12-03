@@ -18,25 +18,14 @@ export default function RoomList({ rooms }) {
       </Grid2>
       {rooms.map((room) => (
         <Grid2 container key={`${room.id}-rooms in RoomList`}>
-          <Grid2 xs={8}>
+          <Grid2 xs={8} variant="resultsDropdown">
             {" "}
-            <Typography
-              style={{
-                textAlign: "center",
-                marginTop: 5,
-                color: theme.baseBgColor,
-              }}
-            >
+            <Typography>
               {room.name}
             </Typography>
           </Grid2>
-          <Grid2 xs={4}>
-            <Typography
-              style={{
-                textAlign: "center",
-                marginTop: 5,
-              }}
-            >
+          <Grid2 xs={4} variant="resultsDropdown">
+            <Typography>
               {room.allocatedHours} h
             </Typography>
           </Grid2>

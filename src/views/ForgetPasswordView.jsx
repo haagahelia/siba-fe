@@ -37,15 +37,7 @@ export default function ForgetPasswordView() {
 
   return (
     <div>
-      <Card
-        variant="outlined"
-        sx={{
-          width: "65%",
-          padding: 1,
-          margin: "auto",
-          marginTop: "100px",
-        }}
-      >
+      <Card variant="outlined">
         <CardContent>
           <Typography>
             Please enter your registered email to reset your password.

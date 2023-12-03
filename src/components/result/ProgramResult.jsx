@@ -15,6 +15,7 @@ import ProgressBar from "@ramonak/react-progress-bar";
 import AllocRoundControlPanel from "../allocRound/AllocRoundControlPanel";
 import CollapsedRow from "./CollapsedRow";
 import SubjectResult from "./SubjectResult";
+import { margins } from "../../styles/theme";
 
 // component for displaying the subject groups of the allocation result shows:
 // the name of the subject groups
@@ -90,9 +91,9 @@ export default function ProgramResult() {
         <Box
           sx={{
             width: "80%",
-            margin: "auto",
+            margin: margins.auto,
             borderRadius: 20,
-            marginTop: 10,
+            marginTop: margins.large,
             backgroundColor: (theme) => theme.palette.background.default,
             position: "relative",
           }}
@@ -132,7 +133,6 @@ export default function ProgramResult() {
           <Typography
             sx={{
               textAlign: "center",
-              marginTop: "5%",
             }}
           >
             {subProg.name} -subjects
@@ -153,7 +153,7 @@ export default function ProgramResult() {
         }}
         columnSpacing={{ xs: 1, sm: 2, md: 3 }}
         spacing={2}
-        variant="programResultContainer"
+        variant="resultContainer"
       >
         {progs.map((prog) => {
           const progress = calculateProsent(prog.subjects);

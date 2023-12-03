@@ -1,9 +1,13 @@
-// import { Visibility, VisibilityOff } from "@mui/icons-material";
+import { useState, useEffect } from "react";
+
+import ExpandLessIcon from "@mui/icons-material/ExpandLess";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import Button from "@mui/material/Button";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
+import CardHeader from "@mui/material/CardHeader";
 import Checkbox from "@mui/material/Checkbox";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormGroup from "@mui/material/FormGroup";
@@ -11,22 +15,12 @@ import Grid from "@mui/material/Grid";
 import IconButton from "@mui/material/IconButton";
 import InputAdornment from "@mui/material/InputAdornment";
 import TextField from "@mui/material/TextField";
-import Typography from "@mui/material/Typography";
-import { useState, useEffect } from "react";
-import dao from "../../ajax/dao";
-import Logger from "../../logger/logger";
-import backgroundImage from "../../styles/SibeliusLogoLoginPage.svg";
-import AlertBox from "../common/AlertBox";
+import AddUserDialogConfirmations from "./AddUserDialogConfirmations";
 
-export default function RegisterView({ handleLoginChange }) {
-  Logger.logPrefix = "RegisterView";
-
-  const [alertOpen, setAlertOpen] = useState(false);
-  const [alertOptions, setAlertOptions] = useState({
-    message: "This is an alert — check it out!",
-    severity: "error",
-  });
-
+export default function AddUser({ getAllUsers }) {
+  const [isCardExpanded, setIsCardExpanded] = useState(false);
+  
+  const [open, setOpen] = useState(false);
   const [registerForm, setRegisterForm] = useState({
     email: "",
     password: "",
@@ -41,176 +35,132 @@ export default function RegisterView({ handleLoginChange }) {
     setShowPassword(!showPassword);
   };
 
-  const registerUser = async () => {
-    Logger.debug(
-      "Attempting to register a user with email:",
-      registerForm.email,
-    );
-
-    if (
-      !registerForm.email.trim() || // Check for empty or whitespace-only email
-      !registerForm.password.trim() || // Check for empty or whitespace-only password
-      (registerForm.isAdmin === 0 &&
-        registerForm.isPlanner === 0 &&
-        registerForm.isStatist === 0)
-    ) {
-      setAlertOptions({
-        severity: "error",
-        title: "Error!",
-        message:
-          "Please provide valid email and password, and select at least one role.",
-      });
-      setAlertOpen(true);
-      return;
-    }
-
-    // const hashedPassword = bcrypt.hashSync(registerForm.password, 10);
-    const success = await dao.postNewUser({
-      ...registerForm,
-    });
-    // password: hashedPassword,
-    if (!success) {
-      Logger.error("Registration failed for email:", registerForm.email);
-
-      // Use setAlertOptions instead of alert
-      setAlertOptions({
-        severity: "error",
-        title: "Error!",
-        message: "Something went wrong during registration.",
-      });
-      setAlertOpen(true);
-    } else {
-      Logger.debug("Registration successful for email:", registerForm.email);
-
-      // Set the alert options for success
-      setAlertOptions({
-        severity: "success",
-        title: "Success!",
-        message: `A user ${registerForm.email} was successfully created.`,
-      });
-      setAlertOpen(true); // Open the alert
-
-      setRegisterForm({
-        email: "",
-        password: "",
-        isAdmin: 0,
-        isPlanner: 0,
-        isStatist: 0,
-      });
-
-      // Trigger login change after registration
-      handleLoginChange();
-    }
+  const openDialogBox = () => {
+    setOpen(true);
   };
 
   useEffect(() => {
-    document.title = 'Add User';
+    getAllUsers();
   }, []);
 
   return (
-    <div>
-      <AlertBox
-        alertOpen={alertOpen}
-        alertOptions={alertOptions}
-        setAlertOpen={setAlertOpen}
-      />
-      <img
-        src={backgroundImage}
-        alt="Sibelius-Akatemia logo in the background."
-        className="logInPageBackgroundLogo"
-      />
-
-      <Card variant="formContent">
-        <CardContent style={{ zIndex: 1 }}>
-          <Typography variant="logInPageTitle">Add User</Typography>
-          <Grid>
-            <TextField
-              className="formTextInput"
-              value={registerForm.email}
-              onChange={(event) =>
-                setRegisterForm({ ...registerForm, email: event.target.value })
+    <>
+      <Card variant="outlined">
+        <CardContent>
+          <CardHeader
+              title="Add User"
+              onClick={() => setIsCardExpanded(!isCardExpanded)}
+              variant="pageHeader"
+              action={
+                <IconButton
+                  onClick={() => setIsCardExpanded(!isCardExpanded)}
+                  aria-expanded={isCardExpanded}
+                  aria-label="expand/collapse"
+                  color="primary"
+                >
+                  {isCardExpanded ? <ExpandLessIcon /> : <ExpandMoreIcon />}
+                </IconButton>
               }
-              placeholder="email"
             />
-          </Grid>
-          <Grid>
-            <TextField
-              className="formTextInput"
-              value={registerForm.password}
-              onChange={(event) =>
-                setRegisterForm({
-                  ...registerForm,
-                  password: event.target.value,
-                })
-              }
-              type={showPassword ? "text" : "password"}
-              placeholder="password"
-              InputProps={{
-                endAdornment: (
-                  <InputAdornment position="end">
-                    <IconButton
-                      onClick={handlePasswordVisibility}
-                      edge="end"
-                      style={{ backgroundColor: "transparent" }}
-                    >
-                      {showPassword ? <Visibility /> : <VisibilityOff />}
-                    </IconButton>
-                  </InputAdornment>
-                ),
-              }}
-            />
-          </Grid>
-          <Grid>
-            <FormGroup>
-              <FormControlLabel
-                control={<Checkbox />}
-                label="Admin"
-                labelPlacement="start"
-                className="formCheckBoxButtons"
-                name="isAdmin"
-                checked={registerForm.isAdmin === 1}
-                onChange={(event) =>
-                  setRegisterForm({
-                    ...registerForm,
-                    isAdmin: event.target.checked ? 1 : 0,
-                  })
-                }
-              />
-              <FormControlLabel
-                control={<Checkbox />}
-                label="Planner"
-                labelPlacement="start"
-                className="formCheckBoxButtons"
-                name="isPlanner"
-                checked={registerForm.isPlanner === 1}
-                onChange={(event) =>
-                  setRegisterForm({
-                    ...registerForm,
-                    isPlanner: event.target.checked ? 1 : 0,
-                  })
-                }
-              />
-              <FormControlLabel
-                control={<Checkbox />}
-                label="Statist"
-                labelPlacement="start"
-                className="formCheckBoxButtons"
-                name="isStatist"
-                checked={registerForm.isStatist === 1}
-                onChange={(event) =>
-                  setRegisterForm({
-                    ...registerForm,
-                    isStatist: event.target.checked ? 1 : 0,
-                  })
-                }
-              />
-            </FormGroup>
-            <Button variant="formButton" onClick={registerUser}>
-              Add User
-            </Button>
-          </Grid>
+            {isCardExpanded && (
+              <Grid container spacing={2}>
+                <Grid item xs={12}>
+                  <TextField
+                    className="formTextInput"
+                    value={registerForm.email}
+                    onChange={(event) =>
+                      setRegisterForm({ ...registerForm, email: event.target.value })
+                    }
+                    placeholder="email"
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <TextField
+                    className="formTextInput"
+                    value={registerForm.password}
+                    onChange={(event) =>
+                      setRegisterForm({
+                        ...registerForm,
+                        password: event.target.value,
+                      })
+                    }
+                    type={showPassword ? "text" : "password"}
+                    placeholder="password"
+                    InputProps={{
+                      endAdornment: (
+                        <InputAdornment position="end">
+                          <IconButton
+                            onClick={handlePasswordVisibility}
+                            edge="end"
+                            style={{ backgroundColor: "transparent" }}
+                          >
+                            {showPassword ? <Visibility /> : <VisibilityOff />}
+                          </IconButton>
+                        </InputAdornment>
+                      ),
+                    }}
+                  />
+                </Grid>
+                <Grid item xs={12} sm={6} md={4}>
+                  <FormGroup>
+                    <FormControlLabel
+                      control={<Checkbox />}
+                      label="Admin"
+                      labelPlacement="start"
+                      className="formCheckBoxButtons"
+                      name="isAdmin"
+                      checked={registerForm.isAdmin === 1}
+                      onChange={(event) =>
+                        setRegisterForm({
+                          ...registerForm,
+                          isAdmin: event.target.checked ? 1 : 0,
+                        })
+                      }
+                    />
+                    <FormControlLabel
+                      control={<Checkbox />}
+                      label="Planner"
+                      labelPlacement="start"
+                      className="formCheckBoxButtons"
+                      name="isPlanner"
+                      checked={registerForm.isPlanner === 1}
+                      onChange={(event) =>
+                        setRegisterForm({
+                          ...registerForm,
+                          isPlanner: event.target.checked ? 1 : 0,
+                        })
+                      }
+                    />
+                    <FormControlLabel
+                      control={<Checkbox />}
+                      label="Statist"
+                      labelPlacement="start"
+                      className="formCheckBoxButtons"
+                      name="isStatist"
+                      checked={registerForm.isStatist === 1}
+                      onChange={(event) =>
+                        setRegisterForm({
+                          ...registerForm,
+                          isStatist: event.target.checked ? 1 : 0,
+                        })
+                      }
+                    />
+                  </FormGroup>
+                  <Button onClick={() => openDialogBox()} variant="contained">
+                    Add User
+                  </Button>
+                </Grid>
+              </Grid>
+            )}
         </CardContent>
       </Card>
-    </div>
+      <AddUserDialogConfirmations
+        open={open}
+        setOpen={setOpen}
+        registerForm={registerForm}
+        setRegisterForm={setRegisterForm}
+        getAllUsers={getAllUsers}
+      />  
+    </>
   );
 }

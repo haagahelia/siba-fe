@@ -48,7 +48,7 @@ export default function RoomResult() {
   }, []);
 
   return (
-    <div style={{ width: "80%", margin: "auto" }}>
+    <div style={theme.components.RoomResultsContainer}>
       <AllocRoundControlPanel incrementResetCounter={incrementResetCounter} />
       <Typography className="mt6" variant="pageHeader">
         Spaces (Huoneet)
@@ -56,23 +56,22 @@ export default function RoomResult() {
       <Box
         sx={{
           display: "flex",
-          gap: 12,
-          marginTop: "3%",
-          marginBottom: "5%",
+          justifyContent: "flex-start",
+          alignSelf: "flex-end",
+          gap: 2,
         }}
       >
-        <div style={theme.components.IndexRooms.luentoluokkaindex}>
-          <Typography sx={{ marginLeft: 5 }}> Lecture class </Typography>
-        </div>
-        <div style={theme.components.IndexRooms.studioindex}>
-          <Typography sx={{ marginLeft: 5 }}> Studio </Typography>
-        </div>
-        <div style={theme.components.IndexRooms.esitystilaindex}>
-          <Typography sx={{ marginLeft: 5 }}> Performance space </Typography>
-        </div>
-        <div style={theme.components.IndexRooms.musiikkiluokkaindex}>
-          <Typography sx={{ marginLeft: 5 }}> Music class </Typography>
-        </div>
+        <div style={theme.components.IndexRooms.luentoluokkaindex} />
+        <Typography variant="roomIndex"> Lecture class </Typography>
+        
+        <div style={theme.components.IndexRooms.studioindex} />
+        <Typography variant="roomIndex"> Studio </Typography>
+        
+        <div style={theme.components.IndexRooms.esitystilaindex} />
+        <Typography variant="roomIndex"> Performance space </Typography>
+        
+        <div style={theme.components.IndexRooms.musiikkiluokkaindex} />
+          <Typography variant="roomIndex"> Music class </Typography>
       </Box>
 
       <RoomsWithTimesList rooms={rooms} />

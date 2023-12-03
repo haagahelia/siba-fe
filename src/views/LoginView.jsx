@@ -14,6 +14,15 @@ import AlertBox from "../components/common/AlertBox";
 import Logger from "../logger/logger";
 import backgroundImage from "../styles/SibeliusLogoLoginPage.svg";
 
+export const localStorageClearUserLoginAndToken = () => {
+  localStorage.setItem("sessionToken", "");
+  localStorage.setItem("userId", "");
+  localStorage.setItem("email", "");
+  localStorage.setItem("isAdmin", "");
+  localStorage.setItem("isPlanner", "");
+  localStorage.setItem("isStatist", "");
+};
+
 export default function LoginView({ handleLoginChange }) {
   Logger.logPrefix = "LoginView";
 
@@ -112,7 +121,7 @@ export default function LoginView({ handleLoginChange }) {
   };
 
   useEffect(() => {
-    document.title = 'Log In';
+    document.title = "Log In";
   }, []);
 
   return (

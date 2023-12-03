@@ -27,9 +27,12 @@ import BuildingView from "../views/BuildingView";
 import DepartmentView from "../views/DepartmentView";
 import EquipmentView from "../views/EquipmentView";
 import ForgetPasswordView from "../views/ForgetPasswordView";
-import LoginView from "../views/LoginView";
+import LoginView, {
+  localStorageClearUserLoginAndToken,
+} from "../views/LoginView";
 import NotFoundView from "../views/NotFoundView";
 import ProgramResultView from "../views/ProgramResultView";
+import ProgramView from "../views/ProgramView";
 import RegisterView from "../views/RegisterView";
 import ResetPasswordView from "../views/ResetPasswordView";
 import RoomResultView from "../views/RoomResultView";
@@ -37,7 +40,6 @@ import SettingsView from "../views/SettingsView";
 import SpaceView from "../views/SpaceView";
 import SubjectView from "../views/SubjectView";
 import UserView from "../views/UserView";
-import ProgramView from "../views/ProgramView";
 
 export default function NavBar() {
   Logger.debug("NavBar initiated");
@@ -105,12 +107,6 @@ export default function NavBar() {
       showForCurrentUser: false,
     },
     {
-      name: "Add User",
-      href: "/addUser",
-      forRoles: ["admin"],
-      showForCurrentUser: false,
-    },
-    {
       name: "User List",
       href: "/users",
       forRoles: ["admin"],
@@ -152,7 +148,7 @@ export default function NavBar() {
       forRoles: ["admin", "planner", "statist"],
       showForCurrentUser: false,
       action() {
-        localStorage.clear();
+        localStorageClearUserLoginAndToken();
         handleLoginChange();
         setIsDropdownVisible(false);
       },
@@ -354,7 +350,7 @@ export default function NavBar() {
                   <Typography variant="navAllocInfo">
                     {`${
                       allocRoundContext.allocRoundId
-                    } : ${allocRoundContext.allocRoundName.substring(0, 12)}`}
+                    } : ${allocRoundContext.allocRoundName.substring(0, 16)}`}
                   </Typography>
                 </List>
               </Box>
@@ -366,7 +362,6 @@ export default function NavBar() {
             path="/login"
             element={<LoginView handleLoginChange={handleLoginChange} />}
           />
-          <Route path="/addUser" element={<RegisterView />} />
           <Route
             path="/"
             element={<LoginView handleLoginChange={handleLoginChange} />}

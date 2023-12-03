@@ -5,6 +5,7 @@ import Button from "@mui/material/Button";
 import useTheme from "@mui/material/styles/useTheme";
 import AlertBox from "../common/AlertBox";
 import ConfirmationDialog from "../common/ConfirmationDialog";
+import { margins } from "../../styles/theme";
 
 export default function DeleteSubEquip({
   singleEquipBySubId,
@@ -87,7 +88,7 @@ export default function DeleteSubEquip({
       <Button
         variant="contained"
         style={theme.components.MuiButton.redbutton}
-        sx={{ margin: "5px", maxWidth: "85px" }}
+        sx={{ marginLeft: margins.small, maxWidth: "85px" }}
         onClick={() => {
           submitDelete(singleEquipBySubId);
         }}
