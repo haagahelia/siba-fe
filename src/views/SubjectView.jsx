@@ -30,7 +30,7 @@ export default function SubjectView() {
   const appContext = useContext(AppContext);
   const { allocRoundContext } = useContext(AllocRoundContext);
 
-  const { subjectIdToShow } = useParams();
+  let { subjectIdToShow } = useParams();
   const [subjectIdToShowState, setSubjectIdToShowState] =
     useState(subjectIdToShow);
   const [shownSubject, setShownSubject] = useState(null);
@@ -49,6 +49,30 @@ export default function SubjectView() {
     from: 0,
     to: pageSize,
   });
+
+  const getAllSubjects = async function () {
+    Logger.debug(
+      "getAllSubjects: fetching all subjects in allocRound, from server.",
+    );
+    console.log("allocRoundId", allocRoundContext.allocRoundId);
+    const { httpStatus, data } = await dao.fetchAllSubjects(
+      allocRoundContext.allocRoundId,
+    );
+    if (httpStatus !== 200) {
+      ajaxRequestErrorHandler(
+        httpStatus,
+        getFunctionName(2),
+        setAlertOptions,
+        setAlertOpen,
+      );
+    } else {
+      Logger.debug(
+        `getAllSubjects: successfully fetched ${data.length} subjects.`,
+      );
+      setAllSubjectsList(data);
+      setPaginateSubjects(data.slice(0, 15));
+    }
+  };
 
   useEffect(() => {
     (() => {
@@ -72,8 +96,9 @@ export default function SubjectView() {
               `getShownSubjectById: successfully fetched ${data[0].id}:${data[0].name} subject.`,
             );
             setShownSubject(data[0]);
-            setOpen(true);
+            //setOpen(true);
             setSubjectIdToShowState(0);
+            subjectIdToShow = 0;
           }
         } else {
           Logger.debug("No subject to show directly");
@@ -83,35 +108,12 @@ export default function SubjectView() {
       Logger.debug("Running effect to fetch possible directly shown subejct.");
       getShownSubjectById(subjectIdToShowState);
     })();
-  }, [subjectIdToShowState]);
+  }, [subjectIdToShowState, subjectIdToShow]);
 
   useEffect(() => {
     Logger.debug("Running effect to fetch all subjects.");
-    const getAllSubjects = async function () {
-      Logger.debug(
-        "getAllSubjects: fetching all subjects in allocRound, from server.",
-      );
-      console.log("allocRoundId", allocRoundContext.allocRoundId);
-      const { httpStatus, data } = await dao.fetchAllSubjects(
-        allocRoundContext.allocRoundId,
-      );
-      if (httpStatus !== 200) {
-        ajaxRequestErrorHandler(
-          httpStatus,
-          getFunctionName(2),
-          setAlertOptions,
-          setAlertOpen,
-        );
-      } else {
-        Logger.debug(
-          `getAllSubjects: successfully fetched ${data.length} subjects.`,
-        );
-        setAllSubjectsList(data);
-        setPaginateSubjects(data.slice(0, 15));
-      }
-    };
     getAllSubjects();
-  }, [allocRoundContext.allocRoundId]);
+  }, [getAllSubjects]);
 
   useEffect(() => {
     Logger.debug("Running effect to update paginated subjects.");

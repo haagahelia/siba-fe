@@ -1,15 +1,16 @@
 import { useEffect, useState } from "react";
 import dao from "../../ajax/dao";
 
+import CloseIcon from "@mui/icons-material/Close";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import Grid from "@mui/material/Grid";
-import Typography from "@mui/material/Typography";
-import AlertBox from "../common/AlertBox";
-import CloseIcon from "@mui/icons-material/Close";
 import IconButton from "@mui/material/IconButton";
+import Typography from "@mui/material/Typography";
+import Logger from "../../logger/logger";
+import AlertBox from "../common/AlertBox";
 import AddSubEquipContainer from "./AddSubEquipContainer";
 import DeleteSubject from "./DeleteSubject";
 import EditSubjectContainer from "./EditSubjectContainer";
@@ -54,7 +55,7 @@ export default function SingleSubjectDialog({
       // console.log(`getEquipmentsBySubId(${singleSubject.id})`);
       getEquipmentsBySubId(singleSubject.id);
     }
-  }, [singleSubject]);
+  }, [singleSubject, getEquipmentsBySubId]);
 
   return (
     <div>
@@ -63,14 +64,25 @@ export default function SingleSubjectDialog({
         alertOptions={alertOptions}
         open={setAlertOpen}
       />
-      <Dialog open={open} onClose={() => setOpen(false)} maxWidth="md" fullWidth>
+      <Dialog
+        open={open}
+        onClose={() => {
+          setOpen(false);
+          Logger.debug("Closing SingleSubjectDialog from onClose...");
+        }}
+        maxWidth="md"
+        fullWidth
+      >
         <DialogTitle id="dialog-title">
           {singleSubject?.subjectName}
         </DialogTitle>
         <IconButton
           edge="end"
           color="inherit"
-          onClick={() => setOpen(false)}
+          onClick={() => {
+            setOpen(false);
+            Logger.debug("Closing SingleSubjectDialog from IconButton...");
+          }}
           aria-label="close"
           style={{ position: "absolute", top: "10px", right: "20px" }}
         >
@@ -94,11 +106,7 @@ export default function SingleSubjectDialog({
             />
           </DialogActions>
           <DialogContent>
-            <Grid
-              container
-              variant="sibaGridSingleItemDisplay"
-              column={14}
-            >
+            <Grid container variant="sibaGridSingleItemDisplay" column={14}>
               <DialogContent variant="sibaDialogContent2">
                 <Grid item xs={12} sm={6}>
                   <Typography variant="singleDialogSubtitle">
@@ -107,7 +115,7 @@ export default function SingleSubjectDialog({
                 </Grid>
                 <Grid item xs={12} sm={6}>
                   <Typography variant="singleDialogSubtitle">
-                    {singleSubject?.subjectName}
+                    {singleSubject?.name}
                   </Typography>
                 </Grid>
               </DialogContent>
@@ -179,7 +187,7 @@ export default function SingleSubjectDialog({
                 </Grid>
                 <Grid item xs={12} sm={6}>
                   <Typography variant="singleDialogSubtitle">
-                    {singleSubject?.programName}
+                    {singleSubject?.progName}
                   </Typography>
                 </Grid>
               </DialogContent>
@@ -195,7 +203,6 @@ export default function SingleSubjectDialog({
                   </Typography>
                 </Grid>
               </DialogContent>
-
             </Grid>
             <DialogContent>
               <Typography variant="boldTitle2">Equipment needs:</Typography>
