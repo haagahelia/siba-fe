@@ -1,10 +1,11 @@
 import dao from "../ajax/dao";
 
 export default async function ValidateAddSpace(values) {
+  console.log("ValidateAddSpace.js called")
   const regName = new RegExp(/^[A-Za-zäöåÄÖÅ0-9\s-]*$/);
   const regInfo = new RegExp(/^[A-Za-zäöåÄÖÅ0-9\s-]*$/);
   const regNumber = new RegExp(/^[0-9]+$/);
-  const regTime = new RegExp(/^([0-1][0-2]):([0-5][0-9])(:[0-5][0-9])?$/);
+  const regTime = new RegExp(/^([0-1][0-9]|2[0-3]):([0-5][0-9])(:[0-5][0-9])?$/);
   const regArea = new RegExp(/^[0-9]*(.[0-9]{1,2})?$/);
 
   const errors = {};
@@ -36,65 +37,65 @@ export default async function ValidateAddSpace(values) {
   };
 
   if (!name) {
-    errors.name = "Space name is required.";
+    errors.name = "'Name': is a required field\n";
   } else if (await isDuplicatedSpaceNameAndBuildingName()) {
-    errors.name = "The space name already exists in the building";
+    errors.name = "'Name': already exists in the building\n";
   } else if (name.length < 2 || name.length > 255) {
-    errors.name = "Space name should be between 2 and 255 characters.";
+    errors.name = "'Name': should be between 2 and 255 characters.\n";
   } else if (!regName.test(values.name)) {
-    errors.name = "Only letters, numbers and '-' allowed";
+    errors.name = "'Name': only letters, numbers and '-' are allowed\n";
   }
 
   if (!area) {
-    errors.area = "Required field area";
+    errors.area = "'Area': is a required field\n";
   } else if (values.area <= 0) {
-    errors.area = "The required quantity cannot be less than 0";
+    errors.area = "'Area': cannot be less than 0\n";
   } else if (!regArea.test(values.area)) {
-    errors.area = "Only numbers allowed & format .00 allowed";
+    errors.area = "'Area': only numbers with a maximum of two decimal places are allowed\n";
   }
 
   if (info.length > 16000) {
-    errors.info = "The space info must be at maximum 16000 characters long";
+    errors.info = "'Info': maximum 16000 characters long\n";
   } else if (!regInfo.test(values.info)) {
-    errors.info = "Only letters, numbers and '-' allowed";
+    errors.info = "'Info': only letters, numbers and '-' are allowed\n";
   }
 
   if (!personLimit) {
-    errors.personLimit = "Required field person limit";
+    errors.personLimit = "'Person limit': is a required field\n";
   } else if (personLimit <= 0) {
-    errors.personLimit = "Person limit cannot be less than 0";
+    errors.personLimit = "'Person limit': cannot be less than 0\n";
   } else if (!regNumber.test(personLimit)) {
-    errors.personLimit = "Only numbers allowed";
+    errors.personLimit = "'Person limit': only numbers allowed\n";
   }
 
   if (!availableFrom) {
-    errors.availableFrom = "Required field available from";
+    errors.availableFrom = "'Available from': is a required field\n";
   } else if (!regTime.test(availableFrom)) {
-    errors.availableFrom = "Allowed format is 00:00 or 00:00:00";
+    errors.availableFrom = "'Available from': allowed format is 00:00 or 00:00:00\n";
   }
 
   if (!availableTo) {
-    errors.availableTo = "Required field available to";
+    errors.availableTo = "'Available to': is a required field\n";
   } else if (!regTime.test(availableTo)) {
-    errors.availableTo = "Allowed format is 00:00 or 00:00:00";
+    errors.availableTo = "'Available to': allowed format is 00:00 or 00:00:00\n";
   }
 
   if (!classesFrom) {
-    errors.classesFrom = "Required field classes from";
+    errors.classesFrom = "'Classes from': is a required field\n";
   } else if (!regTime.test(classesFrom)) {
-    errors.classesFrom = "Allowed format is 00:00 or 00:00:00";
+    errors.classesFrom = "'Classes from': allowed format is 00:00 or 00:00:00\n";
   }
 
   if (!classesTo) {
-    errors.classesTo = "Required field classes to";
+    errors.classesTo = "'Classes to': is a required field\n";
   } else if (!regTime.test(classesTo)) {
-    errors.classesTo = "Allowed format is 00:00 or 00:00:00";
+    errors.classesTo = "Classes to': allowed format is 00:00 or 00:00:00\n";
   }
 
   if (inUse === undefined && inUse === null) {
-    errors.inUse = "Required filed in use";
+    errors.inUse = "'In use?' is a required field\n";
   } else if (!["yes", "no", "0", "1", 0, 1, false, true].includes(inUse)) {
-    errors.inUse = "Required filed in use as value yes/no/'0'/'1'";
+    errors.inUse = "'In use' value must be either: yes/no/'0'/'1'\n";
   }
 
   // Additional validation rules can be added as needed for other fields.
