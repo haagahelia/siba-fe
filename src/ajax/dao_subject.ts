@@ -18,6 +18,25 @@ export const fetchAllSubjects = async (
   }
 };
 
+// fetching one subject by id
+export const fetchSubjectById = async (
+  id: number,
+): Promise<ResponseFiner<Subject>> => {
+  const response = await get(
+    `${baseUrl}/subject/${id}`,
+  );
+  if (response.status === 200) {
+    const subjects: Subject[] = await response.json();
+    if(subjects.length === 1) {
+      return { httpStatus: response.status, data: subjects };
+    } else {
+      return { httpStatus: 409, data: [] };
+    }
+  } else {
+    return { httpStatus: response.status, data: [] };
+  }
+};
+
 // fetching all subject's names
 export const fetchSubjectsNames = async (
   allocRoundId: number,

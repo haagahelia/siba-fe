@@ -8,7 +8,7 @@ import "../styles/AllocationFailure.css";
 import CheckIcon from "@mui/icons-material/Check";
 import CloseIcon from "@mui/icons-material/Close";
 import Button from "@mui/material/Button";
-import ClickAwayListener from "@mui/material/ClickAwayListener";
+
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
@@ -24,92 +24,39 @@ import Tooltip from "@mui/material/Tooltip";
 import Typography from "@mui/material/Typography";
 import AlertBox from "../components/common/AlertBox";
 
-function GetMissingEquipment({ subjId, roomId, item }) {
-  const [missingEquipment, setMissingEquipment] = useState(
-    "No missing equipment",
-  );
-  const [tooltipOpen, setTooltipOpen] = useState(false);
-  const [, setAlertOpen] = useState(false);
-  const [, setAlertOptions] = useState({
-    message: "Whoops!",
-    severity: "error",
-  });
+import { GetMissingEquipment } from "../components/resultFailureReasons/GetMissingEquipment";
 
-  const handleTooltipClose = () => {
-    setTooltipOpen(false);
-  };
-
-  const handleTooltipOpen = () => {
-    if (item > 0) {
-      getMissingEquipment(subjId, roomId);
-    }
-
-    setTooltipOpen(true);
-  };
-
-  const getMissingEquipment = async function (subjectId, spaceId) {
-    Logger.debug(
-      "getMissingEquipment: fetching all missing equipment from server.",
-    );
-    const { httpStatus, data } = await dao.getMissingEquipmentForRoom(
-      subjectId,
-      spaceId,
-    );
-    if (httpStatus !== 200) {
-      console.log("Whoops!");
-      ajaxRequestErrorHandler(
-        httpStatus,
-        "getMissingEquipment",
-        setAlertOptions,
-        setAlertOpen,
-      );
+export const getNameForId = (array, id) => {
+  if(array && array.length > 0) { 
+    const foundItems = array.filter((element) => element.id == id)
+    if (foundItems.length===1) {
+      return foundItems[0].name; 
+      Logger.debug("Found space type name: " +foundItems[0].name);
     } else {
-      Logger.debug("getMissingEquipment: successfully fetched");
-      const equipmentNames = data.map((item) => item.name);
-      setMissingEquipment(`Missing equipment: ${equipmentNames.join(", ")}`);
+      if(foundItems.length===0) {
+        Logger.error("No item found for id: " +id);
+        //console.dir(array);
+      } else {
+        Logger.error("More than one match found for id:" +foundItems);
+        return "More than one match for id";
+      }
     }
-  };
-
-  return (
-    <ClickAwayListener onClickAway={handleTooltipClose}>
-      <Tooltip
-        onClose={handleTooltipClose}
-        open={tooltipOpen}
-        disableFocusListener
-        disableHoverListener
-        disableTouchListener
-        placement="left"
-        title={missingEquipment}
-      >
-        {item > 0 ? (
-          <TableCell>
-            <CloseIcon
-              id="setcursor"
-              onClick={handleTooltipOpen}
-              color="error"
-            />
-          </TableCell>
-        ) : (
-          <TableCell>
-            <CheckIcon
-              id="setcursor"
-              onClick={handleTooltipOpen}
-              color="success"
-            />
-          </TableCell>
-        )}
-      </Tooltip>
-    </ClickAwayListener>
-  );
-}
+  } else {
+    return "Name N/A";
+  }
+};
 
 export default function AllocationSubjectFailureView() {
   const { allocId } = useParams();
 
   const [unAllocableSubjects, setUnAllocableSubjects] = useState([]);
   const [unAllocSubjectRooms, setUnAllocSubjectRooms] = useState([]);
-  const [open, setOpen] = useState(false);
+
+  
   const [currSubjId, setCurrSubjId] = useState();
+  const [unAllocSubject, setUnAllocSubject] = useState({});
+  const [spaceNamesArray, setSpaceNameArray] = useState([]);
+  const [open, setOpen] = useState(false);
   const [alertOpen, setAlertOpen] = useState(false);
   const [alertOptions, setAlertOptions] = useState({
     message: "Whoops!",
@@ -141,10 +88,38 @@ export default function AllocationSubjectFailureView() {
         setAlertOpen,
       );
     } else {
-      Logger.debug("getUnAllocRooms: successfully fetched");
+      Logger.debug("getUnAllocRooms: Subject's unalloc rooms successfully fetched");
       setUnAllocSubjectRooms(data);
       setCurrSubjId(id);
     }
+
+    const response2 = await dao.fetchSubjectById(id);
+    if (response2.httpStatus !== 200) {
+      ajaxRequestErrorHandler(
+        response2.httpStatus,
+        "getUnAllocRooms",
+        setAlertOptions,
+        setAlertOpen,
+      );
+    } else {
+      Logger.debug("getUnAllocRooms: Subject successfully fetched");
+      console.dir(response2.data);
+      setUnAllocSubject(response2.data[0]);
+    }
+
+    const response3 = await dao.fetchSpacetypeForSelect();
+    if (response3.httpStatus !== 200) {
+      ajaxRequestErrorHandler(
+        response3.httpStatus,
+        "getUnAllocRooms",
+        setAlertOptions,
+        setAlertOpen,
+      );
+    } else {
+      Logger.debug("getUnAllocRooms: Spacenames successfully fetched");
+      setSpaceNameArray(response3.data);
+    }
+
   };
 
   const handleClickOpen = (id) => () => {
@@ -210,7 +185,7 @@ export default function AllocationSubjectFailureView() {
         </TableContainer>
       </div>
       <Dialog open={open} onClose={handleClose} scroll="body" maxWidth="70%">
-        <DialogTitle>Suitability of the space</DialogTitle>
+        <DialogTitle>Suitability of the space - for lesson: {unAllocSubject.name}</DialogTitle>
         <DialogContent>
           <TableContainer component={Paper}>
             <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -218,9 +193,9 @@ export default function AllocationSubjectFailureView() {
                 <TableRow>
                   <TableCell>Space name</TableCell>
                   <TableCell>Equipment</TableCell>
-                  <TableCell>Space size</TableCell>
-                  <TableCell>Number of people</TableCell>
-                  <TableCell>Space type</TableCell>
+                  <TableCell>Space size (Required: {unAllocSubject.area})</TableCell>
+                  <TableCell>Number of people (Required: {unAllocSubject.groupSize})</TableCell>
+                  <TableCell>Space type (Required: {getNameForId(spaceNamesArray,unAllocSubject.spaceTypeId)})</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -229,11 +204,11 @@ export default function AllocationSubjectFailureView() {
                     <TableCell>{row.name}</TableCell>
 
                     <GetMissingEquipment
-                      subjectId={currSubjId}
+                      subjId={currSubjId}
                       roomId={row.id}
                       item={row.missingItems}
                     />
-                    <Tooltip disableFocusListener title={row.area}>
+                    <Tooltip disableFocusListener title={`${row.area} (Required: ${unAllocSubject.area})`}>
                       {row.areaOk === 0 ? (
                         <TableCell>
                           <CloseIcon color="error" />
@@ -244,7 +219,7 @@ export default function AllocationSubjectFailureView() {
                         </TableCell>
                       )}
                     </Tooltip>
-                    <Tooltip disableFocusListener title={row.personLimit}>
+                    <Tooltip disableFocusListener title={`${row.personLimit} (required: ${unAllocSubject.groupSize})`}>
                       {row.personLimitOk === 0 ? (
                         <TableCell>
                           <CloseIcon color="error" />
@@ -255,7 +230,7 @@ export default function AllocationSubjectFailureView() {
                         </TableCell>
                       )}
                     </Tooltip>
-                    <Tooltip disableFocusListener title={row.spaceType}>
+                    <Tooltip disableFocusListener title={`${row.spaceType} (required: ${getNameForId(spaceNamesArray,unAllocSubject.spaceTypeId)})`}>
                       {row.spaceTypeOk === 0 ? (
                         <TableCell>
                           <CloseIcon color="error" />
