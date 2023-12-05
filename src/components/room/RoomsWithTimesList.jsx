@@ -12,7 +12,7 @@ export default function RoomsWithTimesList({ rooms }) {
     <Grid2
       key="container for list"
       container
-      rowSpacing={1}
+      rowSpacing={3}
       columnSpacing={{ xs: 1, sm: 2, md: 3 }}
       spacing={2}
       variant="resultContainer"
