@@ -367,6 +367,7 @@ export default function NavBar() {
             element={<LoginView handleLoginChange={handleLoginChange} />}
           />
           <Route path="/subject" element={<SubjectView />} />
+          <Route path="/subject/:subjectIdToShow" element={<SubjectView />} />
           <Route path="/allocation" element={<AllocRoundView />} />
           <Route path="/roomresult" element={<RoomResultView />} />
           <Route path="/programresult" element={<ProgramResultView />} />

@@ -12,7 +12,11 @@ import styled from "@mui/material/styles/styled";
 import { useState } from "react";
 import SingleSubjectDialog from "./SingleSubjectDialog";
 
-export default function SubjectList({ getAllSubjects, paginateSubjects }) {
+export default function SubjectList({
+  shownSubject,
+  getAllSubjects,
+  paginateSubjects,
+}) {
   const [open, setOpen] = useState(false);
   const [singleSubject, setSingleSubject] = useState(null);
   const [order, setOrder] = useState("asc");
@@ -63,9 +67,9 @@ export default function SubjectList({ getAllSubjects, paginateSubjects }) {
   return (
     <div>
       <SingleSubjectDialog
-        open={open}
+        open={shownSubject !== null ? true : open}
         setOpen={setOpen}
-        singleSubject={singleSubject}
+        singleSubject={shownSubject !== null ? shownSubject : singleSubject}
         setSingleSubject={setSingleSubject}
         getAllSubjects={getAllSubjects}
       />

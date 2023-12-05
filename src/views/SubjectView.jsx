@@ -1,6 +1,7 @@
 // The Lessons Page
 import { useContext, useEffect, useState } from "react";
-import { AppContext, AllocRoundContext } from "../AppContext";
+import { useParams } from "react-router-dom";
+import { AllocRoundContext, AppContext } from "../AppContext";
 import {
   ajaxRequestErrorHandler,
   getFunctionName,
@@ -29,6 +30,8 @@ export default function SubjectView() {
   const appContext = useContext(AppContext);
   const { allocRoundContext } = useContext(AllocRoundContext);
 
+  let { subjectIdToShow } = useParams();
+  const [shownSubject, setShownSubject] = useState(null);
   const [paginateSubjects, setPaginateSubjects] = useState([]);
   const [allSubjectsList, setAllSubjectsList] = useState([]);
   const [alertOpen, setAlertOpen] = useState(false);
@@ -45,30 +48,65 @@ export default function SubjectView() {
     to: pageSize,
   });
 
-  const getAllSubjects = async function () {
-    Logger.debug("getAllSubjects: fetching all subjects in allocRound, from server.");
-    console.log("allocRoundId", allocRoundContext.allocRoundId)
-    const { httpStatus, data } = await dao.fetchAllSubjects(allocRoundContext.allocRoundId);
-    if (httpStatus !== 200) {
-      ajaxRequestErrorHandler(
-        httpStatus,
-        getFunctionName(2),
-        setAlertOptions,
-        setAlertOpen,
-      );
-    } else {
-      Logger.debug(
-        `getAllSubjects: successfully fetched ${data.length} subjects.`,
-      );
-      setAllSubjectsList(data);
-      setPaginateSubjects(data.slice(0, 15));
-    }
-  };
+  useEffect(() => {
+    (() => {
+      const getShownSubjectById = async (id) => {
+        Logger.debug(`subjectId: ${id} Starting or not? Based on that id.`);
+        if (id) {
+          Logger.debug("getShownSubjectById: starts");
+          const { httpStatus, data } = await dao.fetchSubjectById(id);
+          if (httpStatus !== 200) {
+            ajaxRequestErrorHandler(
+              httpStatus,
+              getFunctionName(2),
+              setAlertOptions,
+              setAlertOpen,
+            );
+          } else {
+            Logger.debug(
+              `getShownSubjectById: successfully fetched ${data[0].id}:${data[0].name} subject.`,
+            );
+            setShownSubject(data[0]);
+            setOpen(true);
+            subjectIdToShow = 0;
+          }
+        } else {
+          Logger.debug("No subject to show directly");
+        }
+      };
+
+      Logger.debug("Running effect to fetch possible directly shown subejct.");
+      getShownSubjectById(subjectIdToShow);
+    })();
+  }, [subjectIdToShow]);
 
   useEffect(() => {
     Logger.debug("Running effect to fetch all subjects.");
+    const getAllSubjects = async function () {
+      Logger.debug(
+        "getAllSubjects: fetching all subjects in allocRound, from server.",
+      );
+      console.log("allocRoundId", allocRoundContext.allocRoundId);
+      const { httpStatus, data } = await dao.fetchAllSubjects(
+        allocRoundContext.allocRoundId,
+      );
+      if (httpStatus !== 200) {
+        ajaxRequestErrorHandler(
+          httpStatus,
+          getFunctionName(2),
+          setAlertOptions,
+          setAlertOpen,
+        );
+      } else {
+        Logger.debug(
+          `getAllSubjects: successfully fetched ${data.length} subjects.`,
+        );
+        setAllSubjectsList(data);
+        setPaginateSubjects(data.slice(0, 15));
+      }
+    };
     getAllSubjects();
-  }, []);
+  }, [allocRoundContext.allocRoundId]);
 
   useEffect(() => {
     Logger.debug("Running effect to update paginated subjects.");
@@ -76,7 +114,11 @@ export default function SubjectView() {
   }, [allSubjectsList]);
 
   useEffect(() => {
-    document.title = 'Lessons';
+    document.title = "Lessons";
+  }, []);
+
+  useEffect(() => {
+    (async () => {})();
   }, []);
 
   return (
@@ -119,6 +161,7 @@ export default function SubjectView() {
                 pagination={pagination}
               />
               <SubjectListContainer
+                shownSubject={shownSubject}
                 getAllSubjects={getAllSubjects}
                 allSubjectsList={allSubjectsList}
                 paginateSubjects={paginateSubjects}
