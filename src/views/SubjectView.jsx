@@ -30,7 +30,9 @@ export default function SubjectView() {
   const appContext = useContext(AppContext);
   const { allocRoundContext } = useContext(AllocRoundContext);
 
-  let { subjectIdToShow } = useParams();
+  const { subjectIdToShow } = useParams();
+  const [subjectIdToShowState, setSubjectIdToShowState] =
+    useState(subjectIdToShow);
   const [shownSubject, setShownSubject] = useState(null);
   const [paginateSubjects, setPaginateSubjects] = useState([]);
   const [allSubjectsList, setAllSubjectsList] = useState([]);
@@ -50,11 +52,14 @@ export default function SubjectView() {
 
   useEffect(() => {
     (() => {
-      const getShownSubjectById = async (id) => {
-        Logger.debug(`subjectId: ${id} Starting or not? Based on that id.`);
-        if (id) {
+      const getShownSubjectById = async (subjectIdToShowState) => {
+        Logger.debug(
+          `subjectId: ${subjectIdToShowState} Starting or not? Based on that id.`,
+        );
+        if (subjectIdToShowState) {
           Logger.debug("getShownSubjectById: starts");
-          const { httpStatus, data } = await dao.fetchSubjectById(id);
+          const { httpStatus, data } =
+            await dao.fetchSubjectById(subjectIdToShowState);
           if (httpStatus !== 200) {
             ajaxRequestErrorHandler(
               httpStatus,
@@ -68,7 +73,7 @@ export default function SubjectView() {
             );
             setShownSubject(data[0]);
             setOpen(true);
-            subjectIdToShow = 0;
+            setSubjectIdToShowState(0);
           }
         } else {
           Logger.debug("No subject to show directly");
@@ -76,9 +81,9 @@ export default function SubjectView() {
       };
 
       Logger.debug("Running effect to fetch possible directly shown subejct.");
-      getShownSubjectById(subjectIdToShow);
+      getShownSubjectById(subjectIdToShowState);
     })();
-  }, [subjectIdToShow]);
+  }, [subjectIdToShowState]);
 
   useEffect(() => {
     Logger.debug("Running effect to fetch all subjects.");
