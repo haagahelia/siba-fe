@@ -199,7 +199,7 @@ export default function AllocationSubjectFailureView() {
       </div>
       <Dialog open={open} onClose={handleClose} scroll="body" maxWidth="70%">
         <DialogTitle>
-          Suitability of the space - for lesson:
+          {"Suitability of the space - for lesson: "}
           <Link to={`/subject/${unAllocSubject.id}`}>
             {unAllocSubject.name}
           </Link>
@@ -231,11 +231,11 @@ export default function AllocationSubjectFailureView() {
                     <GetMissingEquipment
                       subjId={currSubjId}
                       roomId={row.id}
-                      item={row.missingItems}
+                      missingEquipmentCount={row.missingItems}
                     />
                     <Tooltip
                       disableFocusListener
-                      title={`${row.area} (Required: ${unAllocSubject.area})`}
+                      title={`${row.area} m2 (Required: ${unAllocSubject.area} m2)`}
                     >
                       {row.areaOk === 0 ? (
                         <TableCell>
@@ -249,7 +249,7 @@ export default function AllocationSubjectFailureView() {
                     </Tooltip>
                     <Tooltip
                       disableFocusListener
-                      title={`${row.personLimit} (required: ${unAllocSubject.groupSize})`}
+                      title={`${row.personLimit} persons (required: ${unAllocSubject.groupSize} )`}
                     >
                       {row.personLimitOk === 0 ? (
                         <TableCell>

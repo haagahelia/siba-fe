@@ -55,7 +55,7 @@ export default function SingleSubjectDialog({
       // console.log(`getEquipmentsBySubId(${singleSubject.id})`);
       getEquipmentsBySubId(singleSubject.id);
     }
-  }, [singleSubject, getEquipmentsBySubId]);
+  }, [singleSubject]);
 
   return (
     <div>
