@@ -1,6 +1,7 @@
 // The Lessons Page
 import { useContext, useEffect, useState } from "react";
 import { AppContext, AllocRoundContext } from "../AppContext";
+import { useRoleLoggedIn } from "../hooks/useRoleLoggedIn";
 import {
   ajaxRequestErrorHandler,
   getFunctionName,
@@ -27,6 +28,7 @@ export default function SubjectView() {
   Logger.debug("SubjectView component instantiated.");
 
   const appContext = useContext(AppContext);
+  const { roles } = useRoleLoggedIn();
   const { allocRoundContext } = useContext(AllocRoundContext);
 
   const [paginateSubjects, setPaginateSubjects] = useState([]);
@@ -87,15 +89,11 @@ export default function SubjectView() {
         setAlertOpen={setAlertOpen}
       />
       <Container maxWidth="100%">
-        {appContext.roles.admin || appContext.roles.planner ? (
+      {(roles.admin === "1" || roles.planner === "1") && (
           <AddSubjectContainer
             getAllSubjects={getAllSubjects}
             allSubjectsList={allSubjectsList}
           />
-        ) : (
-          <Typography variant="subtitle1" mt={3}>
-            "Not showing add subject to your role"
-          </Typography>
         )}
         <Grid container rowSpacing={1}>
           <Card variant="outlined">
