@@ -1,6 +1,7 @@
 // The Lessons Page
 import { useContext, useEffect, useState } from "react";
-import { AppContext, AllocRoundContext } from "../AppContext";
+import { useParams } from "react-router-dom";
+import { AllocRoundContext, AppContext } from "../AppContext";
 import { useRoleLoggedIn } from "../hooks/useRoleLoggedIn";
 import {
   ajaxRequestErrorHandler,
@@ -31,6 +32,10 @@ export default function SubjectView() {
   const { roles } = useRoleLoggedIn();
   const { allocRoundContext } = useContext(AllocRoundContext);
 
+  let { subjectIdToShow } = useParams();
+  const [subjectIdToShowState, setSubjectIdToShowState] =
+    useState(subjectIdToShow);
+  const [shownSubject, setShownSubject] = useState(null);
   const [paginateSubjects, setPaginateSubjects] = useState([]);
   const [allSubjectsList, setAllSubjectsList] = useState([]);
   const [alertOpen, setAlertOpen] = useState(false);
@@ -40,6 +45,10 @@ export default function SubjectView() {
     severity: "error",
   });
 
+  const setShownSubject2 = (state) => {
+    setShownSubject(state);
+  };
+
   Logger.debug("Initial state set.");
 
   const [pagination, setPagination] = useState({
@@ -48,9 +57,13 @@ export default function SubjectView() {
   });
 
   const getAllSubjects = async function () {
-    Logger.debug("getAllSubjects: fetching all subjects in allocRound, from server.");
-    console.log("allocRoundId", allocRoundContext.allocRoundId)
-    const { httpStatus, data } = await dao.fetchAllSubjects(allocRoundContext.allocRoundId);
+    Logger.debug(
+      "getAllSubjects: fetching all subjects in allocRound, from server.",
+    );
+    console.log("allocRoundId", allocRoundContext.allocRoundId);
+    const { httpStatus, data } = await dao.fetchAllSubjects(
+      allocRoundContext.allocRoundId,
+    );
     if (httpStatus !== 200) {
       ajaxRequestErrorHandler(
         httpStatus,
@@ -68,6 +81,40 @@ export default function SubjectView() {
   };
 
   useEffect(() => {
+    const getShownSubjectById = async (subjectIdToShowState) => {
+      Logger.debug(
+        `subjectId: ${subjectIdToShowState} Starting or not? Based on that id.`,
+      );
+      if (subjectIdToShowState) {
+        Logger.debug("getShownSubjectById: starts");
+        const { httpStatus, data } =
+          await dao.fetchSubjectById(subjectIdToShowState);
+        if (httpStatus !== 200) {
+          ajaxRequestErrorHandler(
+            httpStatus,
+            getFunctionName(2),
+            setAlertOptions,
+            setAlertOpen,
+          );
+        } else {
+          Logger.debug(
+            `getShownSubjectById: successfully fetched ${data[0].id}:${data[0].name} subject.`,
+          );
+          setShownSubject(data[0]);
+          setSubjectIdToShowState(0);
+          subjectIdToShow = 0;
+          setOpen(true);
+        }
+      } else {
+        Logger.debug("No subject to show directly");
+      }
+    };
+
+    Logger.debug("Running effect to fetch possible directly shown subejct.");
+    getShownSubjectById(subjectIdToShowState);
+  }, [subjectIdToShowState, subjectIdToShow]);
+
+  useEffect(() => {
     Logger.debug("Running effect to fetch all subjects.");
     getAllSubjects();
   }, []);
@@ -78,7 +125,16 @@ export default function SubjectView() {
   }, [allSubjectsList]);
 
   useEffect(() => {
-    document.title = 'Lessons';
+    document.title = "Lessons";
+  }, []);
+
+  useEffect(() => {
+    (async () => {})();
+  }, []);
+
+  useEffect(() => {
+    const foo = async () => {};
+    foo();
   }, []);
 
   return (
@@ -117,6 +173,8 @@ export default function SubjectView() {
                 pagination={pagination}
               />
               <SubjectListContainer
+                shownSubject={shownSubject}
+                setShownSubject={setShownSubject2}
                 getAllSubjects={getAllSubjects}
                 allSubjectsList={allSubjectsList}
                 paginateSubjects={paginateSubjects}

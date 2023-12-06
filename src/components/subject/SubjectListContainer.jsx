@@ -6,6 +6,7 @@ import SingleSubjectDialog from "./SingleSubjectDialog";
 import SubjectList from "./SubjectList";
 
 export default function SubjectListContainer({
+  shownSubject,
   getAllSubjects,
   allSubjectsList,
   paginateSubjects,
@@ -16,6 +17,7 @@ export default function SubjectListContainer({
     <Container maxWidth="xl">
       <SingleSubjectDialog
         getAllSubjects={getAllSubjects}
+        singleSubject={shownSubject?shownSubject:null}
         open={open}
         setOpen={setOpen}
       />
@@ -24,6 +26,7 @@ export default function SubjectListContainer({
         <Card variant="outlined">
           <CardContent>
             <SubjectList
+              shownSubject={shownSubject}
               getAllSubjects={getAllSubjects}
               allSubjectsList={allSubjectsList}
               paginateSubjects={paginateSubjects}

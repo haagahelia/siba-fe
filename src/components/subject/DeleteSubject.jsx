@@ -35,19 +35,20 @@ export default function DeleteSubject({
       });
       setAlertOpen(true);
       return;
+    } else {
+      setAlertOptions({
+        severity: "success",
+        title: "Success!",
+        message: `${subjectData.subjectName} removed successfully.`,
+      });
+      setAlertOpen(true);
+
+      setTimeout(() => {
+        setOpen(false);
+      }, 4000);
+
+      getAllSubjects();
     }
-    setAlertOptions({
-      severity: "success",
-      title: "Success!",
-      message: `${subjectData.subjectName} removed successfully.`,
-    });
-    setAlertOpen(true);
-
-    setTimeout(() => {
-      setOpen(false);
-    }, 4000);
-
-    getAllSubjects();
   };
 
   const submitDelete = (data) => {

@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { ajaxRequestErrorHandler } from "../ajax/ajaxRequestErrorHandler";
 import dao from "../ajax/dao";
 import Logger from "../logger/logger";
@@ -27,17 +27,17 @@ import AlertBox from "../components/common/AlertBox";
 import { GetMissingEquipment } from "../components/resultFailureReasons/GetMissingEquipment";
 
 export const getNameForId = (array, id) => {
-  if(array && array.length > 0) { 
-    const foundItems = array.filter((element) => element.id == id)
-    if (foundItems.length===1) {
-      return foundItems[0].name; 
-      Logger.debug("Found space type name: " +foundItems[0].name);
+  if (array && array.length > 0) {
+    const foundItems = array.filter((element) => element.id === id);
+    if (foundItems.length === 1) {
+      Logger.debug(`Found space type name: ${foundItems[0].name}`);
+      return foundItems[0].name;
     } else {
-      if(foundItems.length===0) {
-        Logger.error("No item found for id: " +id);
+      if (foundItems.length === 0) {
+        Logger.error(`No item found for id:  ${id}`);
         //console.dir(array);
       } else {
-        Logger.error("More than one match found for id:" +foundItems);
+        Logger.error(`More than one match found for id: ${foundItems}`);
         return "More than one match for id";
       }
     }
@@ -52,7 +52,6 @@ export default function AllocationSubjectFailureView() {
   const [unAllocableSubjects, setUnAllocableSubjects] = useState([]);
   const [unAllocSubjectRooms, setUnAllocSubjectRooms] = useState([]);
 
-  
   const [currSubjId, setCurrSubjId] = useState();
   const [unAllocSubject, setUnAllocSubject] = useState({});
   const [spaceNamesArray, setSpaceNameArray] = useState([]);
@@ -88,7 +87,9 @@ export default function AllocationSubjectFailureView() {
         setAlertOpen,
       );
     } else {
-      Logger.debug("getUnAllocRooms: Subject's unalloc rooms successfully fetched");
+      Logger.debug(
+        "getUnAllocRooms: Subject's unalloc rooms successfully fetched",
+      );
       setUnAllocSubjectRooms(data);
       setCurrSubjId(id);
     }
@@ -119,7 +120,6 @@ export default function AllocationSubjectFailureView() {
       Logger.debug("getUnAllocRooms: Spacenames successfully fetched");
       setSpaceNameArray(response3.data);
     }
-
   };
 
   const handleClickOpen = (id) => () => {
@@ -142,7 +142,20 @@ export default function AllocationSubjectFailureView() {
   }, [open]);
 
   useEffect(() => {
-    getUnAlloc(allocId);
+    (async (id) => {
+      const { httpStatus, data } = await dao.getUnAllocableSubjects(id);
+      if (httpStatus !== 200) {
+        ajaxRequestErrorHandler(
+          httpStatus,
+          "getUnAlloc",
+          setAlertOptions,
+          setAlertOpen,
+        );
+      } else {
+        Logger.debug("getUnAlloc: successfully fetched");
+        setUnAllocableSubjects(data);
+      }
+    })(allocId);
   }, [allocId]);
 
   return (
@@ -185,7 +198,12 @@ export default function AllocationSubjectFailureView() {
         </TableContainer>
       </div>
       <Dialog open={open} onClose={handleClose} scroll="body" maxWidth="70%">
-        <DialogTitle>Suitability of the space - for lesson: {unAllocSubject.name}</DialogTitle>
+        <DialogTitle>
+          {"Suitability of the space - for lesson: "}
+          <Link to={`/subject/${unAllocSubject.id}`}>
+            {`${unAllocSubject.name}   So far this leads stucking in /subject/4040 with dialog open!`}
+          </Link>
+        </DialogTitle>
         <DialogContent>
           <TableContainer component={Paper}>
             <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -193,9 +211,16 @@ export default function AllocationSubjectFailureView() {
                 <TableRow>
                   <TableCell>Space name</TableCell>
                   <TableCell>Equipment</TableCell>
-                  <TableCell>Space size (Required: {unAllocSubject.area})</TableCell>
-                  <TableCell>Number of people (Required: {unAllocSubject.groupSize})</TableCell>
-                  <TableCell>Space type (Required: {getNameForId(spaceNamesArray,unAllocSubject.spaceTypeId)})</TableCell>
+                  <TableCell>
+                    Space size (Required: {unAllocSubject.area})
+                  </TableCell>
+                  <TableCell>
+                    Number of people (Required: {unAllocSubject.groupSize})
+                  </TableCell>
+                  <TableCell>
+                    Space type (Required:{" "}
+                    {getNameForId(spaceNamesArray, unAllocSubject.spaceTypeId)})
+                  </TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -206,9 +231,12 @@ export default function AllocationSubjectFailureView() {
                     <GetMissingEquipment
                       subjId={currSubjId}
                       roomId={row.id}
-                      item={row.missingItems}
+                      missingEquipmentCount={row.missingItems}
                     />
-                    <Tooltip disableFocusListener title={`${row.area} (Required: ${unAllocSubject.area})`}>
+                    <Tooltip
+                      disableFocusListener
+                      title={`${row.area} m2 (Required: ${unAllocSubject.area} m2)`}
+                    >
                       {row.areaOk === 0 ? (
                         <TableCell>
                           <CloseIcon color="error" />
@@ -219,7 +247,10 @@ export default function AllocationSubjectFailureView() {
                         </TableCell>
                       )}
                     </Tooltip>
-                    <Tooltip disableFocusListener title={`${row.personLimit} (required: ${unAllocSubject.groupSize})`}>
+                    <Tooltip
+                      disableFocusListener
+                      title={`${row.personLimit} persons (required: ${unAllocSubject.groupSize} )`}
+                    >
                       {row.personLimitOk === 0 ? (
                         <TableCell>
                           <CloseIcon color="error" />
@@ -230,7 +261,13 @@ export default function AllocationSubjectFailureView() {
                         </TableCell>
                       )}
                     </Tooltip>
-                    <Tooltip disableFocusListener title={`${row.spaceType} (required: ${getNameForId(spaceNamesArray,unAllocSubject.spaceTypeId)})`}>
+                    <Tooltip
+                      disableFocusListener
+                      title={`${row.spaceType} (required: ${getNameForId(
+                        spaceNamesArray,
+                        unAllocSubject.spaceTypeId,
+                      )})`}
+                    >
                       {row.spaceTypeOk === 0 ? (
                         <TableCell>
                           <CloseIcon color="error" />

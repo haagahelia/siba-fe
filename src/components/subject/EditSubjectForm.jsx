@@ -180,7 +180,7 @@ export default function EditSubjectForm({
                       {programSelectList.map((value) => {
                         return (
                           <MenuItem key={value.id} value={value.id}>
-                            {value.name}
+                            {value.programName}
                           </MenuItem>
                         );
                       })}
