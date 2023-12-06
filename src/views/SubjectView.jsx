@@ -95,9 +95,9 @@ export default function SubjectView() {
             `getShownSubjectById: successfully fetched ${data[0].id}:${data[0].name} subject.`,
           );
           setShownSubject(data[0]);
-          //setOpen(true);
           setSubjectIdToShowState(0);
           subjectIdToShow = 0;
+          setOpen(true);
         }
       } else {
         Logger.debug("No subject to show directly");
@@ -172,6 +172,7 @@ export default function SubjectView() {
               />
               <SubjectListContainer
                 shownSubject={shownSubject}
+                setShownSubject={setShownSubject}
                 getAllSubjects={getAllSubjects}
                 allSubjectsList={allSubjectsList}
                 paginateSubjects={paginateSubjects}

@@ -22,6 +22,7 @@ export default function SingleSubjectDialog({
   singleSubject,
   getAllSubjects,
   setSingleSubject,
+  setShownSubject,
 }) {
   const [equipListBySubId, setEquipListBySubId] = useState([]);
   const [alertOpen, setAlertOpen] = useState(false);
@@ -55,6 +56,9 @@ export default function SingleSubjectDialog({
       // console.log(`getEquipmentsBySubId(${singleSubject.id})`);
       getEquipmentsBySubId(singleSubject.id);
     }
+
+    setShownSubject(null);
+
   }, [singleSubject]);
 
   return (

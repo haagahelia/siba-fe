@@ -7,6 +7,7 @@ import SubjectList from "./SubjectList";
 
 export default function SubjectListContainer({
   shownSubject,
+  setShownSubject,
   getAllSubjects,
   allSubjectsList,
   paginateSubjects,
@@ -26,6 +27,7 @@ export default function SubjectListContainer({
           <CardContent>
             <SubjectList
               shownSubject={shownSubject}
+              setShownSubject={setShownSubject}
               getAllSubjects={getAllSubjects}
               allSubjectsList={allSubjectsList}
               paginateSubjects={paginateSubjects}
