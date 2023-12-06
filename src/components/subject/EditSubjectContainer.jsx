@@ -13,7 +13,7 @@ import {
 import AlertBox from "../common/AlertBox";
 import ConfirmationDialog from "../common/ConfirmationDialog";
 import EditSubjectForm from "./EditSubjectForm";
-import { AppContext } from "../../AppContext";
+import { AllocRoundContext } from "../../AppContext";
 
 export default function EditSubjectContainer({
   singleSubject,
@@ -36,14 +36,14 @@ export default function EditSubjectContainer({
     content: "Something here",
   });
 
-  const { appContext } = useContext(AppContext)
+  const { allocRoundContext } = useContext(AllocRoundContext)
 
   const formik = useFormik({
     // enableReinitialize checks if Formik needs to reset the form
     // if the initial values change
     enableReinitialize: true,
     initialValues: singleSubject,
-    validate: (values) => validate(values, appContext.allocRoundId),
+    validate: (values) => validate(values, allocRoundContext.allocRoundId),
     onSubmit: (values) => {
       setDialogOptions({
         title: `Are you sure you want to edit ${values.subjectName}?`,
