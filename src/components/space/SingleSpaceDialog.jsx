@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import dao from "../../ajax/dao";
 
+import { useRoleLoggedIn } from "../../hooks/useRoleLoggedIn";
 import CloseIcon from "@mui/icons-material/Close";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
@@ -30,6 +31,8 @@ export default function SingleSpaceDialog({
     severity: "error",
   });
 
+  const { roles } = useRoleLoggedIn();
+
   const getEquipmentsBySpaceId = async function (spaceId) {
     const result = await dao.fetchEquipmentBySpaceId(spaceId);
     if (result.success === false) {
@@ -53,7 +56,7 @@ export default function SingleSpaceDialog({
   }, [singleSpace]);
 
   return (
-    <div>
+    <>
       <AlertBox
         alertOpen={alertOpen}
         alertOptions={alertOptions}
@@ -73,22 +76,23 @@ export default function SingleSpaceDialog({
           {singleSpace?.name}
         </DialogTitle>
         <DialogContent>
-          <DialogActions>
-            <DeleteSpace
-              singleSpace={singleSpace}
-              getAllSpaces={getAllSpaces}
-              setOpen={setOpen}
-            />
-            <EditSpaceContainer
-              singleSpace={singleSpace}
-              getAllSpaces={getAllSpaces}
-              setSingleSpace={setSingleSpace}
-            />
-            <AddSpaceEquipContainer
-              singleSpace={singleSpace}
-              equipmentsBySpaceId={getEquipmentsBySpaceId}
-            />
-          </DialogActions>
+        {(roles.admin === "1" || roles.planner === "1") && (
+            <DialogActions>
+              <DeleteSpace
+                singleSpace={singleSpace}
+                getAllSpaces={getAllSpaces}
+                setOpen={setOpen}
+              />
+              <EditSpaceContainer
+                singleSpace={singleSpace}
+                getAllSpaces={getAllSpaces}
+                setSingleSpace={setSingleSpace}
+              />
+              <AddSpaceEquipContainer
+                singleSpace={singleSpace}
+                equipmentsBySpaceId={getEquipmentsBySpaceId}
+              />
+            </DialogActions>)}
           <DialogContent>
             <Grid
               container
@@ -248,6 +252,6 @@ export default function SingleSpaceDialog({
           </DialogContent>
         </DialogContent>
       </Dialog>
-    </div>
+    </>
   );
 }

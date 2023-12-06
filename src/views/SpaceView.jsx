@@ -5,6 +5,7 @@ import {
   ajaxRequestErrorHandler,
   getFunctionName,
 } from "../ajax/ajaxRequestErrorHandler";
+import { useRoleLoggedIn } from "../hooks/useRoleLoggedIn";
 import dao from "../ajax/dao";
 import Logger from "../logger/logger";
 
@@ -25,6 +26,7 @@ const pageSize = 15;
 export default function SpaceView() {
   Logger.logPrefix = "SpaceView";
   Logger.debug("SpaceView component instantiated.");
+  const { roles } = useRoleLoggedIn();
 
   const appContext = useContext(AppContext);
 
@@ -83,12 +85,8 @@ export default function SpaceView() {
         setAlertOpen={setAlertOpen}
       />
       <Container maxWidth="xl">
-        {appContext.roles.admin ? (
+      {roles.admin === "1" && (
           <AddSpace getAllSpaces={getAllSpaces} allSpacesList={allSpacesList} />
-        ) : (
-          <Typography variant="subtitle1" mt={3}>
-            "Not showing add space to your role"
-          </Typography>
         )}
         <Grid container rowSpacing={1}>
           <Card variant="outlined">

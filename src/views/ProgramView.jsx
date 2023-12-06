@@ -5,6 +5,7 @@ import {
   ajaxRequestErrorHandler,
   getFunctionName,
 } from "../ajax/ajaxRequestErrorHandler";
+import { useRoleLoggedIn } from "../hooks/useRoleLoggedIn";
 import dao from "../ajax/dao";
 import Logger from "../logger/logger";
 
@@ -27,7 +28,7 @@ export default function ProgramView() {
   Logger.debug("ProgramView component instantiated.");
 
   const appContext = useContext(AppContext);
-
+  const { roles } = useRoleLoggedIn();
   const [paginatePrograms, setPaginatePrograms] = useState([]);
   const [allProgramsList, setAllProgramsList] = useState([]);
   const [alertOpen, setAlertOpen] = useState(false);
@@ -81,15 +82,11 @@ export default function ProgramView() {
         setAlertOpen={setAlertOpen}
       />
       <Container maxWidth="100%">
-      {appContext.roles.admin || appContext.roles.planner ? (
+      {(roles.admin ===1|| roles.planner===1) && (
           <AddProgramContainer
             getAllPrograms={getAllPrograms}
             allProgramsList={allProgramsList}
           />
-        ) : (
-          <Typography variant="subtitle1" mt={3}>
-            "Not showing add program to your role"
-          </Typography>
         )}
         <Grid container rowSpacing={1}>
           <Card variant="outlined">
