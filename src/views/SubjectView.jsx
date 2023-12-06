@@ -43,6 +43,10 @@ export default function SubjectView() {
     severity: "error",
   });
 
+  const setShownSubject2 = (state) => {
+    setShownSubject(state);
+  };
+
   Logger.debug("Initial state set.");
 
   const [pagination, setPagination] = useState({
@@ -172,7 +176,7 @@ export default function SubjectView() {
               />
               <SubjectListContainer
                 shownSubject={shownSubject}
-                setShownSubject={setShownSubject}
+                setShownSubject={setShownSubject2}
                 getAllSubjects={getAllSubjects}
                 allSubjectsList={allSubjectsList}
                 paginateSubjects={paginateSubjects}

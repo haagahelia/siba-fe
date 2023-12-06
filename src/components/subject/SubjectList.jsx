@@ -14,7 +14,6 @@ import SingleSubjectDialog from "./SingleSubjectDialog";
 
 export default function SubjectList({
   shownSubject,
-  setShownSubject,
   getAllSubjects,
   paginateSubjects,
 }) {
@@ -68,11 +67,10 @@ export default function SubjectList({
   return (
     <div>
       <SingleSubjectDialog
-        open={shownSubject !== null ? true : open}
+        open={open}
         setOpen={setOpen}
-        singleSubject={shownSubject !== null ? shownSubject : singleSubject}
+        singleSubject={singleSubject}
         setSingleSubject={setSingleSubject}
-        setShownSubject ={setShownSubject}
         getAllSubjects={getAllSubjects}
       />
       <Box>
