@@ -1,3 +1,4 @@
+// The Add Space Component
 import { useEffect, useState } from "react";
 import dao from "../../ajax/dao";
 import Logger from "../../logger/logger";
@@ -26,7 +27,8 @@ export default function AddSpace({ getAllSpaces }) {
   const [open, setOpen] = useState(false);
   const [space, setSpace] = useState({
     name: "",
-    area: "0",
+    area: "",
+    info: "",
     personLimit: "0",
     buildingId: "",
     buildingName: "Musiikkitalo",
@@ -140,10 +142,14 @@ export default function AddSpace({ getAllSpaces }) {
                   fullWidth
                   label="Area"
                   type="number"
+                  placeholder="0"
                   value={space.area}
                   onChange={(event) =>
                     setSpace({ ...space, area: event.target.value })
                   }
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
                 />
               </Grid>
               <Grid item xs={12} sm={6} md={4}>
@@ -200,7 +206,7 @@ export default function AddSpace({ getAllSpaces }) {
               <Grid item xs={12} sm={6} md={4}>
                 <TextField
                   fullWidth
-                  label="Available From"
+                  label="Available from"
                   type="time"
                   value={space.availableFrom}
                   onChange={(event) =>
@@ -211,7 +217,7 @@ export default function AddSpace({ getAllSpaces }) {
               <Grid item xs={12} sm={6} md={4}>
                 <TextField
                   fullWidth
-                  label="Available To"
+                  label="Available to"
                   type="time"
                   value={space.availableTo}
                   onChange={(event) =>
@@ -222,7 +228,7 @@ export default function AddSpace({ getAllSpaces }) {
               <Grid item xs={12} sm={6} md={4}>
                 <TextField
                   fullWidth
-                  label="Classes From"
+                  label="Classes from"
                   type="time"
                   value={space.classesFrom}
                   onChange={(event) =>
@@ -233,7 +239,7 @@ export default function AddSpace({ getAllSpaces }) {
               <Grid item xs={12} sm={6} md={4}>
                 <TextField
                   fullWidth
-                  label="Classes To"
+                  label="Classes to"
                   type="time"
                   value={space.classesTo}
                   onChange={(event) =>
@@ -243,10 +249,10 @@ export default function AddSpace({ getAllSpaces }) {
               </Grid>
               <Grid item xs={12} sm={6}>
                 <FormControl fullWidth>
-                  <InputLabel>Is in use</InputLabel>
+                  <InputLabel>In use?</InputLabel>
                   <Select
                     name="inUse"
-                    label="Is in use"
+                    label="In use?"
                     value={space.inUse}
                     onChange={(event) =>
                       setSpace({
@@ -280,7 +286,7 @@ export default function AddSpace({ getAllSpaces }) {
                   </Select>
                 </FormControl>
               </Grid>
-              <Grid xs={12} padding={2}>
+              <Grid item xs={12} padding={2}>
                 <Button onClick={openDialogBox} variant="addComponentFormButton">
                   Add Space
                 </Button>

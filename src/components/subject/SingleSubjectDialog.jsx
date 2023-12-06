@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import dao from "../../ajax/dao";
 
 import CloseIcon from "@mui/icons-material/Close";
+import { useRoleLoggedIn } from "../../hooks/useRoleLoggedIn";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
@@ -30,7 +31,7 @@ export default function SingleSubjectDialog({
     message: "This is an error alert — check it out!",
     severity: "error",
   });
-
+  const { roles } = useRoleLoggedIn();
   const getEquipmentsBySubId = async function (subjectId) {
     const result = await dao.fetchEquipmentBySubjectId(subjectId);
     if (result.success === false) {
@@ -90,6 +91,7 @@ export default function SingleSubjectDialog({
           <CloseIcon />
         </IconButton>
         <DialogContent>
+        {(roles.admin === "1" || roles.planner === "1") && (
           <DialogActions>
             <DeleteSubject
               singleSubject={singleSubject}
@@ -105,7 +107,7 @@ export default function SingleSubjectDialog({
               singleSubject={singleSubject}
               equipmentsBySubId={getEquipmentsBySubId}
             />
-          </DialogActions>
+          </DialogActions>)}
           <DialogContent>
             <Grid container variant="sibaGridSingleItemDisplay" column={14}>
               <DialogContent variant="sibaDialogContent2">
