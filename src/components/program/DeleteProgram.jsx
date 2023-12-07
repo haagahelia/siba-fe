@@ -51,8 +51,8 @@ export default function DeleteProgram({
 
     const submitDelete = (data) => {
         setDialogOptions({
-            title: `Are you sure you want to delete ${data.programName}?`,
-            content: `Press continue to delete ${data.programName} from the listing.`,
+            title: `Are you sure you want to delete ${data.name}?`,
+            content: `Press continue to delete ${data.name} from the listing.`,
         });
         setDialogOpen(true);
         setDeleteProgramData(data);

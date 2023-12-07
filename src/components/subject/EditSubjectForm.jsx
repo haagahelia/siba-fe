@@ -36,12 +36,8 @@ export default function EditSubjectForm({
       </Button>
       <Dialog open={open}>
         <form onSubmit={formik.handleSubmit}>
-          {/* formik.initialValues?.subjectName} Here ? checks
-              if the subjectName attribute can be found
-              in the initialValues object,
-              if not found returns null and does not crash */}
           <DialogTitle sx={{ maxWidth: "300px" }}>
-            Edit: {formik.initialValues?.subjectName}
+            Edit: {formik.initialValues?.name}
           </DialogTitle>
           <DialogContent>
             <DialogContentText>
@@ -49,20 +45,20 @@ export default function EditSubjectForm({
                 <Grid item xs={12}>
                   <TextField
                     error={
-                      formik.touched.subjectName && formik.errors.subjectName
+                      formik.touched.name && formik.errors.name
                         ? true
                         : false
                     }
-                    name="subjectName"
+                    name="name"
                     label="The name of the lesson"
-                    defaultValue={formik.initialValues?.subjectName}
+                    defaultValue={formik.initialValues?.name}
                     variant="outlined"
-                    value={formik.values?.subjectName}
-                    onChange={formik.handleChange("subjectName")}
-                    onBlur={formik.handleBlur("subjectName")}
+                    value={formik.values?.name}
+                    onChange={formik.handleChange("name")}
+                    onBlur={formik.handleBlur("name")}
                     helperText={
-                      formik.touched.subjectName && formik.errors.subjectName
-                        ? formik.errors.subjectName
+                      formik.touched.name && formik.errors.name
+                        ? formik.errors.name
                         : null
                     }
                   />

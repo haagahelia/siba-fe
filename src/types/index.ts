@@ -12,6 +12,7 @@ export interface ResponseFiner<T> {
 
 export interface Subject {
   id: number;
+  name: string;
   area: number;
   groupCount: number;
   groupSize: number;
@@ -21,7 +22,6 @@ export interface Subject {
   sessionLength: string;
   spaceTypeId: number;
   spaceTypeName: string;
-  subjectName: string;
 }
 
 export interface SubjectName {

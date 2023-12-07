@@ -40,7 +40,7 @@ export default function SingleProgramDialog({
                 getAllPrograms();
             }}
         >
-            <DialogTitle id="dialog-title">Program Info</DialogTitle>
+            <DialogTitle id="dialog-title">{`Program Info: ${singleProgram?.name}`}</DialogTitle>
             {roles.admin === "1" && (
                 <DialogActions>
                     <DeleteProgram
@@ -83,7 +83,7 @@ export default function SingleProgramDialog({
                         </Grid>
                         <Grid item xs={12} sm={6}>
                             <Typography variant="singleDialogSubtitle">
-                                {singleProgram?.programName}
+                                {singleProgram?.name}
                             </Typography>
                         </Grid>
                     </DialogContent>

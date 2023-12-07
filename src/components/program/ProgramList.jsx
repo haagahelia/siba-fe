@@ -26,10 +26,10 @@ export default function ProgramList({ getAllPrograms, paginatePrograms }) {
 
   const sortedPrograms = paginatePrograms.sort((a, b) => {
     switch (orderBy) {
-      case "programName":
+      case "name":
         return order === "asc"
-          ? a.programName.localeCompare(b.programName)
-          : b.programName.localeCompare(a.programName);
+          ? a.name.localeCompare(b.name)
+          : b.name.localeCompare(a.name);
       case "departmentName":
         return order === "asc"
           ? a.departmentName.localeCompare(b.departmentName)
@@ -62,9 +62,9 @@ export default function ProgramList({ getAllPrograms, paginatePrograms }) {
                   <TableCell />
                   <TableCell>
                     <TableSortLabel
-                      active={orderBy === "programName"}
+                      active={orderBy === "name"}
                       direction={order}
-                      onClick={() => handleRequestSort("programName")}
+                      onClick={() => handleRequestSort("name")}
                     >
                       Name
                     </TableSortLabel>
@@ -94,7 +94,7 @@ export default function ProgramList({ getAllPrograms, paginatePrograms }) {
                         <InfoIcon />
                       </IconButton>
                     </TableCell>
-                    <TableCell>{value.programName}</TableCell>
+                    <TableCell>{value.name}</TableCell>
                     <TableCell>{value.departmentName}</TableCell>
                   </TableRow>
                 ))}

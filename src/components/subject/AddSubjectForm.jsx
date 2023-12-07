@@ -48,7 +48,7 @@ export default function AddSubjectForm({
               >
                 {allSubjectsList.map((value) => (
                   <MenuItem key={value.id} value={value}>
-                    {value.subjectName}
+                    {value.name}
                   </MenuItem>
                 ))}
               </Select>
@@ -168,7 +168,7 @@ export default function AddSubjectForm({
               >
                 {programSelectList.map((program) => (
                   <MenuItem key={program.id} value={program.id}>
-                    {program.programName}
+                    {program.name}
                   </MenuItem>
                 ))}
               </Select>

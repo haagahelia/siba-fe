@@ -39,7 +39,7 @@ export default function DeleteSubject({
       setAlertOptions({
         severity: "success",
         title: "Success!",
-        message: `${subjectData.subjectName} removed successfully.`,
+        message: `${subjectData.name} removed successfully.`,
       });
       setAlertOpen(true);
 
@@ -53,8 +53,8 @@ export default function DeleteSubject({
 
   const submitDelete = (data) => {
     setDialogOptions({
-      title: `Are you sure you want to delete ${data.subjectName}?`,
-      content: `Press continue to delete ${data.subjectName} from the listing.`,
+      title: `Are you sure you want to delete ${data.name}?`,
+      content: `Press continue to delete ${data.name} from the listing.`,
     });
     setDialogOpen(true);
     setDeleteSubjectData(data);

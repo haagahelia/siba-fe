@@ -57,7 +57,6 @@ export default function CopyAllocRoundInputField({ formik, allAllocRoundsList}) 
           label="Description "
           defaultValue={formik.initialValues?.description}
           variant="outlined"
-          value={formik.values.description}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur("description")}
           helperText={

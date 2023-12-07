@@ -24,10 +24,6 @@ export default function EditSettingForm({ formik }) {
       </Button>
       <Dialog open={open}>
         <form onSubmit={formik.handleSubmit}>
-          {/* formik.initialValues?.subjectName} Here ? checks
-              if the subjectName attribute can be found
-              in the initialValues object,
-              if not found returns an empty string and does not crash */}
           <DialogTitle>Edit: {formik.initialValues?.name}</DialogTitle>
           <DialogContent>
             <Grid container variant="sibaGridEdit" spacing={3} column={7}>

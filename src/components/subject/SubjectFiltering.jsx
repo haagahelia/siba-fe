@@ -16,7 +16,7 @@ export default function SubjectFiltering({
     const searchText = e.target.value;
     setSearched(searchText);
     const filteredSubjects = allSubjectsList.filter((subject) =>
-      subject.subjectName.toLowerCase().includes(searchText.toLowerCase()),
+      subject.name.toLowerCase().includes(searchText.toLowerCase()),
     );
     setPaginateSubjects(filteredSubjects);
   };

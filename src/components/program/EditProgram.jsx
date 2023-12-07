@@ -20,7 +20,7 @@ export default function EditProgram({
     const [editOpen, setEditOpen] = useState(false);
     const [program, setProgram] = useState({
         id: singleProgram?.id,
-        name: singleProgram?.programName,
+        name: singleProgram?.name,
         departmentId: singleProgram?.departmentId,
     });
 
@@ -66,7 +66,7 @@ export default function EditProgram({
                                 <TextField
                                     name="Program"
                                     label="Program"
-                                    defaultValue={singleProgram?.programName}
+                                    defaultValue={singleProgram?.name}
                                     onChange={(e) =>
                                         setProgram({ ...program, name: e.target.value })
                                     }

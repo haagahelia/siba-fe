@@ -76,7 +76,7 @@ export default function SingleSubjectDialog({
         fullWidth
       >
         <DialogTitle id="dialog-title">
-          {singleSubject?.subjectName}
+          {singleSubject?.name}
         </DialogTitle>
         <IconButton
           edge="end"
@@ -190,7 +190,7 @@ export default function SingleSubjectDialog({
                 </Grid>
                 <Grid item xs={12} sm={6}>
                   <Typography variant="singleDialogSubtitle">
-                    {singleSubject?.programName}
+                    {singleSubject?.name}
                   </Typography>
                 </Grid>
               </DialogContent>

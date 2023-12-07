@@ -4,7 +4,7 @@ import { create, get, remove, update } from "./request";
 const baseUrl = import.meta.env.VITE_BE_SERVER_BASE_URL;
 
 // fetching all programs
-export const fetchProgramsForSelect = async (): Promise<
+export const fetchProgramsWithDepartments = async (): Promise<
   ResponseFiner<Program>
 > => {
   const response = await get(`${baseUrl}/program`);

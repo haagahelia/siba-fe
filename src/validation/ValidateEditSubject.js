@@ -38,21 +38,21 @@ export async function validate(values,allocRoundId) {
       // the name of an already existing lesson
       return filteredList.some(
         (names) =>
-          names.name.toLowerCase() === values.subjectName.toLowerCase(),
+          names.name.toLowerCase() === values.name.toLowerCase(),
       );
     } else {
       Logger.error(`getSubjectNames failed, http status code: ${httpStatus}`);
     }
   };
 
-  if (!values.subjectName) {
-    errors.subjectName = "Required field";
+  if (!values.name) {
+    errors.name = "Required field";
   } else if (await getSubjectNames(allocRoundId)) {
-    errors.subjectName = "The name already exists";
-  } else if (values.subjectName.length < 2 || values.subjectName.length > 255) {
-    errors.subjectName = "The name must be 2-255 characters long";
-  } else if (!regName.test(values.subjectName)) {
-    errors.subjectName = "Only letters, numbers and '-' allowed";
+    errors.name = "The name already exists";
+  } else if (values.name.length < 2 || values.name.length > 255) {
+    errors.name = "The name must be 2-255 characters long";
+  } else if (!regName.test(values.name)) {
+    errors.name = "Only letters, numbers and '-' allowed";
   }
   if (!values.groupSize) {
     errors.groupSize = "Required field";

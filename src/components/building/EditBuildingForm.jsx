@@ -27,10 +27,10 @@ export default function EditBuildingForm({ formik }) {
       </Button>
       <Dialog open={open}>
         <form onSubmit={formik.handleSubmit}>
-          {/* formik.initialValues?.subjectName} Here ? checks
-              if the subjectName attribute can be found
+          {/* formik.initialValues?.name} Here ? checks
+              if the name attribute can be found
               in the initialValues object,
-              if not found returns null and does not crash */}
+              if not found returns undefinef and does not crash */}
           <DialogTitle>Edit: {formik.initialValues?.name}</DialogTitle>
           <DialogContent>
             <Grid

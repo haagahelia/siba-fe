@@ -92,7 +92,7 @@ export default function AddSubjectContainer({
     Logger.debug(
       "getProgramsForSelect: fetching all programs for select from server.",
     );
-    const { httpStatus, data } = await dao.fetchProgramsForSelect();
+    const { httpStatus, data } = await dao.fetchProgramsWithDepartments();
     if (httpStatus !== 200) {
       ajaxRequestErrorHandler(
         httpStatus,

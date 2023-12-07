@@ -9,11 +9,11 @@ export async function validate(values) {
   let programList = [];
 
   const getProgramNames = async function () {
-    const { httpStatus, data } = await dao.fetchProgramsForSelect();
+    const { httpStatus, data } = await dao.fetchProgramsWithDepartments();
     if (httpStatus === 200) {
       programList = data;
       const result = programList.some(
-        (program) => program.programName.toLowerCase() === values.name.toLowerCase(),
+        (program) => program.name.toLowerCase() === values.name.toLowerCase(),
       );
       return result;
     } else {

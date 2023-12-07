@@ -201,7 +201,7 @@ export default function AllocationSubjectFailureView() {
         <DialogTitle>
           {"Suitability of the space - for lesson: "}
           <Link to={`/subject/${unAllocSubject.id}`}>
-            {`${unAllocSubject.name}   So far this leads stucking in /subject/4040 with dialog open!`}
+            {`${unAllocSubject.id} ${unAllocSubject.name}`}
           </Link>
         </DialogTitle>
         <DialogContent>

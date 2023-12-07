@@ -34,9 +34,6 @@ export default function AddSpaceEquipForm({
         Add equipment
       </Button>
       <Dialog open={open}>
-        {/* formik.singleSubject?.subjectName} Here ? checks
-            whether the singleSubject object has the subjectName attribute,
-            if not found it returns the value null and does not crash */}
         <DialogTitle>{singleSpace?.name}</DialogTitle>
         <form onSubmit={formik.handleSubmit}>
           <DialogContent>

@@ -22,7 +22,8 @@ export default function EditSubjectContainer({
 }) {
   // Whenever the editSubject changes in the SubjectList.jsx file,
   // that information comes here as singleSubject
-  const [programSelectList, setProgramSelectList] = useState([]);
+  const [programSelectList, setProgramSelectList] =
+       useState([{id:3009,name:"Globulist Muusic"}]);
   const [spaceTypeSelectList, setSpaceTypeSelectList] = useState([]);
   const [alertOpen, setAlertOpen] = useState(false);
   const [alertOptions, setAlertOptions] = useState({
@@ -46,8 +47,8 @@ export default function EditSubjectContainer({
     validate: (values) => validate(values, allocRoundContext.allocRoundId),
     onSubmit: (values) => {
       setDialogOptions({
-        title: `Are you sure you want to edit ${values.subjectName}?`,
-        content: `Press continue to save ${values.subjectName} new information. `,
+        title: `Are you sure you want to edit ${values.name}?`,
+        content: `Press continue to save ${values.name} new information. `,
       });
       setDialogOpen(true);
       return;
@@ -55,7 +56,7 @@ export default function EditSubjectContainer({
   });
 
   async function submitEditedSubject(values) {
-    const capitalName = capitalizeFirstLetter(values.subjectName);
+    const capitalName = capitalizeFirstLetter(values.name);
     const editedSubject = {
       name: capitalName,
       groupSize: values.groupSize,
@@ -80,7 +81,7 @@ export default function EditSubjectContainer({
     setAlertOptions({
       severity: "success",
       title: "Success!",
-      message: `${values.subjectName} new information added.`,
+      message: `${values.name} new information added.`,
     });
     setAlertOpen(true);
     setSingleSubject(formik.values);
@@ -88,7 +89,7 @@ export default function EditSubjectContainer({
   }
 
   const getProgramsForSelect = async function () {
-    const { httpStatus, data } = await dao.fetchProgramsForSelect();
+    const { httpStatus, data } = await dao.fetchProgramsWithDepartments();
     if (httpStatus !== 200) {
       ajaxRequestErrorHandler(
         httpStatus,

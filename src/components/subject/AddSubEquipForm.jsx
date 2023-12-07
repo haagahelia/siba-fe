@@ -54,10 +54,7 @@ export default function AddSubEquipForm({
         Add equipment
       </Button>
       <Dialog open={open}>
-        {/* formik.singleSubject?.subjectName} Here ? checks
-            whether the singleSubject object has the subjectName attribute,
-            if not found it returns the value null and does not crash */}
-        <DialogTitle>{singleSubject?.subjectName}</DialogTitle>
+        <DialogTitle>{singleSubject?.name}</DialogTitle>
         <form onSubmit={formik.handleSubmit}>
           <DialogContent>
             <DialogContentText>

@@ -47,7 +47,7 @@ export default function ProgramView() {
 
   const getAllPrograms = async function () {
     Logger.debug("getAllPrograms: fetching all programs from server.");
-    const { httpStatus, data } = await dao.fetchProgramsForSelect();
+    const { httpStatus, data } = await dao.fetchProgramsWithDepartments();
     if (httpStatus !== 200) {
       ajaxRequestErrorHandler(
         httpStatus,

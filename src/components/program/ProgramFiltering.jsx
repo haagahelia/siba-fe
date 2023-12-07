@@ -16,7 +16,7 @@ export default function ProgramFiltering({
     const searchText = e.target.value;
     setSearched(searchText);
     const filteredPrograms = allProgramsList.filter((program) =>
-      program.programName.toLowerCase().includes(searchText.toLowerCase()),
+      program.name.toLowerCase().includes(searchText.toLowerCase()),
     );
     setPaginatePrograms(filteredPrograms);
   };

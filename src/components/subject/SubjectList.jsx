@@ -30,10 +30,10 @@ export default function SubjectList({
 
   const sortedSubjects = paginateSubjects.sort((a, b) => {
     switch (orderBy) {
-      case "subjectName":
+      case "name":
         return order === "asc"
-          ? a.subjectName.localeCompare(b.subjectName)
-          : b.subjectName.localeCompare(a.subjectName);
+          ? a.name.localeCompare(b.name)
+          : b.name.localeCompare(a.name);
       case "groupSize":
         return order === "asc"
           ? a.groupSize - b.groupSize
@@ -82,9 +82,9 @@ export default function SubjectList({
                   <TableCell />
                   <TableCell>
                     <TableSortLabel
-                      active={orderBy === "subjectName"}
+                      active={orderBy === "name"}
                       direction={order}
-                      onClick={() => handleRequestSort("subjectName")}
+                      onClick={() => handleRequestSort("name")}
                     >
                       Name
                     </TableSortLabel>
@@ -122,7 +122,7 @@ export default function SubjectList({
                       direction={order}
                       onClick={() => handleRequestSort("programName")}
                     >
-                      Major
+                      Program
                     </TableSortLabel>
                   </TableCell>
                   <TableCell>
@@ -150,7 +150,7 @@ export default function SubjectList({
                         <InfoIcon />
                       </IconButton>
                     </TableCell>
-                    <TableCell>{value.subjectName}</TableCell>
+                    <TableCell>{value.name}</TableCell>
                     <TableCell>{value.groupSize}</TableCell>
                     <TableCell>{value.groupCount}</TableCell>
                     <TableCell>{value.sessionLength}</TableCell>
