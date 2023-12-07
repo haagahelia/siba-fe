@@ -35,7 +35,7 @@ export default function EditUserContainer({
     onSubmit: (values) => {
       setDialogOptions({
         title: `Are you sure you want to edit ${values.email}?`,
-        content: `Press continue to save ${values.email} new information. `,
+        content: `Press continue to save new role for ${values.email}. `,
       });
       setDialogOpen(true);
       return;

@@ -1,13 +1,15 @@
 import { useState } from "react";
 
 import Button from "@mui/material/Button";
+import Checkbox from "@mui/material/Checkbox";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import FormGroup from "@mui/material/FormGroup";
 import Grid from "@mui/material/Grid";
-import TextField from "@mui/material/TextField";
 import useTheme from "@mui/material/styles/useTheme";
 
 export default function EditUserForm({ formik }) {
@@ -29,88 +31,62 @@ export default function EditUserForm({ formik }) {
       <Dialog open={open}>
         <form onSubmit={formik.handleSubmit}>
           <DialogTitle sx={{ maxWidth: "300px" }}>
-            Edit: {formik.initialValues?.email}
+            Edit role for {formik.values.email}
           </DialogTitle>
           <DialogContent>
             <DialogContentText>
               <Grid container variant="sibaGridEdit" spacing={3} column={7}>
                 <Grid item xs={12}>
-                  <TextField
-                    error={
-                      formik.touched.email && formik.errors.email ? true : false
-                    }
-                    name="email"
-                    label="User email"
-                    defaultValue={formik.initialValues?.email}
-                    variant="outlined"
-                    value={formik.values?.email}
-                    onChange={formik.handleChange("email")}
-                    onBlur={formik.handleBlur("email")}
-                    helperText={
-                      formik.touched.email && formik.errors.email
-                        ? formik.errors.email
-                        : null
-                    }
-                  />
-                </Grid>
-                <Grid item xs={12}>
-                  <TextField
-                    error={
-                      formik.touched.isAdmin && formik.errors.isAdmin
-                        ? true
-                        : false
-                    }
-                    name="isAdmin"
-                    label="isAdmin"
-                    defaultValue={formik.initialValues?.isAdmin}
-                    variant="outlined"
-                    value={formik.values?.isAdmin}
-                    onChange={formik.handleChange("isAdmin")}
-                    onBlur={formik.handleBlur("isAdmin")}
-                    helperText={
-                      formik.touched.isAdmin && formik.errors.isAdmin
-                        ? formik.errors.isAdmin
-                        : null
-                    }
-                  />
-                </Grid>
-                <Grid item xs={12}>
-                  <TextField
-                    error={
-                      formik.touched.isPlanner && formik.errors.isPlanner
-                        ? true
-                        : false
-                    }
-                    name="isPlanner"
-                    label="isPlanner"
-                    defaultValue={formik.initialValues?.isPlanner}
-                    variant="outlined"
-                    value={formik.values?.isPlanner}
-                    onChange={formik.handleChange("isPlanner")}
-                    onBlur={formik.handleBlur("isPlanner")}
-                    helperText={
-                      formik.touched.isPlanner && formik.errors.isPlanner
-                    }
-                  />
-                </Grid>
-                <Grid item xs={12}>
-                  <TextField
-                    error={
-                      formik.touched.isStatist && formik.errors.isStatist
-                        ? true
-                        : false
-                    }
-                    name="isStatist"
-                    label="isStatist"
-                    defaultValue={formik.initialValues?.isStatist}
-                    variant="outlined"
-                    value={formik.values?.isStatist}
-                    onChange={formik.handleChange("isStatist")}
-                    onBlur={formik.handleBlur("isStatist")}
-                    helperText={
-                      formik.touched.isStatist && formik.errors.isStatist
-                    }
-                  />
+                  <FormGroup>
+                    <FormControlLabel
+                      control={<Checkbox />}
+                      label="Admin"
+                      labelPlacement="start"
+                      className="formCheckBoxButtons"
+                      name="isAdmin"
+                      checked={formik.values.isAdmin === 1}
+                      onChange={(event) =>
+                        formik.handleChange({
+                          target: {
+                            name: "isAdmin",
+                            value: event.target.checked ? 1 : 0,
+                          },
+                        })
+                      }
+                    />
+                    <FormControlLabel
+                      control={<Checkbox />}
+                      label="Planner"
+                      labelPlacement="start"
+                      className="formCheckBoxButtons"
+                      name="isPlanner"
+                      checked={formik.values.isPlanner === 1}
+                      onChange={(event) =>
+                        formik.handleChange({
+                          target: {
+                            name: "isPlanner",
+                            value: event.target.checked ? 1 : 0,
+                          },
+                        })
+                      }
+                    />
+                    <FormControlLabel
+                      control={<Checkbox />}
+                      label="Statist"
+                      labelPlacement="start"
+                      className="formCheckBoxButtons"
+                      name="isStatist"
+                      checked={formik.values.isStatist === 1}
+                      onChange={(event) =>
+                        formik.handleChange({
+                          target: {
+                            name: "isStatist",
+                            value: event.target.checked ? 1 : 0,
+                          },
+                        })
+                      }
+                    />
+                  </FormGroup>
                 </Grid>
               </Grid>
             </DialogContentText>
