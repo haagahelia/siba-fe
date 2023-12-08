@@ -18,6 +18,7 @@ import { AppContext } from "../AppContext";
 import { AllocRoundContext } from "../AppContext.js";
 import dao from "../ajax/dao";
 import AddAllocRound from "../components/allocRound/AddAllocRound";
+import { useRoleLoggedIn } from "../hooks/useRoleLoggedIn.js";
 import Logger from "../logger/logger";
 import logo from "../styles/SibeliusLogo.svg";
 // The different pages/views
@@ -157,6 +158,7 @@ export default function NavBar() {
 
   const { allocRoundContext } = useContext(AllocRoundContext);
   const appContext = useContext(AppContext);
+  const { roles } = useRoleLoggedIn();
   const [click, setClick] = useState(false);
   const handleClick = () => setClick(!click);
 
@@ -224,10 +226,9 @@ export default function NavBar() {
     for (const element of sibaPages) {
       element.showForCurrentUser = false;
       if (
-        (element.forRoles.includes("admin") && appContext.roles.admin === 1) ||
-        (element.forRoles.includes("planner") &&
-          appContext.roles.planner === 1) ||
-        (element.forRoles.includes("statist") && appContext.roles.statist === 1)
+        (element.forRoles.includes("admin") && roles.admin === "1") ||
+        (element.forRoles.includes("planner") && roles.planner === "1") ||
+        (element.forRoles.includes("statist") && roles.statist === "1")
       ) {
         element.showForCurrentUser = true;
       } else if (element.forRoles.includes("guest") && !appContext.userEmail) {

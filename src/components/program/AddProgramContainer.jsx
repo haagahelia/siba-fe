@@ -14,6 +14,7 @@ import {
 
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import { Typography } from "@mui/material";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardHeader from "@mui/material/CardHeader";
@@ -60,7 +61,9 @@ export default function AddProgramContainer({
   const formik = useFormik({
     enableReinitialize: true,
     initialValues: initialProgram,
-    validate:(values)=>{validate(values)} ,
+    validate: (values) => {
+      validate(values);
+    },
     onSubmit: (values) => {
       setDialogOptions({
         title: `Are you sure you want to add ${values.name}?`,
@@ -99,7 +102,9 @@ export default function AddProgramContainer({
     const capitalName = capitalizeFirstLetter(submitValues.name);
     const newProgram = {
       name: capitalName,
-      departmentId: submitValues.departmentId ? +submitValues.departmentId : null,
+      departmentId: submitValues.departmentId
+        ? +submitValues.departmentId
+        : null,
     };
 
     const result = await dao.postNewProgram(newProgram);
@@ -151,12 +156,7 @@ export default function AddProgramContainer({
       <Card variant="outlined">
         <CardContent>
           <CardHeader
-            title={
-              <>
-                Add Program
-              </>
-            }
-            variant="pageHeader"
+            title={<Typography variant="pageHeader">Programs</Typography>}
             action={
               <IconButton
                 onClick={() => setIsCardExpanded(!isCardExpanded)}

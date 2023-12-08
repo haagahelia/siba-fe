@@ -44,10 +44,9 @@ export default function EditSpaceForm({
             <DialogContentText>
               <Grid
                 container
-                variant="sibaGridEditSpace"  //placeholder variant, see theme.js
+                variant="sibaGridEditSpace" //placeholder variant, see theme.js
                 spacing={3}
                 column={7}
-                
               >
                 <Grid item xs={12} sm={6} md={4}>
                   <TextField
@@ -117,7 +116,7 @@ export default function EditSpaceForm({
                   <TextField
                     error={
                       formik.touched.availableFrom &&
-                        formik.errors.availableFrom
+                      formik.errors.availableFrom
                         ? true
                         : false
                     }
@@ -257,8 +256,7 @@ export default function EditSpaceForm({
                   </FormControl>
                 </Grid>
 
-                <Grid item xs={12} sm={6} md={4}></Grid>
-
+                <Grid item xs={12} sm={6} md={4} />
               </Grid>
             </DialogContentText>
           </DialogContent>

@@ -5,8 +5,8 @@ import {
   ajaxRequestErrorHandler,
   getFunctionName,
 } from "../ajax/ajaxRequestErrorHandler";
-import { useRoleLoggedIn } from "../hooks/useRoleLoggedIn";
 import dao from "../ajax/dao";
+import { useRoleLoggedIn } from "../hooks/useRoleLoggedIn";
 import Logger from "../logger/logger";
 
 import Card from "@mui/material/Card";
@@ -82,7 +82,7 @@ export default function ProgramView() {
         setAlertOpen={setAlertOpen}
       />
       <Container maxWidth="100%">
-      {(roles.admin ===1|| roles.planner===1) && (
+        {(roles.admin === "1" || roles.planner === "1") && (
           <AddProgramContainer
             getAllPrograms={getAllPrograms}
             allProgramsList={allProgramsList}
@@ -91,12 +91,7 @@ export default function ProgramView() {
         <Grid container rowSpacing={1}>
           <Card variant="outlined">
             <CardHeader
-              title={
-                <>
-                  Programs
-                </>
-              }
-              variant="pageHeader"
+              title={<Typography variant="pageHeader">Programs</Typography>}
             />
             <CardContent>
               <ProgramFiltering
