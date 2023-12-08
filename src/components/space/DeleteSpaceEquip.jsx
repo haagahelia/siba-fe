@@ -7,7 +7,7 @@ import AlertBox from "../common/AlertBox";
 import ConfirmationDialog from "../common/ConfirmationDialog";
 
 export default function DeleteSpaceEquip({
-  singleEquipBySpaceId,
+  singleEquipToDelete,
   getEquipmentsBySpaceId,
 }) {
   const [alertOpen, setAlertOpen] = useState(false);
@@ -25,14 +25,15 @@ export default function DeleteSpaceEquip({
     equipmentId: 0,
   });
 
-  const equipmentName = singleEquipBySpaceId.name;
+  const equipmentName = singleEquipToDelete.name;
 
   const theme = useTheme();
 
-  const deleteSpaceEquipment = async (values = null) => {
+  const deleteSpaceEquipment = async (submitValues = null) => {
+    // We will not use submitValues
     const success = await dao.deleteSingleSpaceEquipment(
-      singleEquipBySpaceId.spaceId,
-      singleEquipBySpaceId.equipmentId,
+      singleEquipToDelete.spaceId,
+      singleEquipToDelete.equipmentId,
     );
     if (!success) {
       setAlertOptions({
@@ -49,7 +50,7 @@ export default function DeleteSpaceEquip({
       message: `${equipmentName} removed.`,
     });
     setAlertOpen(true);
-    getEquipmentsBySpaceId(singleEquipBySpaceId.spaceId);
+    getEquipmentsBySpaceId(singleEquipToDelete.spaceId);
   };
 
   const submitDelete = (values) => {
@@ -83,7 +84,7 @@ export default function DeleteSpaceEquip({
         style={theme.components.MuiButton.redbutton}
         sx={{ maxWidth: "85px" }}
         onClick={() => {
-          submitDelete(singleEquipBySpaceId);
+          submitDelete(singleEquipToDelete);
         }}
       >
         Remove

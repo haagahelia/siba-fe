@@ -8,7 +8,7 @@ import AlertBox from "../common/AlertBox";
 import ConfirmationDialog from "../common/ConfirmationDialog";
 
 export default function DeleteSubEquip({
-  singleEquipBySubId,
+  singleSubjectToDelete,
   getEquipmentsBySubId,
 }) {
   const [alertOpen, setAlertOpen] = useState(false);
@@ -26,17 +26,15 @@ export default function DeleteSubEquip({
     equipmentId: 0,
   });
 
-  const equipmentName = singleEquipBySubId.name;
+  const equipmentName = singleSubjectToDelete.name;
 
   const theme = useTheme();
 
-  const deleteSubjectEquipment = async () => {
-    // TODO: Why are we reassigning function parameters here?!
-    // The values of `subjectId` and `equipmentId` get always overwritten
-
+  const deleteSubjectEquipment = async (submitValues = null) => {
+    // We will not use submitValues
     const success = await dao.deleteSingleSubjectEquipment(
-      singleEquipBySubId.subjectId,
-      singleEquipBySubId.equipmentId,
+      singleSubjectToDelete.subjectId,
+      singleSubjectToDelete.equipmentId,
     );
     if (!success) {
       setAlertOptions({
@@ -53,7 +51,7 @@ export default function DeleteSubEquip({
       message: `${equipmentName} removed.`,
     });
     setAlertOpen(true);
-    getEquipmentsBySubId(singleEquipBySubId.subjectId);
+    getEquipmentsBySubId(singleSubjectToDelete.subjectId);
   };
 
   const submitDelete = (values) => {
@@ -87,7 +85,7 @@ export default function DeleteSubEquip({
         style={theme.components.MuiButton.redbutton}
         sx={{ marginLeft: margins.small, maxWidth: "85px" }}
         onClick={() => {
-          submitDelete(singleEquipBySubId);
+          submitDelete(singleSubjectToDelete);
         }}
       >
         Delete
