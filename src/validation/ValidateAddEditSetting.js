@@ -15,15 +15,13 @@ export async function validate(values) {
     let id;
     let filteredList = [];
     // Check if user enter an existed setting name
-    settingList.forEach((setting) => {
+    for (const setting of settingList) {
       if (values.id === setting.id) {
         id = setting.id;
 
-        filteredList = settingList.filter((setting) => {
-          return setting.id !== id;
-        });
+        filteredList = settingList.filter((item) => item.id !== id);
       }
-    });
+    }
 
     return filteredList.some(
       (building) => building.name.toLowerCase() === values.name.toLowerCase(),

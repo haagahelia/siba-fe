@@ -21,18 +21,14 @@ export async function validate(values,allocRoundId) {
       // the name of an already existing lesson.
       // In filtering, however, it is considered / taken into account
       // that the name can be the same as the name of the lesson being edited
-      subjectList.forEach((item) => {
-        // Changed from map to forEach,
-        // as we're not returning a new array but performing side effects
+      for (const item of subjectList) {
         if (values.id === item.id) {
           id = item.id;
-          // Here, all teaching IDs that do not match
-          // the teaching ID to be edited are filtered out
           filteredList = subjectList.filter((element) => {
             return element.id !== id;
           });
         }
-      });
+      }
       // Here we compare the lessons that did not match the id of the lesson
       // to be edited and see if the user's input matches
       // the name of an already existing lesson
