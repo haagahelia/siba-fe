@@ -13,6 +13,7 @@ import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import TextField from "@mui/material/TextField";
 import useTheme from "@mui/material/styles/useTheme";
+import InputLabel from "@mui/material/InputLabel";
 
 export default function EditSubjectForm({
   programSelectList,
@@ -161,6 +162,7 @@ export default function EditSubjectForm({
 
                 <Grid item xs={12}>
                   <FormControl sx={{ minWidth: 200 }}>
+                  <InputLabel>Program</InputLabel>
                     <Select
                       error={
                         formik.touched.programId && formik.errors.programId
@@ -188,6 +190,7 @@ export default function EditSubjectForm({
                 </Grid>
                 <Grid item xs={12}>
                   <FormControl sx={{ minWidth: 200 }}>
+                  <InputLabel>Room type</InputLabel>
                     <Select
                       name="spaceTypeId"
                       defaultValue={formik.initialValues?.spaceTypeId}
