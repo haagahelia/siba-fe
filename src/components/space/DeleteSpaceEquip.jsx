@@ -25,20 +25,14 @@ export default function DeleteSpaceEquip({
     equipmentId: 0,
   });
 
-  const id1 = singleEquipBySpaceId.spaceId;
-  const id2 = singleEquipBySpaceId.equipmentId;
   const equipmentName = singleEquipBySpaceId.name;
 
   const theme = useTheme();
 
-  const deleteSpaceEquipment = async (spaceId, equipmentId) => {
-    // TODO: Why are we reassigning function parameters here?!
-    // The values of `subjectId` and `equipmentId` get always overwritten
-    spaceId = id1;
-    equipmentId = id2;
+  const deleteSpaceEquipment = async (values = null) => {
     const success = await dao.deleteSingleSpaceEquipment(
-      spaceId,
-      equipmentId,
+      singleEquipBySpaceId.spaceId,
+      singleEquipBySpaceId.equipmentId,
     );
     if (!success) {
       setAlertOptions({
@@ -55,7 +49,7 @@ export default function DeleteSpaceEquip({
       message: `${equipmentName} removed.`,
     });
     setAlertOpen(true);
-    getEquipmentsBySpaceId(spaceId);
+    getEquipmentsBySpaceId(singleEquipBySpaceId.spaceId);
   };
 
   const submitDelete = (values) => {

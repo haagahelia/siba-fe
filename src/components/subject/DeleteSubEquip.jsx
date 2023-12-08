@@ -3,9 +3,9 @@ import dao from "../../ajax/dao";
 
 import Button from "@mui/material/Button";
 import useTheme from "@mui/material/styles/useTheme";
+import { margins } from "../../styles/theme";
 import AlertBox from "../common/AlertBox";
 import ConfirmationDialog from "../common/ConfirmationDialog";
-import { margins } from "../../styles/theme";
 
 export default function DeleteSubEquip({
   singleEquipBySubId,
@@ -26,20 +26,17 @@ export default function DeleteSubEquip({
     equipmentId: 0,
   });
 
-  const id1 = singleEquipBySubId.subjectId;
-  const id2 = singleEquipBySubId.equipmentId;
   const equipmentName = singleEquipBySubId.name;
 
   const theme = useTheme();
 
-  const deleteSubjectEquipment = async (subjectId, equipmentId) => {
+  const deleteSubjectEquipment = async () => {
     // TODO: Why are we reassigning function parameters here?!
     // The values of `subjectId` and `equipmentId` get always overwritten
-    subjectId = id1;
-    equipmentId = id2;
+
     const success = await dao.deleteSingleSubjectEquipment(
-      subjectId,
-      equipmentId,
+      singleEquipBySubId.subjectId,
+      singleEquipBySubId.equipmentId,
     );
     if (!success) {
       setAlertOptions({
@@ -56,7 +53,7 @@ export default function DeleteSubEquip({
       message: `${equipmentName} removed.`,
     });
     setAlertOpen(true);
-    getEquipmentsBySubId(subjectId);
+    getEquipmentsBySubId(singleEquipBySubId.subjectId);
   };
 
   const submitDelete = (values) => {
