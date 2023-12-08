@@ -190,7 +190,7 @@ export default function SingleSubjectDialog({
                 </Grid>
                 <Grid item xs={12} sm={6}>
                   <Typography variant="singleDialogSubtitle">
-                    {singleSubject?.name}
+                    {singleSubject?.programName}
                   </Typography>
                 </Grid>
               </DialogContent>
