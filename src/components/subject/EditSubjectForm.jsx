@@ -9,11 +9,11 @@ import DialogTitle from "@mui/material/DialogTitle";
 import FormControl from "@mui/material/FormControl";
 import FormHelperText from "@mui/material/FormHelperText";
 import Grid from "@mui/material/Grid";
+import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import TextField from "@mui/material/TextField";
 import useTheme from "@mui/material/styles/useTheme";
-import InputLabel from "@mui/material/InputLabel";
 
 export default function EditSubjectForm({
   programSelectList,
@@ -46,9 +46,7 @@ export default function EditSubjectForm({
                 <Grid item xs={12}>
                   <TextField
                     error={
-                      formik.touched.name && formik.errors.name
-                        ? true
-                        : false
+                      formik.touched.name && formik.errors.name ? true : false
                     }
                     name="name"
                     label="The name of the lesson"
@@ -162,7 +160,7 @@ export default function EditSubjectForm({
 
                 <Grid item xs={12}>
                   <FormControl sx={{ minWidth: 200 }}>
-                  <InputLabel>Program</InputLabel>
+                    <InputLabel>Program</InputLabel>
                     <Select
                       error={
                         formik.touched.programId && formik.errors.programId
@@ -190,12 +188,11 @@ export default function EditSubjectForm({
                 </Grid>
                 <Grid item xs={12}>
                   <FormControl sx={{ minWidth: 200 }}>
-                  <InputLabel>Space type</InputLabel>
+                    <InputLabel>Space type</InputLabel>
                     <Select
                       name="spaceTypeId"
                       defaultValue={formik.initialValues?.spaceTypeId}
                       onChange={formik.handleChange("spaceTypeId")}
-                      value={formik.values?.spaceTypeId}
                       onBlur={formik.handleBlur("spaceTypeId")}
                     >
                       {spaceTypeSelectList.map((value) => {

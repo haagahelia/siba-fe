@@ -1,5 +1,5 @@
 import { useFormik } from "formik";
-import { useEffect, useState, useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import {
   ajaxRequestErrorHandler,
   getFunctionName,
@@ -10,10 +10,10 @@ import {
   validate,
 } from "../../validation/ValidateEditSubject";
 
+import { AllocRoundContext } from "../../AppContext";
 import AlertBox from "../common/AlertBox";
 import ConfirmationDialog from "../common/ConfirmationDialog";
 import EditSubjectForm from "./EditSubjectForm";
-import { AllocRoundContext } from "../../AppContext";
 
 export default function EditSubjectContainer({
   singleSubject,
@@ -22,8 +22,9 @@ export default function EditSubjectContainer({
 }) {
   // Whenever the editSubject changes in the SubjectList.jsx file,
   // that information comes here as singleSubject
-  const [programSelectList, setProgramSelectList] =
-       useState([{id:3009,name:"Globulist Muusic"}]);
+  const [programSelectList, setProgramSelectList] = useState([
+    { id: 3009, name: "Globulist Muusic" },
+  ]);
   const [spaceTypeSelectList, setSpaceTypeSelectList] = useState([]);
   const [alertOpen, setAlertOpen] = useState(false);
   const [alertOptions, setAlertOptions] = useState({
@@ -37,7 +38,7 @@ export default function EditSubjectContainer({
     content: "Something here",
   });
 
-  const { allocRoundContext } = useContext(AllocRoundContext)
+  const { allocRoundContext } = useContext(AllocRoundContext);
 
   const formik = useFormik({
     // enableReinitialize checks if Formik needs to reset the form
@@ -81,7 +82,7 @@ export default function EditSubjectContainer({
     setAlertOptions({
       severity: "success",
       title: "Success!",
-      message: `${values.name} new information added.`,
+      message: `${values.name} information edited.`,
     });
     setAlertOpen(true);
     setSingleSubject(formik.values);
