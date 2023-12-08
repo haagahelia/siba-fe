@@ -1,9 +1,9 @@
+import DialogContent from "@mui/material/DialogContent";
 import Grid from "@mui/material/Grid";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import Typography from "@mui/material/Typography";
 import DeleteSpaceEquip from "./DeleteSpaceEquip";
-import DialogContent from "@mui/material/DialogContent";
 
 export default function SpaceEquipmentList({
   equipListBySpaceId,
@@ -18,7 +18,7 @@ export default function SpaceEquipmentList({
               <List>
                 <ListItem>
                   <DeleteSpaceEquip
-                    singleEquipBySpaceId={value}
+                    singleSpaceEquipToDelete={value}
                     getEquipmentsBySpaceId={getEquipmentsBySpaceId}
                     subId={value.spaceId}
                   />

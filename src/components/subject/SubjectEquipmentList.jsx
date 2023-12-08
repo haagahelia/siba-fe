@@ -1,3 +1,4 @@
+import DialogContent from "@mui/material/DialogContent";
 import Grid from "@mui/material/Grid";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
@@ -5,7 +6,6 @@ import ListItemText from "@mui/material/ListItemText";
 import Typography from "@mui/material/Typography";
 import DeleteSubEquip from "./DeleteSubEquip";
 import EditSubEquipContainer from "./EditSubEquipContainer";
-import DialogContent from "@mui/material/DialogContent";
 
 export default function SubjectEquipmentList({
   equipListBySubId,
@@ -28,7 +28,7 @@ export default function SubjectEquipmentList({
                     getEquipmentsBySubId={getEquipmentsBySubId}
                   />
                   <DeleteSubEquip
-                    singleEquipBySubId={value}
+                    singleSubEquipToDelete={value}
                     getEquipmentsBySubId={getEquipmentsBySubId}
                     subId={value.subjectId}
                   />
@@ -73,8 +73,8 @@ export default function SubjectEquipmentList({
                           {value.obligatory === 1
                             ? "Yes"
                             : value.obligatory === 0
-                              ? "No"
-                              : null}
+                            ? "No"
+                            : null}
                         </Typography>
                       </Grid>
                     </DialogContent>
@@ -88,8 +88,7 @@ export default function SubjectEquipmentList({
         <Grid item xs={12} sm={6}>
           <Typography>No equipment added</Typography>
         </Grid>
-      )
-      }
+      )}
     </div>
   );
 }
