@@ -131,7 +131,7 @@ export default function SubjectList({
                       direction={order}
                       onClick={() => handleRequestSort("spaceTypeName")}
                     >
-                      Room Type
+                      Space Type
                     </TableSortLabel>
                   </TableCell>
                 </TableRow>

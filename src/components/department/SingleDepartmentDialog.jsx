@@ -42,7 +42,7 @@ export default function SingleDepartmentDialog({
         getAllDepartments();
       }}
     >
-      <DialogTitle id="dialog-title">Department Info</DialogTitle>
+      <DialogTitle id="dialog-title">Department: {singleDepartment?.name}</DialogTitle>
       <IconButton
         edge="end"
         color="inherit"
