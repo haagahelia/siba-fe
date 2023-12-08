@@ -13,7 +13,7 @@ export async function validate(values) {
     let filteredList = [];
 
     // Check if user enter an existed building name except the current one
-    buildingList.forEach((building) => {
+    for (const building of buildingList) {
       if (values.id === building.id) {
         id = building.id;
 
@@ -21,7 +21,7 @@ export async function validate(values) {
           return building.id !== id;
         });
       }
-    });
+    }
 
     return filteredList.some(
       (building) => building.name.toLowerCase() === values.name.toLowerCase(),
