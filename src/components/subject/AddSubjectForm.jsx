@@ -179,10 +179,10 @@ export default function AddSubjectForm({
           </Grid>
           <Grid item xs={12} sm={12} md={6} lg={3}>
             <FormControl fullWidth>
-              <InputLabel>Room type</InputLabel>
+              <InputLabel>Space type</InputLabel>
               <Select
                 name="spaceTypeId"
-                label="Room Type"
+                label="Space Type"
                 onChange={formik.handleChange}
                 value={formik.values.spaceTypeId || ""}
                 onBlur={formik.handleBlur}

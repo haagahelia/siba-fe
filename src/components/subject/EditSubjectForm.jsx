@@ -190,7 +190,7 @@ export default function EditSubjectForm({
                 </Grid>
                 <Grid item xs={12}>
                   <FormControl sx={{ minWidth: 200 }}>
-                  <InputLabel>Room type</InputLabel>
+                  <InputLabel>Space type</InputLabel>
                     <Select
                       name="spaceTypeId"
                       defaultValue={formik.initialValues?.spaceTypeId}

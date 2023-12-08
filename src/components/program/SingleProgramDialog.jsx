@@ -40,7 +40,7 @@ export default function SingleProgramDialog({
                 getAllPrograms();
             }}
         >
-            <DialogTitle id="dialog-title">{`Program Info: ${singleProgram?.name}`}</DialogTitle>
+            <DialogTitle id="dialog-title">{`Program: ${singleProgram?.name}`}</DialogTitle>
             {roles.admin === "1" && (
                 <DialogActions>
                     <DeleteProgram

@@ -61,7 +61,7 @@ export default function SingleUserDialog({
         open={setAlertOpen}
       />
       <Dialog open={open} onClose={() => setOpen(false)} maxWidth="md" fullWidth>
-        <DialogTitle id="dialog-title">{singleUser?.email}</DialogTitle>
+        <DialogTitle id="dialog-title">User: {singleUser?.email}</DialogTitle>
         <IconButton
           edge="end"
           color="inherit"

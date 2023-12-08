@@ -63,7 +63,7 @@ export default function SingleSpaceDialog({
         open={setAlertOpen}
       />
       <Dialog open={open} onClose={() => setOpen(false)} maxWidth="md" fullWidth>
-        <DialogTitle id="dialog-title">
+        <DialogTitle id="dialog-title">Space: {singleSpace?.name}</DialogTitle>
           <IconButton
             edge="end"
             color="inherit"
@@ -73,8 +73,6 @@ export default function SingleSpaceDialog({
           >
             <CloseIcon />
           </IconButton>
-          {singleSpace?.name}
-        </DialogTitle>
         <DialogContent>
         {(roles.admin === "1" || roles.planner === "1") && (
             <DialogActions>

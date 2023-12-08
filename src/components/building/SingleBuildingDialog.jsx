@@ -23,7 +23,7 @@ export default function SingleBuildingDialog({
 
   return (
     <Dialog open={open} onClose={() => setOpen(false)} width="400px">
-      <DialogTitle id="dialog-title">{singleBuilding?.name}</DialogTitle>
+      <DialogTitle id="dialog-title">Building: {singleBuilding?.name}</DialogTitle>
       <IconButton
             edge="end"
             color="inherit"

@@ -40,7 +40,7 @@ export default function SingleEquipmentDialog({
         getAllEquipments();
       }}
     >
-      <DialogTitle id="dialog-title">Equipment Info</DialogTitle>
+      <DialogTitle id="dialog-title">Equipment: {singleEquipment?.name}</DialogTitle>
       {roles.admin === "1" && (
         <DialogActions>
           <EditEquipment
