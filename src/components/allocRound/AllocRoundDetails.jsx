@@ -40,7 +40,7 @@ export default function AllocRoundDetails({
         open={setAlertOpen}
       />
       <Dialog open={open} onClose={handleClose}maxWidth="md" fullWidth>
-        <DialogTitle id="dialog-title">{singleAllocRound?.name}</DialogTitle>
+        <DialogTitle id="dialog-title">Allocation round (Simulation round): {singleAllocRound?.name}</DialogTitle>
         <IconButton
             edge="end"
             color="inherit"

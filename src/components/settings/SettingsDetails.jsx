@@ -36,7 +36,7 @@ export default function SettingsDetails({
         open={setAlertOpen}
       />
       <Dialog open={open} onClose={() => setOpen(false)}>
-        <DialogTitle id="dialog-title">{singleSetting?.name}</DialogTitle>
+        <DialogTitle id="dialog-title">Setting: {singleSetting?.name}</DialogTitle>
         <DialogContent>
           {roles.admin === "1" && (
             <DialogActions>
