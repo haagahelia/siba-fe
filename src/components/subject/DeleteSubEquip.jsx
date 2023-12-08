@@ -8,7 +8,7 @@ import AlertBox from "../common/AlertBox";
 import ConfirmationDialog from "../common/ConfirmationDialog";
 
 export default function DeleteSubEquip({
-  singleSubjectToDelete,
+  singleSubEquipToDelete,
   getEquipmentsBySubId,
 }) {
   const [alertOpen, setAlertOpen] = useState(false);
@@ -26,15 +26,15 @@ export default function DeleteSubEquip({
     equipmentId: 0,
   });
 
-  const equipmentName = singleSubjectToDelete.name;
+  const equipmentName = singleSubEquipToDelete.name;
 
   const theme = useTheme();
 
   const deleteSubjectEquipment = async (submitValues = null) => {
     // We will not use submitValues
     const success = await dao.deleteSingleSubjectEquipment(
-      singleSubjectToDelete.subjectId,
-      singleSubjectToDelete.equipmentId,
+      singleSubEquipToDelete.subjectId,
+      singleSubEquipToDelete.equipmentId,
     );
     if (!success) {
       setAlertOptions({
@@ -51,7 +51,7 @@ export default function DeleteSubEquip({
       message: `${equipmentName} removed.`,
     });
     setAlertOpen(true);
-    getEquipmentsBySubId(singleSubjectToDelete.subjectId);
+    getEquipmentsBySubId(singleSubEquipToDelete.subjectId);
   };
 
   const submitDelete = (values) => {

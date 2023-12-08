@@ -18,7 +18,7 @@ export default function SpaceEquipmentList({
               <List>
                 <ListItem>
                   <DeleteSpaceEquip
-                    singleEquipToDelete={value}
+                    singleSpaceEquipToDelete={value}
                     getEquipmentsBySpaceId={getEquipmentsBySpaceId}
                     subId={value.spaceId}
                   />

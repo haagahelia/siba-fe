@@ -28,7 +28,7 @@ export default function SubjectEquipmentList({
                     getEquipmentsBySubId={getEquipmentsBySubId}
                   />
                   <DeleteSubEquip
-                    singleSubjectToDelete={value}
+                    singleSubEquipToDelete={value}
                     getEquipmentsBySubId={getEquipmentsBySubId}
                     subId={value.subjectId}
                   />
