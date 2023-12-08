@@ -76,7 +76,7 @@ export default function SingleSubjectDialog({
         fullWidth
       >
         <DialogTitle id="dialog-title">
-          {singleSubject?.name}
+          Lesson: {singleSubject?.name}
         </DialogTitle>
         <IconButton
           edge="end"
@@ -185,12 +185,12 @@ export default function SingleSubjectDialog({
               <DialogContent variant="sibaDialogContent2">
                 <Grid item xs={12} sm={6}>
                   <Typography variant="singleDialogSubtitle">
-                    Major:&nbsp;
+                    Program:&nbsp;
                   </Typography>
                 </Grid>
                 <Grid item xs={12} sm={6}>
                   <Typography variant="singleDialogSubtitle">
-                    {singleSubject?.name}
+                    {singleSubject?.programName}
                   </Typography>
                 </Grid>
               </DialogContent>

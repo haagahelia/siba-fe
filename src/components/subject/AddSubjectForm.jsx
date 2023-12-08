@@ -155,9 +155,9 @@ export default function AddSubjectForm({
           </Grid>
           <Grid item xs={12} sm={12} md={6} lg={3}>
             <FormControl fullWidth>
-              <InputLabel>Major</InputLabel>
+              <InputLabel>Program</InputLabel>
               <Select
-                label="Major"
+                label="Program"
                 name="programId"
                 onChange={formik.handleChange}
                 value={formik.values.programId || ""}
