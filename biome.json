@@ -1,5 +1,14 @@
 {
   "formatter": {
     "indentStyle": "space"
+  },
+
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "correctness": {
+        "useExhaustiveDependencies": "off"
+      }
+    }
   }
 }
