@@ -1,5 +1,5 @@
 // The Add Lesson Form
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import Button from "@mui/material/Button";
 import FormControl from "@mui/material/FormControl";
@@ -10,6 +10,8 @@ import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
+import dao from "../../ajax/dao";
+import Logger from "../../logger/logger";
 
 export default function AddSubjectForm({
   handleChange,
@@ -17,10 +19,25 @@ export default function AddSubjectForm({
   formik,
   submitValues,
   setInitialSubject,
-  allSubjectsList,
   spaceTypeSelectList,
 }) {
   const [selectedLesson, setSelectedLesson] = useState("");
+  const [allocRounds, setAllocRounds] = useState([]);
+  const [subjects, setSubjects] = useState([]);
+
+  useEffect(() => getAllAllocRounds, []);
+
+  const getAllAllocRounds = async () => {
+    const { data } = await dao.fetchAllAllocRounds();
+    setAllocRounds(data);
+  };
+
+  const getSubjects = async (allocRoundId) => {
+    Logger.debug("selectedAllocRound", allocRoundId);
+    const { data } = await dao.fetchAllSubjects(allocRoundId);
+    setSubjects(data);
+    setSelectedLesson("");
+  };
 
   return (
     <div>
@@ -35,7 +52,24 @@ export default function AddSubjectForm({
             style={{ border: "5px solid #FDA826", padding: "10px" }}
           >
             <FormControl fullWidth>
-              <InputLabel>Copy Existing Lesson?</InputLabel>
+              <InputLabel>Select Allocation Round</InputLabel>
+              <Select
+                name="selectAllocRound"
+                label="Select Existing AllocRound"
+                onChange={(e) => {
+                  getSubjects(e.target.value.id);
+                }}
+                onBlur={formik.handleBlur}
+              >
+                {allocRounds.map((value) => (
+                  <MenuItem key={value.id} value={value}>
+                    {`${value.id} - ${value.name}`}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+            <FormControl fullWidth>
+              <InputLabel>Select subject</InputLabel>
               <Select
                 name="copyLesson"
                 label="Copy Existing Lesson"
@@ -46,7 +80,7 @@ export default function AddSubjectForm({
                 value={selectedLesson}
                 onBlur={formik.handleBlur}
               >
-                {allSubjectsList.map((value) => (
+                {subjects.map((value) => (
                   <MenuItem key={value.id} value={value}>
                     {value.name}
                   </MenuItem>

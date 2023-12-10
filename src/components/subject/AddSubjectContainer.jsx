@@ -77,7 +77,9 @@ export default function AddSubjectContainer({
   const formik = useFormik({
     enableReinitialize: true,
     initialValues: initialSubject,
-    validate:(values)=>{validate(values,allocRoundContext.allocRoundId)} ,
+    validate: (values) => {
+      validate(values, allocRoundContext.allocRoundId);
+    },
     onSubmit: (values) => {
       setDialogOptions({
         title: `Are you sure you want to add ${values.name}?`,
@@ -233,7 +235,6 @@ export default function AddSubjectContainer({
                 formik={formik}
                 submitValues={formik.values}
                 setInitialSubject={setInitialSubject}
-                allSubjectsList={allSubjectsList}
                 spaceTypeSelectList={spaceTypeSelectList}
               />
               <ImportSubjectContainer
