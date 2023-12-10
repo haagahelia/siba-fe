@@ -69,7 +69,7 @@ export default function BuildingView() {
         setAlertOpen={setAlertOpen}
       />
       <Container maxWidth="xl">
-        {(roles.admin === "1" || roles.planner === "1") && (
+        {(roles.admin === "1") && (
           <AddBuildingContainer getAllBuildings={getAllBuildings} />
         )}
         <Grid container rowSpacing={1}>

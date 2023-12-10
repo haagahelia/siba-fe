@@ -74,7 +74,7 @@ export default function SingleSpaceDialog({
             <CloseIcon />
           </IconButton>
         <DialogContent>
-        {(roles.admin === "1" || roles.planner === "1") && (
+        {(roles.admin === "1" ) && (
             <DialogActions>
               <DeleteSpace
                 singleSpace={singleSpace}

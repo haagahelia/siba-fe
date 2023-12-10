@@ -19,6 +19,7 @@ import AddUser from "../components/user/AddUser";
 import UserFiltering from "../components/user/UserFiltering";
 import UserListContainer from "../components/user/UserListContainer";
 import UserPagination from "../components/user/UserPagination";
+import { useRoleLoggedIn } from "../hooks/useRoleLoggedIn";
 
 const pageSize = 15;
 
@@ -27,7 +28,7 @@ export default function UserView() {
   Logger.debug("UserView component instantiated.");
 
   const appContext = useContext(AppContext);
-
+  const { roles } = useRoleLoggedIn();
   const [paginateUsers, setPaginateUsers] = useState([]);
   const [allUsersList, setAllUsersList] = useState([]);
   const [alertOpen, setAlertOpen] = useState(false);
@@ -83,12 +84,8 @@ export default function UserView() {
         setAlertOpen={setAlertOpen}
       />
       <Container maxWidth="100%">
-        {appContext.roles.admin ? (
-            <AddUser getAllUsers={getAllUsers} allUsersList={allUsersList}/>
-          ) : (
-            <Typography variant="subtitle1" mt={3}>
-              "Not showing add user to your role"
-            </Typography>
+          {roles.admin === "1" && (
+            <AddUser getAllUsers={getAllUsers} allUsersList={allUsersList}/> 
           )}
           <Grid container rowSpacing={1}>
             <Card variant="outlined">
