@@ -9,6 +9,7 @@ import CheckIcon from "@mui/icons-material/Check";
 import CloseIcon from "@mui/icons-material/Close";
 import Button from "@mui/material/Button";
 
+import Card from "@mui/material/Card";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
@@ -166,11 +167,11 @@ export default function AllocationSubjectFailureView() {
         setAlertOpen={setAlertOpen}
       />
 
-      <Typography sx={{ color: "#F6E9E9", margin: 2 }}>
+      <Typography component="p" variant="allocRoundControlPanel">
         Unallocated lessons (Click each to see reasons for failing to allocate)
       </Typography>
 
-      <div style={{ width: "70%", backgroundColor: "#ff1744", margin: "auto" }}>
+      <Card variant="outlined">
         <TableContainer component={Paper}>
           <Table sx={{ minWidth: 650 }} aria-label="simple table">
             <TableHead>
@@ -196,7 +197,8 @@ export default function AllocationSubjectFailureView() {
             </TableBody>
           </Table>
         </TableContainer>
-      </div>
+      </Card>
+
       <Dialog open={open} onClose={handleClose} scroll="body" maxWidth="70%">
         <DialogTitle>
           {"Suitability of the space - for lesson: "}
