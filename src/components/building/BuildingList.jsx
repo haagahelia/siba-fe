@@ -1,3 +1,4 @@
+import ClearIcon from "@mui/icons-material/Clear";
 import InfoIcon from "@mui/icons-material/Info";
 import IconButton from "@mui/material/IconButton";
 import Paper from "@mui/material/Paper";
@@ -8,6 +9,7 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import TableSortLabel from "@mui/material/TableSortLabel";
+import TextField from "@mui/material/TextField";
 import styled from "@mui/material/styles/styled";
 import React, { useState } from "react";
 import Logger from "../../logger/logger";
@@ -19,11 +21,20 @@ export default function BuildingList({ getAllBuildings, paginateBuildings }) {
   const [singleBuilding, setSingleBuilding] = useState(null);
   const [order, setOrder] = useState("asc");
   const [orderBy, setOrderBy] = useState("Name");
+  const [searchQuery, setSearchQuery] = useState("");
 
   const handleRequestSort = (property) => {
     const isAsc = orderBy === property && order === "asc";
     setOrder(isAsc ? "desc" : "asc");
     setOrderBy(property);
+  };
+
+  const handleSearch = (e) => {
+    setSearchQuery(e.target.value);
+  };
+
+  const clearSearch = () => {
+    setSearchQuery("");
   };
 
   const sortedBuildingsList = paginateBuildings.sort((a, b) => {
@@ -37,15 +48,16 @@ export default function BuildingList({ getAllBuildings, paginateBuildings }) {
     }
   });
 
+  const filteredBuildingsList = sortedBuildingsList.filter(
+    (building) =>
+      building.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      building.description.toLowerCase().includes(searchQuery.toLowerCase()),
+  );
+
   // STYLE
   const Box = styled(Table)(({ theme }) => ({
     overflow: "auto",
   }));
-
-  // useEffect(() => {
-  //   Logger.debug("Buildings component instantiated.");
-  //   getAllBuildings();
-  // }, []);
 
   return (
     <div>
@@ -55,6 +67,24 @@ export default function BuildingList({ getAllBuildings, paginateBuildings }) {
         singleBuilding={singleBuilding}
         setSingleBuilding={setSingleBuilding}
         getAllBuildings={getAllBuildings}
+      />
+      <TextField
+        label="Search buildings"
+        variant="outlined"
+        value={searchQuery}
+        onChange={handleSearch}
+        InputProps={{
+          endAdornment: (
+            <IconButton
+              onClick={clearSearch}
+              sx={{ visibility: searchQuery ? "visible" : "hidden" }}
+              variant="clearFilterButton"
+            >
+              <ClearIcon />
+            </IconButton>
+          ),
+        }}
+        style={{ marginBottom: 16, width: "100%" }}
       />
       <Box>
         <Paper>
@@ -76,7 +106,7 @@ export default function BuildingList({ getAllBuildings, paginateBuildings }) {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {sortedBuildingsList.map((value) => (
+                {filteredBuildingsList.map((value) => (
                   <TableRow key={value.id}>
                     <TableCell>
                       <IconButton
