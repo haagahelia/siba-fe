@@ -1,3 +1,4 @@
+import ClearIcon from "@mui/icons-material/Clear";
 import InfoIcon from "@mui/icons-material/Info";
 import IconButton from "@mui/material/IconButton";
 import Paper from "@mui/material/Paper";
@@ -7,6 +8,7 @@ import TableCell from "@mui/material/TableCell";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import TableSortLabel from "@mui/material/TableSortLabel";
+import TextField from "@mui/material/TextField";
 import styled from "@mui/material/styles/styled";
 import { useContext, useState } from "react";
 import { AllocRoundContext } from "../../AppContext";
@@ -24,11 +26,20 @@ export default function AllocRoundList({
   const [open, setOpen] = useState(false);
   const [order, setOrder] = useState("asc");
   const [orderBy, setOrderBy] = useState("ID");
+  const [searchQuery, setSearchQuery] = useState("");
 
   const handleRequestSort = (property) => {
     const isAsc = orderBy === property && order === "asc";
     setOrder(isAsc ? "desc" : "asc");
     setOrderBy(property);
+  };
+
+  const handleSearch = (e) => {
+    setSearchQuery(e.target.value);
+  };
+
+  const clearSearch = () => {
+    setSearchQuery("");
   };
 
   const sortedAllocRounds = paginateAllocRounds.sort((a, b) => {
@@ -52,6 +63,15 @@ export default function AllocRoundList({
     }
   });
 
+  const filteredAllocRounds = sortedAllocRounds.filter(
+    (allocRound) =>
+      allocRound.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      allocRound.description
+        .toLowerCase()
+        .includes(searchQuery.toLowerCase()) ||
+      allocRound.lastModified.toLowerCase().includes(searchQuery.toLowerCase()),
+  );
+
   const handleRowClick = (allocRound) => {
     setSingleAllocRound(allocRound);
     setOpen(true);
@@ -72,6 +92,24 @@ export default function AllocRoundList({
         setSingleAllocRound={setSingleAllocRound}
         getAllocRounds={getAllocRounds}
         incrementDataModifiedCounter={incrementDataModifiedCounter}
+      />
+      <TextField
+        label="Search allocation rounds"
+        variant="outlined"
+        value={searchQuery}
+        onChange={handleSearch}
+        InputProps={{
+          endAdornment: (
+            <IconButton
+              onClick={clearSearch}
+              sx={{ visibility: searchQuery ? "visible" : "hidden" }}
+              variant="clearFilterButton"
+            >
+              <ClearIcon />
+            </IconButton>
+          ),
+        }}
+        style={{ marginBottom: 16, width: "100%" }}
       />
       <Box component={Paper}>
         <Table>
@@ -117,7 +155,7 @@ export default function AllocRoundList({
             </TableRow>
           </TableHead>
           <TableBody>
-            {sortedAllocRounds.map((value) => (
+            {filteredAllocRounds.map((value) => (
               <TableRow key={value.id}>
                 <TableCell>
                   <IconButton
