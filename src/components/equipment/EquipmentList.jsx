@@ -1,3 +1,4 @@
+import ClearIcon from "@mui/icons-material/Clear";
 import InfoIcon from "@mui/icons-material/Info";
 import IconButton from "@mui/material/IconButton";
 import Paper from "@mui/material/Paper";
@@ -7,8 +8,9 @@ import TableCell from "@mui/material/TableCell";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import TableSortLabel from "@mui/material/TableSortLabel";
+import TextField from "@mui/material/TextField";
 import styled from "@mui/material/styles/styled";
-import { useState } from "react";
+import React, { useCallback, useState } from "react";
 import SingleEquipmentDialog from "./SingleEquipmentDialog";
 
 export default function EquipmentList({
@@ -22,18 +24,34 @@ export default function EquipmentList({
   const [singleEquipment, setSingleEquipment] = useState(null);
   const [order, setOrder] = useState("asc");
   const [orderBy, setOrderBy] = useState("Id");
+  const [searchQuery, setSearchQuery] = useState("");
 
   const startIndex = (page - 1) * rowsPerPage;
   const endIndex = startIndex + rowsPerPage;
 
-  const handleChangePage = (event, newPage) => {
-    setPage(newPage);
-  };
+  const handleChangePage = useCallback(
+    (event, newPage) => {
+      onPageChange(newPage);
+    },
+    [onPageChange],
+  );
 
-  const handleRequestSort = (property) => {
-    const isAsc = orderBy === property && order === "asc";
-    setOrder(isAsc ? "desc" : "asc");
-    setOrderBy(property);
+  const handleRequestSort = useCallback(
+    (property) => {
+      const isAsc = orderBy === property && order === "asc";
+      setOrder(isAsc ? "desc" : "asc");
+      setOrderBy(property);
+    },
+    [orderBy, order],
+  );
+
+  const handleRowClick = useCallback((equipment) => {
+    setSingleEquipment(equipment);
+    setOpen(true);
+  }, []);
+
+  const cancelSearch = () => {
+    setSearchQuery("");
   };
 
   const sortedEquipmentList = equipmentList.sort((a, b) => {
@@ -57,12 +75,13 @@ export default function EquipmentList({
     }
   });
 
-  const paginatedData = sortedEquipmentList.slice(startIndex, endIndex);
+  const filteredEquipmentList = sortedEquipmentList.filter(
+    (equipment) =>
+      equipment.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      equipment.description.toLowerCase().includes(searchQuery.toLowerCase()),
+  );
 
-  const handleRowClick = (equipment) => {
-    setSingleEquipment(equipment);
-    setOpen(true);
-  };
+  const paginatedData = filteredEquipmentList.slice(startIndex, endIndex);
 
   // STYLE
   const Box = styled(Table)(({ theme }) => ({
@@ -77,6 +96,23 @@ export default function EquipmentList({
         singleEquipment={singleEquipment}
         setSingleEquipment={setSingleEquipment}
         getAllEquipments={getAllEquipments}
+      />
+      <TextField
+        label="Search equipment"
+        variant="outlined"
+        value={searchQuery}
+        onChange={(e) => setSearchQuery(e.target.value)}
+        InputProps={{
+          endAdornment: (
+            <IconButton
+              onClick={cancelSearch}
+              sx={{ visibility: searchQuery ? "visible" : "hidden" }}
+            >
+              <ClearIcon />
+            </IconButton>
+          ),
+        }}
+        style={{ marginBottom: 16, width: "100%" }}
       />
       <Box>
         <Paper>
@@ -115,23 +151,20 @@ export default function EquipmentList({
               </TableRow>
             </TableHead>
             <TableBody>
-              {paginatedData.map((value) => (
-                <TableRow key={value.id}>
+              {paginatedData.map((equipment) => (
+                <TableRow key={equipment.id}>
                   <TableCell>
                     <IconButton
-                      onClick={() => {
-                        setSingleEquipment(value);
-                        setOpen(true);
-                      }}
+                      onClick={() => handleRowClick(equipment)}
                       aria-label="Open Info"
                     >
                       <InfoIcon />
                     </IconButton>
                   </TableCell>
-                  <TableCell>{value.id}</TableCell>
-                  <TableCell>{value.name}</TableCell>
-                  <TableCell>{value.priority}</TableCell>
-                  <TableCell>{value.description}</TableCell>
+                  <TableCell>{equipment.id}</TableCell>
+                  <TableCell>{equipment.name}</TableCell>
+                  <TableCell>{equipment.priority}</TableCell>
+                  <TableCell>{equipment.description}</TableCell>
                 </TableRow>
               ))}
             </TableBody>
