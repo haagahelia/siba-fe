@@ -85,7 +85,7 @@ export default function DeleteSubEquip({
         style={theme.components.MuiButton.redbutton}
         sx={{ marginLeft: margins.small, maxWidth: "85px" }}
         onClick={() => {
-          submitDelete(singleSubjectToDelete);
+          submitDelete(singleSubEquipToDelete);
         }}
       >
         Delete
