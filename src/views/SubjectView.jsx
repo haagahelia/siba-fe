@@ -2,12 +2,12 @@
 import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { AllocRoundContext, AppContext } from "../AppContext";
-import { useRoleLoggedIn } from "../hooks/useRoleLoggedIn";
 import {
   ajaxRequestErrorHandler,
   getFunctionName,
 } from "../ajax/ajaxRequestErrorHandler";
 import dao from "../ajax/dao";
+import { useRoleLoggedIn } from "../hooks/useRoleLoggedIn";
 import Logger from "../logger/logger";
 
 import Card from "@mui/material/Card";
@@ -38,6 +38,7 @@ export default function SubjectView() {
   const [shownSubject, setShownSubject] = useState(null);
   const [paginateSubjects, setPaginateSubjects] = useState([]);
   const [allSubjectsList, setAllSubjectsList] = useState([]);
+  const [userPrograms, setUserPrograms] = useState([]);
   const [alertOpen, setAlertOpen] = useState(false);
   const [open, setOpen] = useState(false);
   const [alertOptions, setAlertOptions] = useState({
@@ -77,6 +78,25 @@ export default function SubjectView() {
       );
       setAllSubjectsList(data);
       setPaginateSubjects(data.slice(0, 15));
+    }
+  };
+
+  const getUserPrograms = async function () {
+    const { httpStatus, data } = await dao.getProgramsByUserId(
+      appContext.userId,
+    );
+    if (httpStatus !== 200) {
+      ajaxRequestErrorHandler(
+        httpStatus,
+        getFunctionName(2),
+        setAlertOptions,
+        setAlertOpen,
+      );
+    } else {
+      Logger.debug(
+        `getUserPrograms: successfully fetched ${data.length} programs.`,
+      );
+      setUserPrograms(data.map((x) => x.id));
     }
   };
 
@@ -120,6 +140,11 @@ export default function SubjectView() {
   }, []);
 
   useEffect(() => {
+    Logger.debug("Running effect to fetch user planner data.");
+    getUserPrograms();
+  }, []);
+
+  useEffect(() => {
     Logger.debug("Running effect to update paginated subjects.");
     setPaginateSubjects(allSubjectsList.slice(0, 15));
   }, [allSubjectsList]);
@@ -145,7 +170,7 @@ export default function SubjectView() {
         setAlertOpen={setAlertOpen}
       />
       <Container maxWidth="100%">
-      {(roles.admin === "1" || roles.planner === "1") && (
+        {(roles.admin === "1" || roles.planner === "1") && (
           <AddSubjectContainer
             getAllSubjects={getAllSubjects}
             allSubjectsList={allSubjectsList}
@@ -180,6 +205,7 @@ export default function SubjectView() {
                 paginateSubjects={paginateSubjects}
                 open={open}
                 setOpen={setOpen}
+                userPrograms={userPrograms}
               />
               <SubjectPagination
                 pagination={pagination}
