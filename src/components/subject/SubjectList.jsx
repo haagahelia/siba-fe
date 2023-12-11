@@ -1,3 +1,4 @@
+import BuildCircleIcon from "@mui/icons-material/BuildCircle";
 import InfoIcon from "@mui/icons-material/Info";
 import IconButton from "@mui/material/IconButton";
 import Paper from "@mui/material/Paper";
@@ -16,6 +17,7 @@ export default function SubjectList({
   shownSubject,
   getAllSubjects,
   paginateSubjects,
+  userPrograms,
 }) {
   const [open, setOpen] = useState(false);
   const [singleSubject, setSingleSubject] = useState(null);
@@ -28,8 +30,24 @@ export default function SubjectList({
     setOrderBy(property);
   };
 
+  const checkForUserPrograms = (value) => {
+    return userPrograms.find((e) => e === value.programId);
+  };
+
   const sortedSubjects = paginateSubjects.sort((a, b) => {
     switch (orderBy) {
+      case "icon":
+        return order === "asc"
+          ? checkForUserPrograms(a) === checkForUserPrograms(b)
+            ? 0
+            : checkForUserPrograms(a)
+            ? -1
+            : 1
+          : checkForUserPrograms(a) === checkForUserPrograms(b)
+          ? 0
+          : checkForUserPrograms(a)
+          ? 1
+          : -1;
       case "name":
         return order === "asc"
           ? a.name.localeCompare(b.name)
@@ -79,7 +97,13 @@ export default function SubjectList({
             <Table>
               <TableHead>
                 <TableRow>
-                  <TableCell />
+                  <TableCell>
+                    <TableSortLabel
+                      active={orderBy === "programId"}
+                      direction={order}
+                      onClick={() => handleRequestSort("icon")}
+                    ></TableSortLabel>
+                  </TableCell>
                   <TableCell>
                     <TableSortLabel
                       active={orderBy === "name"}
@@ -140,15 +164,27 @@ export default function SubjectList({
                 {sortedSubjects.map((value) => (
                   <TableRow key={value.id}>
                     <TableCell>
-                      <IconButton
-                        onClick={() => {
-                          setSingleSubject(value);
-                          setOpen(true);
-                        }}
-                        aria-label="Open Info"
-                      >
-                        <InfoIcon />
-                      </IconButton>
+                      {checkForUserPrograms(value) ? (
+                        <IconButton
+                          onClick={() => {
+                            setSingleSubject(value);
+                            setOpen(true);
+                          }}
+                          aria-label="Open Info"
+                        >
+                          <BuildCircleIcon />
+                        </IconButton>
+                      ) : (
+                        <IconButton
+                          onClick={() => {
+                            setSingleSubject(value);
+                            setOpen(true);
+                          }}
+                          aria-label="Open Info"
+                        >
+                          <InfoIcon />
+                        </IconButton>
+                      )}
                     </TableCell>
                     <TableCell>{value.name}</TableCell>
                     <TableCell>{value.groupSize}</TableCell>

@@ -28,6 +28,18 @@ export const getProgramByUserEmail = async (
   }
 };
 
+export const getProgramsByUserId = async (
+  userId: number,
+): Promise<ResponseFiner<Program>> => {
+  const response = await get(`${baseUrl}/program/userprograms/${userId}`);
+  if (response.status === 200) {
+    const programs: Program[] = await response.json();
+    return { httpStatus: response.status, data: programs };
+  } else {
+    return { httpStatus: response.status, data: [] };
+  }
+};
+
 // creating new program
 export const postNewProgram = async (newProgram: Program): Promise<boolean> => {
   const response = await create(`${baseUrl}/program`, newProgram);
