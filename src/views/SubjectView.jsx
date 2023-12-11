@@ -2,12 +2,12 @@
 import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { AllocRoundContext, AppContext } from "../AppContext";
-import { useRoleLoggedIn } from "../hooks/useRoleLoggedIn";
 import {
   ajaxRequestErrorHandler,
   getFunctionName,
 } from "../ajax/ajaxRequestErrorHandler";
 import dao from "../ajax/dao";
+import { useRoleLoggedIn } from "../hooks/useRoleLoggedIn";
 import Logger from "../logger/logger";
 
 import Card from "@mui/material/Card";
@@ -36,6 +36,7 @@ export default function SubjectView() {
   const [subjectIdToShowState, setSubjectIdToShowState] =
     useState(subjectIdToShow);
   const [shownSubject, setShownSubject] = useState(null);
+
   const [paginateSubjects, setPaginateSubjects] = useState([]);
   const [allSubjectsList, setAllSubjectsList] = useState([]);
   const [alertOpen, setAlertOpen] = useState(false);
@@ -145,7 +146,7 @@ export default function SubjectView() {
         setAlertOpen={setAlertOpen}
       />
       <Container maxWidth="100%">
-      {(roles.admin === "1" || roles.planner === "1") && (
+        {(roles.admin === "1" || roles.planner === "1") && (
           <AddSubjectContainer
             getAllSubjects={getAllSubjects}
             allSubjectsList={allSubjectsList}

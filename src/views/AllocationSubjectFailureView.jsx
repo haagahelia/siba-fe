@@ -228,7 +228,9 @@ export default function AllocationSubjectFailureView() {
               <TableBody>
                 {unAllocSubjectRooms.map((row) => (
                   <TableRow key={row.id}>
-                    <TableCell>{row.name}</TableCell>
+                    <TableCell>
+                      <Link to={`/space/${row.id}`}>{`${row.name}`}</Link>
+                    </TableCell>
 
                     <GetMissingEquipment
                       subjId={currSubjId}

@@ -14,6 +14,23 @@ export const fetchAllSpaces = async (): Promise<ResponseFiner<Space>> => {
   }
 };
 
+// fetching one space by id
+export const fetchSpaceById = async (
+  id: number,
+): Promise<ResponseFiner<Space>> => {
+  const response = await get(`${baseUrl}/space/${id}`);
+  if (response.status === 200) {
+    const spaces: Space[] = await response.json();
+    if (spaces.length === 1) {
+      return { httpStatus: response.status, data: spaces };
+    } else {
+      return { httpStatus: 409, data: [] };
+    }
+  } else {
+    return { httpStatus: response.status, data: [] };
+  }
+};
+
 // creating new space
 export const postNewSpace = async (newSpace: Space): Promise<boolean> => {
   const response = await create(`${baseUrl}/space`, newSpace);
