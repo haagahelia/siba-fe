@@ -132,11 +132,15 @@ export default function EditSpaceContainer({
         submit={submitEditedSpace}
         submitValues={formik.values}
       />
-      <EditSpaceForm
-        buildingSelectList={buildingSelectList}
-        spaceTypeSelectList={spaceTypeSelectList}
-        formik={formik}
-      />
+      {singleSpace ? (
+        <EditSpaceForm
+          buildingSelectList={buildingSelectList}
+          spaceTypeSelectList={spaceTypeSelectList}
+          formik={formik}
+        />
+      ) : (
+        ""
+      )}
     </div>
   );
 }

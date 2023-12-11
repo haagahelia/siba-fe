@@ -11,10 +11,12 @@ export default function SpaceListContainer({
   paginateSpaces,
   open,
   setOpen,
+  shownSpace,
 }) {
   return (
     <Container maxWidth="lg">
       <SingleSpaceDialog
+        shownSpace={shownSpace}
         getAllSpaces={getAllSpaces}
         open={open}
         onClose={() => setOpen(false)}

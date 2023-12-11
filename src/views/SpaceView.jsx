@@ -29,7 +29,7 @@ export default function SpaceView() {
   Logger.debug("SpaceView component instantiated.");
   const { roles } = useRoleLoggedIn();
 
-  const appContext = useContext(AppContext);
+  //const appContext = useContext(AppContext);
 
   let { spaceIdToShow } = useParams();
   const [spaceIdToShowState, setSpaceIdToShowState] = useState(spaceIdToShow);
@@ -139,6 +139,7 @@ export default function SpaceView() {
                 pagination={pagination}
               />
               <SpaceListContainer
+                shownSpace={shownSpace}
                 getAllSpaces={getAllSpaces}
                 allSpacesList={allSpacesList}
                 paginateSpaces={paginateSpaces}
