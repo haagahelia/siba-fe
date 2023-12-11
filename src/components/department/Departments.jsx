@@ -72,7 +72,7 @@ export default function Departments() {
   return (
     <div>
       <Container maxWidth="100%">
-        {(roles.admin === "1" || roles.planner === "1") && (
+        {(roles.admin === "1") && (
           <AddDepartment getAllDepartments={getAllDepartments} />
         )}
         <Grid container rowSpacing={0.5}>
