@@ -376,6 +376,7 @@ export default function NavBar() {
           <Route path="/building" element={<BuildingView />} />
           <Route path="/department" element={<DepartmentView />} />
           <Route path="/space" element={<SpaceView />} />
+          <Route path="/space/:spaceIdToShow" element={<SpaceView />} />
           <Route path="/program" element={<ProgramView />} />
           <Route path="/allocation/addAllocRound" element={<AddAllocRound />} />
           <Route path="/settings" element={<SettingsView />} />

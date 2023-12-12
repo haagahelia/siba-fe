@@ -6,6 +6,7 @@ import SingleSpaceDialog from "./SingleSpaceDialog";
 import SpaceList from "./SpaceList";
 
 export default function SpaceListContainer({
+  shownSpace,
   getAllSpaces,
   allSpacesList,
   paginateSpaces,
@@ -16,7 +17,9 @@ export default function SpaceListContainer({
     <Container maxWidth="lg">
       <SingleSpaceDialog
         getAllSpaces={getAllSpaces}
+        singleSpace={shownSpace?shownSpace:null}
         open={open}
+        setOpen={setOpen}
         onClose={() => setOpen(false)}
       />
 
@@ -24,6 +27,7 @@ export default function SpaceListContainer({
         <Card variant="outlined">
           <CardContent>
             <SpaceList
+              shownSpace={shownSpace}
               getAllSpaces={getAllSpaces}
               allSpacesList={allSpacesList}
               paginateSpaces={paginateSpaces}

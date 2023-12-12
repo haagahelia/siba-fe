@@ -36,6 +36,7 @@ export default function SubjectView() {
   const [subjectIdToShowState, setSubjectIdToShowState] =
     useState(subjectIdToShow);
   const [shownSubject, setShownSubject] = useState(null);
+
   const [paginateSubjects, setPaginateSubjects] = useState([]);
   const [allSubjectsList, setAllSubjectsList] = useState([]);
   const [userPrograms, setUserPrograms] = useState([]);

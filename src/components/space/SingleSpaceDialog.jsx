@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import dao from "../../ajax/dao";
 
-import { useRoleLoggedIn } from "../../hooks/useRoleLoggedIn";
 import CloseIcon from "@mui/icons-material/Close";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
@@ -10,6 +9,7 @@ import DialogTitle from "@mui/material/DialogTitle";
 import Grid from "@mui/material/Grid";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
+import { useRoleLoggedIn } from "../../hooks/useRoleLoggedIn";
 import AlertBox from "../common/AlertBox";
 import AddSpaceEquipContainer from "./AddSpaceEquipContainer";
 import DeleteSpace from "./DeleteSpace";
@@ -22,6 +22,7 @@ export default function SingleSpaceDialog({
   singleSpace,
   getAllSpaces,
   setSingleSpace,
+  shownSpace,
 }) {
   const [equipListBySpaceId, setEquipListBySpaceId] = useState([]);
   const [alertOpen, setAlertOpen] = useState(false);
@@ -50,6 +51,14 @@ export default function SingleSpaceDialog({
   };
 
   useEffect(() => {
+    (() => {
+      if (shownSpace) {
+        setSingleSpace(shownSpace);
+      }
+    })();
+  }, [shownSpace]);
+
+  useEffect(() => {
     if (singleSpace && typeof singleSpace.id === "number") {
       getEquipmentsBySpaceId(singleSpace.id);
     }
@@ -62,41 +71,52 @@ export default function SingleSpaceDialog({
         alertOptions={alertOptions}
         open={setAlertOpen}
       />
-      <Dialog open={open} onClose={() => setOpen(false)} maxWidth="md" fullWidth>
+      <Dialog
+        open={open}
+        onClose={() => setOpen(false)}
+        maxWidth="md"
+        fullWidth
+      >
         <DialogTitle id="dialog-title">Space: {singleSpace?.name}</DialogTitle>
-          <IconButton
-            edge="end"
-            color="inherit"
-            onClick={() => setOpen(false)}
-            aria-label="close"
-            style={{ position: "absolute", top: "10px", right: "10px" }}
-          >
-            <CloseIcon />
-          </IconButton>
+        <IconButton
+          edge="end"
+          color="inherit"
+          onClick={() => setOpen(false)}
+          aria-label="close"
+          style={{ position: "absolute", top: "10px", right: "10px" }}
+        >
+          <CloseIcon />
+        </IconButton>
         <DialogContent>
-        {(roles.admin === "1" ) && (
+          {(roles.admin === "1" || roles.planner === "1") && (
             <DialogActions>
               <DeleteSpace
                 singleSpace={singleSpace}
                 getAllSpaces={getAllSpaces}
                 setOpen={setOpen}
               />
-              <EditSpaceContainer
-                singleSpace={singleSpace}
-                getAllSpaces={getAllSpaces}
-                setSingleSpace={setSingleSpace}
-              />
-              <AddSpaceEquipContainer
-                singleSpace={singleSpace}
-                equipmentsBySpaceId={getEquipmentsBySpaceId}
-              />
-            </DialogActions>)}
+              {singleSpace ? (
+                <EditSpaceContainer
+                  singleSpace={singleSpace}
+                  getAllSpaces={getAllSpaces}
+                  setSingleSpace={setSingleSpace}
+                />
+              ) : (
+                ""
+              )}
+
+              {singleSpace ? (
+                <AddSpaceEquipContainer
+                  singleSpace={singleSpace}
+                  equipmentsBySpaceId={getEquipmentsBySpaceId}
+                />
+              ) : (
+                ""
+              )}
+            </DialogActions>
+          )}
           <DialogContent>
-            <Grid
-              container
-              variant="sibaGridSingleItemDisplay"
-              column={14}
-            >
+            <Grid container variant="sibaGridSingleItemDisplay" column={14}>
               <DialogContent variant="sibaDialogContent2">
                 <Grid item xs={12} sm={6}>
                   <Typography variant="singleDialogSubtitle">

@@ -1,12 +1,13 @@
 // The Spaces Page
 import { useContext, useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import { AppContext } from "../AppContext";
 import {
   ajaxRequestErrorHandler,
   getFunctionName,
 } from "../ajax/ajaxRequestErrorHandler";
-import { useRoleLoggedIn } from "../hooks/useRoleLoggedIn";
 import dao from "../ajax/dao";
+import { useRoleLoggedIn } from "../hooks/useRoleLoggedIn";
 import Logger from "../logger/logger";
 
 import Card from "@mui/material/Card";
@@ -30,6 +31,10 @@ export default function SpaceView() {
 
   const appContext = useContext(AppContext);
 
+  let { spaceIdToShow } = useParams();
+  const [spaceIdToShowState, setSpaceIdToShowState] = useState(spaceIdToShow);
+  const [shownSpace, setShownSpace] = useState(null);
+
   const [paginateSpaces, setPaginateSpaces] = useState([]);
   const [allSpacesList, setAllSpacesList] = useState([]);
   const [alertOpen, setAlertOpen] = useState(false);
@@ -38,6 +43,10 @@ export default function SpaceView() {
     message: "This is an error alert — check it out!",
     severity: "error",
   });
+
+  const setShownSpace2 = (state) => {
+    setShownSpace(state);
+  };
 
   Logger.debug("Initial state set.");
 
@@ -74,8 +83,42 @@ export default function SpaceView() {
   }, [allSpacesList]);
 
   useEffect(() => {
-    document.title = 'Spaces';
+    document.title = "Spaces";
   }, []);
+
+  useEffect(() => {
+    const getShownSpaceById = async (spaceIdToShowState) => {
+      Logger.debug(
+        `spaceId: ${spaceIdToShowState} Starting or not? Based on that id.`,
+      );
+      if (spaceIdToShowState) {
+        Logger.debug("getShownSpaceById: starts");
+        const { httpStatus, data } =
+          await dao.fetchSpaceById(spaceIdToShowState);
+        if (httpStatus !== 200) {
+          ajaxRequestErrorHandler(
+            httpStatus,
+            getFunctionName(2),
+            setAlertOptions,
+            setAlertOpen,
+          );
+        } else {
+          Logger.debug(
+            `getShownSpaceById: successfully fetched ${data[0].id}:${data[0].name} space.`,
+          );
+          setShownSpace(data[0]);
+          setSpaceIdToShowState(0);
+          spaceIdToShow = 0;
+          setOpen(true);
+        }
+      } else {
+        Logger.debug("No space to show directly");
+      }
+    };
+
+    Logger.debug("Running effect to fetch possible directly shown subejct.");
+    getShownSpaceById(spaceIdToShowState);
+  }, [spaceIdToShowState, spaceIdToShow]);
 
   return (
     <div>
@@ -85,7 +128,7 @@ export default function SpaceView() {
         setAlertOpen={setAlertOpen}
       />
       <Container maxWidth="xl">
-      {roles.admin === "1" && (
+        {roles.admin === "1" && (
           <AddSpace getAllSpaces={getAllSpaces} allSpacesList={allSpacesList} />
         )}
         <Grid container rowSpacing={1}>
@@ -100,6 +143,8 @@ export default function SpaceView() {
                 pagination={pagination}
               />
               <SpaceListContainer
+                shownSpace={shownSpace}
+                setShownSpace={setShownSpace}
                 getAllSpaces={getAllSpaces}
                 allSpacesList={allSpacesList}
                 paginateSpaces={paginateSpaces}

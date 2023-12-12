@@ -12,7 +12,7 @@ import styled from "@mui/material/styles/styled";
 import { useState } from "react";
 import SingleSpaceDialog from "./SingleSpaceDialog";
 
-export default function SpaceList({ getAllSpaces, paginateSpaces }) {
+export default function SpaceList({ shownSpace, getAllSpaces, paginateSpaces }) {
   const [open, setOpen] = useState(false);
   const [singleSpace, setSingleSpace] = useState(null);
   const [order, setOrder] = useState("asc");
