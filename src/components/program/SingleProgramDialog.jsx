@@ -1,5 +1,6 @@
-import { useEffect } from "react";
+import { useEffect, useContext, useState } from "react";
 import { useRoleLoggedIn } from "../../hooks/useRoleLoggedIn";
+import { AppContext } from '../../AppContext';
 import Logger from "../../logger/logger";
 
 import Grid from "@mui/material/Grid";
@@ -10,6 +11,8 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import DeleteProgram from "./DeleteProgram";
 import EditProgram from "./EditProgram";
+import dao from "../../ajax/dao";
+
 
 export default function SingleProgramDialog({
     open,
@@ -21,6 +24,10 @@ export default function SingleProgramDialog({
     Logger.logPrefix = "SingleProgramDialog";
 
     const { roles } = useRoleLoggedIn();
+    const { userId } = useContext(AppContext);
+    const [departmentList, setDepartmentList] = useState([
+        { id: 101, name: "Jazz" },
+      ]);
 
     useEffect(() => {
         if (open && singleProgram) {
@@ -32,6 +39,28 @@ export default function SingleProgramDialog({
         }
     }, [open, singleProgram]);
 
+    const getDepartmentIdForDialog = async () => {
+        
+        if (roles.planner ==="1") {
+          Logger.debug("Fetching planner-specific Departments from server.");
+          const response = await dao.fetchDepartmentplannerByUserId(userId);
+          if (response.success) {
+            setDepartmentList(response.data);
+            console.log(response.data);
+          } else {
+            Logger.debug("Error fetching planner Departments.");
+          }
+        }
+      };
+
+
+      useEffect(() => {
+        getDepartmentIdForDialog();
+      }, []);
+
+      const isPlannerOfDepartment = roles.planner === "1" && departmentList.some(dept => dept.id === singleProgram?.departmentId);
+    
+
     return (
         <Dialog
             open={open}
@@ -41,7 +70,7 @@ export default function SingleProgramDialog({
             }}
         >
             <DialogTitle id="dialog-title">{`Program: ${singleProgram?.name}`}</DialogTitle>
-            {roles.admin === "1" && (
+            {(roles.admin === "1" || isPlannerOfDepartment) && (
                 <DialogActions>
                     <DeleteProgram
                         singleProgram={singleProgram}

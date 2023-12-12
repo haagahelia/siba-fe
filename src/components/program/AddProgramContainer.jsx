@@ -11,6 +11,7 @@ import {
   capitalizeFirstLetter,
   validate,
 } from "../../validation/ValidateAddProgram";
+import { useRoleLoggedIn } from "../../hooks/useRoleLoggedIn"
 
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
@@ -22,6 +23,7 @@ import IconButton from "@mui/material/IconButton";
 import AlertBox from "../common/AlertBox";
 import ConfirmationDialog from "../common/ConfirmationDialog";
 import AddProgramForm from "./AddProgramForm";
+import { AppContext } from '../../AppContext';
 
 export default function AddProgramContainer({
   getAllPrograms,
@@ -30,6 +32,8 @@ export default function AddProgramContainer({
   const { allocRoundContext } = useContext(AllocRoundContext);
   // State for checking if Add Program card is expanded
   const [isCardExpanded, setIsCardExpanded] = useState(false);
+  const { userId } = useContext(AppContext);
+  const { roles } = useRoleLoggedIn();
 
   const [departmentSelectList, setDepartmentSelectList] = useState([
     { id: 101, name: "Jazz" },
@@ -73,26 +77,32 @@ export default function AddProgramContainer({
       return;
     },
   });
-
-  const getDepartmentForSelect = async function () {
-    Logger.debug(
-      "getDepartmentForSelect: fetching all Departments for select from server.",
-    );
-    const { httpStatus, data } = await dao.fetchDepartmentForSelect();
-    if (httpStatus !== 200) {
-      ajaxRequestErrorHandler(
-        httpStatus,
-        getFunctionName(2),
-        setAlertOptions,
-        setAlertOpen,
-      );
-    } else {
-      Logger.debug(
-        "getDepartmentForSelect: successfully fetched Space Types for select.",
-      );
-      setDepartmentSelectList(data);
+  
+  const getDepartmentForSelect = async () => {
+    if (roles.admin === "1") {
+      Logger.debug("Fetching all Departments for select from server (Admin).");
+      const { httpStatus, data } = await dao.fetchDepartmentForSelect();
+      if (httpStatus !== 200) {
+        ajaxRequestErrorHandler(
+          httpStatus,
+          getFunctionName(2),
+          setAlertOptions,
+          setAlertOpen,
+        );
+      } else {
+        setDepartmentSelectList(data);
+      }
+    } else if (roles.planner ==="1") {
+      Logger.debug("Fetching planner-specific Departments from server.");
+      const response = await dao.fetchDepartmentplannerByUserId(userId);
+      if (response.success) {
+        setDepartmentSelectList(response.data);
+      } else {
+        Logger.debug("Error fetching planner Departments.");
+      }
     }
   };
+  
 
   useEffect(() => {
     getDepartmentForSelect();

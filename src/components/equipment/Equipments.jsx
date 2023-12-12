@@ -72,7 +72,7 @@ export default function Equipments() {
   return (
     <div>
       <Container maxWidth="100%">
-        {(roles.admin === "1" || roles.planner === "1") && (
+        {(roles.admin === "1") && (
           <AddEquipment getAllEquipments={getAllEquipments} />
         )}
         <Grid container rowSpacing={0.5}>

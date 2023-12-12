@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import dao from "../../ajax/dao";
 
 import CloseIcon from "@mui/icons-material/Close";
-import { useRoleLoggedIn } from "../../hooks/useRoleLoggedIn";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
@@ -10,6 +9,7 @@ import DialogTitle from "@mui/material/DialogTitle";
 import Grid from "@mui/material/Grid";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
+import { useRoleLoggedIn } from "../../hooks/useRoleLoggedIn";
 import Logger from "../../logger/logger";
 import AlertBox from "../common/AlertBox";
 import AddSubEquipContainer from "./AddSubEquipContainer";
@@ -56,7 +56,6 @@ export default function SingleSubjectDialog({
       // console.log(`getEquipmentsBySubId(${singleSubject.id})`);
       getEquipmentsBySubId(singleSubject.id);
     }
-
   }, [singleSubject]);
 
   return (
@@ -91,23 +90,24 @@ export default function SingleSubjectDialog({
           <CloseIcon />
         </IconButton>
         <DialogContent>
-        {(roles.admin === "1" || roles.planner === "1") && (
-          <DialogActions>
-            <DeleteSubject
-              singleSubject={singleSubject}
-              getAllSubjects={getAllSubjects}
-              setOpen={setOpen}
-            />
-            <EditSubjectContainer
-              singleSubject={singleSubject}
-              getAllSubjects={getAllSubjects}
-              setSingleSubject={setSingleSubject}
-            />
-            <AddSubEquipContainer
-              singleSubject={singleSubject}
-              equipmentsBySubId={getEquipmentsBySubId}
-            />
-          </DialogActions>)}
+          {(roles.admin === "1" || roles.planner === "1") && (
+            <DialogActions>
+              <DeleteSubject
+                singleSubject={singleSubject}
+                getAllSubjects={getAllSubjects}
+                setOpen={setOpen}
+              />
+              <EditSubjectContainer
+                singleSubject={singleSubject}
+                getAllSubjects={getAllSubjects}
+                setSingleSubject={setSingleSubject}
+              />
+              <AddSubEquipContainer
+                singleSubject={singleSubject}
+                equipmentsBySubId={getEquipmentsBySubId}
+              />
+            </DialogActions>
+          )}
           <DialogContent>
             <Grid container variant="sibaGridSingleItemDisplay" column={14}>
               <DialogContent variant="sibaDialogContent2">
@@ -161,7 +161,7 @@ export default function SingleSubjectDialog({
               <DialogContent variant="sibaDialogContent2">
                 <Grid item xs={12} sm={6}>
                   <Typography variant="singleDialogSubtitle">
-                    Number of hours:&nbsp;
+                    Number of sessions per week:&nbsp;
                   </Typography>
                 </Grid>
                 <Grid item xs={12} sm={6}>

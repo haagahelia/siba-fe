@@ -39,6 +39,7 @@ export default function SubjectView() {
 
   const [paginateSubjects, setPaginateSubjects] = useState([]);
   const [allSubjectsList, setAllSubjectsList] = useState([]);
+  const [userPrograms, setUserPrograms] = useState([]);
   const [alertOpen, setAlertOpen] = useState(false);
   const [open, setOpen] = useState(false);
   const [alertOptions, setAlertOptions] = useState({
@@ -81,6 +82,25 @@ export default function SubjectView() {
     }
   };
 
+  const getUserPrograms = async function () {
+    const { httpStatus, data } = await dao.getProgramsByUserId(
+      appContext.userId,
+    );
+    if (httpStatus !== 200) {
+      ajaxRequestErrorHandler(
+        httpStatus,
+        getFunctionName(2),
+        setAlertOptions,
+        setAlertOpen,
+      );
+    } else {
+      Logger.debug(
+        `getUserPrograms: successfully fetched ${data.length} programs.`,
+      );
+      setUserPrograms(data.map((x) => x.id));
+    }
+  };
+
   useEffect(() => {
     const getShownSubjectById = async (subjectIdToShowState) => {
       Logger.debug(
@@ -118,6 +138,11 @@ export default function SubjectView() {
   useEffect(() => {
     Logger.debug("Running effect to fetch all subjects.");
     getAllSubjects();
+  }, []);
+
+  useEffect(() => {
+    Logger.debug("Running effect to fetch user planner data.");
+    getUserPrograms();
   }, []);
 
   useEffect(() => {
@@ -181,6 +206,7 @@ export default function SubjectView() {
                 paginateSubjects={paginateSubjects}
                 open={open}
                 setOpen={setOpen}
+                userPrograms={userPrograms}
               />
               <SubjectPagination
                 pagination={pagination}

@@ -36,7 +36,7 @@ export default function EditSpaceContainer({
   const formik = useFormik({
     enableReinitialize: true,
     initialValues: singleSpace,
-    validate,
+    validate: (values) => validate(values),
     onSubmit: (values) => {
       setDialogOptions({
         title: `Are you sure you want to edit ${values.name}?`,

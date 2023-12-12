@@ -12,12 +12,13 @@ import AllocRoundListContainer from "../components/allocRound/AllocRoundListCont
 import AllocRoundPagination from "../components/allocRound/AllocRoundPagination";
 import AlertBox from "../components/common/AlertBox";
 import Logger from "../logger/logger";
+import { useRoleLoggedIn } from '../hooks/useRoleLoggedIn'
 
 const pageSize = 15;
 
 export default function AllocRoundView() {
   Logger.logPrefix = "AllocRoundView";
-
+  const { roles } = useRoleLoggedIn();
   const navigate = useNavigate();
   const theme = useTheme();
 
@@ -89,12 +90,14 @@ export default function AllocRoundView() {
           <Card variant="outlined">
             <CardContent>
               <CardHeader title="Allocation Rounds" variant="pageHeader" />
+              {roles.admin === "1" && (
               <Button
                 variant="componentAddButton"
                 onClick={() => navigate("addAllocRound", { state: { allAllocRoundsList } })}
               >
                 + Add
               </Button>
+              )}
               <AllocRoundListContainer
                 getAllAllocRounds={getAllAllocRounds}
                 allAllocRoundsList={allAllocRoundsList}

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import dao from "../../ajax/dao";
+import { useRoleLoggedIn } from "../../hooks/useRoleLoggedIn";
 
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
@@ -46,7 +47,7 @@ export default function SingleUserDialog({
       return result.data;
     }
   };
-
+  const { roles } = useRoleLoggedIn();
   useEffect(() => {
     if (singleUser && typeof singleUser.id === "number") {
       getDepartmentListByUserId(singleUser.id);
@@ -72,6 +73,7 @@ export default function SingleUserDialog({
           <CloseIcon />
         </IconButton>
         <DialogContent>
+        {roles.admin === "1" && (
           <DialogActions>
             <DeleteUser
               singleUser={singleUser}
@@ -89,6 +91,7 @@ export default function SingleUserDialog({
               getAllUsers={getAllUsers}
             />
           </DialogActions>
+          )}
           <DialogContent>
             <Grid
               container

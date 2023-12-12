@@ -12,12 +12,13 @@ export default function SubjectListContainer({
   paginateSubjects,
   open,
   setOpen,
+  userPrograms,
 }) {
   return (
     <Container maxWidth="xl">
       <SingleSubjectDialog
         getAllSubjects={getAllSubjects}
-        singleSubject={shownSubject?shownSubject:null}
+        singleSubject={shownSubject ? shownSubject : null}
         open={open}
         setOpen={setOpen}
       />
@@ -30,6 +31,7 @@ export default function SubjectListContainer({
               getAllSubjects={getAllSubjects}
               allSubjectsList={allSubjectsList}
               paginateSubjects={paginateSubjects}
+              userPrograms={userPrograms}
             />
           </CardContent>
         </Card>
