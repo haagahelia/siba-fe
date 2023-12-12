@@ -54,6 +54,10 @@ export default function AllocRoundList({
         return order === "asc"
           ? a.description.localeCompare(b.description)
           : b.description.localeCompare(a.description);
+      case "Created":
+        return order === "asc"
+          ? a.date.localeCompare(b.date)
+          : b.date.localeCompare(a.date);
       case "LastModified":
         return order === "asc"
           ? a.lastModified.localeCompare(b.lastModified)
@@ -145,6 +149,15 @@ export default function AllocRoundList({
               </TableCell>
               <TableCell>
                 <TableSortLabel
+                  active={orderBy === "Created"}
+                  direction={order}
+                  onClick={() => handleRequestSort("Created")}
+                >
+                  Created
+                </TableSortLabel>
+              </TableCell>
+              <TableCell>
+                <TableSortLabel
                   active={orderBy === "LastModified"}
                   direction={order}
                   onClick={() => handleRequestSort("LastModified")}
@@ -175,6 +188,7 @@ export default function AllocRoundList({
                 </TableCell>
                 <TableCell>{value.name}</TableCell>
                 <TableCell>{value.description}</TableCell>
+                <TableCell>{value.date}</TableCell>
                 <TableCell>{value.lastModified}</TableCell>
               </TableRow>
             ))}
