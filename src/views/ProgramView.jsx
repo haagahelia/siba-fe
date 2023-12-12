@@ -17,9 +17,7 @@ import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import AlertBox from "../components/common/AlertBox";
 import AddProgramContainer from "../components/program/AddProgramContainer";
-import ProgramFiltering from "../components/program/ProgramFiltering";
 import ProgramListContainer from "../components/program/ProgramListContainer";
-import ProgramPagination from "../components/program/ProgramPagination";
 
 const pageSize = 15;
 
@@ -94,26 +92,12 @@ export default function ProgramView() {
               title={<Typography variant="pageHeader">Programs</Typography>}
             />
             <CardContent>
-              <ProgramFiltering
-                allProgramsList={allProgramsList}
-                setAllProgramsList={setAllProgramsList}
-                paginatePrograms={paginatePrograms}
-                setPaginatePrograms={setPaginatePrograms}
-                pagination={pagination}
-              />
               <ProgramListContainer
                 getAllPrograms={getAllPrograms}
                 allProgramsList={allProgramsList}
                 paginatePrograms={paginatePrograms}
                 open={open}
                 setOpen={setOpen}
-              />
-              <ProgramPagination
-                pagination={pagination}
-                setPagination={setPagination}
-                allProgramsList={allProgramsList}
-                paginatePrograms={paginatePrograms}
-                setPaginatePrograms={setPaginatePrograms}
               />
             </CardContent>
           </Card>
