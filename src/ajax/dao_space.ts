@@ -27,7 +27,7 @@ export const postNewSpaces = async (newSpace: Space[]): Promise<boolean> => {
 };
 
 // fetching all space's names
-export const fetchSpacesNames = async (): Promise<ResponseFiner<SpaceName>> => {
+export const fetchSpaceNames = async (): Promise<ResponseFiner<SpaceName>> => {
   const response = await get(`${baseUrl}/space/getNames`);
   if (response.status === 200) {
     const spaces: SpaceName[] = await response.json();
@@ -37,7 +37,7 @@ export const fetchSpacesNames = async (): Promise<ResponseFiner<SpaceName>> => {
   }
 };
 
-export const fetchSpacesNamesInBuilding = async (): Promise<
+export const fetchSpaceNamesInBuilding = async (): Promise<
   ResponseFiner<SpaceBuildingName>
 > => {
   const response = await get(`${baseUrl}/space/NameInBuilding`);

@@ -1,12 +1,15 @@
 import dao from "../ajax/dao";
+import {
+  regDescription,
+  regName,
+  regNumberCountPlus,
+  regNumberDecimalOnePlus,
+  requiredFieldErrorMessageFunction,
+  vF_regTimetableTime,
+} from "./Validate_GenericRegexps";
 
 export default async function ValidateAddSpace(values) {
-  console.log("ValidateAddSpace.js called")
-  const regName = new RegExp(/^[A-Za-zäöåÄÖÅ0-9\s-]*$/);
-  const regInfo = new RegExp(/^[A-Za-zäöåÄÖÅ0-9\s-]*$/);
-  const regNumber = new RegExp(/^[0-9]+$/);
-  const regTime = new RegExp(/^([0-1][0-9]|2[0-3]):([0-5][0-9])(:[0-5][0-9])?$/);
-  const regArea = new RegExp(/^[0-9]*(.[0-9]{1,2})?$/);
+  console.log("ValidateAddSpace.js called");
 
   const errors = {};
   const {
@@ -24,7 +27,7 @@ export default async function ValidateAddSpace(values) {
 
   const isDuplicatedSpaceNameAndBuildingName = async function () {
     let spaceList = [];
-    const { data } = await dao.fetchSpacesNamesInBuilding();
+    const { data } = await dao.fetchSpaceNamesInBuilding();
     spaceList = data;
     // Check if user enter an existed space name in the same building
     const result = spaceList.some((spaceName) => {
@@ -37,59 +40,64 @@ export default async function ValidateAddSpace(values) {
   };
 
   if (!name) {
-    errors.name = "'Name': is a required field\n";
+    errors.name = requiredFieldErrorMessageFunction("Name");
   } else if (await isDuplicatedSpaceNameAndBuildingName()) {
     errors.name = "'Name': already exists in the building\n";
   } else if (name.length < 2 || name.length > 255) {
     errors.name = "'Name': should be between 2 and 255 characters.\n";
   } else if (!regName.test(values.name)) {
-    errors.name = "'Name': only letters, numbers and '-' are allowed\n";
+    errors.name =
+      "'Name': only letters, numbers and some punctuation characters is allowed\n";
   }
 
   if (!area) {
-    errors.area = "'Area': is a required field\n";
+    errors.area = requiredFieldErrorMessageFunction("Area");
   } else if (values.area <= 0) {
     errors.area = "'Area': cannot be less than 0\n";
-  } else if (!regArea.test(values.area)) {
-    errors.area = "'Area': only numbers with a maximum of two decimal places are allowed\n";
+  } else if (!regNumberDecimalOnePlus.test(values.area)) {
+    errors.area =
+      "'Area': only numbers with a maximum of two decimal places are allowed\n";
   }
 
   if (info.length > 16000) {
     errors.info = "'Info': maximum 16000 characters long\n";
-  } else if (!regInfo.test(values.info)) {
+  } else if (!regDescription.test(values.info)) {
     errors.info = "'Info': only letters, numbers and '-' are allowed\n";
   }
 
   if (!personLimit) {
-    errors.personLimit = "'Person limit': is a required field\n";
+    errors.personLimit = requiredFieldErrorMessageFunction("Person limit");
   } else if (personLimit <= 0) {
     errors.personLimit = "'Person limit': cannot be less than 0\n";
-  } else if (!regNumber.test(personLimit)) {
+  } else if (!regNumberCountPlus.test(personLimit)) {
     errors.personLimit = "'Person limit': only numbers allowed\n";
   }
 
   if (!availableFrom) {
-    errors.availableFrom = "'Available from': is a required field\n";
-  } else if (!regTime.test(availableFrom)) {
-    errors.availableFrom = "'Available from': allowed format is 00:00 or 00:00:00\n";
+    errors.availableFrom = requiredFieldErrorMessageFunction("Available from");
+  } else if (!vF_regTimetableTime.regExp.test(availableFrom)) {
+    errors.availableFrom =
+      vF_regTimetableTime.errorMessageFunction("Available from");
   }
 
   if (!availableTo) {
-    errors.availableTo = "'Available to': is a required field\n";
-  } else if (!regTime.test(availableTo)) {
-    errors.availableTo = "'Available to': allowed format is 00:00 or 00:00:00\n";
+    errors.availableTo = requiredFieldErrorMessageFunction("Available to");
+  } else if (!vF_regTimetableTime.regExp.test(availableTo)) {
+    errors.availableTo =
+      vF_regTimetableTime.errorMessageFunction("Available to");
   }
 
   if (!classesFrom) {
-    errors.classesFrom = "'Classes from': is a required field\n";
-  } else if (!regTime.test(classesFrom)) {
-    errors.classesFrom = "'Classes from': allowed format is 00:00 or 00:00:00\n";
+    errors.classesFrom = requiredFieldErrorMessageFunction("Classes from");
+  } else if (!vF_regTimetableTime.regExp.test(classesFrom)) {
+    errors.classesFrom =
+      vF_regTimetableTime.errorMessageFunction("Classes from");
   }
 
   if (!classesTo) {
-    errors.classesTo = "'Classes to': is a required field\n";
-  } else if (!regTime.test(classesTo)) {
-    errors.classesTo = "Classes to': allowed format is 00:00 or 00:00:00\n";
+    errors.classesTo = requiredFieldErrorMessageFunction("Classes to");
+  } else if (!vF_regTimetableTime.regExp.test(classesTo)) {
+    errors.classesTo = vF_regTimetableTime.errorMessageFunction("Classes to");
   }
 
   if (inUse === undefined && inUse === null) {

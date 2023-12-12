@@ -131,7 +131,7 @@ export default function EditSubjectForm({
                         : false
                     }
                     name="sessionCount"
-                    label="Number of lessons per week"
+                    label="Number of sessions per week"
                     defaultValue={formik.initialValues?.sessionCount}
                     variant="outlined"
                     value={formik.values?.sessionCount}
