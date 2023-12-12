@@ -102,7 +102,7 @@ export default function SubjectList({
                       active={orderBy === "programId"}
                       direction={order}
                       onClick={() => handleRequestSort("icon")}
-                    ></TableSortLabel>
+                    />
                   </TableCell>
                   <TableCell>
                     <TableSortLabel

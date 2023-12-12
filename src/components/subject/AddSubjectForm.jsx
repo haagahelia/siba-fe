@@ -149,7 +149,7 @@ export default function AddSubjectForm({
               value={formik.values.sessionLength}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
-              placeholder="hh:mm:ss"
+              placeholder="hh:mm"
               helperText={
                 formik.touched.sessionLength && formik.errors.sessionLength
               }
@@ -166,7 +166,7 @@ export default function AddSubjectForm({
                 Boolean(formik.errors.sessionCount)
               }
               name="sessionCount"
-              label="Number of lessons per week"
+              label="Number of sessions per week"
               value={formik.values.sessionCount}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
