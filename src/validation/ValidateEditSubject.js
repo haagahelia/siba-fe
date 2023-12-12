@@ -11,7 +11,7 @@ export async function validate(values, allocRoundId) {
   const errors = {};
 
   const getSubjectNames = async function (allocRoundId) {
-    const { httpStatus, data } = await dao.fetchSubjectsNames(allocRoundId);
+    const { httpStatus, data } = await dao.fetchSubjectNames(allocRoundId);
     if (httpStatus === 200) {
       const subjectList = data;
       //let result;
