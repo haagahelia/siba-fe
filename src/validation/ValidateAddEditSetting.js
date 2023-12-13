@@ -1,11 +1,14 @@
 import dao from "../ajax/dao";
-import { vF_regName } from "./Validate_GenericRegexps";
+import {
+  requiredFieldErrorMessageFunction,
+  vF_regDescription,
+  vF_regName,
+  vF_regNumberValue,
+  vF_regTextValue,
+} from "./Validate_GenericRegexps";
 
 export async function validate(values) {
   const errors = {};
-  const regDescription = new RegExp(/^[A-Za-zäöåÄÖÅ0-9\s-]*$/);
-  const regNumberValue = new RegExp(/^[0-9]+$/);
-  const regTextValue = new RegExp(/^[A-Za-zäöåÄÖÅ0-9\s/,-]*$/);
 
   let settingList = [];
 
@@ -29,7 +32,7 @@ export async function validate(values) {
   };
 
   if (!values.name) {
-    errors.name = "Required field";
+    errors.name = requiredFieldErrorMessageFunction("Name");
   } else if (await getSettingNames()) {
     errors.name = "The name already exists";
   } else if (values.name.length < 2 || values.name.length > 255) {
@@ -41,22 +44,22 @@ export async function validate(values) {
   if (values.description !== null && values.description.length > 16000) {
     errors.description =
       "The description must be maximum 16000 characters long";
-  } else if (!regDescription.test(values.description)) {
-    errors.description = "Only letters, numbers and '-' allowed";
+  } else if (!vF_regDescription.regExp.test(values.description)) {
+    errors.description = vF_regDescription.errorMessageFunction("Description");
   }
 
   if (!values.numberValue) {
-    errors.numberValue = "Required field";
+    errors.numberValue = requiredFieldErrorMessageFunction("numberValue");
   } else if (values.numberValue < 0 || values.numberValue > 11) {
     errors.numberValue = "The numberValue must be between 0 and 11 points";
-  } else if (!regNumberValue.test(values.numberValue)) {
-    errors.numberValue = "Only numbers allowed";
+  } else if (!vF_regNumberValue.regExp.test(values.numberValue)) {
+    errors.numberValue = vF_regNumberValue.errorMessageFunction("numberValue");
   }
 
   if (values.textValue !== null && values.textValue.length > 255) {
     errors.textValue = "The textValue must be maximum 255 characters long";
-  } else if (!regTextValue.test(values.textValue)) {
-    errors.textValue = "Only letters, numbers and '-' allowed";
+  } else if (!vF_regTextValue.regExp.test(values.textValue)) {
+    errors.textValue = vF_regTextValue.errorMessageFunction("textValue");
   }
 
   return errors;

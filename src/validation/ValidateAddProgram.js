@@ -1,10 +1,13 @@
 import dao from "../ajax/dao";
 import Logger from "../logger/logger";
-import { vF_regName } from "./Validate_GenericRegexps";
+import {
+  requiredFieldErrorMessageFunction,
+  vF_regName,
+  vF_regNumber,
+} from "./Validate_GenericRegexps";
 
 export async function validate(values) {
   const errors = {};
-  const regNumber = new RegExp(/^[0-9]+$/);
 
   let programList = [];
 
@@ -22,7 +25,7 @@ export async function validate(values) {
   };
 
   if (!values.name) {
-    errors.name = "Required field";
+    errors.name = requiredFieldErrorMessageFunction("Name");
   } else if (await getProgramNames()) {
     errors.name = "The name already exists";
   } else if (values.name.length < 2 || values.name.length > 255) {
@@ -32,9 +35,9 @@ export async function validate(values) {
   }
 
   if (!values.departmentId) {
-    errors.departmentId = "Required field";
-  } else if (!regNumber.test(values.departmentId)) {
-    errors.departmentId = "Invalid department ID";
+    errors.departmentId = requiredFieldErrorMessageFunction("Department id");
+  } else if (!vF_regNumber.regExp.test(values.departmentId)) {
+    errors.departmentId = vF_regNumber.errorMessageFunction("Department id");
   }
 
   // Add additional validation rules as needed for other fields.

@@ -1,9 +1,9 @@
 import dao from "../ajax/dao";
 import {
-  regNumberCountPlus,
   requiredFieldErrorMessageFunction,
   vF_regDescription,
   vF_regName,
+  vF_regNumberCountPlus,
   vF_regNumberDecimalOnePlus,
   vF_regTimetableTime,
 } from "./Validate_GenericRegexps";
@@ -67,7 +67,7 @@ export default async function ValidateAddSpace(values) {
     errors.personLimit = requiredFieldErrorMessageFunction("Person limit");
   } else if (personLimit <= 0) {
     errors.personLimit = "'Person limit': cannot be less than 0\n";
-  } else if (!regNumberCountPlus.test(personLimit)) {
+  } else if (!vF_regNumberCountPlus.regExp.test(personLimit)) {
     errors.personLimit = "'Person limit': only numbers allowed\n";
   }
 
@@ -99,7 +99,7 @@ export default async function ValidateAddSpace(values) {
   }
 
   if (inUse === undefined && inUse === null) {
-    errors.inUse = "'In use?' is a required field\n";
+    errors.inUse = requiredFieldErrorMessageFunction("In use?");
   } else if (!["yes", "no", "0", "1", 0, 1, false, true].includes(inUse)) {
     errors.inUse = "'In use' value must be either: yes/no/'0'/'1'\n";
   }

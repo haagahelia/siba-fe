@@ -1,10 +1,11 @@
 import dao from "../ajax/dao";
 import Logger from "../logger/logger";
 import {
-  regNumberCountPlus,
-  regNumberDecimalOnePlus,
-  regTimeLengthHoursAndMinutes,
+  requiredFieldErrorMessageFunction,
   vF_regName,
+  vF_regNumberCountPlus,
+  vF_regNumberDecimalOnePlus,
+  vF_regTimeLengthHoursAndMinutes,
 } from "./Validate_GenericRegexps";
 
 export async function validate(values, allocRoundId) {
@@ -28,7 +29,7 @@ export async function validate(values, allocRoundId) {
   };
 
   if (!values.name) {
-    errors.name = "Required field";
+    errors.name = requiredFieldErrorMessageFunction("Name");
   } else if (await getSubjectNames(allocRoundId)) {
     errors.name = "The name already exists";
   } else if (values.name.length < 2 || values.name.length > 255) {
@@ -37,45 +38,48 @@ export async function validate(values, allocRoundId) {
     errors.name = vF_regName.errorMessageFunction("Name");
   }
   if (!values.groupSize) {
-    errors.groupSize = "Required field";
+    errors.groupSize = requiredFieldErrorMessageFunction("Group size");
   } else if (values.groupSize <= 0) {
     errors.groupSize = "Group size cannot be 0";
-  } else if (!regNumberCountPlus.test(values.groupSize)) {
+  } else if (!vF_regNumberCountPlus.regExp.test(values.groupSize)) {
     errors.groupSize = "Only numbers allowed";
   }
 
   if (!values.groupCount) {
-    errors.groupCount = "Required field";
+    errors.groupCount = requiredFieldErrorMessageFunction("Group count");
   } else if (values.groupCount <= 0) {
     errors.groupCount = "The number of groups cannot be 0";
-  } else if (!regNumberCountPlus.test(values.groupCount)) {
+  } else if (!vF_regNumberCountPlus.regExp.test(values.groupCount)) {
     errors.groupCount = "Only numbers allowed";
   }
 
   if (!values.sessionLength) {
-    errors.sessionLength = "Required field";
-  } else if (!regTimeLengthHoursAndMinutes.test(values.sessionLength)) {
-    errors.sessionLength = "Allowed format is 00:00";
+    errors.sessionLength = requiredFieldErrorMessageFunction("Session length");
+  } else if (
+    !vF_regTimeLengthHoursAndMinutes.regExp.test(values.sessionLength)
+  ) {
+    errors.sessionLength =
+      vF_regTimeLengthHoursAndMinutes.errorMessageFunction("Session length");
   }
 
   if (!values.sessionCount) {
-    errors.sessionCount = "Required field";
+    errors.sessionCount = requiredFieldErrorMessageFunction("Session count");
   } else if (values.sessionCount <= 0) {
     errors.sessionCount = "The number of sessions per week cannot be 0";
-  } else if (!regNumberCountPlus.test(values.sessionCount)) {
+  } else if (!vF_regNumberDecimalOnePlus.regExp.test(values.sessionCount)) {
     errors.sessionCount = "Only numbers allowed";
   }
 
   if (!values.area) {
-    errors.area = "Required field";
+    errors.area = requiredFieldErrorMessageFunction("Area");
   } else if (values.area <= 0) {
     errors.area = "The required area cannot be 0";
-  } else if (!regNumberDecimalOnePlus.test(values.area)) {
+  } else if (!vF_regNumberDecimalOnePlus.regExp.test(values.area)) {
     errors.area = "Only numbers and . allowed. Give value from 0.1 to 9999.9 ";
   }
 
   if (!values.programId) {
-    errors.programId = "Required field";
+    errors.programId = requiredFieldErrorMessageFunction("Program");
   }
   return errors;
 }
