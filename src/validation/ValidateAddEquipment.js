@@ -1,5 +1,8 @@
 import dao from "../ajax/dao";
-import { vF_regDescription } from "./Validate_GenericRegexps";
+import {
+  requiredFieldErrorMessageFunction,
+  vF_regDescription,
+} from "./Validate_GenericRegexps";
 
 export default async function ValidateAddEquipment(values) {
   const errors = {};
@@ -18,7 +21,7 @@ export default async function ValidateAddEquipment(values) {
   };
 
   if (!name) {
-    errors.name = "Equipment name required.";
+    errors.name = requiredFieldErrorMessageFunction("Name");
   } else if (await isDuplicatedName()) {
     errors.name = "The name already exists";
   } else if (name.length < 2 || name.length > 255) {
@@ -26,13 +29,13 @@ export default async function ValidateAddEquipment(values) {
   }
 
   if (!priority) {
-    errors.priority = "Priority value required.";
+    errors.priority = requiredFieldErrorMessageFunction("Priority");
   } else if (priority < 0) {
     errors.priority = "Priority needs to be bigger than 0.";
   }
 
   if (!description) {
-    errors.description = "Description name required.";
+    errors.description = requiredFieldErrorMessageFunction("Description");
   } else if (description.length < 2 || description.length > 255) {
     errors.description = "Description needs to be between 2 and 255 characters";
   } else if (!vF_regDescription.regExp.test(description)) {
@@ -40,7 +43,7 @@ export default async function ValidateAddEquipment(values) {
   }
 
   if (isMovable === undefined || isMovable === null) {
-    errors.isMovable = "isMovable value required.";
+    errors.isMovable = requiredFieldErrorMessageFunction("is Movable marking");
   } else if (isMovable !== "1" && isMovable !== "0") {
     errors.isMovable =
       "isMovable needs to be 1 = movable equipment. 0 = unmovable equipment.";
