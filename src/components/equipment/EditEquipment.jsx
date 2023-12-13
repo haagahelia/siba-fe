@@ -10,6 +10,7 @@ import DialogTitle from "@mui/material/DialogTitle";
 import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
 import useTheme from "@mui/material/styles/useTheme";
+import AlertBox from "../common/AlertBox";
 
 export default function EditEquipment({
   singleEquipment,
@@ -23,6 +24,11 @@ export default function EditEquipment({
   const theme = useTheme();
 
   const [editOpen, setEditOpen] = useState(false);
+  const [alertOpen, setAlertOpen] = useState(false);
+  const [alertOptions, setAlertOptions] = useState({
+    message: "This is an error alert — check it out!",
+    severity: "error",
+  });
 
   const submitEdits = async () => {
     Logger.debug(
@@ -36,12 +42,24 @@ export default function EditEquipment({
     } else {
       const result = await dao.editEquipment(singleEquipment, id);
       if (!result) {
-        alert("Something went wrong");
+        setAlertOptions({
+          severity: "error",
+          title: "Error",
+          message: "Something went wrong - please try again later.",
+        });
+        setAlertOpen(true);
         getAllEquipments();
       } else {
-        alert(`Equipment ${singleEquipment.name} updated`);
+        setAlertOptions({
+          severity: "success",
+          title: "Success!",
+          message: `${singleEquipment.name} updated successfully.`,
+        });
+        setAlertOpen(true);
         setEditOpen(false);
-        setOpen(false);
+        setTimeout(() => {
+          setOpen(false);
+        }, 1000);
         setSingleEquipment({
           id: "",
           name: "",
@@ -56,6 +74,11 @@ export default function EditEquipment({
 
   return (
     <div>
+      <AlertBox
+        alertOpen={alertOpen}
+        alertOptions={alertOptions}
+        setAlertOpen={setAlertOpen}
+      />
       <Button
         variant="contained"
         style={theme.components.MuiButton.editbutton}
