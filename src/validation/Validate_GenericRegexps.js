@@ -1,5 +1,5 @@
-export const regName = new RegExp(/^[A-Za-zäöåÄÖÅ0-9\s-]*$/);
-export const regDescription = new RegExp(/^[A-Za-zäöåÄÖÅ0-9\s-]*$/);
+export const regName = new RegExp(/^[A-Za-zäöåÄÖÅ0-9\s/,-]*$/);
+export const regDescription = new RegExp(/^[A-Za-zäöåÄÖÅ0-9\s/,-]*$/);
 
 export const regTimeLengthHoursAndMinutes = new RegExp(
   /^(0*[2][0-3]|0*[1][0-9]|0*[0-9]):([0-5][0-9])$/,

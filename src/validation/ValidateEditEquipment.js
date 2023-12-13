@@ -1,8 +1,8 @@
 export default function ValidateEditEquipment(values) {
   const errors = {};
   const { name, priority, description } = values;
-  const regName = new RegExp(/^[A-Za-zäöåÄÖÅ0-9\s-]*$/);
-  const regDescription = new RegExp(/^[A-Za-zäöåÄÖÅ0-9\s\\"?.,:-]*$/);
+  const regName = new RegExp(/^[A-Za-zäöåÄÖÅ0-9\s/,-]*$/);
+  const regDescription = new RegExp(/^[A-Za-zäöåÄÖÅ0-9\s\\"?.,:/-]*$/);
 
   if (!name) {
     errors.name = "Equipment name required";
