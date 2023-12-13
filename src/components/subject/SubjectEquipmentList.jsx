@@ -1,16 +1,23 @@
+import { DialogActions } from "@mui/material";
 import DialogContent from "@mui/material/DialogContent";
 import Grid from "@mui/material/Grid";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import Typography from "@mui/material/Typography";
+import { checkForUserPrograms } from "../../hooks/checkForUserPrograms";
+import { useRoleLoggedIn } from "../../hooks/useRoleLoggedIn";
 import DeleteSubEquip from "./DeleteSubEquip";
 import EditSubEquipContainer from "./EditSubEquipContainer";
 
 export default function SubjectEquipmentList({
   equipListBySubId,
   getEquipmentsBySubId,
+  userPrograms,
+  singleSubject,
 }) {
+  const { roles } = useRoleLoggedIn();
+
   return (
     <div>
       {equipListBySubId.length ? (
@@ -19,19 +26,25 @@ export default function SubjectEquipmentList({
             <div key={value.equipmentId}>
               <List>
                 <ListItem>
-                  <EditSubEquipContainer
-                    subId={value.subjectId}
-                    equipId={value.equipmentId}
-                    prio={value.priority}
-                    obli={value.obligatory}
-                    name={value.name}
-                    getEquipmentsBySubId={getEquipmentsBySubId}
-                  />
-                  <DeleteSubEquip
-                    singleSubEquipToDelete={value}
-                    getEquipmentsBySubId={getEquipmentsBySubId}
-                    subId={value.subjectId}
-                  />
+                  {(roles.admin === "1" ||
+                    (roles.planner === "1" &&
+                      checkForUserPrograms(singleSubject, userPrograms))) && (
+                    <DialogActions>
+                      <EditSubEquipContainer
+                        subId={value.subjectId}
+                        equipId={value.equipmentId}
+                        prio={value.priority}
+                        obli={value.obligatory}
+                        name={value.name}
+                        getEquipmentsBySubId={getEquipmentsBySubId}
+                      />
+                      <DeleteSubEquip
+                        singleSubEquipToDelete={value}
+                        getEquipmentsBySubId={getEquipmentsBySubId}
+                        subId={value.subjectId}
+                      />
+                    </DialogActions>
+                  )}
                   <DialogContent>
                     <DialogContent variant="sibaDialogContentSubjectEquipment">
                       <Grid item xs={12} sm={6}>
