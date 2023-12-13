@@ -25,13 +25,13 @@ export const vF_regNumber = {
     genericErrorMessageFunction(fieldName, "has to follow format: 0-999999"),
 };
 
+// For settings
 export const vF_regNumberValue = {
   regExp: new RegExp(/^[0-9]+$/),
   hint: "0-9999999",
   errorMessageFunction: (fieldName) =>
     genericErrorMessageFunction(fieldName, "has to follow format: 0-999999"),
 };
-// For settings
 export const vF_regTextValue = {
   regExp: new RegExp(/^[A-Za-zäöåÄÖÅ0-9\s/,-]*$/),
   hint: "A-ö big and small letters, numbers and some punctuation characters allowed",
