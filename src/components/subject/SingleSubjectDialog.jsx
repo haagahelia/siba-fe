@@ -9,6 +9,7 @@ import DialogTitle from "@mui/material/DialogTitle";
 import Grid from "@mui/material/Grid";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
+import { checkForUserPrograms } from "../../hooks/checkForUserPrograms";
 import { useRoleLoggedIn } from "../../hooks/useRoleLoggedIn";
 import Logger from "../../logger/logger";
 import AlertBox from "../common/AlertBox";
@@ -23,6 +24,7 @@ export default function SingleSubjectDialog({
   singleSubject,
   getAllSubjects,
   setSingleSubject,
+  userPrograms,
 }) {
   const [equipListBySubId, setEquipListBySubId] = useState([]);
   const [alertOpen, setAlertOpen] = useState(false);
@@ -31,6 +33,9 @@ export default function SingleSubjectDialog({
     message: "This is an error alert — check it out!",
     severity: "error",
   });
+
+  const [programs, setPrograms] = useState([]);
+
   const { roles } = useRoleLoggedIn();
   const getEquipmentsBySubId = async function (subjectId) {
     const result = await dao.fetchEquipmentBySubjectId(subjectId);
@@ -54,6 +59,7 @@ export default function SingleSubjectDialog({
     // console.log(`singleSubject?.name${singleSubject?.name}`);
     if (singleSubject && typeof singleSubject.id === "number") {
       // console.log(`getEquipmentsBySubId(${singleSubject.id})`);
+      setPrograms(checkForUserPrograms(singleSubject, userPrograms));
       getEquipmentsBySubId(singleSubject.id);
     }
   }, [singleSubject]);
@@ -90,7 +96,7 @@ export default function SingleSubjectDialog({
           <CloseIcon />
         </IconButton>
         <DialogContent>
-          {(roles.admin === "1" || roles.planner === "1") && (
+          {(roles.admin === "1" || (roles.planner === "1" && programs)) && (
             <DialogActions>
               <DeleteSubject
                 singleSubject={singleSubject}
@@ -212,6 +218,8 @@ export default function SingleSubjectDialog({
               <SubjectEquipmentList
                 equipListBySubId={equipListBySubId}
                 getEquipmentsBySubId={getEquipmentsBySubId}
+                singleSubject={singleSubject}
+                userPrograms={userPrograms}
               />
             </DialogContent>
           </DialogContent>

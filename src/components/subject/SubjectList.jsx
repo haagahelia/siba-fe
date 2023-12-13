@@ -11,6 +11,7 @@ import TableRow from "@mui/material/TableRow";
 import TableSortLabel from "@mui/material/TableSortLabel";
 import styled from "@mui/material/styles/styled";
 import { useState } from "react";
+import { checkForUserPrograms } from "../../hooks/checkForUserPrograms";
 import SingleSubjectDialog from "./SingleSubjectDialog";
 
 export default function SubjectList({
@@ -28,10 +29,6 @@ export default function SubjectList({
     const isAsc = orderBy === property && order === "asc";
     setOrder(isAsc ? "desc" : "asc");
     setOrderBy(property);
-  };
-
-  const checkForUserPrograms = (value) => {
-    return userPrograms.find((e) => e === value.programId);
   };
 
   const sortedSubjects = paginateSubjects.sort((a, b) => {
@@ -90,6 +87,7 @@ export default function SubjectList({
         singleSubject={singleSubject}
         setSingleSubject={setSingleSubject}
         getAllSubjects={getAllSubjects}
+        userPrograms={userPrograms}
       />
       <Box>
         <Paper>
@@ -164,7 +162,7 @@ export default function SubjectList({
                 {sortedSubjects.map((value) => (
                   <TableRow key={value.id}>
                     <TableCell>
-                      {checkForUserPrograms(value) ? (
+                      {checkForUserPrograms(value, userPrograms) ? (
                         <IconButton
                           onClick={() => {
                             setSingleSubject(value);
