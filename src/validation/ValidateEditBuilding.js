@@ -2,8 +2,8 @@ import dao from "../ajax/dao";
 
 export async function validate(values) {
   const errors = {};
-  const regName = new RegExp(/^[A-Za-zäöåÄÖÅ0-9\s-]*$/);
-  const regDescription = new RegExp(/^[A-Za-zäöåÄÖÅ0-9\s-]*$/);
+  const regName = new RegExp(/^[A-Za-zäöåÄÖÅ0-9\s/,-]*$/);
+  const regDescription = new RegExp(/^[A-Za-zäöåÄÖÅ0-9\s/,-]*$/);
 
   const isDuplicatedName = async function () {
     let buildingList = [];

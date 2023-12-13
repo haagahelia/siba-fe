@@ -3,7 +3,7 @@ import dao from "../ajax/dao";
 export default async function ValidateAddEquipment(values) {
   const errors = {};
   const { name, priority, description, isMovable } = values;
-  const regDescription = new RegExp(/^[A-Za-zäöåÄÖÅ0-9\s\\"?.,:-]*$/);
+  const regDescription = new RegExp(/^[A-Za-zäöåÄÖÅ0-9\s\\"?.,:/-]*$/);
 
   const isDuplicatedName = async function () {
     let equipmentList = [];
