@@ -25,7 +25,7 @@ export default async function ValidateAddEquipment(values) {
   } else if (await isDuplicatedName()) {
     errors.name = "The name already exists";
   } else if (name.length < 2 || name.length > 255) {
-    errors.name = "Equipment needs to be between 2 and 255 characters.";
+    errors.name = "Equipment name needs to be between 2 and 255 characters.";
   }
 
   if (!priority) {

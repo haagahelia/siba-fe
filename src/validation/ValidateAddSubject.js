@@ -42,7 +42,7 @@ export async function validate(values, allocRoundId) {
   } else if (values.groupSize <= 0) {
     errors.groupSize = "Group size cannot be 0";
   } else if (!vF_regNumberCountPlus.regExp.test(values.groupSize)) {
-    errors.groupSize = "Only numbers allowed";
+    errors.groupSize = vF_regNumberCountPlus.errorMessageFunction("Group size");
   }
 
   if (!values.groupCount) {
@@ -50,7 +50,8 @@ export async function validate(values, allocRoundId) {
   } else if (values.groupCount <= 0) {
     errors.groupCount = "The number of groups cannot be 0";
   } else if (!vF_regNumberCountPlus.regExp.test(values.groupCount)) {
-    errors.groupCount = "Only numbers allowed";
+    errors.groupCount =
+      vF_regNumberCountPlus.errorMessageFunction("Group count");
   }
 
   if (!values.sessionLength) {
@@ -66,8 +67,9 @@ export async function validate(values, allocRoundId) {
     errors.sessionCount = requiredFieldErrorMessageFunction("Session count");
   } else if (values.sessionCount <= 0) {
     errors.sessionCount = "The number of sessions per week cannot be 0";
-  } else if (!vF_regNumberDecimalOnePlus.regExp.test(values.sessionCount)) {
-    errors.sessionCount = "Only numbers allowed";
+  } else if (!vF_regNumberCountPlus.regExp.test(values.sessionCount)) {
+    errors.sessionCount =
+      vF_regNumberCountPlus.errorMessageFunction("Session count");
   }
 
   if (!values.area) {
@@ -75,7 +77,7 @@ export async function validate(values, allocRoundId) {
   } else if (values.area <= 0) {
     errors.area = "The required area cannot be 0";
   } else if (!vF_regNumberDecimalOnePlus.regExp.test(values.area)) {
-    errors.area = "Only numbers and . allowed. Give value from 0.1 to 9999.9 ";
+    errors.area = vF_regNumberDecimalOnePlus.errorMessageFunction("Area");
   }
 
   if (!values.programId) {
