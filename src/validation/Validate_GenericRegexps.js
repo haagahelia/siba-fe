@@ -1,12 +1,41 @@
-export const regName = new RegExp(/^[A-Za-zäöåÄÖÅ0-9\s-]*$/);
+export const vF_regName = {
+  regExp: new RegExp(/^[A-Za-zäöåÄÖÅ0-9\s-]*$/),
+  hint: "A-ö big and small letters, numbers and some punctuation characters allowed",
+  errorMessageFunction: (fieldName) =>
+    genericErrorMessageFunction(
+      fieldName,
+      "has wrong format. A-ö big and small letters, numbers and some punctuation characters allowed",
+    ),
+};
+
 export const regDescription = new RegExp(/^[A-Za-zäöåÄÖÅ0-9\s-]*$/);
+
+export const vF_regDescription = {
+  regExp: new RegExp(/^[A-Za-zäöåÄÖÅ0-9\s-]*$/),
+  hint: "A-ö big and small letters, numbers and some punctuation characters allowed",
+  errorMessageFunction: (fieldName) =>
+    genericErrorMessageFunction(
+      fieldName,
+      "has wrong format. A-ö big and small letters, numbers and some punctuation characters allowed",
+    ),
+};
 
 export const regTimeLengthHoursAndMinutes = new RegExp(
   /^(0*[2][0-3]|0*[1][0-9]|0*[0-9]):([0-5][0-9])$/,
 ); // 00:00 to 23:59
 
 export const regNumberCountPlus = new RegExp(/^[1-9][0-9]*$/); // 1-n, 1-999999999
-export const regNumberDecimalOnePlus = new RegExp(/^[0-9]*(.[0-9])?$/); // 0.1-99999999.9
+//export const regNumberDecimalOnePlus = new RegExp(/^[0-9]*(.[0-9])?$/); // 0.1-99999999.9
+
+export const vF_regNumberDecimalOnePlus = {
+  regExp: new RegExp(/^[0-9]*(.[0-9])?$/), // 0.1-99999999.9
+  hint: "0.1-99999999.9",
+  errorMessageFunction: (fieldName) =>
+    genericErrorMessageFunction(
+      fieldName,
+      "has to follow format: 0.1-99999999.9",
+    ),
+};
 
 export const vF_regTimeLengthHoursAndMinutes = {
   regExp: new RegExp(/^(0*[2][0-3]|0*[1][0-9]|0*[0-9]):([0-5][0-9])$/), // 00:00 to 23:59,

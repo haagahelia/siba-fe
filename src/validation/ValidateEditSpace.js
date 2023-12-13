@@ -1,11 +1,11 @@
 import dao from "../ajax/dao";
 import Logger from "../logger/logger";
 import {
-  regDescription,
   regName,
   regNumberCountPlus,
-  regNumberDecimalOnePlus,
   requiredFieldErrorMessageFunction,
+  vF_regDescription,
+  vF_regNumberDecimalOnePlus,
   vF_regTimetableTime,
 } from "./Validate_GenericRegexps";
 
@@ -54,17 +54,17 @@ export async function validate(values) {
   }
 
   if (!area) {
-    errors.area = "Required field";
+    errors.area = requiredFieldErrorMessageFunction("Area");
   } else if (area <= 0) {
     errors.area = "The required quantity cannot be 0";
-  } else if (!regNumberDecimalOnePlus.test(area)) {
-    errors.area = "Only numbers allowed & format .00 allowed";
+  } else if (!vF_regNumberDecimalOnePlus.regExp.test(area)) {
+    errors.area = vF_regNumberDecimalOnePlus.errorMessageFunction("Area");
   }
 
   if (info.length > 16000) {
     errors.info = "'Info': maximum 16000 characters long\n";
-  } else if (!regDescription.test(info)) {
-    errors.info = "'Info': only letters, numbers and '-' are allowed\n";
+  } else if (!vF_regDescription.regExp.test(info)) {
+    errors.info = vF_regDescription.errorMessageFunction("Info");
   }
 
   if (!values.personLimit) {

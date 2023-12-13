@@ -1,20 +1,25 @@
-import React, { useState } from 'react';
-import Grid from "@mui/material/Grid";
-import TextField from "@mui/material/TextField";
 import FormControl from "@mui/material/FormControl";
+import Grid from "@mui/material/Grid";
 import InputLabel from "@mui/material/InputLabel";
-import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
+import Select from "@mui/material/Select";
+import TextField from "@mui/material/TextField";
+import React, { useState } from "react";
 
-export default function CopyAllocRoundInputField({ formik, allAllocRoundsList}) {
-  const [selectedAllocation, setSelectedAllocation] = useState('');
+export default function CopyAllocRoundInputField({
+  formik,
+  allAllocRoundsList,
+}) {
+  const [selectedAllocation, setSelectedAllocation] = useState("");
 
   const handleAllocationChange = (event) => {
     const selectedAllocationId = event.target.value;
-    const selectedAllocation = allAllocRoundsList.find(allocation => allocation.id === selectedAllocationId);
-  
+    const selectedAllocation = allAllocRoundsList.find(
+      (allocation) => allocation.id === selectedAllocationId,
+    );
+
     setSelectedAllocation(selectedAllocationId);
-  
+
     // Update formik state with the details of the selected allocation
     if (selectedAllocation) {
       formik.setFieldValue("name", selectedAllocation.name);
@@ -23,9 +28,6 @@ export default function CopyAllocRoundInputField({ formik, allAllocRoundsList}) 
       // Update other fields as necessary
     }
   };
-
-  
-  
 
   return (
     <>
@@ -43,7 +45,6 @@ export default function CopyAllocRoundInputField({ formik, allAllocRoundsList}) 
               ? formik.errors.name
               : null
           }
-          
         />
       </Grid>
       <Grid item xs={12}>
@@ -67,7 +68,7 @@ export default function CopyAllocRoundInputField({ formik, allAllocRoundsList}) 
         />
       </Grid>
       <Grid item xs={12}>
-        <FormControl style={{ width: '19%' }}>
+        <FormControl style={{ width: "19%" }}>
           <InputLabel>Copy Existing Allocation</InputLabel>
           <Select
             name="copyAllocation"
@@ -78,10 +79,9 @@ export default function CopyAllocRoundInputField({ formik, allAllocRoundsList}) 
           >
             {allAllocRoundsList.map((allocation) => (
               <MenuItem key={allocation.id} value={allocation.id}>
-                {allocation.name}
+                {`${allocation.id} - ${allocation.name}`}
               </MenuItem>
             ))}
-            
           </Select>
         </FormControl>
       </Grid>
