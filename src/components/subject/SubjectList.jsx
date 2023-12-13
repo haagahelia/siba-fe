@@ -35,14 +35,16 @@ export default function SubjectList({
     switch (orderBy) {
       case "icon":
         return order === "asc"
-          ? checkForUserPrograms(a) === checkForUserPrograms(b)
+          ? checkForUserPrograms(a, userPrograms) ===
+            checkForUserPrograms(b, userPrograms)
             ? 0
-            : checkForUserPrograms(a)
+            : checkForUserPrograms(a, userPrograms)
             ? -1
             : 1
-          : checkForUserPrograms(a) === checkForUserPrograms(b)
+          : checkForUserPrograms(a, userPrograms) ===
+            checkForUserPrograms(b, userPrograms)
           ? 0
-          : checkForUserPrograms(a)
+          : checkForUserPrograms(a, userPrograms)
           ? 1
           : -1;
       case "name":

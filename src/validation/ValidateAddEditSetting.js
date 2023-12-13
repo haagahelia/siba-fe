@@ -5,7 +5,7 @@ export async function validate(values) {
   const errors = {};
   const regDescription = new RegExp(/^[A-Za-zäöåÄÖÅ0-9\s-]*$/);
   const regNumberValue = new RegExp(/^[0-9]+$/);
-  const regTextValue = new RegExp(/^[A-Za-zäöåÄÖÅ0-9\s-]*$/);
+  const regTextValue = new RegExp(/^[A-Za-zäöåÄÖÅ0-9\s/,-]*$/);
 
   let settingList = [];
 
