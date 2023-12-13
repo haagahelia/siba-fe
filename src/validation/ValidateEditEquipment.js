@@ -1,9 +1,8 @@
-import { vF_regName } from "./Validate_GenericRegexps";
+import { vF_regDescription, vF_regName } from "./Validate_GenericRegexps";
 
 export default function ValidateEditEquipment(values) {
   const errors = {};
   const { name, priority, description } = values;
-  const regDescription = new RegExp(/^[A-Za-zäöåÄÖÅ0-9\s\\"?.,:-]*$/);
 
   if (!name) {
     errors.name = "Equipment name required";
@@ -19,8 +18,8 @@ export default function ValidateEditEquipment(values) {
     errors.priority = "Priority must be bigger than zero";
   }
 
-  if (!regDescription.test(description)) {
-    errors.description = "Invalid characters in the description";
+  if (!vF_regDescription.regExp.test(description)) {
+    errors.description = vF_regDescription.errorMessageFunction("Description");
   }
 
   return errors;

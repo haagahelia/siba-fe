@@ -1,10 +1,10 @@
 import dao from "../ajax/dao";
 import Logger from "../logger/logger";
 import {
-  regNumberCountPlus,
   requiredFieldErrorMessageFunction,
   vF_regDescription,
   vF_regName,
+  vF_regNumberCountPlus,
   vF_regNumberDecimalOnePlus,
   vF_regTimetableTime,
 } from "./Validate_GenericRegexps";
@@ -44,7 +44,7 @@ export async function validate(values) {
   };
 
   if (!name) {
-    errors.name = "Required field";
+    errors.name = requiredFieldErrorMessageFunction("Name");
   } else if (await getSpaceNames()) {
     errors.name = "The name already exists";
   } else if (name.length < 2 || name.length > 255) {
@@ -71,7 +71,7 @@ export async function validate(values) {
     errors.personLimit = "'Person limit': is a required field\n";
   } else if (personLimit <= 0) {
     errors.personLimit = "'Person limit': cannot be less than 0\n";
-  } else if (!regNumberCountPlus.test(personLimit)) {
+  } else if (!vF_regNumberCountPlus.regExp.test(personLimit)) {
     errors.personLimit = "'Person limit': only numbers allowed\n";
   }
 

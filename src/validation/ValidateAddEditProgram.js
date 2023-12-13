@@ -18,7 +18,7 @@ export async function validate(values) {
   };
 
   if (!values.name) {
-    errors.name = "Required field";
+    errors.name = requiredFieldErrorMessageFunction("Name");
   } else if (await getProgramNames()) {
     errors.name = "The name already exists";
   } else if (values.name.length < 2 || values.name.length > 255) {

@@ -1,9 +1,12 @@
 import dao from "../ajax/dao";
-import { vF_regName } from "./Validate_GenericRegexps";
+import {
+  requiredFieldErrorMessageFunction,
+  vF_regDescription,
+  vF_regName,
+} from "./Validate_GenericRegexps";
 
 export async function validate(values) {
   const errors = {};
-  const regDescription = new RegExp(/^[A-Za-zäöåÄÖÅ0-9\s-]*$/);
 
   let departmentList = [];
 
@@ -19,7 +22,7 @@ export async function validate(values) {
   };
 
   if (!values.name) {
-    errors.name = "Required field";
+    errors.name = requiredFieldErrorMessageFunction("Name");
   } else if (await getDepartmentNames()) {
     errors.name = "The name already exists";
   } else if (values.name.length < 2 || values.name.length > 255) {
@@ -31,8 +34,8 @@ export async function validate(values) {
   if (values.description.length > 16000) {
     errors.description =
       "The description must be maximum 16000 characters long";
-  } else if (!regDescription.test(values.description)) {
-    errors.description = "Only letters, numbers and '-' allowed";
+  } else if (!vF_regDescription.regExp.test(values.description)) {
+    errors.description = vF_regDescription.errorMessageFunction("Description");
   }
 
   return errors;

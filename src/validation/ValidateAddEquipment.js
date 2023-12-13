@@ -1,9 +1,9 @@
 import dao from "../ajax/dao";
+import { vF_regDescription } from "./Validate_GenericRegexps";
 
 export default async function ValidateAddEquipment(values) {
   const errors = {};
   const { name, priority, description, isMovable } = values;
-  const regDescription = new RegExp(/^[A-Za-zäöåÄÖÅ0-9\s\\"?.,:/-]*$/);
 
   const isDuplicatedName = async function () {
     let equipmentList = [];
@@ -35,8 +35,8 @@ export default async function ValidateAddEquipment(values) {
     errors.description = "Description name required.";
   } else if (description.length < 2 || description.length > 255) {
     errors.description = "Description needs to be between 2 and 255 characters";
-  } else if (!regDescription.test(description)) {
-    errors.description = "Invalid characters in description.";
+  } else if (!vF_regDescription.regExp.test(description)) {
+    errors.description = vF_regDescription.errorMessageFunction("Description");
   }
 
   if (isMovable === undefined || isMovable === null) {
