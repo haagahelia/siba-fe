@@ -1,10 +1,10 @@
 import dao from "../ajax/dao";
 import {
-  regDescription,
-  regName,
   regNumberCountPlus,
-  regNumberDecimalOnePlus,
   requiredFieldErrorMessageFunction,
+  vF_regDescription,
+  vF_regName,
+  vF_regNumberDecimalOnePlus,
   vF_regTimetableTime,
 } from "./Validate_GenericRegexps";
 
@@ -45,24 +45,22 @@ export default async function ValidateAddSpace(values) {
     errors.name = "'Name': already exists in the building\n";
   } else if (name.length < 2 || name.length > 255) {
     errors.name = "'Name': should be between 2 and 255 characters.\n";
-  } else if (!regName.test(values.name)) {
-    errors.name =
-      "'Name': only letters, numbers and some punctuation characters is allowed\n";
+  } else if (!vF_regName.regExp.test(values.name)) {
+    errors.name = vF_regName.errorMessageFunction("Name");
   }
 
   if (!area) {
     errors.area = requiredFieldErrorMessageFunction("Area");
   } else if (values.area <= 0) {
     errors.area = "'Area': cannot be less than 0\n";
-  } else if (!regNumberDecimalOnePlus.test(values.area)) {
-    errors.area =
-      "'Area': only numbers with a maximum of two decimal places are allowed\n";
+  } else if (!vF_regNumberDecimalOnePlus.regExp.test(values.area)) {
+    errors.area = vF_regNumberDecimalOnePlus.errorMessageFunction("Area");
   }
 
   if (info.length > 16000) {
     errors.info = "'Info': maximum 16000 characters long\n";
-  } else if (!regDescription.test(values.info)) {
-    errors.info = "'Info': only letters, numbers and '-' are allowed\n";
+  } else if (!vF_regDescription.regExp.test(values.info)) {
+    errors.info = vF_regDescription.errorMessageFunction("Info");
   }
 
   if (!personLimit) {

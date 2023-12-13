@@ -1,11 +1,11 @@
 import dao from "../ajax/dao";
 import Logger from "../logger/logger";
 import {
-  regDescription,
-  regName,
   regNumberCountPlus,
-  regNumberDecimalOnePlus,
   requiredFieldErrorMessageFunction,
+  vF_regDescription,
+  vF_regName,
+  vF_regNumberDecimalOnePlus,
   vF_regTimetableTime,
 } from "./Validate_GenericRegexps";
 
@@ -49,22 +49,22 @@ export async function validate(values) {
     errors.name = "The name already exists";
   } else if (name.length < 2 || name.length > 255) {
     errors.name = "The name must be 2-255 characters long";
-  } else if (!regName.test(name)) {
-    errors.name = "Only letters, numbers, and '-' allowed";
+  } else if (!vF_regName.regExp.test(name)) {
+    errors.name = vF_regName.errorMessageFunction("Name");
   }
 
   if (!area) {
-    errors.area = "Required field";
+    errors.area = requiredFieldErrorMessageFunction("Area");
   } else if (area <= 0) {
     errors.area = "The required quantity cannot be 0";
-  } else if (!regNumberDecimalOnePlus.test(area)) {
-    errors.area = "Only numbers allowed & format .00 allowed";
+  } else if (!vF_regNumberDecimalOnePlus.regExp.test(area)) {
+    errors.area = vF_regNumberDecimalOnePlus.errorMessageFunction("Area");
   }
 
   if (info.length > 16000) {
     errors.info = "'Info': maximum 16000 characters long\n";
-  } else if (!regDescription.test(info)) {
-    errors.info = "'Info': only letters, numbers and '-' are allowed\n";
+  } else if (!vF_regDescription.regExp.test(info)) {
+    errors.info = vF_regDescription.errorMessageFunction("Info");
   }
 
   if (!values.personLimit) {

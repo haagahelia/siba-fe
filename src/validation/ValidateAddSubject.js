@@ -1,10 +1,10 @@
 import dao from "../ajax/dao";
 import Logger from "../logger/logger";
 import {
-  regName,
   regNumberCountPlus,
   regNumberDecimalOnePlus,
   regTimeLengthHoursAndMinutes,
+  vF_regName,
 } from "./Validate_GenericRegexps";
 
 export async function validate(values, allocRoundId) {
@@ -33,9 +33,8 @@ export async function validate(values, allocRoundId) {
     errors.name = "The name already exists";
   } else if (values.name.length < 2 || values.name.length > 255) {
     errors.name = "The name must be 2-255 characters long";
-  } else if (!regName.test(values.name)) {
-    errors.name =
-      "Only letters, numbers and some punctuation characters allowed";
+  } else if (!vF_regName.regExp.test(values.name)) {
+    errors.name = vF_regName.errorMessageFunction("Name");
   }
   if (!values.groupSize) {
     errors.groupSize = "Required field";
