@@ -1,9 +1,9 @@
 import dao from "../ajax/dao";
 import {
-  regName,
   regNumberCountPlus,
   requiredFieldErrorMessageFunction,
   vF_regDescription,
+  vF_regName,
   vF_regNumberDecimalOnePlus,
   vF_regTimetableTime,
 } from "./Validate_GenericRegexps";
@@ -45,9 +45,8 @@ export default async function ValidateAddSpace(values) {
     errors.name = "'Name': already exists in the building\n";
   } else if (name.length < 2 || name.length > 255) {
     errors.name = "'Name': should be between 2 and 255 characters.\n";
-  } else if (!regName.test(values.name)) {
-    errors.name =
-      "'Name': only letters, numbers and some punctuation characters is allowed\n";
+  } else if (!vF_regName.regExp.test(values.name)) {
+    errors.name = vF_regName.errorMessageFunction("Name");
   }
 
   if (!area) {

@@ -1,10 +1,10 @@
 import dao from "../ajax/dao";
 import Logger from "../logger/logger";
 import {
-  regName,
   regNumberCountPlus,
   requiredFieldErrorMessageFunction,
   vF_regDescription,
+  vF_regName,
   vF_regNumberDecimalOnePlus,
   vF_regTimetableTime,
 } from "./Validate_GenericRegexps";
@@ -49,8 +49,8 @@ export async function validate(values) {
     errors.name = "The name already exists";
   } else if (name.length < 2 || name.length > 255) {
     errors.name = "The name must be 2-255 characters long";
-  } else if (!regName.test(name)) {
-    errors.name = "Only letters, numbers, and '-' allowed";
+  } else if (!vF_regName.regExp.test(name)) {
+    errors.name = vF_regName.errorMessageFunction("Name");
   }
 
   if (!area) {

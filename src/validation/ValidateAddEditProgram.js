@@ -1,9 +1,8 @@
 import dao from "../ajax/dao";
+import { vF_regName } from "./Validate_GenericRegexps";
 
 export async function validate(values) {
   const errors = {};
-  const regName = new RegExp(/^[A-Za-zäöåÄÖÅ0-9\s-]*$/);
-  
 
   let programList = [];
 
@@ -24,10 +23,9 @@ export async function validate(values) {
     errors.name = "The name already exists";
   } else if (values.name.length < 2 || values.name.length > 255) {
     errors.name = "The name must be 2-255 characters long";
-  } else if (!regName.test(values.name)) {
-    errors.name = "Only letters, numbers and '-' allowed";
+  } else if (!vF_regName.regExp.test(values.name)) {
+    errors.name = vF_regName.errorMessageFunction("Name");
   }
-
 
   return errors;
 }
