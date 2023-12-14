@@ -12,8 +12,14 @@ export default function ResetPasswordView() {
   const { id, token } = useParams();
   const navigate = useNavigate();
   const [password, setPassword] = useState("");
+  const [rePassword, setRePassword] = useState("");
 
   const handleReset = async () => {
+    if (password !== rePassword) {
+      alert("Passwords do not match. Please re-enter.");
+      return;
+    }
+
     const response = await fetch(
       `http://localhost:8764/api/user/reset-password/${id}/${token}`,
       {
@@ -27,7 +33,6 @@ export default function ResetPasswordView() {
     );
 
     if (response.status === 200) {
-      navigate("/login");
       alert("Congratulations! Password updated successfully.");
     }
   };
@@ -43,6 +48,14 @@ export default function ResetPasswordView() {
               type="password"
               onChange={(event) => setPassword(event.target.value)}
               placeholder="New Password"
+            />
+          </Grid>
+          <Grid>
+            <TextField
+              value={rePassword}
+              type="password"
+              onChange={(event) => setRePassword(event.target.value)}
+              placeholder="Type Password again"
             />
           </Grid>
           <Button onClick={handleReset}>Reset Password</Button>
