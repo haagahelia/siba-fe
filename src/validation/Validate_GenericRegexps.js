@@ -1,5 +1,5 @@
 export const vF_regName = {
-  regExp: new RegExp(/^[A-Za-zäöåÄÖÅ0-9\s/,-]*$/),
+  regExp: new RegExp(/^[A-Za-zäöåÄÖÅ0-9\(\)\s\/,-]*$/),
   hint: "A-ö big and small letters, numbers and some punctuation characters allowed",
   errorMessageFunction: (fieldName) =>
     genericErrorMessageFunction(
@@ -9,7 +9,7 @@ export const vF_regName = {
 };
 
 export const vF_regDescription = {
-  regExp: new RegExp(/^[A-Za-zäöåÄÖÅ0-9\s/,-]*$/),
+  regExp: new RegExp(/^[A-Za-zäöåÄÖÅ0-9\(\)\s\/,.:-]*$/),
   hint: "A-ö big and small letters, numbers and some punctuation characters allowed",
   errorMessageFunction: (fieldName) =>
     genericErrorMessageFunction(

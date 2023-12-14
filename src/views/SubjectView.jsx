@@ -188,7 +188,7 @@ export default function SubjectView() {
             <CardHeader
               title={
                 <>
-                  Lessons -
+                  Lessons in allocation -
                   <span className="allocRoundHeader">
                     {` ${allocRoundContext.allocRoundId} : ${allocRoundContext.allocRoundName}`}
                   </span>

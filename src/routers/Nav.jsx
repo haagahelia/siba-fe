@@ -12,7 +12,7 @@ import Container from "@mui/material/Container";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import Toolbar from "@mui/material/Toolbar";
-import { useContext, useState, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { BrowserRouter, NavLink, Route, Routes } from "react-router-dom";
 import { AppContext } from "../AppContext";
 import { AllocRoundContext } from "../AppContext.js";
@@ -53,24 +53,7 @@ export default function NavBar() {
       showForCurrentUser: false,
       isLogin: false,
     },
-    {
-      name: "Lessons",
-      href: "/subject",
-      forRoles: ["admin", "planner", "statist"],
-      showForCurrentUser: false,
-    },
-    {
-      name: "Allocation",
-      href: "/allocation",
-      forRoles: ["admin"],
-      showForCurrentUser: false,
-    },
-    {
-      name: "Buildings",
-      href: "/building",
-      forRoles: ["admin", "planner", "statist"],
-      showForCurrentUser: false,
-    },
+
     {
       name: "Departments",
       href: "/department",
@@ -78,8 +61,15 @@ export default function NavBar() {
       showForCurrentUser: false,
     },
     {
-      name: "Equipment",
-      href: "/equipment",
+      name: "Programs",
+      href: "/program",
+      forRoles: ["admin", "planner", "statist"],
+      showForCurrentUser: false,
+    },
+
+    {
+      name: "Buildings",
+      href: "/building",
       forRoles: ["admin", "planner", "statist"],
       showForCurrentUser: false,
     },
@@ -90,11 +80,25 @@ export default function NavBar() {
       showForCurrentUser: false,
     },
     {
-      name: "Programs",
-      href: "/program",
+      name: "Equipment",
+      href: "/equipment",
       forRoles: ["admin", "planner", "statist"],
       showForCurrentUser: false,
     },
+
+    {
+      name: "Allocation",
+      href: "/allocation",
+      forRoles: ["admin"],
+      showForCurrentUser: false,
+    },
+    {
+      name: "Lessons",
+      href: "/subject",
+      forRoles: ["admin", "planner", "statist"],
+      showForCurrentUser: false,
+    },
+
     {
       name: "Program Results",
       href: "/programresult",
@@ -167,8 +171,6 @@ export default function NavBar() {
   );
 
   const [isDropdownVisible, setIsDropdownVisible] = useState(false);
-  
-  
 
   // Called to produce the drop-down menu items
   const renderDropdownMenu = (page, variant) => {
@@ -263,7 +265,6 @@ export default function NavBar() {
     }
   };
 
-
   const handleLoginChange = () => {
     setLoggedIn(
       localStorage.getItem("email") ? localStorage.getItem("email") : "No more",
@@ -306,14 +307,18 @@ export default function NavBar() {
                       .filter((page) => {
                         // For admin users, show all options
                         if (roles.admin === "1") {
-                          return ["Reset Data", "Settings", "Log Out"].includes(page.name);
+                          return ["Reset Data", "Settings", "Log Out"].includes(
+                            page.name,
+                          );
                         }
                         // For non-admin users, show only "Log Out"
                         else {
                           return page.name === "Log Out";
                         }
                       })
-                      .map((page) => renderDropdownMenu(page, "navBarDropDownLinks"))}
+                      .map((page) =>
+                        renderDropdownMenu(page, "navBarDropDownLinks"),
+                      )}
                   </div>
                 )}
               </ListItem>
