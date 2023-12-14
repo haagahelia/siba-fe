@@ -12,7 +12,7 @@ import Container from "@mui/material/Container";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import Toolbar from "@mui/material/Toolbar";
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { BrowserRouter, NavLink, Route, Routes } from "react-router-dom";
 import { AppContext } from "../AppContext";
 import { AllocRoundContext } from "../AppContext.js";
@@ -68,7 +68,7 @@ export default function NavBar() {
     {
       name: "Buildings",
       href: "/building",
-      forRoles: ["admin", "statist"],
+      forRoles: ["admin", "planner", "statist"],
       showForCurrentUser: false,
     },
     {
@@ -167,6 +167,8 @@ export default function NavBar() {
   );
 
   const [isDropdownVisible, setIsDropdownVisible] = useState(false);
+  
+  
 
   // Called to produce the drop-down menu items
   const renderDropdownMenu = (page, variant) => {
@@ -261,6 +263,7 @@ export default function NavBar() {
     }
   };
 
+
   const handleLoginChange = () => {
     setLoggedIn(
       localStorage.getItem("email") ? localStorage.getItem("email") : "No more",
@@ -300,14 +303,17 @@ export default function NavBar() {
                 {isDropdownVisible && (
                   <div className="dropDown">
                     {sibaPages
-                      .filter((page) =>
-                        ["Reset Data", "Settings", "Log Out"].includes(
-                          page.name,
-                        ),
-                      )
-                      .map((page) =>
-                        renderDropdownMenu(page, "navBarDropDownLinks"),
-                      )}
+                      .filter((page) => {
+                        // For admin users, show all options
+                        if (roles.admin === "1") {
+                          return ["Reset Data", "Settings", "Log Out"].includes(page.name);
+                        }
+                        // For non-admin users, show only "Log Out"
+                        else {
+                          return page.name === "Log Out";
+                        }
+                      })
+                      .map((page) => renderDropdownMenu(page, "navBarDropDownLinks"))}
                   </div>
                 )}
               </ListItem>
