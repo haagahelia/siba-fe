@@ -5,10 +5,11 @@ import { useFormik } from "formik";
 import React, { useContext, useState } from "react";
 import { AppContext } from "../../AppContext";
 import dao from "../../ajax/dao";
+import Logger from "../../logger/logger";
 import { validate } from "../../validation/ValidateAddAllocRound";
 import AlertBox from "../common/AlertBox";
 import ConfirmationDialog from "../common/ConfirmationDialog";
-import CopyAllocRoundForm from "./CopyAllocRoundForm";
+import CopyAllocRoundContainer from "./CopyAllocRoundContainer";
 
 export const CopyAllocRound = ({ allAllocRoundsList }) => {
   const { userId } = useContext(AppContext);
@@ -35,7 +36,8 @@ export const CopyAllocRound = ({ allAllocRoundsList }) => {
     validate,
     onSubmit: (values) => {
       setDialogOptions({
-        title: `Are you sure you want to copy allocation ${values.copiedAllocRoundId} as ${values.name}?`,
+        title: `Are you sure you want to copy allocation ${values.copiedAllocRoundId}
+           as ${values.name}?`,
         content: `By clicking continue, ${values.name} will be created as separate copy. With it's subjects and subjectEquipments`,
         onConfirm: () => handleCopyAllocRoundSubmit(values),
       });
@@ -56,7 +58,10 @@ export const CopyAllocRound = ({ allAllocRoundsList }) => {
     event.preventDefault();
     const { name, description, copiedAllocRoundId } = formik.values;
 
-    console.log(name, description, copiedAllocRoundId, userId);
+    Logger.debug(
+      `Trying to create a copy of alloc round with: ${name},${description},${copiedAllocRoundId},${userId}`,
+    );
+
     const response = await dao.copyAllocRound(
       name,
       description,
@@ -64,13 +69,14 @@ export const CopyAllocRound = ({ allAllocRoundsList }) => {
       copiedAllocRoundId,
     );
 
-    console.log("Response Data:", response.data);
+    Logger.debug(`Response Data: ${response.data}`);
 
     if (response.success) {
+      const idOfNewAllocation = response.data.returnedNumberValue;
       setAlertOptions({
         severity: "success",
         title: "Success",
-        message: `Existing allocation ${copiedAllocRoundId} copied as ${name} successfully.`,
+        message: `Existing allocation ${copiedAllocRoundId} copied \n as ${idOfNewAllocation} : ${name} successfully.`,
       });
       resetForm();
     } else {
@@ -99,7 +105,7 @@ export const CopyAllocRound = ({ allAllocRoundsList }) => {
       <Card variant="outlined">
         <CardContent>
           <CardHeader title="Copy Existing Allocation Round" />
-          <CopyAllocRoundForm
+          <CopyAllocRoundContainer
             formik={formik}
             submitValues={formik.values}
             setInitialAllocRound={setInitialEmptyAllocRound}
