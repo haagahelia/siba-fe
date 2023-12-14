@@ -1,5 +1,5 @@
 import { useFormik } from "formik";
-import { useEffect, useState, } from "react";
+import { useEffect, useState } from "react";
 import {
   ajaxRequestErrorHandler,
   getFunctionName,
@@ -44,7 +44,7 @@ export default function EditSubEquipContainer({
     // if the initial values change
     enableReinitialize: true,
     initialValues: initialEquipValues,
-    validate,
+    validate: validate,
     onSubmit: (values) => {
       setDialogOptions({
         title: `Are you sure you want to edit ${initialEquipValues.name}?`,

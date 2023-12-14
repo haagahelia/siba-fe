@@ -49,7 +49,7 @@ export default function EditSubjectForm({
                       formik.touched.name && formik.errors.name ? true : false
                     }
                     name="name"
-                    label="The name of the lesson"
+                    label="Name of the lesson"
                     defaultValue={formik.initialValues?.name}
                     variant="outlined"
                     value={formik.values?.name}
