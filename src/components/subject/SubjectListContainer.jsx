@@ -17,10 +17,11 @@ export default function SubjectListContainer({
   return (
     <Container maxWidth="xl">
       <SingleSubjectDialog
-        getAllSubjects={getAllSubjects}
-        singleSubject={shownSubject ? shownSubject : null}
         open={open}
         setOpen={setOpen}
+        getAllSubjects={getAllSubjects}
+        singleSubject={shownSubject ? shownSubject : null}
+        userPrograms={userPrograms}
       />
 
       <Grid container spacing={2}>

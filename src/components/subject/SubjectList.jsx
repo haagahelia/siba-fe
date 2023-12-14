@@ -90,9 +90,9 @@ export default function SubjectList({
       <SingleSubjectDialog
         open={open}
         setOpen={setOpen}
+        getAllSubjects={getAllSubjects}
         singleSubject={singleSubject}
         setSingleSubject={setSingleSubject}
-        getAllSubjects={getAllSubjects}
         userPrograms={userPrograms}
       />
       <Box>
