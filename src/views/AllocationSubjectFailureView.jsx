@@ -64,6 +64,7 @@ export default function AllocationSubjectFailureView() {
   });
 
   const getUnAlloc = async function (id) {
+    Logger.debug(`(1) Alloc id for un allocable subjests: ${id}`);
     const { httpStatus, data } = await dao.getUnAllocableSubjects(id);
     if (httpStatus !== 200) {
       ajaxRequestErrorHandler(
@@ -144,6 +145,7 @@ export default function AllocationSubjectFailureView() {
 
   useEffect(() => {
     (async (id) => {
+      Logger.debug(`(2) Alloc id for un allocable subjests: ${id}`);
       const { httpStatus, data } = await dao.getUnAllocableSubjects(id);
       if (httpStatus !== 200) {
         ajaxRequestErrorHandler(
