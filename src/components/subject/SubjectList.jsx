@@ -49,8 +49,8 @@ export default function SubjectList({
           : -1;
       case "name":
         return order === "asc"
-          ? a.name.localeCompare(b.name)
-          : b.name.localeCompare(a.name);
+          ? a.name.localeCompare(b.name, "fi-FI")
+          : b.name.localeCompare(a.name, "fi-FI");
       case "groupSize":
         return order === "asc"
           ? a.groupSize - b.groupSize
@@ -63,14 +63,18 @@ export default function SubjectList({
         return order === "asc"
           ? a.sessionLength - b.sessionLength
           : b.sessionLength - a.sessionLength;
+      case "sessionCount":
+        return order === "asc"
+          ? a.sessionCount - b.sessionCount
+          : b.sessionCount - a.sessionCount;
       case "programName":
         return order === "asc"
-          ? a.programName.localeCompare(b.programName)
-          : b.programName.localeCompare(a.programName);
+          ? a.programName.localeCompare(b.programName, "fi-FI")
+          : b.programName.localeCompare(a.programName, "fi-FI");
       case "spaceTypeName":
         return order === "asc"
-          ? a.spaceTypeName.localeCompare(b.spaceTypeName)
-          : b.spaceTypeName.localeCompare(a.spaceTypeName);
+          ? a.spaceTypeName.localeCompare(b.spaceTypeName, "fi-FI")
+          : b.spaceTypeName.localeCompare(a.spaceTypeName, "fi-FI");
       default:
         return 0;
     }
@@ -119,7 +123,7 @@ export default function SubjectList({
                       direction={order}
                       onClick={() => handleRequestSort("groupSize")}
                     >
-                      Group Size
+                      Group size
                     </TableSortLabel>
                   </TableCell>
                   <TableCell>
@@ -128,7 +132,7 @@ export default function SubjectList({
                       direction={order}
                       onClick={() => handleRequestSort("groupCount")}
                     >
-                      Group Count
+                      Group count
                     </TableSortLabel>
                   </TableCell>
                   <TableCell>
@@ -137,7 +141,16 @@ export default function SubjectList({
                       direction={order}
                       onClick={() => handleRequestSort("sessionLength")}
                     >
-                      Lesson Length
+                      Lesson length
+                    </TableSortLabel>
+                  </TableCell>
+                  <TableCell>
+                    <TableSortLabel
+                      active={orderBy === "sessionCount"}
+                      direction={order}
+                      onClick={() => handleRequestSort("sessionCount")}
+                    >
+                      Session count
                     </TableSortLabel>
                   </TableCell>
                   <TableCell>
@@ -155,7 +168,7 @@ export default function SubjectList({
                       direction={order}
                       onClick={() => handleRequestSort("spaceTypeName")}
                     >
-                      Space Type
+                      Space type
                     </TableSortLabel>
                   </TableCell>
                 </TableRow>
@@ -190,6 +203,7 @@ export default function SubjectList({
                     <TableCell>{value.groupSize}</TableCell>
                     <TableCell>{value.groupCount}</TableCell>
                     <TableCell>{value.sessionLength}</TableCell>
+                    <TableCell>{value.sessionCount}</TableCell>
                     <TableCell>{value.programName}</TableCell>
                     <TableCell>{value.spaceTypeName}</TableCell>
                   </TableRow>

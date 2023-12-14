@@ -48,20 +48,20 @@ export default function AllocRoundList({
         return order === "asc" ? a.id - b.id : b.id - a.id;
       case "Name":
         return order === "asc"
-          ? a.name.localeCompare(b.name)
-          : b.name.localeCompare(a.name);
+          ? a.name.localeCompare(b.name, "fi-FI")
+          : b.name.localeCompare(a.name, "fi-FI");
       case "Description":
         return order === "asc"
-          ? a.description.localeCompare(b.description)
-          : b.description.localeCompare(a.description);
+          ? a.description.localeCompare(b.description, "fi-FI")
+          : b.description.localeCompare(a.description, "fi-FI");
       case "Created":
         return order === "asc"
-          ? a.date.localeCompare(b.date)
-          : b.date.localeCompare(a.date);
+          ? a.date.localeCompare(b.date, "fi-FI")
+          : b.date.localeCompare(a.date, "fi-FI");
       case "LastModified":
         return order === "asc"
-          ? a.lastModified.localeCompare(b.lastModified)
-          : b.lastModified.localeCompare(a.lastModified);
+          ? a.lastModified.localeCompare(b.lastModified, "fi-FI")
+          : b.lastModified.localeCompare(a.lastModified, "fi-FI");
       default:
         return 0;
     }

@@ -53,12 +53,12 @@ export default function DepartmentList({
           return order === "asc" ? a.id - b.id : b.id - a.id;
         case "Name":
           return order === "asc"
-            ? a.name.localeCompare(b.name)
-            : b.name.localeCompare(a.name);
+            ? a.name.localeCompare(b.name, "fi-FI")
+            : b.name.localeCompare(a.name, "fi-FI");
         case "Description":
           return order === "asc"
-            ? a.description.localeCompare(b.description)
-            : b.description.localeCompare(a.description);
+            ? a.description.localeCompare(b.description, "fi-FI")
+            : b.description.localeCompare(a.description, "fi-FI");
         default:
           return 0;
       }

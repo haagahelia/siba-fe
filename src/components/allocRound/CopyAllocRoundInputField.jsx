@@ -19,13 +19,9 @@ export default function CopyAllocRoundInputField({
     );
 
     setSelectedAllocation(selectedAllocationId);
-
     // Update formik state with the details of the selected allocation
     if (selectedAllocation) {
-      formik.setFieldValue("name", selectedAllocation.name);
-      formik.setFieldValue("description", selectedAllocation.description);
       formik.setFieldValue("copiedAllocRoundId", selectedAllocation.id);
-      // Update other fields as necessary
     }
   };
 
@@ -38,7 +34,10 @@ export default function CopyAllocRoundInputField({
           label="The name of the allocation round"
           defaultValue={formik.initialValues?.name}
           variant="outlined"
-          onChange={formik.handleChange("name")}
+          onChange={(event) => {
+            formik.handleChange("name");
+            formik.setFieldValue("name", event.target.value);
+          }}
           onBlur={formik.handleBlur("name")}
           helperText={
             formik.touched.name && formik.errors.name
@@ -55,10 +54,13 @@ export default function CopyAllocRoundInputField({
               : false
           }
           name="description"
-          label="Description "
+          label="Description"
           defaultValue={formik.initialValues?.description}
           variant="outlined"
-          onChange={formik.handleChange}
+          onChange={(event) => {
+            formik.handleChange("description");
+            formik.setFieldValue("description", event.target.value);
+          }}
           onBlur={formik.handleBlur("description")}
           helperText={
             formik.touched.description && formik.errors.description
