@@ -1,6 +1,7 @@
 // The Navigation Bar Component
 import {
   faArrowRightFromBracket,
+  faArrowsRotate,
   faGear,
   faTriangleExclamation,
 } from "@fortawesome/free-solid-svg-icons";
@@ -148,6 +149,14 @@ export default function NavBar() {
       showForCurrentUser: false,
     },
     {
+      name: "Change Password",
+      href: `/reset-password/${localStorage.getItem(
+        "userId",
+      )}/${localStorage.getItem("sessionToken")}`,
+      forRoles: ["admin", "planner", "statist"],
+      showForCurrentUser: false,
+    },
+    {
       name: "Log Out",
       href: "/login",
       forRoles: ["admin", "planner", "statist"],
@@ -194,6 +203,12 @@ export default function NavBar() {
             <span className="navIconSpacing">
               {" "}
               <FontAwesomeIcon icon={faGear} />{" "}
+            </span>
+          )}
+          {page.name === "Change Password" && (
+            <span className="navIconSpacing">
+              {" "}
+              <FontAwesomeIcon icon={faArrowsRotate} />{" "}
             </span>
           )}
           {page.name === "Log Out" && (
@@ -282,6 +297,7 @@ export default function NavBar() {
           page.showForCurrentUser &&
           page.name !== "Reset Data" &&
           page.name !== "Settings" &&
+          page.name !== "Change Password" &&
           page.name !== "Log Out",
       )
       .map((page) => {
@@ -304,10 +320,11 @@ export default function NavBar() {
                 {isDropdownVisible && (
                   <div className="dropDown">
                     {sibaPages
-                      .filter((page) => {
+                      .filter((page) =>
+                       {
                         // For admin users, show all options
                         if (roles.admin === "1") {
-                          return ["Reset Data", "Settings", "Log Out"].includes(
+                          return ["Reset Data", "Settings","Change Password", "Log Out"].includes(
                             page.name,
                           );
                         }
