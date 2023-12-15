@@ -41,8 +41,8 @@ export default function BuildingList({ getAllBuildings, paginateBuildings }) {
     switch (orderBy) {
       case "Name":
         return order === "asc"
-          ? a.name.localeCompare(b.name)
-          : b.name.localeCompare(a.name);
+          ? a.name.localeCompare(b.name, "fi-FI")
+          : b.name.localeCompare(a.name, "fi-FI");
       default:
         return 0;
     }

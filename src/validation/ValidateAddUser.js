@@ -1,4 +1,5 @@
 import dao from "../ajax/dao";
+import { requiredFieldErrorMessageFunction } from "./Validate_GenericRegexps";
 
 export default async function ValidateAddUser(values) {
   const errors = {};
@@ -9,7 +10,7 @@ export default async function ValidateAddUser(values) {
       const { data } = await dao.fetchAllUsers();
       const userList = data || [];
       return userList.some(
-        (user) => user.email.toLowerCase() === email.toLowerCase()
+        (user) => user.email.toLowerCase() === email.toLowerCase(),
       );
     } catch (error) {
       console.error("Error fetching users:", error);
@@ -18,7 +19,7 @@ export default async function ValidateAddUser(values) {
   };
 
   if (!email) {
-    errors.email = "Email required";
+    errors.email = requiredFieldErrorMessageFunction("Email");
   } else if (await isDuplicateUser()) {
     errors.email = "The email address already exists.";
   }
@@ -28,7 +29,8 @@ export default async function ValidateAddUser(values) {
     !values.password.trim() ||
     (isAdmin === 0 && isPlanner === 0 && isStatist === 0)
   ) {
-    errors.general = "Please provide valid email and password, and select at least one role.";
+    errors.general =
+      "Please provide valid email and password, and select at least one role.";
   }
 
   return errors;

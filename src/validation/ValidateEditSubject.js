@@ -55,7 +55,7 @@ export async function validate(values, allocRoundId) {
   } else if (values.groupSize <= 0) {
     errors.groupSize = "Group size cannot be 0";
   } else if (!vF_regNumberCountPlus.regExp.test(values.groupSize)) {
-    errors.groupSize = "Only numbers allowed";
+    errors.groupSize = vF_regNumberCountPlus.errorMessageFunction("Group size");
   }
 
   if (!values.groupCount) {
@@ -63,7 +63,8 @@ export async function validate(values, allocRoundId) {
   } else if (values.groupCount <= 0) {
     errors.groupCount = "The number of groups cannot be 0";
   } else if (!vF_regNumberCountPlus.regExp.test(values.groupCount)) {
-    errors.groupCount = "Only numbers allowed";
+    errors.groupCount =
+      vF_regNumberCountPlus.errorMessageFunction("Group count");
   }
 
   if (!values.sessionLength) {
@@ -80,7 +81,8 @@ export async function validate(values, allocRoundId) {
   } else if (values.sessionCount <= 0) {
     errors.sessionCount = "The number of sessions per week cannot be 0";
   } else if (!vF_regNumberCountPlus.regExp.test(values.sessionCount)) {
-    errors.sessionCount = "Only numbers allowed";
+    errors.sessionCount =
+      vF_regNumberCountPlus.errorMessageFunction("Session count");
   }
 
   if (!values.area) {

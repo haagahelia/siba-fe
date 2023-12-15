@@ -47,8 +47,8 @@ export default function SubjectView() {
     severity: "error",
   });
 
-  const setShownSubject2 = (state) => {
-    setShownSubject(state);
+  const setShownSubject2 = (stateSubject) => {
+    setShownSubject(stateSubject);
   };
 
   Logger.debug("Initial state set.");
@@ -98,11 +98,17 @@ export default function SubjectView() {
         `getUserPrograms: successfully fetched ${data.length} programs.`,
       );
       setUserPrograms(data.map((x) => x.id));
+      Logger.debug(
+        `--------------> ${userPrograms?.length} userPrograms: ${userPrograms}`,
+      );
     }
   };
 
   useEffect(() => {
     const getShownSubjectById = async (subjectIdToShowState) => {
+      Logger.debug(
+        `<-------------- ${userPrograms?.length} userPrograms: ${userPrograms}`,
+      );
       Logger.debug(
         `subjectId: ${subjectIdToShowState} Starting or not? Based on that id.`,
       );
@@ -182,7 +188,7 @@ export default function SubjectView() {
             <CardHeader
               title={
                 <>
-                  Lessons -
+                  Lessons in allocation -
                   <span className="allocRoundHeader">
                     {` ${allocRoundContext.allocRoundId} : ${allocRoundContext.allocRoundName}`}
                   </span>

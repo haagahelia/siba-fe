@@ -12,7 +12,11 @@ import styled from "@mui/material/styles/styled";
 import { useState } from "react";
 import SingleSpaceDialog from "./SingleSpaceDialog";
 
-export default function SpaceList({ shownSpace, getAllSpaces, paginateSpaces }) {
+export default function SpaceList({
+  shownSpace,
+  getAllSpaces,
+  paginateSpaces,
+}) {
   const [open, setOpen] = useState(false);
   const [singleSpace, setSingleSpace] = useState(null);
   const [order, setOrder] = useState("asc");
@@ -28,8 +32,8 @@ export default function SpaceList({ shownSpace, getAllSpaces, paginateSpaces }) 
     switch (orderBy) {
       case "name":
         return order === "asc"
-          ? a.name.localeCompare(b.name)
-          : b.name.localeCompare(a.name);
+          ? a.name.localeCompare(b.name, "fi-FI")
+          : b.name.localeCompare(a.name, "fi-FI");
       case "area":
         return order === "asc" ? a.area - b.area : b.area - a.area;
       default:

@@ -6,12 +6,12 @@ import {
   getFunctionName,
 } from "../../ajax/ajaxRequestErrorHandler";
 import dao from "../../ajax/dao";
+import { useRoleLoggedIn } from "../../hooks/useRoleLoggedIn";
 import Logger from "../../logger/logger";
 import {
   capitalizeFirstLetter,
   validate,
 } from "../../validation/ValidateAddProgram";
-import { useRoleLoggedIn } from "../../hooks/useRoleLoggedIn"
 
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
@@ -20,10 +20,10 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardHeader from "@mui/material/CardHeader";
 import IconButton from "@mui/material/IconButton";
+import { AppContext } from "../../AppContext";
 import AlertBox from "../common/AlertBox";
 import ConfirmationDialog from "../common/ConfirmationDialog";
 import AddProgramForm from "./AddProgramForm";
-import { AppContext } from '../../AppContext';
 
 export default function AddProgramContainer({
   getAllPrograms,
@@ -77,7 +77,7 @@ export default function AddProgramContainer({
       return;
     },
   });
-  
+
   const getDepartmentForSelect = async () => {
     if (roles.admin === "1") {
       Logger.debug("Fetching all Departments for select from server (Admin).");
@@ -92,7 +92,7 @@ export default function AddProgramContainer({
       } else {
         setDepartmentSelectList(data);
       }
-    } else if (roles.planner ==="1") {
+    } else if (roles.planner === "1") {
       Logger.debug("Fetching planner-specific Departments from server.");
       const response = await dao.fetchDepartmentplannerByUserId(userId);
       if (response.success) {
@@ -102,7 +102,6 @@ export default function AddProgramContainer({
       }
     }
   };
-  
 
   useEffect(() => {
     getDepartmentForSelect();

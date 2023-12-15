@@ -30,8 +30,8 @@ export default function UserList({ getAllUsers, paginateUsers }) {
         return order === "asc" ? a.id - b.id : b.id - a.id;
       case "email":
         return order === "asc"
-          ? a.email.localeCompare(b.email)
-          : b.email.localeCompare(a.email);
+          ? a.email.localeCompare(b.email, "fi-FI")
+          : b.email.localeCompare(a.email, "fi-FI");
       default:
         return 0;
     }

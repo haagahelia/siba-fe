@@ -1,34 +1,34 @@
-import React, { useState, useContext } from 'react';
-import { useFormik } from 'formik';
-import { AppContext } from '../../AppContext';
-import dao from '../../ajax/dao';
-import { validate } from '../../validation/ValidateAddAllocRound';
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import CardHeader from '@mui/material/CardHeader';
-import AlertBox from '../common/AlertBox';
-import ConfirmationDialog from '../common/ConfirmationDialog';
-import CopyAllocRoundForm from './CopyAllocRoundForm';
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import CardHeader from "@mui/material/CardHeader";
+import { useFormik } from "formik";
+import React, { useContext, useState } from "react";
+import { AppContext } from "../../AppContext";
+import dao from "../../ajax/dao";
+import Logger from "../../logger/logger";
+import { validate } from "../../validation/ValidateAddAllocRound";
+import AlertBox from "../common/AlertBox";
+import ConfirmationDialog from "../common/ConfirmationDialog";
+import CopyAllocRoundContainer from "./CopyAllocRoundContainer";
 
-export const CopyAllocRound = ({allAllocRoundsList}) => {
-    const { userId } = useContext(AppContext);
-    const [alertOpen, setAlertOpen] = useState(false);
-    const [alertOptions, setAlertOptions] = useState({
-      title: "Error",
-      message: "",
-      severity: "error",
-    });
-    const [dialogOpen, setDialogOpen] = useState(false);
-    const [dialogOptions, setDialogOptions] = useState({
-      title: "Confirm",
-      content: "",
-    });
-    const [initialAllocRound, setInitialAllocRound] = useState({
-      name: "",
-      description: "",
-      copiedAllocRoundId: "",
-    });
-  
+export const CopyAllocRound = ({ allAllocRoundsList }) => {
+  const { userId } = useContext(AppContext);
+  const [alertOpen, setAlertOpen] = useState(false);
+  const [alertOptions, setAlertOptions] = useState({
+    title: "Error",
+    message: "",
+    severity: "error",
+  });
+  const [dialogOpen, setDialogOpen] = useState(false);
+  const [dialogOptions, setDialogOptions] = useState({
+    title: "Confirm",
+    content: "",
+  });
+  const [initialAllocRound, setInitialEmptyAllocRound] = useState({
+    name: "",
+    description: "",
+    copiedAllocRoundId: "",
+  });
 
   const formik = useFormik({
     enableReinitialize: true,
@@ -36,8 +36,9 @@ export const CopyAllocRound = ({allAllocRoundsList}) => {
     validate,
     onSubmit: (values) => {
       setDialogOptions({
-        title: `Are you sure you want to copy ${values.name}?`,
-        content: `By clicking continue, ${values.name} will be copied to the allocation round list`,
+        title: `Are you sure you want to copy allocation ${values.copiedAllocRoundId}
+           as ${values.name}?`,
+        content: `By clicking continue, ${values.name} will be created as separate copy. With it's subjects and subjectEquipments`,
         onConfirm: () => handleCopyAllocRoundSubmit(values),
       });
       setDialogOpen(true);
@@ -45,43 +46,51 @@ export const CopyAllocRound = ({allAllocRoundsList}) => {
   });
 
   const resetForm = () => {
-    setInitialAllocRound({
+    setInitialEmptyAllocRound({
       name: "",
       description: "",
-      copiedAllocRoundId: ""
+      copiedAllocRoundId: -2,
+      userId: -2,
     });
   };
 
-
-
   const handleCopyAllocRoundSubmit = async (event) => {
-    event.preventDefault(); 
+    event.preventDefault();
     const { name, description, copiedAllocRoundId } = formik.values;
-    
-    console.log(name, description, copiedAllocRoundId, userId);
-    const response = await dao.copyAllocRound(name, description, userId, copiedAllocRoundId);
 
-    console.log("Response Data:", response.data);
+    Logger.debug(
+      `Trying to create a copy of alloc round with: ${name},${description},${copiedAllocRoundId},${userId}`,
+    );
+
+    const response = await dao.copyAllocRound(
+      name,
+      description,
+      userId,
+      copiedAllocRoundId,
+    );
+
+    Logger.debug(`Response Data: ${response.data}`);
 
     if (response.success) {
-        setAlertOptions({
+      const idOfNewAllocation = response.data.returnedNumberValue;
+      setAlertOptions({
         severity: "success",
         title: "Success",
-        message: `${name} copied successfully.`,
-        });
+        message: `Existing allocation ${copiedAllocRoundId} copied \n as ${idOfNewAllocation} : ${name} successfully.`,
+      });
+      resetForm();
     } else {
-        setAlertOptions({
+      setAlertOptions({
         severity: "error",
         title: "Error",
         message: "Failed to copy allocation round.",
-        });
+      });
     }
     setAlertOpen(true);
-    resetForm();
   };
   return (
     <>
-    <AlertBox
+      <AlertBox
         alertOpen={alertOpen}
         alertOptions={alertOptions}
         setAlertOpen={setAlertOpen}
@@ -93,18 +102,18 @@ export const CopyAllocRound = ({allAllocRoundsList}) => {
         submit={handleCopyAllocRoundSubmit}
         submitValues={formik.values}
       />
-    <Card variant="outlined">
-      <CardContent>
-        <CardHeader title="Copy Existing Allocation Round" />
-        <CopyAllocRoundForm
-        formik={formik}
-        submitValues={formik.values}
-        setInitialAllocRound={setInitialAllocRound}
-        allAllocRoundsList={allAllocRoundsList}
-        handleCopyAllocRoundSubmit={handleCopyAllocRoundSubmit}
-        />
-      </CardContent>
-    </Card>
+      <Card variant="outlined">
+        <CardContent>
+          <CardHeader title="Copy Existing Allocation Round" />
+          <CopyAllocRoundContainer
+            formik={formik}
+            submitValues={formik.values}
+            setInitialAllocRound={setInitialEmptyAllocRound}
+            allAllocRoundsList={allAllocRoundsList}
+            handleCopyAllocRoundSubmit={handleCopyAllocRoundSubmit}
+          />
+        </CardContent>
+      </Card>
     </>
   );
 };

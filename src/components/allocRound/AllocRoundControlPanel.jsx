@@ -28,8 +28,10 @@ export default function AllocRoundControlPanel({ incrementResetCounter }) {
 
   return (
     <Typography component="p" variant="allocRoundControlPanel">
-      Current allocation round: {allocRoundContext.allocRoundId} &nbsp; After Start and
-      Reset wait for few seconds.
+      Allocation {allocRoundContext.allocRoundId}&nbsp;:&nbsp;
+      {allocRoundContext.allocRoundName} &nbsp; - &nbsp;After 'Start' or 'Reset'
+      wait for a few seconds
+      <br />
       <Button
         type="submit"
         variant="contained"

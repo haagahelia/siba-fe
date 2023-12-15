@@ -47,7 +47,7 @@ export const deleteBuildingById = async (
   buildingId: number,
 ): Promise<boolean> => {
   const response = await remove(`${baseUrl}/building/${buildingId}`);
-  if (response.status === 403) {
+  if (response.status === 403 || response.status === 500) {
     return false;
   }
   const data = await response.json();

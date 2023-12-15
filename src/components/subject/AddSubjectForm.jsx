@@ -69,7 +69,7 @@ export default function AddSubjectForm({
               </Select>
             </FormControl>
             <FormControl fullWidth>
-              <InputLabel>Select subject</InputLabel>
+              <InputLabel>Select subject as template</InputLabel>
               <Select
                 name="copyLesson"
                 label="Copy Existing Lesson"
@@ -95,7 +95,7 @@ export default function AddSubjectForm({
               fullWidth
               error={formik.touched.name && Boolean(formik.errors.name)}
               name="name"
-              label="Name"
+              label="Name of the lesson"
               placeholder="Name..."
               value={formik.values.name}
               onChange={formik.handleChange}

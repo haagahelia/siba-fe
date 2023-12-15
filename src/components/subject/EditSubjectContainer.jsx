@@ -59,6 +59,7 @@ export default function EditSubjectContainer({
   async function submitEditedSubject(values) {
     const capitalName = capitalizeFirstLetter(values.name);
     const editedSubject = {
+      id: values.id,
       name: capitalName,
       groupSize: values.groupSize,
       groupCount: values.groupCount,
@@ -67,7 +68,7 @@ export default function EditSubjectContainer({
       area: values.area,
       programId: values.programId,
       spaceTypeId: values.spaceTypeId ? values.spaceTypeId : null,
-      id: values.id,
+      allocRoundId: allocRoundContext.allocRoundId,
     };
     const result = await dao.editSubject(editedSubject);
     if (!result) {

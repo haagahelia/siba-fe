@@ -10,6 +10,7 @@ import DialogTitle from "@mui/material/DialogTitle";
 import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
 import useTheme from "@mui/material/styles/useTheme";
+import AlertBox from "../common/AlertBox";
 
 export default function EditDepartment({
   singleDepartment,
@@ -22,6 +23,11 @@ export default function EditDepartment({
     name: singleDepartment?.name,
     description: singleDepartment?.description,
   });
+  const [alertOpen, setAlertOpen] = useState(false);
+  const [alertOptions, setAlertOptions] = useState({
+    message: "This is an error alert — check it out!",
+    severity: "error",
+  });
 
   const theme = useTheme();
 
@@ -32,11 +38,24 @@ export default function EditDepartment({
     } else {
       const result = await dao.editDepartment(department);
       if (!result) {
-        alert("Something went wrong");
+        setAlertOptions({
+          severity: "error",
+          title: "Error",
+          message: "Something went wrong - please try again later.",
+        });
+        setAlertOpen(true);
+        return;
       } else {
-        alert(`Department ${department.name} updated`);
+        setAlertOptions({
+          severity: "success",
+          title: "Success!",
+          message: `${department.name} updated successfully.`,
+        });
+        setAlertOpen(true);
         setEditOpen(false);
-        setOpen(false);
+        setTimeout(() => {
+          setOpen(false);
+        }, 1000);
         getAllDepartments();
       }
     }
@@ -44,6 +63,11 @@ export default function EditDepartment({
 
   return (
     <div>
+      <AlertBox
+        alertOpen={alertOpen}
+        alertOptions={alertOptions}
+        setAlertOpen={setAlertOpen}
+      />
       <Button
         variant="contained"
         style={theme.components.MuiButton.editbutton}

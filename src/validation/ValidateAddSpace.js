@@ -68,7 +68,8 @@ export default async function ValidateAddSpace(values) {
   } else if (personLimit <= 0) {
     errors.personLimit = "'Person limit': cannot be less than 0\n";
   } else if (!vF_regNumberCountPlus.regExp.test(personLimit)) {
-    errors.personLimit = "'Person limit': only numbers allowed\n";
+    errors.personLimit =
+      vF_regNumberCountPlus.errorMessageFunction("Person limit");
   }
 
   if (!availableFrom) {

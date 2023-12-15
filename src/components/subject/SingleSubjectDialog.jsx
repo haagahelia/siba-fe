@@ -57,7 +57,7 @@ export default function SingleSubjectDialog({
   useEffect(() => {
     // console.log(`singleSubject?.id${singleSubject?.id}`);
     // console.log(`singleSubject?.name${singleSubject?.name}`);
-    if (singleSubject && typeof singleSubject.id === "number") {
+    if (singleSubject && typeof singleSubject?.id === "number") {
       // console.log(`getEquipmentsBySubId(${singleSubject.id})`);
       setPrograms(checkForUserPrograms(singleSubject, userPrograms));
       getEquipmentsBySubId(singleSubject.id);

@@ -208,7 +208,7 @@ export default function AddSubjectContainer({
           <CardHeader
             title={
               <>
-                Add Lesson -
+                Add Lesson to allocation -
                 <span className="allocRoundHeader">
                   {` ${allocRoundContext.allocRoundId} : ${allocRoundContext.allocRoundName}`}
                 </span>

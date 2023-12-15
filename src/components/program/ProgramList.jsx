@@ -32,12 +32,12 @@ export default function ProgramList({ getAllPrograms, allProgramsList }) {
         switch (orderBy) {
           case "name":
             return order === "asc"
-              ? a.name.localeCompare(b.name)
-              : b.name.localeCompare(a.name);
+              ? a.name.localeCompare(b.name, "fi-FI")
+              : b.name.localeCompare(a.name, "fi-FI");
           case "departmentName":
             return order === "asc"
-              ? a.departmentName.localeCompare(b.departmentName)
-              : b.departmentName.localeCompare(a.departmentName);
+              ? a.departmentName.localeCompare(b.departmentName, "fi-FI")
+              : b.departmentName.localeCompare(a.departmentName, "fi-FI");
           default:
             return 0;
         }
