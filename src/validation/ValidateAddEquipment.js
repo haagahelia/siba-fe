@@ -42,9 +42,10 @@ export default async function ValidateAddEquipment(values) {
     errors.description = vF_regDescription.errorMessageFunction("Description");
   }
 
-  if (isMovable === undefined || isMovable === null) {
+  if (isMovable === undefined || isMovable === null || isMovable === -1) {
     errors.isMovable = requiredFieldErrorMessageFunction("is Movable marking");
   } else if (isMovable !== "1" && isMovable !== "0") {
+    // as string here??? Not yer number?
     errors.isMovable =
       "isMovable needs to be 1 = movable equipment. 0 = unmovable equipment.";
   }
