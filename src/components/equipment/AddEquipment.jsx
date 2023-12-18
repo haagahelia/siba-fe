@@ -75,11 +75,11 @@ export default function AddEquipment({ getAllEquipments }) {
                   <Select
                     name="isMovable"
                     label="Is Movable"
-                    value={equipment.isMovable}
+                    value={equipment.isMovable.toString()}
                     onChange={(event) =>
                       setEquipment({
                         ...equipment,
-                        isMovable: event.target.value,
+                        isMovable: Number(event.target.value),
                       })
                     }
                   >
@@ -126,7 +126,10 @@ export default function AddEquipment({ getAllEquipments }) {
                 </FormControl>
               </Grid>
               <Grid item xs={12}>
-                <Button onClick={() => openDialogBox()} variant="addComponentFormButton">
+                <Button
+                  onClick={() => openDialogBox()}
+                  variant="addComponentFormButton"
+                >
                   Add Equipment
                 </Button>
               </Grid>

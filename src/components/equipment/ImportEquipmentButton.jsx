@@ -26,10 +26,7 @@ export default function ImportEquipmentButton({
       name: equipment.name ? capitalizeFirstLetter(equipment.name) : "",
       priority: equipment.priority ? equipment.priority : "",
       description: equipment.description ? equipment.description : "",
-      isMovable:
-        equipment.isMovable === 0 || equipment.isMovable
-          ? equipment.isMovable.toString()
-          : "",
+      isMovable: equipment.isMovable === 0 || !equipment.isMovable ? 0 : 1,
     };
 
     if (equipmentSet.has(newEquipment.name)) {
