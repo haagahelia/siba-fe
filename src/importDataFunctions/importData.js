@@ -36,7 +36,7 @@ export const importData = async (
     setAlertOptions({
       severity: "error",
       title: "Error!",
-      message: `Something wrong happened. ${failedCount} row failed to add.`,
+      message: `Something went wrong with the import. ${failedCount} row(s) failed to add.`,
     });
     setAlertOpen(true);
   } else {
@@ -50,16 +50,16 @@ export const importData = async (
       setAlertOptions({
         severity: "success",
         title: "Success!",
-        message: `${successCount} row added and ${failedCount} row failed to add.`,
+        message: `${successCount} row(s) added and ${failedCount} row(s) failed to add.`,
       });
       setAlertOpen(true);
     } else {
       setAlertOptions({
         severity: "error",
         title: "Error!",
-        message: `Something wrong happened. ${
+        message: `Something went wrong in the import. ${
           failedCount + successCount
-        } row failed to add.`,
+        } row(s) failed to add.`,
       });
       setAlertOpen(true);
     }

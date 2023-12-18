@@ -101,8 +101,9 @@ export default async function ValidateAddSpace(values) {
 
   if (inUse === undefined && inUse === null) {
     errors.inUse = requiredFieldErrorMessageFunction("In use?");
-  } else if (!["yes", "no", "0", "1", 0, 1, false, true].includes(inUse)) {
-    errors.inUse = "'In use' value must be either: yes/no/'0'/'1'\n";
+  } else if (!["0", "1", 0, 1].includes(inUse)) {
+    //!["yes", "no", "0", "1", 0, 1, false, true].includes(inUse)) {
+    errors.inUse = "'In use' value must be either: '0' or '1' \n";
   }
 
   // Additional validation rules can be added as needed for other fields.

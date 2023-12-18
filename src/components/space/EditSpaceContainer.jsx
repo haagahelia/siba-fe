@@ -59,7 +59,7 @@ export default function EditSpaceContainer({
       availableTo: values.availableTo,
       classesFrom: values.classesFrom,
       classesTo: values.classesTo,
-      inUse: values.inUse,
+      inUse: Number(values.inUse),
       spaceTypeId: values.spaceTypeId ? values.spaceTypeId : null,
       id: values.id,
     };

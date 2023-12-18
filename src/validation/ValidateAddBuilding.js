@@ -32,7 +32,7 @@ export async function validate(values) {
 
   if (values.description.length < 2 || values.description.length > 255) {
     errors.description = "The description must be 2-255 characters long";
-  } else if (!vF_regDescription.test(values.description)) {
+  } else if (!vF_regDescription.regExp.test(values.description)) {
     errors.description = vF_regDescription.errorMessageFunction("Description");
   }
 

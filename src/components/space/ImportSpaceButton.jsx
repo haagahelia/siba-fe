@@ -51,8 +51,8 @@ export default function ImportSpaceButton({
         classesTo: space["Classes to"] ? space["Classes to"] : "",
         inUse:
           space["Is in use"] !== undefined && space["Is in use"] !== null
-            ? space["Is in use"] === "yes"
-            : "",
+            ? 1
+            : 0,
         spaceType: space["Space type"] ? space["Space type"] : "",
       };
 

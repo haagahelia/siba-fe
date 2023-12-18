@@ -44,8 +44,7 @@ export default async function ValidateAddEquipment(values) {
 
   if (isMovable === undefined || isMovable === null || isMovable === -1) {
     errors.isMovable = requiredFieldErrorMessageFunction("is Movable marking");
-  } else if (isMovable !== "1" && isMovable !== "0") {
-    // as string here??? Not yer number?
+  } else if (!["0", "1", 0, 1].includes(isMovable)) {
     errors.isMovable =
       "isMovable needs to be 1 = movable equipment. 0 = unmovable equipment.";
   }

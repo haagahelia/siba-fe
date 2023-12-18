@@ -104,9 +104,10 @@ export async function validate(values) {
   }
 
   if (inUse === undefined && inUse === null) {
-    errors.inUse = "'In use?' is a required field\n";
-  } else if (!["yes", "no", "0", "1", 0, 1, false, true].includes(inUse)) {
-    errors.inUse = "'In use' value must be either: yes/no/'0'/'1'\n";
+    errors.inUse = requiredFieldErrorMessageFunction("In use?");
+  } else if (!["0", "1", 0, 1].includes(inUse)) {
+    //!["yes", "no", "0", "1", 0, 1, false, true].includes(inUse)) {
+    errors.inUse = "'In use' value must be either: '0' or '1' \n";
   }
 
   // Add more space-related validation here as needed

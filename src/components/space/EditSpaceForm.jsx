@@ -237,9 +237,7 @@ export default function EditSpaceForm({
                     <Select
                       labelId="inUse-label"
                       error={
-                        formik.touched.inUse && formik.errors.inUse
-                          ? true
-                          : false
+                        formik.touched.inUse && formik.errors.inUse ? 1 : 0
                       }
                       name="inUse"
                       defaultValue={formik.initialValues?.inUse}
