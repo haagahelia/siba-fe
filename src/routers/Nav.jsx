@@ -19,6 +19,7 @@ import { AppContext } from "../AppContext";
 import { AllocRoundContext } from "../AppContext.js";
 import dao from "../ajax/dao";
 import AddAllocRound from "../components/allocRound/AddAllocRound";
+import ConfirmationDialog from "../components/common/ConfirmationDialog.jsx";
 import { useRoleLoggedIn } from "../hooks/useRoleLoggedIn.js";
 import Logger from "../logger/logger";
 import logo from "../styles/SibeliusLogo.svg";
@@ -44,6 +45,12 @@ import SubjectView from "../views/SubjectView";
 import UserView from "../views/UserView";
 
 export default function NavBar() {
+  const [dialogOpen, setDialogOpen] = useState(false);
+  const [dialogOptions, setDialogOptions] = useState({
+    title: "this is dialog",
+    content: "Something here",
+  });
+
   Logger.debug("NavBar initiated");
   // The routes (pages) and the roles which can see them
   const sibaPages = [
@@ -131,12 +138,11 @@ export default function NavBar() {
       action() {
         const mode = import.meta.env.VITE_MODE;
         if (mode === "development") {
-          const confirmation = confirm(
-            "Are you sure that you want to reset database to test data?",
-          );
-          confirmation &&
-            dao.resetDatabase() &&
-            alert("Database reset success!");
+          setDialogOptions({
+            title: "Are you sure you want to reset the database?",
+            content: "By clicking continue, you will reset the database.",
+          });
+          setDialogOpen(true);
         } else {
           alert("Not in development mode!");
         }
@@ -320,13 +326,15 @@ export default function NavBar() {
                 {isDropdownVisible && (
                   <div className="dropDown">
                     {sibaPages
-                      .filter((page) =>
-                       {
+                      .filter((page) => {
                         // For admin users, show all options
                         if (roles.admin === "1") {
-                          return ["Reset Data", "Settings","Change Password", "Log Out"].includes(
-                            page.name,
-                          );
+                          return [
+                            "Reset Data",
+                            "Settings",
+                            "Change Password",
+                            "Log Out",
+                          ].includes(page.name);
                         }
                         // For non-admin users, show only "Log Out"
                         else {
@@ -364,63 +372,77 @@ export default function NavBar() {
   };
 
   return (
-    <div className={`navbar-spacing ${showOrHideScrollBar()}`}>
-      <BrowserRouter>
-        <AppBar variant="verticalNavigationBar" alt="Vertical navigation bar.">
-          <Container maxWidth="xl">
-            <Toolbar disableGutters sx={{ flexDirection: "column" }}>
-              <Box sx={{ flexGrow: 1 }}>
-                <List variant="navBar">
-                  <NavLink to={navImageRoute()} className="navLogo">
-                    {/* <NavLink to="/" className="navLogo"> */}
-                    <img src={logo} alt="Sibelius-Akatemia stylized logo." />
-                  </NavLink>
-                  {renderNavLinks()}
-                  <Typography variant="navAllocInfo">
-                    {`${
-                      allocRoundContext.allocRoundId
-                    } : ${allocRoundContext.allocRoundName.substring(0, 16)}`}
-                  </Typography>
-                </List>
-              </Box>
-            </Toolbar>
-          </Container>
-        </AppBar>
-        <Routes>
-          <Route
-            path="/login"
-            element={<LoginView handleLoginChange={handleLoginChange} />}
-          />
-          <Route
-            path="/"
-            element={<LoginView handleLoginChange={handleLoginChange} />}
-          />
-          <Route path="/subject" element={<SubjectView />} />
-          <Route path="/subject/:subjectIdToShow" element={<SubjectView />} />
-          <Route path="/allocation" element={<AllocRoundView />} />
-          <Route path="/roomresult" element={<RoomResultView />} />
-          <Route path="/programresult" element={<ProgramResultView />} />
-          <Route path="/equipment" element={<EquipmentView />} />
-          <Route path="/building" element={<BuildingView />} />
-          <Route path="/department" element={<DepartmentView />} />
-          <Route path="/space" element={<SpaceView />} />
-          <Route path="/space/:spaceIdToShow" element={<SpaceView />} />
-          <Route path="/program" element={<ProgramView />} />
-          <Route path="/allocation/addAllocRound" element={<AddAllocRound />} />
-          <Route path="/settings" element={<SettingsView />} />
-          <Route path="/users" element={<UserView />} />
-          <Route
-            path="/alloc-fail/:allocId"
-            element={<AllocationSubjectFailureView />}
-          />
-          <Route path="*" element={<NotFoundView />} />
-          <Route path="/forget-password" element={<ForgetPasswordView />} />
-          <Route
-            path="/reset-password/:id/:token"
-            element={<ResetPasswordView />}
-          />
-        </Routes>
-      </BrowserRouter>
+    <div>
+      <ConfirmationDialog
+        dialogOpen={dialogOpen}
+        dialogOptions={dialogOptions}
+        setDialogOpen={setDialogOpen}
+        submit={dao.resetDatabase}
+      />
+      <div className={`navbar-spacing ${showOrHideScrollBar()}`}>
+        <BrowserRouter>
+          <AppBar
+            variant="verticalNavigationBar"
+            alt="Vertical navigation bar."
+          >
+            <Container maxWidth="xl">
+              <Toolbar disableGutters sx={{ flexDirection: "column" }}>
+                <Box sx={{ flexGrow: 1 }}>
+                  <List variant="navBar">
+                    <NavLink to={navImageRoute()} className="navLogo">
+                      {/* <NavLink to="/" className="navLogo"> */}
+                      <img src={logo} alt="Sibelius-Akatemia stylized logo." />
+                    </NavLink>
+                    {renderNavLinks()}
+                    <Typography variant="navAllocInfo">
+                      {`${
+                        allocRoundContext.allocRoundId
+                      } : ${allocRoundContext.allocRoundName.substring(0, 16)}`}
+                    </Typography>
+                  </List>
+                </Box>
+              </Toolbar>
+            </Container>
+          </AppBar>
+          <Routes>
+            <Route
+              path="/login"
+              element={<LoginView handleLoginChange={handleLoginChange} />}
+            />
+            <Route
+              path="/"
+              element={<LoginView handleLoginChange={handleLoginChange} />}
+            />
+            <Route path="/subject" element={<SubjectView />} />
+            <Route path="/subject/:subjectIdToShow" element={<SubjectView />} />
+            <Route path="/allocation" element={<AllocRoundView />} />
+            <Route path="/roomresult" element={<RoomResultView />} />
+            <Route path="/programresult" element={<ProgramResultView />} />
+            <Route path="/equipment" element={<EquipmentView />} />
+            <Route path="/building" element={<BuildingView />} />
+            <Route path="/department" element={<DepartmentView />} />
+            <Route path="/space" element={<SpaceView />} />
+            <Route path="/space/:spaceIdToShow" element={<SpaceView />} />
+            <Route path="/program" element={<ProgramView />} />
+            <Route
+              path="/allocation/addAllocRound"
+              element={<AddAllocRound />}
+            />
+            <Route path="/settings" element={<SettingsView />} />
+            <Route path="/users" element={<UserView />} />
+            <Route
+              path="/alloc-fail/:allocId"
+              element={<AllocationSubjectFailureView />}
+            />
+            <Route path="*" element={<NotFoundView />} />
+            <Route path="/forget-password" element={<ForgetPasswordView />} />
+            <Route
+              path="/reset-password/:id/:token"
+              element={<ResetPasswordView />}
+            />
+          </Routes>
+        </BrowserRouter>
+      </div>
     </div>
   );
 }
