@@ -2,6 +2,7 @@ import dao from "../ajax/dao";
 import {
   requiredFieldErrorMessageFunction,
   vF_regDescription,
+  vF_regName,
 } from "./Validate_GenericRegexps";
 
 export default async function ValidateAddEquipment(values) {
@@ -28,6 +29,8 @@ export default async function ValidateAddEquipment(values) {
     errors.name = "The name already exists";
   } else if (name.length < 2 || name.length > 255) {
     errors.name = "Equipment name needs to be between 2 and 255 characters.";
+  } else if (!vF_regName.regExp.test(name)) {
+    errors.name = vF_regName.errorMessageFunction("Name");
   }
 
   if (!priority) {

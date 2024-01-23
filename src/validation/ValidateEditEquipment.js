@@ -7,7 +7,9 @@ import {
 
 export default function ValidateEditEquipment(values) {
   const errors = {};
-  const { name, priority, description } = values;
+  let { name, priority, description } = values;
+  name = name.trim();
+  description = description.trim();
 
   if (!name) {
     errors.name = requiredFieldErrorMessageFunction("Name");
@@ -23,7 +25,11 @@ export default function ValidateEditEquipment(values) {
     errors.priority = vF_regNumberCountPlus.errorMessageFunction("Priority");
   }
 
-  if (!vF_regDescription.regExp.test(description)) {
+  if (!description) {
+    errors.description = requiredFieldErrorMessageFunction("Description");
+  } else if (description.length > 16000) {
+    errors.description = "Description cannot exceed 16000 characters.";
+  } else if (!vF_regDescription.regExp.test(description)) {
     errors.description = vF_regDescription.errorMessageFunction("Description");
   }
 
