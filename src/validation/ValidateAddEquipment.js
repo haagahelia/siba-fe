@@ -3,6 +3,7 @@ import {
   requiredFieldErrorMessageFunction,
   vF_regDescription,
   vF_regName,
+  vF_regNumberCountPlus,
 } from "./Validate_GenericRegexps";
 
 export default async function ValidateAddEquipment(values) {
@@ -35,8 +36,8 @@ export default async function ValidateAddEquipment(values) {
 
   if (!priority) {
     errors.priority = requiredFieldErrorMessageFunction("Priority");
-  } else if (priority < 0) {
-    errors.priority = "Priority cannot be negative.";
+  } else if (priority < 1) {
+    errors.priority = vF_regNumberCountPlus.errorMessageFunction("Priority");
   }
 
   if (!description) {

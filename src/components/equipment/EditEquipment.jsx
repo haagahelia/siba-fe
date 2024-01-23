@@ -36,7 +36,7 @@ export default function EditEquipment({
     );
     // extracting id from singleEquipment object
     const id = singleEquipment.id;
-    const validation = ValidateEditEquipment(singleEquipment);
+    const validation = await ValidateEditEquipment(singleEquipment);
     if (Object.values(validation).length !== 0) {
       alert(Object.values(validation));
     } else {
