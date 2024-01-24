@@ -2,11 +2,15 @@ import dao from "../ajax/dao";
 import {
   requiredFieldErrorMessageFunction,
   vF_regDescription,
+  vF_regName,
+  vF_regNumberCountPlus,
 } from "./Validate_GenericRegexps";
 
 export default async function ValidateAddEquipment(values) {
   const errors = {};
-  const { name, priority, description, isMovable } = values;
+  let { name, priority, description, isMovable } = values;
+  name = name.trim();
+  description = description.trim();
 
   const isDuplicatedName = async function () {
     let equipmentList = [];
@@ -26,23 +30,30 @@ export default async function ValidateAddEquipment(values) {
     errors.name = "The name already exists";
   } else if (name.length < 2 || name.length > 255) {
     errors.name = "Equipment name needs to be between 2 and 255 characters.";
+  } else if (!vF_regName.regExp.test(name)) {
+    errors.name = vF_regName.errorMessageFunction("Name");
   }
 
   if (!priority) {
     errors.priority = requiredFieldErrorMessageFunction("Priority");
-  } else if (priority < 0) {
-    errors.priority = "Priority needs to be bigger than 0.";
+  } else if (priority < 1) {
+    errors.priority = vF_regNumberCountPlus.errorMessageFunction("Priority");
   }
 
   if (!description) {
     errors.description = requiredFieldErrorMessageFunction("Description");
-  } else if (description.length < 2 || description.length > 255) {
-    errors.description = "Description needs to be between 2 and 255 characters";
+  } else if (description.length > 16000) {
+    errors.description = "Description cannot exceed 16000 characters.";
   } else if (!vF_regDescription.regExp.test(description)) {
     errors.description = vF_regDescription.errorMessageFunction("Description");
   }
 
-  if (isMovable === undefined || isMovable === null || isMovable === -1) {
+  if (
+    isMovable === undefined ||
+    isMovable === null ||
+    isMovable === -1 ||
+    isMovable === ""
+  ) {
     errors.isMovable = requiredFieldErrorMessageFunction("is Movable marking");
   } else if (!["0", "1", 0, 1].includes(isMovable)) {
     errors.isMovable =
