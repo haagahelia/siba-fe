@@ -1,21 +1,23 @@
 import dao from "../ajax/dao";
 import {
   requiredFieldErrorMessageFunction,
+  trimAllPropertyValueStrings,
   vF_regDescription,
   vF_regName,
 } from "./Validate_GenericRegexps";
 
 export async function validate(values) {
   const errors = {};
+  //console.dir(Object.keys(values));
+  trimAllPropertyValueStrings(values);
 
   let allocRoundList = [];
-
   const getAllocRoundNames = async function () {
     const { data } = await dao.fetchAllAllocRounds();
     allocRoundList = data;
     // Check if user enter an existed allocation round name
     const result = allocRoundList.some(
-      (names) => names.name.toLowerCase() === values.name.toLowerCase(),
+      (names) => names.name.trim().toLowerCase() === values.name.toLowerCase(),
     );
 
     return result;
@@ -31,9 +33,14 @@ export async function validate(values) {
     errors.name = vF_regName.errorMessageFunction("Name");
   }
 
-  if (values.description.length > 16000) {
+  if (!values.description) {
+    errors.description = requiredFieldErrorMessageFunction("Description");
+  } else if (
+    values.description.length < 2 ||
+    values.description.length > 16000
+  ) {
     errors.description =
-      "The description must be maximum 16000 characters long";
+      "The description must be between 2 and 16000 characters long";
   } else if (!vF_regDescription.regExp.test(values.description)) {
     errors.description = vF_regDescription.errorMessageFunction("Description");
   }
