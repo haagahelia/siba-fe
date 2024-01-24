@@ -86,3 +86,16 @@ export const requiredFieldErrorMessageFunction = (fieldName) =>
 
 const genericErrorMessageFunction = (fieldName, erroMessageEnd) =>
   `'${fieldName}' ${erroMessageEnd}\n`;
+
+// -------
+
+export const trimAllPropertyValueStrings = (valuesObj) => {
+  const properties = Object.keys(valuesObj);
+
+  for (const propertyName of properties) {
+    if (typeof valuesObj[propertyName] === "string") {
+      //  a.b is kind of same as a[b]
+      valuesObj[propertyName] = valuesObj[propertyName].trim();
+    }
+  }
+};
