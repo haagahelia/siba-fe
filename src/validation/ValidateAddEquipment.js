@@ -34,7 +34,7 @@ export default async function ValidateAddEquipment(values) {
     errors.description = vF_regDescription.errorMessageFunction("Description");
   }
 
-  if (!isMovable) {
+  if (isMovable === null || isMovable === undefined || isMovable === "") {
     errors.isMovable = requiredFieldErrorMessageFunction("is Movable marking");
   } else if (!["0", "1", 0, 1].includes(isMovable)) {
     errors.isMovable =
