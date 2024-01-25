@@ -22,13 +22,11 @@ export const isDuplicatedEquipmentNameExceptCurrent = async (
 ) => {
   const { data } = await dao.fetchEquipmentData();
   const equipmentList = data as Equipment[];
-  let id: number;
   let filteredList: Equipment[] = [];
 
   for (const equipment of equipmentList) {
     if (currentEquipmentId === equipment.id) {
-      id = equipment.id;
-      filteredList = equipmentList.filter((item) => item.id !== id);
+      filteredList = equipmentList.filter((item) => item.id !== equipment.id);
       break;
     }
   }
