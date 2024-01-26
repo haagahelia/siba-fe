@@ -1,11 +1,8 @@
+import { useState } from "react";
 import dao from "../../ajax/dao";
 import ValidateAddEquipment from "../../validation/ValidateAddEquipment";
-
-import Button from "@mui/material/Button";
-import Dialog from "@mui/material/Dialog";
-import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
-import DialogTitle from "@mui/material/DialogTitle";
+import AlertBox from "../common/AlertBox";
+import ConfirmationDialog from "../common/ConfirmationDialog";
 
 export default function AddEquipmentDialogConfirmation({
   open,
@@ -14,6 +11,26 @@ export default function AddEquipmentDialogConfirmation({
   setEquipment,
   getAllEquipments,
 }) {
+  const [alertOpen, setAlertOpen] = useState(false);
+  const [alertOptions, setAlertOptions] = useState({
+    title: "This is title",
+    message: "This is an error alert — check it out!",
+    severity: "error",
+  });
+  const dialogOptions = {
+    title: `Are you sure you want to add ${equipment?.name}`,
+    content: `By clicking continue, ${equipment?.name} will be added to equipments.`,
+  };
+
+  const resetForm = () => {
+    setEquipment({
+      name: "",
+      priority: "",
+      description: "",
+      isMovable: "",
+    });
+  };
+
   const addSingleEquipment = async () => {
     const validation = await ValidateAddEquipment(equipment);
     if (validation) {
@@ -22,37 +39,38 @@ export default function AddEquipmentDialogConfirmation({
     }
     const success = await dao.postNewEquipment(equipment);
     if (!success) {
-      alert("Something went wrong!");
-    } else {
-      setEquipment({
-        name: "",
-        priority: "",
-        description: "",
-        isMovable: "",
+      setAlertOptions({
+        severity: "error",
+        title: "Error",
+        message: "Something went wrong - please try again later.",
       });
-      getAllEquipments();
-      setOpen(false);
+      setAlertOpen(true);
+      return;
     }
+    setAlertOptions({
+      severity: "success",
+      title: "Success!",
+      message: `${equipment?.name} added.`,
+    });
+    setAlertOpen(true);
+    resetForm();
+    getAllEquipments();
   };
 
   return (
-    <Dialog open={open} onClose={() => setOpen(false)}>
-      <DialogTitle>Are you sure you want to add {equipment?.name} </DialogTitle>
-      <DialogContent>
-        <DialogContentText>
-          By clicking continue, {equipment?.name} will be added to equipments.
-        </DialogContentText>
-      </DialogContent>
-      <Button variant="contained" color="red" onClick={() => setOpen(false)}>
-        Cancel
-      </Button>
-      <Button
-        variant="contained"
-        color="success"
-        onClick={() => addSingleEquipment()}
-      >
-        Continue
-      </Button>
-    </Dialog>
+    <>
+      <AlertBox
+        alertOpen={alertOpen}
+        alertOptions={alertOptions}
+        setAlertOpen={setAlertOpen}
+      />
+      <ConfirmationDialog
+        dialogOpen={open}
+        dialogOptions={dialogOptions}
+        setDialogOpen={setOpen}
+        submit={addSingleEquipment}
+        submitValues={equipment}
+      />
+    </>
   );
 }
