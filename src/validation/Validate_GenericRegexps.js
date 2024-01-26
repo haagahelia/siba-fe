@@ -1,6 +1,12 @@
 export const vF_regName = {
   regExp: new RegExp(/^[A-Za-zäöåÄÖÅ0-9\(\)\s\/,-]*$/),
-  hint: "A-ö big and small letters, numbers and some punctuation characters allowed",
+  regExpHint:
+    "A-ö big and small letters, numbers and some punctuation characters allowed",
+
+  // Maybe these could be defined in the RegExp already, to get them checked with allowed chars?
+  length: { min: 2, max: 255 },
+  lengthHint: `Minimum ${this.length.min} and maximum ${this.length.max} characters.`,
+
   errorMessageFunction: (fieldName) =>
     genericErrorMessageFunction(
       fieldName,
