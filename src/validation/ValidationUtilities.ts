@@ -5,12 +5,12 @@ import { Equipment } from "../types";
 
 // Check if user enters an existing equipment name.
 // Used in equipment add validations.
-export const isDuplicatedEquipmentName = async (equipmentName: string) => {
+export const isDuplicatedEquipmentName = async (name: string) => {
   const { data } = await dao.fetchEquipmentData();
   const equipmentList = data as Equipment[];
 
   return equipmentList.some(
-    (equipment) => equipment.name.toLowerCase() === equipmentName.toLowerCase(),
+    (equipment) => equipment.name.toLowerCase() === name.toLowerCase(),
   );
 };
 
@@ -18,21 +18,15 @@ export const isDuplicatedEquipmentName = async (equipmentName: string) => {
 // Used in equipment edit validations.
 export const isDuplicatedEquipmentNameExceptCurrent = async (
   currentEquipmentId: number,
-  currentEquipmentName: string,
+  targetName: string,
 ) => {
   const { data } = await dao.fetchEquipmentData();
   const equipmentList = data as Equipment[];
-  let filteredList: Equipment[] = [];
-
-  for (const equipment of equipmentList) {
-    if (currentEquipmentId === equipment.id) {
-      filteredList = equipmentList.filter((item) => item.id !== equipment.id);
-      break;
-    }
-  }
+  const filteredList = equipmentList.filter(
+    (item) => item.id !== currentEquipmentId,
+  );
 
   return filteredList.some(
-    (equipment) =>
-      equipment.name.toLowerCase() === currentEquipmentName.toLowerCase(),
+    (equipment) => equipment.name.toLowerCase() === targetName.toLowerCase(),
   );
 };
