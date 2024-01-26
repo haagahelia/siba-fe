@@ -1,7 +1,12 @@
 import dao from "../ajax/dao";
-import { vF_regDescription, vF_regName } from "./Validate_GenericRegexps";
+import {
+  trimAllPropertyValueStrings,
+  vF_regDescription,
+  vF_regName,
+} from "./Validate_GenericRegexps";
 
 export async function validate(values) {
+  trimAllPropertyValueStrings(values);
   const errors = {};
 
   let allocRoundList = [];

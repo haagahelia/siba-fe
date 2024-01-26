@@ -2,6 +2,7 @@ import dao from "../ajax/dao";
 import Logger from "../logger/logger";
 import {
   requiredFieldErrorMessageFunction,
+  trimAllPropertyValueStrings,
   vF_regDescription,
   vF_regName,
   vF_regNumberCountPlus,
@@ -10,6 +11,7 @@ import {
 } from "./Validate_GenericRegexps";
 
 export async function validate(values) {
+  trimAllPropertyValueStrings(values);
   const errors = {};
   const {
     name,

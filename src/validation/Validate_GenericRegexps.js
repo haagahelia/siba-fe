@@ -5,7 +5,7 @@ export const vF_regName = {
 
   // Maybe these could be defined in the RegExp already, to get them checked with allowed chars?
   length: { min: 2, max: 255 },
-  lengthHint: `Minimum ${this.length.min} and maximum ${this.length.max} characters.`,
+  lengthHint: "Minimum 2 and maximum 255 characters.",
 
   errorMessageFunction: (fieldName) =>
     genericErrorMessageFunction(

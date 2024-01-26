@@ -1,7 +1,9 @@
 import dao from "../ajax/dao";
 import { vF_regName } from "./Validate_GenericRegexps";
+import { trimAllPropertyValueStrings } from "./Validate_GenericRegexps";
 
 export async function validate(values) {
+  trimAllPropertyValueStrings(values);
   const errors = {};
 
   let programList = [];

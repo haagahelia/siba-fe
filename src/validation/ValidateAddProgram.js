@@ -2,11 +2,13 @@ import dao from "../ajax/dao";
 import Logger from "../logger/logger";
 import {
   requiredFieldErrorMessageFunction,
+  trimAllPropertyValueStrings,
   vF_regName,
   vF_regNumber,
 } from "./Validate_GenericRegexps";
 
 export async function validate(values) {
+  trimAllPropertyValueStrings(values);
   const errors = {};
 
   let programList = [];

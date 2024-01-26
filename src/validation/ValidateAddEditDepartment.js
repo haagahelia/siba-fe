@@ -1,11 +1,13 @@
 import dao from "../ajax/dao";
 import {
   requiredFieldErrorMessageFunction,
+  trimAllPropertyValueStrings,
   vF_regDescription,
   vF_regName,
 } from "./Validate_GenericRegexps";
 
 export async function validate(values) {
+  trimAllPropertyValueStrings(values);
   const errors = {};
 
   let departmentList = [];
