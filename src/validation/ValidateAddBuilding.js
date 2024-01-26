@@ -32,8 +32,9 @@ export async function validate(values) {
     errors.name = vF_regName.errorMessageFunction("Name");
   }
 
-  if (values.description.length < 2 || values.description.length > 255) {
-    errors.description = "The description must be 2-255 characters long";
+  if (values.description.length > 16000) {
+    errors.description =
+      "The description must be maximum 16000 characters long";
   } else if (!vF_regDescription.regExp.test(values.description)) {
     errors.description = vF_regDescription.errorMessageFunction("Description");
   }
