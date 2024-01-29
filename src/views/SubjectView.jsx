@@ -62,7 +62,8 @@ export default function SubjectView() {
     Logger.debug(
       "getAllSubjects: fetching all subjects in allocRound, from server.",
     );
-    console.log("allocRoundId", allocRoundContext.allocRoundId);
+    Logger.debug(`allocRoundId: ${allocRoundContext.allocRoundId}`);
+
     const { httpStatus, data } = await dao.fetchAllSubjects(
       allocRoundContext.allocRoundId,
     );
