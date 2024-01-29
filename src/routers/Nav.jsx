@@ -51,6 +51,7 @@ export default function NavBar() {
     content: "Something here",
   });
 
+  Logger.logPrefix = "NavBar";
   Logger.debug("NavBar initiated");
   // The routes (pages) and the roles which can see them
   const sibaPages = [
