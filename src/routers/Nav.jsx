@@ -45,10 +45,10 @@ import SubjectView from "../views/SubjectView";
 import UserView from "../views/UserView";
 
 export default function NavBar() {
-  const [dialogOpen, setDialogOpen] = useState(false);
-  const [dialogOptions, setDialogOptions] = useState({
-    title: "this is dialog",
-    content: "Something here",
+  const [dBResetDialogOpen, setdBResetDialogOpen] = useState(false);
+  const [dBResetDialogOptions, setdBResetDialogOptions] = useState({
+    title: "this is dialog (dummy value)",
+    content: "Something here (dummy value)",
   });
 
   Logger.logPrefix = "NavBar";
@@ -139,11 +139,11 @@ export default function NavBar() {
       action() {
         const mode = import.meta.env.VITE_MODE;
         if (mode === "development") {
-          setDialogOptions({
+          setdBResetDialogOptions({
             title: "Are you sure you want to reset the database?",
             content: "By clicking continue, you will reset the database.",
           });
-          setDialogOpen(true);
+          setdBResetDialogOpen(true);
         } else {
           alert("Not in development mode!");
         }
@@ -375,9 +375,9 @@ export default function NavBar() {
   return (
     <div>
       <ConfirmationDialog
-        dialogOpen={dialogOpen}
-        dialogOptions={dialogOptions}
-        setDialogOpen={setDialogOpen}
+        dialogOpen={dBResetDialogOpen}
+        dialogOptions={dBResetDialogOptions}
+        setDialogOpen={setdBResetDialogOpen}
         submit={dao.resetDatabase}
       />
       <div className={`navbar-spacing ${showOrHideScrollBar()}`}>
