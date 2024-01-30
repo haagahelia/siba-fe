@@ -40,10 +40,6 @@ export default function AddEquipment({ getAllEquipments }) {
     isMovable: "",
   });
 
-  const openDialogBox = () => {
-    setOpen(true);
-  };
-
   const resetForm = () => {
     setEquipment({
       name: "",
@@ -56,10 +52,11 @@ export default function AddEquipment({ getAllEquipments }) {
   const formik = useFormik({
     enableReinitialize: true,
     initialValues: equipment,
+    validateOnChange: true,
     validate: ValidateAddEquipment,
     onSubmit: (values) => {
       setDialogOptions({
-        title: `Are you sure you want to add ${values.priority}?`,
+        title: `Are you sure you want to add ${values.name}?`,
         content: `By clicking continue, ${values.name} will be added to equipments.`,
       });
       return setDialogOpen(true);
