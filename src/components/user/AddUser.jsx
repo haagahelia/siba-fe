@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
@@ -19,7 +19,7 @@ import AddUserDialogConfirmations from "./AddUserDialogConfirmations";
 
 export default function AddUser({ getAllUsers }) {
   const [isCardExpanded, setIsCardExpanded] = useState(false);
-  
+
   const [open, setOpen] = useState(false);
   const [registerForm, setRegisterForm] = useState({
     email: "",
@@ -48,110 +48,116 @@ export default function AddUser({ getAllUsers }) {
       <Card variant="outlined">
         <CardContent>
           <CardHeader
-              title="Add User"
-              onClick={() => setIsCardExpanded(!isCardExpanded)}
-              variant="pageHeader"
-              action={
-                <IconButton
-                  onClick={() => setIsCardExpanded(!isCardExpanded)}
-                  aria-expanded={isCardExpanded}
-                  aria-label="expand/collapse"
-                  color="primary"
-                >
-                  {isCardExpanded ? <ExpandLessIcon /> : <ExpandMoreIcon />}
-                </IconButton>
-              }
-            />
-            {isCardExpanded && (
-              <Grid container spacing={2}>
-                <Grid item xs={12}>
-                  <TextField
-                    className="formTextInput"
-                    value={registerForm.email}
-                    onChange={(event) =>
-                      setRegisterForm({ ...registerForm, email: event.target.value })
-                    }
-                    placeholder="email"
-                  />
-                </Grid>
-                <Grid item xs={12}>
-                  <TextField
-                    className="formTextInput"
-                    value={registerForm.password}
+            title="Add User"
+            onClick={() => setIsCardExpanded(!isCardExpanded)}
+            variant="pageHeader"
+            action={
+              <IconButton
+                onClick={() => setIsCardExpanded(!isCardExpanded)}
+                aria-expanded={isCardExpanded}
+                aria-label="expand/collapse"
+                color="primary"
+              >
+                {isCardExpanded ? <ExpandLessIcon /> : <ExpandMoreIcon />}
+              </IconButton>
+            }
+          />
+          {isCardExpanded && (
+            <Grid container spacing={2}>
+              <Grid item xs={12}>
+                <TextField
+                  className="formTextInput"
+                  value={registerForm.email}
+                  onChange={(event) =>
+                    setRegisterForm({
+                      ...registerForm,
+                      email: event.target.value,
+                    })
+                  }
+                  placeholder="email"
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  className="formTextInput"
+                  value={registerForm.password}
+                  onChange={(event) =>
+                    setRegisterForm({
+                      ...registerForm,
+                      password: event.target.value,
+                    })
+                  }
+                  type={showPassword ? "text" : "password"}
+                  placeholder="password"
+                  InputProps={{
+                    endAdornment: (
+                      <InputAdornment position="end">
+                        <IconButton
+                          onClick={handlePasswordVisibility}
+                          edge="end"
+                          style={{ backgroundColor: "transparent" }}
+                        >
+                          {showPassword ? <Visibility /> : <VisibilityOff />}
+                        </IconButton>
+                      </InputAdornment>
+                    ),
+                  }}
+                />
+              </Grid>
+              <Grid item xs={12} sm={6} md={4}>
+                <FormGroup>
+                  <FormControlLabel
+                    control={<Checkbox />}
+                    label="Admin"
+                    labelPlacement="start"
+                    className="formCheckBoxButtons"
+                    name="isAdmin"
+                    checked={registerForm.isAdmin === 1}
                     onChange={(event) =>
                       setRegisterForm({
                         ...registerForm,
-                        password: event.target.value,
+                        isAdmin: event.target.checked ? 1 : 0,
                       })
                     }
-                    type={showPassword ? "text" : "password"}
-                    placeholder="password"
-                    InputProps={{
-                      endAdornment: (
-                        <InputAdornment position="end">
-                          <IconButton
-                            onClick={handlePasswordVisibility}
-                            edge="end"
-                            style={{ backgroundColor: "transparent" }}
-                          >
-                            {showPassword ? <Visibility /> : <VisibilityOff />}
-                          </IconButton>
-                        </InputAdornment>
-                      ),
-                    }}
                   />
-                </Grid>
-                <Grid item xs={12} sm={6} md={4}>
-                  <FormGroup>
-                    <FormControlLabel
-                      control={<Checkbox />}
-                      label="Admin"
-                      labelPlacement="start"
-                      className="formCheckBoxButtons"
-                      name="isAdmin"
-                      checked={registerForm.isAdmin === 1}
-                      onChange={(event) =>
-                        setRegisterForm({
-                          ...registerForm,
-                          isAdmin: event.target.checked ? 1 : 0,
-                        })
-                      }
-                    />
-                    <FormControlLabel
-                      control={<Checkbox />}
-                      label="Planner"
-                      labelPlacement="start"
-                      className="formCheckBoxButtons"
-                      name="isPlanner"
-                      checked={registerForm.isPlanner === 1}
-                      onChange={(event) =>
-                        setRegisterForm({
-                          ...registerForm,
-                          isPlanner: event.target.checked ? 1 : 0,
-                        })
-                      }
-                    />
-                    <FormControlLabel
-                      control={<Checkbox />}
-                      label="Statist"
-                      labelPlacement="start"
-                      className="formCheckBoxButtons"
-                      name="isStatist"
-                      checked={registerForm.isStatist === 1}
-                      onChange={(event) =>
-                        setRegisterForm({
-                          ...registerForm,
-                          isStatist: event.target.checked ? 1 : 0,
-                        })
-                      }
-                    />
-                  </FormGroup>
-                  <Button onClick={() => openDialogBox()} variant="contained">
-                    Add User
-                  </Button>
-                </Grid>
+                  <FormControlLabel
+                    control={<Checkbox />}
+                    label="Planner"
+                    labelPlacement="start"
+                    className="formCheckBoxButtons"
+                    name="isPlanner"
+                    checked={registerForm.isPlanner === 1}
+                    onChange={(event) =>
+                      setRegisterForm({
+                        ...registerForm,
+                        isPlanner: event.target.checked ? 1 : 0,
+                      })
+                    }
+                  />
+                  <FormControlLabel
+                    control={<Checkbox />}
+                    label="Statist"
+                    labelPlacement="start"
+                    className="formCheckBoxButtons"
+                    name="isStatist"
+                    checked={registerForm.isStatist === 1}
+                    onChange={(event) =>
+                      setRegisterForm({
+                        ...registerForm,
+                        isStatist: event.target.checked ? 1 : 0,
+                      })
+                    }
+                  />
+                </FormGroup>
+                <Button
+                  onClick={() => openDialogBox()}
+                  variant="addComponentFormButton"
+                >
+                  Add User
+                </Button>
               </Grid>
-            )}
+            </Grid>
+          )}
         </CardContent>
       </Card>
       <AddUserDialogConfirmations
@@ -160,7 +166,7 @@ export default function AddUser({ getAllUsers }) {
         registerForm={registerForm}
         setRegisterForm={setRegisterForm}
         getAllUsers={getAllUsers}
-      />  
+      />
     </>
   );
 }

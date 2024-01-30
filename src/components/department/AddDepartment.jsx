@@ -84,7 +84,10 @@ export default function AddDepartment({ getAllDepartments }) {
                 />
               </Grid>
               <Grid item xs={12}>
-                <Button onClick={() => openDialogBox()} variant="contained">
+                <Button
+                  onClick={() => openDialogBox()}
+                  variant="addComponentFormButton"
+                >
                   Add Department
                 </Button>
               </Grid>
