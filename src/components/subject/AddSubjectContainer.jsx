@@ -78,7 +78,7 @@ export default function AddSubjectContainer({
     enableReinitialize: true,
     initialValues: initialSubject,
     validate: (values) => {
-      validate(values, allocRoundContext.allocRoundId);
+      return validate(values, allocRoundContext.allocRoundId);
     },
     onSubmit: (values) => {
       setDialogOptions({
