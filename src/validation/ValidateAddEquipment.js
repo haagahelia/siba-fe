@@ -8,6 +8,7 @@ import {
 import { isDuplicatedEquipmentName } from "./ValidationUtilities";
 
 export default async function ValidateAddEquipment(values) {
+  console.log("validating equipment");
   trimAllPropertyValueStrings(values);
   const errors = {};
   const { name, priority, description, isMovable } = values;
