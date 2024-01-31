@@ -8,6 +8,7 @@ import "../styles/AllocationFailure.css";
 
 import CheckIcon from "@mui/icons-material/Check";
 import CloseIcon from "@mui/icons-material/Close";
+import { IconButton } from "@mui/material";
 import Button from "@mui/material/Button";
 
 import Card from "@mui/material/Card";
@@ -214,6 +215,15 @@ export default function AllocationSubjectFailureView() {
             {`${unAllocSubject.id} ${unAllocSubject.name}`}
           </Link>
         </DialogTitle>
+        <IconButton
+          edge="end"
+          color="inherit"
+          onClick={() => setOpen(false)}
+          aria-label="close"
+          style={{ position: "absolute", top: "10px", right: "20px" }}
+        >
+          <CloseIcon />
+        </IconButton>
         <DialogContent>
           <TableContainer component={Paper}>
             <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -300,13 +310,7 @@ export default function AllocationSubjectFailureView() {
           </TableContainer>
         </DialogContent>
         <DialogActions>
-          <Button
-            onClick={handleClose}
-            sx={{
-              backgroundColor: "#ff6d00",
-              cursor: "pointer",
-            }}
-          >
+          <Button onClick={handleClose} variant="contained">
             Exit
           </Button>
         </DialogActions>
