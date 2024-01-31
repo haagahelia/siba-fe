@@ -100,7 +100,11 @@ export default function AddSubjectForm({
               value={formik.values.name}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
-              helperText={formik.touched.name && formik.errors.name}
+              helperText={
+                formik.touched.name && formik.errors.name
+                  ? formik.errors.name
+                  : null
+              }
               InputLabelProps={{
                 shrink: true,
               }}
@@ -117,7 +121,11 @@ export default function AddSubjectForm({
               value={formik.values.groupSize}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
-              helperText={formik.touched.groupSize && formik.errors.groupSize}
+              helperText={
+                formik.touched.groupSize && formik.errors.groupSize
+                  ? formik.errors.groupSize
+                  : null
+              }
               InputLabelProps={{
                 shrink: true,
               }}
@@ -134,7 +142,11 @@ export default function AddSubjectForm({
               value={formik.values.groupCount}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
-              helperText={formik.touched.groupCount && formik.errors.groupCount}
+              helperText={
+                formik.touched.groupCount && formik.errors.groupCount
+                  ? formik.errors.groupCount
+                  : null
+              }
             />
           </Grid>
           <Grid item xs={12} sm={6} md={4} lg={3}>
@@ -152,6 +164,8 @@ export default function AddSubjectForm({
               placeholder="hh:mm"
               helperText={
                 formik.touched.sessionLength && formik.errors.sessionLength
+                  ? formik.errors.sessionLength
+                  : null
               }
               InputLabelProps={{
                 shrink: true,
@@ -172,6 +186,8 @@ export default function AddSubjectForm({
               onBlur={formik.handleBlur}
               helperText={
                 formik.touched.sessionCount && formik.errors.sessionCount
+                  ? formik.errors.sessionCount
+                  : null
               }
             />
           </Grid>
@@ -184,7 +200,11 @@ export default function AddSubjectForm({
               value={formik.values.area}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
-              helperText={formik.touched.area && formik.errors.area}
+              helperText={
+                formik.touched.area && formik.errors.area
+                  ? formik.errors.area
+                  : null
+              }
             />
           </Grid>
           <Grid item xs={12} sm={12} md={6} lg={3}>
