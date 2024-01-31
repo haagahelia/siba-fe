@@ -1,3 +1,4 @@
+import useTheme from "@mui/material/styles/useTheme";
 import { useEffect, useRef, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { ajaxRequestErrorHandler } from "../ajax/ajaxRequestErrorHandler";
@@ -48,6 +49,8 @@ export const getNameForId = (array, id) => {
 };
 
 export default function AllocationSubjectFailureView() {
+  const theme = useTheme();
+
   const { allocId } = useParams();
 
   const [unAllocableSubjects, setUnAllocableSubjects] = useState([]);
@@ -204,7 +207,10 @@ export default function AllocationSubjectFailureView() {
       <Dialog open={open} onClose={handleClose} scroll="body" maxWidth="70%">
         <DialogTitle>
           {"Suitability of the space - for lesson: "}
-          <Link to={`/subject/${unAllocSubject.id}`}>
+          <Link
+            style={theme.components.Links}
+            to={`/subject/${unAllocSubject.id}`}
+          >
             {`${unAllocSubject.id} ${unAllocSubject.name}`}
           </Link>
         </DialogTitle>
@@ -231,7 +237,10 @@ export default function AllocationSubjectFailureView() {
                 {unAllocSubjectRooms.map((row) => (
                   <TableRow key={row.id}>
                     <TableCell>
-                      <Link to={`/space/${row.id}`}>{`${row.name}`}</Link>
+                      <Link
+                        style={theme.components.Links}
+                        to={`/space/${row.id}`}
+                      >{`${row.name}`}</Link>
                     </TableCell>
 
                     <GetMissingEquipment
