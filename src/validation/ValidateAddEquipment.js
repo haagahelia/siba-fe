@@ -44,7 +44,6 @@ export default async function ValidateAddEquipment(values) {
   if (Object.values(errors).length === 0) {
     return null;
   }
-  console.log(errors);
   return errors;
 }
 

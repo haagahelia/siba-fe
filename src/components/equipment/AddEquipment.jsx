@@ -1,19 +1,20 @@
+import { useFormik } from "formik";
 import { useState } from "react";
+import dao from "../../ajax/dao";
+import ValidateAddEquipment, {
+  capitalizeFirstLetter,
+} from "../../validation/ValidateAddEquipment";
 
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import Button from "@mui/material/Button";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardHeader from "@mui/material/CardHeader";
-import FormControl from "@mui/material/FormControl";
 import Grid from "@mui/material/Grid";
 import IconButton from "@mui/material/IconButton";
-import InputLabel from "@mui/material/InputLabel";
-import MenuItem from "@mui/material/MenuItem";
-import Select from "@mui/material/Select";
-import TextField from "@mui/material/TextField";
-import AddEquipmentDialogConfirmation from "./AddEquipmentDialogConfirmation";
+import AlertBox from "../common/AlertBox";
+import ConfirmationDialog from "../common/ConfirmationDialog";
+import AddEquipmentForm from "./AddEquipmentForm";
 import EquipmentTemplate from "./EquipmentTemplate";
 import ImportEquipmentContainer from "./ImportEquipmentContainer";
 
@@ -21,7 +22,17 @@ export default function AddEquipment({ getAllEquipments }) {
   // State for checking if Add Equipment card is expanded
   const [isCardExpanded, setIsCardExpanded] = useState(false);
 
-  const [open, setOpen] = useState(false);
+  const [alertOpen, setAlertOpen] = useState(false);
+  const [alertOptions, setAlertOptions] = useState({
+    title: "This is title",
+    message: "This is an error alert — check it out!",
+    severity: "error",
+  });
+  const [dialogOpen, setDialogOpen] = useState(false);
+  const [dialogOptions, setDialogOptions] = useState({
+    title: "Title here",
+    content: "Content here",
+  });
   const [equipment, setEquipment] = useState({
     name: "",
     priority: "",
@@ -29,12 +40,69 @@ export default function AddEquipment({ getAllEquipments }) {
     isMovable: "",
   });
 
-  const openDialogBox = () => {
-    setOpen(true);
+  const resetForm = () => {
+    setEquipment({
+      name: "",
+      priority: "",
+      description: "",
+      isMovable: "",
+    });
+  };
+
+  const formik = useFormik({
+    enableReinitialize: true,
+    initialValues: equipment,
+    validateOnChange: true,
+    validate: ValidateAddEquipment,
+    onSubmit: (values) => {
+      setDialogOptions({
+        title: `Are you sure you want to add ${values.name}?`,
+        content: `By clicking continue, ${values.name} will be added to equipments.`,
+      });
+      return setDialogOpen(true);
+    },
+  });
+
+  const addSingleEquipment = async (submitValues) => {
+    const newEquipment = {
+      name: capitalizeFirstLetter(submitValues.name),
+      description: submitValues.description,
+      isMovable: submitValues.isMovable,
+      priority: submitValues.priority,
+    };
+    const success = await dao.postNewEquipment(newEquipment);
+    if (!success) {
+      setAlertOptions({
+        severity: "error",
+        title: "Error",
+        message: "Something went wrong - please try again later.",
+      });
+    } else {
+      setAlertOptions({
+        severity: "success",
+        title: "Success!",
+        message: `${equipment?.name} added.`,
+      });
+      resetForm();
+    }
+    setAlertOpen(true);
+    getAllEquipments();
   };
 
   return (
     <>
+      <AlertBox
+        alertOpen={alertOpen}
+        alertOptions={alertOptions}
+        setAlertOpen={setAlertOpen}
+      />
+      <ConfirmationDialog
+        dialogOpen={dialogOpen}
+        dialogOptions={dialogOptions}
+        setDialogOpen={setDialogOpen}
+        submit={addSingleEquipment}
+        submitValues={formik.values}
+      />
       <Card variant="outlined">
         <CardContent>
           <CardHeader
@@ -53,101 +121,20 @@ export default function AddEquipment({ getAllEquipments }) {
             }
           />
           {isCardExpanded && (
-            <Grid container spacing={2}>
-              <Grid item xs={12} sm={12} md={4} lg={4}>
-                <FormControl fullWidth>
-                  <TextField
-                    value={equipment.name}
-                    onChange={(event) =>
-                      setEquipment({ ...equipment, name: event.target.value })
-                    }
-                    label="Name"
-                    placeholder="Name..."
-                    InputLabelProps={{
-                      shrink: true,
-                    }}
-                  />
-                </FormControl>
-              </Grid>
-              <Grid item xs={12} sm={12} md={4} lg={4}>
-                <FormControl fullWidth>
-                  <InputLabel>Is movable</InputLabel>
-                  <Select
-                    name="isMovable"
-                    label="Is Movable"
-                    value={equipment.isMovable.toString()}
-                    onChange={(event) =>
-                      setEquipment({
-                        ...equipment,
-                        isMovable: Number(event.target.value),
-                      })
-                    }
-                  >
-                    <MenuItem value="1">Yes</MenuItem>
-                    <MenuItem value="0">No</MenuItem>
-                  </Select>
-                </FormControl>
-              </Grid>
-              <Grid item xs={12} sm={12} md={4} lg={4}>
-                <FormControl fullWidth>
-                  <TextField
-                    value={equipment.priority}
-                    type="number"
-                    onChange={(event) =>
-                      setEquipment({
-                        ...equipment,
-                        priority: event.target.value,
-                      })
-                    }
-                    label="Priority"
-                    placeholder="0"
-                    InputLabelProps={{
-                      shrink: true,
-                    }}
-                  />
-                </FormControl>
-              </Grid>
-              <Grid item xs={12} sm={12} md={12} lg={12}>
-                <FormControl fullWidth>
-                  <TextField
-                    value={equipment.description}
-                    onChange={(event) =>
-                      setEquipment({
-                        ...equipment,
-                        description: event.target.value,
-                      })
-                    }
-                    label="Description"
-                    placeholder="Something about the equipment..."
-                    InputLabelProps={{
-                      shrink: true,
-                    }}
-                  />
-                </FormControl>
-              </Grid>
-              <Grid item xs={12}>
-                <Button
-                  onClick={() => openDialogBox()}
-                  variant="addComponentFormButton"
-                >
-                  Add Equipment
-                </Button>
-              </Grid>
+            <>
+              <AddEquipmentForm
+                formik={formik}
+                submitValues={formik.values}
+                setEquipment={setEquipment}
+              />
               <Grid item xs={12}>
                 <ImportEquipmentContainer getAllEquipments={getAllEquipments} />
                 <EquipmentTemplate />
               </Grid>
-            </Grid>
+            </>
           )}
         </CardContent>
       </Card>
-      <AddEquipmentDialogConfirmation
-        open={open}
-        setOpen={setOpen}
-        equipment={equipment}
-        getAllEquipments={getAllEquipments}
-        setEquipment={setEquipment}
-      />
     </>
   );
 }
