@@ -24,7 +24,6 @@ export default function DeleteDepartment({
 
   const deleteDepartment = async (departmentData) => {
     const result = await dao.deleteDepartment(departmentData.id);
-    console.log(result);
     if (result === false) {
       setAlertOptions({
         severity: "error",

@@ -69,7 +69,7 @@ function CollapsedRow(id) {
   const [rooms, setRooms] = useState([]);
 
   const getRoomsData = async () => {
-    console.log(id);
+    // console.log(id);
     await resultRoomsStore.fetchSubRooms(id, allocRoundContext.allocRoundId);
     setRooms(resultRoomsStore.subRooms);
   };
@@ -100,13 +100,12 @@ function CollapsedRow(id) {
         {rooms?.map((dropdownItem) => {
           return (
             <Grid2 container key={dropdownItem.id}>
-              <Grid2 xs={8} 
-              //variant="resultsDropdown"
+              <Grid2
+                xs={8}
+                //variant="resultsDropdown"
               >
                 {" "}
-                <Typography>
-                  {dropdownItem.name}
-                </Typography>
+                <Typography>{dropdownItem.name}</Typography>
               </Grid2>
               <Grid2 xs={4} />
             </Grid2>

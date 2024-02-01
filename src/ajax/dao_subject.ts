@@ -1,3 +1,4 @@
+import Logger from "../logger/logger";
 import { ResponseFiner, Subject, SubjectName } from "../types";
 import { create, download, get, remove, update } from "./request";
 
@@ -59,7 +60,7 @@ export const postNewSubjects = async (
   newSubject: Subject[],
   allocRoundId: number,
 ): Promise<boolean> => {
-  console.log("ajax", newSubject);
+  Logger.debug("ajax dao_subject: importing multiple subjects:", newSubject);
   const response = await create(
     `${baseUrl}/subject/multi/${allocRoundId}`,
     newSubject,
