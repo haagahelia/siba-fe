@@ -402,7 +402,7 @@ export const createAppTheme = (currentPalette) =>
           color: currentPalette.AllocRoom.musiikkiluokka.color,
         },
       },
-      RoomResultsContainer:{
+      RoomResultsContainer: {
         margin: margins.auto,
         width: "80%",
       },
@@ -427,6 +427,10 @@ export const createAppTheme = (currentPalette) =>
           backgroundColor: currentPalette.AllocRoom.musiikkiluokka.color,
           borderColor: currentPalette.borderColorDark.main,
         },
+      },
+      Links: {
+        textDecoration: "none",
+        color: currentPalette.fontColorDefault.default,
       },
       MuiButton: {
         styleOverrides: {

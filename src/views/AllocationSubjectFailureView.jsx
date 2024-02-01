@@ -1,3 +1,4 @@
+import useTheme from "@mui/material/styles/useTheme";
 import { useEffect, useRef, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { ajaxRequestErrorHandler } from "../ajax/ajaxRequestErrorHandler";
@@ -7,6 +8,7 @@ import "../styles/AllocationFailure.css";
 
 import CheckIcon from "@mui/icons-material/Check";
 import CloseIcon from "@mui/icons-material/Close";
+import { IconButton } from "@mui/material";
 import Button from "@mui/material/Button";
 
 import Card from "@mui/material/Card";
@@ -48,6 +50,8 @@ export const getNameForId = (array, id) => {
 };
 
 export default function AllocationSubjectFailureView() {
+  const theme = useTheme();
+
   const { allocId } = useParams();
 
   const [unAllocableSubjects, setUnAllocableSubjects] = useState([]);
@@ -204,10 +208,22 @@ export default function AllocationSubjectFailureView() {
       <Dialog open={open} onClose={handleClose} scroll="body" maxWidth="70%">
         <DialogTitle>
           {"Suitability of the space - for lesson: "}
-          <Link to={`/subject/${unAllocSubject.id}`}>
+          <Link
+            style={theme.components.Links}
+            to={`/subject/${unAllocSubject.id}`}
+          >
             {`${unAllocSubject.id} ${unAllocSubject.name}`}
           </Link>
         </DialogTitle>
+        <IconButton
+          edge="end"
+          color="inherit"
+          onClick={() => setOpen(false)}
+          aria-label="close"
+          style={{ position: "absolute", top: "10px", right: "20px" }}
+        >
+          <CloseIcon />
+        </IconButton>
         <DialogContent>
           <TableContainer component={Paper}>
             <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -231,7 +247,10 @@ export default function AllocationSubjectFailureView() {
                 {unAllocSubjectRooms.map((row) => (
                   <TableRow key={row.id}>
                     <TableCell>
-                      <Link to={`/space/${row.id}`}>{`${row.name}`}</Link>
+                      <Link
+                        style={theme.components.Links}
+                        to={`/space/${row.id}`}
+                      >{`${row.name}`}</Link>
                     </TableCell>
 
                     <GetMissingEquipment
@@ -291,13 +310,7 @@ export default function AllocationSubjectFailureView() {
           </TableContainer>
         </DialogContent>
         <DialogActions>
-          <Button
-            onClick={handleClose}
-            sx={{
-              backgroundColor: "#ff6d00",
-              cursor: "pointer",
-            }}
-          >
+          <Button onClick={handleClose} variant="contained">
             Exit
           </Button>
         </DialogActions>
