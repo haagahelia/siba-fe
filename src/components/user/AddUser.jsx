@@ -1,3 +1,4 @@
+import { useFormik } from "formik";
 import { useEffect, useState } from "react";
 
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
@@ -35,7 +36,7 @@ export default function AddUser({ getAllUsers }) {
     content: "Something here",
   });
 
-  const [registerForm, setRegisterForm] = useState({
+  const [initialUser, setInitialUser] = useState({
     email: "",
     password: "",
     isAdmin: 0,
@@ -49,27 +50,34 @@ export default function AddUser({ getAllUsers }) {
     setShowPassword(!showPassword);
   };
 
+  const handleCheckUserRole = (rolename) => (event) => {
+    const updatedValue = event.target.checked ? 1 : 0;
+    formik.setFieldValue(rolename, updatedValue);
+  };
+
   useEffect(() => {
     getAllUsers();
   }, []);
 
+  const formik = useFormik({
+    enableReinitialize: true,
+    initialValues: initialUser,
+    validate: ValidateAddUser,
+    onSubmit: (values) => {
+      setDialogOptions({
+        title: `Are you sure you want to add ${values.email}?`,
+        content: `By clicking continue, ${values.email} will be used to create a new user`,
+      });
+      setDialogOpen(true);
+
+      return;
+    },
+  });
+
   const addUser = async (submitValues) => {
-    const validationErrors = await ValidateAddUser(submitValues);
-    if (validationErrors.general) {
-      alert(
-        "Email and/or password is missing, and/or select at least one role.",
-      );
-      return;
-    }
+    const result = await dao.postNewUser(submitValues);
 
-    if (validationErrors.email) {
-      alert(`The email address ${submitValues.email} already exists.`);
-      return;
-    }
-
-    const success = await dao.postNewUser(submitValues);
-
-    if (!success) {
+    if (!result) {
       setAlertOptions({
         severity: "error",
         title: "Error",
@@ -85,7 +93,7 @@ export default function AddUser({ getAllUsers }) {
         message: `${submitValues.email} added.`,
       });
       setAlertOpen(true);
-      setRegisterForm({
+      setInitialUser({
         email: "",
         password: "",
         isAdmin: 0,
@@ -108,7 +116,7 @@ export default function AddUser({ getAllUsers }) {
         dialogOptions={dialogOptions}
         setDialogOpen={setDialogOpen}
         submit={addUser}
-        submitValues={registerForm}
+        submitValues={initialUser}
       />
       <Card variant="outlined">
         <CardContent>
@@ -128,107 +136,106 @@ export default function AddUser({ getAllUsers }) {
             }
           />
           {isCardExpanded && (
-            <Grid container spacing={2}>
-              <Grid item xs={12}>
-                <TextField
-                  className="formTextInput"
-                  value={registerForm.email}
-                  onChange={(event) =>
-                    setRegisterForm({
-                      ...registerForm,
-                      email: event.target.value,
-                    })
-                  }
-                  placeholder="email"
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  className="formTextInput"
-                  value={registerForm.password}
-                  onChange={(event) =>
-                    setRegisterForm({
-                      ...registerForm,
-                      password: event.target.value,
-                    })
-                  }
-                  type={showPassword ? "text" : "password"}
-                  placeholder="password"
-                  InputProps={{
-                    endAdornment: (
-                      <InputAdornment position="end">
-                        <IconButton
-                          onClick={handlePasswordVisibility}
-                          edge="end"
-                          style={{ backgroundColor: "transparent" }}
-                        >
-                          {showPassword ? <Visibility /> : <VisibilityOff />}
-                        </IconButton>
-                      </InputAdornment>
-                    ),
-                  }}
-                />
-              </Grid>
-              <Grid item xs={12} sm={6} md={4}>
-                <FormGroup>
-                  <FormControlLabel
-                    control={<Checkbox />}
-                    label="Admin"
-                    labelPlacement="start"
-                    className="formCheckBoxButtons"
-                    name="isAdmin"
-                    checked={registerForm.isAdmin === 1}
-                    onChange={(event) =>
-                      setRegisterForm({
-                        ...registerForm,
-                        isAdmin: event.target.checked ? 1 : 0,
-                      })
+            <form onSubmit={formik.handleSubmit}>
+              <Grid container spacing={2}>
+                <Grid item xs={12}>
+                  <TextField
+                    className="formTextInput"
+                    error={
+                      formik.touched.email && formik.errors.email ? true : false
                     }
-                  />
-                  <FormControlLabel
-                    control={<Checkbox />}
-                    label="Planner"
-                    labelPlacement="start"
-                    className="formCheckBoxButtons"
-                    name="isPlanner"
-                    checked={registerForm.isPlanner === 1}
-                    onChange={(event) =>
-                      setRegisterForm({
-                        ...registerForm,
-                        isPlanner: event.target.checked ? 1 : 0,
-                      })
+                    name="email"
+                    placeholder="Email..."
+                    label="Email"
+                    value={formik.values.email}
+                    onChange={formik.handleChange("email")}
+                    onBlur={formik.handleBlur("email")}
+                    helperText={
+                      formik.touched.email && formik.errors.email
+                        ? formik.errors.email
+                        : null
                     }
+                    InputLabelProps={{
+                      shrink: true,
+                    }}
                   />
-                  <FormControlLabel
-                    control={<Checkbox />}
-                    label="Statist"
-                    labelPlacement="start"
-                    className="formCheckBoxButtons"
-                    name="isStatist"
-                    checked={registerForm.isStatist === 1}
-                    onChange={(event) =>
-                      setRegisterForm({
-                        ...registerForm,
-                        isStatist: event.target.checked ? 1 : 0,
-                      })
+                </Grid>
+                <Grid item xs={12}>
+                  <TextField
+                    name="password"
+                    placeholder="Password..."
+                    label="Password"
+                    className="formTextInput"
+                    error={
+                      formik.touched.password && !formik.values.password
+                        ? true
+                        : false
                     }
+                    value={formik.values.password}
+                    onChange={formik.handleChange("password")}
+                    type={showPassword ? "text" : "password"}
+                    helperText={
+                      formik.touched.password && !formik.values.password
+                        ? "Password is a required field"
+                        : null
+                    }
+                    InputProps={{
+                      endAdornment: (
+                        <InputAdornment position="end">
+                          <IconButton
+                            onClick={handlePasswordVisibility}
+                            edge="end"
+                            style={{ backgroundColor: "transparent" }}
+                          >
+                            {showPassword ? <Visibility /> : <VisibilityOff />}
+                          </IconButton>
+                        </InputAdornment>
+                      ),
+                    }}
                   />
-                </FormGroup>
-                <Button
-                  type="submit"
-                  variant="addComponentFormButton"
-                  onClick={() => {
-                    setDialogOptions({
-                      title: `Are you sure you want to add ${registerForm.email}?`,
-                      content: `By clicking continue, ${registerForm.email} will be used to create a new user`,
-                    });
-                    setDialogOpen(true);
-                  }}
-                >
-                  Add User
-                </Button>
+                </Grid>
+                <Grid item xs={12} sm={6} md={4}>
+                  <FormGroup>
+                    <FormControlLabel
+                      control={<Checkbox />}
+                      label="Admin"
+                      labelPlacement="start"
+                      className="formCheckBoxButtons"
+                      name="isAdmin"
+                      checked={formik.values.isAdmin === 1}
+                      onChange={handleCheckUserRole("isAdmin")}
+                    />
+                    <FormControlLabel
+                      control={<Checkbox />}
+                      label="Planner"
+                      labelPlacement="start"
+                      className="formCheckBoxButtons"
+                      name="isPlanner"
+                      checked={formik.values.isPlanner === 1}
+                      onChange={handleCheckUserRole("isPlanner")}
+                    />
+                    <FormControlLabel
+                      control={<Checkbox />}
+                      label="Statist"
+                      labelPlacement="start"
+                      className="formCheckBoxButtons"
+                      name="isStatist"
+                      checked={formik.values.isStatist === 1}
+                      onChange={handleCheckUserRole("isStatist")}
+                    />
+                  </FormGroup>
+                  <Button
+                    type="submit"
+                    variant="addComponentFormButton"
+                    onClick={() => {
+                      setInitialUser(formik.values);
+                    }}
+                  >
+                    Add User
+                  </Button>
+                </Grid>
               </Grid>
-            </Grid>
+            </form>
           )}
         </CardContent>
       </Card>
