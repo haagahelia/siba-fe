@@ -38,7 +38,7 @@ export default function SettingsView() {
     Logger.debug("Fetching all settings");
     const { httpStatus, data } = await dao.fetchSettings();
     if (httpStatus !== 200) {
-      Logger.debug("Error fetching settings");
+      Logger.error(`Error fetching settings, http status code: ${httpStatus}`);
       ajaxRequestErrorHandler(
         httpStatus,
         getFunctionName(2),
@@ -70,7 +70,7 @@ export default function SettingsView() {
   }, [settings]);
 
   useEffect(() => {
-    document.title = 'Settings';
+    document.title = "Settings";
   }, []);
 
   return (
@@ -81,7 +81,7 @@ export default function SettingsView() {
         setAlertOpen={setAlertOpen}
       />
       <Container maxWidth="100%">
-        {(roles.admin === "1") && (
+        {roles.admin === "1" && (
           <AddSettingContainer getAllSettings={getAllSettings} />
         )}
         <Grid container rowSpacing={0.5}>

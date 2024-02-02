@@ -9,8 +9,6 @@ import {
 } from "./Validate_GenericRegexps";
 
 export default async function ValidateAddSpace(values) {
-  console.log("ValidateAddSpace.js called");
-
   const errors = {};
   const {
     name,

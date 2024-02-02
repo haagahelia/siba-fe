@@ -98,7 +98,7 @@ export default function AddProgramContainer({
       if (response.success) {
         setDepartmentSelectList(response.data);
       } else {
-        Logger.debug("Error fetching planner Departments.");
+        Logger.error("Error fetching planner Departments.");
       }
     }
   };

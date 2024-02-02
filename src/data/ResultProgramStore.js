@@ -28,7 +28,9 @@ class ResultProgramStore {
       const names = await response.json();
       this.names = names;
     } else {
-      Logger.error("Error fetching alloc programs!");
+      Logger.error(
+        `Error fetching alloc programs, http status code: ${response.status}`,
+      );
     }
   }
 }

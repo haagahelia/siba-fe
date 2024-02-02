@@ -9,7 +9,7 @@ const isValidType = (file) => {
   if (file.name.substring(file.name.lastIndexOf(".") + 1) === "csv") {
     return file.type === "text/csv" || file.type === "application/vnd.ms-excel";
   } else {
-    Logger.debug("File type error, type: ", file.type);
+    Logger.error("File type error, type: ", file.type);
     return false;
   }
 };

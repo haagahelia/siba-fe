@@ -45,9 +45,8 @@ export default function SingleProgramDialog({
       const response = await dao.fetchDepartmentplannerByUserId(userId);
       if (response.success) {
         setDepartmentList(response.data);
-        console.log(response.data);
       } else {
-        Logger.debug("Error fetching planner Departments.");
+        Logger.error("Error fetching planner Departments.");
       }
     }
   };

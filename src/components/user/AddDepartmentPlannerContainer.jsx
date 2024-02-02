@@ -90,7 +90,6 @@ export default function AddDepartmentPlannerContainer({
   });
 
   const addUserDepartment = async (values) => {
-    console.log(values);
     const newDepartmentPlanner = {
       departmentId: values.departmentId,
       userId: values.userId,
