@@ -15,12 +15,26 @@ import Grid from "@mui/material/Grid";
 import IconButton from "@mui/material/IconButton";
 import InputAdornment from "@mui/material/InputAdornment";
 import TextField from "@mui/material/TextField";
-import AddUserDialogConfirmations from "./AddUserDialogConfirmations";
+import dao from "../../ajax/dao";
+import ValidateAddUser from "../../validation/ValidateAddUser";
+import AlertBox from "../common/AlertBox";
+import ConfirmationDialog from "../common/ConfirmationDialog";
 
 export default function AddUser({ getAllUsers }) {
   const [isCardExpanded, setIsCardExpanded] = useState(false);
 
-  const [open, setOpen] = useState(false);
+  const [alertOpen, setAlertOpen] = useState(false);
+  const [alertOptions, setAlertOptions] = useState({
+    title: "This is title",
+    message: "This is an error alert — check it out!",
+    severity: "error",
+  });
+  const [dialogOpen, setDialogOpen] = useState(false);
+  const [dialogOptions, setDialogOptions] = useState({
+    title: "this is dialog",
+    content: "Something here",
+  });
+
   const [registerForm, setRegisterForm] = useState({
     email: "",
     password: "",
@@ -35,16 +49,67 @@ export default function AddUser({ getAllUsers }) {
     setShowPassword(!showPassword);
   };
 
-  const openDialogBox = () => {
-    setOpen(true);
-  };
-
   useEffect(() => {
     getAllUsers();
   }, []);
 
+  const addUser = async (submitValues) => {
+    const validationErrors = await ValidateAddUser(submitValues);
+    if (validationErrors.general) {
+      alert(
+        "Email and/or password is missing, and/or select at least one role.",
+      );
+      return;
+    }
+
+    if (validationErrors.email) {
+      alert(`The email address ${submitValues.email} already exists.`);
+      return;
+    }
+
+    const success = await dao.postNewUser(submitValues);
+
+    if (!success) {
+      setAlertOptions({
+        severity: "error",
+        title: "Error",
+        message: "Something went wrong - please try again later.",
+      });
+      setAlertOpen(true);
+      return;
+    } else {
+      setDialogOpen(false);
+      setAlertOptions({
+        severity: "success",
+        title: "Success!",
+        message: `${submitValues.email} added.`,
+      });
+      setAlertOpen(true);
+      setRegisterForm({
+        email: "",
+        password: "",
+        isAdmin: 0,
+        isPlanner: 0,
+        isStatist: 0,
+      });
+      getAllUsers();
+    }
+  };
+
   return (
     <>
+      <AlertBox
+        alertOpen={alertOpen}
+        alertOptions={alertOptions}
+        setAlertOpen={setAlertOpen}
+      />
+      <ConfirmationDialog
+        dialogOpen={dialogOpen}
+        dialogOptions={dialogOptions}
+        setDialogOpen={setDialogOpen}
+        submit={addUser}
+        submitValues={registerForm}
+      />
       <Card variant="outlined">
         <CardContent>
           <CardHeader
@@ -150,8 +215,15 @@ export default function AddUser({ getAllUsers }) {
                   />
                 </FormGroup>
                 <Button
-                  onClick={() => openDialogBox()}
+                  type="submit"
                   variant="addComponentFormButton"
+                  onClick={() => {
+                    setDialogOptions({
+                      title: `Are you sure you want to add ${registerForm.email}?`,
+                      content: `By clicking continue, ${registerForm.email} will be used to create a new user`,
+                    });
+                    setDialogOpen(true);
+                  }}
                 >
                   Add User
                 </Button>
@@ -160,13 +232,6 @@ export default function AddUser({ getAllUsers }) {
           )}
         </CardContent>
       </Card>
-      <AddUserDialogConfirmations
-        open={open}
-        setOpen={setOpen}
-        registerForm={registerForm}
-        setRegisterForm={setRegisterForm}
-        getAllUsers={getAllUsers}
-      />
     </>
   );
 }
