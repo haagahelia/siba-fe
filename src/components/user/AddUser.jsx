@@ -155,9 +155,6 @@ export default function AddUser({ getAllUsers }) {
                         ? formik.errors.email
                         : null
                     }
-                    InputLabelProps={{
-                      shrink: true,
-                    }}
                   />
                 </Grid>
                 <Grid item xs={12}>
@@ -195,6 +192,14 @@ export default function AddUser({ getAllUsers }) {
                   />
                 </Grid>
                 <Grid item xs={12} sm={6} md={4}>
+                  <div className="errorMessage">
+                    {(formik.touched.isAdmin ||
+                      formik.touched.isPlanner ||
+                      formik.touched.isStatist) &&
+                    Boolean(formik.errors.roles) === true
+                      ? formik.errors.roles
+                      : null}
+                  </div>
                   <FormGroup>
                     <FormControlLabel
                       control={<Checkbox />}

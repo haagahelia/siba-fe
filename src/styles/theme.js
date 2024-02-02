@@ -915,6 +915,9 @@ export const createAppTheme = (currentPalette) =>
               borderWidth: "2px",
             },
           },
+          ".errorMessage": {
+            color: currentPalette.error.main,
+          },
           ".navbar-spacing": {
             height: "100vh",
             left: 0,

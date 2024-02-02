@@ -24,6 +24,10 @@ export default async function ValidateAddUser(values) {
     errors.email = "The email address already exists.";
   }
 
+  if (isAdmin === 0 && isPlanner === 0 && isStatist === 0) {
+    errors.roles = "Please select at least one role.";
+  }
+
   if (
     !email.trim() ||
     !values.password.trim() ||
