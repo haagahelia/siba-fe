@@ -46,7 +46,7 @@ export default function SingleProgramDialog({
       if (response.success) {
         setDepartmentList(response.data);
       } else {
-        Logger.debug("Error fetching planner Departments.");
+        Logger.error("Error fetching planner Departments.");
       }
     }
   };
