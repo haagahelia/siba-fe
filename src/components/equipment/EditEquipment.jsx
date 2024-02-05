@@ -3,6 +3,7 @@ import { useState } from "react";
 import dao from "../../ajax/dao";
 import Logger from "../../logger/logger";
 import ValidateEditEquipment from "../../validation/ValidateEditEquipment";
+import { capitalizeFirstLetter } from "../../validation/ValidationUtilities";
 import AlertBox from "../common/AlertBox";
 import ConfirmationDialog from "../common/ConfirmationDialog";
 import EditEquipmentForm from "./EditEquipmentForm";
@@ -42,8 +43,9 @@ export default function EditEquipment({
 
   const submitEditedEquipment = async (submitValues) => {
     Logger.debug(
-      `Submitting edits for equipment: ${JSON.stringify(singleEquipment)}`,
+      `Submitting edits for equipment: ${JSON.stringify(submitValues)}`,
     );
+    submitValues.name = capitalizeFirstLetter(submitValues.name);
     const success = await dao.editEquipment(submitValues, singleEquipment.id);
     if (!success) {
       setAlertOptions({
