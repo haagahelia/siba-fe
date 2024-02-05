@@ -28,6 +28,14 @@ export default function SingleProgramDialog({
   const [departmentList, setDepartmentList] = useState([
     { id: 101, name: "Jazz" },
   ]);
+  const [numberOfLessons, setNumberOfLessons] = useState(null);
+
+  const fetchNumberOfLessons = async () => {
+    const response = await dao.getNumberOfLessons(singleProgram?.id);
+    const num = response;
+    const value = num["count(*)"];
+    return value;
+  };
 
   useEffect(() => {
     if (open && singleProgram) {
@@ -36,6 +44,14 @@ export default function SingleProgramDialog({
           singleProgram,
         )}`,
       );
+      fetchNumberOfLessons(singleProgram.id)
+        .then((number) => {
+          setNumberOfLessons(number);
+          console.log("Number of lessons:", number);
+        })
+        .catch((error) =>
+          Logger.error("Error fetching the number of lessons:", error),
+        );
     }
   }, [open, singleProgram]);
 
@@ -77,22 +93,41 @@ export default function SingleProgramDialog({
       >
         <CloseIcon />
       </IconButton>
-      {(roles.admin === "1" || isPlannerOfDepartment) && (
-        <DialogActions>
-          <DeleteProgram
-            singleProgram={singleProgram}
-            getAllPrograms={getAllPrograms}
-            setOpen={setOpen}
-          />
-          <EditProgram
-            singleProgram={singleProgram}
-            setSingleProgram={setSingleProgram}
-            getAllPrograms={getAllPrograms}
-            open={open}
-            setOpen={setOpen}
-          />
-        </DialogActions>
-      )}
+      <DialogContent
+        variant="sibaDialogContent2"
+        style={{
+          background: "none",
+          display: "flex",
+          justifyContent: "center",
+        }}
+      >
+        <Typography variant="singleDialogSubtitle">
+          {numberOfLessons !== null
+            ? numberOfLessons === 0
+              ? "There are no lessons in this program."
+              : numberOfLessons === 1
+                ? "There is 1 lesson in this program."
+                : `There are ${numberOfLessons} lessons in this program.`
+            : "Loading..."}
+        </Typography>
+      </DialogContent>
+      {(roles.admin === "1" || isPlannerOfDepartment) &&
+        numberOfLessons === 0 && (
+          <DialogActions>
+            <DeleteProgram
+              singleProgram={singleProgram}
+              getAllPrograms={getAllPrograms}
+              setOpen={setOpen}
+            />
+            <EditProgram
+              singleProgram={singleProgram}
+              setSingleProgram={setSingleProgram}
+              getAllPrograms={getAllPrograms}
+              open={open}
+              setOpen={setOpen}
+            />
+          </DialogActions>
+        )}
       <DialogContent>
         <Grid container variant="sibaGridSingleItemDisplay" column={14}>
           <DialogContent variant="sibaDialogContent2">
