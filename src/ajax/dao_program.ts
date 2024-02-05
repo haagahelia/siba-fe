@@ -61,3 +61,12 @@ export const deleteProgram = async (programId: number): Promise<boolean> => {
   const data = await response.json();
   return data?.returnedNumberValue === 1;
 };
+
+// Fetch the number of lessons for a program
+export const getNumberOfLessons = async (
+  programId: number,
+): Promise<number> => {
+  const response = await get(`${baseUrl}/program/${programId}/numberOfLessons`);
+  const numberOfLessons: number = await response.json();
+  return numberOfLessons;
+};
