@@ -106,7 +106,9 @@ export default function SingleProgramDialog({
           {numberOfLessons !== null
             ? numberOfLessons === 0
               ? "There are no lessons in this program."
-              : `There are ${numberOfLessons} lessons in this program.`
+              : numberOfLessons === 1
+                ? "There is 1 lesson in this program."
+                : `There are ${numberOfLessons} lessons in this program.`
             : "Loading..."}
         </Typography>
       </DialogContent>
