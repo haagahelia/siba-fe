@@ -1,6 +1,6 @@
 import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
-import BuildingInputField from "./BuildingInputField";
+import BuildingInputFields from "./BuildingInputFields";
 
 export default function AddBuildingForm({
   formik,
@@ -10,7 +10,7 @@ export default function AddBuildingForm({
   return (
     <form onSubmit={formik.handleSubmit}>
       <Grid container spacing={2}>
-        <BuildingInputField formik={formik} />
+        <BuildingInputFields formik={formik} />
       </Grid>
       <Grid item xs={3} padding={2}>
         <Button

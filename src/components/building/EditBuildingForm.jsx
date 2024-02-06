@@ -6,13 +6,13 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import Grid from "@mui/material/Grid";
-import BuildingInputField from "./BuildingInputField";
 import useTheme from "@mui/material/styles/useTheme";
+import BuildingInputFields from "./BuildingInputFields";
 
 export default function EditBuildingForm({ formik }) {
   const [open, setOpen] = useState(false);
 
-  const theme= useTheme();
+  const theme = useTheme();
 
   return (
     <div>
@@ -40,7 +40,7 @@ export default function EditBuildingForm({ formik }) {
               spacing={3}
               column={7}
             >
-              <BuildingInputField formik={formik} />
+              <BuildingInputFields formik={formik} />
             </Grid>
           </DialogContent>
           <DialogActions sx={{ justifyContent: "space-evenly" }}>
