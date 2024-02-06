@@ -3,6 +3,11 @@
 import dao from "../ajax/dao";
 import { Equipment } from "../types";
 
+// Returns a new string with the first letter of input capitalized.
+export function capitalizeFirstLetter(input: string) {
+  return input[0].toUpperCase() + input.slice(1);
+}
+
 // Check if user enters an existing equipment name.
 // Used in equipment add validations.
 export const isDuplicatedEquipmentName = async (name: string) => {
