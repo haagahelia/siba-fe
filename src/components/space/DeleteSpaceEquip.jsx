@@ -3,18 +3,15 @@ import dao from "../../ajax/dao";
 
 import Button from "@mui/material/Button";
 import useTheme from "@mui/material/styles/useTheme";
-import AlertBox from "../common/AlertBox";
+import Logger from "../../logger/logger";
 import ConfirmationDialog from "../common/ConfirmationDialog";
 
 export default function DeleteSpaceEquip({
+  setAlertOpen,
+  setAlertOptions,
   singleSpaceEquipToDelete,
   getEquipmentsBySpaceId,
 }) {
-  const [alertOpen, setAlertOpen] = useState(false);
-  const [alertOptions, setAlertOptions] = useState({
-    message: "This is an error alert — check it out!",
-    severity: "error",
-  });
   const [dialogOpen, setDialogOpen] = useState(false);
   const [dialogOptions, setDialogOptions] = useState({
     title: "this is dialog",
@@ -41,14 +38,15 @@ export default function DeleteSpaceEquip({
         title: "Error",
         message: "Something went wrong - please try again later.",
       });
-      setAlertOpen(true);
-      return;
+      Logger.error("delete space equipment failed");
+    } else {
+      setAlertOptions({
+        severity: "success",
+        title: "Success!",
+        message: `${equipmentName} removed.`,
+      });
+      Logger.debug("delete space equipment success");
     }
-    setAlertOptions({
-      severity: "success",
-      title: "Success!",
-      message: `${equipmentName} removed.`,
-    });
     setAlertOpen(true);
     getEquipmentsBySpaceId(singleSpaceEquipToDelete.spaceId);
   };
@@ -59,19 +57,11 @@ export default function DeleteSpaceEquip({
       content: `Press continue to remove ${values.name} from the listing.`,
     });
     setDialogOpen(true);
-
     setDeleteSpaceEquip(values.spaceId, values.equipmentId);
-
-    return;
   };
 
   return (
     <div>
-      <AlertBox
-        alertOpen={alertOpen}
-        alertOptions={alertOptions}
-        setAlertOpen={setAlertOpen}
-      />
       <ConfirmationDialog
         dialogOpen={dialogOpen}
         dialogOptions={dialogOptions}
