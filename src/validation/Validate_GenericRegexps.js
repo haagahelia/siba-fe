@@ -1,3 +1,5 @@
+import Logger from "../logger/logger";
+
 export const vF_regName = {
   regExp: new RegExp(/^[A-Za-zäöåÄÖÅ0-9\(\)\s\/,-]*$/),
   regExpHint:
@@ -96,12 +98,16 @@ const genericErrorMessageFunction = (fieldName, erroMessageEnd) =>
 // -------
 
 export const trimAllPropertyValueStrings = (valuesObj) => {
-  const properties = Object.keys(valuesObj);
+  Logger.debug(`Typeof valuesObj: ${typeof valuesObj}`);
 
-  for (const propertyName of properties) {
-    if (typeof valuesObj[propertyName] === "string") {
-      //  a.b is kind of same as a[b]
-      valuesObj[propertyName] = valuesObj[propertyName].trim();
+  if (valuesObj) {
+    const properties = Object.keys(valuesObj);
+
+    for (const propertyName of properties) {
+      if (typeof valuesObj[propertyName] === "string") {
+        //  a.b is kind of same as a[b]
+        valuesObj[propertyName] = valuesObj[propertyName].trim();
+      }
     }
   }
 };

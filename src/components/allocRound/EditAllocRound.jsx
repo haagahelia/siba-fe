@@ -1,11 +1,9 @@
 import { useFormik } from "formik";
 import { useState } from "react";
 import dao from "../../ajax/dao";
-import {
-  capitalizeFirstLetter,
-  validate,
-} from "../../validation/ValidateEditAllocRound";
+import { validate } from "../../validation/ValidateEditAllocRound";
 
+import { capitalizeFirstLetter } from "../../validation/ValidationUtilities";
 import AlertBox from "../common/AlertBox";
 import ConfirmationDialog from "../common/ConfirmationDialog";
 import EditAllocRoundForm from "./EditAllocRoundForm";

@@ -1,33 +1,34 @@
-import React, { useState } from 'react';
-import { useFormik } from 'formik';
-import dao from '../../ajax/dao';
-import { capitalizeFirstLetter, validate } from '../../validation/ValidateAddAllocRound';
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import CardHeader from '@mui/material/CardHeader';
-import AlertBox from '../common/AlertBox';
-import ConfirmationDialog from '../common/ConfirmationDialog';
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import CardHeader from "@mui/material/CardHeader";
+import { useFormik } from "formik";
+import React, { useState } from "react";
+import dao from "../../ajax/dao";
+import { validate } from "../../validation/ValidateAddAllocRound";
+import AlertBox from "../common/AlertBox";
+import ConfirmationDialog from "../common/ConfirmationDialog";
 
-import AddAllocRoundForm from './AddAllocRoundForm';
+import { capitalizeFirstLetter } from "../../validation/ValidationUtilities";
+import AddAllocRoundForm from "./AddAllocRoundForm";
 
-export const AddEmptyAllocRound = ({allAllocRoundsList}) => {
-    const [alertOpen, setAlertOpen] = useState(false);
-    const [alertOptions, setAlertOptions] = useState({
-      title: "Error",
-      message: "",
-      severity: "error",
-    });
-    const [dialogOpen, setDialogOpen] = useState(false);
-    const [dialogOptions, setDialogOptions] = useState({
-      title: "Confirm",
-      content: "",
-    });
-    const [initialAllocRound, setInitialAllocRound] = useState({
-      name: "",
-      description: "",
-    });
+export const AddEmptyAllocRound = ({ allAllocRoundsList }) => {
+  const [alertOpen, setAlertOpen] = useState(false);
+  const [alertOptions, setAlertOptions] = useState({
+    title: "Error",
+    message: "",
+    severity: "error",
+  });
+  const [dialogOpen, setDialogOpen] = useState(false);
+  const [dialogOptions, setDialogOptions] = useState({
+    title: "Confirm",
+    content: "",
+  });
+  const [initialAllocRound, setInitialAllocRound] = useState({
+    name: "",
+    description: "",
+  });
 
-      // Here is a list of lessons
+  // Here is a list of lessons
   // When you choose a lesson, the information goes to the form's initialvalues
   const handleChange = (e) => {
     const selected = e.target.value;
@@ -38,7 +39,6 @@ export const AddEmptyAllocRound = ({allAllocRoundsList}) => {
       description: selected.description,
     });
   };
-  
 
   const formik = useFormik({
     enableReinitialize: true,
@@ -89,7 +89,7 @@ export const AddEmptyAllocRound = ({allAllocRoundsList}) => {
   };
   return (
     <>
-    <AlertBox
+      <AlertBox
         alertOpen={alertOpen}
         alertOptions={alertOptions}
         setAlertOpen={setAlertOpen}
@@ -101,19 +101,18 @@ export const AddEmptyAllocRound = ({allAllocRoundsList}) => {
         submit={addAllocRound}
         submitValues={formik.values}
       />
-    <Card variant="outlined">
-      <CardContent>
-        <CardHeader title="Add Empty Allocation Round" />
-        <AddAllocRoundForm
-         handleChange={handleChange}
-         formik={formik}
-         submitValues={formik.values}
-         setInitialAllocRound={setInitialAllocRound}
-         allAllocRoundsList={allAllocRoundsList}
-         />
-      </CardContent>
-    </Card>
-
+      <Card variant="outlined">
+        <CardContent>
+          <CardHeader title="Add Empty Allocation Round" />
+          <AddAllocRoundForm
+            handleChange={handleChange}
+            formik={formik}
+            submitValues={formik.values}
+            setInitialAllocRound={setInitialAllocRound}
+            allAllocRoundsList={allAllocRoundsList}
+          />
+        </CardContent>
+      </Card>
     </>
   );
 };

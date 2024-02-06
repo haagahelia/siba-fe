@@ -1,10 +1,7 @@
 import { useFormik } from "formik";
 import { useState } from "react";
 import dao from "../../ajax/dao";
-import {
-  capitalizeFirstLetter,
-  validate,
-} from "../../validation/ValidateAddBuilding";
+import { validate } from "../../validation/ValidateAddBuilding";
 
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
@@ -12,6 +9,8 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardHeader from "@mui/material/CardHeader";
 import IconButton from "@mui/material/IconButton";
+import Logger from "../../logger/logger";
+import { capitalizeFirstLetter } from "../../validation/ValidationUtilities";
 import AlertBox from "../common/AlertBox";
 import ConfirmationDialog from "../common/ConfirmationDialog";
 import AddBuildingForm from "./AddBuildingForm";
@@ -49,7 +48,10 @@ export default function AddBuildingContainer({ getAllBuildings }) {
   const formik = useFormik({
     enableReinitialize: true,
     initialValues: initialBuilding,
-    validate,
+    validate: (values) => {
+      Logger.debug("Formik validate");
+      return validate(values);
+    },
     onSubmit: (values) => {
       setDialogOptions({
         title: `Are you sure you want to add ${values.name}?`,

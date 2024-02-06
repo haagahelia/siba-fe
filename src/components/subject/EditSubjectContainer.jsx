@@ -1,16 +1,13 @@
 import { useFormik } from "formik";
 import { useContext, useEffect, useState } from "react";
+import { AllocRoundContext } from "../../AppContext";
 import {
   ajaxRequestErrorHandler,
   getFunctionName,
 } from "../../ajax/ajaxRequestErrorHandler";
 import dao from "../../ajax/dao";
-import {
-  capitalizeFirstLetter,
-  validate,
-} from "../../validation/ValidateEditSubject";
-
-import { AllocRoundContext } from "../../AppContext";
+import { validate } from "../../validation/ValidateEditSubject";
+import { capitalizeFirstLetter } from "../../validation/ValidationUtilities";
 import AlertBox from "../common/AlertBox";
 import ConfirmationDialog from "../common/ConfirmationDialog";
 import EditSubjectForm from "./EditSubjectForm";

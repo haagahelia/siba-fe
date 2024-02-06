@@ -5,11 +5,8 @@ import {
   getFunctionName,
 } from "../../ajax/ajaxRequestErrorHandler";
 import dao from "../../ajax/dao";
-import {
-  capitalizeFirstLetter,
-  validate,
-} from "../../validation/ValidateEditSpace";
-
+import { validate } from "../../validation/ValidateEditSpace";
+import { capitalizeFirstLetter } from "../../validation/ValidationUtilities";
 import AlertBox from "../common/AlertBox";
 import ConfirmationDialog from "../common/ConfirmationDialog";
 import EditSpaceForm from "./EditSpaceForm";

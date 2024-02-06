@@ -1,12 +1,10 @@
 import { useState } from "react";
 import dao from "../../ajax/dao";
 import { importData } from "../../importDataFunctions/importData";
-import {
-  capitalizeFirstLetter,
-  validate,
-} from "../../validation/ValidateAddBuilding";
+import { validate } from "../../validation/ValidateAddBuilding";
 
 import Button from "@mui/material/Button";
+import { capitalizeFirstLetter } from "../../validation/ValidationUtilities";
 import AlertBox from "../common/AlertBox";
 
 export default function ImportBuildingButton({

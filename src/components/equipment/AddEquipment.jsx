@@ -1,9 +1,7 @@
 import { useFormik } from "formik";
 import { useState } from "react";
 import dao from "../../ajax/dao";
-import ValidateAddEquipment, {
-  capitalizeFirstLetter,
-} from "../../validation/ValidateAddEquipment";
+import ValidateAddEquipment, {} from "../../validation/ValidateAddEquipment";
 
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
@@ -12,6 +10,7 @@ import CardContent from "@mui/material/CardContent";
 import CardHeader from "@mui/material/CardHeader";
 import Grid from "@mui/material/Grid";
 import IconButton from "@mui/material/IconButton";
+import { capitalizeFirstLetter } from "../../validation/ValidationUtilities";
 import AlertBox from "../common/AlertBox";
 import ConfirmationDialog from "../common/ConfirmationDialog";
 import AddEquipmentForm from "./AddEquipmentForm";

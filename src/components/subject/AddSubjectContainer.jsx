@@ -7,10 +7,8 @@ import {
 } from "../../ajax/ajaxRequestErrorHandler";
 import dao from "../../ajax/dao";
 import Logger from "../../logger/logger";
-import {
-  capitalizeFirstLetter,
-  validate,
-} from "../../validation/ValidateAddSubject";
+import { validate } from "../../validation/ValidateAddSubject";
+import { capitalizeFirstLetter } from "../../validation/ValidationUtilities";
 
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";

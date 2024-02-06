@@ -1,18 +1,3 @@
-import { useFormik } from "formik";
-import { useContext, useEffect, useState } from "react";
-import { AllocRoundContext } from "../../AppContext";
-import {
-  ajaxRequestErrorHandler,
-  getFunctionName,
-} from "../../ajax/ajaxRequestErrorHandler";
-import dao from "../../ajax/dao";
-import { useRoleLoggedIn } from "../../hooks/useRoleLoggedIn";
-import Logger from "../../logger/logger";
-import {
-  capitalizeFirstLetter,
-  validate,
-} from "../../validation/ValidateAddProgram";
-
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { Typography } from "@mui/material";
@@ -20,7 +5,19 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardHeader from "@mui/material/CardHeader";
 import IconButton from "@mui/material/IconButton";
+import { useFormik } from "formik";
+import { useContext, useEffect, useState } from "react";
+import { AllocRoundContext } from "../../AppContext";
 import { AppContext } from "../../AppContext";
+import {
+  ajaxRequestErrorHandler,
+  getFunctionName,
+} from "../../ajax/ajaxRequestErrorHandler";
+import dao from "../../ajax/dao";
+import { useRoleLoggedIn } from "../../hooks/useRoleLoggedIn";
+import Logger from "../../logger/logger";
+import { validate } from "../../validation/ValidateAddProgram";
+import { capitalizeFirstLetter } from "../../validation/ValidationUtilities";
 import AlertBox from "../common/AlertBox";
 import ConfirmationDialog from "../common/ConfirmationDialog";
 import AddProgramForm from "./AddProgramForm";
@@ -66,7 +63,8 @@ export default function AddProgramContainer({
     enableReinitialize: true,
     initialValues: initialProgram,
     validate: (values) => {
-      validate(values);
+      Logger.debug("Formik validate");
+      return validate(values);
     },
     onSubmit: (values) => {
       setDialogOptions({

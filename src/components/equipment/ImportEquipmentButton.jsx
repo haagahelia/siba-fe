@@ -1,9 +1,8 @@
 import { useState } from "react";
 import dao from "../../ajax/dao";
 import { importData } from "../../importDataFunctions/importData";
-import ValidateAddEquipment, {
-  capitalizeFirstLetter,
-} from "../../validation/ValidateAddEquipment";
+import ValidateAddEquipment, {} from "../../validation/ValidateAddEquipment";
+import { capitalizeFirstLetter } from "../../validation/ValidationUtilities";
 
 import Button from "@mui/material/Button";
 import AlertBox from "../common/AlertBox";

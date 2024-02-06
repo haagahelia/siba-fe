@@ -10,13 +10,13 @@ export async function validate(values) {
   trimAllPropertyValueStrings(values);
   const errors = {};
 
-  const isDuplicatedName = async function () {
-    let buildingList = [];
+  const isDuplicatedBuildingName = async function (name) {
     const { data } = await dao.fetchAllBuildings();
+    let buildingList = [];
     buildingList = data;
     // Check if user enter an existed building name
     const result = buildingList.some(
-      (building) => building.name.toLowerCase() === values.name.toLowerCase(),
+      (building) => building.name.trim().toLowerCase() === name.toLowerCase(),
     );
 
     return result;
@@ -24,7 +24,7 @@ export async function validate(values) {
 
   if (!values.name) {
     errors.name = requiredFieldErrorMessageFunction("Name");
-  } else if (await isDuplicatedName()) {
+  } else if (await isDuplicatedBuildingName(values.name)) {
     errors.name = "The name already exists";
   } else if (values.name.length < 2 || values.name.length > 255) {
     errors.name = "The name must be 2-255 characters long";
@@ -40,8 +40,4 @@ export async function validate(values) {
   }
 
   return errors;
-}
-
-export function capitalizeFirstLetter(string) {
-  return string.charAt(0).toUpperCase() + string.slice(1);
 }
