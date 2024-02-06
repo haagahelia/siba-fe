@@ -1,6 +1,6 @@
 import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
-import AddEquipmentInputField from "./AddEquipmentInputField";
+import AddEquipmentInputFields from "./AddEquipmentInputFields";
 
 export default function AddEquipmentForm({
   formik,
@@ -10,7 +10,7 @@ export default function AddEquipmentForm({
   return (
     <form onSubmit={formik.handleSubmit}>
       <Grid container spacing={2}>
-        <AddEquipmentInputField formik={formik} />
+        <AddEquipmentInputFields formik={formik} />
       </Grid>
       <Grid item xs={3} padding={2}>
         <Button

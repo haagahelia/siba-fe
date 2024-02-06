@@ -6,7 +6,7 @@ import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import TextField from "@mui/material/TextField";
 
-export default function AddEquipmentInputField({ formik }) {
+export default function AddEquipmentInputFields({ formik }) {
   return (
     <>
       <Grid item xs={12} sm={12} md={4} lg={4}>
