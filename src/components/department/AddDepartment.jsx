@@ -32,6 +32,8 @@ export default function AddDepartment({ getAllDepartments }) {
 
   const addDepartment = async () => {
     const validation = validate(department);
+    Logger.debug(validation);
+
     if (!validation) {
       alert(Object.values(validation));
       return;

@@ -1,7 +1,7 @@
 import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
 
-export default function BuildingInputField({ formik }) {
+export default function BuildingInputFields({ formik }) {
   return (
     <>
       <Grid item xs={12} sm={12} md={4} lg={4}>
