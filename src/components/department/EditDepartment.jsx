@@ -15,8 +15,8 @@ import ConfirmationDialog from "../common/ConfirmationDialog";
 
 export default function EditDepartment({
   singleDepartment,
+  setSingleDepartment,
   getAllDepartments,
-  setOpen,
 }) {
   const [editOpen, setEditOpen] = useState(false);
   const [department, setDepartment] = useState({
@@ -42,28 +42,24 @@ export default function EditDepartment({
     if (Object.values(validation).length !== 0) {
       alert(Object.values(submitValues));
     } else {
-      const result = await dao.editDepartment(submitValues);
-      if (!result) {
+      const success = await dao.editDepartment(submitValues);
+      if (!success) {
         setAlertOptions({
           severity: "error",
           title: "Error",
           message: "Something went wrong - please try again later.",
         });
-        setAlertOpen(true);
-        return;
       } else {
         setAlertOptions({
           severity: "success",
           title: "Success!",
           message: `${submitValues.name} updated successfully.`,
         });
-        setAlertOpen(true);
-        setEditOpen(false);
-        setTimeout(() => {
-          setOpen(false);
-        }, 1000);
-        getAllDepartments();
+        setSingleDepartment(submitValues);
       }
+      setAlertOpen(true);
+      setEditOpen(false);
+      getAllDepartments();
     }
   };
 
