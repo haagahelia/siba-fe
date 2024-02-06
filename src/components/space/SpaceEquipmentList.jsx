@@ -1,16 +1,31 @@
+import { useState } from "react";
+
 import DialogContent from "@mui/material/DialogContent";
 import Grid from "@mui/material/Grid";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import Typography from "@mui/material/Typography";
+import AlertBox from "../common/AlertBox";
 import DeleteSpaceEquip from "./DeleteSpaceEquip";
 
 export default function SpaceEquipmentList({
   equipListBySpaceId,
   getEquipmentsBySpaceId,
 }) {
+  const [alertOpen, setAlertOpen] = useState(false);
+  const [alertOptions, setAlertOptions] = useState({
+    message: "This is an error alert — check it out!",
+    title: "Error",
+    severity: "error",
+  });
+
   return (
     <div>
+      <AlertBox
+        alertOpen={alertOpen}
+        alertOptions={alertOptions}
+        setAlertOpen={setAlertOpen}
+      />
       {equipListBySpaceId.length ? (
         equipListBySpaceId.map((value) => {
           return (
@@ -18,6 +33,8 @@ export default function SpaceEquipmentList({
               <List>
                 <ListItem>
                   <DeleteSpaceEquip
+                    setAlertOpen={setAlertOpen}
+                    setAlertOptions={setAlertOptions}
                     singleSpaceEquipToDelete={value}
                     getEquipmentsBySpaceId={getEquipmentsBySpaceId}
                     subId={value.spaceId}
