@@ -15,12 +15,27 @@ export default function AddDepartmentDialogConfirmation({
   getAllDepartments,
 }) {
   const addSingleDepartment = async () => {
-    const validation = validate(department);
-    if (!validation) {
-      alert(Object.values(validation));
+    const validationErrors = await validate(department);
+    console.log("addSingleDepartment validate");
+    console.dir(validationErrors);
+
+    for (const element of Object.keys(validationErrors)) {
+      console.log(`key:  ${element}`);
+    }
+
+    if (Object.keys(validationErrors).length > 0) {
+      if (Object.keys(validationErrors).some((element) => element === "name")) {
+        alert(validationErrors.name);
+        console.log("Return1");
+        return;
+      }
+      alert(validationErrors);
+      console.log("Return2");
       return;
     }
+
     const success = await dao.addDepartment(department);
+
     if (!success) {
       alert("Something went wrong!");
     } else {

@@ -30,23 +30,28 @@ export default function AddDepartment({ getAllDepartments }) {
     setDepartment({ ...department, [event.target.name]: event.target.value });
   };
 
-  const addDepartment = async () => {
-    const validation = validate(department);
-    Logger.debug(validation);
+  // const addDepartment = async () => {
+  //   const validation = validate(department);
+  //   Logger.debug("Validation "+validation);
+  //   console.dir(validation);
 
-    if (!validation) {
-      alert(Object.values(validation));
-      return;
-    }
-    const success = await dao.addDepartment(department);
-    if (!success) {
-      alert("something went wrong!");
-    } else {
-      setDepartment({ name: "", description: "" });
-      getAllDepartments();
-      setOpen(false);
-    }
-  };
+  //   if (validation) {
+  //     if (Object.values(validation).length !== 0) {
+  //       alert(Object.values(submitValues));
+  //     }
+  //     console.log("return");
+  //     return;
+  //   }
+
+  //   const success = await dao.addDepartment(department);
+  //   if (!success) {
+  //     alert("something went wrong!");
+  //   } else {
+  //     setDepartment({ name: "", description: "" });
+  //     getAllDepartments();
+  //     setOpen(false);
+  //   }
+  // };
 
   return (
     <>

@@ -40,5 +40,9 @@ export async function validate(values) {
     errors.description = vF_regDescription.errorMessageFunction("Description");
   }
 
+  if (errors.name && errors.description) {
+    return null;
+  }
+
   return errors;
 }
