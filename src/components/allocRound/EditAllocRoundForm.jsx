@@ -7,7 +7,7 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import Grid from "@mui/material/Grid";
-import AllocRoundInputField from "./AllocRoundInputField";
+import AllocRoundInputFields from "./AllocRoundInputFields";
 
 export default function EditAllocRoundForm({ formik }) {
   const theme = useTheme();
@@ -40,7 +40,7 @@ export default function EditAllocRoundForm({ formik }) {
               spacing={3}
               column={7}
             >
-              <AllocRoundInputField formik={formik} />
+              <AllocRoundInputFields formik={formik} />
             </Grid>
           </DialogContent>
           <DialogActions sx={{ justifyContent: "space-evenly" }}>

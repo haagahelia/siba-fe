@@ -1,7 +1,7 @@
 import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
 import useTheme from "@mui/material/styles/useTheme";
-import AllocRoundInputField from "./AllocRoundInputField";
+import AllocRoundInputFields from "./AllocRoundInputFields";
 
 export default function AddAllocRoundForm({
   formik,
@@ -18,7 +18,7 @@ export default function AddAllocRoundForm({
     <div>
       <form onSubmit={formik.handleSubmit}>
         <Grid container variant="sibaGridAddForm" column={8}>
-          <AllocRoundInputField formik={formik} />
+          <AllocRoundInputFields formik={formik} />
         </Grid>
         <Grid container item xs={12} justifyContent="space-between" padding={2}>
           <Button

@@ -1,7 +1,7 @@
 import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
 
-export default function AllocRoundInputField({ formik }) {
+export default function AllocRoundInputFields({ formik }) {
   return (
     <>
       <Grid item xs={12}>
