@@ -66,19 +66,19 @@ export default function Departments() {
   }, []);
 
   useEffect(() => {
-    document.title = 'Departments';
+    document.title = "Departments";
   }, []);
 
   return (
     <div>
       <Container maxWidth="100%">
-        {(roles.admin === "1") && (
+        {roles.admin === "1" && (
           <AddDepartment getAllDepartments={getAllDepartments} />
         )}
         <Grid container rowSpacing={0.5}>
           <Card variant="outlined">
             <CardContent>
-              <CardHeader title="Department" variant="pageHeader" />
+              <CardHeader title="Departments" variant="pageHeader" />
               <DepartmentListContainer
                 getAllDepartments={getAllDepartments}
                 departmentList={departmentList}
