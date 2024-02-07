@@ -69,7 +69,7 @@ export default function AddProgramContainer({
     onSubmit: (values) => {
       setDialogOptions({
         title: `Are you sure you want to add ${values.name}?`,
-        content: `By clicking continue, ${values.name} will be added to the teaching list`,
+        content: `By clicking continue, ${values.name} will be added to the program list.`,
       });
       setDialogOpen(true);
       return;
@@ -77,27 +77,33 @@ export default function AddProgramContainer({
   });
 
   const getDepartmentForSelect = async () => {
-    if (roles.admin === "1") {
-      Logger.debug("Fetching all Departments for select from server (Admin).");
-      const { httpStatus, data } = await dao.fetchDepartmentForSelect();
-      if (httpStatus !== 200) {
-        ajaxRequestErrorHandler(
-          httpStatus,
-          getFunctionName(2),
-          setAlertOptions,
-          setAlertOpen,
+    try {
+      if (roles.admin === "1") {
+        Logger.debug(
+          "Fetching all Departments for select from server (Admin).",
         );
-      } else {
-        setDepartmentSelectList(data);
+        const { httpStatus, data } = await dao.fetchDepartmentForSelect();
+        if (httpStatus !== 200) {
+          ajaxRequestErrorHandler(
+            httpStatus,
+            getFunctionName(2),
+            setAlertOptions,
+            setAlertOpen,
+          );
+        } else {
+          setDepartmentSelectList(data);
+        }
+      } else if (roles.planner === "1") {
+        Logger.debug("Fetching planner-specific Departments from server.");
+        const response = await dao.fetchDepartmentplannerByUserId(userId);
+        if (response.success) {
+          setDepartmentSelectList(response.data);
+        } else {
+          Logger.error("Error fetching planner Departments.");
+        }
       }
-    } else if (roles.planner === "1") {
-      Logger.debug("Fetching planner-specific Departments from server.");
-      const response = await dao.fetchDepartmentplannerByUserId(userId);
-      if (response.success) {
-        setDepartmentSelectList(response.data);
-      } else {
-        Logger.error("Error fetching planner Departments.");
-      }
+    } catch (error) {
+      Logger.error("Error in getDepartmentForSelect:", error);
     }
   };
 
@@ -106,32 +112,36 @@ export default function AddProgramContainer({
   }, []);
 
   const addProgram = async (submitValues) => {
-    const capitalName = capitalizeFirstLetter(submitValues.name);
-    const newProgram = {
-      name: capitalName,
-      departmentId: submitValues.departmentId
-        ? +submitValues.departmentId
-        : null,
-    };
+    try {
+      const capitalName = capitalizeFirstLetter(submitValues.name);
+      const newProgram = {
+        name: capitalName,
+        departmentId: submitValues.departmentId
+          ? +submitValues.departmentId
+          : null,
+      };
 
-    const result = await dao.postNewProgram(newProgram);
-    if (!result) {
+      const result = await dao.postNewProgram(newProgram);
+      if (!result) {
+        setAlertOptions({
+          severity: "error",
+          title: "Error",
+          message: "Something went wrong - please try again later.",
+        });
+        setAlertOpen(true);
+        return;
+      }
       setAlertOptions({
-        severity: "error",
-        title: "Error",
-        message: "Something went wrong - please try again later.",
+        severity: "success",
+        title: "Success!",
+        message: `${submitValues.name} added.`,
       });
       setAlertOpen(true);
-      return;
+      resetForm();
+      getAllPrograms();
+    } catch (error) {
+      Logger.error("Error in addProgram:", error);
     }
-    setAlertOptions({
-      severity: "success",
-      title: "Success!",
-      message: `${submitValues.name} added.`,
-    });
-    setAlertOpen(true);
-    resetForm();
-    getAllPrograms();
   };
 
   // Here is a list of lessons
@@ -163,7 +173,7 @@ export default function AddProgramContainer({
       <Card variant="outlined">
         <CardContent>
           <CardHeader
-            title={<Typography variant="pageHeader">Programs</Typography>}
+            title={<Typography variant="pageHeader">Add Program</Typography>}
             action={
               <IconButton
                 onClick={() => setIsCardExpanded(!isCardExpanded)}
