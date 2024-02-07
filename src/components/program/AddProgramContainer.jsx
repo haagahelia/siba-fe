@@ -173,7 +173,8 @@ export default function AddProgramContainer({
       <Card variant="outlined">
         <CardContent>
           <CardHeader
-            title={<Typography variant="pageHeader">Add Program</Typography>}
+            title="Add Program"
+            variant="pageHeader"
             action={
               <IconButton
                 onClick={() => setIsCardExpanded(!isCardExpanded)}
