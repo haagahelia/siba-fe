@@ -75,8 +75,12 @@ export const editSpace = async (editedSpace: Space): Promise<boolean> => {
 // removing single space
 export const deleteSingleSpace = async (spaceId: number): Promise<boolean> => {
   const response = await remove(`${baseUrl}/space/${spaceId}`);
-  const data = await response.json();
-  return data?.affectedRows === 1;
+  try {
+    const data = await response.json();
+    return data?.returnedNumberValue === 1;
+  } catch (error) {
+    return false;
+  }
 };
 
 export const downloadSpaceTemplate = async (): Promise<

@@ -58,8 +58,13 @@ export const deleteProgram = async (programId: number): Promise<boolean> => {
   if (response.status === 403) {
     return false;
   }
-  const data = await response.json();
-  return data?.returnedNumberValue === 1;
+
+  try {
+    const data = await response.json();
+    return data?.returnedNumberValue === 1;
+  } catch (_) {
+    return false;
+  }
 };
 
 // Fetch the number of lessons for a program
