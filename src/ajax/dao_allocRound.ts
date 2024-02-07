@@ -1,4 +1,4 @@
-import { AllocRound, CopyAllocRound, Response, } from "../types";
+import { AllocRound, CopyAllocRound, Response } from "../types";
 import { create, get, remove, update } from "./request";
 
 const baseUrl = import.meta.env.VITE_BE_SERVER_BASE_URL;
@@ -29,17 +29,17 @@ export const copyAllocRound = async (
     name,
     description,
     userId,
-    copiedAllocRoundId
+    copiedAllocRoundId,
   };
-  
-    const response = await create(`${baseUrl}/allocRound/copyAllocRound`, requestBody);
-    const data: CopyAllocRound[] = await response.json();
 
+  const response = await create(
+    `${baseUrl}/allocRound/copyAllocRound`,
+    requestBody,
+  );
+  const data: CopyAllocRound[] = await response.json();
 
-    return { success: response.ok, data: data }
-  
-}
-
+  return { success: response.ok, data: data };
+};
 
 // updating allocRound
 export const editAllocRound = async (
@@ -52,6 +52,10 @@ export const editAllocRound = async (
 // remove single allocRound
 export const deleteSingleAllocRound = async (id: number): Promise<boolean> => {
   const response = await remove(`${baseUrl}/allocRound/${id}`);
-  const data = await response.json();
-  return data?.returnedNumberValue === 1;
+  try {
+    const data = await response.json();
+    return data?.returnedNumberValue === 1;
+  } catch (error) {
+    return false;
+  }
 };
