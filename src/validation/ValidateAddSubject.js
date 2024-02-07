@@ -56,11 +56,18 @@ export async function validate(values, allocRoundId) {
 
   if (!values.sessionLength) {
     errors.sessionLength = requiredFieldErrorMessageFunction("Session length");
-  } else if (
-    !vF_regTimeLengthHoursAndMinutes.regExp.test(values.sessionLength)
-  ) {
-    errors.sessionLength =
-      vF_regTimeLengthHoursAndMinutes.errorMessageFunction("Session length");
+  } else {
+    const sessionLengthMinutes = parseInt(values.sessionLength.split(":")[1]);
+    const sessionLengthHours = parseInt(values.sessionLength.split(":")[0]);
+
+    if (sessionLengthHours === 0 && sessionLengthMinutes < 15) {
+      errors.sessionLength = "Session length must be at least 15 minutes";
+    } else if (
+      !vF_regTimeLengthHoursAndMinutes.regExp.test(values.sessionLength)
+    ) {
+      errors.sessionLength =
+        vF_regTimeLengthHoursAndMinutes.errorMessageFunction("Session length");
+    }
   }
 
   if (!values.sessionCount) {
