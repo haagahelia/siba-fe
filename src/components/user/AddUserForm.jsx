@@ -55,8 +55,8 @@ export default function AddUserForm({ formik, submitValues, setInitialUser }) {
             onChange={formik.handleChange("password")}
             type={showPassword ? "text" : "password"}
             helperText={
-              formik.touched.password && !formik.values.password
-                ? "Password is a required field"
+              formik.touched.password && formik.errors.password
+                ? formik.errors.password
                 : null
             }
             InputProps={{
