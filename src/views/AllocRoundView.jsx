@@ -11,8 +11,8 @@ import dao from "../ajax/dao";
 import AllocRoundListContainer from "../components/allocRound/AllocRoundListContainer";
 import AllocRoundPagination from "../components/allocRound/AllocRoundPagination";
 import AlertBox from "../components/common/AlertBox";
+import { useRoleLoggedIn } from "../hooks/useRoleLoggedIn";
 import Logger from "../logger/logger";
-import { useRoleLoggedIn } from '../hooks/useRoleLoggedIn'
 
 const pageSize = 15;
 
@@ -62,7 +62,8 @@ export default function AllocRoundView() {
   };
 
   useEffect(() => {
-    getAllAllocRounds();
+    //getAllAllocRounds();
+    document.title = "Allocation";
   }, []);
 
   useEffect(() => {
@@ -72,10 +73,6 @@ export default function AllocRoundView() {
   useEffect(() => {
     setpaginateAllocRounds(allAllocRoundsList.slice(0, 15));
   }, [allAllocRoundsList]);
-
-  useEffect(() => {
-    document.title = 'Allocation';
-  }, []);
 
   return (
     <div>
@@ -91,12 +88,14 @@ export default function AllocRoundView() {
             <CardContent>
               <CardHeader title="Allocation Rounds" variant="pageHeader" />
               {roles.admin === "1" && (
-              <Button
-                variant="componentAddButton"
-                onClick={() => navigate("addAllocRound", { state: { allAllocRoundsList } })}
-              >
-                + Add
-              </Button>
+                <Button
+                  variant="componentAddButton"
+                  onClick={() =>
+                    navigate("addAllocRound", { state: { allAllocRoundsList } })
+                  }
+                >
+                  + Add
+                </Button>
               )}
               <AllocRoundListContainer
                 getAllAllocRounds={getAllAllocRounds}

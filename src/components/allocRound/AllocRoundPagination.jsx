@@ -19,7 +19,7 @@ export default function AllocRoundPagination({
       pagination.to,
     );
     setPaginateAllocRounds(slicedAllocRounds);
-  }, [pagination, allAllocRoundsList, setPaginateAllocRounds]);
+  }, [allAllocRoundsList]);
 
   const handleChange = (e, p) => {
     const from = (p - 1) * pageSize;
