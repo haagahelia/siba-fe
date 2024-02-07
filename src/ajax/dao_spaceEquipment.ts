@@ -33,5 +33,5 @@ export const deleteSingleSpaceEquipment = async (
     `${baseUrl}/spaceequipment/delete/${spaceId}/${equipmentId}`,
   );
   const data = await response.json();
-  return data?.affectedRows === 1;
+  return data?.returnedNumberValue === 1;
 };
