@@ -19,6 +19,7 @@ import { AppContext } from "../AppContext";
 import { AllocRoundContext } from "../AppContext.js";
 import dao from "../ajax/dao";
 import AddAllocRound from "../components/allocRound/AddAllocRound";
+import AlertBox from "../components/common/AlertBox.jsx";
 import ConfirmationDialog from "../components/common/ConfirmationDialog.jsx";
 import { useRoleLoggedIn } from "../hooks/useRoleLoggedIn.js";
 import Logger from "../logger/logger";
@@ -49,6 +50,12 @@ export default function NavBar() {
   const [dBResetDialogOptions, setdBResetDialogOptions] = useState({
     title: "this is dialog (dummy value)",
     content: "Something here (dummy value)",
+  });
+  const [alertOpen, setAlertOpen] = useState(false);
+  const [alertOptions, setAlertOptions] = useState({
+    message: "This is an error alert — check it out!",
+    title: "Error",
+    severity: "error",
   });
 
   Logger.logPrefix = "NavBar";
@@ -239,6 +246,29 @@ export default function NavBar() {
     appContext.roles.statist = Number(localStorage.getItem("isStatist"));
   };
 
+  // Attempts to reset database and shows result with success or error alert
+  const resetDatabase = async () => {
+    const result = await dao.resetDatabase();
+    if (result.httpStatus === 200) {
+      setAlertOptions({
+        severity: "success",
+        title: "Success!",
+        message: "Database was reset.",
+      });
+      Logger.debug("reset database success");
+    } else {
+      setAlertOptions({
+        severity: "error",
+        title: "Error",
+        message: "Something went wrong - please try again later.",
+      });
+      Logger.error(
+        `failed to reset database, http status code: ${result.httpStatus}`,
+      );
+    }
+    setAlertOpen(true);
+  };
+
   const setSibaPages = () => {
     // Logger.debug("App context roles: setSibaPages", appContext.roles);
     if (appContext.userEmail) {
@@ -374,11 +404,16 @@ export default function NavBar() {
 
   return (
     <div>
+      <AlertBox
+        alertOpen={alertOpen}
+        alertOptions={alertOptions}
+        setAlertOpen={setAlertOpen}
+      />
       <ConfirmationDialog
         dialogOpen={dBResetDialogOpen}
         dialogOptions={dBResetDialogOptions}
         setDialogOpen={setdBResetDialogOpen}
-        submit={dao.resetDatabase}
+        submit={resetDatabase}
       />
       <div className={`navbar-spacing ${showOrHideScrollBar()}`}>
         <BrowserRouter>
