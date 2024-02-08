@@ -175,7 +175,7 @@ export default function AddSubjectContainer({
     setInitialSubject({
       // This is so that the entered name does not change
       // even if you select the data of an existing lesson
-      name: formik.values.name,
+      name: selected.name,
 
       groupSize: selected.groupSize,
       groupCount: selected.groupCount,
