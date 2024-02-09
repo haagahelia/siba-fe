@@ -54,7 +54,7 @@ export default function AddSettingForm({
                 : false
             }
             name="numberValue"
-            label="numberValue"
+            label="Number Value"
             variant="outlined"
             value={formik.values.numberValue}
             onChange={formik.handleChange("numberValue")}
@@ -72,7 +72,7 @@ export default function AddSettingForm({
               formik.touched.textValue && formik.errors.textValue ? true : false
             }
             name="textValue"
-            label="textValue"
+            label="Text Value"
             variant="outlined"
             value={formik.values.textValue}
             onChange={formik.handleChange("textValue")}

@@ -52,8 +52,8 @@ export async function validate(values) {
 
   if (!values.numberValue) {
     errors.numberValue = requiredFieldErrorMessageFunction("numberValue");
-  } else if (values.numberValue < 0 || values.numberValue > 11) {
-    errors.numberValue = "The numberValue must be between 0 and 11 points";
+  } else if (Number.isNaN(values.numberValue)) {
+    errors.numberValue = "The input is not a valid number";
   } else if (!vF_regNumberValue.regExp.test(values.numberValue)) {
     errors.numberValue = vF_regNumberValue.errorMessageFunction("numberValue");
   }
