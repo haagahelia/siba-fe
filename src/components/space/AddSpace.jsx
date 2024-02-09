@@ -7,6 +7,7 @@ import validate from "../../validation/ValidateAddSpace";
 
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import { FormHelperText } from "@mui/material";
 import Button from "@mui/material/Button";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
@@ -33,7 +34,7 @@ export default function AddSpace({ getAllSpaces }) {
     area: "",
     info: "",
     personLimit: "0",
-    buildingId: "",
+    buildingId: "401",
     buildingName: "Musiikkitalo",
     availableFrom: "",
     availableTo: "",
@@ -73,7 +74,7 @@ export default function AddSpace({ getAllSpaces }) {
         name: "",
         area: "0",
         personLimit: "0",
-        buildingId: "400",
+        buildingId: "401",
         availableFrom: "",
         availableTo: "",
         classesFrom: "",

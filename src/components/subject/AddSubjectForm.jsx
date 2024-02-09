@@ -42,13 +42,13 @@ export default function AddSubjectForm({
   return (
     <div>
       <form onSubmit={formik.handleSubmit}>
-        <Grid container spacing={2} justifyContent="flex-end">
+        <Grid container spacing={2} justifyContent="center">
           <Grid
             item
             xs={12}
-            sm={12}
-            md={6}
-            lg={3}
+            sm={10}
+            md={8}
+            lg={6}
             style={{ border: "5px solid #FDA826", padding: "10px" }}
           >
             <FormControl fullWidth>
