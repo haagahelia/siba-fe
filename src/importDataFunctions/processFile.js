@@ -44,8 +44,6 @@ export const processFile = (
       message: "Please upload a .csv file.",
     });
     setAlertOpen(true);
-
-    return;
   } else {
     fileToArray(file, setDataToImport);
   }

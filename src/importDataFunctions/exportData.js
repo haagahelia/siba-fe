@@ -9,11 +9,9 @@ export const exportData = async (
     setAlertOptions({
       severity: "info",
       title: "Export data info",
-      message: "There is no data to export",
+      message: "There is no data to export.",
     });
     setAlertOpen(true);
-
-    return;
   } else {
     const csv = Papa.unparse(dataFailedToImport);
     const blob = new Blob([csv]);
