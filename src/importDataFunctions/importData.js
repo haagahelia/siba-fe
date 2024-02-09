@@ -31,37 +31,38 @@ export const importData = async (
   setDataFailedToImport([...dataFailedToImport, ...tempFailedData]);
   Logger.debug("failed data", tempFailedData);
 
-  // if the data is empty after validation, not sending to backend
-  if (dataToSend.length === 0) {
+  // if the data is empty or invalid after validation, not sending to backend
+  if (successCount === 0 && failedCount === 0) {
+    setAlertOptions({
+      severity: "info",
+      title: "Import data info",
+      message: "There is no data to import.",
+    });
+  } else if (successCount === 0 && failedCount > 0) {
     setAlertOptions({
       severity: "error",
       title: "Error!",
-      message: `Something went wrong with the import. ${failedCount} row(s) failed to add.`,
+      message: `Something went wrong. ${failedCount} row(s) failed to add.`,
     });
-    setAlertOpen(true);
   } else {
     Logger.debug("dataToSend", dataToSend);
-
-    const result = await sendDataToImport(dataToSend);
-
-    if (result) {
+    const success = await sendDataToImport(dataToSend);
+    if (success) {
       getAllData();
-
       setAlertOptions({
         severity: "success",
         title: "Success!",
         message: `${successCount} row(s) added and ${failedCount} row(s) failed to add.`,
       });
-      setAlertOpen(true);
     } else {
       setAlertOptions({
         severity: "error",
         title: "Error!",
-        message: `Something went wrong in the import. ${
+        message: `Something went wrong. ${
           failedCount + successCount
         } row(s) failed to add.`,
       });
-      setAlertOpen(true);
     }
   }
+  setAlertOpen(true);
 };
