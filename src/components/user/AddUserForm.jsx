@@ -44,15 +44,16 @@ export default function AddUserForm({ formik, submitValues, setInitialUser }) {
         </Grid>
         <Grid item xs={12}>
           <TextField
+            className="formTextInput"
+            error={
+              formik.touched.password && formik.values.password ? true : false
+            }
             name="password"
             placeholder="Password..."
             label="Password"
-            className="formTextInput"
-            error={
-              formik.touched.password && !formik.values.password ? true : false
-            }
             value={formik.values.password}
             onChange={formik.handleChange("password")}
+            onBlur={formik.handleBlur("password")}
             type={showPassword ? "text" : "password"}
             helperText={
               formik.touched.password && formik.errors.password

@@ -50,12 +50,13 @@ export async function validate(values) {
     errors.description = vF_regDescription.errorMessageFunction("Description");
   }
 
-  if (!values.numberValue) {
-    errors.numberValue = requiredFieldErrorMessageFunction("numberValue");
-  } else if (values.numberValue < 0 || values.numberValue > 11) {
-    errors.numberValue = "The numberValue must be between 0 and 11 points";
-  } else if (!vF_regNumberValue.regExp.test(values.numberValue)) {
-    errors.numberValue = vF_regNumberValue.errorMessageFunction("numberValue");
+  if (
+    values.numberValue !== undefined &&
+    values.numberValue !== null &&
+    values.numberValue !== "" &&
+    !/^\d+$/.test(values.numberValue)
+  ) {
+    errors.numberValue = "The input is not a valid number";
   }
 
   if (values.textValue !== null && values.textValue.length > 255) {
