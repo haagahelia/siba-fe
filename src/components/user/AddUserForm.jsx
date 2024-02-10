@@ -40,7 +40,6 @@ export default function AddUserForm({ formik, submitValues, setInitialUser }) {
                 ? formik.errors.email
                 : null
             }
-            git
           />
         </Grid>
         <Grid item xs={12}>

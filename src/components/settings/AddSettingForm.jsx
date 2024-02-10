@@ -1,6 +1,7 @@
 import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
+import { useState } from "react";
 
 export default function AddSettingForm({
   formik,
@@ -16,13 +17,14 @@ export default function AddSettingForm({
             name="name"
             label="Setting name"
             variant="outlined"
+            required
             value={formik.values.name}
             onChange={formik.handleChange("name")}
             onBlur={formik.handleBlur("name")}
             helperText={
               formik.touched.name && formik.errors.name
                 ? formik.errors.name
-                : ""
+                : "This field is required"
             }
           />
         </Grid>
@@ -36,13 +38,14 @@ export default function AddSettingForm({
             name="description"
             label="Description"
             variant="outlined"
+            required
             value={formik.values.description}
             onChange={formik.handleChange("description")}
             onBlur={formik.handleBlur("description")}
             helperText={
               formik.touched.description && formik.errors.description
                 ? formik.errors.description
-                : ""
+                : "This field is required"
             }
           />
         </Grid>
@@ -54,7 +57,7 @@ export default function AddSettingForm({
                 : false
             }
             name="numberValue"
-            label="Number Value"
+            label="Number Value (optional)"
             variant="outlined"
             value={formik.values.numberValue}
             onChange={formik.handleChange("numberValue")}
@@ -72,7 +75,7 @@ export default function AddSettingForm({
               formik.touched.textValue && formik.errors.textValue ? true : false
             }
             name="textValue"
-            label="Text Value"
+            label="Text Value (optional)"
             variant="outlined"
             value={formik.values.textValue}
             onChange={formik.handleChange("textValue")}
