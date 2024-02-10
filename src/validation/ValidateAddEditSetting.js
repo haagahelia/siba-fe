@@ -54,8 +54,6 @@ export async function validate(values) {
     errors.numberValue = requiredFieldErrorMessageFunction("numberValue");
   } else if (Number.isNaN(values.numberValue)) {
     errors.numberValue = "The input is not a valid number";
-  } else if (!vF_regNumberValue.regExp.test(values.numberValue)) {
-    errors.numberValue = vF_regNumberValue.errorMessageFunction("numberValue");
   }
 
   if (values.textValue !== null && values.textValue.length > 255) {
