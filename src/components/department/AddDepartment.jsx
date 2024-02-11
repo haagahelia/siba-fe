@@ -11,47 +11,89 @@ import CardHeader from "@mui/material/CardHeader";
 import Grid from "@mui/material/Grid";
 import IconButton from "@mui/material/IconButton";
 import TextField from "@mui/material/TextField";
-import AddDepartmentDialogConfirmation from "./AddDepartmentDialogConfirmation"; // You will need to create this component
+import AlertBox from "../common/AlertBox";
+import ConfirmationDialog from "../common/ConfirmationDialog";
 
 export default function AddDepartment({ getAllDepartments }) {
   const [isCardExpanded, setIsCardExpanded] = useState(false);
 
-  const [open, setOpen] = useState(false);
+  const [alertOpen, setAlertOpen] = useState(false);
+  const [alertOptions, setAlertOptions] = useState({
+    title: "This is a title",
+    message: "This is an error alert — check it out!",
+    severity: "error",
+  });
+  const [dialogOpen, setDialogOpen] = useState(false);
+  const [dialogOptions, setDialogOptions] = useState({
+    title: "this is dialog",
+    content: "Something here",
+  });
+
   const [department, setDepartment] = useState({
     name: "",
     description: "",
   });
 
-  const openDialogBox = () => {
-    setOpen(true);
+  const openConfirmationDialog = () => {
+    setDialogOptions({
+      title: `Are you sure you want to add "${department.name}"?`,
+      content: `Press continue to save "${department.name}".`,
+    });
+    setDialogOpen(true);
   };
 
   const inputChanged = (event) => {
     setDepartment({ ...department, [event.target.name]: event.target.value });
   };
 
-  // const addDepartment = async () => {
-  //   const validation = validate(department);
-  //   Logger.debug("Validation "+validation);
-  //   console.dir(validation);
+  const addDepartment = async () => {
+    const validationErrors = await validate(department);
+    console.log("addSingleDepartment validate");
+    console.dir(validationErrors);
 
-  //   if (validation) {
-  //     if (Object.values(validation).length !== 0) {
-  //       alert(Object.values(submitValues));
-  //     }
-  //     console.log("return");
-  //     return;
-  //   }
+    for (const element of Object.keys(validationErrors)) {
+      console.log(`key:  ${element}`);
+    }
 
-  //   const success = await dao.addDepartment(department);
-  //   if (!success) {
-  //     alert("something went wrong!");
-  //   } else {
-  //     setDepartment({ name: "", description: "" });
-  //     getAllDepartments();
-  //     setOpen(false);
-  //   }
-  // };
+    if (Object.keys(validationErrors).length > 0) {
+      // department name already exists
+      if (Object.keys(validationErrors).some((element) => element === "name")) {
+        //console.log(validationErrors.name);
+        console.log(`Error name:${validationErrors.name}`);
+        setAlertOptions({
+          title: "Error",
+          message: `${validationErrors.name}`,
+          severity: "error",
+        });
+        setAlertOpen(true);
+        return;
+      }
+    }
+
+    const success = await dao.addDepartment(department);
+
+    if (!success) {
+      setAlertOptions({
+        title: "Error",
+        message: "Something went wrong - please try again later.",
+        severity: "error",
+      });
+      setAlertOpen(true);
+    } else {
+      setAlertOptions({
+        title: "Success!",
+        message: `${department.name} added successfully.`,
+        severity: "success",
+      });
+      setAlertOpen(true);
+      setDepartment({
+        name: "",
+        description: "",
+      });
+      getAllDepartments();
+      setDialogOpen(false);
+    }
+  };
 
   return (
     <>
@@ -92,7 +134,7 @@ export default function AddDepartment({ getAllDepartments }) {
               </Grid>
               <Grid item xs={12}>
                 <Button
-                  onClick={() => openDialogBox()}
+                  onClick={() => openConfirmationDialog()}
                   variant="addComponentFormButton"
                 >
                   Add Department
@@ -102,12 +144,17 @@ export default function AddDepartment({ getAllDepartments }) {
           )}
         </CardContent>
       </Card>
-      <AddDepartmentDialogConfirmation
-        open={open}
-        setOpen={setOpen}
-        department={department}
-        getAllDepartments={getAllDepartments}
-        setDepartment={setDepartment}
+      <AlertBox
+        alertOpen={alertOpen}
+        alertOptions={alertOptions}
+        setAlertOpen={setAlertOpen}
+      />
+      <ConfirmationDialog
+        dialogOpen={dialogOpen}
+        dialogOptions={dialogOptions}
+        setDialogOpen={setDialogOpen}
+        submit={addDepartment}
+        submitValues={department}
       />
     </>
   );
