@@ -32,9 +32,7 @@ export const editSubjectEquipment = async (
     `${baseUrl}/subjectequipment/update`,
     editedSubjectEquipment,
   );
-  const data = await response.json();
-  //return data.ok;
-  return data?.returnedNumberValue === 1;
+  return response.ok;
 };
 
 // removing single SubjectEquipment
@@ -45,9 +43,5 @@ export const deleteSingleSubjectEquipment = async (
   const response = await remove(
     `${baseUrl}/subjectequipment/delete/${subjectId}/${equipmentId}`,
   );
-  if (response.status === 403) {
-    return false;
-  }
-  const data = await response.json();
-  return data?.returnedNumberValue === 1;
+  return response.ok;
 };
