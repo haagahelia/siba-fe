@@ -1,3 +1,4 @@
+import { useState } from "react";
 import dao from "../../ajax/dao";
 import { validate } from "../../validation/ValidateAddEditDepartment";
 
@@ -6,6 +7,8 @@ import Dialog from "@mui/material/Dialog";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
+import AlertBox from "../common/AlertBox";
+import ConfirmationDialog from "../common/ConfirmationDialog";
 
 export default function AddDepartmentDialogConfirmation({
   open,
@@ -14,6 +17,18 @@ export default function AddDepartmentDialogConfirmation({
   setDepartment,
   getAllDepartments,
 }) {
+  const [alertOpen, setAlertOpen] = useState(false);
+  const [alertOptions, setAlertOptions] = useState({
+    title: "This is a title",
+    message: "This is an error alert — check it out!",
+    severity: "error",
+  });
+  const [dialogOpen, setDialogOpen] = useState(false);
+  const [dialogOptions, setDialogOptions] = useState({
+    title: "this is dialog",
+    content: "Something here",
+  });
+
   const addSingleDepartment = async () => {
     const validationErrors = await validate(department);
     console.log("addSingleDepartment validate");
@@ -24,11 +39,19 @@ export default function AddDepartmentDialogConfirmation({
     }
 
     if (Object.keys(validationErrors).length > 0) {
+      // department name already exists
       if (Object.keys(validationErrors).some((element) => element === "name")) {
-        alert(validationErrors.name);
+        //alert(validationErrors.name);
+        setAlertOptions({
+          title: "Error",
+          message: `${department.name} already exists.`,
+          severity: "error",
+        });
+        setAlertOpen(true);
         console.log("Return1");
         return;
       }
+      // other error ?
       alert(validationErrors);
       console.log("Return2");
       return;
@@ -37,8 +60,20 @@ export default function AddDepartmentDialogConfirmation({
     const success = await dao.addDepartment(department);
 
     if (!success) {
-      alert("Something went wrong!");
+      //alert("Something went wrong!");
+      setAlertOptions({
+        title: "Error",
+        message: "Something went wrong - please try again later.",
+        severity: "error",
+      });
+      setAlertOpen(true);
     } else {
+      setAlertOptions({
+        title: "Success!",
+        message: `${department.name} added successfully.`,
+        severity: "success",
+      });
+      setAlertOpen(true);
       setDepartment({
         name: "",
         description: "",
@@ -49,29 +84,52 @@ export default function AddDepartmentDialogConfirmation({
   };
 
   return (
-    <Dialog open={open} onClose={() => setOpen(false)}>
-      <DialogTitle>
-        Are you sure you want to add {department?.name}?
-      </DialogTitle>
-      <DialogContent>
-        <DialogContentText>
-          By clicking continue, {department?.name} will be added to departments.
-        </DialogContentText>
-        <Button
-          variant="contained"
-          color="error"
-          onClick={() => setOpen(false)}
-        >
-          Cancel
-        </Button>
-        <Button
-          variant="contained"
-          color="primary"
-          onClick={addSingleDepartment}
-        >
-          Continue
-        </Button>
-      </DialogContent>
-    </Dialog>
+    <>
+      <AlertBox
+        alertOpen={alertOpen}
+        alertOptions={alertOptions}
+        setAlertOpen={setAlertOpen}
+      />
+      <ConfirmationDialog
+        dialogOpen={dialogOpen}
+        dialogOptions={dialogOptions}
+        setDialogOpen={setDialogOpen}
+        submit={addSingleDepartment}
+        submitValues={department}
+      />
+      <Dialog open={open} onClose={() => setOpen(false)}>
+        <DialogTitle>
+          Are you sure you want to add {department?.name}?
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            By clicking continue, {department?.name} will be added to
+            departments.
+          </DialogContentText>
+          <Button
+            variant="contained"
+            color="error"
+            onClick={() => setOpen(false)}
+          >
+            Cancel
+          </Button>
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={() => {
+              console.log("parola italiana");
+              setOpen(false);
+              setDialogOptions({
+                title: `Are you sure you want to add ${department.name}?`,
+                content: `Press continue to save ${department.name}.`,
+              });
+              setDialogOpen(true);
+            }}
+          >
+            Continue
+          </Button>
+        </DialogContent>
+      </Dialog>
+    </>
   );
 }
