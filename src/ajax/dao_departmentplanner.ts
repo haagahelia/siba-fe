@@ -33,11 +33,4 @@ export const deleteSingleDepartmentPlanner = async (
     `${baseUrl}/departmentplanner/${userId}/${departmentId}`,
   );
   return response.ok;
-  /*
-  if (response.status === 403) {
-    return false;
-  }
-  const data = await response.json();
-  return data?.returnedNumberValue === 1;
-  */
 };

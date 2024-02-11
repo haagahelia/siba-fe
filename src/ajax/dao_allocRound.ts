@@ -52,10 +52,5 @@ export const editAllocRound = async (
 // remove single allocRound
 export const deleteSingleAllocRound = async (id: number): Promise<boolean> => {
   const response = await remove(`${baseUrl}/allocRound/${id}`);
-  try {
-    const data = await response.json();
-    return data?.returnedNumberValue === 1;
-  } catch (error) {
-    return false;
-  }
+  return response.ok;
 };

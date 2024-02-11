@@ -35,10 +35,7 @@ export const editBuilding = async (
   editedBuilding: Building,
 ): Promise<boolean> => {
   const response = await update(`${baseUrl}/building`, editedBuilding);
-  if (response.status === 403) {
-    return false;
-  }
-  return true;
+  return response.ok;
 };
 
 // removing single building
@@ -46,10 +43,7 @@ export const deleteBuildingById = async (
   buildingId: number,
 ): Promise<boolean> => {
   const response = await remove(`${baseUrl}/building/${buildingId}`);
-  if (!response.ok) {
-    return false;
-  }
-  return true;
+  return response.ok;
 };
 
 export const downloadBuildingTemplate = async (): Promise<

@@ -58,7 +58,4 @@ export const deleteDepartment = async (
 ): Promise<boolean> => {
   const response = await remove(`${baseUrl}/department/${departmentId}`);
   return response.ok;
-  /*const data = await response.json();
-  return data?.returnedNumberValue === 1; 
-  */
 };
