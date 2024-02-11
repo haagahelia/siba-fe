@@ -57,9 +57,8 @@ export const deleteDepartment = async (
   departmentId: number,
 ): Promise<boolean> => {
   const response = await remove(`${baseUrl}/department/${departmentId}`);
-  if (response.status === 403 || response.status === 500) {
-    return false;
-  }
-  const data = await response.json();
-  return data?.returnedNumberValue === 1;
+  return response.ok;
+  /*const data = await response.json();
+  return data?.returnedNumberValue === 1; 
+  */
 };

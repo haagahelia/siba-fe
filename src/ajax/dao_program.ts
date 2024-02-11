@@ -55,16 +55,7 @@ export const editProgram = async (editedProgram: Program): Promise<boolean> => {
 // remove single program
 export const deleteProgram = async (programId: number): Promise<boolean> => {
   const response = await remove(`${baseUrl}/program/${programId}`);
-  if (response.status === 403) {
-    return false;
-  }
-
-  try {
-    const data = await response.json();
-    return data?.returnedNumberValue === 1;
-  } catch (_) {
-    return false;
-  }
+  return response.ok;
 };
 
 // Fetch the number of lessons for a program

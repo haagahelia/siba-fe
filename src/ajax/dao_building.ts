@@ -38,8 +38,7 @@ export const editBuilding = async (
   if (response.status === 403) {
     return false;
   }
-  const data = await response.json();
-  return data?.returnedNumberValue === 1;
+  return true;
 };
 
 // removing single building
@@ -47,11 +46,10 @@ export const deleteBuildingById = async (
   buildingId: number,
 ): Promise<boolean> => {
   const response = await remove(`${baseUrl}/building/${buildingId}`);
-  if (response.status === 403 || response.status === 500) {
+  if (!response.ok) {
     return false;
   }
-  const data = await response.json();
-  return data?.returnedNumberValue === 1;
+  return true;
 };
 
 export const downloadBuildingTemplate = async (): Promise<

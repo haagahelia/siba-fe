@@ -79,12 +79,7 @@ export const deleteSingleSubject = async (
   subjectId: number,
 ): Promise<boolean> => {
   const response = await remove(`${baseUrl}/subject/${subjectId}`);
-  try {
-    const data = await response.json();
-    return data?.returnedNumberValue === 1;
-  } catch (_) {
-    return false;
-  }
+  return response.ok;
 };
 
 export const downloadSubjectTemplate = async (): Promise<
