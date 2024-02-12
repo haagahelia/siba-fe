@@ -21,7 +21,6 @@ export const importData = async (
     Logger.debug("no file selected for import data");
     return setAlertOpen(true);
   }
-
   if (!fileOptions.fileTypeValid) {
     setAlertOptions({
       severity: "error",

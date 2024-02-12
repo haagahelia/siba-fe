@@ -35,8 +35,12 @@ export const processFile = (
 ) => {
   const file = e.target.files[0];
 
-  if (!isUploaded(file)) return;
-  if (!isValidType(file)) {
+  if (!isUploaded(file)) {
+    setFileOptions({
+      fileChosen: false,
+      fileTypeValid: false,
+    });
+  } else if (!isValidType(file)) {
     setAlertOptions({
       severity: "error",
       title: "Invalid file type",
