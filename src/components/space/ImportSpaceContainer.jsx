@@ -1,3 +1,4 @@
+import Grid from "@mui/material/Grid";
 import Input from "@mui/material/Input";
 import Typography from "@mui/material/Typography";
 import { useState } from "react";
@@ -5,7 +6,6 @@ import { processFile } from "../../importDataFunctions/processFile";
 import AlertBox from "../common/AlertBox";
 import ExportSpaceButton from "./ExportSpaceButton";
 import ImportSpaceButton from "./ImportSpaceButton";
-import Grid from "@mui/material/Grid";
 
 export default function ImportSpaceContainer({
   getAllSpaces,
@@ -18,11 +18,21 @@ export default function ImportSpaceContainer({
     message: "This is an error alert — check it out!",
     severity: "error",
   });
+  const [fileOptions, setFileOptions] = useState({
+    isFileChosen: false,
+    isFileTypeValid: false,
+  });
   const [spaceToImport, setSpaceToImport] = useState([]);
   const [spaceFailedToImport, setSpaceFailedToImport] = useState([]);
 
   const handleUploadeFiled = (e) => {
-    processFile(e, setSpaceToImport, setAlertOpen, setAlertOptions);
+    processFile(
+      e,
+      setSpaceToImport,
+      setAlertOpen,
+      setAlertOptions,
+      setFileOptions,
+    );
   };
 
   return (
@@ -32,8 +42,14 @@ export default function ImportSpaceContainer({
         alertOptions={alertOptions}
         setAlertOpen={setAlertOpen}
       />
-      <Grid container direction="column" variant="AddComponentFormButtonSection">
-        <Typography variant="addComponentSubHeader">Import data from .csv file</Typography>
+      <Grid
+        container
+        direction="column"
+        variant="AddComponentFormButtonSection"
+      >
+        <Typography variant="addComponentSubHeader">
+          Import data from .csv file
+        </Typography>
         <Grid item>
           <Input
             variant="sibaInputFileName"
@@ -50,6 +66,7 @@ export default function ImportSpaceContainer({
             getAllSpaces={getAllSpaces}
             buildingSelectList={buildingSelectList}
             spaceTypeSelectList={spaceTypeSelectList}
+            fileOptions={fileOptions}
           />
         </Grid>
         <Grid item>

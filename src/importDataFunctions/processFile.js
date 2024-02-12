@@ -8,12 +8,12 @@ const isUploaded = (file) => {
 const isValidType = (file) => {
   if (file.name.substring(file.name.lastIndexOf(".") + 1) === "csv") {
     return file.type === "text/csv" || file.type === "application/vnd.ms-excel";
-  } else {
-    Logger.error("File type error, type: ", file.type);
-    return false;
   }
+  Logger.error("File type error, type: ", file.type);
+  return false;
 };
 
+// Parses rows from csv file into an array of objects.
 const fileToArray = (file, setDataToImport) => {
   Papa.parse(file, {
     header: true,
@@ -32,11 +32,15 @@ export const processFile = (
   setDataToImport,
   setAlertOpen,
   setAlertOptions,
+  setFileOptions,
 ) => {
   const file = e.target.files[0];
 
   if (!isUploaded(file)) {
-    return;
+    setFileOptions({
+      isFileChosen: false,
+      isFileTypeValid: false,
+    });
   } else if (!isValidType(file)) {
     setAlertOptions({
       severity: "error",
@@ -44,7 +48,15 @@ export const processFile = (
       message: "Please upload a .csv file.",
     });
     setAlertOpen(true);
+    setFileOptions({
+      isFileChosen: true,
+      isFileTypeValid: false,
+    });
   } else {
     fileToArray(file, setDataToImport);
+    setFileOptions({
+      isFileChosen: true,
+      isFileTypeValid: true,
+    });
   }
 };

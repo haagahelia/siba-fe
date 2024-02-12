@@ -1,13 +1,13 @@
-import { useEffect, useState, } from "react";
+import Grid from "@mui/material/Grid";
+import Input from "@mui/material/Input";
+import Typography from "@mui/material/Typography";
+import { useEffect, useState } from "react";
 import {
   ajaxRequestErrorHandler,
   getFunctionName,
 } from "../../ajax/ajaxRequestErrorHandler";
 import dao from "../../ajax/dao";
 import { processFile } from "../../importDataFunctions/processFile";
-import Grid from "@mui/material/Grid";
-import Input from "@mui/material/Input";
-import Typography from "@mui/material/Typography";
 import AlertBox from "../common/AlertBox";
 import ExportSubjectButton from "./ExportSubjectButton";
 import ImportSubjectButton from "./ImportSubjectButton";
@@ -22,11 +22,15 @@ export default function ImportSubjectContainer({
     message: "This is an error alert — check it out!",
     severity: "error",
   });
+  const [fileOptions, setFileOptions] = useState({
+    isFileChosen: false,
+    isFileTypeValid: false,
+  });
   const [progNameList, setProgNameList] = useState([]);
   const [subjectToImport, setSubjectToImport] = useState([]);
   const [subjectFailedToImport, setSubjectFailedToImport] = useState([]);
 
-  const getAuthorizedProgramForUser = async function () {
+  const getAuthorizedProgramForUser = async () => {
     let { httpStatus, data } = await dao.getProgramByUserEmail(
       localStorage.getItem("email"),
     );
@@ -48,7 +52,13 @@ export default function ImportSubjectContainer({
   }, []);
 
   const handleUploadeFiled = (e) => {
-    processFile(e, setSubjectToImport, setAlertOpen, setAlertOptions);
+    processFile(
+      e,
+      setSubjectToImport,
+      setAlertOpen,
+      setAlertOptions,
+      setFileOptions,
+    );
   };
 
   return (
@@ -58,9 +68,12 @@ export default function ImportSubjectContainer({
         alertOptions={alertOptions}
         setAlertOpen={setAlertOpen}
       />
-      <Grid container direction="column" variant="AddComponentFormButtonSection">
-        <Typography
-          variant="addComponentSubHeader">
+      <Grid
+        container
+        direction="column"
+        variant="AddComponentFormButtonSection"
+      >
+        <Typography variant="addComponentSubHeader">
           Import Data From .csv File
         </Typography>
         <Grid item>
@@ -79,6 +92,7 @@ export default function ImportSubjectContainer({
             setSubjectFailedToImport={setSubjectFailedToImport}
             getAllSubjects={getAllSubjects}
             spaceTypeSelectList={spaceTypeSelectList}
+            fileOptions={fileOptions}
           />
         </Grid>
         <Grid item>

@@ -13,6 +13,7 @@ export default function ImportSpaceButton({
   getAllSpaces,
   buildingSelectList,
   spaceTypeSelectList,
+  fileOptions,
 }) {
   const [alertOpen, setAlertOpen] = useState(false);
   const [alertOptions, setAlertOptions] = useState({
@@ -34,10 +35,8 @@ export default function ImportSpaceButton({
   const processSpace = async (space, spaceSet) => {
     if (!isBuildingNameCorrect(space)) {
       space.FailedReason = "Non-existent building";
-      return space;
     } else if (!isSpaceTypeCorrect(space)) {
       space.FailedReason = "Non-existent space type";
-      return space;
     } else {
       const newSpace = {
         name: space.Name ? space.Name : "",
@@ -63,12 +62,10 @@ export default function ImportSpaceButton({
         space.FailedReason =
           "Duplicated space name in the same building in the file";
         return space;
-      } else {
-        spaceSet.add(key);
       }
+      spaceSet.add(key);
 
       const validateResult = await ValidateAddSpace(newSpace);
-
       if (validateResult) {
         space.FailedReason =
           validateResult.name ||
@@ -82,10 +79,10 @@ export default function ImportSpaceButton({
           validateResult.inUse;
 
         return space;
-      } else {
-        return newSpace;
       }
+      return newSpace;
     }
+    return space;
   };
 
   const handleClick = async () => {
@@ -98,6 +95,7 @@ export default function ImportSpaceButton({
       dao.postNewSpaces,
       setAlertOpen,
       setAlertOptions,
+      fileOptions,
     );
   };
 
