@@ -13,6 +13,7 @@ const isValidType = (file) => {
   return false;
 };
 
+// Parses rows from csv file into an array of objects.
 const fileToArray = (file, setDataToImport) => {
   Papa.parse(file, {
     header: true,

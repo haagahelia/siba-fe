@@ -15,6 +15,7 @@ export default function ImportSubjectButton({
   setSubjectFailedToImport,
   getAllSubjects,
   spaceTypeSelectList,
+  fileOptions,
 }) {
   const [alertOpen, setAlertOpen] = useState(false);
   const [alertOptions, setAlertOptions] = useState({
@@ -38,10 +39,8 @@ export default function ImportSubjectButton({
   const processSubject = async (subject, subjectSet) => {
     if (!isProgramAuthorized(subject)) {
       subject.FailedReason = "Not authorized for this program";
-      return subject;
     } else if (!isSpaceNameCorrect(subject)) {
       subject.FailedReason = "Non-existent Room type";
-      return subject;
     } else {
       const newSubject = {
         name: subject["Name of the lesson"]
@@ -65,9 +64,8 @@ export default function ImportSubjectButton({
       if (subjectSet.has(newSubject.name)) {
         subject.FailedReason = "Name of lesson is duplicated in the file";
         return subject;
-      } else {
-        subjectSet.add(newSubject.name);
       }
+      subjectSet.add(newSubject.name);
 
       const validateResult = await validate(
         newSubject,
@@ -85,6 +83,7 @@ export default function ImportSubjectButton({
 
       return subject.FailedReason ? subject : newSubject;
     }
+    return subject;
   };
 
   const handleClick = async () => {
@@ -101,6 +100,7 @@ export default function ImportSubjectButton({
         ),
       setAlertOpen,
       setAlertOptions,
+      fileOptions,
     );
   };
 
