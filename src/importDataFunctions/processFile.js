@@ -8,10 +8,9 @@ const isUploaded = (file) => {
 const isValidType = (file) => {
   if (file.name.substring(file.name.lastIndexOf(".") + 1) === "csv") {
     return file.type === "text/csv" || file.type === "application/vnd.ms-excel";
-  } else {
-    Logger.error("File type error, type: ", file.type);
-    return false;
   }
+  Logger.error("File type error, type: ", file.type);
+  return false;
 };
 
 const fileToArray = (file, setDataToImport) => {
@@ -32,19 +31,27 @@ export const processFile = (
   setDataToImport,
   setAlertOpen,
   setAlertOptions,
+  setFileOptions,
 ) => {
   const file = e.target.files[0];
 
-  if (!isUploaded(file)) {
-    return;
-  } else if (!isValidType(file)) {
+  if (!isUploaded(file)) return;
+  if (!isValidType(file)) {
     setAlertOptions({
       severity: "error",
       title: "Invalid file type",
       message: "Please upload a .csv file.",
     });
     setAlertOpen(true);
+    setFileOptions({
+      fileChosen: true,
+      fileTypeValid: false,
+    });
   } else {
     fileToArray(file, setDataToImport);
+    setFileOptions({
+      fileChosen: true,
+      fileTypeValid: true,
+    });
   }
 };

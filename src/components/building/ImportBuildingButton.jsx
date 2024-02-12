@@ -12,6 +12,7 @@ export default function ImportBuildingButton({
   buildingFailedToImport,
   setBuildingFailedToImport,
   getAllBuildings,
+  fileOptions,
 }) {
   const [alertOpen, setAlertOpen] = useState(false);
   const [alertOptions, setAlertOptions] = useState({
@@ -29,12 +30,10 @@ export default function ImportBuildingButton({
     if (buildingSet.has(newBuilding.name)) {
       building.FailedReason = "Name of building is duplicated in the file";
       return building;
-    } else {
-      buildingSet.add(newBuilding.name);
     }
+    buildingSet.add(newBuilding.name);
 
     const validateResult = await validate(newBuilding);
-
     building.FailedReason = validateResult.name || validateResult.description;
 
     return building.FailedReason ? building : newBuilding;
@@ -50,6 +49,7 @@ export default function ImportBuildingButton({
       dao.postNewBuildings,
       setAlertOpen,
       setAlertOptions,
+      fileOptions,
     );
   };
 

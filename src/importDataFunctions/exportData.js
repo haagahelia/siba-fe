@@ -8,8 +8,8 @@ export const exportData = async (
   if (dataFailedToImport.length === 0) {
     setAlertOptions({
       severity: "info",
-      title: "Export data info",
-      message: "There is no data to export.",
+      title: "Export failed data info",
+      message: "There is no failed data to export.",
     });
     setAlertOpen(true);
   } else {

@@ -9,7 +9,29 @@ export const importData = async (
   sendDataToImport,
   setAlertOpen,
   setAlertOptions,
+  fileOptions,
 ) => {
+  // Check if file is chosen or has invalid type
+  if (!fileOptions.fileChosen) {
+    setAlertOptions({
+      severity: "info",
+      title: "Import data info",
+      message: "No file chosen.",
+    });
+    Logger.debug("no file selected for import data");
+    return setAlertOpen(true);
+  }
+
+  if (!fileOptions.fileTypeValid) {
+    setAlertOptions({
+      severity: "error",
+      title: "Invalid file type",
+      message: "Please upload a .csv file.",
+    });
+    Logger.debug("chosen file has invalid type for import data");
+    return setAlertOpen(true);
+  }
+
   let successCount = 0;
   let failedCount = 0;
   const tempFailedData = [];

@@ -1,3 +1,4 @@
+import Grid from "@mui/material/Grid";
 import Input from "@mui/material/Input";
 import Typography from "@mui/material/Typography";
 import { useState } from "react";
@@ -5,7 +6,6 @@ import { processFile } from "../../importDataFunctions/processFile";
 import AlertBox from "../common/AlertBox";
 import ExportBuildingButton from "./ExportBuildingButton";
 import ImportBuildingButton from "./ImportBuildingButton";
-import Grid from "@mui/material/Grid";
 
 export default function ImportBuildingContainer({ getAllBuildings }) {
   const [alertOpen, setAlertOpen] = useState(false);
@@ -14,11 +14,21 @@ export default function ImportBuildingContainer({ getAllBuildings }) {
     message: "This is an error alert — check it out!",
     severity: "error",
   });
+  const [fileOptions, setFileOptions] = useState({
+    fileChosen: false,
+    fileTypeValid: false,
+  });
   const [buildingToImport, setBuildingToImport] = useState([]);
   const [buildingFailedToImport, setBuildingFailedToImport] = useState([]);
 
   const handleUploadeFiled = (e) => {
-    processFile(e, setBuildingToImport, setAlertOpen, setAlertOptions);
+    processFile(
+      e,
+      setBuildingToImport,
+      setAlertOpen,
+      setAlertOptions,
+      setFileOptions,
+    );
   };
 
   return (
@@ -28,9 +38,12 @@ export default function ImportBuildingContainer({ getAllBuildings }) {
         alertOptions={alertOptions}
         setAlertOpen={setAlertOpen}
       />
-      <Grid container direction="column" variant="AddComponentFormButtonSection">
-        <Typography
-          variant="addComponentSubHeader">
+      <Grid
+        container
+        direction="column"
+        variant="AddComponentFormButtonSection"
+      >
+        <Typography variant="addComponentSubHeader">
           Import data from .csv file
         </Typography>
         <Grid item>
@@ -47,10 +60,13 @@ export default function ImportBuildingContainer({ getAllBuildings }) {
             buildingFailedToImport={buildingFailedToImport}
             setBuildingFailedToImport={setBuildingFailedToImport}
             getAllBuildings={getAllBuildings}
+            fileOptions={fileOptions}
           />
         </Grid>
         <Grid item>
-          <ExportBuildingButton buildingFailedToImport={buildingFailedToImport} />
+          <ExportBuildingButton
+            buildingFailedToImport={buildingFailedToImport}
+          />
         </Grid>
       </Grid>
     </>
