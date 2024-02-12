@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
 import Button from "@mui/material/Button";
@@ -36,6 +36,10 @@ export default function ResetPasswordView() {
       alert("Congratulations! Password updated successfully.");
     }
   };
+
+  useEffect(() => {
+    document.title = "Reset Password";
+  }, []);
 
   return (
     <div>
