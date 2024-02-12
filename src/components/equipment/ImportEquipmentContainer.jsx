@@ -15,8 +15,8 @@ export default function ImportEquipmentContainer({ getAllEquipments }) {
     severity: "error",
   });
   const [fileOptions, setFileOptions] = useState({
-    fileChosen: false,
-    fileTypeValid: false,
+    isFileChosen: false,
+    isFileTypeValid: false,
   });
   const [equipmentToImport, setEquipmentToImport] = useState([]);
   const [equipmentFailedToImport, setEquipmentFailedToImport] = useState([]);

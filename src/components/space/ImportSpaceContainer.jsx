@@ -19,8 +19,8 @@ export default function ImportSpaceContainer({
     severity: "error",
   });
   const [fileOptions, setFileOptions] = useState({
-    fileChosen: false,
-    fileTypeValid: false,
+    isFileChosen: false,
+    isFileTypeValid: false,
   });
   const [spaceToImport, setSpaceToImport] = useState([]);
   const [spaceFailedToImport, setSpaceFailedToImport] = useState([]);

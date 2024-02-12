@@ -37,8 +37,8 @@ export const processFile = (
 
   if (!isUploaded(file)) {
     setFileOptions({
-      fileChosen: false,
-      fileTypeValid: false,
+      isFileChosen: false,
+      isFileTypeValid: false,
     });
   } else if (!isValidType(file)) {
     setAlertOptions({
@@ -48,14 +48,14 @@ export const processFile = (
     });
     setAlertOpen(true);
     setFileOptions({
-      fileChosen: true,
-      fileTypeValid: false,
+      isFileChosen: true,
+      isFileTypeValid: false,
     });
   } else {
     fileToArray(file, setDataToImport);
     setFileOptions({
-      fileChosen: true,
-      fileTypeValid: true,
+      isFileChosen: true,
+      isFileTypeValid: true,
     });
   }
 };

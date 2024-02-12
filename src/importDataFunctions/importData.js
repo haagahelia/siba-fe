@@ -12,7 +12,7 @@ export const importData = async (
   fileOptions,
 ) => {
   // Check if file is chosen or has invalid type
-  if (!fileOptions.fileChosen) {
+  if (!fileOptions.isFileChosen) {
     setAlertOptions({
       severity: "info",
       title: "Import data info",
@@ -21,7 +21,7 @@ export const importData = async (
     Logger.debug("no file selected for import data");
     return setAlertOpen(true);
   }
-  if (!fileOptions.fileTypeValid) {
+  if (!fileOptions.isFileTypeValid) {
     setAlertOptions({
       severity: "error",
       title: "Invalid file type",

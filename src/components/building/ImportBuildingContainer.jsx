@@ -15,8 +15,8 @@ export default function ImportBuildingContainer({ getAllBuildings }) {
     severity: "error",
   });
   const [fileOptions, setFileOptions] = useState({
-    fileChosen: false,
-    fileTypeValid: false,
+    isFileChosen: false,
+    isFileTypeValid: false,
   });
   const [buildingToImport, setBuildingToImport] = useState([]);
   const [buildingFailedToImport, setBuildingFailedToImport] = useState([]);
