@@ -62,7 +62,7 @@ export default function AllocRoundView() {
 
   useEffect(() => {
     //getAllAllocRounds();
-    document.title = "Allocationzs";
+    document.title = "Allocations";
   }, []);
 
   useEffect(() => {
