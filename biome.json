@@ -2,12 +2,14 @@
   "formatter": {
     "indentStyle": "space"
   },
-
+ 
   "linter": {
     "enabled": true,
     "rules": {
       "correctness": {
-        "useExhaustiveDependencies": "off",
+        "useExhaustiveDependencies": "off"
+      },
+      "style": {
         "noUselessElse": "off"
       }
     }
