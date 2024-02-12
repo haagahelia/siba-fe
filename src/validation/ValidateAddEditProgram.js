@@ -8,8 +8,8 @@ export async function validate(values) {
 
   let programList = [];
 
-  const getProgramNames = async function () {
-    const { data } = await dao.fetchProgramData();
+  const getProgramNames = async () => {
+    const { data } = await dao.fetchProgramsWithDepartments();
     programList = data;
     // Check if user enter an existed program name
     const result = programList.some(
