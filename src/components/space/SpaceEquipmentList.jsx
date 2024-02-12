@@ -1,10 +1,12 @@
 import { useState } from "react";
 
+import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import Grid from "@mui/material/Grid";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import Typography from "@mui/material/Typography";
+import { useRoleLoggedIn } from "../../hooks/useRoleLoggedIn";
 import AlertBox from "../common/AlertBox";
 import DeleteSpaceEquip from "./DeleteSpaceEquip";
 
@@ -12,6 +14,8 @@ export default function SpaceEquipmentList({
   equipListBySpaceId,
   getEquipmentsBySpaceId,
 }) {
+  const { roles } = useRoleLoggedIn();
+
   const [alertOpen, setAlertOpen] = useState(false);
   const [alertOptions, setAlertOptions] = useState({
     message: "This is an error alert — check it out!",
@@ -32,13 +36,17 @@ export default function SpaceEquipmentList({
             <div key={value.equipmentId}>
               <List>
                 <ListItem>
-                  <DeleteSpaceEquip
-                    setAlertOpen={setAlertOpen}
-                    setAlertOptions={setAlertOptions}
-                    singleSpaceEquipToDelete={value}
-                    getEquipmentsBySpaceId={getEquipmentsBySpaceId}
-                    subId={value.spaceId}
-                  />
+                  {roles.admin === "1" && (
+                    <DialogActions>
+                      <DeleteSpaceEquip
+                        setAlertOpen={setAlertOpen}
+                        setAlertOptions={setAlertOptions}
+                        singleSpaceEquipToDelete={value}
+                        getEquipmentsBySpaceId={getEquipmentsBySpaceId}
+                        subId={value.spaceId}
+                      />
+                    </DialogActions>
+                  )}
                   <DialogContent>
                     <DialogContent variant="sibaDialogContent3">
                       <Grid item xs={12} sm={6}>
