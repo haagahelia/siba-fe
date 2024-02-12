@@ -36,7 +36,7 @@ export default function AllocRoundView() {
     to: pageSize,
   });
 
-  const getAllAllocRounds = async function () {
+  const getAllAllocRounds = async () => {
     Logger.debug("Fetching all allocation rounds");
     const { success, data } = await dao.fetchAllAllocRounds();
     if (!success) {
@@ -49,11 +49,10 @@ export default function AllocRoundView() {
       });
       setAlertOpen(true);
       return;
-    } else {
-      Logger.debug(`Fetched allocation rounds: ${data.length}`);
-      setallAllocRoundsList(data);
-      setpaginateAllocRounds(allAllocRoundsList.slice(0, 15));
     }
+    Logger.debug(`Fetched allocation rounds: ${data.length}`);
+    setallAllocRoundsList(data);
+    setpaginateAllocRounds(allAllocRoundsList.slice(0, 15));
   };
 
   const incrementDataModifiedCounter = () => {
@@ -63,7 +62,7 @@ export default function AllocRoundView() {
 
   useEffect(() => {
     //getAllAllocRounds();
-    document.title = "Allocation";
+    document.title = "Allocations";
   }, []);
 
   useEffect(() => {

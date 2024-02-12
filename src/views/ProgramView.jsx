@@ -43,7 +43,7 @@ export default function ProgramView() {
     to: pageSize,
   });
 
-  const getAllPrograms = async function () {
+  const getAllPrograms = async () => {
     Logger.debug("getAllPrograms: fetching all programs from server.");
     const { httpStatus, data } = await dao.fetchProgramsWithDepartments();
     if (httpStatus !== 200) {
@@ -65,6 +65,7 @@ export default function ProgramView() {
   useEffect(() => {
     Logger.debug("Running effect to fetch all programs.");
     getAllPrograms();
+    document.title = "Programs";
   }, []);
 
   useEffect(() => {
