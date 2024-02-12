@@ -12,6 +12,7 @@ export default function ImportEquipmentButton({
   equipmentFailedToImport,
   setEquipmentFailedToImport,
   getAllEquipments,
+  fileOptions,
 }) {
   const [alertOpen, setAlertOpen] = useState(false);
   const [alertOptions, setAlertOptions] = useState({
@@ -36,12 +37,10 @@ export default function ImportEquipmentButton({
     if (equipmentSet.has(newEquipment.name)) {
       equipment.FailedReason = "Name of equipment is duplicated in the file";
       return equipment;
-    } else {
-      equipmentSet.add(newEquipment.name);
     }
+    equipmentSet.add(newEquipment.name);
 
     const validateResult = await ValidateAddEquipment(newEquipment);
-
     if (validateResult) {
       equipment.FailedReason =
         validateResult.name ||
@@ -50,9 +49,8 @@ export default function ImportEquipmentButton({
         validateResult.isMovable;
 
       return equipment;
-    } else {
-      return newEquipment;
     }
+    return newEquipment;
   };
 
   const handleClick = async () => {
@@ -65,6 +63,7 @@ export default function ImportEquipmentButton({
       dao.postNewEquipments,
       setAlertOpen,
       setAlertOptions,
+      fileOptions,
     );
   };
 

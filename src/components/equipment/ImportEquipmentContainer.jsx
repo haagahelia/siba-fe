@@ -1,3 +1,4 @@
+import Grid from "@mui/material/Grid";
 import Input from "@mui/material/Input";
 import Typography from "@mui/material/Typography";
 import { useState } from "react";
@@ -5,7 +6,6 @@ import { processFile } from "../../importDataFunctions/processFile";
 import AlertBox from "../common/AlertBox";
 import ExportEquipmentButton from "./ExportEquipmentButton";
 import ImportEquipmentButton from "./ImportEquipmentButton";
-import Grid from "@mui/material/Grid";
 
 export default function ImportEquipmentContainer({ getAllEquipments }) {
   const [alertOpen, setAlertOpen] = useState(false);
@@ -14,11 +14,21 @@ export default function ImportEquipmentContainer({ getAllEquipments }) {
     message: "This is an error alert — check it out!",
     severity: "error",
   });
+  const [fileOptions, setFileOptions] = useState({
+    fileChosen: false,
+    fileTypeValid: false,
+  });
   const [equipmentToImport, setEquipmentToImport] = useState([]);
   const [equipmentFailedToImport, setEquipmentFailedToImport] = useState([]);
 
   const handleUploadeFiled = (e) => {
-    processFile(e, setEquipmentToImport, setAlertOpen, setAlertOptions);
+    processFile(
+      e,
+      setEquipmentToImport,
+      setAlertOpen,
+      setAlertOptions,
+      setFileOptions,
+    );
   };
 
   return (
@@ -28,7 +38,11 @@ export default function ImportEquipmentContainer({ getAllEquipments }) {
         alertOptions={alertOptions}
         setAlertOpen={setAlertOpen}
       />
-      <Grid container direction="column" variant="AddComponentFormButtonSection">
+      <Grid
+        container
+        direction="column"
+        variant="AddComponentFormButtonSection"
+      >
         <Typography variant="addComponentSubHeader">
           Import data from .csv file
         </Typography>
@@ -46,6 +60,7 @@ export default function ImportEquipmentContainer({ getAllEquipments }) {
             equipmentFailedToImport={equipmentFailedToImport}
             setEquipmentFailedToImport={setEquipmentFailedToImport}
             getAllEquipments={getAllEquipments}
+            fileOptions={fileOptions}
           />
         </Grid>
         <Grid item>
