@@ -83,3 +83,20 @@ export const downloadSpaceTemplate = async (): Promise<
 > => {
   return download<Space>("space", baseUrl);
 };
+
+// Function to fetch spaces by building ID
+export const fetchSpacesByBuildingId = async (buildingId: number) => {
+  try {
+    const response = await get(`${baseUrl}/space/byBuilding/${buildingId}`);
+    if (response.status === 200) {
+      const spaces = await response.json();
+      return { httpStatus: response.status, data: spaces };
+    } else {
+      console.error("Failed to fetch spaces for building ID:", buildingId);
+      return { httpStatus: response.status, data: [] };
+    }
+  } catch (error) {
+    console.error("Error fetching spaces by building ID:", error);
+    return { httpStatus: 500, data: [] };
+  }
+};
