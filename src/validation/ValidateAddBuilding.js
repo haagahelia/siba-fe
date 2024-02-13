@@ -22,6 +22,7 @@ export async function validate(values) {
     return result;
   };
 
+  // Validation for name
   if (!values.name) {
     errors.name = requiredFieldErrorMessageFunction("Name");
   } else if (await isDuplicatedBuildingName(values.name)) {
@@ -32,7 +33,10 @@ export async function validate(values) {
     errors.name = vF_regName.errorMessageFunction("Name");
   }
 
-  if (values.description.length > 16000) {
+  // Validation for description
+  if (!values.description) {
+    errors.description = requiredFieldErrorMessageFunction("Description");
+  } else if (values.description.length > 16000) {
     errors.description =
       "The description must be maximum 16000 characters long";
   } else if (!vF_regDescription.regExp.test(values.description)) {
