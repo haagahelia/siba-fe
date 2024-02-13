@@ -1,3 +1,4 @@
+import { useFormik } from "formik";
 import { useState } from "react";
 import dao from "../../ajax/dao";
 import { validate } from "../../validation/ValidateAddEditDepartment";
@@ -10,6 +11,7 @@ import DialogTitle from "@mui/material/DialogTitle";
 import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
 import useTheme from "@mui/material/styles/useTheme";
+import { capitalizeFirstLetter } from "../../validation/ValidationUtilities";
 import AlertBox from "../common/AlertBox";
 import ConfirmationDialog from "../common/ConfirmationDialog";
 
@@ -37,30 +39,40 @@ export default function EditDepartment({
 
   const theme = useTheme();
 
+  const formik = useFormik({
+    enableReinitialize: true,
+    initialValues: singleDepartment,
+    validateOnChange: true,
+    validate,
+    onSubmit: (values) => {
+      setDialogOptions({
+        title: `Are you sure you want to add ${values.name}?`,
+        content: `Press continue to save ${values.name} new information.`,
+      });
+      setDialogOpen(true);
+    },
+  });
+
   const submitEdits = async (submitValues) => {
-    const validation = validate(submitValues);
-    if (Object.values(validation).length !== 0) {
-      alert(Object.values(submitValues));
+    submitValues.name = capitalizeFirstLetter(submitValues.name);
+    const success = await dao.editDepartment(submitValues);
+    if (!success) {
+      setAlertOptions({
+        severity: "error",
+        title: "Error",
+        message: "Something went wrong - please try again later.",
+      });
     } else {
-      const success = await dao.editDepartment(submitValues);
-      if (!success) {
-        setAlertOptions({
-          severity: "error",
-          title: "Error",
-          message: "Something went wrong - please try again later.",
-        });
-      } else {
-        setAlertOptions({
-          severity: "success",
-          title: "Success!",
-          message: `${submitValues.name} updated successfully.`,
-        });
-        setSingleDepartment(submitValues);
-      }
-      setAlertOpen(true);
-      setEditOpen(false);
-      getAllDepartments();
+      setAlertOptions({
+        severity: "success",
+        title: "Success!",
+        message: `${submitValues.name} updated successfully.`,
+      });
+      setSingleDepartment(submitValues);
     }
+    setAlertOpen(true);
+    setEditOpen(false);
+    getAllDepartments();
   };
 
   return (
@@ -75,7 +87,7 @@ export default function EditDepartment({
         dialogOptions={dialogOptions}
         setDialogOpen={setDialogOpen}
         submit={submitEdits}
-        submitValues={department}
+        submitValues={formik.values}
       />
       <Button
         variant="contained"
@@ -86,59 +98,89 @@ export default function EditDepartment({
       >
         Edit
       </Button>
-      <Dialog open={editOpen} onClose={() => setEditOpen(false)}>
-        <DialogTitle>Edit Department</DialogTitle>
-        <DialogContent>
-          <Grid container variant="sibaGridEdit" spacing={3} column={7}>
-            <Grid item xs={12}>
-              <TextField
-                name="Department"
-                label="Department"
-                defaultValue={singleDepartment?.name}
-                onChange={(e) =>
-                  setDepartment({ ...department, name: e.target.value })
-                }
-              />
+      <Dialog open={editOpen}>
+        <form onSubmit={formik.handleSubmit}>
+          <DialogTitle>Edit Department</DialogTitle>
+          <DialogContent>
+            <Grid
+              container
+              variant="sibaGridEdit"
+              direction="column"
+              spacing={3}
+              column={7}
+            >
+              <Grid item xs={12} sm={12} md={4} lg={4}>
+                <TextField
+                  fullWidth
+                  error={
+                    formik.touched.name && formik.errors.name ? true : false
+                  }
+                  name="name"
+                  placeholder="Name..."
+                  label="Department name"
+                  variant="outlined"
+                  value={formik.values.name}
+                  onChange={formik.handleChange("name")}
+                  onBlur={formik.handleBlur("name")}
+                  helperText={
+                    formik.touched.name && formik.errors.name
+                      ? formik.errors.name
+                      : null
+                  }
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                />
+              </Grid>
+              <Grid item xs={12} sm={12} md={8} lg={8}>
+                <TextField
+                  fullWidth
+                  error={
+                    formik.touched.description && formik.errors.description
+                      ? true
+                      : false
+                  }
+                  name="description"
+                  label="Description"
+                  placeholder="Some description..."
+                  variant="outlined"
+                  value={formik.values.description}
+                  onChange={formik.handleChange("description")}
+                  onBlur={formik.handleBlur("description")}
+                  helperText={
+                    formik.touched.description && formik.errors.description
+                      ? formik.errors.description
+                      : null
+                  }
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                />
+              </Grid>
             </Grid>
-            <Grid item xs={12}>
-              <TextField
-                name="Description"
-                label="Description"
-                defaultValue={singleDepartment?.description}
-                onChange={(e) =>
-                  setDepartment({
-                    ...department,
-                    description: e.target.value,
-                  })
-                }
-              />
-            </Grid>
-          </Grid>
-        </DialogContent>
-        <DialogActions sx={{ justifyContent: "space-evenly" }}>
-          <Button
-            onClick={() => {
-              setEditOpen(false);
-            }}
-            variant="contained"
-            color="red"
-          >
-            Cancel
-          </Button>
-          <Button
-            variant="contained"
-            onClick={() => {
-              setEditOpen(false);
-              setDialogOptions({
-                title: `Are you sure you want to edit ${department.name}?`,
-                content: `Press continue to save ${department.name} new information.`,
-              });
-              setDialogOpen(true);
-            }}
-          >
-            Submit
-          </Button>
-        </DialogActions>
+          </DialogContent>
+          <DialogActions sx={{ justifyContent: "space-evenly" }}>
+            <Button
+              onClick={() => {
+                setEditOpen(false);
+                formik.resetForm();
+              }}
+              variant="contained"
+              color="red"
+            >
+              Cancel
+            </Button>
+            <Button
+              type="submit"
+              variant="contained"
+              onClick={() => {
+                setEditOpen(false);
+              }}
+            >
+              Submit
+            </Button>
+          </DialogActions>
+        </form>
       </Dialog>
     </div>
   );

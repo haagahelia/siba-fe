@@ -12,7 +12,7 @@ export async function validate(values) {
 
   let departmentList = [];
 
-  const isDuplicatedDepartmentName = async function (name) {
+  const isDuplicatedDepartmentName = async (name) => {
     const { data } = await dao.fetchDepartmentData();
     departmentList = data;
     // Check if user enter an existed building name
@@ -38,10 +38,6 @@ export async function validate(values) {
       "The description must be maximum 16000 characters long";
   } else if (!vF_regDescription.regExp.test(values.description)) {
     errors.description = vF_regDescription.errorMessageFunction("Description");
-  }
-
-  if (errors.name && errors.description) {
-    return null;
   }
 
   return errors;
