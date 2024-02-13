@@ -1,6 +1,6 @@
 import { useState } from "react";
 import dao from "../../ajax/dao";
-import { validate } from "../../validation/ValidateAddEditDepartment";
+import { validate } from "../../validation/ValidateAddDepartment";
 
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";

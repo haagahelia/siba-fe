@@ -1,6 +1,6 @@
 import { useState } from "react";
 import dao from "../../ajax/dao";
-import { validate } from "../../validation/ValidateAddEditDepartment";
+import { validate } from "../../validation/ValidateAddDepartment";
 
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";

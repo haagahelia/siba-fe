@@ -1,26 +1,24 @@
 // Add common validation utilities here
 
 import dao from "../ajax/dao";
-import { Equipment } from "../types";
+import { Department, Equipment } from "../types";
 
 // Returns a new string with the first letter of input capitalized.
 export function capitalizeFirstLetter(input: string) {
   return input[0].toUpperCase() + input.slice(1);
 }
 
-// Check if user enters an existing equipment name.
-// Used in equipment add validations.
+// Checks if equipment name already exists
 export const isDuplicatedEquipmentName = async (name: string) => {
   const { data } = await dao.fetchEquipmentData();
   const equipmentList = data as Equipment[];
 
   return equipmentList.some(
-    (equipment) => equipment.name.toLowerCase() === name.toLowerCase(),
+    (equipment) => equipment.name.trim().toLowerCase() === name.toLowerCase(),
   );
 };
 
-// Check if user enters an existing equipment name except the current one.
-// Used in equipment edit validations.
+// Checks if equipment name already exists ignoring currently selected equipment.
 export const isDuplicatedEquipmentNameExceptCurrent = async (
   currentEquipmentId: number,
   targetName: string,
@@ -32,6 +30,26 @@ export const isDuplicatedEquipmentNameExceptCurrent = async (
   );
 
   return filteredList.some(
-    (equipment) => equipment.name.toLowerCase() === targetName.toLowerCase(),
+    (equipment) =>
+      equipment.name.trim().toLowerCase() === targetName.toLowerCase(),
+  );
+};
+
+// Checks if department name already exists. If departmentIdToIgnore is passed, ignores department with that id.
+export const isDuplicatedDepartmentName = async (
+  name: string,
+  departmentIdToIgnore: number | undefined,
+) => {
+  const { data } = await dao.fetchDepartmentData();
+  let departmentList = data as Department[];
+
+  if (departmentIdToIgnore) {
+    departmentList = departmentList.filter(
+      (department) => department.id !== departmentIdToIgnore,
+    );
+  }
+
+  return departmentList.some(
+    (department) => department.name.trim().toLowerCase() === name.toLowerCase(),
   );
 };

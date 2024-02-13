@@ -1,7 +1,7 @@
 import { useFormik } from "formik";
 import { useState } from "react";
 import dao from "../../ajax/dao";
-import { validate } from "../../validation/ValidateAddEditDepartment";
+import { validate } from "../../validation/ValidateEditDepartment";
 
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
@@ -21,11 +21,6 @@ export default function EditDepartment({
   getAllDepartments,
 }) {
   const [editOpen, setEditOpen] = useState(false);
-  const [department, setDepartment] = useState({
-    id: singleDepartment?.id,
-    name: singleDepartment?.name,
-    description: singleDepartment?.description,
-  });
   const [alertOpen, setAlertOpen] = useState(false);
   const [alertOptions, setAlertOptions] = useState({
     message: "This is an error alert — check it out!",
