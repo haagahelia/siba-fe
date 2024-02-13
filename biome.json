@@ -10,7 +10,6 @@
         "useExhaustiveDependencies": "off"
       },
       "style": {
-        "noUselessElse": "off"
       }
     }
   }
