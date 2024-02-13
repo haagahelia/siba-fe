@@ -1,27 +1,14 @@
-import dao from "../ajax/dao";
 import {
   requiredFieldErrorMessageFunction,
   trimAllPropertyValueStrings,
   vF_regDescription,
   vF_regName,
 } from "./Validate_GenericRegexps";
+import { isDuplicatedDepartmentName } from "./ValidationUtilities";
 
 export async function validate(values) {
   trimAllPropertyValueStrings(values);
   const errors = {};
-
-  let departmentList = [];
-
-  const isDuplicatedDepartmentName = async function (name) {
-    const { data } = await dao.fetchDepartmentData();
-    departmentList = data;
-    // Check if user enter an existed building name
-    const result = departmentList.some(
-      (names) => names.name.trim().toLowerCase() === name.toLowerCase(),
-    );
-
-    return result;
-  };
 
   if (!values.name) {
     errors.name = requiredFieldErrorMessageFunction("Name");
@@ -38,10 +25,6 @@ export async function validate(values) {
       "The description must be maximum 16000 characters long";
   } else if (!vF_regDescription.regExp.test(values.description)) {
     errors.description = vF_regDescription.errorMessageFunction("Description");
-  }
-
-  if (errors.name && errors.description) {
-    return null;
   }
 
   return errors;
