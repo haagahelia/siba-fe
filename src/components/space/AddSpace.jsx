@@ -19,6 +19,7 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import TextField from "@mui/material/TextField";
+import AlertBox from "../common/AlertBox";
 import ConfirmationDialog from "../common/ConfirmationDialog";
 import AddSpaceDialogConfirmation from "./AddSpaceDialogConfirmation";
 import ImportSpaceContainer from "./ImportSpaceContainer";
@@ -44,6 +45,13 @@ export default function AddSpace({ getAllSpaces }) {
     spaceTypeId: "",
   });
 
+  const [alertOpen, setAlertOpen] = useState(false);
+  const [alertOptions, setAlertOptions] = useState({
+    title: "This is title",
+    message: "This is an error alert — check it out!",
+    severity: "error",
+  });
+
   const [dialogOpen, setDialogOpen] = useState(false);
   const [dialogOptions, setDialogOptions] = useState({
     title: "this is dialog",
@@ -65,10 +73,15 @@ export default function AddSpace({ getAllSpaces }) {
     },
   });
 
-  const addSingleSpace = async () => {
+  const addSingleSpace = async (spaceData) => {
     const success = await dao.postNewSpace(space);
     if (!success) {
-      alert("Something went wrong!");
+      setAlertOptions({
+        severity: "error",
+        title: "Error",
+        message: "Something went wrong - please try again later.",
+      });
+      setAlertOpen(true);
     } else {
       setSpace({
         name: "",
@@ -82,6 +95,12 @@ export default function AddSpace({ getAllSpaces }) {
         inUse: "",
         spaceTypeId: "",
       });
+      setAlertOptions({
+        severity: "success",
+        title: "Success!",
+        message: `${spaceData.name} added.`,
+      });
+      setAlertOpen(true);
       getAllSpaces();
     }
   };
@@ -99,7 +118,7 @@ export default function AddSpace({ getAllSpaces }) {
     { id: 401, name: "Musiikkitalo" },
   ]);
 
-  const getSpaceTypesForSelect = async function () {
+  const getSpaceTypesForSelect = async () => {
     Logger.debug(
       "getSpaceTypesForSelect: fetching all Space Types for select from server.",
     );
@@ -119,7 +138,7 @@ export default function AddSpace({ getAllSpaces }) {
     }
   };
 
-  const getBuildingsForSelect = async function () {
+  const getBuildingsForSelect = async () => {
     Logger.debug(
       "getBuildingForSelect: fetching all Buildings for select from server.",
     );
@@ -146,6 +165,11 @@ export default function AddSpace({ getAllSpaces }) {
 
   return (
     <>
+      <AlertBox
+        alertOpen={alertOpen}
+        alertOptions={alertOptions}
+        setAlertOpen={setAlertOpen}
+      />
       <ConfirmationDialog
         dialogOpen={dialogOpen}
         dialogOptions={dialogOptions}
