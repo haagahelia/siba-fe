@@ -14,7 +14,7 @@ export async function validate(values) {
 
   let settingList = [];
 
-  const getSettingNames = async function () {
+  const getSettingNames = async () => {
     const { data } = await dao.fetchSettings();
     settingList = data;
     let id;
@@ -54,7 +54,7 @@ export async function validate(values) {
     values.numberValue !== undefined &&
     values.numberValue !== null &&
     values.numberValue !== "" &&
-    !/^\d+$/.test(values.numberValue)
+    !/^(-?\d+)$/.test(values.numberValue)
   ) {
     errors.numberValue = "The input is not a valid number";
   }
