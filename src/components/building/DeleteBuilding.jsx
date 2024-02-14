@@ -1,4 +1,5 @@
 import Button from "@mui/material/Button";
+import Tooltip from "@mui/material/Tooltip";
 import useTheme from "@mui/material/styles/useTheme";
 import { useEffect, useState } from "react";
 import dao from "../../ajax/dao";
@@ -20,6 +21,7 @@ export default function DeleteBuilding({
   const [dialogOptions, setDialogOptions] = useState({});
   const [deleteBuildingData, setDeleteBuildingData] = useState(null);
   const [hasAssociatedSpaces, setHasAssociatedSpaces] = useState(false);
+  const [spaceNames, setSpaceNames] = useState([]);
 
   // Fetch spaces associated with the building
   useEffect(() => {
@@ -27,7 +29,9 @@ export default function DeleteBuilding({
       dao
         .fetchSpacesByBuildingId(singleBuilding.id)
         .then((response) => {
-          setHasAssociatedSpaces(response.data && response.data.length > 0);
+          const spaces = response.data || [];
+          setHasAssociatedSpaces(spaces.length > 0);
+          setSpaceNames(spaces.map((space) => space.name));
         })
         .catch((error) =>
           console.error("Failed to fetch spaces for building:", error),
@@ -91,13 +95,17 @@ export default function DeleteBuilding({
           Delete
         </Button>
       ) : (
-        <Button
-          variant="contained"
-          disabled
-          style={{ ...theme.components.MuiButton.redbutton, opacity: 0.5 }}
-        >
-          Delete (Spaces Present)
-        </Button>
+        <Tooltip title={`Space(s): ${spaceNames.join(", ")}`} placement="top">
+          <span>
+            <Button
+              variant="contained"
+              disabled
+              style={{ ...theme.components.MuiButton.redbutton, opacity: 0.5 }}
+            >
+              Delete (Spaces Present)
+            </Button>
+          </span>
+        </Tooltip>
       )}
     </>
   );
