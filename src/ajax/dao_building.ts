@@ -51,3 +51,14 @@ export const downloadBuildingTemplate = async (): Promise<
 > => {
   return download<Building>("building", baseUrl);
 };
+
+// Fetch the number of spaces for buidling
+export const getNumberOfSpaces = async (
+  buildingId: number,
+): Promise<number> => {
+  const response = await get(
+    `${baseUrl}/building/${buildingId}/numberOfSpaces`,
+  );
+  const numberOfSpaces: number = await response.json();
+  return numberOfSpaces;
+};
