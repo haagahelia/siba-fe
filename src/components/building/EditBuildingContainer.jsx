@@ -29,12 +29,16 @@ export default function EditBuildingContainer({
     // enableReinitialize checks if Formik needs to reset the form
     // if the initial values change
     enableReinitialize: true,
-    initialValues: singleBuilding,
+    initialValues: {
+      ...singleBuilding,
+      description:
+        singleBuilding.description === null ? "" : singleBuilding.description,
+    },
     validate,
     onSubmit: (values) => {
       setDialogOptions({
         title: `Are you sure you want to edit ${values.name}?`,
-        content: `Press continue to save ${values.name} new information. `,
+        content: `Press continue to save ${values.name} new information.`,
       });
       setDialogOpen(true);
       return;

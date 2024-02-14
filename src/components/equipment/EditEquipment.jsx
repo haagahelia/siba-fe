@@ -29,7 +29,11 @@ export default function EditEquipment({
 
   const formik = useFormik({
     enableReinitialize: true,
-    initialValues: singleEquipment,
+    initialValues: {
+      ...singleEquipment,
+      description:
+        singleEquipment.description === null ? "" : singleEquipment.description,
+    },
     validateOnChange: true,
     validate: ValidateEditEquipment,
     onSubmit: (values) => {
