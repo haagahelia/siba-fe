@@ -22,9 +22,11 @@ export default function AddSettingForm({
             onChange={formik.handleChange("name")}
             onBlur={formik.handleBlur("name")}
             helperText={
-              formik.touched.name && formik.errors.name
-                ? formik.errors.name
-                : "This field is required"
+              formik.touched.name && formik.errors.name ? (
+                formik.errors.name
+              ) : (
+                <span style={{ color: "red" }}>This field is required</span>
+              )
             }
           />
         </Grid>
@@ -43,9 +45,11 @@ export default function AddSettingForm({
             onChange={formik.handleChange("description")}
             onBlur={formik.handleBlur("description")}
             helperText={
-              formik.touched.description && formik.errors.description
-                ? formik.errors.description
-                : "This field is required"
+              formik.touched.description && formik.errors.description ? (
+                formik.errors.description
+              ) : (
+                <span style={{ color: "red" }}>This field is required</span>
+              )
             }
           />
         </Grid>
