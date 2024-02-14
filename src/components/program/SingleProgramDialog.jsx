@@ -47,7 +47,7 @@ export default function SingleProgramDialog({
       fetchNumberOfLessons(singleProgram.id)
         .then((number) => {
           setNumberOfLessons(number);
-          console.log("Number of lessons:", number);
+          Logger.debug("Number of lessons:", number);
         })
         .catch((error) =>
           Logger.error("Error fetching the number of lessons:", error),

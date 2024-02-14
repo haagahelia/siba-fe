@@ -27,7 +27,7 @@ export const importData = async (
       title: "Invalid file type",
       message: "Please upload a .csv file.",
     });
-    Logger.debug("chosen file has invalid type for import data");
+    Logger.error("chosen file has invalid type for import data");
     return setAlertOpen(true);
   }
 
@@ -50,7 +50,7 @@ export const importData = async (
   }
 
   setDataFailedToImport([...dataFailedToImport, ...tempFailedData]);
-  Logger.debug("failed data", tempFailedData);
+  Logger.error("failed data", tempFailedData);
 
   // if the data is empty or invalid after validation, not sending to backend
   if (successCount === 0 && failedCount === 0) {

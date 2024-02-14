@@ -31,11 +31,11 @@ export default function AddDepartmentDialogConfirmation({
 
   const addSingleDepartment = async () => {
     const validationErrors = await validate(department);
-    console.log("addSingleDepartment validate");
+    Logger.debug("addSingleDepartment validate");
     console.dir(validationErrors);
 
     for (const element of Object.keys(validationErrors)) {
-      console.log(`key:  ${element}`);
+      Logger.debug(`key:  ${element}`);
     }
 
     if (Object.keys(validationErrors).length > 0) {
@@ -48,12 +48,12 @@ export default function AddDepartmentDialogConfirmation({
           severity: "error",
         });
         setAlertOpen(true);
-        console.log("Return1");
+        Logger.debug("Return1");
         return;
       }
       // other error ?
       alert(validationErrors);
-      console.log("Return2");
+      Logger.debug("Return2");
       return;
     }
 
@@ -117,7 +117,7 @@ export default function AddDepartmentDialogConfirmation({
             variant="contained"
             color="primary"
             onClick={() => {
-              console.log("parola italiana");
+              Logger.debug("parola italiana");
               setOpen(false);
               setDialogOptions({
                 title: `Are you sure you want to add ${department.name}?`,
