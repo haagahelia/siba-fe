@@ -87,13 +87,16 @@ export default function SingleBuildingDialog({
         </Typography>
       </DialogContent>
 
-      {roles.admin === "1" && numberOfSpaces === 0 && (
+      {roles.admin === "1" && (
         <DialogActions>
-          <DeleteBuilding
-            singleBuilding={singleBuilding}
-            getAllBuildings={getAllBuildings}
-            setOpen={setOpen}
-          />
+          {numberOfSpaces === 0 && (
+            <DeleteBuilding
+              singleBuilding={singleBuilding}
+              getAllBuildings={getAllBuildings}
+              setOpen={setOpen}
+            />
+          )}
+
           <EditBuildingContainer
             singleBuilding={singleBuilding}
             getAllBuildings={getAllBuildings}
