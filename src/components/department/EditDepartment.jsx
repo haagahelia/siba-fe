@@ -11,6 +11,7 @@ import DialogTitle from "@mui/material/DialogTitle";
 import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
 import useTheme from "@mui/material/styles/useTheme";
+import Logger from "../../logger/logger";
 import { capitalizeFirstLetter } from "../../validation/ValidationUtilities";
 import AlertBox from "../common/AlertBox";
 import ConfirmationDialog from "../common/ConfirmationDialog";
@@ -36,12 +37,19 @@ export default function EditDepartment({
 
   const formik = useFormik({
     enableReinitialize: true,
-    initialValues: singleDepartment,
+    initialValues: {
+      ...singleDepartment,
+      description:
+        singleDepartment.description === null
+          ? ""
+          : singleDepartment.description,
+    },
     validateOnChange: true,
     validate,
     onSubmit: (values) => {
+      Logger.debug("edit department values:", values);
       setDialogOptions({
-        title: `Are you sure you want to add ${values.name}?`,
+        title: `Are you sure you want to edit ${values.name}?`,
         content: `Press continue to save ${values.name} new information.`,
       });
       setDialogOpen(true);
@@ -93,7 +101,7 @@ export default function EditDepartment({
       >
         Edit
       </Button>
-      <Dialog open={editOpen}>
+      <Dialog open={editOpen} onClose={() => setEditOpen(false)}>
         <form onSubmit={formik.handleSubmit}>
           <DialogTitle>Edit Department</DialogTitle>
           <DialogContent>
