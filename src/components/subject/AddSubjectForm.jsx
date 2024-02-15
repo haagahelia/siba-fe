@@ -158,6 +158,7 @@ export default function AddSubjectForm({
               }
               name="sessionLength"
               label="Lesson Length"
+              type="time"
               value={formik.values.sessionLength}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
