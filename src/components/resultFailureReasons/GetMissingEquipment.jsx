@@ -10,46 +10,46 @@ import TableCell from "@mui/material/TableCell";
 import Tooltip from "@mui/material/Tooltip";
 
 export function GetMissingEquipment({ subjId, roomId, missingEquipmentCount }) {
-    const [missingEquipment, setMissingEquipment] = useState(
-      "No equipment missing",
-    );
-    const [tooltipOpen, setTooltipOpen] = useState(false);
-    const [alertOpen, setAlertOpen] = useState(false);
-    const [alertOptions, setAlertOptions] = useState({
-      message: "Whoops!",
-      severity: "error",
-    });
-  
-    useEffect(()=>{
-      const getMissingEquipment = async function (subjectId, spaceId) {
-        Logger.debug(
-          "getMissingEquipment: fetching all missing equipment from server.",
-        );
-        const { httpStatus, data } = await dao.getMissingEquipmentForRoom(
-          subjectId,
-          spaceId,
-        );
-        if (httpStatus !== 200) {
-          Logger.debug("getMissingEquipment: failed to fetch missing equipment");
-          ajaxRequestErrorHandler(
-            httpStatus,
-            "getMissingEquipment",
-            setAlertOptions,
-            setAlertOpen,
-          );
-        } else {
-          Logger.debug("getMissingEquipment: successfully fetched");
-          const equipmentNames = data.map((equipmentObj) => equipmentObj.name);
-          setMissingEquipment(`Missing equipment: ${equipmentNames.join(", ")}`);
-        }
-      };
+  const [missingEquipment, setMissingEquipment] = useState(
+    "No equipment missing",
+  );
+  const [tooltipOpen, setTooltipOpen] = useState(false);
+  const [alertOpen, setAlertOpen] = useState(false);
+  const [alertOptions, setAlertOptions] = useState({
+    message: "Whoops!",
+    severity: "error",
+  });
 
-      if (missingEquipmentCount > 0) {
-        getMissingEquipment(subjId, roomId);
+  useEffect(() => {
+    const getMissingEquipment = async (subjectId, spaceId) => {
+      Logger.debug(
+        "getMissingEquipment: fetching all missing equipment from server.",
+      );
+      const { httpStatus, data } = await dao.getMissingEquipmentForRoom(
+        subjectId,
+        spaceId,
+      );
+      if (httpStatus !== 200) {
+        Logger.error("getMissingEquipment: failed to fetch missing equipment");
+        ajaxRequestErrorHandler(
+          httpStatus,
+          "getMissingEquipment",
+          setAlertOptions,
+          setAlertOpen,
+        );
+      } else {
+        Logger.debug("getMissingEquipment: successfully fetched");
+        const equipmentNames = data.map((equipmentObj) => equipmentObj.name);
+        setMissingEquipment(`Missing equipment: ${equipmentNames.join(", ")}`);
       }
-    }, [missingEquipmentCount, subjId, roomId]);
+    };
 
-    /*
+    if (missingEquipmentCount > 0) {
+      getMissingEquipment(subjId, roomId);
+    }
+  }, [missingEquipmentCount, subjId, roomId]);
+
+  /*
     const handleTooltipClose = () => {
       setTooltipOpen(false);
     };
@@ -58,23 +58,18 @@ export function GetMissingEquipment({ subjId, roomId, missingEquipmentCount }) {
       setTooltipOpen(true);
     };
     */
-    
-  
-    return (
-      <Tooltip
-        disableFocusListener
-        title={missingEquipment}
-        >
-        {missingEquipmentCount > 0 ? (
-          <TableCell>
-            <CloseIcon color="error" />
-          </TableCell>
-        ) : (
-          <TableCell>
-            <CheckIcon color="success" />
-          </TableCell>
-        )}
-      </Tooltip>
 
-    );
-  }
+  return (
+    <Tooltip disableFocusListener title={missingEquipment}>
+      {missingEquipmentCount > 0 ? (
+        <TableCell>
+          <CloseIcon color="error" />
+        </TableCell>
+      ) : (
+        <TableCell>
+          <CheckIcon color="success" />
+        </TableCell>
+      )}
+    </Tooltip>
+  );
+}
