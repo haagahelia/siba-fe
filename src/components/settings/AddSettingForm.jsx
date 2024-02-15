@@ -17,16 +17,13 @@ export default function AddSettingForm({
             name="name"
             label="Setting name"
             variant="outlined"
-            required
             value={formik.values.name}
             onChange={formik.handleChange("name")}
             onBlur={formik.handleBlur("name")}
             helperText={
-              formik.touched.name && formik.errors.name ? (
-                formik.errors.name
-              ) : (
-                <span style={{ color: "red" }}>This field is required</span>
-              )
+              formik.touched.name && formik.errors.name
+                ? formik.errors.name
+                : ""
             }
           />
         </Grid>
@@ -40,16 +37,13 @@ export default function AddSettingForm({
             name="description"
             label="Description"
             variant="outlined"
-            required
             value={formik.values.description}
             onChange={formik.handleChange("description")}
             onBlur={formik.handleBlur("description")}
             helperText={
-              formik.touched.description && formik.errors.description ? (
-                formik.errors.description
-              ) : (
-                <span style={{ color: "red" }}>This field is required</span>
-              )
+              formik.touched.description && formik.errors.description
+                ? formik.errors.description
+                : ""
             }
           />
         </Grid>
