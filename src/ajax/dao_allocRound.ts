@@ -54,3 +54,10 @@ export const deleteSingleAllocRound = async (id: number): Promise<boolean> => {
   const response = await remove(`${baseUrl}/allocRound/${id}`);
   return response.ok;
 };
+
+//fetch all data for excel
+/*export const fetchReportData = async () : Promise<Response<any>> => {
+  const response = await get(`${baseUrl}/allocRound`);
+  const allocrounds: AllocRound[] = await response.json();
+  return { success: response.ok, data: allocrounds };
+};*/
