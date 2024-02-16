@@ -43,7 +43,9 @@ export async function validate(values) {
     errors.name = vF_regName.errorMessageFunction("Name");
   }
 
-  if (values.description !== null && values.description.length > 16000) {
+  if (!values.description) {
+    errors.description = requiredFieldErrorMessageFunction("Description");
+  } else if (values.description.length > 16000) {
     errors.description =
       "The description must be maximum 16000 characters long";
   } else if (!vF_regDescription.regExp.test(values.description)) {
