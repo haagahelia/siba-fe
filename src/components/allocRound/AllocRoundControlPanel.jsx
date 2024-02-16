@@ -69,6 +69,22 @@ export default function AllocRoundControlPanel({ incrementResetCounter }) {
           Show failed allocation
         </Button>
       </Link>
+      <Button
+        type="submit"
+        variant="outlined"
+        color="inherit"
+        disabled={!isClicked}
+      >
+        Download full report
+      </Button>
+      <Button
+        type="submit"
+        variant="outlined"
+        color="inherit"
+        disabled={!isClicked}
+      >
+        Download Planner report
+      </Button>
     </Typography>
   );
 }
