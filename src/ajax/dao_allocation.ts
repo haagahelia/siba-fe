@@ -57,3 +57,10 @@ export const fetchReportData = async (): Promise<Response<Report>> => {
   const reportData: Report[] = await response.json();
   return { success: response.ok, data: reportData };
 };
+
+//fetch all data for excel
+export const fetchPlannerData = async (): Promise<Response<Report>> => {
+  const response = await get(`${baseUrl}/allocation/plannerreport`);
+  const reportData: Report[] = await response.json();
+  return { success: response.ok, data: reportData };
+};
