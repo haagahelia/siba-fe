@@ -1,5 +1,6 @@
 import {
   MissingEquipment,
+  Response,
   ResponseFiner,
   SubjectRoom,
   UnallocableSubject,
@@ -48,4 +49,11 @@ export const getMissingEquipmentForRoom = async (
   } else {
     return { httpStatus: response.status, data: [] };
   }
+};
+
+//fetch all data for excel
+export const fetchReportData = async (): Promise<Response<Report>> => {
+  const response = await get(`${baseUrl}/allocation/report`);
+  const reportData: Report[] = await response.json();
+  return { success: response.ok, data: reportData };
 };
