@@ -61,12 +61,23 @@ export default function AddSettingContainer({ getAllSettings }) {
   });
 
   const addSetting = async (submitValues) => {
-    const newSetting = {
-      name: capitalizeFirstLetter(submitValues.name),
-      description: submitValues.description,
-      numberValue: submitValues.numberValue,
-      textValue: submitValues.textValue,
-    };
+    const newSetting = {};
+
+    if (submitValues.name) {
+      newSetting.name = submitValues.name;
+    }
+
+    if (submitValues.description) {
+      newSetting.description = submitValues.description;
+    }
+
+    if (submitValues.numberValue !== "") {
+      newSetting.numberValue = submitValues.numberValue;
+    }
+
+    if (submitValues.textValue !== "") {
+      newSetting.textValue = submitValues.textValue;
+    }
 
     const result = await dao.postNewSetting(newSetting);
     if (!result) {
