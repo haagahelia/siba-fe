@@ -91,6 +91,13 @@ export interface CopyAllocRound {
   name: string;
 }
 
+export interface Report {
+  department: string;
+  program: string;
+  lesson: string;
+  room: string;
+}
+
 export interface Building {
   id: number;
   name: string;
