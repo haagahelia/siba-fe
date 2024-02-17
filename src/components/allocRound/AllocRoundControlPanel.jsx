@@ -134,7 +134,7 @@ export default function AllocRoundControlPanel({ incrementResetCounter }) {
       <Button
         type="submit"
         variant="outlined"
-        color="inherit"
+        color="secondary"
         disabled={!isClicked}
       >
         <CSVLink
@@ -142,7 +142,8 @@ export default function AllocRoundControlPanel({ incrementResetCounter }) {
           data={reportData}
           filename={fileName}
           separator={";"}
-          style={{ textDecoration: "none", color: "#fff" }}
+          style={{ textDecoration: "none", color: "inherit" }}
+          disabled={!isClicked}
         >
           Download full report
         </CSVLink>
@@ -150,15 +151,15 @@ export default function AllocRoundControlPanel({ incrementResetCounter }) {
       <Button
         type="submit"
         variant="outlined"
-        color="inherit"
+        color="secondary"
         disabled={!isClicked}
       >
         <CSVLink
           headers={headers}
           data={plannerData}
           filename={fileNamePlanner}
-          separator={";"}
-          style={{ textDecoration: "none", color: "#fff" }}
+          style={{ textDecoration: "none", color: "inherit" }}
+          disabled={!isClicked}
         >
           Download Planner report
         </CSVLink>
