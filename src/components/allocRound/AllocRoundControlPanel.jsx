@@ -157,6 +157,7 @@ export default function AllocRoundControlPanel({ incrementResetCounter }) {
           headers={headers}
           data={plannerData}
           filename={fileNamePlanner}
+          separator={";"}
           style={{ textDecoration: "none", color: "#fff" }}
         >
           Download Planner report
