@@ -77,7 +77,7 @@ export default function EditSubEquipContainer({
     setAlertOptions({
       severity: "success",
       title: "Success!",
-      message: `${values.name} new information added.`,
+      message: `${values.name} edited.`,
     });
     setAlertOpen(true);
     // The form resets and gets the new modified initialValues

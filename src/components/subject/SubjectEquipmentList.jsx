@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 import { DialogActions } from "@mui/material";
 import DialogContent from "@mui/material/DialogContent";
 import Grid from "@mui/material/Grid";
@@ -9,6 +11,7 @@ import { checkForUserPrograms } from "../../hooks/checkForUserPrograms";
 import { useRoleLoggedIn } from "../../hooks/useRoleLoggedIn";
 import DeleteSubEquip from "./DeleteSubEquip";
 import EditSubEquipContainer from "./EditSubEquipContainer";
+import AlertBox from "../common/AlertBox";
 
 export default function SubjectEquipmentList({
   equipListBySubId,
@@ -17,9 +20,18 @@ export default function SubjectEquipmentList({
   singleSubject,
 }) {
   const { roles } = useRoleLoggedIn();
-
+  const [alertOpen, setAlertOpen] = useState(false);
+  const [alertOptions, setAlertOptions] = useState({
+    message: "This is an error alert — check it out!",
+    severity: "error",
+  });
   return (
     <div>
+      <AlertBox
+        alertOpen={alertOpen}
+        alertOptions={alertOptions}
+        setAlertOpen={setAlertOpen}
+      />
       {equipListBySubId.length ? (
         equipListBySubId.map((value) => {
           return (
@@ -39,6 +51,8 @@ export default function SubjectEquipmentList({
                         getEquipmentsBySubId={getEquipmentsBySubId}
                       />
                       <DeleteSubEquip
+                        setAlertOpen={setAlertOpen}
+                        setAlertOptions={setAlertOptions}
                         singleSubEquipToDelete={value}
                         getEquipmentsBySubId={getEquipmentsBySubId}
                         subId={value.subjectId}
