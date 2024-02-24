@@ -59,3 +59,13 @@ export const deleteDepartment = async (
   const response = await remove(`${baseUrl}/department/${departmentId}`);
   return response.ok;
 };
+// Fetch the number of programs for a department
+export const getNumberOfPrograms = async (
+  departmentId: number,
+): Promise<number> => {
+  const response = await get(
+    `${baseUrl}/department/${departmentId}/numberOfPrograms`,
+  );
+  const numberOfPrograms: number = await response.json();
+  return numberOfPrograms;
+};
