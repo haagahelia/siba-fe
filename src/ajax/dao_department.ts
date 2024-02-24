@@ -60,12 +60,8 @@ export const deleteDepartment = async (
   return response.ok;
 };
 // Fetch the number of programs for a department
-export const getNumberOfPrograms = async (
-  departmentId: number,
-): Promise<number> => {
-  const response = await get(
-    `${baseUrl}/department/${departmentId}/numberOfPrograms`,
-  );
+export const getNumberOfPrograms = async (id: number): Promise<number> => {
+  const response = await get(`${baseUrl}/department/${id}/numberOfPrograms`);
   const numberOfPrograms: number = await response.json();
   return numberOfPrograms;
 };

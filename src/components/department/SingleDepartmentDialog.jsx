@@ -110,10 +110,10 @@ export default function SingleDepartmentDialog({
         <Typography variant="singleDialogSubtitle">
           {numberOfPrograms !== null
             ? numberOfPrograms === 0
-              ? "There are no lessons in this program."
+              ? "There are no programs in this department."
               : numberOfPrograms === 1
-                ? "There is 1 lesson in this program."
-                : `There are ${numberOfPrograms} lessons in this program.`
+                ? "There is 1 programs in this department."
+                : `There are ${numberOfPrograms} program in this department.`
             : "Loading..."}
         </Typography>
       </DialogContent>
