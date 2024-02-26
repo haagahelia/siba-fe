@@ -88,7 +88,7 @@ export default function AddSubjectContainer({
     },
   });
 
-  const getProgramsForSelect = async function () {
+  const getProgramsForSelect = async () => {
     Logger.debug(
       "getProgramsForSelect: fetching all programs for select from server.",
     );
@@ -110,7 +110,7 @@ export default function AddSubjectContainer({
     getProgramsForSelect();
   }, []);
 
-  const getSpaceTypesForSelect = async function () {
+  const getSpaceTypesForSelect = async () => {
     Logger.debug(
       "getSpaceTypesForSelect: fetching all Space Types for select from server.",
     );
@@ -175,7 +175,7 @@ export default function AddSubjectContainer({
     setInitialSubject({
       // This is so that the entered name does not change
       // even if you select the data of an existing lesson
-      name: selected.name,
+      name: `* ${selected.name}`,
 
       groupSize: selected.groupSize,
       groupCount: selected.groupCount,

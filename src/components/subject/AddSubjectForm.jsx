@@ -42,7 +42,7 @@ export default function AddSubjectForm({
   return (
     <div>
       <form onSubmit={formik.handleSubmit}>
-        <Grid container spacing={2} justifyContent="center">
+        <Grid container spacing={2} justifyContent="flex-end">
           <Grid
             item
             xs={12}
@@ -51,6 +51,7 @@ export default function AddSubjectForm({
             lg={6}
             style={{ border: "5px solid #FDA826", padding: "10px" }}
           >
+            <Typography>Optional</Typography>
             <FormControl fullWidth>
               <InputLabel>Select Allocation Round</InputLabel>
               <Select
