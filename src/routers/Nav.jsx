@@ -41,6 +41,7 @@ import RegisterView from "../views/RegisterView";
 import ResetPasswordView from "../views/ResetPasswordView";
 import RoomResultView from "../views/RoomResultView";
 import SettingsView from "../views/SettingsView";
+import SpaceTypeView from "../views/SpaceTypeView";
 import SpaceView from "../views/SpaceView";
 import SubjectView from "../views/SubjectView";
 import UserView from "../views/UserView";
@@ -92,6 +93,12 @@ export default function NavBar() {
     {
       name: "Spaces",
       href: "/space",
+      forRoles: ["admin", "planner", "statist"],
+      showForCurrentUser: false,
+    },
+    {
+      name: "Space Types",
+      href: "/spaceType",
       forRoles: ["admin", "planner", "statist"],
       showForCurrentUser: false,
     },
@@ -459,6 +466,7 @@ export default function NavBar() {
             <Route path="/department" element={<DepartmentView />} />
             <Route path="/space" element={<SpaceView />} />
             <Route path="/space/:spaceIdToShow" element={<SpaceView />} />
+            <Route path="/spaceType" element={<SpaceTypeView />} />
             <Route path="/program" element={<ProgramView />} />
             <Route
               path="/allocation/addAllocRound"

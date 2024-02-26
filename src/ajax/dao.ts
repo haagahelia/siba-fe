@@ -22,6 +22,7 @@ const dao = {
   ...dao_spaceType,
   ...dao_space,
   ...dao_spaceEquipment,
+  ...dao_spaceType,
   ...dao_subject,
   ...dao_subjectEquipment,
   ...dao_allocRound,
