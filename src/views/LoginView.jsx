@@ -12,6 +12,7 @@ import { AppContext } from "../AppContext";
 import dao from "../ajax/dao";
 import AlertBox from "../components/common/AlertBox";
 import Logger from "../logger/logger";
+import { getSettings, handleSettings } from "../setting/handleSettings";
 import backgroundImage from "../styles/SibeliusLogoLoginPage.svg";
 
 export const localStorageClearUserLoginAndToken = () => {
@@ -103,6 +104,7 @@ export default function LoginView({ handleLoginChange }) {
       setAlertOpen(true);
 
       handleLoginChange();
+      handleSettings(getSettings(), appContext);
 
       setLoginForm({
         email: "",

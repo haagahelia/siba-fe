@@ -13,7 +13,7 @@ import Container from "@mui/material/Container";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import Toolbar from "@mui/material/Toolbar";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { BrowserRouter, NavLink, Route, Routes } from "react-router-dom";
 import { AppContext } from "../AppContext";
 import { AllocRoundContext } from "../AppContext.js";

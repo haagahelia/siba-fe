@@ -7,6 +7,7 @@ export const AppContext = createContext({
   userEmail: null,
   sessionToken: null,
   roles: { admin: 0, planner: 0, statist: 0 },
+  itemsPerPage: 15,
 });
 
 export const AllocRoundContext = createContext({
