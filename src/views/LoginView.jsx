@@ -104,12 +104,13 @@ export default function LoginView({ handleLoginChange }) {
       setAlertOpen(true);
 
       handleLoginChange();
-      handleSettings(getSettings(), appContext);
 
       setLoginForm({
         email: "",
         password: "",
       });
+
+      handleSettings(await getSettings(), appContext);
 
       // Timeout to show popup message before navigation
       setTimeout(() => {

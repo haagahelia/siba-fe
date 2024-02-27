@@ -29,7 +29,7 @@ export default function SpaceView() {
   Logger.debug("SpaceView component instantiated.");
   const { roles } = useRoleLoggedIn();
 
-  const appContext = useContext(AppContext);
+  const itemsPerPage = useContext(AppContext).settings.itemsPerPage;
 
   let { spaceIdToShow } = useParams();
   const [spaceIdToShowState, setSpaceIdToShowState] = useState(spaceIdToShow);
@@ -52,10 +52,10 @@ export default function SpaceView() {
 
   const [pagination, setPagination] = useState({
     from: 0,
-    to: pageSize,
+    to: itemsPerPage,
   });
 
-  const getAllSpaces = async function () {
+  const getAllSpaces = async () => {
     Logger.debug("getAllSpaces: fetching all spaces from server.");
     const { httpStatus, data } = await dao.fetchAllSpaces();
     if (httpStatus !== 200) {
@@ -68,7 +68,7 @@ export default function SpaceView() {
     } else {
       Logger.debug(`getAllSpaces: successfully fetched ${data.length} spaces.`);
       setAllSpacesList(data);
-      setPaginateSpaces(data.slice(0, 15));
+      setPaginateSpaces(data.slice(0, itemsPerPage));
     }
   };
 
@@ -79,7 +79,7 @@ export default function SpaceView() {
 
   useEffect(() => {
     Logger.debug("Running effect to update paginated spaces.");
-    setPaginateSpaces(allSpacesList.slice(0, 15));
+    setPaginateSpaces(allSpacesList.slice(0, itemsPerPage));
   }, [allSpacesList]);
 
   useEffect(() => {
@@ -157,6 +157,7 @@ export default function SpaceView() {
                 allSpacesList={allSpacesList}
                 paginateSpaces={paginateSpaces}
                 setPaginateSpaces={setPaginateSpaces}
+                pageSize={itemsPerPage}
               />
             </CardContent>
           </Card>

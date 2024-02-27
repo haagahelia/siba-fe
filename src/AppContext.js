@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext } from "react";
 
 export const AppContext = createContext({
   // allocRoundId: 10004,
@@ -7,7 +7,7 @@ export const AppContext = createContext({
   userEmail: null,
   sessionToken: null,
   roles: { admin: 0, planner: 0, statist: 0 },
-  itemsPerPage: 15,
+  settings: { itemsPerPage: 15 },
 });
 
 export const AllocRoundContext = createContext({

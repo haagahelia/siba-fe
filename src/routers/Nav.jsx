@@ -13,7 +13,7 @@ import Container from "@mui/material/Container";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import Toolbar from "@mui/material/Toolbar";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { BrowserRouter, NavLink, Route, Routes } from "react-router-dom";
 import { AppContext } from "../AppContext";
 import { AllocRoundContext } from "../AppContext.js";
@@ -23,6 +23,7 @@ import AlertBox from "../components/common/AlertBox.jsx";
 import ConfirmationDialog from "../components/common/ConfirmationDialog.jsx";
 import { useRoleLoggedIn } from "../hooks/useRoleLoggedIn.js";
 import Logger from "../logger/logger";
+import { getSettings, handleSettings } from "../setting/handleSettings.js";
 import logo from "../styles/SibeliusLogo.svg";
 // The different pages/views
 import AllocRoundView from "../views/AllocRoundView";
@@ -194,6 +195,15 @@ export default function NavBar() {
   );
 
   const [isDropdownVisible, setIsDropdownVisible] = useState(false);
+
+  useEffect(() => {
+    async function getAndHandleSettings() {
+      if (sibaPages[1].isLogin) {
+        handleSettings(await getSettings(), appContext);
+      }
+    }
+    getAndHandleSettings();
+  }, []);
 
   // Called to produce the drop-down menu items
   const renderDropdownMenu = (page, variant) => {

@@ -2,7 +2,8 @@ import { CardContent, CardHeader } from "@mui/material";
 import Card from "@mui/material/Card";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { AppContext } from "../AppContext";
 import {
   ajaxRequestErrorHandler,
   getFunctionName,
@@ -15,8 +16,6 @@ import AlertBox from "../components/common/AlertBox";
 import { useRoleLoggedIn } from "../hooks/useRoleLoggedIn";
 import Logger from "../logger/logger";
 
-const pageSize = 15;
-
 export default function BuildingView() {
   const { roles } = useRoleLoggedIn();
   const [paginateBuildings, setPaginateBuildings] = useState([]);
@@ -27,13 +26,14 @@ export default function BuildingView() {
     message: "This is an error alert — check it out!",
     severity: "error",
   });
+  const itemsPerPage = useContext(AppContext).settings.itemsPerPage;
 
   const [pagination, setPagination] = useState({
     from: 0,
-    to: pageSize,
+    to: itemsPerPage,
   });
 
-  const getAllBuildings = async function () {
+  const getAllBuildings = async () => {
     const { httpStatus, data } = await dao.fetchAllBuildings();
     if (httpStatus !== 200) {
       ajaxRequestErrorHandler(
@@ -54,11 +54,11 @@ export default function BuildingView() {
   }, []);
 
   useEffect(() => {
-    setPaginateBuildings(allBuildingsList.slice(0, 15));
+    setPaginateBuildings(allBuildingsList.slice(0, itemsPerPage));
   }, [allBuildingsList]);
 
   useEffect(() => {
-    document.title = 'Buildings';
+    document.title = "Buildings";
   }, []);
 
   return (
@@ -69,7 +69,7 @@ export default function BuildingView() {
         setAlertOpen={setAlertOpen}
       />
       <Container maxWidth="xl">
-        {(roles.admin === "1") && (
+        {roles.admin === "1" && (
           <AddBuildingContainer getAllBuildings={getAllBuildings} />
         )}
         <Grid container rowSpacing={1}>
@@ -87,6 +87,7 @@ export default function BuildingView() {
                 allBuildingsList={allBuildingsList}
                 paginateBuildings={paginateBuildings}
                 setPaginateBuildings={setPaginateBuildings}
+                pageSize={itemsPerPage}
               />
             </CardContent>
           </Card>

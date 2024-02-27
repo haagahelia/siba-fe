@@ -15,12 +15,13 @@ export const getSettings = async () => {
 // Handles and sets settings used in the app.
 export const handleSettings = (settings, appContext) => {
   Logger.debug("Handling settings");
+  Logger.debug(settings);
 
   const itemsPerPage = settings.find(
     (setting) => setting?.name?.toLowerCase() === "items-per-page",
   );
   if (itemsPerPage) {
-    appContext.itemsPerPage = itemsPerPage.numberValue;
+    appContext.settings.itemsPerPage = itemsPerPage.numberValue;
     Logger.debug("items-per-page setting found");
   }
 };

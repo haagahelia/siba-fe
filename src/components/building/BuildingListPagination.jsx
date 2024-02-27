@@ -1,14 +1,12 @@
-import { useEffect } from "react";
-
 import Pagination from "@mui/material/Pagination";
-
-const pageSize = 15;
+import { useEffect } from "react";
 
 export default function BuildingPagination({
   pagination,
   setPagination,
   allBuildingsList,
   setPaginateBuildings,
+  pageSize,
 }) {
   const count = Math.ceil(allBuildingsList.length / pageSize);
 
