@@ -1,4 +1,4 @@
-import { Department, Response, ResponseFiner } from "../types";
+import { Department, Program, Response, ResponseFiner } from "../types";
 import { create, get, remove, update } from "./request";
 
 const baseUrl = import.meta.env.VITE_BE_SERVER_BASE_URL;
@@ -60,8 +60,14 @@ export const deleteDepartment = async (
   return response.ok;
 };
 // Fetch the number of programs for a department
-export const getNumberOfPrograms = async (id: number): Promise<number> => {
+export const getNumberOfPrograms = async (
+  id: number,
+): Promise<number | null> => {
   const response = await get(`${baseUrl}/department/${id}/numberOfPrograms`);
-  const numberOfPrograms: number = await response.json();
-  return numberOfPrograms;
+  if (response.status === 200) {
+    const numberOfPrograms: number = await response.json();
+    return numberOfPrograms;
+  } else {
+    return null;
+  }
 };
