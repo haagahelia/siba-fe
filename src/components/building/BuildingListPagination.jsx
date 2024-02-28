@@ -1,25 +1,27 @@
-import { useEffect } from "react";
-
 import Pagination from "@mui/material/Pagination";
-
-const pageSize = 15;
+import { useEffect, useState } from "react";
 
 export default function BuildingPagination({
   pagination,
   setPagination,
   allBuildingsList,
   setPaginateBuildings,
+  pageSize,
 }) {
   const count = Math.ceil(allBuildingsList.length / pageSize);
+  const [initialRender, setInitialRender] = useState(true);
 
   useEffect(() => {
-    if (!pagination.from) return;
-    const slicedBuildings = allBuildingsList.slice(
-      pagination.from,
-      pagination.to,
-    );
-    setPaginateBuildings(slicedBuildings);
-  }, [pagination, allBuildingsList, setPaginateBuildings]);
+    if (initialRender) {
+      setInitialRender(false);
+    } else {
+      const slicedBuildings = allBuildingsList.slice(
+        pagination.from,
+        pagination.to,
+      );
+      setPaginateBuildings(slicedBuildings);
+    }
+  }, [pagination]);
 
   const handleChange = (e, p) => {
     const from = (p - 1) * pageSize;

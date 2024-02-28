@@ -15,26 +15,22 @@ import CardContent from "@mui/material/CardContent";
 import CardHeader from "@mui/material/CardHeader";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
-import Typography from "@mui/material/Typography";
 import AlertBox from "../components/common/AlertBox";
 import AddSpace from "../components/space/AddSpace";
 import SpaceFiltering from "../components/space/SpaceFiltering";
 import SpaceListContainer from "../components/space/SpaceListContainer";
 import SpacePagination from "../components/space/SpacePagination";
 
-const pageSize = 15;
-
 export default function SpaceView() {
   Logger.logPrefix = "SpaceView";
   Logger.debug("SpaceView component instantiated.");
+
   const { roles } = useRoleLoggedIn();
-
-  const appContext = useContext(AppContext);
-
   let { spaceIdToShow } = useParams();
+  const pageSize = useContext(AppContext).settings.itemsPerPage;
+
   const [spaceIdToShowState, setSpaceIdToShowState] = useState(spaceIdToShow);
   const [shownSpace, setShownSpace] = useState(null);
-
   const [paginateSpaces, setPaginateSpaces] = useState([]);
   const [allSpacesList, setAllSpacesList] = useState([]);
   const [alertOpen, setAlertOpen] = useState(false);
@@ -43,19 +39,18 @@ export default function SpaceView() {
     message: "This is an error alert — check it out!",
     severity: "error",
   });
-
-  const setShownSpace2 = (state) => {
-    setShownSpace(state);
-  };
-
-  Logger.debug("Initial state set.");
-
   const [pagination, setPagination] = useState({
     from: 0,
     to: pageSize,
   });
 
-  const getAllSpaces = async function () {
+  Logger.debug("Initial state set.");
+
+  const setShownSpace2 = (state) => {
+    setShownSpace(state);
+  };
+
+  const getAllSpaces = async () => {
     Logger.debug("getAllSpaces: fetching all spaces from server.");
     const { httpStatus, data } = await dao.fetchAllSpaces();
     if (httpStatus !== 200) {
@@ -68,7 +63,7 @@ export default function SpaceView() {
     } else {
       Logger.debug(`getAllSpaces: successfully fetched ${data.length} spaces.`);
       setAllSpacesList(data);
-      setPaginateSpaces(data.slice(0, 15));
+      setPaginateSpaces(data.slice(0, pageSize));
     }
   };
 
@@ -79,7 +74,7 @@ export default function SpaceView() {
 
   useEffect(() => {
     Logger.debug("Running effect to update paginated spaces.");
-    setPaginateSpaces(allSpacesList.slice(0, 15));
+    setPaginateSpaces(allSpacesList.slice(0, pageSize));
   }, [allSpacesList]);
 
   useEffect(() => {
@@ -157,6 +152,7 @@ export default function SpaceView() {
                 allSpacesList={allSpacesList}
                 paginateSpaces={paginateSpaces}
                 setPaginateSpaces={setPaginateSpaces}
+                pageSize={pageSize}
               />
             </CardContent>
           </Card>

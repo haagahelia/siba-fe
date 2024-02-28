@@ -15,20 +15,18 @@ import CardContent from "@mui/material/CardContent";
 import CardHeader from "@mui/material/CardHeader";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
-import Typography from "@mui/material/Typography";
 import AlertBox from "../components/common/AlertBox";
 import AddSubjectContainer from "../components/subject/AddSubjectContainer";
 import SubjectFiltering from "../components/subject/SubjectFiltering";
 import SubjectListContainer from "../components/subject/SubjectListContainer";
 import SubjectPagination from "../components/subject/SubjectPagination";
 
-const pageSize = 15;
-
 export default function SubjectView() {
   Logger.logPrefix = "SubjectView";
   Logger.debug("SubjectView component instantiated.");
 
   const appContext = useContext(AppContext);
+  const pageSize = appContext.settings.itemsPerPage;
   const { roles } = useRoleLoggedIn();
   const { allocRoundContext } = useContext(AllocRoundContext);
 
@@ -46,19 +44,18 @@ export default function SubjectView() {
     message: "This is an error alert — check it out!",
     severity: "error",
   });
-
-  const setShownSubject2 = (stateSubject) => {
-    setShownSubject(stateSubject);
-  };
-
-  Logger.debug("Initial state set.");
-
   const [pagination, setPagination] = useState({
     from: 0,
     to: pageSize,
   });
 
-  const getAllSubjects = async function () {
+  Logger.debug("Initial state set.");
+
+  const setShownSubject2 = (stateSubject) => {
+    setShownSubject(stateSubject);
+  };
+
+  const getAllSubjects = async () => {
     Logger.debug(
       "getAllSubjects: fetching all subjects in allocRound, from server.",
     );
@@ -79,11 +76,11 @@ export default function SubjectView() {
         `getAllSubjects: successfully fetched ${data.length} subjects.`,
       );
       setAllSubjectsList(data);
-      setPaginateSubjects(data.slice(0, 15));
+      setPaginateSubjects(data.slice(0, pageSize));
     }
   };
 
-  const getUserPrograms = async function () {
+  const getUserPrograms = async () => {
     const { httpStatus, data } = await dao.getProgramsByUserId(
       appContext.userId,
     );
@@ -154,7 +151,7 @@ export default function SubjectView() {
 
   useEffect(() => {
     Logger.debug("Running effect to update paginated subjects.");
-    setPaginateSubjects(allSubjectsList.slice(0, 15));
+    setPaginateSubjects(allSubjectsList.slice(0, pageSize));
   }, [allSubjectsList]);
 
   useEffect(() => {
@@ -221,6 +218,7 @@ export default function SubjectView() {
                 allSubjectsList={allSubjectsList}
                 paginateSubjects={paginateSubjects}
                 setPaginateSubjects={setPaginateSubjects}
+                pageSize={pageSize}
               />
             </CardContent>
           </Card>
