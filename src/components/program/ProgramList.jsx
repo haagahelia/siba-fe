@@ -173,7 +173,6 @@ export default function ProgramList({ getAllPrograms, allProgramsList }) {
           color="primary"
           onChange={handleChangePage}
           variant="outlined"
-          page={currentPage}
         />
       </div>
       <SingleProgramDialog
