@@ -29,7 +29,6 @@ export default function AllocRoundControlPanel({ incrementResetCounter }) {
     { header: "Program", key: "program", width: 20 },
     { header: "Lesson", key: "lesson", width: 20 },
     { header: "Room", key: "room", width: 20 },
-    { header: "Subject Id", key: "subjectId", width: 20 },
   ];
 
   const setDelayedClickedToggle = () => {
@@ -60,10 +59,6 @@ export default function AllocRoundControlPanel({ incrementResetCounter }) {
     const reportsheet = report.addWorksheet("Report");
     reportsheet.columns = sheetcolumns;
 
-    /*data.forEach((row) => {
-      reportsheet.addRow(row);
-    }); */
-
     for (const row of data) {
       reportsheet.addRow(row);
     }
@@ -79,7 +74,7 @@ export default function AllocRoundControlPanel({ incrementResetCounter }) {
 
       const blob = new Blob([buffer], { type: fileType });
 
-      saveAs(blob, `Report ${fileExtension}`);
+      saveAs(blob, `Allocated-Lessons${fileExtension}`);
       report.removeWorksheet(reportsheet.id);
     } catch (err) {
       console.log(`Could not download report: ${err}`);
@@ -104,9 +99,6 @@ export default function AllocRoundControlPanel({ incrementResetCounter }) {
     const plannersheet = plannerReport.addWorksheet("Planner");
     plannersheet.columns = sheetcolumns;
 
-    /*data.forEach((row) => {
-      plannersheet.addRow(row);
-    }); */
     for (const row of data) {
       plannersheet.addRow(row);
     }
@@ -122,7 +114,7 @@ export default function AllocRoundControlPanel({ incrementResetCounter }) {
 
       const blob = new Blob([buffer], { type: fileType });
 
-      saveAs(blob, `PlannerReport ${fileExtension}`);
+      saveAs(blob, `Your-Allocated-Lessons${fileExtension}`);
       plannerReport.removeWorksheet(plannersheet.id);
     } catch (err) {
       console.log(`Could not download report: ${err}`);
