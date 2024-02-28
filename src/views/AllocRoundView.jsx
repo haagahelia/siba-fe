@@ -51,7 +51,7 @@ export default function AllocRoundView() {
     }
     Logger.debug(`Fetched allocation rounds: ${data.length}`);
     setallAllocRoundsList(data);
-    setpaginateAllocRounds(allAllocRoundsList.slice(0, pageSize));
+    setpaginateAllocRounds(data.slice(0, pageSize));
   };
 
   const incrementDataModifiedCounter = () => {
