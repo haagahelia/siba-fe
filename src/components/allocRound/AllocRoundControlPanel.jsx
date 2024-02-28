@@ -1,8 +1,9 @@
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import useTheme from "@mui/material/styles/useTheme";
+import * as ExcelJS from "Exceljs";
+import { saveAs } from "file-saver";
 import { useContext, useState } from "react";
-import { CSVLink } from "react-csv";
 import { Link } from "react-router-dom";
 import { AllocRoundContext } from "../../AppContext";
 import dao from "../../ajax/dao";
@@ -21,15 +22,14 @@ export default function AllocRoundControlPanel({ incrementResetCounter }) {
   });
 
   const [isClicked, setIsClicked] = useState(true);
-  const fileName = "Allocation-Report";
-  const fileNamePlanner = "Allocation-Report-Department";
-  const [reportData, setReportData] = useState([]);
-  const [plannerData, setPlannerData] = useState([]);
-  const headers = [
-    { label: "Department", key: "department" },
-    { label: "Program", key: "program" },
-    { label: "Lesson", key: "lesson" },
-    { label: "Room", key: "room" },
+  const report = new ExcelJS.Workbook();
+  const plannerReport = new ExcelJS.Workbook();
+  const sheetcolumns = [
+    { header: "Department", key: "department", width: 20 },
+    { header: "Program", key: "program", width: 20 },
+    { header: "Lesson", key: "lesson", width: 20 },
+    { header: "Room", key: "room", width: 20 },
+    { header: "Subject Id", key: "subjectId", width: 20 },
   ];
 
   const setDelayedClickedToggle = () => {
@@ -43,9 +43,10 @@ export default function AllocRoundControlPanel({ incrementResetCounter }) {
     }, 3000);
   };
 
-  const getReportData = async () => {
-    const { success, data } = await dao.fetchReportData();
+  const getReportData = async (allocRoundId) => {
+    const { success, data } = await dao.fetchReportData(allocRoundId);
     console.log(success);
+    console.log(data);
     if (!success) {
       setAlertOptions({
         severity: "error",
@@ -56,14 +57,40 @@ export default function AllocRoundControlPanel({ incrementResetCounter }) {
 
       return;
     }
+    const reportsheet = report.addWorksheet("Report");
+    reportsheet.columns = sheetcolumns;
 
-    setReportData(data);
-    console.log(data);
+    /*data.forEach((row) => {
+      reportsheet.addRow(row);
+    }); */
+
+    for (const row of data) {
+      reportsheet.addRow(row);
+    }
+
+    reportsheet.getRow(1).eachCell((cell) => {
+      cell.font = { bold: true };
+    });
+    try {
+      const buffer = await report.xlsx.writeBuffer();
+      const fileType =
+        "application/vnd.openxmlformats-officedocument.sreadsheetml.sheet";
+      const fileExtension = ".xlsx";
+
+      const blob = new Blob([buffer], { type: fileType });
+
+      saveAs(blob, `Report ${fileExtension}`);
+      report.removeWorksheet(reportsheet.id);
+    } catch (err) {
+      console.log(`Could not download report: ${err}`);
+      report.removeWorksheet(reportsheet.id);
+    }
   };
 
-  const getPlannerData = async () => {
-    const { success, data } = await dao.fetchPlannerData();
-    console.log(success);
+  const getPlannerData = async (allocRoundId) => {
+    const { success, data } = await dao.fetchPlannerData(allocRoundId);
+
+    console.log(data);
     if (!success) {
       setAlertOptions({
         severity: "error",
@@ -74,9 +101,33 @@ export default function AllocRoundControlPanel({ incrementResetCounter }) {
 
       return;
     }
+    const plannersheet = plannerReport.addWorksheet("Planner");
+    plannersheet.columns = sheetcolumns;
 
-    setPlannerData(data);
-    console.log(data);
+    /*data.forEach((row) => {
+      plannersheet.addRow(row);
+    }); */
+    for (const row of data) {
+      plannersheet.addRow(row);
+    }
+
+    plannersheet.getRow(1).eachCell((cell) => {
+      cell.font = { bold: true };
+    });
+    try {
+      const buffer = await plannerReport.xlsx.writeBuffer();
+      const fileType =
+        "application/vnd.openxmlformats-officedocument.sreadsheetml.sheet";
+      const fileExtension = ".xlsx";
+
+      const blob = new Blob([buffer], { type: fileType });
+
+      saveAs(blob, `PlannerReport ${fileExtension}`);
+      plannerReport.removeWorksheet(plannersheet.id);
+    } catch (err) {
+      console.log(`Could not download report: ${err}`);
+      plannerReport.removeWorksheet(plannersheet.id);
+    }
   };
 
   return (
@@ -97,8 +148,6 @@ export default function AllocRoundControlPanel({ incrementResetCounter }) {
         onClick={() => {
           allocationPost.startAlloc(allocRoundContext.allocRoundId);
           setDelayedClickedToggle();
-          getReportData();
-          getPlannerData();
         }}
         disabled={isClicked}
       >
@@ -111,8 +160,6 @@ export default function AllocRoundControlPanel({ incrementResetCounter }) {
         onClick={() => {
           allocationPost.resetAlloc(allocRoundContext.allocRoundId);
           setDelayedClickedToggle();
-          getReportData();
-          getPlannerData();
         }}
         disabled={!isClicked}
       >
@@ -136,33 +183,23 @@ export default function AllocRoundControlPanel({ incrementResetCounter }) {
         variant="outlined"
         color="secondary"
         disabled={!isClicked}
+        onClick={() => {
+          getReportData(allocRoundContext.allocRoundId);
+          //downloadReport();
+        }}
       >
-        <CSVLink
-          headers={headers}
-          data={reportData}
-          filename={fileName}
-          separator={";"}
-          style={{ textDecoration: "none", color: "inherit" }}
-          disabled={!isClicked}
-        >
-          Download full report
-        </CSVLink>
+        Download full report
       </Button>
       <Button
         type="submit"
         variant="outlined"
         color="secondary"
         disabled={!isClicked}
+        onClick={() => {
+          getPlannerData(allocRoundContext.allocRoundId);
+        }}
       >
-        <CSVLink
-          headers={headers}
-          data={plannerData}
-          filename={fileNamePlanner}
-          style={{ textDecoration: "none", color: "inherit" }}
-          disabled={!isClicked}
-        >
-          Download Planner report
-        </CSVLink>
+        Download Planner report
       </Button>
     </Typography>
   );
