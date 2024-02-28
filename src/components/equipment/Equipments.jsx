@@ -1,5 +1,5 @@
 // The Equipment Page
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import {
   ajaxRequestErrorHandler,
   getFunctionName,
@@ -14,6 +14,7 @@ import CardContent from "@mui/material/CardContent";
 import CardHeader from "@mui/material/CardHeader";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
+import { AppContext } from "../../AppContext";
 import AddEquipment from "./AddEquipment";
 import EquipmentListContainer from "./EquipmentListContainer";
 
@@ -25,7 +26,7 @@ export default function Equipments() {
   const [equipmentList, setEquipmentList] = useState([]);
 
   const [page, setPage] = useState(1);
-  const rowsPerPage = 15;
+  const rowsPerPage = useContext(AppContext).settings.itemsPerPage;
   const startIndex = (page - 1) * rowsPerPage;
   const endIndex = startIndex + rowsPerPage;
   const currentData = equipmentList.slice(startIndex, endIndex);
@@ -42,7 +43,7 @@ export default function Equipments() {
   });
   const [/* alertOpen, */ setAlertOpen] = useState(false);
 
-  const getAllEquipments = async function () {
+  const getAllEquipments = async () => {
     Logger.debug("getAllEquipments: fetching all equipments from server.");
     const { httpStatus, data } = await dao.fetchEquipmentData();
     if (httpStatus !== 200) {
@@ -66,13 +67,13 @@ export default function Equipments() {
   }, []);
 
   useEffect(() => {
-    document.title = 'Equipment';
+    document.title = "Equipment";
   }, []);
 
   return (
     <div>
       <Container maxWidth="100%">
-        {(roles.admin === "1") && (
+        {roles.admin === "1" && (
           <AddEquipment getAllEquipments={getAllEquipments} />
         )}
         <Grid container rowSpacing={0.5}>

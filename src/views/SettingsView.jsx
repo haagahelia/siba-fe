@@ -24,6 +24,7 @@ export default function SettingsView() {
 
   const { roles } = useRoleLoggedIn();
   const appContext = useContext(AppContext);
+  const pageSize = appContext.settings.itemsPerPage;
 
   // State for checking if Settings card is expanded
   const [isCardExpanded, setIsCardExpanded] = useState(true);
@@ -51,7 +52,7 @@ export default function SettingsView() {
     } else {
       Logger.info(`Fetched ${data.length} settings.`);
       setSettings(data);
-      setPaginateSettings(settings.slice(0, 15));
+      setPaginateSettings(settings.slice(0, pageSize));
       handleSettings(data, appContext);
     }
   };
@@ -70,7 +71,7 @@ export default function SettingsView() {
   }, [dataModifiedCounter]);
 
   useEffect(() => {
-    setPaginateSettings(settings.slice(0, 15));
+    setPaginateSettings(settings.slice(0, pageSize));
   }, [settings]);
 
   useEffect(() => {

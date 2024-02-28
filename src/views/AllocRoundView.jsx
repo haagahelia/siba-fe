@@ -5,8 +5,9 @@ import CardHeader from "@mui/material/CardHeader";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import useTheme from "@mui/material/styles/useTheme";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { AppContext } from "../AppContext";
 import dao from "../ajax/dao";
 import AllocRoundListContainer from "../components/allocRound/AllocRoundListContainer";
 import AllocRoundPagination from "../components/allocRound/AllocRoundPagination";
@@ -14,13 +15,12 @@ import AlertBox from "../components/common/AlertBox";
 import { useRoleLoggedIn } from "../hooks/useRoleLoggedIn";
 import Logger from "../logger/logger";
 
-const pageSize = 15;
-
 export default function AllocRoundView() {
   Logger.logPrefix = "AllocRoundView";
   const { roles } = useRoleLoggedIn();
   const navigate = useNavigate();
   const theme = useTheme();
+  const pageSize = useContext(AppContext).settings.itemsPerPage;
 
   const [paginateAllocRounds, setpaginateAllocRounds] = useState([]);
   const [allAllocRoundsList, setallAllocRoundsList] = useState([]);
@@ -30,7 +30,6 @@ export default function AllocRoundView() {
     message: "This is an error alert — check it out!",
     severity: "error",
   });
-
   const [pagination, setPagination] = useState({
     from: 0,
     to: pageSize,
@@ -52,7 +51,7 @@ export default function AllocRoundView() {
     }
     Logger.debug(`Fetched allocation rounds: ${data.length}`);
     setallAllocRoundsList(data);
-    setpaginateAllocRounds(allAllocRoundsList.slice(0, 15));
+    setpaginateAllocRounds(allAllocRoundsList.slice(0, pageSize));
   };
 
   const incrementDataModifiedCounter = () => {
@@ -70,7 +69,7 @@ export default function AllocRoundView() {
   }, [dataModifiedCounter]);
 
   useEffect(() => {
-    setpaginateAllocRounds(allAllocRoundsList.slice(0, 15));
+    setpaginateAllocRounds(allAllocRoundsList.slice(0, pageSize));
   }, [allAllocRoundsList]);
 
   return (
@@ -108,6 +107,7 @@ export default function AllocRoundView() {
                 allAllocRoundsList={allAllocRoundsList}
                 paginateAllocRounds={paginateAllocRounds}
                 setPaginateAllocRounds={setpaginateAllocRounds}
+                pageSize={pageSize}
               />
             </CardContent>
           </Card>

@@ -2,13 +2,12 @@ import { useEffect } from "react";
 
 import Pagination from "@mui/material/Pagination";
 
-const pageSize = 15;
-
 export default function AllocRoundPagination({
   pagination,
   setPagination,
   allAllocRoundsList,
   setPaginateAllocRounds,
+  pageSize,
 }) {
   const count = Math.ceil(allAllocRoundsList.length / pageSize);
 
