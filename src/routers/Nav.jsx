@@ -198,7 +198,7 @@ export default function NavBar() {
 
   useEffect(() => {
     async function getAndHandleSettings() {
-      if (sibaPages[1].isLogin) {
+      if (appContext.sessionToken) {
         handleSettings(await getSettings(), appContext);
       }
     }

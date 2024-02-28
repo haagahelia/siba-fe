@@ -18,6 +18,8 @@ import Logger from "../logger/logger";
 
 export default function BuildingView() {
   const { roles } = useRoleLoggedIn();
+  const pageSize = useContext(AppContext).settings.itemsPerPage;
+
   const [paginateBuildings, setPaginateBuildings] = useState([]);
   const [allBuildingsList, setAllBuildingsList] = useState([]);
   const [alertOpen, setAlertOpen] = useState(false);
@@ -26,11 +28,9 @@ export default function BuildingView() {
     message: "This is an error alert — check it out!",
     severity: "error",
   });
-  const itemsPerPage = useContext(AppContext).settings.itemsPerPage;
-
   const [pagination, setPagination] = useState({
     from: 0,
-    to: itemsPerPage,
+    to: pageSize,
   });
 
   const getAllBuildings = async () => {
@@ -54,7 +54,7 @@ export default function BuildingView() {
   }, []);
 
   useEffect(() => {
-    setPaginateBuildings(allBuildingsList.slice(0, itemsPerPage));
+    setPaginateBuildings(allBuildingsList.slice(0, pageSize));
   }, [allBuildingsList]);
 
   useEffect(() => {
@@ -87,7 +87,7 @@ export default function BuildingView() {
                 allBuildingsList={allBuildingsList}
                 paginateBuildings={paginateBuildings}
                 setPaginateBuildings={setPaginateBuildings}
-                pageSize={itemsPerPage}
+                pageSize={pageSize}
               />
             </CardContent>
           </Card>
