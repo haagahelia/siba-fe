@@ -25,10 +25,10 @@ export default function AllocRoundControlPanel({ incrementResetCounter }) {
   const report = new ExcelJS.Workbook();
   const plannerReport = new ExcelJS.Workbook();
   const sheetcolumns = [
-    { header: "Department", key: "department", width: 20 },
-    { header: "Program", key: "program", width: 20 },
-    { header: "Lesson", key: "lesson", width: 20 },
-    { header: "Room", key: "room", width: 20 },
+    { header: "Department", key: "department", width: 35, height: 20 },
+    { header: "Program", key: "program", width: 45, height: 20 },
+    { header: "Lesson", key: "lesson", width: 53, height: 20 },
+    { header: "Room", key: "room", width: 35, height: 20 },
   ];
 
   const setDelayedClickedToggle = () => {
