@@ -35,7 +35,6 @@ export default function AllocRoundControlPanel({ incrementResetCounter }) {
       <Button
         type="submit"
         variant="contained"
-        style={{ color: theme.palette.primary.contrastText }}
         onClick={() => {
           allocationPost.startAlloc(allocRoundContext.allocRoundId);
           setDelayedClickedToggle();

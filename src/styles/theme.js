@@ -538,7 +538,12 @@ export const createAppTheme = (currentPalette) =>
             justifyContent: "center",
             button: {
               color: currentPalette.fontColorDefault.default,
-              borderColor: currentPalette.borderColor.main, // was "yellow"
+              borderColor: currentPalette.borderColor.main,
+            },
+            "& .MuiPaginationItem-page.Mui-selected": {
+              backgroundColor: `${currentPalette.primary.main}25`,
+              color: currentPalette.primary.main,
+              borderColor: currentPalette.primary.main,
             },
           },
         },
@@ -866,6 +871,9 @@ export const createAppTheme = (currentPalette) =>
         styleOverrides: {
           root: {
             color: currentPalette.infoIcon.main,
+            "&:hover": {
+              backgroundColor: `${currentPalette.primary.main}25`,
+            },
           },
         },
         variants: [

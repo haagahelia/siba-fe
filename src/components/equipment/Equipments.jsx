@@ -92,7 +92,6 @@ export default function Equipments() {
                 count={totalCount}
                 page={page}
                 onChange={handlePageChange}
-                color="primary"
                 variant="outlined"
               />
             </CardContent>

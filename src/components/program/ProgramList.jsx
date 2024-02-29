@@ -173,7 +173,6 @@ export default function ProgramList({ getAllPrograms, allProgramsList }) {
       <div>
         <Pagination
           count={Math.ceil(allProgramsList.length / pageSize)}
-          color="primary"
           onChange={handleChangePage}
           variant="outlined"
         />

@@ -35,7 +35,6 @@ export default function AlertBox({ alertOpen, alertOptions, setAlertOpen }) {
             <IconButton
               sx={{ alignSelf: "center" }}
               aria-label="sulje"
-              color="inherit"
               onClick={() => {
                 setAlertOpen(false);
               }}

@@ -67,7 +67,7 @@ export default function AllocationSubjectFailureView() {
     severity: "error",
   });
 
-  const getUnAlloc = async function (id) {
+  const getUnAlloc = async (id) => {
     Logger.debug(`(1) Alloc id for un allocable subjests: ${id}`);
     const { httpStatus, data } = await dao.getUnAllocableSubjects(id);
     if (httpStatus !== 200) {
@@ -83,7 +83,7 @@ export default function AllocationSubjectFailureView() {
     }
   };
 
-  const getUnAllocRooms = async function (id) {
+  const getUnAllocRooms = async (id) => {
     const { httpStatus, data } = await dao.getSubjectRooms(id);
     if (httpStatus !== 200) {
       ajaxRequestErrorHandler(
@@ -217,7 +217,6 @@ export default function AllocationSubjectFailureView() {
         </DialogTitle>
         <IconButton
           edge="end"
-          color="inherit"
           onClick={() => setOpen(false)}
           aria-label="close"
           style={{ position: "absolute", top: "10px", right: "20px" }}
