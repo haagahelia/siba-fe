@@ -37,7 +37,7 @@ export default function SingleSubjectDialog({
   const [programs, setPrograms] = useState([]);
 
   const { roles } = useRoleLoggedIn();
-  const getEquipmentsBySubId = async function (subjectId) {
+  const getEquipmentsBySubId = async (subjectId) => {
     const result = await dao.fetchEquipmentBySubjectId(subjectId);
     if (result.success === false) {
       setAlertOptions({
@@ -85,7 +85,6 @@ export default function SingleSubjectDialog({
         </DialogTitle>
         <IconButton
           edge="end"
-          color="inherit"
           onClick={() => {
             setOpen(false);
             Logger.debug("Closing SingleSubjectDialog from IconButton...");

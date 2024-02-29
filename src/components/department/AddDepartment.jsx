@@ -94,7 +94,6 @@ export default function AddDepartment({ getAllDepartments }) {
                 onClick={() => setIsCardExpanded(!isCardExpanded)}
                 aria-expanded={isCardExpanded}
                 aria-label="show more"
-                color="primary"
               >
                 {isCardExpanded ? <ExpandLessIcon /> : <ExpandMoreIcon />}
               </IconButton>

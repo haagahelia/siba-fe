@@ -180,7 +180,6 @@ export default function AddProgramContainer({
                 onClick={() => setIsCardExpanded(!isCardExpanded)}
                 aria-expanded={isCardExpanded}
                 aria-label="expand/collapse"
-                color="primary"
               >
                 {isCardExpanded ? <ExpandLessIcon /> : <ExpandMoreIcon />}
               </IconButton>

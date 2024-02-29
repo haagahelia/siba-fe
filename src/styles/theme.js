@@ -871,6 +871,9 @@ export const createAppTheme = (currentPalette) =>
         styleOverrides: {
           root: {
             color: currentPalette.infoIcon.main,
+            "&:hover": {
+              backgroundColor: `${currentPalette.primary.main}25`,
+            },
           },
         },
         variants: [
