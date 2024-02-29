@@ -47,7 +47,7 @@ export default function AllocRoundControlPanel({ incrementResetCounter }) {
       <Button
         type="submit"
         variant="contained"
-        color="red"
+        style={theme.components.MuiButton.redbutton}
         onClick={() => {
           allocationPost.resetAlloc(allocRoundContext.allocRoundId);
           setDelayedClickedToggle();
