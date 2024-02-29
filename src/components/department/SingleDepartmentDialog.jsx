@@ -51,7 +51,7 @@ export default function SingleDepartmentDialog({
       fetchNumberOfPrograms(singleDepartment.id)
         .then((data) => {
           setNumberOfPrograms(data);
-          console.log(data);
+          Logger.debug(data);
         })
         .catch((error) => {
           Logger.error(error);
@@ -113,8 +113,8 @@ export default function SingleDepartmentDialog({
             ? numberOfPrograms === 0
               ? "There are no programs in this department."
               : numberOfPrograms === 1
-                ? "There is 1 programs in this department."
-                : `There are ${numberOfPrograms} program in this department.`
+                ? "There is 1 program in this department."
+                : `There are ${numberOfPrograms} programs in this department.`
             : "Loading..."}
         </Typography>
       </DialogContent>
