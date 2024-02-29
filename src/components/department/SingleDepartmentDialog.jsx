@@ -33,9 +33,11 @@ export default function SingleDepartmentDialog({
   // Fetches the number of programs for the department with the given id.
   const fetchNumberOfPrograms = async () => {
     const response = await dao.getNumberOfPrograms(singleDepartment?.id);
-    const num = response;
-    const value = num["count(*)"];
-    return value;
+    if (response === null) {
+      return "Error fetching number of programs";
+    }
+    const programCount = response["count(*)"];
+    return programCount;
   };
 
   // Fetches the department id for the dialog.
@@ -47,13 +49,13 @@ export default function SingleDepartmentDialog({
         )}`,
       );
       fetchNumberOfPrograms(singleDepartment.id)
-        .then((number) => {
-          setNumberOfPrograms(number);
-          Logger.debug("Number of programs:", number);
+        .then((data) => {
+          setNumberOfPrograms(data);
+          console.log(data);
         })
-        .catch((error) =>
-          Logger.error("Error fetching the number of programs:", error),
-        );
+        .catch((error) => {
+          Logger.error(error);
+        });
     }
   }, [open, singleDepartment]);
 
