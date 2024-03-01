@@ -1,7 +1,5 @@
 export const getReportData = async (allocRoundId, report, sheetcolumns) => {
   const { success, data } = await dao.fetchReportData(allocRoundId);
-  console.log(success);
-  console.log(data);
   if (!success) {
     setAlertOptions({
       severity: "error",

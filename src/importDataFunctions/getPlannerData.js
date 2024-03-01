@@ -1,7 +1,5 @@
 const getPlannerData = async (allocRoundId, sheetcolumns, plannerReport) => {
   const { success, data } = await dao.fetchPlannerData(allocRoundId);
-
-  console.log(data);
   if (!success) {
     setAlertOptions({
       severity: "error",
