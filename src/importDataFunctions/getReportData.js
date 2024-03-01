@@ -1,4 +1,12 @@
-export const getReportData = async (allocRoundId, report, sheetcolumns) => {
+import * as ExcelJS from "Exceljs";
+import dao from "../ajax/dao";
+
+export const getReportData = async (
+  allocRoundId,
+  sheetcolumns,
+  saveAs,
+  setAlertOptions,
+) => {
   const { success, data } = await dao.fetchReportData(allocRoundId);
   if (!success) {
     setAlertOptions({
@@ -10,6 +18,7 @@ export const getReportData = async (allocRoundId, report, sheetcolumns) => {
 
     return;
   }
+  const report = new ExcelJS.Workbook();
   const reportsheet = report.addWorksheet("Report");
   reportsheet.columns = sheetcolumns;
 

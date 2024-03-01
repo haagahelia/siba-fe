@@ -1,12 +1,10 @@
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import useTheme from "@mui/material/styles/useTheme";
-import * as ExcelJS from "Exceljs";
 import { saveAs } from "file-saver";
 import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { AllocRoundContext } from "../../AppContext";
-import dao from "../../ajax/dao";
 import allocationPost from "../../data/ResultAllocationStore";
 import { getPlannerData } from "../../importDataFunctions/getPlannerData";
 import { getReportData } from "../../importDataFunctions/getReportData";
@@ -24,13 +22,12 @@ export default function AllocRoundControlPanel({ incrementResetCounter }) {
   });
 
   const [isClicked, setIsClicked] = useState(true);
-  const report = new ExcelJS.Workbook();
-  const plannerReport = new ExcelJS.Workbook();
   const sheetcolumns = [
     { header: "Department", key: "department", width: 35, height: 20 },
     { header: "Program", key: "program", width: 45, height: 20 },
     { header: "Lesson", key: "lesson", width: 53, height: 20 },
     { header: "Room", key: "room", width: 35, height: 20 },
+    { header: "Allocated Hours", key: "hours", width: 20, height: 20 },
   ];
 
   const setDelayedClickedToggle = () => {
@@ -97,7 +94,12 @@ export default function AllocRoundControlPanel({ incrementResetCounter }) {
         color="secondary"
         disabled={!isClicked}
         onClick={() => {
-          getReportData(allocRoundContext.allocRoundId, report, sheetcolumns);
+          getReportData(
+            allocRoundContext.allocRoundId,
+            sheetcolumns,
+            saveAs,
+            setAlertOptions,
+          );
           //downloadReport();
         }}
       >
@@ -111,8 +113,9 @@ export default function AllocRoundControlPanel({ incrementResetCounter }) {
         onClick={() => {
           getPlannerData(
             allocRoundContext.allocRoundId,
-            plannerReport,
             sheetcolumns,
+            saveAs,
+            setAlertOptions,
           );
         }}
       >

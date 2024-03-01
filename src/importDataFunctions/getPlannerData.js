@@ -1,4 +1,12 @@
-const getPlannerData = async (allocRoundId, sheetcolumns, plannerReport) => {
+import * as ExcelJS from "Exceljs";
+import dao from "../ajax/dao";
+
+export const getPlannerData = async (
+  allocRoundId,
+  sheetcolumns,
+  saveAs,
+  setAlertOptions,
+) => {
   const { success, data } = await dao.fetchPlannerData(allocRoundId);
   if (!success) {
     setAlertOptions({
@@ -10,6 +18,7 @@ const getPlannerData = async (allocRoundId, sheetcolumns, plannerReport) => {
 
     return;
   }
+  const plannerReport = new ExcelJS.Workbook();
   const plannersheet = plannerReport.addWorksheet("Planner");
   plannersheet.columns = sheetcolumns;
 
