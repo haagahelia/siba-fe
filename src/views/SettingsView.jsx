@@ -1,5 +1,5 @@
 // The Settings Page
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import {
   ajaxRequestErrorHandler,
   getFunctionName,
@@ -13,14 +13,18 @@ import CardContent from "@mui/material/CardContent";
 import CardHeader from "@mui/material/CardHeader";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
+import { AppContext } from "../AppContext";
 import AlertBox from "../components/common/AlertBox";
 import AddSettingContainer from "../components/settings/AddSettingContainer";
 import SettingsListContainer from "../components/settings/SettingsListContainer";
+import { handleSettings } from "../setting/handleSettings";
 
 export default function SettingsView() {
   Logger.logPrefix = "SettingsView";
 
   const { roles } = useRoleLoggedIn();
+  const appContext = useContext(AppContext);
+  const pageSize = appContext.settings.itemsPerPage;
 
   // State for checking if Settings card is expanded
   const [isCardExpanded, setIsCardExpanded] = useState(true);
@@ -34,7 +38,7 @@ export default function SettingsView() {
     severity: "error",
   });
 
-  const getAllSettings = async function () {
+  const getAllSettings = async () => {
     Logger.debug("Fetching all settings");
     const { httpStatus, data } = await dao.fetchSettings();
     if (httpStatus !== 200) {
@@ -48,7 +52,8 @@ export default function SettingsView() {
     } else {
       Logger.info(`Fetched ${data.length} settings.`);
       setSettings(data);
-      setPaginateSettings(settings.slice(0, 15));
+      setPaginateSettings(settings.slice(0, pageSize));
+      handleSettings(data, appContext);
     }
   };
 
@@ -66,7 +71,7 @@ export default function SettingsView() {
   }, [dataModifiedCounter]);
 
   useEffect(() => {
-    setPaginateSettings(settings.slice(0, 15));
+    setPaginateSettings(settings.slice(0, pageSize));
   }, [settings]);
 
   useEffect(() => {

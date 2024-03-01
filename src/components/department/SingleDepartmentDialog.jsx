@@ -33,9 +33,11 @@ export default function SingleDepartmentDialog({
   // Fetches the number of programs for the department with the given id.
   const fetchNumberOfPrograms = async () => {
     const response = await dao.getNumberOfPrograms(singleDepartment?.id);
-    const num = response;
-    const value = num["count(*)"];
-    return value;
+    if (response === null) {
+      return "Error fetching number of programs";
+    }
+    const programCount = response["count(*)"];
+    return programCount;
   };
 
   // Fetches the department id for the dialog.
@@ -47,13 +49,13 @@ export default function SingleDepartmentDialog({
         )}`,
       );
       fetchNumberOfPrograms(singleDepartment.id)
-        .then((number) => {
-          setNumberOfPrograms(number);
-          Logger.debug("Number of programs:", number);
+        .then((data) => {
+          setNumberOfPrograms(data);
+          Logger.debug(data);
         })
-        .catch((error) =>
-          Logger.error("Error fetching the number of programs:", error),
-        );
+        .catch((error) => {
+          Logger.error(error);
+        });
     }
   }, [open, singleDepartment]);
 
@@ -92,7 +94,6 @@ export default function SingleDepartmentDialog({
       </DialogTitle>
       <IconButton
         edge="end"
-        color="inherit"
         onClick={() => setOpen(false)}
         aria-label="close"
         style={{ position: "absolute", top: "10px", right: "20px" }}
@@ -112,8 +113,8 @@ export default function SingleDepartmentDialog({
             ? numberOfPrograms === 0
               ? "There are no programs in this department."
               : numberOfPrograms === 1
-                ? "There is 1 programs in this department."
-                : `There are ${numberOfPrograms} program in this department.`
+                ? "There is 1 program in this department."
+                : `There are ${numberOfPrograms} programs in this department.`
             : "Loading..."}
         </Typography>
       </DialogContent>

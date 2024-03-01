@@ -34,7 +34,7 @@ export default function SingleSpaceDialog({
 
   const { roles } = useRoleLoggedIn();
 
-  const getEquipmentsBySpaceId = async function (spaceId) {
+  const getEquipmentsBySpaceId = async (spaceId) => {
     const result = await dao.fetchEquipmentBySpaceId(spaceId);
     if (result.success === false) {
       setAlertOptions({
@@ -80,7 +80,6 @@ export default function SingleSpaceDialog({
         <DialogTitle id="dialog-title">Space: {singleSpace?.name}</DialogTitle>
         <IconButton
           edge="end"
-          color="inherit"
           onClick={() => setOpen(false)}
           aria-label="close"
           style={{ position: "absolute", top: "10px", right: "20px" }}

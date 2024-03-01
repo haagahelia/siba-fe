@@ -1,14 +1,12 @@
-import { useEffect } from "react";
-
 import Pagination from "@mui/material/Pagination";
-
-const pageSize = 15;
+import { useEffect } from "react";
 
 export default function SpacePagination({
   pagination,
   setPagination,
   allSpacesList,
   setPaginateSpaces,
+  pageSize,
 }) {
   const count = Math.ceil(allSpacesList.length / pageSize);
 
@@ -26,11 +24,6 @@ export default function SpacePagination({
   };
 
   return (
-    <Pagination
-      count={count}
-      color="primary"
-      onChange={handleChange}
-      variant="outlined"
-    />
+    <Pagination count={count} onChange={handleChange} variant="outlined" />
   );
 }

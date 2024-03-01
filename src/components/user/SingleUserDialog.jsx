@@ -2,15 +2,15 @@ import { useEffect, useState } from "react";
 import dao from "../../ajax/dao";
 import { useRoleLoggedIn } from "../../hooks/useRoleLoggedIn";
 
+import CloseIcon from "@mui/icons-material/Close";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import Grid from "@mui/material/Grid";
+import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import AlertBox from "../common/AlertBox";
-import CloseIcon from "@mui/icons-material/Close";
-import IconButton from "@mui/material/IconButton";
 import AddDepartmentPlannerContainer from "./AddDepartmentPlannerContainer";
 import DeleteUser from "./DeleteUser";
 import EditUserContainer from "./EditUserContainer";
@@ -31,7 +31,7 @@ export default function SingleUserDialog({
     severity: "error",
   });
 
-  const getDepartmentListByUserId = async function (userId) {
+  const getDepartmentListByUserId = async (userId) => {
     const result = await dao.fetchDepartmentplannerByUserId(userId);
     if (result.success === false) {
       setAlertOptions({
@@ -61,11 +61,15 @@ export default function SingleUserDialog({
         alertOptions={alertOptions}
         open={setAlertOpen}
       />
-      <Dialog open={open} onClose={() => setOpen(false)} maxWidth="md" fullWidth>
+      <Dialog
+        open={open}
+        onClose={() => setOpen(false)}
+        maxWidth="md"
+        fullWidth
+      >
         <DialogTitle id="dialog-title">User: {singleUser?.email}</DialogTitle>
         <IconButton
           edge="end"
-          color="inherit"
           onClick={() => setOpen(false)}
           aria-label="close"
           style={{ position: "absolute", top: "10px", right: "20px" }}
@@ -73,31 +77,27 @@ export default function SingleUserDialog({
           <CloseIcon />
         </IconButton>
         <DialogContent>
-        {roles.admin === "1" && (
-          <DialogActions>
-            <DeleteUser
-              singleUser={singleUser}
-              getAllUsers={getAllUsers}
-              setOpen={setOpen}
-            />
-            <EditUserContainer
-              singleUser={singleUser}
-              getAllUsers={getAllUsers}
-              setSingleUser={setSingleUser}
-            />
-            <AddDepartmentPlannerContainer
-              singleUser={singleUser}
-              getDeparmentsByUserId={getDepartmentListByUserId}
-              getAllUsers={getAllUsers}
-            />
-          </DialogActions>
+          {roles.admin === "1" && (
+            <DialogActions>
+              <DeleteUser
+                singleUser={singleUser}
+                getAllUsers={getAllUsers}
+                setOpen={setOpen}
+              />
+              <EditUserContainer
+                singleUser={singleUser}
+                getAllUsers={getAllUsers}
+                setSingleUser={setSingleUser}
+              />
+              <AddDepartmentPlannerContainer
+                singleUser={singleUser}
+                getDeparmentsByUserId={getDepartmentListByUserId}
+                getAllUsers={getAllUsers}
+              />
+            </DialogActions>
           )}
           <DialogContent>
-            <Grid
-              container
-              variant="sibaGridSingleItemDisplay"
-              column={14}
-            >
+            <Grid container variant="sibaGridSingleItemDisplay" column={14}>
               <DialogContent variant="sibaDialogContent2">
                 <Grid item xs={12} sm={6}>
                   <Typography variant="singleDialogSubtitle">

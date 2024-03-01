@@ -2,13 +2,12 @@ import { useEffect, useState } from "react";
 
 import Pagination from "@mui/material/Pagination";
 
-const pageSize = 15;
-
 export default function UserPagination({
   pagination,
   setPagination,
   allUsersList,
   setPaginateUsers,
+  pageSize,
 }) {
   const count = Math.ceil(allUsersList.length / pageSize);
   const [initialRender, setInitialRender] = useState(true);
@@ -29,11 +28,6 @@ export default function UserPagination({
   };
 
   return (
-    <Pagination
-      count={count}
-      color="primary"
-      onChange={handleChange}
-      variant="outlined"
-    />
+    <Pagination count={count} onChange={handleChange} variant="outlined" />
   );
 }

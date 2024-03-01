@@ -188,7 +188,6 @@ export default function AddSpace({ getAllSpaces }) {
                 onClick={() => setIsCardExpanded(!isCardExpanded)}
                 aria-expanded={isCardExpanded}
                 aria-label="expand/collapse"
-                color="primary"
               >
                 {isCardExpanded ? <ExpandLessIcon /> : <ExpandMoreIcon />}
               </IconButton>

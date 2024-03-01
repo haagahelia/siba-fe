@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import {
   ajaxRequestErrorHandler,
   getFunctionName,
@@ -14,6 +14,7 @@ import CardContent from "@mui/material/CardContent";
 import CardHeader from "@mui/material/CardHeader";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
+import { AppContext } from "../../AppContext";
 import AddDepartment from "./AddDepartment";
 import DepartmentListContainer from "./DepartmentListContainer";
 
@@ -25,7 +26,7 @@ export default function Departments() {
   const [departmentList, setDepartmentList] = useState([]);
 
   const [page, setPage] = useState(1);
-  const rowsPerPage = 15;
+  const rowsPerPage = useContext(AppContext).settings.itemsPerPage;
   const startIndex = (page - 1) * rowsPerPage;
   const endIndex = startIndex + rowsPerPage;
   const currentData = departmentList.slice(startIndex, endIndex);
@@ -42,7 +43,7 @@ export default function Departments() {
   });
   const [/* alertOpen, */ setAlertOpen] = useState(false);
 
-  const getAllDepartments = async function () {
+  const getAllDepartments = async () => {
     Logger.debug("getAllDepartments: fetching all departments from server.");
     const { httpStatus, data } = await dao.fetchAllDepartmentData();
     if (httpStatus !== 200) {

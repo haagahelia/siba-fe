@@ -51,7 +51,7 @@ export default function EditBuildingForm({ formik }) {
                 formik.resetForm();
               }}
               variant="contained"
-              color="red"
+              style={theme.components.MuiButton.redbutton}
             >
               Cancel
             </Button>

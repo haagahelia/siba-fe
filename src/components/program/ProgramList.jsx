@@ -13,17 +13,20 @@ import TableRow from "@mui/material/TableRow";
 import TableSortLabel from "@mui/material/TableSortLabel";
 import TextField from "@mui/material/TextField";
 import styled from "@mui/material/styles/styled";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { AppContext } from "../../AppContext";
 import SingleProgramDialog from "./SingleProgramDialog";
 
 export default function ProgramList({ getAllPrograms, allProgramsList }) {
+  const pageSize = useContext(AppContext).settings.itemsPerPage;
+
   const [openDialog, setOpenDialog] = useState(false);
   const [selectedProgram, setSelectedProgram] = useState(null);
   const [order, setOrder] = useState("asc");
   const [orderBy, setOrderBy] = useState("name");
   const [searched, setSearched] = useState("");
   const [paginatedPrograms, setPaginatedPrograms] = useState([]);
-  const [pagination, setPagination] = useState({ from: 0, to: 15 });
+  const [pagination, setPagination] = useState({ from: 0, to: pageSize });
   const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
@@ -72,7 +75,7 @@ export default function ProgramList({ getAllPrograms, allProgramsList }) {
     setOrderBy(property);
 
     // Reset pagination when sorting criteria change
-    setPagination({ from: 0, to: 15 });
+    setPagination({ from: 0, to: pageSize });
   };
 
   const handleSearch = (e) => {
@@ -80,12 +83,12 @@ export default function ProgramList({ getAllPrograms, allProgramsList }) {
     setSearched(searchText);
 
     // Reset pagination when search criteria change
-    setPagination({ from: 0, to: 15 });
+    setPagination({ from: 0, to: pageSize });
   };
 
   const handleChangePage = (e, p) => {
-    const from = (p - 1) * 15;
-    const to = (p - 1) * 15 + 15;
+    const from = (p - 1) * pageSize;
+    const to = (p - 1) * pageSize + pageSize;
     setPagination({ from, to });
     setCurrentPage(p);
   };
@@ -169,8 +172,7 @@ export default function ProgramList({ getAllPrograms, allProgramsList }) {
       </Paper>
       <div>
         <Pagination
-          count={Math.ceil(allProgramsList.length / 15)}
-          color="primary"
+          count={Math.ceil(allProgramsList.length / pageSize)}
           onChange={handleChangePage}
           variant="outlined"
         />

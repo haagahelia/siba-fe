@@ -14,19 +14,18 @@ import CardContent from "@mui/material/CardContent";
 import CardHeader from "@mui/material/CardHeader";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
-import Typography from "@mui/material/Typography";
 import AlertBox from "../components/common/AlertBox";
 import AddProgramContainer from "../components/program/AddProgramContainer";
 import ProgramListContainer from "../components/program/ProgramListContainer";
-
-const pageSize = 15;
 
 export default function ProgramView() {
   Logger.logPrefix = "ProgramView";
   Logger.debug("ProgramView component instantiated.");
 
-  const appContext = useContext(AppContext);
   const { roles } = useRoleLoggedIn();
+  const appContext = useContext(AppContext);
+  const pageSize = appContext.settings.itemsPerPage;
+
   const [paginatePrograms, setPaginatePrograms] = useState([]);
   const [allProgramsList, setAllProgramsList] = useState([]);
   const [alertOpen, setAlertOpen] = useState(false);
@@ -35,13 +34,12 @@ export default function ProgramView() {
     message: "This is an error alert — check it out!",
     severity: "error",
   });
-
-  Logger.debug("Initial state set.");
-
   const [pagination, setPagination] = useState({
     from: 0,
     to: pageSize,
   });
+
+  Logger.debug("Initial state set.");
 
   const getAllPrograms = async () => {
     Logger.debug("getAllPrograms: fetching all programs from server.");
