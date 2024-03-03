@@ -102,7 +102,7 @@ export default function DeleteBuilding({
               disabled
               style={{ ...theme.components.MuiButton.redbutton, opacity: 0.5 }}
             >
-              Delete (Spaces Present)
+              {`This building has ${spaceNames.length} space(s)`}
             </Button>
           </span>
         </Tooltip>
