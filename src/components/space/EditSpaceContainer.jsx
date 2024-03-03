@@ -80,7 +80,7 @@ export default function EditSpaceContainer({
     getAllSpaces();
   }
 
-  const getBuildingsForSelect = async function () {
+  const getBuildingsForSelect = async () => {
     const { httpStatus, data } = await dao.fetchAllBuildings();
     if (httpStatus !== 200) {
       ajaxRequestErrorHandler(
@@ -98,8 +98,8 @@ export default function EditSpaceContainer({
     getBuildingsForSelect();
   }, []);
 
-  const getSpaceTypesForSelect = async function () {
-    const { httpStatus, data } = await dao.fetchSpacetypeForSelect();
+  const getSpaceTypesForSelect = async () => {
+    const { httpStatus, data } = await dao.fetchAllSpaceTypes();
     if (httpStatus !== 200) {
       ajaxRequestErrorHandler(
         httpStatus,

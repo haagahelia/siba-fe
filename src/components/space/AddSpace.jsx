@@ -122,7 +122,7 @@ export default function AddSpace({ getAllSpaces }) {
     Logger.debug(
       "getSpaceTypesForSelect: fetching all Space Types for select from server.",
     );
-    const { httpStatus, data } = await dao.fetchSpacetypeForSelect();
+    const { httpStatus, data } = await dao.fetchAllSpaceTypes();
     if (httpStatus !== 200) {
       ajaxRequestErrorHandler(
         httpStatus,
