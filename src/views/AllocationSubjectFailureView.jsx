@@ -243,67 +243,73 @@ export default function AllocationSubjectFailureView() {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {unAllocSubjectRooms.map((row) => (
-                  <TableRow key={row.id}>
-                    <TableCell>
-                      <Link
-                        style={theme.components.Links}
-                        to={`/space/${row.id}`}
-                      >{`${row.name}`}</Link>
-                    </TableCell>
+                {unAllocSubjectRooms && unAllocSubjectRooms.length > 0 ? (
+                  unAllocSubjectRooms.map((row) => (
+                    <TableRow key={row.id}>
+                      <TableCell>
+                        <Link
+                          style={theme.components.Links}
+                          to={`/space/${row.id}`}
+                        >{`${row.name}`}</Link>
+                      </TableCell>
 
-                    <GetMissingEquipment
-                      subjId={currSubjId}
-                      roomId={row.id}
-                      missingEquipmentCount={row.missingItems}
-                    />
-                    <Tooltip
-                      disableFocusListener
-                      title={`${row.area} m2 (Required: ${unAllocSubject.area} m2)`}
-                    >
-                      {row.areaOk === 0 ? (
-                        <TableCell>
-                          <CloseIcon color="error" />
-                        </TableCell>
-                      ) : (
-                        <TableCell>
-                          <CheckIcon color="success" />
-                        </TableCell>
-                      )}
-                    </Tooltip>
-                    <Tooltip
-                      disableFocusListener
-                      title={`${row.personLimit} persons (required: ${unAllocSubject.groupSize} )`}
-                    >
-                      {row.personLimitOk === 0 ? (
-                        <TableCell>
-                          <CloseIcon color="error" />
-                        </TableCell>
-                      ) : (
-                        <TableCell>
-                          <CheckIcon color="success" />
-                        </TableCell>
-                      )}
-                    </Tooltip>
-                    <Tooltip
-                      disableFocusListener
-                      title={`${row.spaceType} (required: ${getNameForId(
-                        spaceNamesArray,
-                        unAllocSubject.spaceTypeId,
-                      )})`}
-                    >
-                      {row.spaceTypeOk === 0 ? (
-                        <TableCell>
-                          <CloseIcon color="error" />
-                        </TableCell>
-                      ) : (
-                        <TableCell>
-                          <CheckIcon color="success" />
-                        </TableCell>
-                      )}
-                    </Tooltip>
-                  </TableRow>
-                ))}
+                      <GetMissingEquipment
+                        subjId={currSubjId}
+                        roomId={row.id}
+                        missingEquipmentCount={row.missingItems}
+                      />
+                      <Tooltip
+                        disableFocusListener
+                        title={`${row.area} m2 (Required: ${unAllocSubject.area} m2)`}
+                      >
+                        {row.areaOk === 0 ? (
+                          <TableCell>
+                            <CloseIcon color="error" />
+                          </TableCell>
+                        ) : (
+                          <TableCell>
+                            <CheckIcon color="success" />
+                          </TableCell>
+                        )}
+                      </Tooltip>
+                      <Tooltip
+                        disableFocusListener
+                        title={`${row.personLimit} persons (required: ${unAllocSubject.groupSize} )`}
+                      >
+                        {row.personLimitOk === 0 ? (
+                          <TableCell>
+                            <CloseIcon color="error" />
+                          </TableCell>
+                        ) : (
+                          <TableCell>
+                            <CheckIcon color="success" />
+                          </TableCell>
+                        )}
+                      </Tooltip>
+                      <Tooltip
+                        disableFocusListener
+                        title={`${row.spaceType} (required: ${getNameForId(
+                          spaceNamesArray,
+                          unAllocSubject.spaceTypeId,
+                        )})`}
+                      >
+                        {row.spaceTypeOk === 0 ? (
+                          <TableCell>
+                            <CloseIcon color="error" />
+                          </TableCell>
+                        ) : (
+                          <TableCell>
+                            <CheckIcon color="success" />
+                          </TableCell>
+                        )}
+                      </Tooltip>
+                    </TableRow>
+                  ))
+                ) : (
+                  <tr>
+                    <td>"No rooms yet"</td>
+                  </tr>
+                )}
               </TableBody>
             </Table>
           </TableContainer>
