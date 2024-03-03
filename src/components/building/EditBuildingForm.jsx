@@ -1,5 +1,3 @@
-import { useState } from "react";
-
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
@@ -7,12 +5,24 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import Grid from "@mui/material/Grid";
 import useTheme from "@mui/material/styles/useTheme";
+import React, { useState } from "react";
 import BuildingInputFields from "./BuildingInputFields";
 
 export default function EditBuildingForm({ formik }) {
   const [open, setOpen] = useState(false);
+  const [buildingNameError, setBuildingNameError] = useState("");
 
   const theme = useTheme();
+
+  const handleSubmit = () => {
+    if (!formik.values.name.trim()) {
+      setBuildingNameError("Building name cannot be empty");
+    } else {
+      setBuildingNameError("");
+      setOpen(false);
+      formik.handleSubmit();
+    }
+  };
 
   return (
     <div>
@@ -26,11 +36,12 @@ export default function EditBuildingForm({ formik }) {
         Edit
       </Button>
       <Dialog open={open}>
-        <form onSubmit={formik.handleSubmit}>
-          {/* formik.initialValues?.name} Here ? checks
-              if the name attribute can be found
-              in the initialValues object,
-              if not found returns undefinef and does not crash */}
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            handleSubmit();
+          }}
+        >
           <DialogTitle>Edit: {formik.initialValues?.name}</DialogTitle>
           <DialogContent>
             <Grid
@@ -41,6 +52,9 @@ export default function EditBuildingForm({ formik }) {
               column={7}
             >
               <BuildingInputFields formik={formik} />
+              {buildingNameError && (
+                <p style={{ color: "red" }}>{buildingNameError}</p>
+              )}
             </Grid>
           </DialogContent>
           <DialogActions sx={{ justifyContent: "space-evenly" }}>
@@ -55,13 +69,7 @@ export default function EditBuildingForm({ formik }) {
             >
               Cancel
             </Button>
-            <Button
-              type="submit"
-              variant="contained"
-              onClick={() => {
-                setOpen(false);
-              }}
-            >
+            <Button type="submit" variant="contained" onClick={handleSubmit}>
               Continue
             </Button>
           </DialogActions>
