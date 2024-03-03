@@ -79,7 +79,7 @@ export default function CollapsedRowB({ id }) {
                     marginTop: margins.small,
                   }}
                 >
-                  {subject.totalTime}
+                  {subject.totalTime} h
                 </Typography>
               </Grid2>
             </Grid2>
