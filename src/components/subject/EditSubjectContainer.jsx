@@ -87,7 +87,7 @@ export default function EditSubjectContainer({
     getAllSubjects();
   }
 
-  const getProgramsForSelect = async function () {
+  const getProgramsForSelect = async () => {
     const { httpStatus, data } = await dao.fetchProgramsWithDepartments();
     if (httpStatus !== 200) {
       ajaxRequestErrorHandler(
@@ -105,8 +105,8 @@ export default function EditSubjectContainer({
     getProgramsForSelect();
   }, []);
 
-  const getSpaceTypesForSelect = async function () {
-    const { httpStatus, data } = await dao.fetchSpacetypeForSelect();
+  const getSpaceTypesForSelect = async () => {
+    const { httpStatus, data } = await dao.fetchAllSpaceTypes();
     if (httpStatus !== 200) {
       ajaxRequestErrorHandler(
         httpStatus,

@@ -114,7 +114,7 @@ export default function AllocationSubjectFailureView() {
       setUnAllocSubject(response2.data[0]);
     }
 
-    const response3 = await dao.fetchSpacetypeForSelect();
+    const response3 = await dao.fetchAllSpaceTypes();
     if (response3.httpStatus !== 200) {
       ajaxRequestErrorHandler(
         response3.httpStatus,
