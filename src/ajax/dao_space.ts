@@ -100,3 +100,20 @@ export const fetchSpacesByBuildingId = async (buildingId: number) => {
     return { httpStatus: 500, data: [] };
   }
 };
+
+// Function to fetch spaces by SpaceType ID
+export const fetchSpacesBySpaceTypeId = async (spaceTypeId: number) => {
+  try {
+    const response = await get(`${baseUrl}/space/bySpaceType/${spaceTypeId}`);
+    if (response.status === 200) {
+      const spaces = await response.json();
+      return { httpStatus: response.status, data: spaces };
+    } else {
+      console.error("Failed to fetch spaces for space type ID:", spaceTypeId);
+      return { httpStatus: response.status, data: [] };
+    }
+  } catch (error) {
+    console.error("Error fetching spaces by space type ID:", error);
+    return { httpStatus: 500, data: [] };
+  }
+};
