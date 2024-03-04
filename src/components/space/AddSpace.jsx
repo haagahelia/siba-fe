@@ -19,6 +19,7 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import TextField from "@mui/material/TextField";
+import { capitalizeFirstLetter } from "../../validation/ValidationUtilities";
 import AlertBox from "../common/AlertBox";
 import ConfirmationDialog from "../common/ConfirmationDialog";
 import AddSpaceDialogConfirmation from "./AddSpaceDialogConfirmation";
@@ -74,6 +75,7 @@ export default function AddSpace({ getAllSpaces }) {
   });
 
   const addSingleSpace = async (spaceData) => {
+    spaceData.name = capitalizeFirstLetter(spaceData.name);
     const success = await dao.postNewSpace(space);
     if (!success) {
       setAlertOptions({
