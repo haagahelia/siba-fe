@@ -35,7 +35,7 @@ export default function DeleteSpace({ singleSpace, getAllSpaces, setOpen }) {
     setAlertOptions({
       severity: "success",
       title: "Success!",
-      message: `${spaceData.name} removed successfully.`,
+      message: `${spaceData.name} deleted successfully.`,
     });
     setAlertOpen(true);
 

@@ -80,7 +80,7 @@ export default function EditSubjectContainer({
     setAlertOptions({
       severity: "success",
       title: "Success!",
-      message: `${values.name} information edited.`,
+      message: `${values.name} updated successfully.`,
     });
     setAlertOpen(true);
     setSingleSubject(formik.values);

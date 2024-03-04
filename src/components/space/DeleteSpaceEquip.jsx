@@ -43,7 +43,7 @@ export default function DeleteSpaceEquip({
       setAlertOptions({
         severity: "success",
         title: "Success!",
-        message: `${equipmentName} removed.`,
+        message: `${equipmentName} deleted successfully.`,
       });
       Logger.debug("delete space equipment success");
     }

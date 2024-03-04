@@ -36,7 +36,7 @@ export default function DeleteDepartment({
     setAlertOptions({
       severity: "success",
       title: "Success!",
-      message: `${departmentData.name} removed successfully.`,
+      message: `${departmentData.name} deleted successfully.`,
     });
     setAlertOpen(true);
 

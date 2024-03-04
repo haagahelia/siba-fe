@@ -64,7 +64,7 @@ export default function EditSpaceTypeContainer({
     setAlertOptions({
       severity: "success",
       title: "Success!",
-      message: `${values.name} new information added.`,
+      message: `${values.name} updated successfully.`,
     });
     setAlertOpen(true);
     setSingleSpaceType(formik.values);

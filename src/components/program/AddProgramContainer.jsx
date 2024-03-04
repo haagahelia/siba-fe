@@ -134,7 +134,7 @@ export default function AddProgramContainer({
       setAlertOptions({
         severity: "success",
         title: "Success!",
-        message: `${submitValues.name} added.`,
+        message: `${submitValues.name} added successfully.`,
       });
       setAlertOpen(true);
       resetForm();

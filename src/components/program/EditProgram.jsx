@@ -116,7 +116,7 @@ export default function EditProgram({
     setAlertOptions({
       severity: "success",
       title: "Success!",
-      message: `${values.name} new information added.`,
+      message: `${values.name} updated successfully.`,
     });
     setEditOpen(false);
     setAlertOpen(true);

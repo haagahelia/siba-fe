@@ -42,7 +42,7 @@ export default function DeleteAllocRound({
     setAlertOptions({
       severity: "success",
       title: "Success!",
-      message: `${deletedName} removed.`,
+      message: `${deletedName} deleted successfully.`,
     });
     setAlertOpen(true);
     incrementDataModifiedCounter();

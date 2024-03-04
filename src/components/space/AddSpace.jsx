@@ -98,7 +98,7 @@ export default function AddSpace({ getAllSpaces }) {
       setAlertOptions({
         severity: "success",
         title: "Success!",
-        message: `${spaceData.name} added.`,
+        message: `${spaceData.name} added successfully.`,
       });
       setAlertOpen(true);
       getAllSpaces();

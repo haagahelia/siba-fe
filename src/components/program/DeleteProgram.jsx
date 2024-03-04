@@ -37,7 +37,7 @@ export default function DeleteProgram({
     setAlertOptions({
       severity: "success",
       title: "Success!",
-      message: `${programData.name} removed successfully.`,
+      message: `${programData.name} deleted successfully.`,
     });
     setAlertOpen(true);
 
