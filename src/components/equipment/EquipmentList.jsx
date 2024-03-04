@@ -114,63 +114,61 @@ export default function EquipmentList({
         }}
         style={{ marginBottom: 16, width: "100%" }}
       />
-      <Box>
-        <Paper>
-          <Table>
-            <TableHead>
-              <TableRow>
-                <TableCell />
+      <Paper>
+        <Box>
+          <TableHead>
+            <TableRow>
+              <TableCell />
+              <TableCell>
+                <TableSortLabel
+                  active={orderBy === "Id"}
+                  direction={order}
+                  onClick={() => handleRequestSort("Id")}
+                >
+                  ID
+                </TableSortLabel>
+              </TableCell>
+              <TableCell>
+                <TableSortLabel
+                  active={orderBy === "Name"}
+                  direction={order}
+                  onClick={() => handleRequestSort("Name")}
+                >
+                  Name
+                </TableSortLabel>
+              </TableCell>
+              <TableCell>
+                <TableSortLabel
+                  active={orderBy === "Priority"}
+                  direction={order}
+                  onClick={() => handleRequestSort("Priority")}
+                >
+                  Priority
+                </TableSortLabel>
+              </TableCell>
+              <TableCell>Description</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {paginatedData.map((equipment) => (
+              <TableRow key={equipment.id}>
                 <TableCell>
-                  <TableSortLabel
-                    active={orderBy === "Id"}
-                    direction={order}
-                    onClick={() => handleRequestSort("Id")}
+                  <IconButton
+                    onClick={() => handleRowClick(equipment)}
+                    aria-label="Open Info"
                   >
-                    ID
-                  </TableSortLabel>
+                    <InfoIcon />
+                  </IconButton>
                 </TableCell>
-                <TableCell>
-                  <TableSortLabel
-                    active={orderBy === "Name"}
-                    direction={order}
-                    onClick={() => handleRequestSort("Name")}
-                  >
-                    Name
-                  </TableSortLabel>
-                </TableCell>
-                <TableCell>
-                  <TableSortLabel
-                    active={orderBy === "Priority"}
-                    direction={order}
-                    onClick={() => handleRequestSort("Priority")}
-                  >
-                    Priority
-                  </TableSortLabel>
-                </TableCell>
-                <TableCell>Description</TableCell>
+                <TableCell>{equipment.id}</TableCell>
+                <TableCell>{equipment.name}</TableCell>
+                <TableCell>{equipment.priority}</TableCell>
+                <TableCell>{equipment.description}</TableCell>
               </TableRow>
-            </TableHead>
-            <TableBody>
-              {paginatedData.map((equipment) => (
-                <TableRow key={equipment.id}>
-                  <TableCell>
-                    <IconButton
-                      onClick={() => handleRowClick(equipment)}
-                      aria-label="Open Info"
-                    >
-                      <InfoIcon />
-                    </IconButton>
-                  </TableCell>
-                  <TableCell>{equipment.id}</TableCell>
-                  <TableCell>{equipment.name}</TableCell>
-                  <TableCell>{equipment.priority}</TableCell>
-                  <TableCell>{equipment.description}</TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </Paper>
-      </Box>
+            ))}
+          </TableBody>
+        </Box>
+      </Paper>
     </div>
   );
 }

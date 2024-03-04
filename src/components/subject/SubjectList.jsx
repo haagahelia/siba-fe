@@ -39,14 +39,14 @@ export default function SubjectList({
             checkForUserPrograms(b, userPrograms)
             ? 0
             : checkForUserPrograms(a, userPrograms)
-            ? -1
-            : 1
+              ? -1
+              : 1
           : checkForUserPrograms(a, userPrograms) ===
-            checkForUserPrograms(b, userPrograms)
-          ? 0
-          : checkForUserPrograms(a, userPrograms)
-          ? 1
-          : -1;
+              checkForUserPrograms(b, userPrograms)
+            ? 0
+            : checkForUserPrograms(a, userPrograms)
+              ? 1
+              : -1;
       case "name":
         return order === "asc"
           ? a.name.localeCompare(b.name, "fi-FI")
@@ -95,124 +95,122 @@ export default function SubjectList({
         setSingleSubject={setSingleSubject}
         userPrograms={userPrograms}
       />
-      <Box>
-        <Paper>
-          <TableContainer>
-            <Table>
-              <TableHead>
-                <TableRow>
+      <Paper>
+        <TableContainer>
+          <Box>
+            <TableHead>
+              <TableRow>
+                <TableCell>
+                  <TableSortLabel
+                    active={orderBy === "programId"}
+                    direction={order}
+                    onClick={() => handleRequestSort("icon")}
+                  />
+                </TableCell>
+                <TableCell>
+                  <TableSortLabel
+                    active={orderBy === "name"}
+                    direction={order}
+                    onClick={() => handleRequestSort("name")}
+                  >
+                    Name
+                  </TableSortLabel>
+                </TableCell>
+                <TableCell>
+                  <TableSortLabel
+                    active={orderBy === "groupSize"}
+                    direction={order}
+                    onClick={() => handleRequestSort("groupSize")}
+                  >
+                    Group size
+                  </TableSortLabel>
+                </TableCell>
+                <TableCell>
+                  <TableSortLabel
+                    active={orderBy === "groupCount"}
+                    direction={order}
+                    onClick={() => handleRequestSort("groupCount")}
+                  >
+                    Group count
+                  </TableSortLabel>
+                </TableCell>
+                <TableCell>
+                  <TableSortLabel
+                    active={orderBy === "sessionLength"}
+                    direction={order}
+                    onClick={() => handleRequestSort("sessionLength")}
+                  >
+                    Lesson length
+                  </TableSortLabel>
+                </TableCell>
+                <TableCell>
+                  <TableSortLabel
+                    active={orderBy === "sessionCount"}
+                    direction={order}
+                    onClick={() => handleRequestSort("sessionCount")}
+                  >
+                    Session count
+                  </TableSortLabel>
+                </TableCell>
+                <TableCell>
+                  <TableSortLabel
+                    active={orderBy === "programName"}
+                    direction={order}
+                    onClick={() => handleRequestSort("programName")}
+                  >
+                    Program
+                  </TableSortLabel>
+                </TableCell>
+                <TableCell>
+                  <TableSortLabel
+                    active={orderBy === "spaceTypeName"}
+                    direction={order}
+                    onClick={() => handleRequestSort("spaceTypeName")}
+                  >
+                    Space type
+                  </TableSortLabel>
+                </TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {sortedSubjects.map((value) => (
+                <TableRow key={value.id}>
                   <TableCell>
-                    <TableSortLabel
-                      active={orderBy === "programId"}
-                      direction={order}
-                      onClick={() => handleRequestSort("icon")}
-                    />
+                    {checkForUserPrograms(value, userPrograms) ? (
+                      <IconButton
+                        onClick={() => {
+                          setSingleSubject(value);
+                          setOpen(true);
+                        }}
+                        aria-label="Open Info"
+                      >
+                        <BuildCircleIcon />
+                      </IconButton>
+                    ) : (
+                      <IconButton
+                        onClick={() => {
+                          setSingleSubject(value);
+                          setOpen(true);
+                        }}
+                        aria-label="Open Info"
+                      >
+                        <InfoIcon />
+                      </IconButton>
+                    )}
                   </TableCell>
-                  <TableCell>
-                    <TableSortLabel
-                      active={orderBy === "name"}
-                      direction={order}
-                      onClick={() => handleRequestSort("name")}
-                    >
-                      Name
-                    </TableSortLabel>
-                  </TableCell>
-                  <TableCell>
-                    <TableSortLabel
-                      active={orderBy === "groupSize"}
-                      direction={order}
-                      onClick={() => handleRequestSort("groupSize")}
-                    >
-                      Group size
-                    </TableSortLabel>
-                  </TableCell>
-                  <TableCell>
-                    <TableSortLabel
-                      active={orderBy === "groupCount"}
-                      direction={order}
-                      onClick={() => handleRequestSort("groupCount")}
-                    >
-                      Group count
-                    </TableSortLabel>
-                  </TableCell>
-                  <TableCell>
-                    <TableSortLabel
-                      active={orderBy === "sessionLength"}
-                      direction={order}
-                      onClick={() => handleRequestSort("sessionLength")}
-                    >
-                      Lesson length
-                    </TableSortLabel>
-                  </TableCell>
-                  <TableCell>
-                    <TableSortLabel
-                      active={orderBy === "sessionCount"}
-                      direction={order}
-                      onClick={() => handleRequestSort("sessionCount")}
-                    >
-                      Session count
-                    </TableSortLabel>
-                  </TableCell>
-                  <TableCell>
-                    <TableSortLabel
-                      active={orderBy === "programName"}
-                      direction={order}
-                      onClick={() => handleRequestSort("programName")}
-                    >
-                      Program
-                    </TableSortLabel>
-                  </TableCell>
-                  <TableCell>
-                    <TableSortLabel
-                      active={orderBy === "spaceTypeName"}
-                      direction={order}
-                      onClick={() => handleRequestSort("spaceTypeName")}
-                    >
-                      Space type
-                    </TableSortLabel>
-                  </TableCell>
+                  <TableCell>{value.name}</TableCell>
+                  <TableCell>{value.groupSize}</TableCell>
+                  <TableCell>{value.groupCount}</TableCell>
+                  <TableCell>{value.sessionLength}</TableCell>
+                  <TableCell>{value.sessionCount}</TableCell>
+                  <TableCell>{value.programName}</TableCell>
+                  <TableCell>{value.spaceTypeName}</TableCell>
                 </TableRow>
-              </TableHead>
-              <TableBody>
-                {sortedSubjects.map((value) => (
-                  <TableRow key={value.id}>
-                    <TableCell>
-                      {checkForUserPrograms(value, userPrograms) ? (
-                        <IconButton
-                          onClick={() => {
-                            setSingleSubject(value);
-                            setOpen(true);
-                          }}
-                          aria-label="Open Info"
-                        >
-                          <BuildCircleIcon />
-                        </IconButton>
-                      ) : (
-                        <IconButton
-                          onClick={() => {
-                            setSingleSubject(value);
-                            setOpen(true);
-                          }}
-                          aria-label="Open Info"
-                        >
-                          <InfoIcon />
-                        </IconButton>
-                      )}
-                    </TableCell>
-                    <TableCell>{value.name}</TableCell>
-                    <TableCell>{value.groupSize}</TableCell>
-                    <TableCell>{value.groupCount}</TableCell>
-                    <TableCell>{value.sessionLength}</TableCell>
-                    <TableCell>{value.sessionCount}</TableCell>
-                    <TableCell>{value.programName}</TableCell>
-                    <TableCell>{value.spaceTypeName}</TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </TableContainer>
-        </Paper>
-      </Box>
+              ))}
+            </TableBody>
+          </Box>
+        </TableContainer>
+      </Paper>
     </div>
   );
 }

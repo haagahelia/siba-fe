@@ -52,65 +52,63 @@ export default function UserList({ getAllUsers, paginateUsers }) {
         setSingleUser={setSingleUser}
         getAllUsers={getAllUsers}
       />
-      <Box>
-        <Paper>
-          <TableContainer>
-            <Table>
-              <TableHead>
-                <TableRow>
-                  <TableCell />
+      <Paper>
+        <TableContainer>
+          <Box>
+            <TableHead>
+              <TableRow>
+                <TableCell />
+                <TableCell>
+                  <TableSortLabel
+                    active={orderBy === "id"}
+                    direction={order}
+                    onClick={() => handleRequestSort("id")}
+                  >
+                    ID
+                  </TableSortLabel>
+                </TableCell>
+                <TableCell>
+                  <TableSortLabel
+                    active={orderBy === "email"}
+                    direction={order}
+                    onClick={() => handleRequestSort("email")}
+                  >
+                    Email
+                  </TableSortLabel>
+                </TableCell>
+                <TableCell>Admin</TableCell>
+                <TableCell>Planner</TableCell>
+                <TableCell>Statist</TableCell>
+                <TableCell>Planner for</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {sortedUsers.map((value) => (
+                <TableRow key={value.id}>
                   <TableCell>
-                    <TableSortLabel
-                      active={orderBy === "id"}
-                      direction={order}
-                      onClick={() => handleRequestSort("id")}
+                    <IconButton
+                      onClick={() => {
+                        setSingleUser(value);
+                        setOpen(true);
+                      }}
+                      aria-label="Open Info"
                     >
-                      ID
-                    </TableSortLabel>
+                      <InfoIcon />
+                    </IconButton>
                   </TableCell>
-                  <TableCell>
-                    <TableSortLabel
-                      active={orderBy === "email"}
-                      direction={order}
-                      onClick={() => handleRequestSort("email")}
-                    >
-                      Email
-                    </TableSortLabel>
-                  </TableCell>
-                  <TableCell>Admin</TableCell>
-                  <TableCell>Planner</TableCell>
-                  <TableCell>Statist</TableCell>
-                  <TableCell>Planner for</TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {sortedUsers.map((value) => (
-                  <TableRow key={value.id}>
-                    <TableCell>
-                      <IconButton
-                        onClick={() => {
-                          setSingleUser(value);
-                          setOpen(true);
-                        }}
-                        aria-label="Open Info"
-                      >
-                        <InfoIcon />
-                      </IconButton>
-                    </TableCell>
-                    <TableCell>{value.id}</TableCell>
-                    <TableCell>{value.email}</TableCell>
-                    <TableCell>{value.isAdmin ? "✅" : "❌"}</TableCell>
-                    <TableCell>{value.isPlanner ? "✅" : "❌"}</TableCell>
-                    <TableCell>{value.isStatist ? "✅" : "❌"}</TableCell>
+                  <TableCell>{value.id}</TableCell>
+                  <TableCell>{value.email}</TableCell>
+                  <TableCell>{value.isAdmin ? "✅" : "❌"}</TableCell>
+                  <TableCell>{value.isPlanner ? "✅" : "❌"}</TableCell>
+                  <TableCell>{value.isStatist ? "✅" : "❌"}</TableCell>
 
-                    <TableCell>{value.plannerdepartment}</TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </TableContainer>
-        </Paper>
-      </Box>
+                  <TableCell>{value.plannerdepartment}</TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Box>
+        </TableContainer>
+      </Paper>
     </div>
   );
 }
