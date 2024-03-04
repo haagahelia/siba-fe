@@ -207,7 +207,17 @@ export default function NavBar() {
   useEffect(() => {
     async function getAndHandleSettings() {
       if (appContext.sessionToken) {
-        handleSettings(await getSettings(), appContext);
+        try {
+          handleSettings(await getSettings(), appContext);
+        } catch (err) {
+          setAlertOptions({
+            severity: "error",
+            title: "Error",
+            message: "Something went wrong - please try again later.",
+          });
+          setAlertOpen(true);
+          return Logger.error("failed to get settings:", err);
+        }
       }
       setIsSettingsHandled(true);
     }
