@@ -89,48 +89,46 @@ export default function SpaceTypeList({
         }}
         style={{ marginBottom: 16, width: "100%" }}
       />
-      <Box>
-        <Paper>
-          <TableContainer>
-            <Table>
-              <TableHead>
-                <TableRow>
-                  <TableCell />
+      <Paper>
+        <TableContainer>
+          <Box>
+            <TableHead>
+              <TableRow>
+                <TableCell />
+                <TableCell>
+                  <TableSortLabel
+                    active={orderBy === "Name"}
+                    direction={order}
+                    onClick={() => handleRequestSort("Name")}
+                  >
+                    Name
+                  </TableSortLabel>
+                </TableCell>
+                <TableCell>Description</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {filteredSpaceTypesList.map((value) => (
+                <TableRow key={value.id}>
                   <TableCell>
-                    <TableSortLabel
-                      active={orderBy === "Name"}
-                      direction={order}
-                      onClick={() => handleRequestSort("Name")}
+                    <IconButton
+                      onClick={() => {
+                        setSingleSpaceType(value);
+                        setOpen(true);
+                      }}
+                      aria-label="Open Info"
                     >
-                      Name
-                    </TableSortLabel>
+                      <InfoIcon />
+                    </IconButton>
                   </TableCell>
-                  <TableCell>Description</TableCell>
+                  <TableCell>{value.name}</TableCell>
+                  <TableCell>{value.description}</TableCell>
                 </TableRow>
-              </TableHead>
-              <TableBody>
-                {filteredSpaceTypesList.map((value) => (
-                  <TableRow key={value.id}>
-                    <TableCell>
-                      <IconButton
-                        onClick={() => {
-                          setSingleSpaceType(value);
-                          setOpen(true);
-                        }}
-                        aria-label="Open Info"
-                      >
-                        <InfoIcon />
-                      </IconButton>
-                    </TableCell>
-                    <TableCell>{value.name}</TableCell>
-                    <TableCell>{value.description}</TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </TableContainer>
-        </Paper>
-      </Box>
+              ))}
+            </TableBody>
+          </Box>
+        </TableContainer>
+      </Paper>
     </div>
   );
 }
