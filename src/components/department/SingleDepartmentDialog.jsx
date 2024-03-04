@@ -79,7 +79,7 @@ export default function SingleDepartmentDialog({
   // Checks if the user is a planner of the department.
   const isPlannerOfDepartment =
     roles.planner === "1" &&
-    departmentList.some((dept) => dept.id === singleProgram?.departmentId);
+    departmentList.some((dept) => dept.id === singleDepartment?.departmentId);
 
   return (
     <Dialog
