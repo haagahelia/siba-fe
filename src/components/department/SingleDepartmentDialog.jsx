@@ -1,4 +1,5 @@
 import CloseIcon from "@mui/icons-material/Close";
+import { Tooltip } from "@mui/material";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
@@ -29,15 +30,17 @@ export default function SingleDepartmentDialog({
     { id: 101, name: "Jazz" },
   ]);
   const [numberOfPrograms, setNumberOfPrograms] = useState(null);
+  const [programNames, setProgramNames] = useState([]);
 
   // Fetches the number of programs for the department with the given id.
   const fetchNumberOfPrograms = async () => {
-    const response = await dao.getNumberOfPrograms(singleDepartment?.id);
+    const response = await dao.getListOfPrograms(singleDepartment?.id);
     if (response === null) {
       return "Error fetching number of programs";
     }
-    const programCount = response["count(*)"];
-    return programCount;
+    const programNames = response.data.map((program) => program.name);
+    setProgramNames(programNames);
+    return programNames;
   };
 
   // Fetches the department id for the dialog.
@@ -50,7 +53,7 @@ export default function SingleDepartmentDialog({
       );
       fetchNumberOfPrograms(singleDepartment.id)
         .then((data) => {
-          setNumberOfPrograms(data);
+          setNumberOfPrograms(data.length);
           Logger.debug(data);
         })
         .catch((error) => {
@@ -109,13 +112,18 @@ export default function SingleDepartmentDialog({
         }}
       >
         <Typography variant="singleDialogSubtitle">
-          {numberOfPrograms !== null
-            ? numberOfPrograms === 0
-              ? "There are no programs in this department."
-              : numberOfPrograms === 1
-                ? "There is 1 program in this department."
-                : `There are ${numberOfPrograms} programs in this department.`
-            : "Loading..."}
+          <Tooltip
+            title={`Space(s): ${programNames.slice(0, 5).join(", ")}`}
+            placement="top"
+          >
+            {numberOfPrograms !== null
+              ? numberOfPrograms === 0
+                ? "There are no programs in this department."
+                : numberOfPrograms === 1
+                  ? "There is 1 program in this department."
+                  : `There are ${numberOfPrograms} programs in this department.`
+              : "Loading..."}
+          </Tooltip>
         </Typography>
       </DialogContent>
       {(roles.admin === "1" || isPlannerOfDepartment) &&
