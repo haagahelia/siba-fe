@@ -9,6 +9,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Typography } from "@mui/material";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
+import CircularProgress from "@mui/material/CircularProgress";
 import Container from "@mui/material/Container";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
@@ -200,14 +201,25 @@ export default function NavBar() {
   const [loggedIn, setLoggedIn] = useState(
     localStorage.getItem("email") ? localStorage.getItem("email") : "Not yet",
   );
-
+  const [isSettingsHandled, setIsSettingsHandled] = useState(false);
   const [isDropdownVisible, setIsDropdownVisible] = useState(false);
 
   useEffect(() => {
     async function getAndHandleSettings() {
       if (appContext.sessionToken) {
-        handleSettings(await getSettings(), appContext);
+        try {
+          handleSettings(await getSettings(), appContext);
+        } catch (err) {
+          setAlertOptions({
+            severity: "error",
+            title: "Error",
+            message: "Something went wrong - please try again later.",
+          });
+          setAlertOpen(true);
+          return Logger.error("failed to get settings:", err);
+        }
       }
+      setIsSettingsHandled(true);
     }
     getAndHandleSettings();
   }, []);
@@ -457,44 +469,51 @@ export default function NavBar() {
               </Toolbar>
             </Container>
           </AppBar>
-          <Routes>
-            <Route
-              path="/login"
-              element={<LoginView handleLoginChange={handleLoginChange} />}
-            />
-            <Route
-              path="/"
-              element={<LoginView handleLoginChange={handleLoginChange} />}
-            />
-            <Route path="/subject" element={<SubjectView />} />
-            <Route path="/subject/:subjectIdToShow" element={<SubjectView />} />
-            <Route path="/allocation" element={<AllocRoundView />} />
-            <Route path="/roomresult" element={<RoomResultView />} />
-            <Route path="/programresult" element={<ProgramResultView />} />
-            <Route path="/equipment" element={<EquipmentView />} />
-            <Route path="/building" element={<BuildingView />} />
-            <Route path="/department" element={<DepartmentView />} />
-            <Route path="/space" element={<SpaceView />} />
-            <Route path="/space/:spaceIdToShow" element={<SpaceView />} />
-            <Route path="/spaceType" element={<SpaceTypeView />} />
-            <Route path="/program" element={<ProgramView />} />
-            <Route
-              path="/allocation/addAllocRound"
-              element={<AddAllocRound />}
-            />
-            <Route path="/settings" element={<SettingsView />} />
-            <Route path="/users" element={<UserView />} />
-            <Route
-              path="/alloc-fail/:allocId"
-              element={<AllocationSubjectFailureView />}
-            />
-            <Route path="*" element={<NotFoundView />} />
-            <Route path="/forget-password" element={<ForgetPasswordView />} />
-            <Route
-              path="/reset-password/:id/:token"
-              element={<ResetPasswordView />}
-            />
-          </Routes>
+          {isSettingsHandled ? (
+            <Routes>
+              <Route
+                path="/login"
+                element={<LoginView handleLoginChange={handleLoginChange} />}
+              />
+              <Route
+                path="/"
+                element={<LoginView handleLoginChange={handleLoginChange} />}
+              />
+              <Route path="/subject" element={<SubjectView />} />
+              <Route
+                path="/subject/:subjectIdToShow"
+                element={<SubjectView />}
+              />
+              <Route path="/allocation" element={<AllocRoundView />} />
+              <Route path="/roomresult" element={<RoomResultView />} />
+              <Route path="/programresult" element={<ProgramResultView />} />
+              <Route path="/equipment" element={<EquipmentView />} />
+              <Route path="/building" element={<BuildingView />} />
+              <Route path="/department" element={<DepartmentView />} />
+              <Route path="/space" element={<SpaceView />} />
+              <Route path="/space/:spaceIdToShow" element={<SpaceView />} />
+              <Route path="/spaceType" element={<SpaceTypeView />} />
+              <Route path="/program" element={<ProgramView />} />
+              <Route
+                path="/allocation/addAllocRound"
+                element={<AddAllocRound />}
+              />
+              <Route path="/settings" element={<SettingsView />} />
+              <Route path="/users" element={<UserView />} />
+              <Route
+                path="/alloc-fail/:allocId"
+                element={<AllocationSubjectFailureView />}
+              />
+              <Route path="*" element={<NotFoundView />} />
+              <Route path="/forget-password" element={<ForgetPasswordView />} />
+              <Route
+                path="/reset-password/:id/:token"
+                element={<ResetPasswordView />}
+              />
+            </Routes>
+          ) : (
+            <CircularProgress sx={{ position: "absolute", top: "50%" }} />
+          )}
         </BrowserRouter>
       </div>
     </div>
