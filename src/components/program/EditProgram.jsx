@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import dao from "../../ajax/dao";
 import { useRoleLoggedIn } from "../../hooks/useRoleLoggedIn";
 import Logger from "../../logger/logger";
-import { validate } from "../../validation/ValidateAddEditProgram";
+import { validate } from "../../validation/ValidateEditProgram";
 
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
