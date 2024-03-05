@@ -69,8 +69,8 @@ export default function DepartmentList({
     const lowerCaseQuery = searchQuery.toLowerCase();
     return sortedDepartmentList.filter(
       (department) =>
-        department.name.toLowerCase().includes(lowerCaseQuery) ||
-        department.description.toLowerCase().includes(lowerCaseQuery),
+        department.name?.toLowerCase().includes(lowerCaseQuery) ||
+        department.description?.toLowerCase().includes(lowerCaseQuery),
     );
   }, [searchQuery, sortedDepartmentList]);
 

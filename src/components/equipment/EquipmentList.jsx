@@ -77,8 +77,8 @@ export default function EquipmentList({
 
   const filteredEquipmentList = sortedEquipmentList.filter(
     (equipment) =>
-      equipment.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      equipment.description.toLowerCase().includes(searchQuery.toLowerCase()),
+      equipment.name?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      equipment.description?.toLowerCase().includes(searchQuery.toLowerCase()),
   );
 
   const paginatedData = filteredEquipmentList.slice(startIndex, endIndex);

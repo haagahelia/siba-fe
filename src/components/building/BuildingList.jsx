@@ -50,8 +50,8 @@ export default function BuildingList({ getAllBuildings, paginateBuildings }) {
 
   const filteredBuildingsList = sortedBuildingsList.filter(
     (building) =>
-      building.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      building.description.toLowerCase().includes(searchQuery.toLowerCase()),
+      building.name?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      building.description?.toLowerCase().includes(searchQuery.toLowerCase()),
   );
 
   // STYLE
