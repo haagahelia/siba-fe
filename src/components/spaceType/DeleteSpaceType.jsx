@@ -52,7 +52,7 @@ export default function DeleteSpaceType({
       setAlertOptions({
         severity: "success",
         title: "Success!",
-        message: `${spaceTypeData.name} removed successfully.`,
+        message: `${spaceTypeData.name} deleted successfully.`,
       });
       setAlertOpen(true);
       setTimeout(() => {

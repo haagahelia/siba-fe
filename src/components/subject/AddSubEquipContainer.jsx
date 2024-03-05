@@ -37,7 +37,7 @@ export default function AddSubEquipContainer({
 
   const subId = singleSubject?.id;
 
-  const getSubEquipBySubId = async function (subId) {
+  const getSubEquipBySubId = async (subId) => {
     const result = await equipmentsBySubId(subId);
     getEquipmentsForSelect(result);
   };
@@ -46,7 +46,7 @@ export default function AddSubEquipContainer({
     getSubEquipBySubId(subId);
   }, []);
 
-  const getEquipmentsForSelect = async function (subEquipList) {
+  const getEquipmentsForSelect = async (subEquipList) => {
     const { httpStatus, data } = await dao.fetchEquipmentData();
 
     if (httpStatus !== 200) {
@@ -114,7 +114,7 @@ export default function AddSubEquipContainer({
     setAlertOptions({
       severity: "success",
       title: "Success!",
-      message: "Equipment added.",
+      message: "Equipment added successfully.",
     });
     setAlertOpen(true);
     formik.resetForm();

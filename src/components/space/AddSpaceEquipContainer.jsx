@@ -35,7 +35,7 @@ export default function AddSpaceEquipContainer({
 
   const spaceId = singleSpace?.id;
 
-  const getSpaceEquipBySpaceId = async function (spaceId) {
+  const getSpaceEquipBySpaceId = async (spaceId) => {
     const result = await equipmentsBySpaceId(spaceId);
     getEquipmentsForSelect(result);
   };
@@ -44,7 +44,7 @@ export default function AddSpaceEquipContainer({
     getSpaceEquipBySpaceId(spaceId);
   }, []);
 
-  const getEquipmentsForSelect = async function (spaceEquipList) {
+  const getEquipmentsForSelect = async (spaceEquipList) => {
     const { httpStatus, data } = await dao.fetchEquipmentData();
 
     if (httpStatus !== 200) {
@@ -110,7 +110,7 @@ export default function AddSpaceEquipContainer({
     setAlertOptions({
       severity: "success",
       title: "Success!",
-      message: "Equipment added.",
+      message: "Equipment added successfully.",
     });
     setAlertOpen(true);
     formik.resetForm();

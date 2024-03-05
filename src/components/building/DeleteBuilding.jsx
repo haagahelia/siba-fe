@@ -52,7 +52,7 @@ export default function DeleteBuilding({
       setAlertOptions({
         severity: "success",
         title: "Success!",
-        message: `${buildingData.name} removed successfully.`,
+        message: `${buildingData.name} deleted successfully.`,
       });
       setAlertOpen(true);
       setTimeout(() => {

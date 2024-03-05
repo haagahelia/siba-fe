@@ -80,7 +80,7 @@ export default function AddEquipment({ getAllEquipments }) {
       setAlertOptions({
         severity: "success",
         title: "Success!",
-        message: `${equipment?.name} added.`,
+        message: `${equipment?.name} added successfully.`,
       });
       resetForm();
     }
