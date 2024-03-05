@@ -436,6 +436,17 @@ export const createAppTheme = (currentPalette) =>
         styleOverrides: {
           contained: {
             color: currentPalette.fontColorDefault.default,
+            "&.redButton": {
+              backgroundColor: currentPalette.warning.main,
+              color: currentPalette.warning.contrastText,
+            },
+            "&.editButton": {
+              backgroundColor: currentPalette.edit.main,
+              color: currentPalette.edit.contrastText,
+            },
+            "&.disabledButton": {
+              opacity: 0.5,
+            },
           },
           text: {
             backgroundColor: currentPalette.primary.main,
@@ -662,6 +673,14 @@ export const createAppTheme = (currentPalette) =>
             props: { variant: "allocRoundControlPanel" },
             style: {
               marginTop: margins.small,
+            },
+          },
+          {
+            props: { variant: "errorTypography" },
+            style: {
+              padding: margins.none,
+              margin: margins.auto,
+              color: currentPalette.error.main,
             },
           },
         ],

@@ -24,7 +24,6 @@ export default function AddDepartmentPlannerForm({
     <div>
       <Button
         variant="contained"
-        color="primary"
         onClick={() => {
           setOpen(true);
         }}
@@ -74,7 +73,7 @@ export default function AddDepartmentPlannerForm({
           <DialogActions>
             <Button
               variant="contained"
-              color="red"
+              className="redButton"
               onClick={() => {
                 setOpen(false);
                 formik.resetForm();

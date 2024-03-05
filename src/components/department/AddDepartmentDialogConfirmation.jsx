@@ -108,7 +108,7 @@ export default function AddDepartmentDialogConfirmation({
           </DialogContentText>
           <Button
             variant="contained"
-            color="error"
+            className="redButton"
             onClick={() => setOpen(false)}
           >
             Cancel

@@ -6,19 +6,16 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import Grid from "@mui/material/Grid";
-import useTheme from "@mui/material/styles/useTheme";
 import SpaceTypeInputFields from "./SpaceTypeInputFields";
 
 export default function EditSpaceTypeForm({ formik }) {
   const [open, setOpen] = useState(false);
 
-  const theme = useTheme();
-
   return (
     <div>
       <Button
         variant="contained"
-        style={theme.components.MuiButton.editbutton}
+        className="editButton"
         onClick={() => {
           setOpen(true);
         }}
@@ -51,7 +48,7 @@ export default function EditSpaceTypeForm({ formik }) {
                 formik.resetForm();
               }}
               variant="contained"
-              color="red"
+              className="redButton"
             >
               Cancel
             </Button>

@@ -82,7 +82,7 @@ export default function DeleteUser({ singleUser, getAllUsers, setOpen }) {
       />
       <Button
         variant="contained"
-        color="red"
+        className="redButton"
         onClick={() => submitDelete(singleUser)}
       >
         Delete

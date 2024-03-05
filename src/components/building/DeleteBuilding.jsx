@@ -93,7 +93,7 @@ export default function DeleteBuilding({
       {!hasAssociatedSpaces ? (
         <Button
           variant="contained"
-          style={theme.components.MuiButton.redbutton}
+          className="redButton"
           onClick={() => submitDelete(singleBuilding)}
         >
           Delete
@@ -109,7 +109,7 @@ export default function DeleteBuilding({
             <Button
               variant="contained"
               disabled
-              style={{ ...theme.components.MuiButton.redbutton, opacity: 0.5 }}
+              className="redButton disabledButton"
             >
               {`This building has ${totalSpaceCount} space(s)`}
             </Button>

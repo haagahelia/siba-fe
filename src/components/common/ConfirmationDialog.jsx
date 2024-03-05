@@ -23,7 +23,11 @@ export default function ConfirmationDialog({
           <DialogContentText>{dialogOptions.content}</DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button variant="contained" color="red" onClick={handleClose}>
+          <Button
+            variant="contained"
+            className="redButton"
+            onClick={handleClose}
+          >
             Cancel
           </Button>
           <Button
