@@ -4,15 +4,13 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import Grid from "@mui/material/Grid";
-import useTheme from "@mui/material/styles/useTheme";
+import Typography from "@mui/material/Typography";
 import React, { useState } from "react";
 import BuildingInputFields from "./BuildingInputFields";
 
 export default function EditBuildingForm({ formik }) {
   const [open, setOpen] = useState(false);
   const [buildingNameError, setBuildingNameError] = useState("");
-
-  const theme = useTheme();
 
   const handleSubmit = () => {
     if (!formik.values.name.trim()) {
@@ -28,7 +26,7 @@ export default function EditBuildingForm({ formik }) {
     <div>
       <Button
         variant="contained"
-        style={theme.components.MuiButton.editbutton}
+        className="editButton"
         onClick={() => {
           setOpen(true);
         }}
@@ -53,7 +51,9 @@ export default function EditBuildingForm({ formik }) {
             >
               <BuildingInputFields formik={formik} />
               {buildingNameError && (
-                <p style={{ color: "red" }}>{buildingNameError}</p>
+                <Typography variant="errorTypography">
+                  {buildingNameError}
+                </Typography>
               )}
             </Grid>
           </DialogContent>
@@ -65,7 +65,7 @@ export default function EditBuildingForm({ formik }) {
                 formik.resetForm();
               }}
               variant="contained"
-              style={theme.components.MuiButton.redbutton}
+              className="redButton"
             >
               Cancel
             </Button>

@@ -71,7 +71,7 @@ export default function DeleteSetting({
       />
       <Button
         variant="contained"
-        color="red"
+        className="redButton"
         onClick={() => submitDelete(singleSetting)}
       >
         Delete

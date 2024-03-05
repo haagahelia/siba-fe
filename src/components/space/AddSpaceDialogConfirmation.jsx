@@ -49,14 +49,14 @@ export default function AddSpaceDialogConfirmation({
           By clicking continue, {space?.name} will be added to spaces.
         </DialogContentText>
       </DialogContent>
-      <Button variant="contained" color="red" onClick={() => setOpen(false)}>
-        Cancel
-      </Button>
       <Button
         variant="contained"
-        color="success"
-        onClick={() => addSingleSpace()}
+        className="redButton"
+        onClick={() => setOpen(false)}
       >
+        Cancel
+      </Button>
+      <Button variant="contained" onClick={() => addSingleSpace()}>
         Continue
       </Button>
     </Dialog>

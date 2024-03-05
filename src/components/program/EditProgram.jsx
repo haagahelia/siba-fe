@@ -201,7 +201,7 @@ export default function EditProgram({
                 formik.resetForm();
               }}
               variant="contained"
-              color="red"
+              className="redButton"
             >
               Cancel
             </Button>

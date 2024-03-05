@@ -15,7 +15,7 @@ export default function EditSettingForm({ formik }) {
     <div>
       <Button
         variant="contained"
-        color="secondary"
+        className="editButton"
         onClick={() => {
           setOpen(true);
         }}
@@ -115,7 +115,7 @@ export default function EditSettingForm({ formik }) {
                 formik.resetForm();
               }}
               variant="contained"
-              color="red"
+              className="redButton"
             >
               Cancel
             </Button>

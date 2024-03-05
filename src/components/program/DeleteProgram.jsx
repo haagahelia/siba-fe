@@ -74,7 +74,7 @@ export default function DeleteProgram({
       />
       <Button
         variant="contained"
-        color="red"
+        className="redButton"
         onClick={() => submitDelete(singleProgram)}
       >
         Delete

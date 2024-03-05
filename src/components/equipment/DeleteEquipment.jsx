@@ -73,7 +73,7 @@ export default function DeleteEquipment({
       />
       <Button
         variant="contained"
-        color="red"
+        className="redButton"
         onClick={() => submitDelete(singleEquipment)}
       >
         Delete

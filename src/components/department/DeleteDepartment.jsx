@@ -73,7 +73,7 @@ export default function DeleteDepartment({
       />
       <Button
         variant="contained"
-        color="red"
+        className="redButton"
         onClick={() => submitDelete(singleDepartment)}
       >
         Delete
