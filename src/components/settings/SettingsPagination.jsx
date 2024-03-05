@@ -6,6 +6,7 @@ export default function SettingsPagination({
   pagination,
   setPagination,
   allSettingsList,
+  paginateSettings,
   setPaginateSettings,
   pageSize,
 }) {
@@ -22,7 +23,7 @@ export default function SettingsPagination({
       );
       setPaginateSettings(slicedSettings);
     }
-  }, [pagination]);
+  }, [pagination, paginateSettings]);
 
   const handleChange = (e, p) => {
     const from = (p - 1) * pageSize;
