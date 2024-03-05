@@ -61,7 +61,7 @@ export default function AddDepartment({ getAllDepartments }) {
       setAlertOptions({
         severity: "success",
         title: "Success!",
-        message: `${submitValues.name} updated successfully.`,
+        message: `${submitValues.name} added successfully.`,
       });
       setDepartment(submitValues);
     }

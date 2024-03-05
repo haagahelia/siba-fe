@@ -81,7 +81,7 @@ export const AddEmptyAllocRound = ({ allAllocRoundsList }) => {
     setAlertOptions({
       severity: "success",
       title: "Success!",
-      message: `${submitValues.name} added.`,
+      message: `${submitValues.name} added successfully.`,
     });
     setAlertOpen(true);
     resetFormm();

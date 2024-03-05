@@ -77,14 +77,14 @@ export default function EditSubEquipContainer({
     setAlertOptions({
       severity: "success",
       title: "Success!",
-      message: `${values.name} edited.`,
+      message: `${values.name} updated successfully.`,
     });
     setAlertOpen(true);
     // The form resets and gets the new modified initialValues
     formik.resetForm(setInitialEquipValues(formik.values));
     getEquipmentsBySubId(subId);
   }
-  const getpriority = async function () {
+  const getpriority = async () => {
     const { httpStatus, data } = await dao.fetchEquipmentData();
     if (httpStatus !== 200) {
       ajaxRequestErrorHandler(

@@ -2,8 +2,8 @@ import { useState } from "react";
 import dao from "../../ajax/dao";
 
 import Button from "@mui/material/Button";
-import Logger from "../../logger/logger";
 import useTheme from "@mui/material/styles/useTheme";
+import Logger from "../../logger/logger";
 import { margins } from "../../styles/theme";
 import ConfirmationDialog from "../common/ConfirmationDialog";
 
@@ -13,7 +13,6 @@ export default function DeleteSubEquip({
   singleSubEquipToDelete,
   getEquipmentsBySubId,
 }) {
- 
   const [dialogOpen, setDialogOpen] = useState(false);
   const [dialogOptions, setDialogOptions] = useState({
     title: "this is dialog",
@@ -34,7 +33,7 @@ export default function DeleteSubEquip({
       singleSubEquipToDelete.subjectId,
       singleSubEquipToDelete.equipmentId,
     );
-   
+
     if (!success) {
       setAlertOptions({
         severity: "error",
@@ -42,13 +41,13 @@ export default function DeleteSubEquip({
         message: "Something went wrong - please try again later.",
       });
     } else {
-    setAlertOptions({
-      severity: "success",
-      title: "Success!",
-      message: `${equipmentName} removed.`,
-    });
-    Logger.debug("delete subject equipment success");
-  }
+      setAlertOptions({
+        severity: "success",
+        title: "Success!",
+        message: `${equipmentName} deleted successfully.`,
+      });
+      Logger.debug("delete subject equipment success");
+    }
     setAlertOpen(true);
     getEquipmentsBySubId(singleSubEquipToDelete.subjectId);
   };

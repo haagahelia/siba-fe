@@ -39,7 +39,7 @@ export default function DeleteSubject({
       setAlertOptions({
         severity: "success",
         title: "Success!",
-        message: `${subjectData.name} removed successfully.`,
+        message: `${subjectData.name} deleted successfully.`,
       });
       setAlertOpen(true);
 

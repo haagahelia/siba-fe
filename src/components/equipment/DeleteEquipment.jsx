@@ -36,7 +36,7 @@ export default function DeleteEquipment({
     setAlertOptions({
       severity: "success",
       title: "Success!",
-      message: `${equipmentData.name} removed successfully.`,
+      message: `${equipmentData.name} deleted successfully.`,
     });
     setAlertOpen(true);
 

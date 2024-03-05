@@ -161,7 +161,7 @@ export default function AddSubjectContainer({
     setAlertOptions({
       severity: "success",
       title: "Success!",
-      message: `${submitValues.name} added.`,
+      message: `${submitValues.name} added successfully.`,
     });
     setAlertOpen(true);
     resetForm();
