@@ -1,4 +1,5 @@
-import { Department, Program, Response, ResponseFiner } from "../types";
+import Logger from "../logger/logger";
+import { Department, Response, ResponseFiner } from "../types";
 import { create, get, remove, update } from "./request";
 
 const baseUrl = import.meta.env.VITE_BE_SERVER_BASE_URL;
@@ -60,12 +61,29 @@ export const deleteDepartment = async (
   return response.ok;
 };
 // Fetch the number of programs for a department
-export const getListOfPrograms = async (id: number) => {
-  const response = await get(`${baseUrl}/department/${id}/programsList`);
+export const getNumberOfPrograms = async (id: number) => {
+  const response = await get(`${baseUrl}/department/${id}/numberOfPrograms`);
   if (response.status === 200) {
-    const nameOfPrograms = await response.json();
-    return { httpStatus: response.status, data: nameOfPrograms };
+    const numberOfPrograms = await response.json();
+    return { httpStatus: response.status, data: numberOfPrograms };
   } else {
+    return { httpStatus: response.status, data: [] };
+  }
+};
+
+// get first five programs names of a department by id
+export const getProgramsFirstFiveNames = async (id: number) => {
+  const response = await get(
+    `${baseUrl}/department/${id}/programsFirstFiveNames`,
+  );
+  if (response.status === 200) {
+    const firstFiveNames = await response.json();
+    return {
+      httpStatus: response.status,
+      data: firstFiveNames,
+    };
+  } else {
+    Logger.error("Failed to get the programs of the department from database");
     return { httpStatus: response.status, data: [] };
   }
 };
