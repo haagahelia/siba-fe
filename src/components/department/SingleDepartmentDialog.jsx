@@ -26,11 +26,11 @@ export default function SingleDepartmentDialog({
 
   const { roles } = useRoleLoggedIn();
   const { userId } = useContext(AppContext);
-  const [departmentList, setDepartmentList] = useState([
-    { id: 101, name: "Jazz" },
-  ]);
+  const [departmentList, setDepartmentList] = useState([]); //([{ id: -1, name: "N/A" },]);
   const [numberOfPrograms, setNumberOfPrograms] = useState(null);
   const [programNames, setProgramNames] = useState([]);
+  const [isPlannerForThisDepartment, setIsPlannerForThisDepartment] =
+    useState(false);
 
   // Fetches the number of programs for the department with the given id.
   const fetchNumberOfPrograms = async () => {
@@ -63,12 +63,18 @@ export default function SingleDepartmentDialog({
   }, [open, singleDepartment]);
 
   // Fetches the department id, If the user is a planner, only the departments they are a planner of are fetched.
-  const getDepartmentIdForDialog = async () => {
+  const checkIfUserPlannerForThisDepartment = async () => {
     if (roles.planner === "1") {
       Logger.debug("Fetching planner-specific Departments from server.");
       const response = await dao.fetchDepartmentplannerByUserId(userId);
       if (response.success) {
         setDepartmentList(response.data);
+
+        // Check if the user is a planner of this department.
+        setIsPlannerForThisDepartment(
+          roles.planner === "1" &&
+            departmentList.some((dept) => dept.id === singleDepartment?.id),
+        );
       } else {
         Logger.error("Error fetching planner Departments.");
       }
@@ -76,13 +82,8 @@ export default function SingleDepartmentDialog({
   };
 
   useEffect(() => {
-    getDepartmentIdForDialog();
-  }, []);
-
-  // Checks if the user is a planner of the department.
-  const isPlannerOfDepartment =
-    roles.planner === "1" &&
-    departmentList.some((dept) => dept.id === singleProgram?.departmentId);
+    checkIfUserPlannerForThisDepartment();
+  }, [singleDepartment]);
 
   return (
     <Dialog
@@ -113,9 +114,14 @@ export default function SingleDepartmentDialog({
       >
         <Typography variant="singleDialogSubtitle">
           <Tooltip
-            title={`Space(s): ${programNames.slice(0, 5).join(", ")}`}
+            title={`Programs: ${programNames.slice(0, 5).join(", ")}`}
             placement="top"
           >
+            {`${
+              isPlannerForThisDepartment
+                ? "Your department!\n"
+                : "Not your dept!"
+            }`}
             {numberOfPrograms !== null
               ? numberOfPrograms === 0
                 ? "There are no programs in this department."
@@ -126,7 +132,7 @@ export default function SingleDepartmentDialog({
           </Tooltip>
         </Typography>
       </DialogContent>
-      {(roles.admin === "1" || isPlannerOfDepartment) &&
+      {(roles.admin === "1" || isPlannerForThisDepartment) &&
         numberOfPrograms === 0 && (
           <DialogActions>
             <EditDepartment
