@@ -22,6 +22,7 @@ export default function DeleteBuilding({
   const [deleteBuildingData, setDeleteBuildingData] = useState(null);
   const [hasAssociatedSpaces, setHasAssociatedSpaces] = useState(false);
   const [spaceNames, setSpaceNames] = useState([]);
+  const [totalSpaceCount, setTotalSpaceCount] = useState(0);
 
   // Fetch spaces associated with the building
   useEffect(() => {
@@ -31,7 +32,10 @@ export default function DeleteBuilding({
         .then((response) => {
           const spaces = response.data || [];
           setHasAssociatedSpaces(spaces.length > 0);
-          setSpaceNames(spaces.map((space) => space.name));
+          setTotalSpaceCount(spaces.length);
+
+          const displayedNames = spaces.slice(0, 5).map((space) => space.name);
+          setSpaceNames(displayedNames);
         })
         .catch((error) =>
           console.error("Failed to fetch spaces for building:", error),
@@ -95,14 +99,19 @@ export default function DeleteBuilding({
           Delete
         </Button>
       ) : (
-        <Tooltip title={`Space(s): ${spaceNames.join(", ")}`} placement="top">
+        <Tooltip
+          title={`Space(s): ${spaceNames.join(", ")}${
+            totalSpaceCount > 5 ? ", ..." : ""
+          }`}
+          placement="top"
+        >
           <span>
             <Button
               variant="contained"
               disabled
               style={{ ...theme.components.MuiButton.redbutton, opacity: 0.5 }}
             >
-              {`This building has ${spaceNames.length} space(s)`}
+              {`This building has ${totalSpaceCount} space(s)`}
             </Button>
           </span>
         </Tooltip>
