@@ -42,7 +42,7 @@ export default function AllocRoundControlPanel({ incrementResetCounter }) {
   };
 
   return (
-    <Typography component="p" variant="allocRoundControlPanel">
+    <Typography component="div" variant="allocRoundControlPanel">
       <AlertBox
         alertOpen={alertOpen}
         alertOptions={alertOptions}
