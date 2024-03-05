@@ -2,33 +2,33 @@ import { useEffect, useState } from "react";
 
 import Pagination from "@mui/material/Pagination";
 
-export default function AllocRoundPagination({
+export default function SettingsPagination({
   pagination,
   setPagination,
-  allAllocRoundsList,
-  setPaginateAllocRounds,
+  allSettingsList,
+  paginateSettings,
+  setPaginateSettings,
   pageSize,
 }) {
-  const count = Math.ceil(allAllocRoundsList.length / pageSize);
+  const count = Math.ceil(allSettingsList.length / pageSize);
   const [initialRender, setInitialRender] = useState(true);
 
   useEffect(() => {
     if (initialRender) {
       setInitialRender(false);
     } else {
-      const slicedAllocRounds = allAllocRoundsList.slice(
+      const slicedSettings = allSettingsList.slice(
         pagination.from,
         pagination.to,
       );
-      setPaginateAllocRounds(slicedAllocRounds);
+      setPaginateSettings(slicedSettings);
     }
-  }, [pagination]);
+  }, [pagination, paginateSettings]);
 
   const handleChange = (e, p) => {
     const from = (p - 1) * pageSize;
     const to = (p - 1) * pageSize + pageSize;
-    setPagination({ from, to });
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    setPagination({ ...pagination, from: from, to: to });
   };
 
   return (

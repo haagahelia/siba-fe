@@ -1,25 +1,28 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 import Pagination from "@mui/material/Pagination";
-
-const pageSize = 15;
 
 export default function SpaceTypePagination({
   pagination,
   setPagination,
   allSpaceTypesList,
   setPaginateSpaceTypes,
+  pageSize,
 }) {
   const count = Math.ceil(allSpaceTypesList.length / pageSize);
+  const [initialRender, setInitialRender] = useState(true);
 
   useEffect(() => {
-    if (!pagination.from) return;
-    const slicedSpaceTypes = allSpaceTypesList.slice(
-      pagination.from,
-      pagination.to,
-    );
-    setPaginateSpaceTypes(slicedSpaceTypes);
-  }, [pagination, allSpaceTypesList, setPaginateSpaceTypes]);
+    if (initialRender) {
+      setInitialRender(false);
+    } else {
+      const slicedSpaceTypes = allSpaceTypesList.slice(
+        pagination.from,
+        pagination.to,
+      );
+      setPaginateSpaceTypes(slicedSpaceTypes);
+    }
+  }, [pagination, allSpaceTypesList]);
 
   const handleChange = (e, p) => {
     const from = (p - 1) * pageSize;
