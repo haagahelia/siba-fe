@@ -17,6 +17,7 @@ import { AppContext } from "../AppContext";
 import AlertBox from "../components/common/AlertBox";
 import AddSettingContainer from "../components/settings/AddSettingContainer";
 import SettingsListContainer from "../components/settings/SettingsListContainer";
+import SettingsPagination from "../components/settings/SettingsPagination";
 import { handleSettings } from "../setting/handleSettings";
 
 export default function SettingsView() {
@@ -36,6 +37,10 @@ export default function SettingsView() {
   const [alertOptions, setAlertOptions] = useState({
     message: "This is an error alert — check it out!",
     severity: "error",
+  });
+  const [pagination, setPagination] = useState({
+    from: 0,
+    to: pageSize,
   });
 
   const getAllSettings = async () => {
@@ -98,12 +103,22 @@ export default function SettingsView() {
                 variant="pageHeader"
               />
               {isCardExpanded && (
-                <SettingsListContainer
-                  getAllSettings={getAllSettings}
-                  incrementDataModifiedCounter={incrementDataModifiedCounter}
-                  allSettings={settings}
-                  paginateSettings={paginateSettings}
-                />
+                <>
+                  <SettingsListContainer
+                    getAllSettings={getAllSettings}
+                    incrementDataModifiedCounter={incrementDataModifiedCounter}
+                    allSettings={settings}
+                    paginateSettings={paginateSettings}
+                  />
+                  <SettingsPagination
+                    pagination={pagination}
+                    setPagination={setPagination}
+                    allSettingsList={settings}
+                    paginateSettings={paginateSettings}
+                    setPaginateSettings={setPaginateSettings}
+                    pageSize={pageSize}
+                  />
+                </>
               )}
             </CardContent>
           </Card>
