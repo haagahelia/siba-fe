@@ -27,7 +27,7 @@ export default function AllocRoundPagination({
   const handleChange = (e, p) => {
     const from = (p - 1) * pageSize;
     const to = (p - 1) * pageSize + pageSize;
-    setPagination({ ...pagination, from: from, to: to });
+    setPagination({ from, to });
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 

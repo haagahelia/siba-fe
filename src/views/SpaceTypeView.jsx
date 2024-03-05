@@ -2,7 +2,8 @@ import { CardContent, CardHeader } from "@mui/material";
 import Card from "@mui/material/Card";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { AppContext } from "../AppContext";
 import {
   ajaxRequestErrorHandler,
   getFunctionName,
@@ -15,10 +16,10 @@ import SpaceTypePagination from "../components/spaceType/SpaceTypeListPagination
 import { useRoleLoggedIn } from "../hooks/useRoleLoggedIn";
 import Logger from "../logger/logger";
 
-const pageSize = 15;
-
 export default function SpaceTypeView() {
   const { roles } = useRoleLoggedIn();
+  const pageSize = useContext(AppContext).settings.itemsPerPage;
+
   const [paginateSpaceTypes, setPaginateSpaceTypes] = useState([]);
   const [allSpaceTypesList, setAllSpaceTypesList] = useState([]);
   const [alertOpen, setAlertOpen] = useState(false);
@@ -27,7 +28,6 @@ export default function SpaceTypeView() {
     message: "This is an error alert — check it out!",
     severity: "error",
   });
-
   const [pagination, setPagination] = useState({
     from: 0,
     to: pageSize,
@@ -54,7 +54,7 @@ export default function SpaceTypeView() {
   }, []);
 
   useEffect(() => {
-    setPaginateSpaceTypes(allSpaceTypesList.slice(0, 15));
+    setPaginateSpaceTypes(allSpaceTypesList.slice(0, pageSize));
   }, [allSpaceTypesList]);
 
   useEffect(() => {
@@ -87,6 +87,7 @@ export default function SpaceTypeView() {
                 allSpaceTypesList={allSpaceTypesList}
                 paginateSpaceTypes={paginateSpaceTypes}
                 setPaginateSpaceTypes={setPaginateSpaceTypes}
+                pageSize={pageSize}
               />
             </CardContent>
           </Card>
