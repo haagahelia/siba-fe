@@ -53,8 +53,8 @@ export default function SpaceTypeList({
 
   const filteredSpaceTypesList = sortedSpaceTypesList.filter(
     (spaceType) =>
-      spaceType.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      spaceType.description.toLowerCase().includes(searchQuery.toLowerCase()),
+      spaceType.name?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      spaceType.description?.toLowerCase().includes(searchQuery.toLowerCase()),
   );
 
   // STYLE
