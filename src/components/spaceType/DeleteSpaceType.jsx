@@ -22,6 +22,7 @@ export default function DeleteSpaceType({
   const [deleteSpaceTypeData, setDeleteSpaceTypeData] = useState(null);
   const [hasAssociatedSpaces, setHasAssociatedSpaces] = useState(false);
   const [spaceNames, setSpaceNames] = useState([]);
+  const [totalSpaceCount, setTotalSpaceCount] = useState(0);
 
   // Fetch spaces associated with the spacetype
   useEffect(() => {
@@ -31,7 +32,10 @@ export default function DeleteSpaceType({
         .then((response) => {
           const spaces = response.data || [];
           setHasAssociatedSpaces(spaces.length > 0);
-          setSpaceNames(spaces.map((space) => space.name));
+          setTotalSpaceCount(spaces.length);
+
+          const displayedNames = spaces.slice(0, 5).map((space) => space.name);
+          setSpaceNames(displayedNames);
         })
         .catch((error) =>
           console.error("Failed to fetch spaces for space type:", error),
@@ -95,14 +99,19 @@ export default function DeleteSpaceType({
           Delete
         </Button>
       ) : (
-        <Tooltip title={`Space(s): ${spaceNames.join(", ")}`} placement="top">
+        <Tooltip
+          title={`Space(s): ${spaceNames.join(", ")}${
+            totalSpaceCount > 5 ? ", ..." : ""
+          }`}
+          placement="top"
+        >
           <span>
             <Button
               variant="contained"
               disabled
               style={{ ...theme.components.MuiButton.redbutton, opacity: 0.5 }}
             >
-              Delete (Spaces Present)
+              {`This space type has ${totalSpaceCount} space(s)`}
             </Button>
           </span>
         </Tooltip>
