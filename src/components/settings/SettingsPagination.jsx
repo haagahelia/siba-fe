@@ -6,7 +6,6 @@ export default function SettingsPagination({
   pagination,
   setPagination,
   allSettingsList,
-  paginateSettings,
   setPaginateSettings,
   pageSize,
 }) {
@@ -14,16 +13,17 @@ export default function SettingsPagination({
   const [initialRender, setInitialRender] = useState(true);
 
   useEffect(() => {
-    if (initialRender) {
-      setInitialRender(false);
-    } else {
+    if (!initialRender) {
+      // Check if it's not the initial render
       const slicedSettings = allSettingsList.slice(
         pagination.from,
         pagination.to,
       );
       setPaginateSettings(slicedSettings);
+    } else {
+      setInitialRender(false);
     }
-  }, [pagination, paginateSettings]);
+  }, [pagination, allSettingsList, initialRender]);
 
   const handleChange = (e, p) => {
     const from = (p - 1) * pageSize;
