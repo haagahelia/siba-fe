@@ -1,5 +1,3 @@
-import { useState } from "react";
-
 import Button from "@mui/material/Button";
 import Checkbox from "@mui/material/Checkbox";
 import Dialog from "@mui/material/Dialog";
@@ -11,10 +9,10 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import FormGroup from "@mui/material/FormGroup";
 import Grid from "@mui/material/Grid";
 import useTheme from "@mui/material/styles/useTheme";
+import { useState } from "react";
 
 export default function EditUserForm({ formik }) {
   const [open, setOpen] = useState(false);
-
   const theme = useTheme();
 
   return (
@@ -34,62 +32,56 @@ export default function EditUserForm({ formik }) {
             Edit role for {formik.values.email}
           </DialogTitle>
           <DialogContent>
-            <DialogContentText>
-              <Grid container variant="sibaGridEdit" spacing={3} column={7}>
-                <Grid item xs={12}>
-                  <FormGroup>
-                    <FormControlLabel
-                      control={<Checkbox />}
-                      label="Admin"
-                      labelPlacement="start"
-                      className="formCheckBoxButtons"
-                      name="isAdmin"
-                      checked={formik.values.isAdmin === 1}
-                      onChange={(event) =>
-                        formik.handleChange({
-                          target: {
-                            name: "isAdmin",
-                            value: event.target.checked ? 1 : 0,
-                          },
-                        })
-                      }
-                    />
-                    <FormControlLabel
-                      control={<Checkbox />}
-                      label="Planner"
-                      labelPlacement="start"
-                      className="formCheckBoxButtons"
-                      name="isPlanner"
-                      checked={formik.values.isPlanner === 1}
-                      onChange={(event) =>
-                        formik.handleChange({
-                          target: {
-                            name: "isPlanner",
-                            value: event.target.checked ? 1 : 0,
-                          },
-                        })
-                      }
-                    />
-                    <FormControlLabel
-                      control={<Checkbox />}
-                      label="Statist"
-                      labelPlacement="start"
-                      className="formCheckBoxButtons"
-                      name="isStatist"
-                      checked={formik.values.isStatist === 1}
-                      onChange={(event) =>
-                        formik.handleChange({
-                          target: {
-                            name: "isStatist",
-                            value: event.target.checked ? 1 : 0,
-                          },
-                        })
-                      }
-                    />
-                  </FormGroup>
-                </Grid>
-              </Grid>
-            </DialogContentText>
+            <FormGroup>
+              <FormControlLabel
+                control={<Checkbox />}
+                label="Admin"
+                labelPlacement="start"
+                className="formCheckBoxButtons"
+                name="isAdmin"
+                checked={formik.values.isAdmin === 1}
+                onChange={(event) =>
+                  formik.handleChange({
+                    target: {
+                      name: "isAdmin",
+                      value: event.target.checked ? 1 : 0,
+                    },
+                  })
+                }
+              />
+              <FormControlLabel
+                control={<Checkbox />}
+                label="Planner"
+                labelPlacement="start"
+                className="formCheckBoxButtons"
+                name="isPlanner"
+                checked={formik.values.isPlanner === 1}
+                onChange={(event) =>
+                  formik.handleChange({
+                    target: {
+                      name: "isPlanner",
+                      value: event.target.checked ? 1 : 0,
+                    },
+                  })
+                }
+              />
+              <FormControlLabel
+                control={<Checkbox />}
+                label="Statist"
+                labelPlacement="start"
+                className="formCheckBoxButtons"
+                name="isStatist"
+                checked={formik.values.isStatist === 1}
+                onChange={(event) =>
+                  formik.handleChange({
+                    target: {
+                      name: "isStatist",
+                      value: event.target.checked ? 1 : 0,
+                    },
+                  })
+                }
+              />
+            </FormGroup>
           </DialogContent>
           <DialogActions
             sx={{ justifyContent: "space-evenly", padding: "16px" }}
