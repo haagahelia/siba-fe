@@ -54,6 +54,11 @@ export default function NavBar() {
     title: "this is dialog (dummy value)",
     content: "Something here (dummy value)",
   });
+  const [logoutDialogOpen, setLogoutDialogOpen] = useState(false);
+  const [logoutDialogOptions, setLogoutDialogOptions] = useState({
+    title: "this is dialog (dummy value)",
+    content: "Something here (dummy value)",
+  });
   const [alertOpen, setAlertOpen] = useState(false);
   const [alertOptions, setAlertOptions] = useState({
     message: "This is an error alert — check it out!",
@@ -181,13 +186,14 @@ export default function NavBar() {
     },
     {
       name: "Log Out",
-      href: "/login",
       forRoles: ["admin", "planner", "statist"],
       showForCurrentUser: false,
       action() {
-        localStorageClearUserLoginAndToken();
-        handleLoginChange();
-        setIsDropdownVisible(false);
+        setLogoutDialogOpen(true);
+        setLogoutDialogOptions({
+          title: "Are you sure you want to log out?",
+          content: "By clicking continue, you will be logged out.",
+        });
       },
     },
   ];
@@ -223,6 +229,18 @@ export default function NavBar() {
     }
     getAndHandleSettings();
   }, []);
+
+  useEffect(() => {
+    // Show alert when user logs out
+    if (!appContext.userEmail) {
+      setAlertOptions({
+        severity: "info",
+        title: "Logged Out",
+        message: "You have been logged out.",
+      });
+      setAlertOpen(true);
+    }
+  }, [appContext.userEmail]); // Show alert when user logs out
 
   // Called to produce the drop-down menu items
   const renderDropdownMenu = (page, variant) => {
@@ -273,6 +291,14 @@ export default function NavBar() {
     appContext.roles.admin = Number(localStorage.getItem("isAdmin"));
     appContext.roles.planner = Number(localStorage.getItem("isPlanner"));
     appContext.roles.statist = Number(localStorage.getItem("isStatist"));
+  };
+
+  const performLogout = () => {
+    localStorageClearUserLoginAndToken();
+    handleLoginChange();
+    setIsDropdownVisible(false);
+    window.location.href = "/login";
+    console.log("logout");
   };
 
   // Attempts to reset database and shows result with success or error alert
@@ -443,6 +469,12 @@ export default function NavBar() {
         dialogOptions={dBResetDialogOptions}
         setDialogOpen={setdBResetDialogOpen}
         submit={resetDatabase}
+      />
+      <ConfirmationDialog
+        dialogOpen={logoutDialogOpen}
+        dialogOptions={logoutDialogOptions}
+        setDialogOpen={setLogoutDialogOpen}
+        submit={performLogout}
       />
       <div className={`navbar-spacing ${showOrHideScrollBar()}`}>
         <BrowserRouter>
