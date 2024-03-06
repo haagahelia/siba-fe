@@ -14,16 +14,15 @@ export default function SettingsPagination({
   const [initialRender, setInitialRender] = useState(true);
 
   useEffect(() => {
-    if (initialRender) {
-      setInitialRender(false);
-    } else {
+    if (!initialRender) {
+      // Check if it's not the initial render
       const slicedSettings = allSettingsList.slice(
         pagination.from,
         pagination.to,
       );
       setPaginateSettings(slicedSettings);
     }
-  }, [pagination, paginateSettings]);
+  }, [pagination, allSettingsList, paginateSettings, initialRender]);
 
   const handleChange = (e, p) => {
     const from = (p - 1) * pageSize;
