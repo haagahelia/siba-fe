@@ -7,7 +7,7 @@ import DialogTitle from "@mui/material/DialogTitle";
 import Grid from "@mui/material/Grid";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
-import { useContext, useEffect, useState } from "react";
+import { Fragment, useContext, useEffect, useState } from "react";
 import { AppContext } from "../../AppContext";
 import dao from "../../ajax/dao";
 import { useRoleLoggedIn } from "../../hooks/useRoleLoggedIn";
@@ -28,22 +28,32 @@ export default function SingleDepartmentDialog({
   const { userId } = useContext(AppContext);
   const [departmentList, setDepartmentList] = useState([]); //([{ id: -1, name: "N/A" },]);
   const [numberOfPrograms, setNumberOfPrograms] = useState(null);
-  const [programNames, setProgramNames] = useState([]);
+  const [namesOfPrograms, setNamesOfPrograms] = useState([]);
   const [isPlannerForThisDepartment, setIsPlannerForThisDepartment] =
     useState(false);
 
   // Fetches the number of programs for the department with the given id.
   const fetchNumberOfPrograms = async () => {
-    const response = await dao.getListOfPrograms(singleDepartment?.id);
+    const response = await dao.getNumberOfPrograms(singleDepartment?.id);
     if (response === null) {
       return "Error fetching number of programs";
     }
-    const programNames = response.data.map((program) => program.name);
-    setProgramNames(programNames);
-    return programNames;
+    const num = response.data;
+    const programCount = num["count(*)"];
+    return programCount;
   };
 
-  // Fetches the department id for the dialog.
+  // fetches the first five program names for the department with the given id.
+  const fetchFirstFiveProgramNames = async () => {
+    const response = await dao.getProgramsFirstFiveNames(singleDepartment?.id);
+    if (response.httpStatus !== 200) {
+      return "Error fetching first five program names";
+    }
+    const displayFirstFiveNames = response.data.map((program) => program.name);
+    return displayFirstFiveNames;
+  };
+
+  // Fetches the number of programs by department id for the dialog.
   useEffect(() => {
     if (open && singleDepartment) {
       Logger.debug(
@@ -53,8 +63,25 @@ export default function SingleDepartmentDialog({
       );
       fetchNumberOfPrograms(singleDepartment.id)
         .then((data) => {
-          setNumberOfPrograms(data.length);
-          Logger.debug(data);
+          setNumberOfPrograms(data);
+        })
+        .catch((error) => {
+          Logger.error(error);
+        });
+    }
+  }, [open, singleDepartment]);
+
+  // Fetches the first five program names by dept id for the dialog.
+  useEffect(() => {
+    if (open && singleDepartment) {
+      Logger.debug(
+        `Rendering SingleDepartmentDialog for department: ${JSON.stringify(
+          singleDepartment,
+        )}`,
+      );
+      fetchFirstFiveProgramNames(singleDepartment.id)
+        .then((data) => {
+          setNamesOfPrograms(data);
         })
         .catch((error) => {
           Logger.error(error);
@@ -114,21 +141,26 @@ export default function SingleDepartmentDialog({
       >
         <Typography variant="singleDialogSubtitle">
           <Tooltip
-            title={`Programs: ${programNames.slice(0, 5).join(", ")}`}
+            title={`Programs: ${namesOfPrograms.join(", ")}${
+              numberOfPrograms > 5 ? ", ..." : ""
+            }`}
             placement="top"
           >
-            {`${
-              isPlannerForThisDepartment
-                ? "Your department!\n"
-                : "Not your dept!"
-            }`}
-            {numberOfPrograms !== null
-              ? numberOfPrograms === 0
-                ? "There are no programs in this department."
-                : numberOfPrograms === 1
-                  ? "There is 1 program in this department."
-                  : `There are ${numberOfPrograms} programs in this department.`
-              : "Loading..."}
+            <div>
+              {`${
+                isPlannerForThisDepartment
+                  ? "You are planner for this department!"
+                  : "Not planner for this dept!"
+              }`}
+              <br />
+              {numberOfPrograms !== null
+                ? numberOfPrograms === 0
+                  ? "There are no programs in this department."
+                  : numberOfPrograms === 1
+                    ? "There is 1 program in this department."
+                    : `There are ${numberOfPrograms} programs in this department.`
+                : "Loading..."}
+            </div>
           </Tooltip>
         </Typography>
       </DialogContent>
