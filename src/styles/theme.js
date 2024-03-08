@@ -444,26 +444,32 @@ export const createAppTheme = (currentPalette) =>
               backgroundColor: currentPalette.edit.main,
               color: currentPalette.edit.contrastText,
             },
+            "&.greenButton": {
+              backgroundColor: currentPalette.success.main,
+              color: currentPalette.success.contrastText,
+            },
             "&.disabledButton": {
               opacity: 0.5,
+            },
+          },
+          outlined: {
+            "&.redButton": {
+              borderColor: currentPalette.warning.main,
+              color: currentPalette.warning.main,
+            },
+            "&.secondaryButton": {
+              borderColor: currentPalette.secondary.main,
+              color: currentPalette.secondary.main,
+              "&:hover": {
+                backgroundColor: currentPalette.backgroundDarker.default,
+                opacity: 0.8,
+              },
             },
           },
           text: {
             backgroundColor: currentPalette.primary.main,
             color: currentPalette.primary.contrastText,
           },
-        },
-        redbutton: {
-          backgroundColor: currentPalette.warning.main,
-          color: currentPalette.warning.contrastText,
-        },
-        editbutton: {
-          backgroundColor: currentPalette.edit.main,
-          color: currentPalette.edit.contrastText,
-        },
-        greenbutton: {
-          backgroundColor: currentPalette.success.main,
-          color: currentPalette.success.contrastText,
         },
         variants: [
           {

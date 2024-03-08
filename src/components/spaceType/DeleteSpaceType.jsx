@@ -1,6 +1,5 @@
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
-import useTheme from "@mui/material/styles/useTheme";
 import { useEffect, useState } from "react";
 import dao from "../../ajax/dao";
 import AlertBox from "../common/AlertBox";
@@ -11,7 +10,6 @@ export default function DeleteSpaceType({
   getAllSpaceTypes,
   setOpen,
 }) {
-  const theme = useTheme();
   const [alertOpen, setAlertOpen] = useState(false);
   const [alertOptions, setAlertOptions] = useState({
     message: "",
@@ -93,7 +91,7 @@ export default function DeleteSpaceType({
       {!hasAssociatedSpaces ? (
         <Button
           variant="contained"
-          style={theme.components.MuiButton.redbutton}
+          className="redButton"
           onClick={() => submitDelete(singleSpaceType)}
         >
           Delete
@@ -109,7 +107,7 @@ export default function DeleteSpaceType({
             <Button
               variant="contained"
               disabled
-              style={{ ...theme.components.MuiButton.redbutton, opacity: 0.5 }}
+              className="redButton disabledButton"
             >
               {`This space type has ${totalSpaceCount} space(s)`}
             </Button>

@@ -2,7 +2,6 @@ import { useState } from "react";
 import dao from "../../ajax/dao";
 
 import Button from "@mui/material/Button";
-import useTheme from "@mui/material/styles/useTheme";
 import AlertBox from "../common/AlertBox";
 import ConfirmationDialog from "../common/ConfirmationDialog";
 
@@ -22,8 +21,6 @@ export default function DeleteSubject({
     content: "Something here",
   });
   const [deleteSubjectData, setDeleteSubjectData] = useState(null);
-
-  const theme = useTheme();
 
   const deleteSubject = async (subjectData) => {
     const result = await dao.deleteSingleSubject(subjectData.id);
@@ -77,7 +74,7 @@ export default function DeleteSubject({
       />
       <Button
         variant="contained"
-        style={theme.components.MuiButton.redbutton}
+        className="redButton"
         onClick={() => submitDelete(singleSubject)}
       >
         Delete

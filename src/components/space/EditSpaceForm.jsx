@@ -13,7 +13,6 @@ import Grid from "@mui/material/Grid";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import TextField from "@mui/material/TextField";
-import useTheme from "@mui/material/styles/useTheme";
 
 export default function EditSpaceForm({
   buildingSelectList,
@@ -22,13 +21,11 @@ export default function EditSpaceForm({
 }) {
   const [open, setOpen] = useState(false);
 
-  const theme = useTheme();
-
   return (
     <div>
       <Button
         variant="contained"
-        style={theme.components.MuiButton.editbutton}
+        className="editButton"
         onClick={() => {
           setOpen(true);
         }}
@@ -265,7 +262,7 @@ export default function EditSpaceForm({
                 formik.resetForm();
               }}
               variant="contained"
-              style={theme.components.MuiButton.redbutton}
+              className="redButton"
             >
               Cancel
             </Button>

@@ -4,7 +4,6 @@ import CardContent from "@mui/material/CardContent";
 import CardHeader from "@mui/material/CardHeader";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
-import useTheme from "@mui/material/styles/useTheme";
 import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AppContext } from "../AppContext";
@@ -19,7 +18,6 @@ export default function AllocRoundView() {
   Logger.logPrefix = "AllocRoundView";
   const { roles } = useRoleLoggedIn();
   const navigate = useNavigate();
-  const theme = useTheme();
   const pageSize = useContext(AppContext).settings.itemsPerPage;
 
   const [paginateAllocRounds, setpaginateAllocRounds] = useState([]);

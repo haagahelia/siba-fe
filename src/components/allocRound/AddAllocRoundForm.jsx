@@ -1,6 +1,5 @@
 import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
-import useTheme from "@mui/material/styles/useTheme";
 import AllocRoundInputFields from "./AllocRoundInputFields";
 
 export default function AddAllocRoundForm({
@@ -8,8 +7,6 @@ export default function AddAllocRoundForm({
   submitValues,
   setInitialAllocRound,
 }) {
-  const theme = useTheme();
-
   const onCancel = () => {
     window.history.back(); // Return to the previous page
   };
@@ -24,7 +21,7 @@ export default function AddAllocRoundForm({
           <Button
             type="button"
             variant="outlined"
-            style={theme.components.MuiButton.redbuttton}
+            className="redButton"
             onClick={onCancel}
           >
             Cancel
@@ -32,7 +29,7 @@ export default function AddAllocRoundForm({
           <Button
             type="submit"
             variant="contained"
-            style={theme.components.MuiButton.greenbutton}
+            className="greenButton"
             onClick={() => {
               setInitialAllocRound(submitValues);
             }}

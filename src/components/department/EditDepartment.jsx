@@ -10,7 +10,6 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
-import useTheme from "@mui/material/styles/useTheme";
 import Logger from "../../logger/logger";
 import { capitalizeFirstLetter } from "../../validation/ValidationUtilities";
 import AlertBox from "../common/AlertBox";
@@ -32,8 +31,6 @@ export default function EditDepartment({
     title: "this is dialog",
     content: "Something here",
   });
-
-  const theme = useTheme();
 
   const formik = useFormik({
     enableReinitialize: true,
@@ -94,7 +91,7 @@ export default function EditDepartment({
       />
       <Button
         variant="contained"
-        style={theme.components.MuiButton.editbutton}
+        className="editButton"
         onClick={() => {
           setEditOpen(true);
         }}

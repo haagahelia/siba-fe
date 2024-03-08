@@ -2,7 +2,6 @@ import { useState } from "react";
 import dao from "../../ajax/dao";
 
 import Button from "@mui/material/Button";
-import useTheme from "@mui/material/styles/useTheme";
 import AlertBox from "../common/AlertBox";
 import ConfirmationDialog from "../common/ConfirmationDialog";
 
@@ -18,8 +17,6 @@ export default function DeleteSpace({ singleSpace, getAllSpaces, setOpen }) {
     content: "Something here",
   });
   const [deleteSpaceData, setDeleteSpaceData] = useState(null);
-
-  const theme = useTheme();
 
   const deleteSpace = async (spaceData) => {
     const result = await dao.deleteSingleSpace(spaceData.id);
@@ -72,7 +69,7 @@ export default function DeleteSpace({ singleSpace, getAllSpaces, setOpen }) {
       />
       <Button
         variant="contained"
-        style={theme.components.MuiButton.redbutton}
+        className="redButton"
         onClick={() => submitDelete(singleSpace)}
       >
         Delete

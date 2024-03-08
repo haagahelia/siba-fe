@@ -12,7 +12,6 @@ import Grid from "@mui/material/Grid";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
-import useTheme from "@mui/material/styles/useTheme";
 
 export default function AddSpaceEquipForm({
   equipmentSelectList,
@@ -20,8 +19,6 @@ export default function AddSpaceEquipForm({
   formik,
 }) {
   const [open, setOpen] = useState(false);
-
-  const theme = useTheme();
 
   return (
     <div>
@@ -78,7 +75,7 @@ export default function AddSpaceEquipForm({
           <DialogActions>
             <Button
               variant="contained"
-              style={theme.components.MuiButton.redbutton}
+              className="redButton"
               onClick={() => {
                 setOpen(false);
                 setEquipPriority(0);

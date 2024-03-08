@@ -13,7 +13,6 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import TextField from "@mui/material/TextField";
-import useTheme from "@mui/material/styles/useTheme";
 
 export default function EditSubjectForm({
   programSelectList,
@@ -22,13 +21,11 @@ export default function EditSubjectForm({
 }) {
   const [open, setOpen] = useState(false);
 
-  const theme = useTheme();
-
   return (
     <div>
       <Button
         variant="contained"
-        style={theme.components.MuiButton.editbutton}
+        className="editButton"
         onClick={() => {
           setOpen(true);
         }}
@@ -216,7 +213,7 @@ export default function EditSubjectForm({
                 formik.resetForm();
               }}
               variant="contained"
-              style={theme.components.MuiButton.redbutton}
+              className="redButton"
             >
               Cancel
             </Button>

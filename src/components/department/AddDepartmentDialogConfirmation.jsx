@@ -115,7 +115,6 @@ export default function AddDepartmentDialogConfirmation({
           </Button>
           <Button
             variant="contained"
-            color="primary"
             onClick={() => {
               Logger.debug("parola italiana");
               setOpen(false);

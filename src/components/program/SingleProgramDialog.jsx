@@ -86,7 +86,6 @@ export default function SingleProgramDialog({
       <DialogTitle id="dialog-title">{`Program: ${singleProgram?.name}`}</DialogTitle>
       <IconButton
         edge="end"
-        //color="inherit"
         onClick={() => setOpen(false)}
         aria-label="close"
         style={{ position: "absolute", top: "10px", right: "20px" }}

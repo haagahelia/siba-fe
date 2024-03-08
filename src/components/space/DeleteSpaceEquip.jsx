@@ -2,7 +2,6 @@ import { useState } from "react";
 import dao from "../../ajax/dao";
 
 import Button from "@mui/material/Button";
-import useTheme from "@mui/material/styles/useTheme";
 import Logger from "../../logger/logger";
 import ConfirmationDialog from "../common/ConfirmationDialog";
 
@@ -23,8 +22,6 @@ export default function DeleteSpaceEquip({
   });
 
   const equipmentName = singleSpaceEquipToDelete.name;
-
-  const theme = useTheme();
 
   const deleteSpaceEquipment = async (submitValues = null) => {
     // We will not use submitValues
@@ -71,7 +68,7 @@ export default function DeleteSpaceEquip({
       />
       <Button
         variant="contained"
-        style={theme.components.MuiButton.redbutton}
+        className="redButton"
         sx={{ maxWidth: "85px" }}
         onClick={() => {
           submitDelete(singleSpaceEquipToDelete);
