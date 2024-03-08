@@ -1,5 +1,5 @@
 import CloseIcon from "@mui/icons-material/Close";
-import { Tooltip } from "@mui/material";
+import { Button, Tooltip } from "@mui/material";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
@@ -140,48 +140,55 @@ export default function SingleDepartmentDialog({
         }}
       >
         <Typography variant="singleDialogSubtitle">
-          <Tooltip
-            title={`Programs: ${namesOfPrograms.join(", ")}${
-              numberOfPrograms > 5 ? ", ..." : ""
-            }`}
-            placement="top"
-          >
-            <div>
-              {`${
-                isPlannerForThisDepartment
-                  ? "You are planner for this department!"
-                  : "Not planner for this dept!"
-              }`}
-              <br />
-              {numberOfPrograms !== null
-                ? numberOfPrograms === 0
-                  ? "There are no programs in this department."
-                  : numberOfPrograms === 1
-                    ? "There is 1 program in this department."
-                    : `There are ${numberOfPrograms} programs in this department.`
-                : "Loading..."}
-            </div>
-          </Tooltip>
+          {`${
+            isPlannerForThisDepartment
+              ? "You are planner for this department!"
+              : "Not planner for this dept!"
+          }`}
+          <br />
         </Typography>
       </DialogContent>
-      {(roles.admin === "1" || isPlannerForThisDepartment) &&
-        numberOfPrograms === 0 && (
-          <DialogActions>
-            <EditDepartment
-              singleDepartment={singleDepartment}
-              setSingleDepartment={setSingleDepartment}
-              getAllDepartments={getAllDepartments}
-              setOpen={setOpen}
-              open={open}
-            />
+      {(roles.admin === "1" || isPlannerForThisDepartment) && (
+        <DialogActions>
+          {numberOfPrograms === 0 ? (
             <DeleteDepartment
               singleDepartment={singleDepartment}
               getAllDepartments={getAllDepartments}
               setOpen={setOpen}
             />
-          </DialogActions>
-        )}
-
+          ) : (
+            <Tooltip
+              title={`Programs: ${namesOfPrograms.join(", ")}${
+                numberOfPrograms > 5 ? ", ..." : ""
+              }`}
+              placement="top"
+            >
+              <div>
+                <Button
+                  variant="contained"
+                  disabled
+                  className="redButton disabledButton"
+                >
+                  {numberOfPrograms !== null
+                    ? numberOfPrograms === 0
+                      ? "There are no programs in this department."
+                      : numberOfPrograms === 1
+                        ? "This department has 1 program."
+                        : `This department has  ${numberOfPrograms} programs.`
+                    : "Loading..."}
+                </Button>
+              </div>
+            </Tooltip>
+          )}
+          <EditDepartment
+            singleDepartment={singleDepartment}
+            setSingleDepartment={setSingleDepartment}
+            getAllDepartments={getAllDepartments}
+            setOpen={setOpen}
+            open={open}
+          />
+        </DialogActions>
+      )}
       <DialogContent>
         <Grid container variant="sibaGridSingleItemDisplay" column={14}>
           <DialogContent variant="sibaDialogContent2">
