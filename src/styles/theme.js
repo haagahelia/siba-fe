@@ -457,6 +457,14 @@ export const createAppTheme = (currentPalette) =>
               borderColor: currentPalette.warning.main,
               color: currentPalette.warning.main,
             },
+            "&.secondaryButton": {
+              borderColor: currentPalette.secondary.main,
+              color: currentPalette.secondary.main,
+              "&:hover": {
+                backgroundColor: currentPalette.backgroundDarker.default,
+                opacity: 0.8,
+              },
+            },
           },
           text: {
             backgroundColor: currentPalette.primary.main,

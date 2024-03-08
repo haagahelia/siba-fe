@@ -1,6 +1,5 @@
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import useTheme from "@mui/material/styles/useTheme";
 import { saveAs } from "file-saver";
 import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
@@ -14,7 +13,6 @@ export default function AllocRoundControlPanel({ incrementResetCounter }) {
   const { allocRoundContext } = useContext(AllocRoundContext);
   // console.log("appContext 123: " + appContext);
 
-  const theme = useTheme();
   const [alertOpen, setAlertOpen] = useState(false);
   const [alertOptions, setAlertOptions] = useState({
     message: "This is an error alert — check it out!",
@@ -66,7 +64,7 @@ export default function AllocRoundControlPanel({ incrementResetCounter }) {
       <Button
         type="submit"
         variant="contained"
-        color="red"
+        className={`redButton ${!isClicked ? "disabledButton" : ""}`}
         onClick={() => {
           allocationPost.resetAlloc(allocRoundContext.allocRoundId);
           setDelayedClickedToggle();
@@ -82,7 +80,7 @@ export default function AllocRoundControlPanel({ incrementResetCounter }) {
         <Button
           type="submit"
           variant="outlined"
-          color="secondary"
+          className="secondaryButton"
           disabled={!isClicked}
         >
           Show failed allocation
@@ -91,7 +89,7 @@ export default function AllocRoundControlPanel({ incrementResetCounter }) {
       <Button
         type="submit"
         variant="outlined"
-        color="secondary"
+        className="secondaryButton"
         disabled={!isClicked}
         onClick={() => {
           getReportData(
@@ -108,7 +106,7 @@ export default function AllocRoundControlPanel({ incrementResetCounter }) {
       <Button
         type="submit"
         variant="outlined"
-        color="secondary"
+        className="secondaryButton"
         disabled={!isClicked}
         onClick={() => {
           getPlannerData(
