@@ -1,4 +1,3 @@
-import useTheme from "@mui/material/styles/useTheme";
 import { useState } from "react";
 
 import Button from "@mui/material/Button";
@@ -10,15 +9,13 @@ import Grid from "@mui/material/Grid";
 import AllocRoundInputFields from "./AllocRoundInputFields";
 
 export default function EditAllocRoundForm({ formik }) {
-  const theme = useTheme();
-
   const [open, setOpen] = useState(false);
 
   return (
     <div>
       <Button // theme button yellow
         variant="contained"
-        style={theme.components.MuiButton.editbutton}
+        className="editButton"
         onClick={() => {
           setOpen(true);
         }}
@@ -51,14 +48,14 @@ export default function EditAllocRoundForm({ formik }) {
                 formik.resetForm();
               }}
               variant="contained"
-              style={theme.components.MuiButton.redbutton}
+              className="redButton"
             >
               Cancel
             </Button>
             <Button // theme button green
               type="submit"
               variant="contained"
-              style={theme.components.MuiButton.greenbutton}
+              className="greenButton"
               onClick={() => {
                 setOpen(false);
               }}

@@ -18,7 +18,6 @@ import RadioGroup from "@mui/material/RadioGroup";
 import Select from "@mui/material/Select";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
-import useTheme from "@mui/material/styles/useTheme";
 
 export default function AddSubEquipForm({
   equipmentSelectList,
@@ -27,8 +26,6 @@ export default function AddSubEquipForm({
 }) {
   const [open, setOpen] = useState(false);
   const [equipPriority, setEquipPriority] = useState(0);
-
-  const theme = useTheme();
 
   /* Here we look for the priority of the equipment selected in select,
      so that the user can see what the equipment's default priority value is */
@@ -144,7 +141,7 @@ export default function AddSubEquipForm({
           <DialogActions>
             <Button
               variant="contained"
-              style={theme.components.MuiButton.redbutton}
+              className="redButton"
               onClick={() => {
                 setOpen(false);
                 setEquipPriority(0);

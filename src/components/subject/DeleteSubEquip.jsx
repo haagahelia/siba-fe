@@ -2,7 +2,6 @@ import { useState } from "react";
 import dao from "../../ajax/dao";
 
 import Button from "@mui/material/Button";
-import useTheme from "@mui/material/styles/useTheme";
 import Logger from "../../logger/logger";
 import { margins } from "../../styles/theme";
 import ConfirmationDialog from "../common/ConfirmationDialog";
@@ -24,8 +23,6 @@ export default function DeleteSubEquip({
   });
 
   const equipmentName = singleSubEquipToDelete.name;
-
-  const theme = useTheme();
 
   const deleteSubjectEquipment = async (submitValues = null) => {
     // We will not use submitValues
@@ -75,7 +72,7 @@ export default function DeleteSubEquip({
       />
       <Button
         variant="contained"
-        style={theme.components.MuiButton.redbutton}
+        className="redButton"
         sx={{ marginLeft: margins.small, maxWidth: "85px" }}
         onClick={() => {
           submitDelete(singleSubEquipToDelete);

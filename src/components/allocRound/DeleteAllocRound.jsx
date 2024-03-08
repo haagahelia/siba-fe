@@ -1,4 +1,3 @@
-import useTheme from "@mui/material/styles/useTheme";
 import { useContext, useState } from "react";
 import { AllocRoundContext } from "../../AppContext";
 import dao from "../../ajax/dao";
@@ -13,7 +12,6 @@ export default function DeleteAllocRound({
   incrementDataModifiedCounter,
 }) {
   const { allocRoundContext } = useContext(AllocRoundContext);
-  const theme = useTheme();
 
   const [alertOpen, setAlertOpen] = useState(false);
   const [alertOptions, setAlertOptions] = useState({
@@ -86,9 +84,8 @@ export default function DeleteAllocRound({
         submitValues={deleteId}
       />
       <Button
-        // theme button red
         variant="contained"
-        style={theme.components.MuiButton.redbutton}
+        className="redButton"
         onClick={() => submitDelete(singleAllocRound)}
       >
         Delete

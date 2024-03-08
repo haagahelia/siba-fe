@@ -17,7 +17,6 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import TextField from "@mui/material/TextField";
-import useTheme from "@mui/material/styles/useTheme";
 import AlertBox from "../common/AlertBox";
 import ConfirmationDialog from "../common/ConfirmationDialog";
 
@@ -43,7 +42,6 @@ export default function EditProgram({
   const [departmentSelectList, setDepartmentSelectList] = useState([]);
 
   const { roles } = useRoleLoggedIn();
-  const theme = useTheme();
 
   const getDepartmentForSelect = async () => {
     try {
@@ -140,7 +138,7 @@ export default function EditProgram({
       />
       <Button
         variant="contained"
-        style={theme.components.MuiButton.editbutton}
+        className="editButton"
         onClick={() => {
           setEditOpen(true);
         }}

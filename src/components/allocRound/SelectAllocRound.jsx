@@ -1,16 +1,15 @@
-import useTheme from "@mui/material/styles/useTheme";
 import { useContext, useState } from "react";
 import { AppContext } from "../../AppContext";
-import {AllocRoundContext} from "../../AppContext.js";
+import { AllocRoundContext } from "../../AppContext.js";
 
 import Button from "@mui/material/Button";
 import AlertBox from "../common/AlertBox";
 import ConfirmationDialog from "../common/ConfirmationDialog";
 
 export default function SelectAllocRound({ singleAllocRound }) {
-  const {allocRoundContext, setAllocRoundContext} = useContext(AllocRoundContext);
+  const { allocRoundContext, setAllocRoundContext } =
+    useContext(AllocRoundContext);
   const appContext = useContext(AppContext);
-  const theme = useTheme();
 
   const [alertOpen, setAlertOpen] = useState(false);
   const [alertOptions, setAlertOptions] = useState({
@@ -29,7 +28,10 @@ export default function SelectAllocRound({ singleAllocRound }) {
     // appContext.allocRoundName = allocRoundObj.name; // Now using AllocRoundContext
     localStorage.setItem("allocRoundId", allocRoundObj.id);
     localStorage.setItem("allocRoundName", allocRoundObj.name);
-    setAllocRoundContext({allocRoundId: allocRoundObj.id, allocRoundName: allocRoundObj.name});
+    setAllocRoundContext({
+      allocRoundId: allocRoundObj.id,
+      allocRoundName: allocRoundObj.name,
+    });
   };
 
   const allocationSelection = () => {
@@ -68,7 +70,7 @@ export default function SelectAllocRound({ singleAllocRound }) {
       />
       <Button
         variant="contained"
-        style={theme.components.MuiButton.greenbutton}
+        className="greenButton"
         onClick={confirmAllocationSelection}
       >
         Pick this allocation

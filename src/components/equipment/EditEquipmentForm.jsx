@@ -5,18 +5,16 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
-import useTheme from "@mui/material/styles/useTheme";
 import { useState } from "react";
 
 export default function EditEquipmentForm({ formik }) {
   const [editOpen, setEditOpen] = useState(false);
-  const theme = useTheme();
 
   return (
     <>
       <Button
         variant="contained"
-        style={theme.components.MuiButton.editbutton}
+        className="editButton"
         onClick={() => setEditOpen(true)}
       >
         Edit
