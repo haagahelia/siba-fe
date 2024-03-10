@@ -15,6 +15,8 @@ import TextField from "@mui/material/TextField";
 import { capitalizeFirstLetter } from "../../validation/ValidationUtilities";
 import AlertBox from "../common/AlertBox";
 import ConfirmationDialog from "../common/ConfirmationDialog";
+import DepartmentTemplate from "./DepartmentTemplate";
+import ImportDepartmentContainer from "./ImportDepartmentContainer";
 
 export default function AddDepartment({ getAllDepartments }) {
   const [isCardExpanded, setIsCardExpanded] = useState(false);
@@ -160,6 +162,12 @@ export default function AddDepartment({ getAllDepartments }) {
                   >
                     Add Department
                   </Button>
+                  <Grid padding={2}>
+                    <ImportDepartmentContainer
+                      getAllDepartments={getAllDepartments}
+                    />
+                    <DepartmentTemplate />
+                  </Grid>
                 </Grid>
               </Grid>
             </form>
