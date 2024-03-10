@@ -23,7 +23,7 @@ export default async function ValidateAddSpace(values) {
     inUse,
   } = values;
 
-  const isDuplicatedSpaceNameAndBuildingName = async function () {
+  const isDuplicatedSpaceNameAndBuildingName = async () => {
     let spaceList = [];
     const { data } = await dao.fetchSpaceNamesInBuilding();
     spaceList = data;
@@ -70,31 +70,49 @@ export default async function ValidateAddSpace(values) {
       vF_regNumberCountPlus.errorMessageFunction("Person limit");
   }
 
-  if (!availableFrom) {
+  if (!values.availableFrom) {
     errors.availableFrom = requiredFieldErrorMessageFunction("Available from");
-  } else if (!vF_regTimetableTime.regExp.test(availableFrom)) {
+  } else if (!vF_regTimetableTime.regExp.test(values.availableFrom)) {
     errors.availableFrom =
       vF_regTimetableTime.errorMessageFunction("Available from");
   }
 
-  if (!availableTo) {
+  if (!values.availableTo) {
     errors.availableTo = requiredFieldErrorMessageFunction("Available to");
-  } else if (!vF_regTimetableTime.regExp.test(availableTo)) {
+  } else if (!vF_regTimetableTime.regExp.test(values.availableTo)) {
     errors.availableTo =
       vF_regTimetableTime.errorMessageFunction("Available to");
+  } else if (
+    values.availableFrom &&
+    values.availableTo <= values.availableFrom
+  ) {
+    errors.availableTo = "Available to must be later than Available from";
   }
 
-  if (!classesFrom) {
+  if (!values.classesFrom) {
     errors.classesFrom = requiredFieldErrorMessageFunction("Classes from");
-  } else if (!vF_regTimetableTime.regExp.test(classesFrom)) {
+  } else if (!vF_regTimetableTime.regExp.test(values.classesFrom)) {
     errors.classesFrom =
       vF_regTimetableTime.errorMessageFunction("Classes from");
+  } else if (values.availableTo && values.classesFrom >= values.availableTo) {
+    errors.classesFrom = "Classes from must be earlier than Available to";
+  } else if (
+    values.availableFrom &&
+    values.classesFrom < values.availableFrom
+  ) {
+    errors.classesFrom =
+      "Classes from must be equal to or later than Available from";
   }
 
-  if (!classesTo) {
+  if (!values.classesTo) {
     errors.classesTo = requiredFieldErrorMessageFunction("Classes to");
-  } else if (!vF_regTimetableTime.regExp.test(classesTo)) {
+  } else if (!vF_regTimetableTime.regExp.test(values.classesTo)) {
     errors.classesTo = vF_regTimetableTime.errorMessageFunction("Classes to");
+  } else if (values.classesFrom && values.classesTo <= values.classesFrom) {
+    errors.classesTo = "Classes to must be later than Classes from";
+  } else if (values.availableTo && values.classesTo > values.availableTo) {
+    errors.classesTo =
+      "Classes to must be equal to or earlier than Available to";
   }
 
   if (inUse === undefined && inUse === null) {
