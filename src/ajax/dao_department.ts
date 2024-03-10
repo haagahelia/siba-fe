@@ -1,6 +1,6 @@
 import Logger from "../logger/logger";
 import { Department, Response, ResponseFiner } from "../types";
-import { create, get, remove, update } from "./request";
+import { create, download, get, remove, update } from "./request";
 
 const baseUrl = import.meta.env.VITE_BE_SERVER_BASE_URL;
 
@@ -45,6 +45,14 @@ export const addDepartment = async (
   return response.ok;
 };
 
+// creating multiple departments
+export const addDepartments = async (
+  newDepartment: Department[],
+): Promise<boolean> => {
+  const response = await create(`${baseUrl}/department/multi`, newDepartment);
+  return response.ok;
+};
+
 // update department
 export const editDepartment = async (
   editedDepartment: Department,
@@ -86,4 +94,10 @@ export const getProgramsFirstFiveNames = async (id: number) => {
     Logger.error("Failed to get the programs of the department from database");
     return { httpStatus: response.status, data: [] };
   }
+};
+
+export const downloadDepartmentTemplate = async (): Promise<
+  ResponseFiner<Department>
+> => {
+  return download<Department>("department", baseUrl);
 };
