@@ -1,3 +1,4 @@
+import DownloadIcon from "@mui/icons-material/Download";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { saveAs } from "file-saver";
@@ -5,6 +6,7 @@ import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { AllocRoundContext } from "../../AppContext";
 import allocationPost from "../../data/ResultAllocationStore";
+import { getFullReport } from "../../importDataFunctions/getFullReport";
 import { getPlannerData } from "../../importDataFunctions/getPlannerData";
 import { getReportData } from "../../importDataFunctions/getReportData";
 import AlertBox from "../common/AlertBox";
@@ -103,7 +105,7 @@ export default function AllocRoundControlPanel({ incrementResetCounter }) {
           );
         }}
       >
-        Download full report
+        allocation report <DownloadIcon />
       </Button>
       <Button
         type="submit"
@@ -119,7 +121,18 @@ export default function AllocRoundControlPanel({ incrementResetCounter }) {
           );
         }}
       >
-        Download Planner report
+        Planner report <DownloadIcon />
+      </Button>
+      <Button
+        type="submit"
+        variant="outlined"
+        className="secondaryButton"
+        disabled={!isClicked}
+        onClick={() => {
+          getFullReport(sheetcolumns, saveAs, setAlertOptions);
+        }}
+      >
+        Full report <DownloadIcon />
       </Button>
     </Typography>
   );
