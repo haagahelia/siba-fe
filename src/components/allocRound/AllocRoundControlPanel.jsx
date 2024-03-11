@@ -21,11 +21,14 @@ export default function AllocRoundControlPanel({ incrementResetCounter }) {
 
   const [isClicked, setIsClicked] = useState(true);
   const sheetcolumns = [
-    { header: "Department", key: "department", width: 35, height: 20 },
+    { header: "Allocation ID", key: "allocId", width: 12, height: 20 },
+    { header: "Allocation", key: "allocation", width: 9, height: 20 },
+    { header: "Allocated on", key: "lastModified", width: 17.89, height: 20 },
+    { header: "Department", key: "department", width: 34, height: 20 },
     { header: "Program", key: "program", width: 45, height: 20 },
-    { header: "Lesson", key: "lesson", width: 53, height: 20 },
-    { header: "Room", key: "room", width: 35, height: 20 },
-    { header: "Allocated Hours", key: "hours", width: 20, height: 20 },
+    { header: "Lesson", key: "lesson", width: 40, height: 20 },
+    { header: "Room", key: "room", width: 34, height: 20 },
+    { header: "Allocated Hours", key: "hours", width: 14, height: 20 },
   ];
 
   const setDelayedClickedToggle = () => {
@@ -92,13 +95,7 @@ export default function AllocRoundControlPanel({ incrementResetCounter }) {
         className="secondaryButton"
         disabled={!isClicked}
         onClick={() => {
-          getReportData(
-            allocRoundContext.allocRoundId,
-            sheetcolumns,
-            saveAs,
-            setAlertOptions,
-          );
-          //downloadReport();
+          getReportData(sheetcolumns, saveAs, setAlertOptions);
         }}
       >
         Download full report
@@ -109,12 +106,7 @@ export default function AllocRoundControlPanel({ incrementResetCounter }) {
         className="secondaryButton"
         disabled={!isClicked}
         onClick={() => {
-          getPlannerData(
-            allocRoundContext.allocRoundId,
-            sheetcolumns,
-            saveAs,
-            setAlertOptions,
-          );
+          getPlannerData(sheetcolumns, saveAs, setAlertOptions);
         }}
       >
         Download Planner report
