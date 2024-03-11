@@ -28,7 +28,7 @@ export default function AllocRoundControlPanel({ incrementResetCounter }) {
     { header: "Program", key: "program", width: 45, height: 20 },
     { header: "Lesson", key: "lesson", width: 40, height: 20 },
     { header: "Room", key: "room", width: 34, height: 20 },
-    { header: "Allocated Hours", key: "hours", width: 14, height: 20 },
+    { header: "Allocated Hours", key: "hours", width: 20, height: 20 },
   ];
 
   const setDelayedClickedToggle = () => {
@@ -95,7 +95,12 @@ export default function AllocRoundControlPanel({ incrementResetCounter }) {
         className="secondaryButton"
         disabled={!isClicked}
         onClick={() => {
-          getReportData(sheetcolumns, saveAs, setAlertOptions);
+          getReportData(
+            allocRoundContext.allocRoundId,
+            sheetcolumns,
+            saveAs,
+            setAlertOptions,
+          );
         }}
       >
         Download full report
@@ -106,7 +111,12 @@ export default function AllocRoundControlPanel({ incrementResetCounter }) {
         className="secondaryButton"
         disabled={!isClicked}
         onClick={() => {
-          getPlannerData(sheetcolumns, saveAs, setAlertOptions);
+          getPlannerData(
+            allocRoundContext.allocRoundId,
+            sheetcolumns,
+            saveAs,
+            setAlertOptions,
+          );
         }}
       >
         Download Planner report

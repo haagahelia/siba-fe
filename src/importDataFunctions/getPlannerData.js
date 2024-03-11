@@ -1,8 +1,13 @@
 import * as ExcelJS from "Exceljs";
 import dao from "../ajax/dao";
 
-export const getPlannerData = async (sheetcolumns, saveAs, setAlertOptions) => {
-  const { success, data } = await dao.fetchPlannerData();
+export const getPlannerData = async (
+  allocRoundId,
+  sheetcolumns,
+  saveAs,
+  setAlertOptions,
+) => {
+  const { success, data } = await dao.fetchPlannerData(allocRoundId);
   if (!success) {
     setAlertOptions({
       severity: "error",
@@ -15,6 +20,8 @@ export const getPlannerData = async (sheetcolumns, saveAs, setAlertOptions) => {
   }
   const plannerReport = new ExcelJS.Workbook();
   const plannersheet = plannerReport.addWorksheet("Planner");
+  plannersheet.addRow(`Allocation Round: ${data.allocId} ${data.allocation}`);
+  plannersheet.addRow(`Allocation was run on: ${data.lastModified}`);
   plannersheet.columns = sheetcolumns;
 
   for (const row of data) {
