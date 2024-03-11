@@ -20,8 +20,6 @@ export const getPlannerData = async (
   }
   const plannerReport = new ExcelJS.Workbook();
   const plannersheet = plannerReport.addWorksheet("Planner");
-  plannersheet.addRow(`Allocation Round: ${data.allocId} ${data.allocation}`);
-  plannersheet.addRow(`Allocation was run on: ${data.lastModified}`);
   plannersheet.columns = sheetcolumns;
 
   for (const row of data) {
