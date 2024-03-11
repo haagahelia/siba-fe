@@ -51,7 +51,7 @@ export const getMissingEquipmentForRoom = async (
   }
 };
 
-//fetch all data for excel
+//fetch current allocation data for report excel
 export const fetchReportData = async (
   allocRoundId: number,
 ): Promise<Response<Report>> => {
@@ -67,6 +67,13 @@ export const fetchPlannerData = async (
   const response = await get(
     `${baseUrl}/allocation/plannerreport/${allocRoundId}`,
   );
+  const reportData: Report[] = await response.json();
+  return { success: response.ok, data: reportData };
+};
+
+//fetch all allocations
+export const fetchFullReportData = async (): Promise<Response<Report>> => {
+  const response = await get(`${baseUrl}/allocation/report`);
   const reportData: Report[] = await response.json();
   return { success: response.ok, data: reportData };
 };
