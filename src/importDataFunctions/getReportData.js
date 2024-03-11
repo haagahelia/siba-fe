@@ -1,13 +1,8 @@
 import * as ExcelJS from "Exceljs";
 import dao from "../ajax/dao";
 
-export const getReportData = async (
-  allocRoundId,
-  sheetcolumns,
-  saveAs,
-  setAlertOptions,
-) => {
-  const { success, data } = await dao.fetchReportData(allocRoundId);
+export const getReportData = async (sheetcolumns, saveAs, setAlertOptions) => {
+  const { success, data } = await dao.fetchReportData();
   if (!success) {
     setAlertOptions({
       severity: "error",
@@ -36,8 +31,12 @@ export const getReportData = async (
     const fileExtension = ".xlsx";
 
     const blob = new Blob([buffer], { type: fileType });
+    const today = new Date();
+    const currDate = `${today.getFullYear()}-${
+      today.getMonth() + 1
+    }-${today.getDate()}-${today.getHours()}.${today.getMinutes()}`;
 
-    saveAs(blob, `Allocated-Lessons${fileExtension}`);
+    saveAs(blob, `Allocation-Report${currDate}${fileExtension}`);
     report.removeWorksheet(reportsheet.id);
   } catch (err) {
     console.log(`Could not download report: ${err}`);
