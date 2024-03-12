@@ -23,7 +23,7 @@ export default async function ValidateAddSpace(values) {
     inUse,
   } = values;
 
-  const isDuplicatedSpaceNameAndBuildingName = async function () {
+  const isDuplicatedSpaceNameAndBuildingName = async () => {
     let spaceList = [];
     const { data } = await dao.fetchSpaceNamesInBuilding();
     spaceList = data;
@@ -84,6 +84,11 @@ export default async function ValidateAddSpace(values) {
       vF_regTimetableTime.errorMessageFunction("Available to");
   }
 
+  if (availableFrom && availableTo && availableFrom === availableTo) {
+    errors.availableTo =
+      "'Available to' cannot be the same as 'Available from'";
+  }
+
   if (!classesFrom) {
     errors.classesFrom = requiredFieldErrorMessageFunction("Classes from");
   } else if (!vF_regTimetableTime.regExp.test(classesFrom)) {
@@ -95,6 +100,10 @@ export default async function ValidateAddSpace(values) {
     errors.classesTo = requiredFieldErrorMessageFunction("Classes to");
   } else if (!vF_regTimetableTime.regExp.test(classesTo)) {
     errors.classesTo = vF_regTimetableTime.errorMessageFunction("Classes to");
+  }
+
+  if (classesFrom && classesTo && classesFrom === classesTo) {
+    errors.classesTo = "'Classes to' cannot be the same as 'Classes from'";
   }
 
   if (inUse === undefined && inUse === null) {
