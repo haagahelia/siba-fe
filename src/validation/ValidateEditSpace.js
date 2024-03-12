@@ -26,7 +26,7 @@ export async function validate(values) {
     inUse,
   } = values;
 
-  const getSpaceNames = async function () {
+  const getSpaceNames = async () => {
     try {
       const { httpStatus, data } = await dao.fetchSpaceNames();
       if (httpStatus === 200) {
@@ -78,33 +78,50 @@ export async function validate(values) {
       vF_regNumberCountPlus.errorMessageFunction("Person limit");
   }
 
-  if (!availableFrom) {
+  if (!values.availableFrom) {
     errors.availableFrom = requiredFieldErrorMessageFunction("Available from");
-  } else if (!vF_regTimetableTime.regExp.test(availableFrom)) {
+  } else if (!vF_regTimetableTime.regExp.test(values.availableFrom)) {
     errors.availableFrom =
       vF_regTimetableTime.errorMessageFunction("Available from");
   }
 
-  if (!availableTo) {
+  if (!values.availableTo) {
     errors.availableTo = requiredFieldErrorMessageFunction("Available to");
-  } else if (!vF_regTimetableTime.regExp.test(availableTo)) {
+  } else if (!vF_regTimetableTime.regExp.test(values.availableTo)) {
     errors.availableTo =
       vF_regTimetableTime.errorMessageFunction("Available to");
+  } else if (
+    values.availableFrom &&
+    values.availableTo <= values.availableFrom
+  ) {
+    errors.availableTo = "Available to must be later than Available from";
   }
 
-  if (!classesFrom) {
+  if (!values.classesFrom) {
     errors.classesFrom = requiredFieldErrorMessageFunction("Classes from");
-  } else if (!vF_regTimetableTime.regExp.test(classesFrom)) {
+  } else if (!vF_regTimetableTime.regExp.test(values.classesFrom)) {
     errors.classesFrom =
       vF_regTimetableTime.errorMessageFunction("Classes from");
+  } else if (values.availableTo && values.classesFrom >= values.availableTo) {
+    errors.classesFrom = "Classes from must be earlier than Available to";
+  } else if (
+    values.availableFrom &&
+    values.classesFrom < values.availableFrom
+  ) {
+    errors.classesFrom =
+      "Classes from must be equal to or later than Available from";
   }
 
-  if (!classesTo) {
+  if (!values.classesTo) {
     errors.classesTo = requiredFieldErrorMessageFunction("Classes to");
-  } else if (!vF_regTimetableTime.regExp.test(classesTo)) {
+  } else if (!vF_regTimetableTime.regExp.test(values.classesTo)) {
     errors.classesTo = vF_regTimetableTime.errorMessageFunction("Classes to");
+  } else if (values.classesFrom && values.classesTo <= values.classesFrom) {
+    errors.classesTo = "Classes to must be later than Classes from";
+  } else if (values.availableTo && values.classesTo > values.availableTo) {
+    errors.classesTo =
+      "Classes to must be equal to or earlier than Available to";
   }
-
   if (inUse === undefined && inUse === null) {
     errors.inUse = requiredFieldErrorMessageFunction("In use?");
   } else if (!["0", "1", 0, 1].includes(inUse)) {
