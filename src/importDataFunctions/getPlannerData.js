@@ -36,8 +36,12 @@ export const getPlannerData = async (
     const fileExtension = ".xlsx";
 
     const blob = new Blob([buffer], { type: fileType });
+    const today = new Date();
+    const currDate = `${today.getFullYear()}-${
+      today.getMonth() + 1
+    }-${today.getDate()}-${today.getHours()}.${today.getMinutes()}`;
 
-    saveAs(blob, `Your-Allocated-Lessons${fileExtension}`);
+    saveAs(blob, `Your-Planner-Report-${currDate}${fileExtension}`);
     plannerReport.removeWorksheet(plannersheet.id);
   } catch (err) {
     console.log(`Could not download report: ${err}`);

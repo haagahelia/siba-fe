@@ -1,3 +1,4 @@
+import DownloadIcon from "@mui/icons-material/Download";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { saveAs } from "file-saver";
@@ -5,6 +6,7 @@ import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { AllocRoundContext } from "../../AppContext";
 import allocationPost from "../../data/ResultAllocationStore";
+import { getFullReport } from "../../importDataFunctions/getFullReport";
 import { getPlannerData } from "../../importDataFunctions/getPlannerData";
 import { getReportData } from "../../importDataFunctions/getReportData";
 import AlertBox from "../common/AlertBox";
@@ -21,10 +23,13 @@ export default function AllocRoundControlPanel({ incrementResetCounter }) {
 
   const [isClicked, setIsClicked] = useState(true);
   const sheetcolumns = [
-    { header: "Department", key: "department", width: 35, height: 20 },
+    { header: "Allocation ID", key: "allocId", width: 12, height: 20 },
+    { header: "Allocation", key: "allocation", width: 9, height: 20 },
+    { header: "Allocated on", key: "lastModified", width: 17.89, height: 20 },
+    { header: "Department", key: "department", width: 34, height: 20 },
     { header: "Program", key: "program", width: 45, height: 20 },
-    { header: "Lesson", key: "lesson", width: 53, height: 20 },
-    { header: "Room", key: "room", width: 35, height: 20 },
+    { header: "Lesson", key: "lesson", width: 40, height: 20 },
+    { header: "Room", key: "room", width: 34, height: 20 },
     { header: "Allocated Hours", key: "hours", width: 20, height: 20 },
   ];
 
@@ -98,10 +103,9 @@ export default function AllocRoundControlPanel({ incrementResetCounter }) {
             saveAs,
             setAlertOptions,
           );
-          //downloadReport();
         }}
       >
-        Download full report
+        allocation report <DownloadIcon />
       </Button>
       <Button
         type="submit"
@@ -117,7 +121,18 @@ export default function AllocRoundControlPanel({ incrementResetCounter }) {
           );
         }}
       >
-        Download Planner report
+        Planner report <DownloadIcon />
+      </Button>
+      <Button
+        type="submit"
+        variant="outlined"
+        className="secondaryButton"
+        disabled={!isClicked}
+        onClick={() => {
+          getFullReport(sheetcolumns, saveAs, setAlertOptions);
+        }}
+      >
+        Full report <DownloadIcon />
       </Button>
     </Typography>
   );

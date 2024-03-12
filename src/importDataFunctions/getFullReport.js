@@ -1,13 +1,8 @@
 import * as ExcelJS from "Exceljs";
 import dao from "../ajax/dao";
 
-export const getReportData = async (
-  allocRoundId,
-  sheetcolumns,
-  saveAs,
-  setAlertOptions,
-) => {
-  const { success, data } = await dao.fetchReportData(allocRoundId);
+export const getFullReport = async (sheetcolumns, saveAs, setAlertOptions) => {
+  const { success, data } = await dao.fetchFullReportData();
   if (!success) {
     setAlertOptions({
       severity: "error",
@@ -18,8 +13,8 @@ export const getReportData = async (
 
     return;
   }
-  const report = new ExcelJS.Workbook();
-  const reportsheet = report.addWorksheet("Report");
+  const fullReport = new ExcelJS.Workbook();
+  const reportsheet = fullReport.addWorksheet("Report");
   reportsheet.columns = sheetcolumns;
 
   for (const row of data) {
@@ -30,7 +25,7 @@ export const getReportData = async (
     cell.font = { bold: true };
   });
   try {
-    const buffer = await report.xlsx.writeBuffer();
+    const buffer = await fullReport.xlsx.writeBuffer();
     const fileType =
       "application/vnd.openxmlformats-officedocument.sreadsheetml.sheet";
     const fileExtension = ".xlsx";
@@ -41,10 +36,10 @@ export const getReportData = async (
       today.getMonth() + 1
     }-${today.getDate()}-${today.getHours()}.${today.getMinutes()}`;
 
-    saveAs(blob, `Allocation-Report${currDate}${fileExtension}`);
-    report.removeWorksheet(reportsheet.id);
+    saveAs(blob, `Full-Report${currDate}${fileExtension}`);
+    fullReport.removeWorksheet(reportsheet.id);
   } catch (err) {
     console.log(`Could not download report: ${err}`);
-    report.removeWorksheet(reportsheet.id);
+    fullReport.removeWorksheet(reportsheet.id);
   }
 };
