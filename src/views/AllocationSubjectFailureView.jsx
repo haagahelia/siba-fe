@@ -264,11 +264,11 @@ export default function AllocationSubjectFailureView() {
                       >
                         {row.areaOk === 0 ? (
                           <TableCell>
-                            <CloseIcon color="error" />
+                            <CloseIcon className="redIcon" />
                           </TableCell>
                         ) : (
                           <TableCell>
-                            <CheckIcon color="success" />
+                            <CheckIcon className="greenIcon" />
                           </TableCell>
                         )}
                       </Tooltip>
@@ -278,11 +278,11 @@ export default function AllocationSubjectFailureView() {
                       >
                         {row.personLimitOk === 0 ? (
                           <TableCell>
-                            <CloseIcon color="error" />
+                            <CloseIcon className="redIcon" />
                           </TableCell>
                         ) : (
                           <TableCell>
-                            <CheckIcon color="success" />
+                            <CheckIcon className="greenIcon" />
                           </TableCell>
                         )}
                       </Tooltip>
@@ -295,11 +295,11 @@ export default function AllocationSubjectFailureView() {
                       >
                         {row.spaceTypeOk === 0 ? (
                           <TableCell>
-                            <CloseIcon color="error" />
+                            <CloseIcon className="redIcon" />
                           </TableCell>
                         ) : (
                           <TableCell>
-                            <CheckIcon color="success" />
+                            <CheckIcon className="greenIcon" />
                           </TableCell>
                         )}
                       </Tooltip>

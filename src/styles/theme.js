@@ -29,6 +29,24 @@ export const createAppTheme = (currentPalette) =>
   createTheme({
     palette: currentPalette,
     components: {
+      MuiSvgIcon: {
+        styleOverrides: {
+          root: {
+            "&.redIcon": {
+              color: currentPalette.warning.main,
+            },
+            "&.greenIcon": {
+              color: currentPalette.success.main,
+            },
+            "&.infoIcon": {
+              color: currentPalette.infoIcon.main,
+            },
+            "&.arrowUpDownIcon": {
+              fontSize: 25,
+            },
+          },
+        },
+      },
       MuiCheckbox: {
         styleOverrides: {
           root: {
@@ -556,6 +574,9 @@ export const createAppTheme = (currentPalette) =>
             button: {
               color: currentPalette.fontColorDefault.default,
               borderColor: currentPalette.borderColor.main,
+              "&:hover": {
+                backgroundColor: `${currentPalette.backgroundDarker.default}175`,
+              },
             },
             "& .MuiPaginationItem-page.Mui-selected": {
               backgroundColor: `${currentPalette.primary.main}25`,

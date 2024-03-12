@@ -32,11 +32,6 @@ export default function SpaceTypePagination({
   };
 
   return (
-    <Pagination
-      count={count}
-      color="primary"
-      onChange={handleChange}
-      variant="outlined"
-    />
+    <Pagination count={count} onChange={handleChange} variant="outlined" />
   );
 }

@@ -63,11 +63,11 @@ export function GetMissingEquipment({ subjId, roomId, missingEquipmentCount }) {
     <Tooltip disableFocusListener title={missingEquipment}>
       {missingEquipmentCount > 0 ? (
         <TableCell>
-          <CloseIcon color="error" />
+          <CloseIcon className="redIcon" />
         </TableCell>
       ) : (
         <TableCell>
-          <CheckIcon color="success" />
+          <CheckIcon className="greenIcon" />
         </TableCell>
       )}
     </Tooltip>

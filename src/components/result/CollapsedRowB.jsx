@@ -37,12 +37,15 @@ export default function CollapsedRowB({ id }) {
   return (
     <Grid2 container>
       {expand ? (
-        <KeyboardArrowUpIcon sx={{ fontSize: 24 }} onClick={handleExpandClick}>
+        <KeyboardArrowUpIcon
+          className="infoIcon arrowUpDownIcon"
+          onClick={handleExpandClick}
+        >
           {" "}
         </KeyboardArrowUpIcon>
       ) : (
         <KeyboardArrowDownIcon
-          sx={{ color: theme.palette.infoIcon.main, fontSize: 24 }}
+          className="infoIcon arrowUpDownIcon"
           onClick={handleExpandClick}
         >
           {" "}
