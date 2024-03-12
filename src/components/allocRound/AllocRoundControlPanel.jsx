@@ -6,6 +6,7 @@ import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { AllocRoundContext } from "../../AppContext";
 import allocationPost from "../../data/ResultAllocationStore";
+import { useRoleLoggedIn } from "../../hooks/useRoleLoggedIn.js";
 import { getFullReport } from "../../importDataFunctions/getFullReport";
 import { getPlannerData } from "../../importDataFunctions/getPlannerData";
 import { getReportData } from "../../importDataFunctions/getReportData";
@@ -13,6 +14,7 @@ import AlertBox from "../common/AlertBox";
 
 export default function AllocRoundControlPanel({ incrementResetCounter }) {
   const { allocRoundContext } = useContext(AllocRoundContext);
+  const { roles } = useRoleLoggedIn();
   // console.log("appContext 123: " + appContext);
 
   const [alertOpen, setAlertOpen] = useState(false);
@@ -107,10 +109,12 @@ export default function AllocRoundControlPanel({ incrementResetCounter }) {
       >
         allocation report <DownloadIcon />
       </Button>
+      {}
       <Button
         type="submit"
         variant="outlined"
         className="secondaryButton"
+        style={{ display: roles.planner === "1" ? "" : "none" }}
         disabled={!isClicked}
         onClick={() => {
           getPlannerData(
