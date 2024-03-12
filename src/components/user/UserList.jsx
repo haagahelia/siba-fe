@@ -79,7 +79,7 @@ export default function UserList({ getAllUsers, paginateUsers }) {
                 <TableCell>Admin</TableCell>
                 <TableCell>Planner</TableCell>
                 <TableCell>Statist</TableCell>
-                <TableCell>Planner for</TableCell>
+                <TableCell>Planner for departments</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
