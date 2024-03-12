@@ -110,23 +110,24 @@ export default function SingleProgramDialog({
             : "Loading..."}
         </Typography>
       </DialogContent>
-      {(roles.admin === "1" || isPlannerOfDepartment) &&
-        numberOfLessons === 0 && (
-          <DialogActions>
+      {(roles.admin === "1" || isPlannerOfDepartment) && (
+        <DialogActions>
+          {numberOfLessons === 0 && (
             <DeleteProgram
               singleProgram={singleProgram}
               getAllPrograms={getAllPrograms}
               setOpen={setOpen}
             />
-            <EditProgram
-              singleProgram={singleProgram}
-              setSingleProgram={setSingleProgram}
-              getAllPrograms={getAllPrograms}
-              open={open}
-              setOpen={setOpen}
-            />
-          </DialogActions>
-        )}
+          )}
+          <EditProgram
+            singleProgram={singleProgram}
+            setSingleProgram={setSingleProgram}
+            getAllPrograms={getAllPrograms}
+            open={open}
+            setOpen={setOpen}
+          />
+        </DialogActions>
+      )}
       <DialogContent>
         <Grid container variant="sibaGridSingleItemDisplay" column={14}>
           <DialogContent variant="sibaDialogContent2">
