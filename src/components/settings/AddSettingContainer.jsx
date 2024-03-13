@@ -30,7 +30,7 @@ export default function AddSettingContainer({ getAllSettings }) {
   });
   // Here the initialvalues of the form are stored in the state
   const [initialSetting, setInitialSetting] = useState({
-    name: "",
+    variable: "",
     description: "",
     numberValue: "",
     textValue: "",
@@ -38,7 +38,7 @@ export default function AddSettingContainer({ getAllSettings }) {
 
   const resetForm = () => {
     setInitialSetting({
-      name: "",
+      variable: "",
       description: "",
       numberValue: "",
       textValue: "",
@@ -51,8 +51,8 @@ export default function AddSettingContainer({ getAllSettings }) {
     validate,
     onSubmit: (values) => {
       setDialogOptions({
-        title: `Are you sure you want to add ${values.name}?`,
-        content: `By clicking continue, ${values.name} will be added to the setting list`,
+        title: `Are you sure you want to add ${values.variable}?`,
+        content: `By clicking continue, ${values.variable} will be added to the setting list`,
       });
       setDialogOpen(true);
 
@@ -63,8 +63,8 @@ export default function AddSettingContainer({ getAllSettings }) {
   const addSetting = async (submitValues) => {
     const newSetting = {};
 
-    if (submitValues.name) {
-      newSetting.name = submitValues.name;
+    if (submitValues.variable) {
+      newSetting.variable = submitValues.variable;
     }
 
     if (submitValues.description) {
@@ -92,7 +92,7 @@ export default function AddSettingContainer({ getAllSettings }) {
     setAlertOptions({
       severity: "success",
       title: "Success!",
-      message: `${submitValues.name} added.`,
+      message: `${submitValues.variable} added.`,
     });
     setAlertOpen(true);
     resetForm();

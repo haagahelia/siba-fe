@@ -24,23 +24,25 @@ export default function EditSettingForm({ formik }) {
       </Button>
       <Dialog open={open}>
         <form onSubmit={formik.handleSubmit}>
-          <DialogTitle>Edit: {formik.initialValues?.name}</DialogTitle>
+          <DialogTitle>Edit: {formik.initialValues?.variable}</DialogTitle>
           <DialogContent>
             <Grid container variant="sibaGridEdit" spacing={3} column={7}>
               <Grid item xs={12}>
                 <TextField
                   error={
-                    formik.touched.name && formik.errors.name ? true : false
+                    formik.touched.variable && formik.errors.variable
+                      ? true
+                      : false
                   }
-                  name="name"
-                  label="Setting name"
+                  name="variable"
+                  label="Setting variable"
                   variant="outlined"
-                  value={formik.values?.name}
-                  onChange={formik.handleChange("name")}
-                  onBlur={formik.handleBlur("name")}
+                  value={formik.values?.variable}
+                  onChange={formik.handleChange("variable")}
+                  onBlur={formik.handleBlur("variable")}
                   helperText={
-                    formik.touched.name && formik.errors.name
-                      ? formik.errors.name
+                    formik.touched.variable && formik.errors.variable
+                      ? formik.errors.variable
                       : ""
                   }
                 />

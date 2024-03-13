@@ -64,10 +64,10 @@ export default function SettingsList({
                       variant="caption"
                       style={{ fontWeight: "bold" }}
                     >
-                      Name:
+                      Variable:
                     </Typography>
                     <ListItemText
-                      primary={value.name}
+                      primary={value.variable}
                       primaryTypographyProps={{
                         variant: "body2",
                       }}

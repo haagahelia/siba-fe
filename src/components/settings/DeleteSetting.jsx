@@ -36,7 +36,7 @@ export default function DeleteSetting({
     setAlertOptions({
       severity: "success",
       title: "Success!",
-      message: `${settingData.name} removed.`,
+      message: `${settingData.variable} removed.`,
     });
     setAlertOpen(true);
     setTimeout(() => {
@@ -47,8 +47,8 @@ export default function DeleteSetting({
 
   const submitDelete = (data) => {
     setDialogOptions({
-      title: `Are you sure you want to delete ${data.name}?`,
-      content: `Press continue to delete ${data.name} from the listing.`,
+      title: `Are you sure you want to delete ${data.variable}?`,
+      content: `Press continue to delete ${data.variable} from the listing.`,
     });
     setDialogOpen(true);
     setDeleteSettingData(data);

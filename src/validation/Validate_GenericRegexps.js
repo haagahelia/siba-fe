@@ -16,6 +16,21 @@ export const vF_regName = {
     ),
 };
 
+export const vF_regVariable = {
+  regExp: new RegExp(/^[A-Za-zäöåÄÖÅ0-9\(\)\s\/,-]*$/),
+  regExpHint:
+    "A-ö big and small letters, numbers and some punctuation characters allowed",
+
+  length: { min: 2, max: 255 },
+  lengthHint: "Minimum 2 and maximum 255 characters.",
+
+  errorMessageFunction: (fieldName) =>
+    genericErrorMessageFunction(
+      fieldName,
+      "has wrong format. A-ö big and small letters, numbers and some punctuation characters allowed",
+    ),
+};
+
 export const vF_regDescription = {
   regExp: new RegExp(/^[A-Za-zäöåÄÖÅ0-9\(\)\s\/,.:-]*$/),
   hint: "A-ö big and small letters, numbers and some punctuation characters allowed",
