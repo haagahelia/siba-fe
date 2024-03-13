@@ -3,9 +3,9 @@ import {
   requiredFieldErrorMessageFunction,
   trimAllPropertyValueStrings,
   vF_regDescription,
-  vF_regName,
   vF_regNumberValue,
   vF_regTextValue,
+  vF_regVariable,
 } from "./Validate_GenericRegexps";
 
 export async function validate(values) {
@@ -14,7 +14,7 @@ export async function validate(values) {
 
   let settingList = [];
 
-  const getSettingNames = async () => {
+  const getSettingVariables = async () => {
     const { data } = await dao.fetchSettings();
     settingList = data;
     let id;
@@ -29,18 +29,19 @@ export async function validate(values) {
     }
 
     return filteredList.some(
-      (building) => building.name.toLowerCase() === values.name.toLowerCase(),
+      (building) =>
+        building.name.toLowerCase() === values.variable.toLowerCase(),
     );
   };
 
-  if (!values.name) {
-    errors.name = requiredFieldErrorMessageFunction("Name");
-  } else if (await getSettingNames()) {
-    errors.name = "The name already exists";
-  } else if (values.name.length < 2 || values.name.length > 255) {
-    errors.name = "The name must be 2-255 characters long";
-  } else if (!vF_regName.regExp.test(values.name)) {
-    errors.name = vF_regName.errorMessageFunction("Name");
+  if (!values.variable) {
+    errors.variable = requiredFieldErrorMessageFunction("Variable");
+  } else if (await getSettingVariables()) {
+    errors.variable = "The variable already exists";
+  } else if (values.variable.length < 2 || values.variable.length > 255) {
+    errors.variable = "The variable must be 2-255 characters long";
+  } else if (!vF_regVariable.regExp.test(values.variable)) {
+    errors.variable = vF_regVariable.errorMessageFunction("Variable");
   }
 
   if (!values.description) {

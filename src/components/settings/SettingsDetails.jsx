@@ -36,7 +36,9 @@ export default function SettingsDetails({
         open={setAlertOpen}
       />
       <Dialog open={open} onClose={() => setOpen(false)}>
-        <DialogTitle id="dialog-title">Setting: {singleSetting?.name}</DialogTitle>
+        <DialogTitle id="dialog-title">
+          Setting: {singleSetting?.variable}
+        </DialogTitle>
         <DialogContent>
           {roles.admin === "1" && (
             <DialogActions>
@@ -65,8 +67,8 @@ export default function SettingsDetails({
           >
             <Grid item s={6}>
               <Typography variant="subtitle1">
-                Name:&nbsp;
-                {singleSetting?.name}
+                Variable:&nbsp;
+                {singleSetting?.variable}
               </Typography>
             </Grid>
             <Grid item s={6}>

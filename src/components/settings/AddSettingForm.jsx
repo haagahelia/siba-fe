@@ -13,16 +13,18 @@ export default function AddSettingForm({
       <Grid container variant="sibaGridAddForm" column={8}>
         <Grid item xs={12} sm={6} md={2}>
           <TextField
-            error={formik.touched.name && formik.errors.name ? true : false}
-            name="name"
-            label="Setting name"
+            error={
+              formik.touched.variable && formik.errors.variable ? true : false
+            }
+            name="variable"
+            label="Setting variable"
             variant="outlined"
-            value={formik.values.name}
-            onChange={formik.handleChange("name")}
-            onBlur={formik.handleBlur("name")}
+            value={formik.values.variable}
+            onChange={formik.handleChange("variable")}
+            onBlur={formik.handleBlur("variable")}
             helperText={
-              formik.touched.name && formik.errors.name
-                ? formik.errors.name
+              formik.touched.variable && formik.errors.variable
+                ? formik.errors.variable
                 : ""
             }
           />

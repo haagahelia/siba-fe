@@ -33,8 +33,8 @@ export default function EditSettingContainer({
     validate,
     onSubmit: (values) => {
       setDialogOptions({
-        title: `Are you sure you want to edit ${values.name}?`,
-        content: `Press continue to save ${values.name} new information. `,
+        title: `Are you sure you want to edit ${values.variable}?`,
+        content: `Press continue to save ${values.variable} new information. `,
       });
       setDialogOpen(true);
       return;
@@ -44,7 +44,7 @@ export default function EditSettingContainer({
   async function submitEditedSetting(values) {
     const editedSetting = {
       id: values.id,
-      name: capitalizeFirstLetter(values.name),
+      variable: capitalizeFirstLetter(values.variable),
       description: values.description,
       numberValue: values.numberValue,
       textValue: values.textValue,
@@ -65,7 +65,7 @@ export default function EditSettingContainer({
     setAlertOptions({
       severity: "success",
       title: "Success!",
-      message: `${values.name} new information added.`,
+      message: `${values.variable} new information added.`,
     });
     setAlertOpen(true);
     setSingleSetting(formik.values);
