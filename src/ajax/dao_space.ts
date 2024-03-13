@@ -1,3 +1,4 @@
+import Logger from "../logger/logger";
 import { ResponseFiner, Space, SpaceBuildingName, SpaceName } from "../types";
 import { create, download, get, remove, update } from "./request";
 
@@ -115,5 +116,23 @@ export const fetchSpacesBySpaceTypeId = async (spaceTypeId: number) => {
   } catch (error) {
     console.error("Error fetching spaces by space type ID:", error);
     return { httpStatus: 500, data: [] };
+  }
+};
+
+// function fetch number of alloc associated with spce by id
+export const fetchNumberOfAllocSpaces = async (id: number) => {
+  try {
+    const response = await get(`${baseUrl}/space/${id}`);
+    if (response.status === 200) {
+      const allocSpacesCount = await response.json();
+      console.log("allocSpaces", allocSpacesCount);
+      return { httpStatus: response.status, data: allocSpacesCount };
+    } else {
+      Logger.debug("Failed to fetch alloc spaces for space ID:", id);
+      return { httpStatus: response.status, data: 0 };
+    }
+  } catch (error) {
+    Logger.debug("Error fetching alloc spaces by space ID:", error);
+    return { httpStatus: 500, data: 0 };
   }
 };
