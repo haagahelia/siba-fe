@@ -16,17 +16,14 @@ export default function CollapsedRow({ prog1 }) {
     <Grid2 container>
       {expand ? (
         <KeyboardArrowUpIcon
-          sx={{ fontSize: 24, color: theme.palette.infoIcon.main }}
+          className="infoIcon arrowUpDownIcon"
           onClick={() => setExpand(!expand)}
         >
           {" "}
         </KeyboardArrowUpIcon>
       ) : (
         <KeyboardArrowDownIcon
-          sx={{
-            fontSize: 24,
-            color: theme.palette.infoIcon.main,
-          }}
+          className="infoIcon arrowUpDownIcon"
           onClick={() => setExpand(!expand)}
         >
           {" "}

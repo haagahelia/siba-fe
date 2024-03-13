@@ -78,14 +78,14 @@ function CollapsedRow(id) {
     <Grid2 container>
       {expand ? (
         <KeyboardArrowUpIcon
-          sx={{ color: theme.palette.primary, fontSize: 24 }}
+          className="infoIcon arrowUpDownIcon"
           onClick={() => setExpand(!expand)}
         >
           {" "}
         </KeyboardArrowUpIcon>
       ) : (
         <KeyboardArrowDownIcon
-          sx={{ color: theme.palette.primary, fontSize: 24 }}
+          className="infoIcon arrowUpDownIcon"
           onClick={() => {
             getRoomsData();
             setExpand(!expand);

@@ -92,7 +92,6 @@ export default function Departments() {
                 count={totalCount}
                 page={page}
                 onChange={handlePageChange}
-                color="primary"
                 variant="outlined"
               />
             </CardContent>
