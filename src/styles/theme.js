@@ -236,19 +236,7 @@ export const createAppTheme = (currentPalette) =>
             props: { variant: "dropDown" },
             style: {
               alignItems: "center",
-              backgroundColor: currentPalette.primary.main,
-              borderRight: `1px solid ${currentPalette.primary.main}`,
-              display: "flex",
-              flexDirection: "column",
-              flexWrap: "nowrap",
-              fontSize: "17.5px",
-              height: "100vh",
-              justifyContent: "space-evenly",
-              padding: "20px 0 20px 0",
-              position: "sticky",
-              textAlign: "center",
-              top: 0,
-              zIndex: 20,
+              backgroundColor: currentPalette.background.default,
             },
           },
         ],
@@ -295,42 +283,6 @@ export const createAppTheme = (currentPalette) =>
             },
           },
           {
-            // The drop down menu styling
-            props: { variant: "navBarDropDownLinks" },
-            style: {
-              backgroundColor: "transparent",
-              display: "flex",
-              borderRadius: "10px",
-              flexDirection: "column",
-              justifyContent: "center",
-              padding: "5px",
-              textAlign: "center",
-              width: "130px",
-              color: currentPalette.primary.main,
-
-              "& a": {
-                fontSize: "15.5px",
-                fontWeight: 600,
-                textDecoration: "none",
-              },
-
-              "&:hover a": {
-                color: currentPalette.primary.main,
-              },
-            },
-          },
-        ],
-      },
-      MuiListSubheader: {
-        styleOverrides: {
-          root: {
-            backgroundColor: currentPalette.backgroundDarker.default,
-            border: `1px solid ${currentPalette.borderColor.cardBoder}`,
-            color: currentPalette.fontColorDefault.default,
-          },
-        },
-        variants: [
-          {
             // The "Account" button styling
             props: { variant: "navBarAccountButton" },
             style: {
@@ -340,10 +292,13 @@ export const createAppTheme = (currentPalette) =>
               justifyContent: "center",
               left: "20px",
               margin: "auto",
+              padding: "5px",
+              position: "absolute",
               textAlign: "center",
               width: "130px",
 
               "& a": {
+                backgroundColor: currentPalette.background.default,
                 color: currentPalette.primary.main,
                 fontSize: "17.5px",
                 fontWeight: 700,
@@ -351,7 +306,33 @@ export const createAppTheme = (currentPalette) =>
               },
 
               "&:hover a": {
+                backgroundcolor: currentPalette.background.default,
                 color: currentPalette.fontColorDefault.default,
+              },
+            },
+          },
+          {
+            // The drop down menu styling
+            props: { variant: "navBarDropDownLinks" },
+            style: {
+              backgroundColor: currentPalette.background.default,
+              display: "flex",
+              borderRadius: "10px",
+              flexDirection: "column",
+              justifyContent: "center",
+
+              textAlign: "center",
+              width: "130px",
+              color: currentPalette.background.default,
+
+              "& a": {
+                fontSize: "15.5px",
+                fontWeight: 600,
+                textDecoration: "none",
+              },
+
+              "&:hover a": {
+                color: currentPalette.background.default,
               },
             },
           },
@@ -967,11 +948,11 @@ export const createAppTheme = (currentPalette) =>
             fontWeight: "normal",
           },
           ".dropDown": {
-            backgroundColor: currentPalette.backgroundDarker.default,
+            backgroundColor: currentPalette.background.default,
             border: "2px solid black",
             borderRadius: "10px",
             bottom: "0px",
-            left: `calc(${navbarWidth} - 19px)`,
+            left: `calc(${navbarWidth} - 110px)`,
             position: "absolute",
           },
           ".dropDownHoverArea": {

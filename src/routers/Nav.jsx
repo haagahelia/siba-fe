@@ -406,12 +406,11 @@ export default function NavBar() {
               onMouseLeave={() => setIsDropdownVisible(false)}
             >
               <ListItem variant="navBarAccountButton">
-                <List>
-                  <NavLink>
-                    {loggedIn}{" "}
-                    {/* The username which apperas in the account button */}
-                  </NavLink>
-
+                <NavLink>
+                  {loggedIn}{" "}
+                  {/* The username which apperas in the account button */}
+                </NavLink>
+                <List variant="dropDown">
                   {isDropdownVisible && (
                     <div className="dropDown">
                       {sibaPages
