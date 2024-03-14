@@ -236,7 +236,7 @@ export const createAppTheme = (currentPalette) =>
             props: { variant: "dropDown" },
             style: {
               alignItems: "center",
-              backgroundColor: currentPalette.background.default,
+              backgroundColor: currentPalette.backgroundDarker.default,
             },
           },
         ],
@@ -268,7 +268,7 @@ export const createAppTheme = (currentPalette) =>
               },
               "&:hover a": {
                 // borderBottom: "3px solid",
-                backgroundColor: currentPalette.background.default,
+                backgroundColor: currentPalette.backgroundDarker.default,
                 color: currentPalette.fontColorDefault.default,
                 fontWeight: 800,
               },
@@ -298,7 +298,7 @@ export const createAppTheme = (currentPalette) =>
               width: "130px",
 
               "& a": {
-                backgroundColor: currentPalette.background.default,
+                backgroundColor: "transparent",
                 color: currentPalette.primary.main,
                 fontSize: "17.5px",
                 fontWeight: 700,
@@ -315,7 +315,7 @@ export const createAppTheme = (currentPalette) =>
             // The drop down menu styling
             props: { variant: "navBarDropDownLinks" },
             style: {
-              backgroundColor: currentPalette.background.default,
+              backgroundColor: "transparent",
               display: "flex",
               borderRadius: "10px",
               flexDirection: "column",
@@ -323,7 +323,7 @@ export const createAppTheme = (currentPalette) =>
 
               textAlign: "center",
               width: "130px",
-              color: currentPalette.background.default,
+              color: currentPalette.backgroundDarker.default,
 
               "& a": {
                 fontSize: "15.5px",
@@ -948,7 +948,7 @@ export const createAppTheme = (currentPalette) =>
             fontWeight: "normal",
           },
           ".dropDown": {
-            backgroundColor: currentPalette.background.default,
+            backgroundColor: currentPalette.backgroundDarker.default,
             border: "2px solid black",
             borderRadius: "10px",
             bottom: "0px",
