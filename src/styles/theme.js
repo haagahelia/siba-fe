@@ -318,7 +318,7 @@ export const createAppTheme = (currentPalette) =>
               backgroundColor: "transparent",
               display: "flex",
               borderRadius: "10px",
-              padding: "3px",
+              padding: "2px",
               margin: "auto",
               flexDirection: "column",
               justifyContent: "center",
@@ -328,7 +328,7 @@ export const createAppTheme = (currentPalette) =>
               color: currentPalette.backgroundDarker.default,
 
               "& a": {
-                fontSize: "15.5px",
+                fontSize: "17.5px",
                 fontWeight: 600,
                 textDecoration: "none",
               },
