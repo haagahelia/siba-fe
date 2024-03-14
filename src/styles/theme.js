@@ -318,6 +318,8 @@ export const createAppTheme = (currentPalette) =>
               backgroundColor: "transparent",
               display: "flex",
               borderRadius: "10px",
+              padding: "3px",
+              margin: "auto",
               flexDirection: "column",
               justifyContent: "center",
 
