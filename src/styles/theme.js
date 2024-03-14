@@ -232,6 +232,13 @@ export const createAppTheme = (currentPalette) =>
               zIndex: 20,
             },
           },
+          {
+            props: { variant: "dropDown" },
+            style: {
+              alignItems: "center",
+              backgroundColor: currentPalette.backgroundDarker.default,
+            },
+          },
         ],
       },
       MuiListItem: {
@@ -291,6 +298,7 @@ export const createAppTheme = (currentPalette) =>
               width: "130px",
 
               "& a": {
+                backgroundColor: "transparent",
                 color: currentPalette.primary.main,
                 fontSize: "17.5px",
                 fontWeight: 700,
@@ -298,6 +306,7 @@ export const createAppTheme = (currentPalette) =>
               },
 
               "&:hover a": {
+                backgroundcolor: currentPalette.background.default,
                 color: currentPalette.fontColorDefault.default,
               },
             },
@@ -309,12 +318,14 @@ export const createAppTheme = (currentPalette) =>
               backgroundColor: "transparent",
               display: "flex",
               borderRadius: "10px",
+              padding: "2px",
+              margin: "auto",
               flexDirection: "column",
               justifyContent: "center",
-              padding: "2px",
+
               textAlign: "center",
               width: "130px",
-              color: currentPalette.primary.main,
+              color: currentPalette.backgroundDarker.default,
 
               "& a": {
                 fontSize: "17.5px",
@@ -943,7 +954,7 @@ export const createAppTheme = (currentPalette) =>
             border: "2px solid black",
             borderRadius: "10px",
             bottom: "0px",
-            left: `calc(${navbarWidth} - 19px)`,
+            left: `calc(${navbarWidth} - 110px)`,
             position: "absolute",
           },
           ".dropDownHoverArea": {

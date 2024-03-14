@@ -408,35 +408,35 @@ export default function NavBar() {
                   {loggedIn}{" "}
                   {/* The username which apperas in the account button */}
                 </NavLink>
-
-                {isDropdownVisible && (
-                  <div className="dropDown">
-                    {sibaPages
-                      .filter((page) => {
-                        // For admin users, show all options
-                        if (roles.admin === "1") {
-                          return [
-                            "Reset Data",
-                            "Settings",
-                            "Change Password",
-                            "Log Out",
-                          ].includes(page.name);
-                        }
-                        // For non-admin users, show only "Log Out"
-                        else {
-                          return page.name === "Log Out";
-                        }
-                      })
-                      .map((page) =>
-                        renderDropdownMenu(page, "navBarDropDownLinks"),
-                      )}
-                  </div>
-                )}
+                <List variant="dropDown">
+                  {isDropdownVisible && (
+                    <div className="dropDown">
+                      {sibaPages
+                        .filter((page) => {
+                          // For admin users, show all options
+                          if (roles.admin === "1") {
+                            return [
+                              "Reset Data",
+                              "Settings",
+                              "Change Password",
+                              "Log Out",
+                            ].includes(page.name);
+                          }
+                          // For non-admin users, show only "Log Out"
+                          else {
+                            return page.name === "Log Out";
+                          }
+                        })
+                        .map((page) =>
+                          renderDropdownMenu(page, "navBarDropDownLinks"),
+                        )}
+                    </div>
+                  )}
+                </List>
               </ListItem>
             </div>
           );
         }
-
         return (
           <ListItem variant={variantValue} key={page.name}>
             <NavLink
