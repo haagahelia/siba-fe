@@ -12,7 +12,6 @@ export default function AlertBox({ alertOpen, alertOptions, setAlertOpen }) {
   return (
     <div>
       <Snackbar
-        open={alertOpen}
         snackopen={alertOpen !== "false" && alertOpen ? "true" : "false"}
         autoHideDuration={4000}
         onClose={setAlertOpen}

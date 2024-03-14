@@ -276,33 +276,6 @@ export const createAppTheme = (currentPalette) =>
             },
           },
           {
-            // The "Account" button styling
-            props: { variant: "navBarAccountButton" },
-            style: {
-              backgroundColor: currentPalette.background.default,
-              borderRadius: "10px",
-              display: "flex",
-              justifyContent: "center",
-              left: "20px",
-              margin: "auto",
-              padding: "5px",
-              position: "absolute",
-              textAlign: "center",
-              width: "130px",
-
-              "& a": {
-                color: currentPalette.primary.main,
-                fontSize: "17.5px",
-                fontWeight: 700,
-                textDecoration: "none",
-              },
-
-              "&:hover a": {
-                color: currentPalette.fontColorDefault.default,
-              },
-            },
-          },
-          {
             // The drop down menu styling
             props: { variant: "navBarDropDownLinks" },
             style: {
@@ -317,13 +290,49 @@ export const createAppTheme = (currentPalette) =>
               color: currentPalette.primary.main,
 
               "& a": {
-                fontSize: "17.5px",
+                fontSize: "15.5px",
                 fontWeight: 600,
                 textDecoration: "none",
               },
 
               "&:hover a": {
                 color: currentPalette.primary.main,
+              },
+            },
+          },
+        ],
+      },
+      MuiListSubheader: {
+        styleOverrides: {
+          root: {
+            backgroundColor: currentPalette.backgroundDarker.default,
+            border: `1px solid ${currentPalette.borderColor.cardBoder}`,
+            color: currentPalette.fontColorDefault.default,
+          },
+        },
+        variants: [
+          {
+            // The "Account" button styling
+            props: { variant: "navBarAccountButton" },
+            style: {
+              backgroundColor: currentPalette.background.default,
+              borderRadius: "10px",
+              display: "flex",
+              justifyContent: "center",
+              left: "20px",
+              margin: "auto",
+              textAlign: "center",
+              width: "130px",
+
+              "& a": {
+                color: currentPalette.primary.main,
+                fontSize: "17.5px",
+                fontWeight: 700,
+                textDecoration: "none",
+              },
+
+              "&:hover a": {
+                color: currentPalette.fontColorDefault.default,
               },
             },
           },

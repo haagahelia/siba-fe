@@ -13,6 +13,7 @@ import CircularProgress from "@mui/material/CircularProgress";
 import Container from "@mui/material/Container";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
+import ListSubheader from "@mui/material/ListSubheader";
 import Toolbar from "@mui/material/Toolbar";
 import { useContext, useEffect, useState } from "react";
 import { BrowserRouter, NavLink, Route, Routes } from "react-router-dom";
@@ -403,7 +404,7 @@ export default function NavBar() {
               onMouseEnter={() => setIsDropdownVisible(true)}
               onMouseLeave={() => setIsDropdownVisible(false)}
             >
-              <ListItem variant="navBarAccountButton">
+              <ListSubheader variant="navBarAccountButton">
                 <NavLink>
                   {loggedIn}{" "}
                   {/* The username which apperas in the account button */}
@@ -432,7 +433,7 @@ export default function NavBar() {
                       )}
                   </div>
                 )}
-              </ListItem>
+              </ListSubheader>
             </div>
           );
         }
