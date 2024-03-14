@@ -268,7 +268,7 @@ export const createAppTheme = (currentPalette) =>
               },
               "&:hover a": {
                 // borderBottom: "3px solid",
-                backgroundColor: currentPalette.backgroundDarker.default,
+                backgroundColor: currentPalette.background.default,
                 color: currentPalette.fontColorDefault.default,
                 fontWeight: 800,
               },
