@@ -334,7 +334,7 @@ export const createAppTheme = (currentPalette) =>
               },
 
               "&:hover a": {
-                color: currentPalette.background.default,
+                color: currentPalette.primary.main,
               },
             },
           },
