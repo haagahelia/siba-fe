@@ -1,5 +1,6 @@
 import useTheme from "@mui/material/styles/useTheme";
 import { Fragment } from "react";
+import { Link } from "react-router-dom";
 
 import Grid2 from "@mui/material/Unstable_Grid2";
 import ProgressBar from "@ramonak/react-progress-bar";
@@ -23,8 +24,8 @@ export default function RoomsWithTimesList({ rooms }) {
           progress > 100
             ? theme.palette.progressBarRed.main
             : progress < 80
-            ? theme.palette.progressBarYellow.main
-            : theme.palette.progressBarGreen.main;
+              ? theme.palette.progressBarYellow.main
+              : theme.palette.progressBarGreen.main;
         const progressBarTextColor =
           progress === 0
             ? theme.palette.progressBarTextZero.main
@@ -38,13 +39,16 @@ export default function RoomsWithTimesList({ rooms }) {
                 room.spaceTypeId === 5001
                   ? theme.components.AllocRoom.studio
                   : room.spaceTypeId === 5002
-                  ? theme.components.AllocRoom.luentoluokka
-                  : room.spaceTypeId === 5003
-                  ? theme.components.AllocRoom.esitystila
-                  : theme.components.AllocRoom.musiikkiluokka
+                    ? theme.components.AllocRoom.luentoluokka
+                    : room.spaceTypeId === 5003
+                      ? theme.components.AllocRoom.esitystila
+                      : theme.components.AllocRoom.musiikkiluokka
               }
             >
-              {room.name}
+              <Link
+                style={theme.components.Links}
+                to={`/space/${room.id}`}
+              >{`${room.name}`}</Link>
             </Grid2>
             <Grid2 xs={3} key={`${room.id}-b`}>
               <ProgressBar
