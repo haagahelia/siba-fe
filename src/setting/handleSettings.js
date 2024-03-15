@@ -17,7 +17,7 @@ export const handleSettings = (settings, appContext) => {
   Logger.debug("Handling settings");
 
   const itemsPerPage = settings.find(
-    (setting) => setting?.name?.toLowerCase() === "items-per-page",
+    (setting) => setting?.variable?.toLowerCase() === "items-per-page",
   );
   if (itemsPerPage) {
     appContext.settings.itemsPerPage = itemsPerPage.numberValue;
