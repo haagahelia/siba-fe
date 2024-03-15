@@ -1,5 +1,6 @@
 import useTheme from "@mui/material/styles/useTheme";
 import { useContext, useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { AllocRoundContext } from "../../AppContext";
 import resultRoomsStore from "../../data/ResultRoomsStore";
 
@@ -55,10 +56,10 @@ export default function CollapsedRowB({ id }) {
       <Collapse in={expand} style={{ width: "100%" }}>
         <Grid2 container>
           <Grid2 xs={8}>
-            <Typography style={{ fontSize: 20 }}>Opetukset</Typography>
+            <Typography style={{ fontSize: 20 }}>Lessons</Typography>
           </Grid2>
           <Grid2 xs={4}>
-            <Typography style={{ fontSize: 20 }}>Tunnit</Typography>
+            <Typography style={{ fontSize: 20 }}>Hours</Typography>
           </Grid2>
         </Grid2>
 
@@ -72,7 +73,12 @@ export default function CollapsedRowB({ id }) {
                     marginTop: margins.small,
                   }}
                 >
-                  {subject.name}
+                  <Link
+                    style={theme.components.Links}
+                    to={`/subject/${subject.id}`}
+                  >
+                    {`${subject.id} ${subject.name}`}
+                  </Link>
                 </Typography>
               </Grid2>
               <Grid2 xs={4}>
