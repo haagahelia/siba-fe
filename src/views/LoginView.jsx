@@ -166,6 +166,11 @@ export default function LoginView({ handleLoginChange }) {
               }
               placeholder="password"
               type="password"
+              onKeyDown={(event) => {
+                if (event.key === "Enter") {
+                  loginAndError();
+                }
+              }}
             />
           </Grid>
           <Grid>
