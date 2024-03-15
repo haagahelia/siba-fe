@@ -14,29 +14,23 @@ export async function validate(values) {
 
   let settingList = [];
 
-  const getSettingVariables = async () => {
+  const findIfDuplicateSettingVariableNameInDB = async () => {
     const { data } = await dao.fetchSettings();
     settingList = data;
-    let id;
-    let filteredList = [];
-    // Check if user enter an existed setting name
-    for (const setting of settingList) {
-      if (values.id === setting.id) {
-        id = setting.id;
 
-        filteredList = settingList.filter((item) => item.id !== id);
-      }
+    // If current setting in database, let's filter it out
+    if (values.id !== undefined) {
+      settingList = settingList.filter((item) => item.id !== values.id);
     }
 
-    return filteredList.some(
-      (building) =>
-        building.name.toLowerCase() === values.variable.toLowerCase(),
+    return settingList.some(
+      (item) => item.variable.toLowerCase() === values.variable.toLowerCase(),
     );
   };
 
   if (!values.variable) {
     errors.variable = requiredFieldErrorMessageFunction("Variable");
-  } else if (await getSettingVariables()) {
+  } else if (await findIfDuplicateSettingVariableNameInDB()) {
     errors.variable = "The variable already exists";
   } else if (values.variable.length < 2 || values.variable.length > 255) {
     errors.variable = "The variable must be 2-255 characters long";
