@@ -77,7 +77,7 @@ export default function CollapsedRowB({ id }) {
                     style={theme.components.Links}
                     to={`/subject/${subject.id}`}
                   >
-                    {`${subject.id} ${subject.name}`}
+                    {`${subject.name}`}
                   </Link>
                 </Typography>
               </Grid2>
