@@ -28,9 +28,10 @@ export default function DeleteSpace({ singleSpace, getAllSpaces, setOpen }) {
       dao
         .fetchNumberOfAllocSpaces(singleSpace.id)
         .then((response) => {
-          const allocCount = response.data || 0;
-          setAllocspaceCount(allocCount);
-          setHasAssociatedAllocations(allocCount > 0);
+          const allocCount = response.data[0];
+          const count = allocCount["count(`allocRoundId`)"];
+          setAllocspaceCount(count);
+          setHasAssociatedAllocations(count > 0);
         })
         .catch((error) =>
           console.error("Failed to fetch allocations for space:", error),
@@ -98,6 +99,8 @@ export default function DeleteSpace({ singleSpace, getAllSpaces, setOpen }) {
       ) : (
         <Tooltip placement="top">
           <span>
+            {`This space has associated ${allocspcaeCount} allocations`}
+            <br />
             <Button
               variant="contained"
               className="redButton disabledButton"
@@ -105,7 +108,6 @@ export default function DeleteSpace({ singleSpace, getAllSpaces, setOpen }) {
             >
               Delete
             </Button>
-            {`This space has associated ${allocspcaeCount} allocations`}
           </span>
         </Tooltip>
       )}

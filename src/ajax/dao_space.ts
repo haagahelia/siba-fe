@@ -122,10 +122,9 @@ export const fetchSpacesBySpaceTypeId = async (spaceTypeId: number) => {
 // function fetch number of alloc associated with spce by id
 export const fetchNumberOfAllocSpaces = async (id: number) => {
   try {
-    const response = await get(`${baseUrl}/space/${id}`);
+    const response = await get(`${baseUrl}/space/${id}/numberOfAllocSpaces`);
     if (response.status === 200) {
       const allocSpacesCount = await response.json();
-      console.log("allocSpaces", allocSpacesCount);
       return { httpStatus: response.status, data: allocSpacesCount };
     } else {
       Logger.debug("Failed to fetch alloc spaces for space ID:", id);
