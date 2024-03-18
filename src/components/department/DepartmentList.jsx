@@ -11,31 +11,21 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import TableSortLabel from "@mui/material/TableSortLabel";
 import TextField from "@mui/material/TextField";
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import SingleDepartmentDialog from "./SingleDepartmentDialog";
 
 export default function DepartmentList({
   getAllDepartments,
   departmentList,
-  onPageChange,
-  page,
-  rowsPerPage,
+  pagination,
+  setPaginateDepartment,
+  paginateDepartment,
 }) {
   const [open, setOpen] = useState(false);
   const [singleDepartment, setSingleDepartment] = useState(null);
   const [order, setOrder] = useState("asc");
   const [orderBy, setOrderBy] = useState("Id");
   const [searchQuery, setSearchQuery] = useState("");
-
-  const startIndex = (page - 1) * rowsPerPage;
-  const endIndex = startIndex + rowsPerPage;
-
-  const handleChangePage = useCallback(
-    (event, newPage) => {
-      onPageChange(newPage);
-    },
-    [onPageChange],
-  );
 
   const handleRequestSort = useCallback(
     (property) => {
@@ -46,46 +36,49 @@ export default function DepartmentList({
     [orderBy, order],
   );
 
-  const sortedDepartmentList = useMemo(() => {
-    return [...departmentList].sort((a, b) => {
-      switch (orderBy) {
-        case "Id":
-          return order === "asc" ? a.id - b.id : b.id - a.id;
-        case "Name":
-          return order === "asc"
-            ? a.name.localeCompare(b.name, "fi-FI")
-            : b.name.localeCompare(a.name, "fi-FI");
-        case "Description":
-          return order === "asc"
-            ? a.description.localeCompare(b.description, "fi-FI")
-            : b.description.localeCompare(a.description, "fi-FI");
-        default:
-          return 0;
-      }
-    });
-  }, [departmentList, orderBy, order]);
-
-  const filteredDepartmentList = useMemo(() => {
-    const lowerCaseQuery = searchQuery.toLowerCase();
-    return sortedDepartmentList.filter(
-      (department) =>
-        department.name?.toLowerCase().includes(lowerCaseQuery) ||
-        department.description?.toLowerCase().includes(lowerCaseQuery),
-    );
-  }, [searchQuery, sortedDepartmentList]);
-
-  const paginatedData = useMemo(() => {
-    return filteredDepartmentList.slice(startIndex, endIndex);
-  }, [filteredDepartmentList, startIndex, endIndex]);
-
   const handleRowClick = useCallback((department) => {
     setSingleDepartment(department);
     setOpen(true);
   }, []);
 
+  const requestSearch = (e) => {
+    const searchText = e.target.value;
+    setSearchQuery(searchText);
+    const filteredDepartment = departmentList.filter((department) =>
+      department.name.toLowerCase().includes(searchText.toLowerCase()),
+    );
+    setPaginateDepartment(filteredDepartment);
+  };
+
+  useEffect(() => {
+    if (searchQuery === "") {
+      setPaginateDepartment(
+        departmentList.slice(pagination.from, pagination.to),
+      );
+    }
+  }, [searchQuery, setPaginateDepartment, departmentList, pagination]);
+
   const cancelSearch = () => {
     setSearchQuery("");
+    setPaginateDepartment(departmentList.slice(pagination.from, pagination.to));
   };
+
+  const sortedDepartmentList = paginateDepartment.sort((a, b) => {
+    switch (orderBy) {
+      case "Id":
+        return order === "asc" ? a.id - b.id : b.id - a.id;
+      case "Name":
+        return order === "asc"
+          ? a.name.localeCompare(b.name, "fi-FI")
+          : b.name.localeCompare(a.name, "fi-FI");
+      case "Description":
+        return order === "asc"
+          ? a.description.localeCompare(b.description, "fi-FI")
+          : b.description.localeCompare(a.description, "fi-FI");
+      default:
+        return 0;
+    }
+  });
 
   return (
     <div>
@@ -100,7 +93,7 @@ export default function DepartmentList({
         label="Search departments"
         variant="outlined"
         value={searchQuery}
-        onChange={(e) => setSearchQuery(e.target.value)}
+        onChange={(e) => requestSearch(e)}
         InputProps={{
           endAdornment: (
             <IconButton
@@ -143,7 +136,7 @@ export default function DepartmentList({
                 </TableRow>
               </TableHead>
               <TableBody>
-                {paginatedData.map((department) => (
+                {sortedDepartmentList.map((department) => (
                   <TableRow key={department.id}>
                     <TableCell>
                       <IconButton

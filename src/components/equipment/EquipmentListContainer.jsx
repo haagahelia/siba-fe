@@ -9,9 +9,11 @@ export default function EquipmentListContainer({
   getAllEquipments,
   equipmentList,
   onPageChange,
-  page,
+  pagination,
   totalCount,
   rowsPerPage,
+  setPaginateEquipment,
+  paginateEquipment,
 }) {
   const [open, setOpen] = useState(false);
 
@@ -29,9 +31,11 @@ export default function EquipmentListContainer({
               getAllEquipments={getAllEquipments}
               equipmentList={equipmentList}
               onPageChange={onPageChange}
-              page={page}
+              pagination={pagination}
               totalCount={totalCount}
               rowsPerPage={rowsPerPage}
+              setPaginateEquipment={setPaginateEquipment}
+              paginateEquipment={paginateEquipment}
             />
           </CardContent>
         </Card>

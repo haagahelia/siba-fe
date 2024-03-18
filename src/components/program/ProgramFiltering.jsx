@@ -37,7 +37,7 @@ export default function ProgramFiltering({
   return (
     <TextField
       name="searched"
-      placeholder="Search programs"
+      label="Search programs"
       type="text"
       variant="outlined"
       fullWidth

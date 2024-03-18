@@ -10,9 +10,11 @@ export default function DepartmentListContainer({
   getAllDepartments,
   departmentList,
   onPageChange,
-  page,
+  pagination,
   totalCount,
   rowsPerPage,
+  setPaginateDepartment,
+  paginateDepartment,
 }) {
   const [open, setOpen] = useState(false);
 
@@ -30,9 +32,11 @@ export default function DepartmentListContainer({
               getAllDepartments={getAllDepartments}
               departmentList={departmentList}
               onPageChange={onPageChange}
-              page={page}
+              pagination={pagination}
               totalCount={totalCount}
               rowsPerPage={rowsPerPage}
+              setPaginateDepartment={setPaginateDepartment}
+              paginateDepartment={paginateDepartment}
             />
           </CardContent>
         </Card>

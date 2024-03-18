@@ -25,17 +25,31 @@ export default function Departments() {
   const { roles } = useRoleLoggedIn();
   const [departmentList, setDepartmentList] = useState([]);
 
-  const [page, setPage] = useState(1);
   const rowsPerPage = useContext(AppContext).settings.itemsPerPage;
-  const startIndex = (page - 1) * rowsPerPage;
-  const endIndex = startIndex + rowsPerPage;
-  const currentData = departmentList.slice(startIndex, endIndex);
+  const [paginateDepartment, setPaginateDepartment] = useState([]);
 
-  const handlePageChange = (event, newPage) => {
-    setPage(newPage);
-  };
+  const [pagination, setPagination] = useState({
+    from: 0,
+    to: rowsPerPage,
+  });
 
   const totalCount = Math.ceil(departmentList.length / rowsPerPage);
+
+  useEffect(() => {
+    if (!pagination.from) return;
+    const slicedDepartment = departmentList.slice(
+      pagination.from,
+      pagination.to,
+    );
+    setPaginateDepartment(slicedDepartment);
+  }, [pagination, departmentList, setPaginateDepartment]);
+
+  const handlePageChange = (e, p) => {
+    const from = (p - 1) * rowsPerPage;
+    const to = (p - 1) * rowsPerPage + rowsPerPage;
+    setPagination({ from, to });
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
 
   const [/* alertOptions, */ setAlertOptions] = useState({
     message: "This is an error alert — check it out!",
@@ -84,13 +98,15 @@ export default function Departments() {
                 getAllDepartments={getAllDepartments}
                 departmentList={departmentList}
                 onPageChange={handlePageChange}
-                page={page}
+                pagination={pagination}
                 totalCount={totalCount}
                 rowsPerPage={rowsPerPage}
+                setPaginateDepartment={setPaginateDepartment}
+                paginateDepartment={paginateDepartment}
               />
               <Pagination
                 count={totalCount}
-                page={page}
+                pagination={pagination}
                 onChange={handlePageChange}
                 variant="outlined"
               />

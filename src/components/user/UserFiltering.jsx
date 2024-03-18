@@ -34,7 +34,7 @@ export default function UserFiltering({
   return (
     <TextField
       name="searched"
-      placeholder="Search users"
+      label="Search users"
       type="text"
       variant="outlined"
       fullWidth

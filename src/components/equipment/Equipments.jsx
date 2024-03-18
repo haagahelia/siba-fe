@@ -25,17 +25,28 @@ export default function Equipments() {
   const { roles } = useRoleLoggedIn();
   const [equipmentList, setEquipmentList] = useState([]);
 
-  const [page, setPage] = useState(1);
   const rowsPerPage = useContext(AppContext).settings.itemsPerPage;
-  const startIndex = (page - 1) * rowsPerPage;
-  const endIndex = startIndex + rowsPerPage;
-  const currentData = equipmentList.slice(startIndex, endIndex);
+  const [paginateEquipment, setPaginateEquipment] = useState([]);
 
-  const handlePageChange = (event, newPage) => {
-    setPage(newPage);
-  };
+  const [pagination, setPagination] = useState({
+    from: 0,
+    to: rowsPerPage,
+  });
 
   const totalCount = Math.ceil(equipmentList.length / rowsPerPage);
+
+  useEffect(() => {
+    if (!pagination.from) return;
+    const slicedEquipment = equipmentList.slice(pagination.from, pagination.to);
+    setPaginateEquipment(slicedEquipment);
+  }, [pagination, equipmentList, setPaginateEquipment]);
+
+  const handlePageChange = (e, p) => {
+    const from = (p - 1) * rowsPerPage;
+    const to = (p - 1) * rowsPerPage + rowsPerPage;
+    setPagination({ from, to });
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
 
   const [/* alertOptions, */ setAlertOptions] = useState({
     message: "This is an error alert — check it out!",
@@ -84,13 +95,15 @@ export default function Equipments() {
                 getAllEquipments={getAllEquipments}
                 equipmentList={equipmentList}
                 onPageChange={handlePageChange}
-                page={page}
+                pagination={pagination}
                 totalCount={totalCount}
                 rowsPerPage={rowsPerPage}
+                setPaginateEquipment={setPaginateEquipment}
+                paginateEquipment={paginateEquipment}
               />
               <Pagination
                 count={totalCount}
-                page={page}
+                pagination={pagination}
                 onChange={handlePageChange}
                 variant="outlined"
               />

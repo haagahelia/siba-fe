@@ -10,31 +10,21 @@ import TableRow from "@mui/material/TableRow";
 import TableSortLabel from "@mui/material/TableSortLabel";
 import TextField from "@mui/material/TextField";
 import styled from "@mui/material/styles/styled";
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import SingleEquipmentDialog from "./SingleEquipmentDialog";
 
 export default function EquipmentList({
   getAllEquipments,
   equipmentList,
-  onPageChange,
-  page,
-  rowsPerPage,
+  pagination,
+  setPaginateEquipment,
+  paginateEquipment,
 }) {
   const [open, setOpen] = useState(false);
   const [singleEquipment, setSingleEquipment] = useState(null);
   const [order, setOrder] = useState("asc");
   const [orderBy, setOrderBy] = useState("Id");
   const [searchQuery, setSearchQuery] = useState("");
-
-  const startIndex = (page - 1) * rowsPerPage;
-  const endIndex = startIndex + rowsPerPage;
-
-  const handleChangePage = useCallback(
-    (event, newPage) => {
-      onPageChange(newPage);
-    },
-    [onPageChange],
-  );
 
   const handleRequestSort = useCallback(
     (property) => {
@@ -50,11 +40,27 @@ export default function EquipmentList({
     setOpen(true);
   }, []);
 
-  const cancelSearch = () => {
-    setSearchQuery("");
+  const requestSearch = (e) => {
+    const searchText = e.target.value;
+    setSearchQuery(searchText);
+    const filteredEquipment = equipmentList.filter((equipment) =>
+      equipment.name.toLowerCase().includes(searchText.toLowerCase()),
+    );
+    setPaginateEquipment(filteredEquipment);
   };
 
-  const sortedEquipmentList = equipmentList.sort((a, b) => {
+  useEffect(() => {
+    if (searchQuery === "") {
+      setPaginateEquipment(equipmentList.slice(pagination.from, pagination.to));
+    }
+  }, [searchQuery, setPaginateEquipment, equipmentList, pagination]);
+
+  const cancelSearch = () => {
+    setSearchQuery("");
+    setPaginateEquipment(equipmentList.slice(pagination.from, pagination.to));
+  };
+
+  const sortedEquipmentList = paginateEquipment.sort((a, b) => {
     switch (orderBy) {
       case "Id":
         return order === "asc" ? a.id - b.id : b.id - a.id;
@@ -75,14 +81,6 @@ export default function EquipmentList({
     }
   });
 
-  const filteredEquipmentList = sortedEquipmentList.filter(
-    (equipment) =>
-      equipment.name?.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      equipment.description?.toLowerCase().includes(searchQuery.toLowerCase()),
-  );
-
-  const paginatedData = filteredEquipmentList.slice(startIndex, endIndex);
-
   // STYLE
   const Box = styled(Table)(({ theme }) => ({
     overflow: "auto",
@@ -101,7 +99,7 @@ export default function EquipmentList({
         label="Search equipment"
         variant="outlined"
         value={searchQuery}
-        onChange={(e) => setSearchQuery(e.target.value)}
+        onChange={(e) => requestSearch(e)}
         InputProps={{
           endAdornment: (
             <IconButton
@@ -150,7 +148,7 @@ export default function EquipmentList({
             </TableRow>
           </TableHead>
           <TableBody>
-            {paginatedData.map((equipment) => (
+            {sortedEquipmentList.map((equipment) => (
               <TableRow key={equipment.id}>
                 <TableCell>
                   <IconButton

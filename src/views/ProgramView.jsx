@@ -16,15 +16,16 @@ import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import AlertBox from "../components/common/AlertBox";
 import AddProgramContainer from "../components/program/AddProgramContainer";
+import ProgramFiltering from "../components/program/ProgramFiltering";
 import ProgramListContainer from "../components/program/ProgramListContainer";
+import ProgramPagination from "../components/program/ProgramPagination";
 
 export default function ProgramView() {
   Logger.logPrefix = "ProgramView";
   Logger.debug("ProgramView component instantiated.");
 
   const { roles } = useRoleLoggedIn();
-  const appContext = useContext(AppContext);
-  const pageSize = appContext.settings.itemsPerPage;
+  const pageSize = useContext(AppContext).settings.itemsPerPage;
 
   const [paginatePrograms, setPaginatePrograms] = useState([]);
   const [allProgramsList, setAllProgramsList] = useState([]);
@@ -56,20 +57,23 @@ export default function ProgramView() {
         `getAllPrograms: successfully fetched ${data.length} programs.`,
       );
       setAllProgramsList(data);
-      setPaginatePrograms(data.slice(0, 15));
+      setPaginatePrograms(data.slice(0, pageSize));
     }
   };
 
   useEffect(() => {
     Logger.debug("Running effect to fetch all programs.");
     getAllPrograms();
-    document.title = "Programs";
   }, []);
 
   useEffect(() => {
     Logger.debug("Running effect to update paginated programs.");
-    setPaginatePrograms(allProgramsList.slice(0, 15));
+    setPaginatePrograms(allProgramsList.slice(0, pageSize));
   }, [allProgramsList]);
+
+  useEffect(() => {
+    document.title = "Programs";
+  }, []);
 
   return (
     <div>
@@ -78,7 +82,7 @@ export default function ProgramView() {
         alertOptions={alertOptions}
         setAlertOpen={setAlertOpen}
       />
-      <Container maxWidth="100%">
+      <Container maxWidth="xl">
         {(roles.admin === "1" || roles.planner === "1") && (
           <AddProgramContainer
             getAllPrograms={getAllPrograms}
@@ -89,12 +93,27 @@ export default function ProgramView() {
           <Card variant="outlined">
             <CardHeader title="Programs" variant="pageHeader" />
             <CardContent>
+              <ProgramFiltering
+                allProgramsList={allProgramsList}
+                setAllProgramsList={setAllProgramsList}
+                paginatePrograms={paginatePrograms}
+                setPaginatePrograms={setPaginatePrograms}
+                pagination={pagination}
+              />
               <ProgramListContainer
                 getAllPrograms={getAllPrograms}
                 allProgramsList={allProgramsList}
                 paginatePrograms={paginatePrograms}
                 open={open}
                 setOpen={setOpen}
+              />
+              <ProgramPagination
+                pagination={pagination}
+                setPagination={setPagination}
+                allProgramsList={allProgramsList}
+                paginatePrograms={paginatePrograms}
+                setPaginatePrograms={setPaginatePrograms}
+                pageSize={pageSize}
               />
             </CardContent>
           </Card>

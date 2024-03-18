@@ -35,7 +35,7 @@ export default function SpaceFiltering({
   return (
     <TextField
       name="searched"
-      placeholder="Search spaces"
+      label="Search spaces"
       type="text"
       variant="outlined"
       fullWidth
