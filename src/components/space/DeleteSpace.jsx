@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import dao from "../../ajax/dao";
 
+import { Tooltip } from "@mui/material";
 import Button from "@mui/material/Button";
 import AlertBox from "../common/AlertBox";
 import ConfirmationDialog from "../common/ConfirmationDialog";
@@ -17,6 +18,26 @@ export default function DeleteSpace({ singleSpace, getAllSpaces, setOpen }) {
     content: "Something here",
   });
   const [deleteSpaceData, setDeleteSpaceData] = useState(null);
+  const [allocspcaeCount, setAllocspaceCount] = useState(0);
+  const [hasAssociatedAllocations, setHasAssociatedAllocations] =
+    useState(false);
+
+  // fetch no. of allocations associated with the space
+  useEffect(() => {
+    if (singleSpace?.id) {
+      dao
+        .fetchNumberOfAllocSpaces(singleSpace.id)
+        .then((response) => {
+          const allocCount = response.data[0];
+          const count = allocCount["count(`allocRoundId`)"];
+          setAllocspaceCount(count);
+          setHasAssociatedAllocations(count > 0);
+        })
+        .catch((error) =>
+          console.error("Failed to fetch allocations for space:", error),
+        );
+    }
+  }, [singleSpace]);
 
   const deleteSpace = async (spaceData) => {
     const result = await dao.deleteSingleSpace(spaceData.id);
@@ -67,13 +88,29 @@ export default function DeleteSpace({ singleSpace, getAllSpaces, setOpen }) {
         submit={deleteSpace}
         submitValues={deleteSpaceData}
       />
-      <Button
-        variant="contained"
-        className="redButton"
-        onClick={() => submitDelete(singleSpace)}
-      >
-        Delete
-      </Button>
+      {!hasAssociatedAllocations ? (
+        <Button
+          variant="contained"
+          className="redButton"
+          onClick={() => submitDelete(singleSpace)}
+        >
+          Delete
+        </Button>
+      ) : (
+        <Tooltip placement="top">
+          <span>
+            {`This space has associated ${allocspcaeCount} allocations`}
+            <br />
+            <Button
+              variant="contained"
+              className="redButton disabledButton"
+              disabled
+            >
+              Delete
+            </Button>
+          </span>
+        </Tooltip>
+      )}
     </div>
   );
 }
