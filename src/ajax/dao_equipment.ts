@@ -1,6 +1,6 @@
+import Logger from "../logger/logger";
 import { Equipment, ResponseFiner } from "../types";
 import { create, download, get, remove, update } from "./request";
-
 const baseUrl = import.meta.env.VITE_BE_SERVER_BASE_URL;
 
 // fetching all equipments
@@ -66,4 +66,22 @@ export const downloadEquipmentTemplate = async (): Promise<
   ResponseFiner<Equipment>
 > => {
   return download<Equipment>("equipment", baseUrl);
+};
+// fetching total numbers of subject id associtaed to an equipment by id
+export const fetchSubjectCount = async (id: number) => {
+  try {
+    {
+      const response = await get(`${baseUrl}/equipment/${id}/subjectCount`);
+      if (response.status === 200) {
+        const subjectId: number = await response.json();
+        return { httpStatus: response.status, data: subjectId };
+      } else {
+        Logger.debug("Failed to fetch subject id for equiment ID:", id);
+        return { httpStatus: response.status, data: 0 };
+      }
+    }
+  } catch (error) {
+    Logger.debug("Error fetching subject id by equipment ID:", error);
+    return { httpStatus: 500, data: 0 };
+  }
 };

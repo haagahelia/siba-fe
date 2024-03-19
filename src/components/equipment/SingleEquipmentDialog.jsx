@@ -54,16 +54,16 @@ export default function SingleEquipmentDialog({
       </IconButton>
       {roles.admin === "1" && (
         <DialogActions>
+          <DeleteEquipment
+            singleEquipment={singleEquipment}
+            getAllEquipments={getAllEquipments}
+            setOpen={setOpen}
+          />
           <EditEquipment
             singleEquipment={singleEquipment}
             setSingleEquipment={setSingleEquipment}
             getAllEquipments={getAllEquipments}
             open={open}
-            setOpen={setOpen}
-          />
-          <DeleteEquipment
-            singleEquipment={singleEquipment}
-            getAllEquipments={getAllEquipments}
             setOpen={setOpen}
           />
         </DialogActions>
