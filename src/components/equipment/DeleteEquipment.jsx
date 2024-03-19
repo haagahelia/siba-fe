@@ -3,6 +3,7 @@ import dao from "../../ajax/dao";
 
 import { Tooltip } from "@mui/material";
 import Button from "@mui/material/Button";
+import Logger from "../../logger/logger";
 import AlertBox from "../common/AlertBox";
 import ConfirmationDialog from "../common/ConfirmationDialog";
 
@@ -24,24 +25,66 @@ export default function DeleteEquipment({
   const [deleteEquipmentData, setDeleteEquipmentData] = useState(null);
   const [subjecIdtCount, setSubjectIdCount] = useState(0);
   const [HasasAssociatedSubject, setHasAssociatedSubjects] = useState(false);
+  const [namesOfSubjects, setNamesOfSubjects] = useState([]);
 
+  // fetch number of subjects associated with the equipment
+  const fetchNumberOfSubjects = async () => {
+    const response = await dao.fetchSubjectCount(singleEquipment.id);
+    if (response === null) {
+      return "Error fetching number of subjects";
+    }
+    const subjectCount = response.data[0];
+    const count = subjectCount["count(`subjectId`)"];
+    setHasAssociatedSubjects(count > 0);
+    return count;
+  };
   // fetch no. of subjects associated with the equipment
   useEffect(() => {
-    if (singleEquipment?.id) {
-      dao
-        .fetchSubjectCount(singleEquipment.id)
-        .then((response) => {
-          const subjectCount = response.data[0];
-          const count = subjectCount["count(`subjectId`)"];
-          setSubjectIdCount(count);
-          setHasAssociatedSubjects(count > 0);
+    if (open && singleEquipment) {
+      Logger.debug(
+        `Rendering SingleEquipmentDialog for equipment: ${JSON.stringify(
+          singleEquipment,
+        )}`,
+      );
+      fetchNumberOfSubjects(singleEquipment.id)
+        .then((data) => {
+          setSubjectIdCount(data);
         })
-        .catch((error) =>
-          console.error("Failed to fetch subjects for equipment:", error),
-        );
+        .catch((error) => {
+          Logger.error(error);
+        });
     }
-  }, [singleEquipment]);
+  }, [open, singleEquipment]);
 
+  // fetches fisrt five subject names associated with the equipment by id
+  const fetchFirstFiveSubjectNames = async () => {
+    const response = await dao.fetchSubjectsFirstFiveNames(singleEquipment?.id);
+    if (response.httpStatus !== 200) {
+      return "Error fetching first five subject names";
+    }
+    const displayFirstFiveNames = response.data.map((subject) => subject.name);
+    return displayFirstFiveNames;
+  };
+
+  // fetches the first five subject names by equipment id for the dialog.
+  useEffect(() => {
+    if (open && singleEquipment) {
+      Logger.debug(
+        `Rendering SingleEquipmentDialog for equipment: ${JSON.stringify(
+          singleEquipment,
+        )}`,
+      );
+      fetchFirstFiveSubjectNames(singleEquipment.id)
+        .then((data) => {
+          setNamesOfSubjects(data);
+        })
+        .catch((error) => {
+          Logger.error(error);
+        });
+    }
+  }, [open, singleEquipment]);
+
+  // delete equipment
   const deleteEquipment = async (equipmentData) => {
     const result = await dao.deleteSingleEquipment(equipmentData.id);
     if (result === false) {
@@ -100,7 +143,10 @@ export default function DeleteEquipment({
           Delete
         </Button>
       ) : (
-        <Tooltip>
+        <Tooltip
+          title={`Subjects: ${namesOfSubjects.join(", ")}
+            ${subjecIdtCount > 5 ? ", ..." : ""}`}
+        >
           <span>
             {`This equipment is associated to ${subjecIdtCount} subjects`}
             <br />

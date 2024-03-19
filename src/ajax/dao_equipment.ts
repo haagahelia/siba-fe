@@ -85,3 +85,28 @@ export const fetchSubjectCount = async (id: number) => {
     return { httpStatus: 500, data: 0 };
   }
 };
+
+// fetch first five names of subjects of a selected equipment by id
+export const fetchSubjectsFirstFiveNames = async (id: number) => {
+  try {
+    const response = await get(
+      `${baseUrl}/equipment/${id}/subjectFirstFiveNames`,
+    );
+    if (response.status === 200) {
+      const firstFiveNames = await response.json();
+      return {
+        httpStatus: response.status,
+        data: firstFiveNames,
+      };
+    } else {
+      Logger.debug("Failed to get the subjects of the equipment from database");
+      return { httpStatus: response.status, data: [] };
+    }
+  } catch (error) {
+    Logger.debug(
+      "Error fetching first five names of subjects by equipment ID:",
+      error,
+    );
+    return { httpStatus: 500, data: [] };
+  }
+};
