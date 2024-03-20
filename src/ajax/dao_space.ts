@@ -135,3 +135,27 @@ export const fetchNumberOfAllocSpaces = async (id: number) => {
     return { httpStatus: 500, data: 0 };
   }
 };
+
+// function fetching first five names of allocation associated with space by id
+
+export const fetchFirstFiveAllocNames = async (id: number) => {
+  try {
+    const response = await get(`${baseUrl}/space/${id}/firstFiveAllocNames`);
+    if (response.status === 200) {
+      const firstFiveNames = await response.json();
+      return { httpStatus: response.status, data: firstFiveNames };
+    } else {
+      Logger.debug(
+        "Failed to fetch first five names of alloc by space ID:",
+        id,
+      );
+      return { httpStatus: response.status, data: [] };
+    }
+  } catch (error) {
+    Logger.debug(
+      "Error fetching first five names of alloc by space ID:",
+      error,
+    );
+    return { httpStatus: 500, data: [] };
+  }
+};

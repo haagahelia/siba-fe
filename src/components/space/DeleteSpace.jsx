@@ -1,8 +1,8 @@
-import { useEffect, useState } from "react";
-import dao from "../../ajax/dao";
-
 import { Tooltip } from "@mui/material";
 import Button from "@mui/material/Button";
+import { useEffect, useState } from "react";
+import dao from "../../ajax/dao";
+import Logger from "../../logger/logger";
 import AlertBox from "../common/AlertBox";
 import ConfirmationDialog from "../common/ConfirmationDialog";
 
@@ -21,17 +21,29 @@ export default function DeleteSpace({ singleSpace, getAllSpaces, setOpen }) {
   const [allocspcaeCount, setAllocspaceCount] = useState(0);
   const [hasAssociatedAllocations, setHasAssociatedAllocations] =
     useState(false);
+  const [firstFiveAllocNames, setFirstFiveAllocNames] = useState([]);
 
   // fetch no. of allocations associated with the space
+
+  const getAllocSpaceCount = async () => {
+    const response = await dao.fetchNumberOfAllocSpaces(singleSpace.id);
+    if (response.httpStatus !== 200) {
+      return "Error fetching number of allocations";
+    }
+    const allocCount = response.data[0];
+    const count = allocCount["count(`allocRoundId`)"];
+    setAllocspaceCount(count);
+    setHasAssociatedAllocations(count > 0);
+    return count;
+  };
   useEffect(() => {
-    if (singleSpace?.id) {
-      dao
-        .fetchNumberOfAllocSpaces(singleSpace.id)
-        .then((response) => {
-          const allocCount = response.data[0];
-          const count = allocCount["count(`allocRoundId`)"];
-          setAllocspaceCount(count);
-          setHasAssociatedAllocations(count > 0);
+    if (open && singleSpace) {
+      Logger.debug(
+        `Rendering SingleSpaceDialog for space: ${JSON.stringify(singleSpace)}`,
+      );
+      getAllocSpaceCount(singleSpace.id)
+        .then((data) => {
+          setAllocspaceCount(data);
         })
         .catch((error) =>
           console.error("Failed to fetch allocations for space:", error),
@@ -39,6 +51,32 @@ export default function DeleteSpace({ singleSpace, getAllSpaces, setOpen }) {
     }
   }, [singleSpace]);
 
+  // fetches fisrt five allocation names associated with the space by id
+  const getFirstFiveAllocNames = async () => {
+    const response = await dao.fetchFirstFiveAllocNames(singleSpace.id);
+    if (response.httpStatus !== 200) {
+      return "Error fetching first five allocation names";
+    }
+    const displayNmaes = response.data.map((alloc) => alloc.name);
+    return displayNmaes;
+  };
+
+  useEffect(() => {
+    if (open && singleSpace) {
+      Logger.debug(
+        `Rendering SingleSpaceDialog for space: ${JSON.stringify(singleSpace)}`,
+      );
+      getFirstFiveAllocNames(singleSpace.id)
+        .then((data) => {
+          setFirstFiveAllocNames(data);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    }
+  }, [open, singleSpace]);
+
+  // delete space
   const deleteSpace = async (spaceData) => {
     const result = await dao.deleteSingleSpace(spaceData.id);
     if (result === false) {
@@ -97,7 +135,11 @@ export default function DeleteSpace({ singleSpace, getAllSpaces, setOpen }) {
           Delete
         </Button>
       ) : (
-        <Tooltip placement="top">
+        <Tooltip
+          title={`Associated allocations: ${firstFiveAllocNames.join(", ")}
+         ${allocspcaeCount > 5 ? ", ..." : ""}`}
+          placement="top"
+        >
           <span>
             {`This space has associated ${allocspcaeCount} allocations`}
             <br />
