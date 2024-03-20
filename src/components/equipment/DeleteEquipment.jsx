@@ -24,7 +24,7 @@ export default function DeleteEquipment({
   });
   const [deleteEquipmentData, setDeleteEquipmentData] = useState(null);
   const [subjecIdtCount, setSubjectIdCount] = useState(0);
-  const [HasasAssociatedSubject, setHasAssociatedSubjects] = useState(false);
+  const [HasAssociatedSubject, setHasAssociatedSubjects] = useState(false);
   const [namesOfSubjects, setNamesOfSubjects] = useState([]);
 
   // fetch number of subjects associated with the equipment
@@ -134,7 +134,7 @@ export default function DeleteEquipment({
         submit={deleteEquipment}
         submitValues={deleteEquipmentData}
       />
-      {!HasasAssociatedSubject ? (
+      {!HasAssociatedSubject ? (
         <Button
           variant="contained"
           className="redButton"
