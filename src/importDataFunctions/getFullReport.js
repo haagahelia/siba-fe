@@ -1,4 +1,4 @@
-import * as ExcelJS from "Exceljs";
+import * as ExcelJS from "exceljs";
 import dao from "../ajax/dao";
 
 export const getFullReport = async (sheetcolumns, saveAs, setAlertOptions) => {
