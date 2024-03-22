@@ -44,10 +44,6 @@ export default function SubjectView() {
     message: "This is an error alert — check it out!",
     severity: "error",
   });
-  const [pagination, setPagination] = useState({
-    from: 0,
-    to: pageSize,
-  });
 
   Logger.debug("Initial state set.");
 
@@ -195,30 +191,17 @@ export default function SubjectView() {
               variant="pageHeader"
             />
             <CardContent>
-              <SubjectFiltering
-                allSubjectsList={allSubjectsList}
-                setAllSubjectsList={setAllSubjectsList}
-                paginateSubjects={paginateSubjects}
-                setPaginateSubjects={setPaginateSubjects}
-                pagination={pagination}
-              />
               <SubjectListContainer
                 shownSubject={shownSubject}
                 setShownSubject={setShownSubject2}
                 getAllSubjects={getAllSubjects}
                 allSubjectsList={allSubjectsList}
                 paginateSubjects={paginateSubjects}
+                setPaginateSubjects={setPaginateSubjects}
+                pageSize={pageSize}
                 open={open}
                 setOpen={setOpen}
                 userPrograms={userPrograms}
-              />
-              <SubjectPagination
-                pagination={pagination}
-                setPagination={setPagination}
-                allSubjectsList={allSubjectsList}
-                paginateSubjects={paginateSubjects}
-                setPaginateSubjects={setPaginateSubjects}
-                pageSize={pageSize}
               />
             </CardContent>
           </Card>

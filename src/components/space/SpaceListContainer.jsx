@@ -10,6 +10,7 @@ export default function SpaceListContainer({
   getAllSpaces,
   allSpacesList,
   paginateSpaces,
+  setPaginateSpaces,
   open,
   setOpen,
 }) {
@@ -17,7 +18,7 @@ export default function SpaceListContainer({
     <Container maxWidth="lg">
       <SingleSpaceDialog
         getAllSpaces={getAllSpaces}
-        singleSpace={shownSpace?shownSpace:null}
+        singleSpace={shownSpace ? shownSpace : null}
         open={open}
         setOpen={setOpen}
         onClose={() => setOpen(false)}
@@ -31,6 +32,7 @@ export default function SpaceListContainer({
               getAllSpaces={getAllSpaces}
               allSpacesList={allSpacesList}
               paginateSpaces={paginateSpaces}
+              setPaginateSpaces={setPaginateSpaces}
             />
           </CardContent>
         </Card>

@@ -1,5 +1,8 @@
+import ClearIcon from "@mui/icons-material/Clear";
 import InfoIcon from "@mui/icons-material/Info";
+import { Pagination, TextField } from "@mui/material";
 import IconButton from "@mui/material/IconButton";
+import InputAdornment from "@mui/material/InputAdornment";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -9,18 +12,64 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import TableSortLabel from "@mui/material/TableSortLabel";
 import styled from "@mui/material/styles/styled";
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { AppContext } from "../../AppContext";
 import SingleSpaceDialog from "./SingleSpaceDialog";
 
 export default function SpaceList({
   shownSpace,
   getAllSpaces,
+  allSpacesList,
   paginateSpaces,
+  setPaginateSpaces,
 }) {
+  const pageSize = useContext(AppContext).settings.itemsPerPage;
+
   const [open, setOpen] = useState(false);
   const [singleSpace, setSingleSpace] = useState(null);
   const [order, setOrder] = useState("asc");
   const [orderBy, setOrderBy] = useState("SpaceName");
+  const [searched, setSearched] = useState("");
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const [pagination, setPagination] = useState({
+    from: 0,
+    to: pageSize,
+  });
+
+  useEffect(() => {
+    const sortAndPaginateSpaces = () => {
+      let sorted = allSpacesList.slice().sort((a, b) => {
+        switch (orderBy) {
+          case "name":
+            return order === "asc"
+              ? a.name.localeCompare(b.name, "fi-FI")
+              : b.name.localeCompare(a.name, "fi-FI");
+          case "area":
+            return order === "asc" ? a.area - b.area : b.area - a.area;
+          default:
+            return 0;
+        }
+      });
+
+      // Apply search filter to both name and departmentName
+      if (searched !== "") {
+        sorted = sorted.filter((space) =>
+          space.name.toLowerCase().includes(searched.toLowerCase()),
+        );
+      }
+
+      // Apply pagination
+      const paginated = sorted.slice(pagination.from, pagination.to);
+      setPaginateSpaces(paginated);
+    };
+
+    sortAndPaginateSpaces();
+  }, [allSpacesList, orderBy, order, searched, pagination]);
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [pagination]);
 
   const handleRequestSort = (property) => {
     const isAsc = orderBy === property && order === "asc";
@@ -28,18 +77,18 @@ export default function SpaceList({
     setOrderBy(property);
   };
 
-  const sortedSpaces = paginateSpaces.sort((a, b) => {
-    switch (orderBy) {
-      case "name":
-        return order === "asc"
-          ? a.name.localeCompare(b.name, "fi-FI")
-          : b.name.localeCompare(a.name, "fi-FI");
-      case "area":
-        return order === "asc" ? a.area - b.area : b.area - a.area;
-      default:
-        return 0;
-    }
-  });
+  const handleSearch = (e) => {
+    const searchText = e.target.value;
+    setSearched(searchText);
+    setPagination({ from: 0, to: pageSize });
+  };
+
+  const handleChangePage = (e, p) => {
+    const from = (p - 1) * pageSize;
+    const to = (p - 1) * pageSize + pageSize;
+    setPagination({ from, to });
+    setCurrentPage(p);
+  };
 
   // STYLE
   const Box = styled(Table)(({ theme }) => ({
@@ -48,6 +97,27 @@ export default function SpaceList({
   }));
   return (
     <div>
+      <TextField
+        type="text"
+        label="Search spaces"
+        value={searched}
+        onChange={handleSearch}
+        fullWidth
+        variant="outlined"
+        size="medium"
+        InputProps={{
+          endAdornment: (
+            <InputAdornment position="end">
+              <IconButton
+                onClick={() => setSearched("")}
+                sx={{ visibility: searched ? "visible" : "hidden" }}
+              >
+                <ClearIcon />
+              </IconButton>
+            </InputAdornment>
+          ),
+        }}
+      />
       <SingleSpaceDialog
         open={open}
         setOpen={setOpen}
@@ -82,7 +152,7 @@ export default function SpaceList({
               </TableRow>
             </TableHead>
             <TableBody>
-              {sortedSpaces.map((value) => (
+              {paginateSpaces.map((value) => (
                 <TableRow key={value.id}>
                   <TableCell>
                     <IconButton
@@ -103,6 +173,13 @@ export default function SpaceList({
           </Box>
         </TableContainer>
       </Paper>
+      <div>
+        <Pagination
+          count={Math.ceil(allSpacesList.length / pageSize)}
+          onChange={handleChangePage}
+          variant="outlined"
+        />
+      </div>
     </div>
   );
 }

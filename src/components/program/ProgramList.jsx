@@ -17,7 +17,14 @@ import React, { useContext, useEffect, useState } from "react";
 import { AppContext } from "../../AppContext";
 import SingleProgramDialog from "./SingleProgramDialog";
 
-export default function ProgramList({ getAllPrograms, allProgramsList }) {
+export default function ProgramList({
+  getAllPrograms,
+  allProgramsList,
+  paginatePrograms,
+  setPaginatePrograms,
+  pagination,
+  setPagination,
+}) {
   const pageSize = useContext(AppContext).settings.itemsPerPage;
 
   const [openDialog, setOpenDialog] = useState(false);
@@ -25,8 +32,7 @@ export default function ProgramList({ getAllPrograms, allProgramsList }) {
   const [order, setOrder] = useState("asc");
   const [orderBy, setOrderBy] = useState("name");
   const [searched, setSearched] = useState("");
-  const [paginatedPrograms, setPaginatedPrograms] = useState([]);
-  const [pagination, setPagination] = useState({ from: 0, to: pageSize });
+
   const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
@@ -59,7 +65,7 @@ export default function ProgramList({ getAllPrograms, allProgramsList }) {
 
       // Apply pagination
       const paginated = sorted.slice(pagination.from, pagination.to);
-      setPaginatedPrograms(paginated);
+      setPaginatePrograms(paginated);
     };
 
     sortAndPaginatePrograms();
@@ -108,7 +114,7 @@ export default function ProgramList({ getAllPrograms, allProgramsList }) {
     <div>
       <TextField
         type="text"
-        placeholder="Search programs"
+        label="Search programs"
         value={searched}
         onChange={handleSearch}
         fullWidth
@@ -153,7 +159,7 @@ export default function ProgramList({ getAllPrograms, allProgramsList }) {
             </TableRow>
           </TableHead>
           <TableBody>
-            {paginatedPrograms.map((value) => (
+            {paginatePrograms.map((value) => (
               <TableRow key={value.id}>
                 <TableCell>
                   <IconButton
@@ -173,6 +179,7 @@ export default function ProgramList({ getAllPrograms, allProgramsList }) {
       <div>
         <Pagination
           count={Math.ceil(allProgramsList.length / pageSize)}
+          currentPage={currentPage}
           onChange={handleChangePage}
           variant="outlined"
         />

@@ -93,6 +93,9 @@ export default function ProgramView() {
                 getAllPrograms={getAllPrograms}
                 allProgramsList={allProgramsList}
                 paginatePrograms={paginatePrograms}
+                setPaginatePrograms={setPaginatePrograms}
+                pagination={pagination}
+                setPagination={setPagination}
                 open={open}
                 setOpen={setOpen}
               />
