@@ -1,0 +1,11 @@
+version: '3'
+
+services:
+  siba-fe:
+    build:
+      context: .
+      dockerfile: Dockerfile.nginx
+    container_name: siba_fe_nginx
+    env_file: .env
+    ports:
+      - '${PORT}:80'
