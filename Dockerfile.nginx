@@ -1,3 +1,5 @@
+# This Dockerfile builds the frontend React app and serves it from nginx web server
+
 FROM node:20 AS builder
 RUN groupadd -r siba && useradd -m -r -g siba siba
 WORKDIR /app
