@@ -8,4 +8,4 @@ services:
     container_name: siba_fe_nginx
     env_file: .env
     ports:
-      - '${PORT}:80'
+      - '${PORT}:8080'
