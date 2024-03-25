@@ -93,7 +93,6 @@ Frontend side installation instructions
    ```
 
 3. Run this command to launch the application using Node development server.
-
    ```sh
    docker-compose -f docker-compose-fe.yaml up -d
    ```
