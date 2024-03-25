@@ -63,6 +63,12 @@ Frontend side installation instructions
    ```
    Basically start the backend, make sure it runs and copy the working address here, adding /api at the end. E.g. http://localhost:1234/api
 
+   Optional environment variables:
+   ```sh
+   VITE_MODE=development    # This enables e.g. debug logs in console
+   PORT=5173                # This changes the frontend port number. If this is not set, default port is 5173
+   ```
+
 4. Install needed packages
 
    ```sh
@@ -79,10 +85,34 @@ Frontend side installation instructions
 
 1. Follow installation steps from 1 to 3
 
-2. Run this command to launch application
+2. Add PORT environment variable to the **.env** file
+   ```sh
+   PORT=5173
+   ```
+   If you have .env.local file then rename it to .env (or copy and rename)
+
+3. Run this command to launch the application using Node development server.
 
    ```sh
    docker-compose -f docker-compose-fe.yaml up -d
+   ```
+
+4. OR run this command to launch the application using Nginx web server. This is more suitable for production environment.
+   ```sh
+   docker-compose -f docker-compose-fe-nginx.yml up -d
+   ```
+
+   The container overwrites default Nginx configuration file with the `nginx.conf` file found at the project root. It contains directives to make the React application work properly.
+
+5. Access the application e.g. http://localhost:5173. Replace the port with the port you set in step 2.
+
+6. Stop and remove the started container depending on which command you ran:
+   ```sh
+   docker-compose -f docker-compose-fe.yaml down
+   ```
+   OR
+   ```sh
+   docker-compose -f docker-compose-fe-nginx.yml down
    ```
 
 <p align="right">(<a href="#top">back to top</a>)</p>
