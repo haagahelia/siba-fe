@@ -66,7 +66,7 @@ Frontend side installation instructions
    Optional environment variables:
    ```sh
    VITE_MODE=development    # This enables e.g. debug logs in console
-   PORT=5173                # This changes the frontend port number. If this is not set, default port is 5173
+   PORT=5173                # This changes the frontend port number. If this is not set then default port 5173 is used
    ```
 
 4. Install needed packages
@@ -99,7 +99,7 @@ Frontend side installation instructions
 
 4. OR run this command to launch the application using Nginx web server. This is more suitable for production environment.
    ```sh
-   docker-compose -f docker-compose-fe-nginx.yml up -d
+   docker-compose -f docker-compose-fe-nginx.yaml up -d
    ```
 
    The container overwrites default Nginx configuration file with the `nginx.conf` file found at the project root. It contains directives to make the React application work properly.
@@ -112,7 +112,7 @@ Frontend side installation instructions
    ```
    OR
    ```sh
-   docker-compose -f docker-compose-fe-nginx.yml down
+   docker-compose -f docker-compose-fe-nginx.yaml down
    ```
 
 <p align="right">(<a href="#top">back to top</a>)</p>
