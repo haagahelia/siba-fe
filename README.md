@@ -85,11 +85,12 @@ Frontend side installation instructions
 
 1. Follow installation steps from 1 to 3
 
-2. Add PORT environment variable to the **.env** file
+2. If you have .env.local file then rename it to .env (or copy and rename)
+
+   Add PORT environment variable to the .env file
    ```sh
    PORT=5173
    ```
-   If you have .env.local file then rename it to .env (or copy and rename)
 
 3. Run this command to launch the application using Node development server.
 
