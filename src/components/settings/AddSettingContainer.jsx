@@ -8,7 +8,6 @@ import { useFormik } from "formik";
 import { useState } from "react";
 import dao from "../../ajax/dao";
 import { validate } from "../../validation/ValidateAddEditSetting";
-import { capitalizeFirstLetter } from "../../validation/ValidationUtilities";
 import AlertBox from "../common/AlertBox";
 import ConfirmationDialog from "../common/ConfirmationDialog";
 import AddSettingForm from "./AddSettingForm";

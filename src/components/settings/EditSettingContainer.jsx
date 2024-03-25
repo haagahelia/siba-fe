@@ -3,7 +3,6 @@ import { useState } from "react";
 import dao from "../../ajax/dao";
 import Logger from "../../logger/logger";
 import { validate } from "../../validation/ValidateAddEditSetting";
-import { capitalizeFirstLetter } from "../../validation/ValidationUtilities";
 import AlertBox from "../common/AlertBox";
 import ConfirmationDialog from "../common/ConfirmationDialog";
 import EditSettingForm from "./EditSettingForm";
@@ -44,7 +43,7 @@ export default function EditSettingContainer({
   async function submitEditedSetting(values) {
     const editedSetting = {
       id: values.id,
-      variable: capitalizeFirstLetter(values.variable),
+      variable: values.variable,
       description: values.description,
       numberValue: values.numberValue,
       textValue: values.textValue,
