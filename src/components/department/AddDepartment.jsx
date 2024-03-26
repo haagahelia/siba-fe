@@ -31,14 +31,21 @@ export default function AddDepartment({ getAllDepartments }) {
     title: "this is dialog",
     content: "Something here",
   });
-  const [department, setDepartment] = useState({
+  const [initialDepartment, setInitialDepartment] = useState({
     name: "",
     description: "",
   });
 
+  const resetForm = () => {
+    setInitialDepartment({
+      name: "",
+      description: "",
+    });
+  };
+
   const formik = useFormik({
     enableReinitialize: true,
-    initialValues: department,
+    initialValues: initialDepartment,
     validateOnChange: true,
     validate,
     onSubmit: (values) => {
@@ -65,9 +72,10 @@ export default function AddDepartment({ getAllDepartments }) {
         title: "Success!",
         message: `${submitValues.name} added successfully.`,
       });
-      setDepartment(submitValues);
+      setInitialDepartment(submitValues);
     }
     setAlertOpen(true);
+    resetForm();
     getAllDepartments();
   };
 
@@ -157,7 +165,7 @@ export default function AddDepartment({ getAllDepartments }) {
                     type="submit"
                     variant="addComponentFormButton"
                     onClick={() => {
-                      setDepartment(formik.values);
+                      setInitialDepartment(formik.values);
                     }}
                   >
                     Add Department
