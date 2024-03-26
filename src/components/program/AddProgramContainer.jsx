@@ -21,6 +21,8 @@ import { capitalizeFirstLetter } from "../../validation/ValidationUtilities";
 import AlertBox from "../common/AlertBox";
 import ConfirmationDialog from "../common/ConfirmationDialog";
 import AddProgramForm from "./AddProgramForm";
+import ImportProgramContainer from "./ImportProgramContainer";
+import ProgramTemplate from "./ProgramTemplate";
 
 export default function AddProgramContainer({
   getAllPrograms,
@@ -195,6 +197,11 @@ export default function AddProgramContainer({
                 allProgramsList={allProgramsList}
                 departmentSelectList={departmentSelectList}
               />
+              <ImportProgramContainer
+                getAllPrograms={getAllPrograms}
+                departmentSelectList={departmentSelectList}
+              />
+              <ProgramTemplate />
             </>
           )}
         </CardContent>
