@@ -1,5 +1,5 @@
 import { Program, ResponseFiner } from "../types";
-import { create, get, remove, update } from "./request";
+import { create, download, get, remove, update } from "./request";
 
 const baseUrl = import.meta.env.VITE_BE_SERVER_BASE_URL;
 
@@ -46,6 +46,14 @@ export const postNewProgram = async (newProgram: Program): Promise<boolean> => {
   return response.ok;
 };
 
+// creating new programs
+export const postNewPrograms = async (
+  newProgram: Program[],
+): Promise<boolean> => {
+  const response = await create(`${baseUrl}/program/multi`, newProgram);
+  return response.ok;
+};
+
 // update program
 export const editProgram = async (editedProgram: Program): Promise<boolean> => {
   const response = await update(`${baseUrl}/program`, editedProgram);
@@ -65,4 +73,10 @@ export const getNumberOfLessons = async (
   const response = await get(`${baseUrl}/program/${programId}/numberOfLessons`);
   const numberOfLessons: number = await response.json();
   return numberOfLessons;
+};
+
+export const downloadProgramTemplate = async (): Promise<
+  ResponseFiner<Program>
+> => {
+  return download<Program>("program", baseUrl);
 };
