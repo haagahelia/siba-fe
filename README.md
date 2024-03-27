@@ -94,7 +94,7 @@ Frontend side installation instructions
 
 3. Run this command to launch the application using Node development server.
    ```sh
-   docker-compose -f docker-compose-fe.yaml up -d
+   docker-compose -f docker-compose-fe-dev.yaml up -d
    ```
 
 4. OR run this command to launch the application using Nginx web server. This is more suitable for production environment.
@@ -108,7 +108,7 @@ Frontend side installation instructions
 
 6. Stop and remove the started container depending on which command you ran:
    ```sh
-   docker-compose -f docker-compose-fe.yaml down
+   docker-compose -f docker-compose-fe-dev.yaml down
    ```
    OR
    ```sh
