@@ -41,6 +41,12 @@ export const createAppTheme = (currentPalette) =>
             "&.infoIcon": {
               color: currentPalette.infoIcon.main,
             },
+            "&.contrastingIcon": {
+              color: currentPalette.primary.contrastText,
+            },
+            "&.normalIconSize": {
+              fontSize: 30,
+            },
             "&.arrowUpDownIcon": {
               fontSize: 25,
             },
@@ -938,6 +944,14 @@ export const createAppTheme = (currentPalette) =>
             props: { variant: "clearFilterButton" },
             style: {
               color: currentPalette.text.primary,
+            },
+          },
+          {
+            props: { variant: "contrastingHover" },
+            style: {
+              "&:hover": {
+                backgroundColor: `${currentPalette.primary.contrastText}25`,
+              },
             },
           },
         ],
