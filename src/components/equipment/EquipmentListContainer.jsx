@@ -8,8 +8,10 @@ import SingleEquipmentDialog from "./SingleEquipmentDialog";
 export default function EquipmentListContainer({
   getAllEquipments,
   equipmentList,
-  onPageChange,
-  page,
+  paginateEquipment,
+  setPaginateEquipment,
+  pagination,
+  setPagination,
   totalCount,
   rowsPerPage,
 }) {
@@ -28,8 +30,10 @@ export default function EquipmentListContainer({
             <EquipmentList
               getAllEquipments={getAllEquipments}
               equipmentList={equipmentList}
-              onPageChange={onPageChange}
-              page={page}
+              paginateEquipment={paginateEquipment}
+              setPaginateEquipment={setPaginateEquipment}
+              pagination={pagination}
+              setPagination={setPagination}
               totalCount={totalCount}
               rowsPerPage={rowsPerPage}
             />

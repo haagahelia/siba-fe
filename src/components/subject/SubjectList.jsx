@@ -1,6 +1,9 @@
 import BuildCircleIcon from "@mui/icons-material/BuildCircle";
+import ClearIcon from "@mui/icons-material/Clear";
 import InfoIcon from "@mui/icons-material/Info";
+import { Pagination, TextField } from "@mui/material";
 import IconButton from "@mui/material/IconButton";
+import InputAdornment from "@mui/material/InputAdornment";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -10,20 +13,99 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import TableSortLabel from "@mui/material/TableSortLabel";
 import styled from "@mui/material/styles/styled";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { checkForUserPrograms } from "../../hooks/checkForUserPrograms";
 import SingleSubjectDialog from "./SingleSubjectDialog";
 
 export default function SubjectList({
   shownSubject,
   getAllSubjects,
+  allSubjectsList,
   paginateSubjects,
+  setPaginateSubjects,
+  pageSize,
   userPrograms,
 }) {
   const [open, setOpen] = useState(false);
   const [singleSubject, setSingleSubject] = useState(null);
   const [order, setOrder] = useState("asc");
   const [orderBy, setOrderBy] = useState("SubjectName");
+  const [searched, setSearched] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const [pagination, setPagination] = useState({
+    from: 0,
+    to: pageSize,
+  });
+
+  useEffect(() => {
+    const sortAndPaginateSubjects = () => {
+      let sorted = allSubjectsList.slice().sort((a, b) => {
+        switch (orderBy) {
+          case "icon":
+            return order === "asc"
+              ? checkForUserPrograms(a, userPrograms) ===
+                checkForUserPrograms(b, userPrograms)
+                ? 0
+                : checkForUserPrograms(a, userPrograms)
+                  ? -1
+                  : 1
+              : checkForUserPrograms(a, userPrograms) ===
+                  checkForUserPrograms(b, userPrograms)
+                ? 0
+                : checkForUserPrograms(a, userPrograms)
+                  ? 1
+                  : -1;
+          case "name":
+            return order === "asc"
+              ? a.name.localeCompare(b.name, "fi-FI")
+              : b.name.localeCompare(a.name, "fi-FI");
+          case "groupSize":
+            return order === "asc"
+              ? a.groupSize - b.groupSize
+              : b.groupSize - a.groupSize;
+          case "groupCount":
+            return order === "asc"
+              ? a.groupCount - b.groupCount
+              : b.groupCount - a.groupCount;
+          case "sessionLength":
+            return order === "asc"
+              ? a.sessionLength - b.sessionLength
+              : b.sessionLength - a.sessionLength;
+          case "sessionCount":
+            return order === "asc"
+              ? a.sessionCount - b.sessionCount
+              : b.sessionCount - a.sessionCount;
+          case "programName":
+            return order === "asc"
+              ? a.programName.localeCompare(b.programName, "fi-FI")
+              : b.programName.localeCompare(a.programName, "fi-FI");
+          case "spaceTypeName":
+            return order === "asc"
+              ? a.spaceTypeName.localeCompare(b.spaceTypeName, "fi-FI")
+              : b.spaceTypeName.localeCompare(a.spaceTypeName, "fi-FI");
+          default:
+            return 0;
+        }
+      });
+
+      // Apply search filter to both name and departmentName
+      if (searched !== "") {
+        sorted = sorted.filter((subject) =>
+          subject.name.toLowerCase().includes(searched.toLowerCase()),
+        );
+      }
+
+      // Apply pagination
+      const paginated = sorted.slice(pagination.from, pagination.to);
+      setPaginateSubjects(paginated);
+    };
+
+    sortAndPaginateSubjects();
+  }, [allSubjectsList, orderBy, order, searched, pagination]);
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [pagination]);
 
   const handleRequestSort = (property) => {
     const isAsc = orderBy === property && order === "asc";
@@ -31,54 +113,18 @@ export default function SubjectList({
     setOrderBy(property);
   };
 
-  const sortedSubjects = paginateSubjects.sort((a, b) => {
-    switch (orderBy) {
-      case "icon":
-        return order === "asc"
-          ? checkForUserPrograms(a, userPrograms) ===
-            checkForUserPrograms(b, userPrograms)
-            ? 0
-            : checkForUserPrograms(a, userPrograms)
-              ? -1
-              : 1
-          : checkForUserPrograms(a, userPrograms) ===
-              checkForUserPrograms(b, userPrograms)
-            ? 0
-            : checkForUserPrograms(a, userPrograms)
-              ? 1
-              : -1;
-      case "name":
-        return order === "asc"
-          ? a.name.localeCompare(b.name, "fi-FI")
-          : b.name.localeCompare(a.name, "fi-FI");
-      case "groupSize":
-        return order === "asc"
-          ? a.groupSize - b.groupSize
-          : b.groupSize - a.groupSize;
-      case "groupCount":
-        return order === "asc"
-          ? a.groupCount - b.groupCount
-          : b.groupCount - a.groupCount;
-      case "sessionLength":
-        return order === "asc"
-          ? a.sessionLength - b.sessionLength
-          : b.sessionLength - a.sessionLength;
-      case "sessionCount":
-        return order === "asc"
-          ? a.sessionCount - b.sessionCount
-          : b.sessionCount - a.sessionCount;
-      case "programName":
-        return order === "asc"
-          ? a.programName.localeCompare(b.programName, "fi-FI")
-          : b.programName.localeCompare(a.programName, "fi-FI");
-      case "spaceTypeName":
-        return order === "asc"
-          ? a.spaceTypeName.localeCompare(b.spaceTypeName, "fi-FI")
-          : b.spaceTypeName.localeCompare(a.spaceTypeName, "fi-FI");
-      default:
-        return 0;
-    }
-  });
+  const handleSearch = (e) => {
+    const searchText = e.target.value;
+    setSearched(searchText);
+    setPagination({ from: 0, to: pageSize });
+  };
+
+  const handleChangePage = (e, p) => {
+    const from = (p - 1) * pageSize;
+    const to = (p - 1) * pageSize + pageSize;
+    setPagination({ from, to });
+    setCurrentPage(p);
+  };
 
   // STYLE
   const Box = styled(Table)(({ theme }) => ({
@@ -87,6 +133,27 @@ export default function SubjectList({
   }));
   return (
     <div>
+      <TextField
+        type="text"
+        label="Search subjects"
+        value={searched}
+        onChange={handleSearch}
+        fullWidth
+        variant="outlined"
+        size="medium"
+        InputProps={{
+          endAdornment: (
+            <InputAdornment position="end">
+              <IconButton
+                onClick={() => setSearched("")}
+                sx={{ visibility: searched ? "visible" : "hidden" }}
+              >
+                <ClearIcon />
+              </IconButton>
+            </InputAdornment>
+          ),
+        }}
+      />
       <SingleSubjectDialog
         open={open}
         setOpen={setOpen}
@@ -173,7 +240,7 @@ export default function SubjectList({
               </TableRow>
             </TableHead>
             <TableBody>
-              {sortedSubjects.map((value) => (
+              {paginateSubjects.map((value) => (
                 <TableRow key={value.id}>
                   <TableCell>
                     {checkForUserPrograms(value, userPrograms) ? (
@@ -211,6 +278,13 @@ export default function SubjectList({
           </Box>
         </TableContainer>
       </Paper>
+      <div>
+        <Pagination
+          count={Math.ceil(allSubjectsList.length / pageSize)}
+          onChange={handleChangePage}
+          variant="outlined"
+        />
+      </div>
     </div>
   );
 }

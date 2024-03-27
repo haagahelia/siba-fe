@@ -8,7 +8,6 @@ import dao from "../../ajax/dao";
 import { useRoleLoggedIn } from "../../hooks/useRoleLoggedIn";
 import Logger from "../../logger/logger";
 
-import { Pagination } from "@mui/material";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardHeader from "@mui/material/CardHeader";
@@ -24,16 +23,13 @@ export default function Equipments() {
 
   const { roles } = useRoleLoggedIn();
   const [equipmentList, setEquipmentList] = useState([]);
-
-  const [page, setPage] = useState(1);
   const rowsPerPage = useContext(AppContext).settings.itemsPerPage;
-  const startIndex = (page - 1) * rowsPerPage;
-  const endIndex = startIndex + rowsPerPage;
-  const currentData = equipmentList.slice(startIndex, endIndex);
+  const [paginateEquipment, setPaginateEquipment] = useState([]);
 
-  const handlePageChange = (event, newPage) => {
-    setPage(newPage);
-  };
+  const [pagination, setPagination] = useState({
+    from: 0,
+    to: rowsPerPage,
+  });
 
   const totalCount = Math.ceil(equipmentList.length / rowsPerPage);
 
@@ -83,16 +79,12 @@ export default function Equipments() {
               <EquipmentListContainer
                 getAllEquipments={getAllEquipments}
                 equipmentList={equipmentList}
-                onPageChange={handlePageChange}
-                page={page}
+                paginateEquipment={paginateEquipment}
+                setPaginateEquipment={setPaginateEquipment}
+                pagination={pagination}
+                setPagination={setPagination}
                 totalCount={totalCount}
                 rowsPerPage={rowsPerPage}
-              />
-              <Pagination
-                count={totalCount}
-                page={page}
-                onChange={handlePageChange}
-                variant="outlined"
               />
             </CardContent>
           </Card>
