@@ -149,48 +149,46 @@ export default function EditProgram({
         <form onSubmit={formik.handleSubmit}>
           <DialogTitle>Edit: {formik.initialValues?.name}</DialogTitle>
           <DialogContent>
-            <DialogContentText>
-              <Grid container variant="sibaGridEdit" spacing={2} column={7}>
-                <Grid item xs={12}>
-                  <TextField
-                    error={
-                      formik.touched.name && formik.errors.name ? true : false
-                    }
-                    name="Program"
-                    label="Program"
-                    defaultValue={formik.values.name}
-                    onChange={formik.handleChange("name")}
-                    onBlur={formik.handleBlur("name")}
-                    helperText={
-                      formik.touched.name && formik.errors.name
-                        ? formik.errors.name
-                        : null
-                    }
-                    InputLabelProps={{
-                      shrink: true,
-                    }}
-                  />
-                </Grid>
-                <Grid item xs={12}>
-                  <FormControl sx={{ minWidth: 230 }}>
-                    <InputLabel>Department</InputLabel>
-                    <Select
-                      name="departmentId"
-                      label="Department"
-                      onChange={formik.handleChange}
-                      value={formik.values.departmentId || ""}
-                      onBlur={formik.handleBlur}
-                    >
-                      {departmentSelectList.map((department) => (
-                        <MenuItem key={department.id} value={department.id}>
-                          {department.name}
-                        </MenuItem>
-                      ))}
-                    </Select>
-                  </FormControl>
-                </Grid>
+            <Grid container variant="sibaGridEdit" spacing={2} column={7}>
+              <Grid item xs={12}>
+                <TextField
+                  error={
+                    formik.touched.name && formik.errors.name ? true : false
+                  }
+                  name="Program"
+                  label="Program"
+                  defaultValue={formik.values.name}
+                  onChange={formik.handleChange("name")}
+                  onBlur={formik.handleBlur("name")}
+                  helperText={
+                    formik.touched.name && formik.errors.name
+                      ? formik.errors.name
+                      : null
+                  }
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                />
               </Grid>
-            </DialogContentText>
+              <Grid item xs={12}>
+                <FormControl sx={{ minWidth: 230 }}>
+                  <InputLabel>Department</InputLabel>
+                  <Select
+                    name="departmentId"
+                    label="Department"
+                    onChange={formik.handleChange}
+                    value={formik.values.departmentId || ""}
+                    onBlur={formik.handleBlur}
+                  >
+                    {departmentSelectList.map((department) => (
+                      <MenuItem key={department.id} value={department.id}>
+                        {department.name}
+                      </MenuItem>
+                    ))}
+                  </Select>
+                </FormControl>
+              </Grid>
+            </Grid>
           </DialogContent>
           <DialogActions sx={{ justifyContent: "space-evenly" }}>
             <Button
