@@ -2,6 +2,7 @@ import useTheme from "@mui/material/styles/useTheme";
 
 import Typography from "@mui/material/Typography";
 import Grid2 from "@mui/material/Unstable_Grid2";
+import { Link } from "react-router-dom";
 
 export default function RoomList({ rooms }) {
   const theme = useTheme();
@@ -10,10 +11,10 @@ export default function RoomList({ rooms }) {
     <>
       <Grid2 container key="collapse_container_row36">
         <Grid2 xs={8}>
-          <Typography style={{ fontSize: 20 }}>Huoneet</Typography>
+          <Typography style={{ fontSize: 20 }}>Rooms</Typography>
         </Grid2>
         <Grid2 xs={4}>
-          <Typography style={{ fontSize: 20 }}>Tunnit</Typography>
+          <Typography style={{ fontSize: 20 }}>Hours</Typography>
         </Grid2>
       </Grid2>
       {rooms.map((room) => (
@@ -21,7 +22,10 @@ export default function RoomList({ rooms }) {
           <Grid2 xs={8} variant="resultsDropdown">
             {" "}
             <Typography>
-              {room.name}
+            <Link
+                style={theme.components.Links}
+                to={`/space/${room.id}`}
+              >{`${room.name}`}</Link>
             </Typography>
           </Grid2>
           <Grid2 xs={4} variant="resultsDropdown">
