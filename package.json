@@ -6,6 +6,7 @@
   "scripts": {
     "clean": "rimraf dist",
     "start": "vite --open",
+    "host": "vite --host",
     "build": "tsc && vite build",
     "preview": "vite preview",
     "precommit": "sh ./pre-commit"
