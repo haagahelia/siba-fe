@@ -25,6 +25,7 @@ export default function AllocRoundControlPanel({ incrementResetCounter }) {
 
   const [isClicked, setIsClicked] = useState(true);
   const sheetcolumns = [
+    { header: "Successful", key: "Successful", width: 12, height: 20 },
     { header: "Allocation ID", key: "allocId", width: 12, height: 20 },
     { header: "Allocation", key: "allocation", width: 9, height: 20 },
     { header: "Allocated on", key: "lastModified", width: 17.89, height: 20 },
