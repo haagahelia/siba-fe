@@ -55,7 +55,7 @@ Frontend side installation instructions
    cd siba-fe
    ```
 
-3. Create **.env.local** file. Add .env to the root of the project.
+3. Create **.env** file. Add .env to the root of the project.
 
    ```sh
    VITE_BE_SERVER_BASE_URL=http://...backend server address and port here.../api
