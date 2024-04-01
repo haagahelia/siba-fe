@@ -1,15 +1,16 @@
 import styled from "@mui/material/styles/styled";
 import { useState } from "react";
 
+import BuildCircleIcon from "@mui/icons-material/BuildCircle";
 import Divider from "@mui/material/Divider";
 import Grid from "@mui/material/Grid";
+import IconButton from "@mui/material/IconButton";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
 import SettingsDetails from "./SettingsDetails";
-
 export default function SettingsList({
   paginateSettings,
   getAllSettings,
@@ -41,10 +42,19 @@ export default function SettingsList({
                   disablePadding
                   onClick={() => {
                     setSingleSetting(value);
-
-                    setOpen(true);
                   }}
                 >
+                  <Grid item md={3} xs={2}>
+                    <IconButton
+                      onClick={() => {
+                        setSingleSetting(value);
+                        setOpen(true);
+                      }}
+                      aria-label="Open Info"
+                    >
+                      <BuildCircleIcon />
+                    </IconButton>
+                  </Grid>
                   <Grid item md={3} xs={2}>
                     <Typography
                       variant="caption"
@@ -59,7 +69,7 @@ export default function SettingsList({
                       }}
                     />
                   </Grid>
-                  <Grid item md={3} xs={4}>
+                  <Grid item md={4} xs={2}>
                     <Typography
                       variant="caption"
                       style={{ fontWeight: "bold" }}
@@ -87,7 +97,7 @@ export default function SettingsList({
                       }}
                     />
                   </Grid>
-                  <Grid item md={10} xs={7}>
+                  <Grid item md={5} xs={7}>
                     <Typography
                       variant="caption"
                       style={{ fontWeight: "bold" }}

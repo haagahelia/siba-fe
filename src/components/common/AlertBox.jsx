@@ -32,13 +32,14 @@ export default function AlertBox({ alertOpen, alertOptions, setAlertOpen }) {
           elevation={24}
           action={
             <IconButton
+              variant="contrastingHover"
               sx={{ alignSelf: "center" }}
               aria-label="sulje"
               onClick={() => {
                 setAlertOpen(false);
               }}
             >
-              <CloseIcon sx={{ fontSize: "30px" }} />
+              <CloseIcon className="contrastingIcon normalIconSize" />
             </IconButton>
           }
         >
