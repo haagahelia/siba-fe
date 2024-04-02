@@ -67,10 +67,6 @@ export default function EquipmentList({
     sortAndPaginateEquipment();
   }, [equipmentList, orderBy, order, searchQuery, pagination]);
 
-  useEffect(() => {
-    setCurrentPage(1);
-  }, [pagination]);
-
   const handleChangePage = (e, p) => {
     const from = (p - 1) * rowsPerPage;
     const to = (p - 1) * rowsPerPage + rowsPerPage;
@@ -91,6 +87,9 @@ export default function EquipmentList({
     const searchText = e.target.value;
     setSearchQuery(searchText);
     setPagination({ from: 0, to: rowsPerPage });
+    if (searchText === "") {
+      setCurrentPage(1);
+    }
   };
 
   const handleRowClick = useCallback((equipment) => {
@@ -100,6 +99,7 @@ export default function EquipmentList({
 
   const cancelSearch = () => {
     setSearchQuery("");
+    setCurrentPage(1);
   };
 
   // STYLE
@@ -191,6 +191,7 @@ export default function EquipmentList({
           <Pagination
             count={totalCount}
             onChange={handleChangePage}
+            page={currentPage}
             variant="outlined"
           />
         </div>

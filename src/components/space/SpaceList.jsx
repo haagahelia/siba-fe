@@ -67,10 +67,6 @@ export default function SpaceList({
     sortAndPaginateSpaces();
   }, [allSpacesList, orderBy, order, searched, pagination]);
 
-  useEffect(() => {
-    setCurrentPage(1);
-  }, [pagination]);
-
   const handleRequestSort = (property) => {
     const isAsc = orderBy === property && order === "asc";
     setOrder(isAsc ? "desc" : "asc");
@@ -81,6 +77,9 @@ export default function SpaceList({
     const searchText = e.target.value;
     setSearched(searchText);
     setPagination({ from: 0, to: pageSize });
+    if (searchText === "") {
+      setCurrentPage(1);
+    }
   };
 
   const handleChangePage = (e, p) => {
@@ -109,7 +108,10 @@ export default function SpaceList({
           endAdornment: (
             <InputAdornment position="end">
               <IconButton
-                onClick={() => setSearched("")}
+                onClick={() => {
+                  setSearched("");
+                  setCurrentPage(1);
+                }}
                 sx={{ visibility: searched ? "visible" : "hidden" }}
               >
                 <ClearIcon />
@@ -177,6 +179,7 @@ export default function SpaceList({
         <Pagination
           count={Math.ceil(allSpacesList.length / pageSize)}
           onChange={handleChangePage}
+          page={currentPage}
           variant="outlined"
         />
       </div>

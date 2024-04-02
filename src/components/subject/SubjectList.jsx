@@ -103,10 +103,6 @@ export default function SubjectList({
     sortAndPaginateSubjects();
   }, [allSubjectsList, orderBy, order, searched, pagination]);
 
-  useEffect(() => {
-    setCurrentPage(1);
-  }, [pagination]);
-
   const handleRequestSort = (property) => {
     const isAsc = orderBy === property && order === "asc";
     setOrder(isAsc ? "desc" : "asc");
@@ -117,6 +113,9 @@ export default function SubjectList({
     const searchText = e.target.value;
     setSearched(searchText);
     setPagination({ from: 0, to: pageSize });
+    if (searchText === "") {
+      setCurrentPage(1);
+    }
   };
 
   const handleChangePage = (e, p) => {
@@ -145,7 +144,10 @@ export default function SubjectList({
           endAdornment: (
             <InputAdornment position="end">
               <IconButton
-                onClick={() => setSearched("")}
+                onClick={() => {
+                  setSearched("");
+                  setCurrentPage(1);
+                }}
                 sx={{ visibility: searched ? "visible" : "hidden" }}
               >
                 <ClearIcon />
@@ -282,6 +284,7 @@ export default function SubjectList({
         <Pagination
           count={Math.ceil(allSubjectsList.length / pageSize)}
           onChange={handleChangePage}
+          page={currentPage}
           variant="outlined"
         />
       </div>

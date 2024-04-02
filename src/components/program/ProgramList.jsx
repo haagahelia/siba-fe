@@ -71,10 +71,6 @@ export default function ProgramList({
     sortAndPaginatePrograms();
   }, [allProgramsList, orderBy, order, searched, pagination]);
 
-  useEffect(() => {
-    setCurrentPage(1);
-  }, [pagination]);
-
   const handleRequestSort = (property) => {
     const isAsc = orderBy === property && order === "asc";
     setOrder(isAsc ? "desc" : "asc");
@@ -90,6 +86,9 @@ export default function ProgramList({
 
     // Reset pagination when search criteria change
     setPagination({ from: 0, to: pageSize });
+    if (searchText === "") {
+      setCurrentPage(1);
+    }
   };
 
   const handleChangePage = (e, p) => {
@@ -124,7 +123,10 @@ export default function ProgramList({
           endAdornment: (
             <InputAdornment position="end">
               <IconButton
-                onClick={() => setSearched("")}
+                onClick={() => {
+                  setSearched("");
+                  setCurrentPage(1);
+                }}
                 sx={{ visibility: searched ? "visible" : "hidden" }}
               >
                 <ClearIcon />
@@ -179,7 +181,7 @@ export default function ProgramList({
       <div>
         <Pagination
           count={Math.ceil(allProgramsList.length / pageSize)}
-          currentPage={currentPage}
+          page={currentPage}
           onChange={handleChangePage}
           variant="outlined"
         />

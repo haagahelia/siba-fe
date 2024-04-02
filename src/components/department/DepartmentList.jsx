@@ -64,10 +64,6 @@ export default function DepartmentList({
     sortAndPaginateDepartment();
   }, [departmentList, orderBy, order, searchQuery, pagination]);
 
-  useEffect(() => {
-    setCurrentPage(1);
-  }, [pagination]);
-
   const handleChangePage = (e, p) => {
     const from = (p - 1) * rowsPerPage;
     const to = (p - 1) * rowsPerPage + rowsPerPage;
@@ -85,6 +81,9 @@ export default function DepartmentList({
     const searchText = e.target.value;
     setSearchQuery(searchText);
     setPagination({ from: 0, to: rowsPerPage });
+    if (searchText === "") {
+      setCurrentPage(1);
+    }
   };
 
   const handleRowClick = (department) => {
@@ -94,6 +93,7 @@ export default function DepartmentList({
 
   const cancelSearch = () => {
     setSearchQuery("");
+    setCurrentPage(1);
   };
 
   return (
@@ -175,6 +175,7 @@ export default function DepartmentList({
           <Pagination
             count={totalCount}
             onChange={handleChangePage}
+            page={currentPage}
             variant="outlined"
           />
         </div>
