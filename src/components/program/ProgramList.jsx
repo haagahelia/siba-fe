@@ -75,9 +75,6 @@ export default function ProgramList({
     const isAsc = orderBy === property && order === "asc";
     setOrder(isAsc ? "desc" : "asc");
     setOrderBy(property);
-
-    // Reset pagination when sorting criteria change
-    setPagination({ from: 0, to: pageSize });
   };
 
   const handleSearch = (e) => {

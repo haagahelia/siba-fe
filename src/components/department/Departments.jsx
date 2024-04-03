@@ -50,7 +50,7 @@ export default function Departments() {
       );
     } else {
       setDepartmentList(data);
-      setPaginateDepartment(data.slice(0, 15));
+      setPaginateDepartment(data.slice(0, rowsPerPage));
       Logger.info(
         `getAllDepartments: successfully fetched ${data.length} departments.`,
       );
@@ -65,7 +65,7 @@ export default function Departments() {
 
   useEffect(() => {
     Logger.debug("Running effect to update paginated department.");
-    setPaginateDepartment(departmentList.slice(0, 15));
+    setPaginateDepartment(departmentList.slice(0, rowsPerPage));
   }, [departmentList]);
 
   return (
