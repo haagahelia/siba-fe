@@ -5,6 +5,10 @@ RUN groupadd -r siba && useradd -m -r -g siba siba
 WORKDIR /app
 RUN chown -R siba:siba /app
 USER siba
+
+ARG API_URL
+ENV VITE_BE_SERVER_BASE_URL $API_URL
+
 COPY package.json .
 RUN npm i
 COPY . .
