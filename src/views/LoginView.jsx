@@ -114,8 +114,9 @@ export default function LoginView({ handleLoginChange }) {
 
       // Timeout to show popup message before navigation
       setTimeout(() => {
-        navigate("/subject");
-      }, 1500);
+        navigate("/department");
+        location.reload();
+      }, 1000);
     }
   };
 
