@@ -612,6 +612,12 @@ export const createAppTheme = (currentPalette) =>
         },
         variants: [
           {
+            props: { variant: "caption" },
+            style: {
+              fontWeight: "bold",
+            },
+          },
+          {
             props: { variant: "roomIndex" },
             style: {
               marginRight: margins.large,
@@ -940,6 +946,14 @@ export const createAppTheme = (currentPalette) =>
           },
         },
         variants: [
+          {
+            props: { variant: "closeButton" },
+            style: {
+              position: "absolute",
+              top: 10,
+              right: 20,
+            },
+          },
           {
             props: { variant: "clearFilterButton" },
             style: {

@@ -1,4 +1,3 @@
-import { useTheme } from "@mui/material/styles";
 import { useState } from "react";
 
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
@@ -8,8 +7,6 @@ import Grid2 from "@mui/material/Unstable_Grid2";
 import RoomList from "../room/RoomList";
 
 export default function CollapsedRow({ prog1 }) {
-  const theme = useTheme();
-
   const [expand, setExpand] = useState(false);
 
   return (
