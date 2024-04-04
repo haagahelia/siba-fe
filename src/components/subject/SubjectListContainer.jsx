@@ -10,6 +10,8 @@ export default function SubjectListContainer({
   getAllSubjects,
   allSubjectsList,
   paginateSubjects,
+  setPaginateSubjects,
+  pageSize,
   open,
   setOpen,
   userPrograms,
@@ -32,6 +34,8 @@ export default function SubjectListContainer({
               getAllSubjects={getAllSubjects}
               allSubjectsList={allSubjectsList}
               paginateSubjects={paginateSubjects}
+              setPaginateSubjects={setPaginateSubjects}
+              pageSize={pageSize}
               userPrograms={userPrograms}
             />
           </CardContent>

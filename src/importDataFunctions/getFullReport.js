@@ -1,3 +1,4 @@
+import { blue } from "@mui/material/colors";
 import * as ExcelJS from "exceljs";
 import dao from "../ajax/dao";
 
@@ -22,7 +23,7 @@ export const getFullReport = async (sheetcolumns, saveAs, setAlertOptions) => {
   }
 
   reportsheet.getRow(1).eachCell((cell) => {
-    cell.font = { bold: true };
+    cell.font = { bold: true, color: { argb: "82b1ff" } };
   });
   try {
     const buffer = await fullReport.xlsx.writeBuffer();

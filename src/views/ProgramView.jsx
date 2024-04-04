@@ -56,7 +56,7 @@ export default function ProgramView() {
         `getAllPrograms: successfully fetched ${data.length} programs.`,
       );
       setAllProgramsList(data);
-      setPaginatePrograms(data.slice(0, 15));
+      setPaginatePrograms(data.slice(0, pageSize));
     }
   };
 
@@ -68,7 +68,7 @@ export default function ProgramView() {
 
   useEffect(() => {
     Logger.debug("Running effect to update paginated programs.");
-    setPaginatePrograms(allProgramsList.slice(0, 15));
+    setPaginatePrograms(allProgramsList.slice(0, pageSize));
   }, [allProgramsList]);
 
   return (
@@ -93,6 +93,9 @@ export default function ProgramView() {
                 getAllPrograms={getAllPrograms}
                 allProgramsList={allProgramsList}
                 paginatePrograms={paginatePrograms}
+                setPaginatePrograms={setPaginatePrograms}
+                pagination={pagination}
+                setPagination={setPagination}
                 open={open}
                 setOpen={setOpen}
               />

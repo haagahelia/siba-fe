@@ -17,9 +17,7 @@ import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import AlertBox from "../components/common/AlertBox";
 import AddSpace from "../components/space/AddSpace";
-import SpaceFiltering from "../components/space/SpaceFiltering";
 import SpaceListContainer from "../components/space/SpaceListContainer";
-import SpacePagination from "../components/space/SpacePagination";
 
 export default function SpaceView() {
   Logger.logPrefix = "SpaceView";
@@ -38,10 +36,6 @@ export default function SpaceView() {
   const [alertOptions, setAlertOptions] = useState({
     message: "This is an error alert — check it out!",
     severity: "error",
-  });
-  const [pagination, setPagination] = useState({
-    from: 0,
-    to: pageSize,
   });
 
   Logger.debug("Initial state set.");
@@ -130,29 +124,15 @@ export default function SpaceView() {
           <Card variant="outlined">
             <CardHeader title="Spaces" variant="pageHeader" />
             <CardContent>
-              <SpaceFiltering
-                allSpacesList={allSpacesList}
-                setAllSpacesList={setAllSpacesList}
-                paginateSpaces={paginateSpaces}
-                setPaginateSpaces={setPaginateSpaces}
-                pagination={pagination}
-              />
               <SpaceListContainer
                 shownSpace={shownSpace}
                 setShownSpace={setShownSpace}
                 getAllSpaces={getAllSpaces}
                 allSpacesList={allSpacesList}
                 paginateSpaces={paginateSpaces}
+                setPaginateSpaces={setPaginateSpaces}
                 open={open}
                 setOpen={setOpen}
-              />
-              <SpacePagination
-                pagination={pagination}
-                setPagination={setPagination}
-                allSpacesList={allSpacesList}
-                paginateSpaces={paginateSpaces}
-                setPaginateSpaces={setPaginateSpaces}
-                pageSize={pageSize}
               />
             </CardContent>
           </Card>

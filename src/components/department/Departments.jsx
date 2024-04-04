@@ -7,8 +7,6 @@ import dao from "../../ajax/dao";
 import { useRoleLoggedIn } from "../../hooks/useRoleLoggedIn";
 import Logger from "../../logger/logger";
 
-import { Pagination } from "@mui/material";
-
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardHeader from "@mui/material/CardHeader";
@@ -24,16 +22,13 @@ export default function Departments() {
 
   const { roles } = useRoleLoggedIn();
   const [departmentList, setDepartmentList] = useState([]);
-
-  const [page, setPage] = useState(1);
+  const [paginateDepartment, setPaginateDepartment] = useState([]);
   const rowsPerPage = useContext(AppContext).settings.itemsPerPage;
-  const startIndex = (page - 1) * rowsPerPage;
-  const endIndex = startIndex + rowsPerPage;
-  const currentData = departmentList.slice(startIndex, endIndex);
 
-  const handlePageChange = (event, newPage) => {
-    setPage(newPage);
-  };
+  const [pagination, setPagination] = useState({
+    from: 0,
+    to: rowsPerPage,
+  });
 
   const totalCount = Math.ceil(departmentList.length / rowsPerPage);
 
@@ -55,6 +50,7 @@ export default function Departments() {
       );
     } else {
       setDepartmentList(data);
+      setPaginateDepartment(data.slice(0, rowsPerPage));
       Logger.info(
         `getAllDepartments: successfully fetched ${data.length} departments.`,
       );
@@ -64,11 +60,13 @@ export default function Departments() {
   useEffect(() => {
     Logger.debug("Calling getAllDepartments in useEffect");
     getAllDepartments();
+    document.title = "Departments";
   }, []);
 
   useEffect(() => {
-    document.title = "Departments";
-  }, []);
+    Logger.debug("Running effect to update paginated department.");
+    setPaginateDepartment(departmentList.slice(0, rowsPerPage));
+  }, [departmentList]);
 
   return (
     <div>
@@ -83,16 +81,12 @@ export default function Departments() {
               <DepartmentListContainer
                 getAllDepartments={getAllDepartments}
                 departmentList={departmentList}
-                onPageChange={handlePageChange}
-                page={page}
+                paginateDepartment={paginateDepartment}
+                setPaginateDepartment={setPaginateDepartment}
+                pagination={pagination}
+                setPagination={setPagination}
                 totalCount={totalCount}
                 rowsPerPage={rowsPerPage}
-              />
-              <Pagination
-                count={totalCount}
-                page={page}
-                onChange={handlePageChange}
-                variant="outlined"
               />
             </CardContent>
           </Card>
