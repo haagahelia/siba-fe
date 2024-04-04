@@ -9,8 +9,10 @@ import SingleDepartmentDialog from "./SingleDepartmentDialog";
 export default function DepartmentListContainer({
   getAllDepartments,
   departmentList,
-  onPageChange,
-  page,
+  paginateDepartment,
+  setPaginateDepartment,
+  pagination,
+  setPagination,
   totalCount,
   rowsPerPage,
 }) {
@@ -29,8 +31,10 @@ export default function DepartmentListContainer({
             <DepartmentList
               getAllDepartments={getAllDepartments}
               departmentList={departmentList}
-              onPageChange={onPageChange}
-              page={page}
+              paginateDepartment={paginateDepartment}
+              setPaginateDepartment={setPaginateDepartment}
+              pagination={pagination}
+              setPagination={setPagination}
               totalCount={totalCount}
               rowsPerPage={rowsPerPage}
             />
