@@ -6,9 +6,6 @@ WORKDIR /app
 RUN chown -R siba:siba /app
 USER siba
 
-ARG BE_API_URL
-ENV VITE_BE_SERVER_BASE_URL $BE_API_URL
-
 COPY package.json .
 RUN npm i
 COPY . .

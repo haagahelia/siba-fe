@@ -6,8 +6,6 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.nginx
-      args:
-        BE_API_URL: ${VITE_BE_SERVER_BASE_URL}
     container_name: siba_fe_nginx_container
     ports:
       - '${PORT}:8080'
