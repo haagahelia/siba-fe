@@ -56,12 +56,7 @@ export default function SettingsList({
                     </IconButton>
                   </Grid>
                   <Grid item md={3} xs={2}>
-                    <Typography
-                      variant="caption"
-                      style={{ fontWeight: "bold" }}
-                    >
-                      ID:
-                    </Typography>
+                    <Typography variant="caption">ID:</Typography>
                     <ListItemText
                       primary={value.id}
                       primaryTypographyProps={{
@@ -70,12 +65,7 @@ export default function SettingsList({
                     />
                   </Grid>
                   <Grid item md={4} xs={2}>
-                    <Typography
-                      variant="caption"
-                      style={{ fontWeight: "bold" }}
-                    >
-                      Variable:
-                    </Typography>
+                    <Typography variant="caption">Variable:</Typography>
                     <ListItemText
                       primary={value.variable}
                       primaryTypographyProps={{
@@ -84,12 +74,7 @@ export default function SettingsList({
                     />
                   </Grid>
                   <Grid item md={10} xs={7}>
-                    <Typography
-                      variant="caption"
-                      style={{ fontWeight: "bold" }}
-                    >
-                      Description:
-                    </Typography>
+                    <Typography variant="caption">Description:</Typography>
                     <ListItemText
                       primary={value.description}
                       primaryTypographyProps={{
@@ -98,12 +83,7 @@ export default function SettingsList({
                     />
                   </Grid>
                   <Grid item md={5} xs={7}>
-                    <Typography
-                      variant="caption"
-                      style={{ fontWeight: "bold" }}
-                    >
-                      textValue:
-                    </Typography>
+                    <Typography variant="caption">textValue:</Typography>
                     <ListItemText
                       primary={value.textValue}
                       primaryTypographyProps={{
@@ -112,12 +92,7 @@ export default function SettingsList({
                     />
                   </Grid>
                   <Grid item md={10} xs={7}>
-                    <Typography
-                      variant="caption"
-                      style={{ fontWeight: "bold" }}
-                    >
-                      numberValue:
-                    </Typography>
+                    <Typography variant="caption">numberValue:</Typography>
                     <ListItemText
                       primary={value.numberValue}
                       primaryTypographyProps={{

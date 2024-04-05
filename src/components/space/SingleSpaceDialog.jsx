@@ -82,7 +82,7 @@ export default function SingleSpaceDialog({
           edge="end"
           onClick={() => setOpen(false)}
           aria-label="close"
-          style={{ position: "absolute", top: "10px", right: "20px" }}
+          variant="closeButton"
         >
           <CloseIcon />
         </IconButton>

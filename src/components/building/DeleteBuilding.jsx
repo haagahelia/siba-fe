@@ -1,6 +1,5 @@
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
-import useTheme from "@mui/material/styles/useTheme";
 import { useEffect, useState } from "react";
 import dao from "../../ajax/dao";
 import AlertBox from "../common/AlertBox";
@@ -11,7 +10,6 @@ export default function DeleteBuilding({
   getAllBuildings,
   setOpen,
 }) {
-  const theme = useTheme();
   const [alertOpen, setAlertOpen] = useState(false);
   const [alertOptions, setAlertOptions] = useState({
     message: "",

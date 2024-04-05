@@ -90,7 +90,7 @@ export default function SingleSubjectDialog({
             Logger.debug("Closing SingleSubjectDialog from IconButton...");
           }}
           aria-label="close"
-          style={{ position: "absolute", top: "10px", right: "20px" }}
+          variant="closeButton"
         >
           <CloseIcon />
         </IconButton>
