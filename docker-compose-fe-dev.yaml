@@ -1,0 +1,12 @@
+version: "3.8"
+services:
+  siba-fe-dev:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    container_name: siba_fe_dev_container
+    env_file: .env
+    ports:
+      - '${PORT}:${PORT}'
+    stdin_open: true
+    tty: true

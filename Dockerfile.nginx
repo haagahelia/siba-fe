@@ -5,6 +5,7 @@ RUN groupadd -r siba && useradd -m -r -g siba siba
 WORKDIR /app
 RUN chown -R siba:siba /app
 USER siba
+
 COPY package.json .
 RUN npm i
 COPY . .
