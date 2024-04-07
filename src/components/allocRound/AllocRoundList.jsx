@@ -138,15 +138,7 @@ export default function AllocRoundList({
                   Name
                 </TableSortLabel>
               </TableCell>
-              <TableCell>
-                <TableSortLabel
-                  active={orderBy === "Description"}
-                  direction={order}
-                  onClick={() => handleRequestSort("Description")}
-                >
-                  Description
-                </TableSortLabel>
-              </TableCell>
+              <TableCell>Description</TableCell>
               <TableCell>
                 <TableSortLabel
                   active={orderBy === "Created"}
