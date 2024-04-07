@@ -54,6 +54,7 @@ export default function SpaceTypeList({
   const filteredSpaceTypesList = sortedSpaceTypesList.filter(
     (spaceType) =>
       spaceType.name?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      spaceType.acronym?.toLowerCase().includes(searchQuery.toLowerCase()) ||
       spaceType.description?.toLowerCase().includes(searchQuery.toLowerCase()),
   );
 
@@ -104,6 +105,7 @@ export default function SpaceTypeList({
                     Name
                   </TableSortLabel>
                 </TableCell>
+                <TableCell>Acronym</TableCell>
                 <TableCell>Description</TableCell>
               </TableRow>
             </TableHead>
@@ -122,6 +124,7 @@ export default function SpaceTypeList({
                     </IconButton>
                   </TableCell>
                   <TableCell>{value.name}</TableCell>
+                  <TableCell>{value.acronym}</TableCell>
                   <TableCell>{value.description}</TableCell>
                 </TableRow>
               ))}

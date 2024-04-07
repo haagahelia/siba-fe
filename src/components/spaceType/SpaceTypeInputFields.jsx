@@ -25,6 +25,27 @@ export default function SpaceTypeInputFields({ formik }) {
           }}
         />
       </Grid>
+      <Grid item xs={12} sm={12} md={4} lg={4}>
+        <TextField
+          fullWidth
+          error={formik.touched.acronym && formik.errors.acronym ? true : false}
+          name="acronym"
+          placeholder="Acronym..."
+          label="Space type acronym"
+          variant="outlined"
+          value={formik.values.acronym}
+          onChange={formik.handleChange("acronym")}
+          onBlur={formik.handleBlur("acronym")}
+          helperText={
+            formik.touched.acronym && formik.errors.acronym
+              ? formik.errors.acronym
+              : null
+          }
+          InputLabelProps={{
+            shrink: true,
+          }}
+        />
+      </Grid>
       <Grid item xs={12} sm={12} md={8} lg={8}>
         <TextField
           fullWidth

@@ -49,6 +49,7 @@ export default function EditSpaceTypeContainer({
     const editedSpaceType = {
       id: values.id,
       name: capitalizeFirstLetter(values.name),
+      acronym: values.acronym.toUpperCase(),
       description: values.description,
     };
     const result = await dao.editSpaceType(editedSpaceType);

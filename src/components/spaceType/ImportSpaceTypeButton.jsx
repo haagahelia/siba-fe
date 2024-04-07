@@ -24,6 +24,7 @@ export default function ImportSpaceTypeButton({
   const processSpaceType = async (spaceType, spaceTypeSet) => {
     const newSpaceType = {
       name: spaceType.name ? capitalizeFirstLetter(spaceType.name) : "",
+      acronym: spaceType.description ? toUpperCase(spaceType.acronym) : "",
       description: spaceType.description ? spaceType.description : "",
     };
 
@@ -33,8 +34,18 @@ export default function ImportSpaceTypeButton({
     }
     spaceTypeSet.add(newSpaceType.name);
 
+    if (spaceTypeSet.has(newSpaceType.acronym)) {
+      spaceType.FailedReason =
+        "Acronym of space type is duplicated in the file";
+      return spaceType;
+    }
+    spaceTypeSet.add(newSpaceType.acronym);
+
     const validateResult = await validate(newSpaceType);
-    spaceType.FailedReason = validateResult.name || validateResult.description;
+    spaceType.FailedReason =
+      validateResult.name ||
+      validateResult.acronym ||
+      validateResult.description;
 
     return spaceType.FailedReason ? spaceType : newSpaceType;
   };

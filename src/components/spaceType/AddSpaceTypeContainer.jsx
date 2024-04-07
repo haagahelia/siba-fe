@@ -41,6 +41,7 @@ export default function AddSpaceTypeContainer({ getAllSpaceTypes }) {
   const resetForm = () => {
     setInitialSpaceType({
       name: "",
+      acronym: "",
       description: "",
     });
   };
@@ -66,6 +67,7 @@ export default function AddSpaceTypeContainer({ getAllSpaceTypes }) {
   const addSpaceType = async (submitValues) => {
     const newSpaceType = {
       name: capitalizeFirstLetter(submitValues.name),
+      acronym: submitValues.acronym.toUpperCase(),
       description: submitValues.description,
     };
 
