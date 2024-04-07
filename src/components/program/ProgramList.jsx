@@ -31,7 +31,7 @@ export default function ProgramList({
   const [selectedProgram, setSelectedProgram] = useState(null);
   const [order, setOrder] = useState("asc");
   const [orderBy, setOrderBy] = useState("name");
-  const [searched, setSearched] = useState("");
+  const [searchQuery, setSearched] = useState("");
 
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -53,13 +53,13 @@ export default function ProgramList({
       });
 
       // Apply search filter to both name and departmentName
-      if (searched !== "") {
+      if (searchQuery !== "") {
         sorted = sorted.filter(
           (program) =>
-            program.name.toLowerCase().includes(searched.toLowerCase()) ||
+            program.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
             program.departmentName
               .toLowerCase()
-              .includes(searched.toLowerCase()),
+              .includes(searchQuery.toLowerCase()),
         );
       }
 
@@ -69,7 +69,7 @@ export default function ProgramList({
     };
 
     sortAndPaginatePrograms();
-  }, [allProgramsList, orderBy, order, searched, pagination]);
+  }, [allProgramsList, orderBy, order, searchQuery, pagination]);
 
   const handleRequestSort = (property) => {
     const isAsc = orderBy === property && order === "asc";
@@ -92,7 +92,10 @@ export default function ProgramList({
     const from = (p - 1) * pageSize;
     const to = (p - 1) * pageSize + pageSize;
     setPagination({ from, to });
-    setCurrentPage(p);
+
+    if (searchQuery !== "") {
+      setCurrentPage(1);
+    }
   };
 
   const handleOpenDialog = (program) => {
@@ -111,7 +114,7 @@ export default function ProgramList({
       <TextField
         type="text"
         label="Search programs"
-        value={searched}
+        value={searchQuery}
         onChange={handleSearch}
         fullWidth
         variant="outlined"
@@ -124,7 +127,7 @@ export default function ProgramList({
                   setSearched("");
                   setCurrentPage(1);
                 }}
-                sx={{ visibility: searched ? "visible" : "hidden" }}
+                sx={{ visibility: searchQuery ? "visible" : "hidden" }}
               >
                 <ClearIcon />
               </IconButton>

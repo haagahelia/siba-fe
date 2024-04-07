@@ -24,14 +24,18 @@ export default function SpaceTypePagination({
     }
   }, [pagination, allSpaceTypesList]);
 
-  const handleChange = (e, p) => {
+  const handlePageChange = (e, p) => {
     const from = (p - 1) * pageSize;
     const to = (p - 1) * pageSize + pageSize;
     setPagination({ from, to });
     window.scrollTo({ top: 0, behavior: "smooth" });
+
+    if (searchQuery !== "") {
+      setCurrentPage(1);
+    }
   };
 
   return (
-    <Pagination count={count} onChange={handleChange} variant="outlined" />
+    <Pagination count={count} onChange={handlePageChange} variant="outlined" />
   );
 }

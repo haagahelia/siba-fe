@@ -68,7 +68,10 @@ export default function DepartmentList({
     const from = (p - 1) * rowsPerPage;
     const to = (p - 1) * rowsPerPage + rowsPerPage;
     setPagination({ from, to });
-    setCurrentPage(p);
+
+    if (searchQuery !== "") {
+      setCurrentPage(1);
+    }
   };
 
   const handleRequestSort = (property) => {
