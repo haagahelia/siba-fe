@@ -1,6 +1,3 @@
-// The Add Lesson Form
-import { useEffect, useState } from "react";
-
 import Button from "@mui/material/Button";
 import FormControl from "@mui/material/FormControl";
 import FormHelperText from "@mui/material/FormHelperText";
@@ -10,6 +7,7 @@ import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
+import { useEffect, useState } from "react";
 import dao from "../../ajax/dao";
 import Logger from "../../logger/logger";
 
@@ -21,11 +19,14 @@ export default function AddSubjectForm({
   setInitialSubject,
   spaceTypeSelectList,
 }) {
+  const [selectedAllocRound, setSelectedAllocRound] = useState("");
   const [selectedLesson, setSelectedLesson] = useState("");
   const [allocRounds, setAllocRounds] = useState([]);
   const [subjects, setSubjects] = useState([]);
 
-  useEffect(() => getAllAllocRounds, []);
+  useEffect(() => {
+    getAllAllocRounds();
+  }, []);
 
   const getAllAllocRounds = async () => {
     const { data } = await dao.fetchAllAllocRounds();
@@ -36,7 +37,7 @@ export default function AddSubjectForm({
     Logger.debug("selectedAllocRound", allocRoundId);
     const { data } = await dao.fetchAllSubjects(allocRoundId);
     setSubjects(data);
-    setSelectedLesson("");
+    setSelectedLesson(""); // Reset selected lesson when alloc round changes
   };
 
   return (
@@ -58,9 +59,11 @@ export default function AddSubjectForm({
                 name="selectAllocRound"
                 label="Select Existing AllocRound"
                 onChange={(e) => {
+                  setSelectedAllocRound(e.target.value);
                   getSubjects(e.target.value.id);
                 }}
                 onBlur={formik.handleBlur}
+                value={selectedAllocRound}
               >
                 {allocRounds.map((value) => (
                   <MenuItem key={value.id} value={value}>
@@ -75,11 +78,11 @@ export default function AddSubjectForm({
                 name="copyLesson"
                 label="Copy Existing Lesson"
                 onChange={(e) => {
-                  handleChange(e);
                   setSelectedLesson(e.target.value);
+                  handleChange(e);
                 }}
-                value={selectedLesson}
                 onBlur={formik.handleBlur}
+                value={selectedLesson}
               >
                 {subjects.map((value) => (
                   <MenuItem key={value.id} value={value}>
