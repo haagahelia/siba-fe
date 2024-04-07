@@ -37,7 +37,7 @@ export default function EditSettingForm({ formik }) {
                   name="variable"
                   label="Setting variable"
                   variant="outlined"
-                  value={formik.values?.variable}
+                  value={formik.values?.variable || ""}
                   onChange={formik.handleChange("variable")}
                   onBlur={formik.handleBlur("variable")}
                   helperText={
@@ -57,7 +57,7 @@ export default function EditSettingForm({ formik }) {
                   name="description"
                   label="Description"
                   variant="outlined"
-                  value={formik.values?.description}
+                  value={formik.values?.description || ""}
                   onChange={formik.handleChange("description")}
                   onBlur={formik.handleBlur("description")}
                   helperText={
@@ -77,7 +77,7 @@ export default function EditSettingForm({ formik }) {
                   name="numberValue"
                   label="numberValue"
                   variant="outlined"
-                  value={formik.values?.numberValue}
+                  value={formik.values?.numberValue || ""}
                   onChange={formik.handleChange("numberValue")}
                   onBlur={formik.handleBlur("numberValue")}
                   helperText={
@@ -97,7 +97,7 @@ export default function EditSettingForm({ formik }) {
                   name="textValue"
                   label="textValue"
                   variant="outlined"
-                  value={formik.values?.textValue}
+                  value={formik.values?.textValue || ""}
                   onChange={formik.handleChange("textValue")}
                   onBlur={formik.handleBlur("textValue")}
                   helperText={
