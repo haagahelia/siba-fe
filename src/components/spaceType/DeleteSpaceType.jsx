@@ -21,6 +21,9 @@ export default function DeleteSpaceType({
   const [hasAssociatedSpaces, setHasAssociatedSpaces] = useState(false);
   const [spaceNames, setSpaceNames] = useState([]);
   const [totalSpaceCount, setTotalSpaceCount] = useState(0);
+  const [hasAssociatedSubjects, setHasAssociatedSubjects] = useState(false);
+  const [totalSubjectCount, setTotalSubjectCount] = useState(0);
+  const [subjectNames, setSubjectNames] = useState([]);
 
   // Fetch spaces associated with the spacetype
   useEffect(() => {
@@ -37,6 +40,21 @@ export default function DeleteSpaceType({
         })
         .catch((error) =>
           console.error("Failed to fetch spaces for space type:", error),
+        );
+      dao
+        .fetchSubjectsBySpaceTypeId(singleSpaceType.id)
+        .then((response) => {
+          const subjects = response.data || [];
+          setHasAssociatedSubjects(subjects.length > 0);
+          setTotalSubjectCount(subjects.length);
+
+          const displayedNames = subjects
+            .slice(0, 5)
+            .map((subject) => subject.name);
+          setSubjectNames(displayedNames);
+        })
+        .catch((error) =>
+          console.error("Failed to fetch subjects for space type:", error),
         );
     }
   }, [singleSpaceType]);
@@ -88,7 +106,7 @@ export default function DeleteSpaceType({
         setDialogOpen={setDialogOpen}
         submit={() => deleteSpaceType(deleteSpaceTypeData)}
       />
-      {!hasAssociatedSpaces ? (
+      {!hasAssociatedSpaces && !hasAssociatedSubjects ? (
         <Button
           variant="contained"
           className="redButton"
@@ -98,9 +116,20 @@ export default function DeleteSpaceType({
         </Button>
       ) : (
         <Tooltip
-          title={`Space(s): ${spaceNames.join(", ")}${
-            totalSpaceCount > 5 ? ", ..." : ""
-          }`}
+          title={`
+          ${
+            totalSpaceCount > 0
+              ? `Space(s): ${spaceNames.join(", ")}
+            ${totalSpaceCount > 5 ? ", ..." : ""}`
+              : ""
+          }
+          ${
+            totalSpaceCount === 0
+              ? `Lesson(s): ${subjectNames.slice(0, 5).join(", ")}
+              ${totalSubjectCount > 5 ? ", ..." : ""}`
+              : ""
+          }
+        `}
           placement="top"
         >
           <span>
@@ -109,7 +138,7 @@ export default function DeleteSpaceType({
               disabled
               className="redButton disabledButton"
             >
-              {`This space type has ${totalSpaceCount} space(s)`}
+              {`This space type has ${totalSpaceCount} space(s) and ${totalSubjectCount} lesson(s)`}
             </Button>
           </span>
         </Tooltip>
