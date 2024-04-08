@@ -24,7 +24,7 @@ export default function ImportSpaceTypeButton({
   const processSpaceType = async (spaceType, spaceTypeSet) => {
     const newSpaceType = {
       name: spaceType.name ? capitalizeFirstLetter(spaceType.name) : "",
-      acronym: spaceType.description ? toUpperCase(spaceType.acronym) : "",
+      acronym: spaceType.acronym ? toUpperCase(spaceType.acronym) : "",
       description: spaceType.description ? spaceType.description : "",
     };
 
