@@ -165,8 +165,6 @@ export default function NavBar() {
             content: "By clicking continue, you will reset the database.",
           });
           setdBResetDialogOpen(true);
-        } else {
-          alert("Not in development mode!");
         }
       },
     },
@@ -311,7 +309,7 @@ export default function NavBar() {
         message: "Database was reset.",
       });
       Logger.debug("reset database success");
-    } else {
+    } else if (result.httpStatus !== 400) {
       setAlertOptions({
         severity: "error",
         title: "Error",
@@ -320,6 +318,12 @@ export default function NavBar() {
       Logger.error(
         `failed to reset database, http status code: ${result.httpStatus}`,
       );
+    } else {
+      setAlertOptions({
+        severity: "error",
+        title: "Error",
+        message: "Not in development mode!",
+      });
     }
     setAlertOpen(true);
   };
