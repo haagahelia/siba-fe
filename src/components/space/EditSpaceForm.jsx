@@ -220,7 +220,7 @@ export default function EditSpaceForm({
                       {spaceTypeSelectList.map((value) => {
                         return (
                           <MenuItem key={value.id} value={value.id}>
-                            {value.name}
+                            {value.name} ({value.acronym})
                           </MenuItem>
                         );
                       })}

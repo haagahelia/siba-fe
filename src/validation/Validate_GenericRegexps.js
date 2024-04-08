@@ -28,6 +28,19 @@ export const vF_regDescription = {
     ),
 };
 
+export const vF_regAcronym = {
+  regExp: new RegExp(/^[A-Za-zÄÖÅäöå0-9]*$/),
+  regExpHint: "A-Ö capital letters and numbers allowed",
+  length: { min: 1, max: 255 },
+  lengthHint: "Minimum 1 and maximum 255 characters.",
+
+  errorMessageFunction: (fieldName) =>
+    genericErrorMessageFunction(
+      fieldName,
+      "has wrong format. A-Ö letters and numbers allowed",
+    ),
+};
+
 export const vF_regNumber = {
   regExp: new RegExp(/^[0-9]+$/),
   hint: "0-9999999",
