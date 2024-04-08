@@ -82,6 +82,22 @@ export const deleteSingleSubject = async (
   return response.ok;
 };
 
+export const fetchSubjectsBySpaceTypeId = async (spaceTypeId: number) => {
+  try {
+    const response = await get(`${baseUrl}/subject/bySpaceType/${spaceTypeId}`);
+    if (response.status === 200) {
+      const subjects = await response.json();
+      return { httpStatus: response.status, data: subjects };
+    } else {
+      console.error("Failed to fetch subjects for space type ID:", spaceTypeId);
+      return { httpStatus: response.status, data: [] };
+    }
+  } catch (error) {
+    console.error("Error fetching subjects by space type ID:", error);
+    return { httpStatus: 500, data: [] };
+  }
+};
+
 export const downloadSubjectTemplate = async (): Promise<
   ResponseFiner<Subject>
 > => {
