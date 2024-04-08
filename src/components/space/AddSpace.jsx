@@ -421,7 +421,7 @@ export default function AddSpace({ getAllSpaces }) {
                       >
                         {spaceTypeSelectList.map((spaceType) => (
                           <MenuItem key={spaceType.id} value={spaceType.id}>
-                            {spaceType.name}
+                            {spaceType.name} ({spaceType.acronym})
                           </MenuItem>
                         ))}
                       </Select>

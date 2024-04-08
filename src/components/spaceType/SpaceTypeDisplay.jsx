@@ -18,6 +18,16 @@ export default function SpaceTypeDisplay({ singleSpaceType }) {
       </DialogContent>
       <DialogContent variant="sibaDialogContent2">
         <Grid item xs={12} sm={6}>
+          <Typography variant="singleDialogSubtitle">Acronym:&nbsp;</Typography>
+        </Grid>
+        <Grid item xs={12} sm={6}>
+          <Typography variant="singleDialogSubtitle">
+            {singleSpaceType?.acronym}
+          </Typography>
+        </Grid>
+      </DialogContent>
+      <DialogContent variant="sibaDialogContent2">
+        <Grid item xs={12} sm={6}>
           <Typography variant="singleDialogSubtitle">
             Description:&nbsp;
           </Typography>
