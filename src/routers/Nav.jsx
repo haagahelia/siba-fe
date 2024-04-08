@@ -309,21 +309,15 @@ export default function NavBar() {
         message: "Database was reset.",
       });
       Logger.debug("reset database success");
-    } else if (result.httpStatus !== 400) {
-      setAlertOptions({
-        severity: "error",
-        title: "Error",
-        message: "Something went wrong - please try again later.",
-      });
-      Logger.error(
-        `failed to reset database, http status code: ${result.httpStatus}`,
-      );
     } else {
       setAlertOptions({
         severity: "error",
         title: "Error",
-        message: "Not in development mode!",
+        message: "Something went wrong - Network or Database connection error.",
       });
+      Logger.error(
+        `failed to reset database, http status code: ${result.httpStatus}`,
+      );
     }
     setAlertOpen(true);
   };
