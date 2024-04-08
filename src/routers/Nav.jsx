@@ -399,6 +399,8 @@ export default function NavBar() {
       .map((page) => {
         const variantValue =
           page.name === "Account" ? "navBarAccountButton" : "navBar";
+        const mode = import.meta.env.VITE_MODE;
+        console.log(mode);
         if (page.name === "Account") {
           return (
             <div
@@ -418,9 +420,16 @@ export default function NavBar() {
                       {sibaPages
                         .filter((page) => {
                           // For admin users, show all options
-                          if (roles.admin === "1") {
+                          if (roles.admin === "1" && mode === "development") {
                             return [
                               "Reset Data",
+                              "Settings",
+                              "Change Password",
+                              "Log Out",
+                            ].includes(page.name);
+                            //if in production, remove Reset Data from options
+                          } else if (roles.admin === "1") {
+                            return [
                               "Settings",
                               "Change Password",
                               "Log Out",
