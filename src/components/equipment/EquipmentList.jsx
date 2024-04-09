@@ -119,6 +119,7 @@ export default function EquipmentList({
       <TextField
         label="Search equipment"
         variant="outlined"
+        className="search"
         value={searchQuery}
         onChange={handleSearch}
         InputProps={{
@@ -126,12 +127,12 @@ export default function EquipmentList({
             <IconButton
               onClick={cancelSearch}
               sx={{ visibility: searchQuery ? "visible" : "hidden" }}
+              variant="clearFilterButton"
             >
               <ClearIcon />
             </IconButton>
           ),
         }}
-        style={{ marginBottom: 16, width: "100%" }}
       />
       <Paper>
         <Box>

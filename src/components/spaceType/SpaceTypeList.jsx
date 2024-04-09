@@ -75,6 +75,7 @@ export default function SpaceTypeList({
       <TextField
         label="Search space types"
         variant="outlined"
+        className="search"
         value={searchQuery}
         onChange={handleSearch}
         InputProps={{
@@ -88,7 +89,6 @@ export default function SpaceTypeList({
             </IconButton>
           ),
         }}
-        style={{ marginBottom: 16, width: "100%" }}
       />
       <Paper>
         <TableContainer>

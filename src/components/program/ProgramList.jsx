@@ -113,9 +113,9 @@ export default function ProgramList({
         label="Search programs"
         value={searched}
         onChange={handleSearch}
-        fullWidth
         variant="outlined"
-        size="medium"
+        className="search"
+        //size="medium"
         InputProps={{
           endAdornment: (
             <InputAdornment position="end">
@@ -125,6 +125,7 @@ export default function ProgramList({
                   setCurrentPage(1);
                 }}
                 sx={{ visibility: searched ? "visible" : "hidden" }}
+                variant="clearFilterButton"
               >
                 <ClearIcon />
               </IconButton>

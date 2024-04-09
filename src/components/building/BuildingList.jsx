@@ -71,6 +71,7 @@ export default function BuildingList({ getAllBuildings, paginateBuildings }) {
       <TextField
         label="Search buildings"
         variant="outlined"
+        className="search"
         value={searchQuery}
         onChange={handleSearch}
         InputProps={{
@@ -84,7 +85,6 @@ export default function BuildingList({ getAllBuildings, paginateBuildings }) {
             </IconButton>
           ),
         }}
-        style={{ marginBottom: 16, width: "100%" }}
       />
       <Paper>
         <TableContainer>

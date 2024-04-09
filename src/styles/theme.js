@@ -171,6 +171,10 @@ export const createAppTheme = (currentPalette) =>
                 },
               },
             },
+            "&.search": {
+              marginBottom: margins.none,
+              width: "100%",
+            },
           },
         },
       },

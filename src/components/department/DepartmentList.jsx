@@ -108,6 +108,7 @@ export default function DepartmentList({
       <TextField
         label="Search departments"
         variant="outlined"
+        className="search"
         value={searchQuery}
         onChange={handleSearch}
         InputProps={{
@@ -121,7 +122,6 @@ export default function DepartmentList({
             </IconButton>
           ),
         }}
-        style={{ marginBottom: 16, width: "100%" }}
       />
       <Box>
         <Paper>

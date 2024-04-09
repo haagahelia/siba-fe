@@ -100,6 +100,7 @@ export default function AllocRoundList({
       <TextField
         label="Search allocation rounds"
         variant="outlined"
+        className="search"
         value={searchQuery}
         onChange={handleSearch}
         InputProps={{
@@ -113,7 +114,6 @@ export default function AllocRoundList({
             </IconButton>
           ),
         }}
-        style={{ marginBottom: 16, width: "100%" }}
       />
       <Box component={Paper}>
         <Table>
