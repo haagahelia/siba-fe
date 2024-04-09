@@ -105,18 +105,16 @@ export default function SpaceList({
         className="search"
         InputProps={{
           endAdornment: (
-            <InputAdornment position="end">
-              <IconButton
-                onClick={() => {
-                  setSearched("");
-                  setCurrentPage(1);
-                }}
-                sx={{ visibility: searched ? "visible" : "hidden" }}
-                variant="clearFilterButton"
-              >
-                <ClearIcon />
-              </IconButton>
-            </InputAdornment>
+            <IconButton
+              onClick={() => {
+                setSearched("");
+                setCurrentPage(1);
+              }}
+              sx={{ visibility: searched ? "visible" : "hidden" }}
+              variant="clearFilterButton"
+            >
+              <ClearIcon />
+            </IconButton>
           ),
         }}
       />

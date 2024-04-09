@@ -141,18 +141,18 @@ export default function SubjectList({
         className="search"
         InputProps={{
           endAdornment: (
-            <InputAdornment position="end">
-              <IconButton
-                onClick={() => {
-                  setSearched("");
-                  setCurrentPage(1);
-                }}
-                sx={{ visibility: searched ? "visible" : "hidden" }}
-                variant="clearFilterButton"
-              >
-                <ClearIcon />
-              </IconButton>
-            </InputAdornment>
+            //<InputAdornment position="end">
+            <IconButton
+              onClick={() => {
+                setSearched("");
+                setCurrentPage(1);
+              }}
+              sx={{ visibility: searched ? "visible" : "hidden" }}
+              variant="clearFilterButton"
+            >
+              <ClearIcon />
+            </IconButton>
+            //</InputAdornment>
           ),
         }}
       />
