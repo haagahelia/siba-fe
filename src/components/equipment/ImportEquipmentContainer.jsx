@@ -44,7 +44,7 @@ export default function ImportEquipmentContainer({ getAllEquipments }) {
         variant="AddComponentFormButtonSection"
       >
         <Typography variant="addComponentSubHeader">
-          Import data from .csv file
+          ... OR Import data from .csv file
         </Typography>
         <Grid item>
           <Input

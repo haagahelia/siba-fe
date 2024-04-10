@@ -103,7 +103,7 @@ export const AddEmptyAllocRound = ({ allAllocRoundsList }) => {
       />
       <Card variant="outlined">
         <CardContent>
-          <CardHeader title="Add Empty Allocation Round" />
+          <CardHeader title="Add a new empty allocation round ..." />
           <AddAllocRoundForm
             handleChange={handleChange}
             formik={formik}

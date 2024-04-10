@@ -74,7 +74,7 @@ export default function ImportSubjectContainer({
         variant="AddComponentFormButtonSection"
       >
         <Typography variant="addComponentSubHeader">
-          Import Data From .csv File
+          ... OR Import data from .csv File
         </Typography>
         <Grid item>
           <Input

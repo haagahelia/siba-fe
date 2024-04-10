@@ -52,7 +52,9 @@ export default function AddSubjectForm({
             lg={6}
             style={{ border: "5px solid #FDA826", padding: "10px" }}
           >
-            <Typography>Optional</Typography>
+            <Typography>
+              Optional: Use existing lesson as starting point
+            </Typography>
             <FormControl fullWidth>
               <InputLabel>Select Allocation Round</InputLabel>
               <Select

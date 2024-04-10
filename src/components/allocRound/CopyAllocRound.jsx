@@ -104,7 +104,7 @@ export const CopyAllocRound = ({ allAllocRoundsList }) => {
       />
       <Card variant="outlined">
         <CardContent>
-          <CardHeader title="Copy Existing Allocation Round" />
+          <CardHeader title="... OR Copy existing allocation round as separate copy" />
           <CopyAllocRoundContainer
             formik={formik}
             submitValues={formik.values}

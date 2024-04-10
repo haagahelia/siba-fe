@@ -8,7 +8,7 @@ export default function AllocRoundInputFields({ formik }) {
         <TextField
           error={formik.touched.name && formik.errors.name ? true : false}
           name="name"
-          label="The name of the allocation round"
+          label="The name of the new allocation round"
           defaultValue={formik.initialValues?.name}
           variant="outlined"
           onChange={formik.handleChange("name")}
