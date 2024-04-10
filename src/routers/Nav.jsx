@@ -381,6 +381,11 @@ export default function NavBar() {
     setSibaPages();
     // Logger.debug("pages status 000:", sibaPages);
 
+    const mode = import.meta.env.VITE_MODE;
+    if (mode) {
+      Logger.debug(`Navbar rendering page links in mode: ${mode} `);
+    }
+
     return sibaPages
       .filter(
         (page) =>
@@ -393,8 +398,6 @@ export default function NavBar() {
       .map((page) => {
         const variantValue =
           page.name === "Account" ? "navBarAccountButton" : "navBar";
-        const mode = import.meta.env.VITE_MODE;
-        console.log(mode);
         if (page.name === "Account") {
           return (
             <div
