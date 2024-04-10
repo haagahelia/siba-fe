@@ -47,7 +47,7 @@ export default function ImportProgramContainer({
         variant="AddComponentFormButtonSection"
       >
         <Typography variant="addComponentSubHeader">
-          Import data from .csv file
+          ... OR Import data from .csv file
         </Typography>
         <Grid item>
           <Input
@@ -70,7 +70,7 @@ export default function ImportProgramContainer({
         <Grid item>
           <ExportProgramButton programFailedToImport={programFailedToImport} />
         </Grid>
-        <Grid item></Grid>
+        <Grid item />
       </Grid>
     </>
   );
