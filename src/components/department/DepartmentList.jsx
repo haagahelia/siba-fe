@@ -37,8 +37,11 @@ export default function DepartmentList({
     const sortAndPaginateDepartment = () => {
       let sorted = departmentList.slice().sort((a, b) => {
         switch (orderBy) {
+          /*
           case "Id":
             return order === "asc" ? a.id - b.id : b.id - a.id;
+          */
+
           case "Name":
             return order === "asc"
               ? a.name.localeCompare(b.name, "fi-FI")
@@ -130,6 +133,8 @@ export default function DepartmentList({
               <TableHead>
                 <TableRow>
                   <TableCell />
+
+                  {/*
                   <TableCell>
                     <TableSortLabel
                       active={orderBy === "Id"}
@@ -139,6 +144,8 @@ export default function DepartmentList({
                       ID
                     </TableSortLabel>
                   </TableCell>
+                  */}
+
                   <TableCell>
                     <TableSortLabel
                       active={orderBy === "Name"}
@@ -162,7 +169,7 @@ export default function DepartmentList({
                         <InfoIcon />
                       </IconButton>
                     </TableCell>
-                    <TableCell>{department.id}</TableCell>
+                    {/* <TableCell>{department.id}</TableCell> */}
                     <TableCell>{department.name}</TableCell>
                     <TableCell>{department.description}</TableCell>
                   </TableRow>

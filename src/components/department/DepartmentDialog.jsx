@@ -6,6 +6,7 @@ import DialogTitle from "@mui/material/DialogTitle";
 import DeleteDepartment from "./DeleteDepartment";
 import EditDepartment from "./EditDepartment";
 
+// CHECK!!! Is this currently used at all? Some work in pogress?
 export default function DepartmentDialog({
   open,
   setOpen,

@@ -138,6 +138,8 @@ export default function EquipmentList({
           <TableHead>
             <TableRow>
               <TableCell />
+
+              {/*
               <TableCell>
                 <TableSortLabel
                   active={orderBy === "Id"}
@@ -147,6 +149,8 @@ export default function EquipmentList({
                   ID
                 </TableSortLabel>
               </TableCell>
+              */}
+
               <TableCell>
                 <TableSortLabel
                   active={orderBy === "Name"}
@@ -179,7 +183,9 @@ export default function EquipmentList({
                     <InfoIcon />
                   </IconButton>
                 </TableCell>
-                <TableCell>{equipment.id}</TableCell>
+
+                {/* <TableCell>{equipment.id}</TableCell> */}
+
                 <TableCell>{equipment.name}</TableCell>
                 <TableCell>{equipment.priority}</TableCell>
                 <TableCell>{equipment.description}</TableCell>
