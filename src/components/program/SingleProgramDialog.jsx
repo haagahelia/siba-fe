@@ -26,7 +26,7 @@ export default function SingleProgramDialog({
   const { roles } = useRoleLoggedIn();
   const { userId } = useContext(AppContext);
   const [departmentList, setDepartmentList] = useState([
-    { id: 101, name: "Jazz" },
+    { id: 101, name: "Jazz" }, // Hard-coded???
   ]);
   const [numberOfLessons, setNumberOfLessons] = useState(null);
 
@@ -130,6 +130,7 @@ export default function SingleProgramDialog({
       )}
       <DialogContent>
         <Grid container variant="sibaGridSingleItemDisplay" column={14}>
+          {/* 
           <DialogContent variant="sibaDialogContent2">
             <Grid item xs={12} sm={6}>
               <Typography variant="singleDialogSubtitle">id:</Typography>
@@ -140,6 +141,7 @@ export default function SingleProgramDialog({
               </Typography>
             </Grid>
           </DialogContent>
+           */}
           <DialogContent variant="sibaDialogContent2">
             <Grid item xs={12} sm={6}>
               <Typography variant="singleDialogSubtitle">Name:</Typography>
