@@ -50,7 +50,9 @@ export const importData = async (
   }
 
   setDataFailedToImport([...dataFailedToImport, ...tempFailedData]);
-  Logger.error("failed data", tempFailedData);
+  if (tempFailedData.length !== 0) {
+    Logger.error("failed data", tempFailedData);
+  }
 
   // if the data is empty or invalid after validation, not sending to backend
   if (successCount === 0 && failedCount === 0) {
