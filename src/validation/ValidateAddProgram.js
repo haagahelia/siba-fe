@@ -14,7 +14,7 @@ export async function validate(values) {
   trimAllPropertyValueStrings(values);
   const errors = {};
 
-  const isDuplicatedProgramName = async function (name) {
+  const isDuplicatedProgramName = async (name) => {
     const { httpStatus, data } = await dao.fetchProgramsWithDepartments();
     if (httpStatus === 200) {
       let programList = [];

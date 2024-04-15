@@ -35,7 +35,7 @@ export default function AddDepartmentPlannerContainer({
 
   const userId = singleUser?.id;
 
-  const getUserDepartmentsByUserId = async function (userId) {
+  const getUserDepartmentsByUserId = async (userId) => {
     const result = await getDeparmentsByUserId(userId);
     getDepartmentsForSelect(result);
   };
@@ -44,7 +44,7 @@ export default function AddDepartmentPlannerContainer({
     getUserDepartmentsByUserId(userId);
   }, []);
 
-  const getDepartmentsForSelect = async function (userDepartments) {
+  const getDepartmentsForSelect = async (userDepartments) => {
     Logger.debug(
       "getDepartmentsForSelect: fetching all departments for select.",
     );

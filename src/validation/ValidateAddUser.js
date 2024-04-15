@@ -10,7 +10,7 @@ export default async function ValidateAddUser(values) {
     return emailRegex.test(email);
   };
 
-  const isDuplicateUser = async function () {
+  const isDuplicateUser = async () => {
     try {
       const { data } = await dao.fetchAllUsers();
       const userList = data || [];

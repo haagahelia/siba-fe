@@ -19,14 +19,14 @@ class AllocationPost {
           },
         },
       )
-      .then(function (response) {
+      .then((response) => {
         Logger.debug("start allocation:", response);
       })
       .then(() => {
         resultRoomsStore.fetchRooms(allocRoundId);
         resultProgramStore.fetchNames(allocRoundId);
       })
-      .catch(function (error) {
+      .catch((error) => {
         Logger.error("start allocation failed:", error);
       });
   }
@@ -46,10 +46,10 @@ class AllocationPost {
           },
         },
       )
-      .then(function (response) {
+      .then((response) => {
         Logger.debug("reset allocation:", response);
       })
-      .catch(function (error) {
+      .catch((error) => {
         Logger.error("reset allocation failed:", error);
       });
   }
