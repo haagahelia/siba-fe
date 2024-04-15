@@ -41,12 +41,9 @@ export default function SubjectResult({ data }) {
               xs={3}
               style={{ color: theme.palette.fontColorDefault.default }}
             >
-                   <Link
-                    style={theme.components.Links}
-                    to={`/subject/${prog.id}`}
-                  >
-                    {`${prog.id} ${prog.name}`}
-                  </Link>
+              <Link style={theme.components.Links} to={`/subject/${prog.id}`}>
+                {`${prog.id} ${prog.name}`}
+              </Link>
             </Grid2>
             <Grid2 xs={3}>
               <ProgressBar
@@ -111,15 +108,14 @@ function CollapsedRow(id) {
                 //variant="resultsDropdown"
               >
                 {" "}
-                <Typography> 
-                  
-                    <Link
-                style={theme.components.Links}
-                to={`/space/${dropdownItem.id}`}
-              >{`${dropdownItem.name}`}
-                   </Link>
-
-              </Typography>
+                <Typography>
+                  <Link
+                    style={theme.components.Links}
+                    to={`/space/${dropdownItem.id}`}
+                  >
+                    {`${dropdownItem.name}`}
+                  </Link>
+                </Typography>
               </Grid2>
               <Grid2 xs={4} />
             </Grid2>

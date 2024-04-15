@@ -39,7 +39,8 @@ const EquipmentTemplate = () => {
       />
       <Button
         variant="addComponentFormButton"
-        onClick={downloadEquipmentTemplate}>
+        onClick={downloadEquipmentTemplate}
+      >
         Download template
       </Button>
     </>

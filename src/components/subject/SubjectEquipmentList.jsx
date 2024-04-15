@@ -9,9 +9,9 @@ import ListItemText from "@mui/material/ListItemText";
 import Typography from "@mui/material/Typography";
 import { checkForUserPrograms } from "../../hooks/checkForUserPrograms";
 import { useRoleLoggedIn } from "../../hooks/useRoleLoggedIn";
+import AlertBox from "../common/AlertBox";
 import DeleteSubEquip from "./DeleteSubEquip";
 import EditSubEquipContainer from "./EditSubEquipContainer";
-import AlertBox from "../common/AlertBox";
 
 export default function SubjectEquipmentList({
   equipListBySubId,
@@ -100,8 +100,8 @@ export default function SubjectEquipmentList({
                           {value.obligatory === 1
                             ? "Yes"
                             : value.obligatory === 0
-                            ? "No"
-                            : null}
+                              ? "No"
+                              : null}
                         </Typography>
                       </Grid>
                     </DialogContent>
