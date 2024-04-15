@@ -30,8 +30,8 @@ export default function DepartmentList({
   const [order, setOrder] = useState("asc");
   const [orderBy, setOrderBy] = useState("Id");
   const [searchQuery, setSearchQuery] = useState("");
-
   const [currentPage, setCurrentPage] = useState(1);
+  const [searchHandled, setSearchHandled] = useState(false);
 
   useEffect(() => {
     const sortAndPaginateDepartment = () => {
@@ -71,7 +71,14 @@ export default function DepartmentList({
     const from = (p - 1) * rowsPerPage;
     const to = (p - 1) * rowsPerPage + rowsPerPage;
     setPagination({ from, to });
-    setCurrentPage(p);
+
+    if (searchHandled) {
+      setCurrentPage(1);
+      setSearchHandled(false);
+      setCurrentPage(p);
+    } else {
+      setCurrentPage(p);
+    }
   };
 
   const handleRequestSort = (property) => {
@@ -84,9 +91,8 @@ export default function DepartmentList({
     const searchText = e.target.value;
     setSearchQuery(searchText);
     setPagination({ from: 0, to: rowsPerPage });
-    if (searchText === "") {
-      setCurrentPage(1);
-    }
+    setSearchHandled(true);
+    setCurrentPage(1);
   };
 
   const handleRowClick = (department) => {

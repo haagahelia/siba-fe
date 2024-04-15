@@ -29,7 +29,7 @@ export default function SpaceList({
   const [singleSpace, setSingleSpace] = useState(null);
   const [order, setOrder] = useState("asc");
   const [orderBy, setOrderBy] = useState("SpaceName");
-  const [searched, setSearched] = useState("");
+  const [searchQuery, setSearchQuery] = useState("");
 
   const [currentPage, setCurrentPage] = useState(1);
   const [pagination, setPagination] = useState({
@@ -53,9 +53,9 @@ export default function SpaceList({
       });
 
       // Apply search filter to both name and departmentName
-      if (searched !== "") {
+      if (searchQuery !== "") {
         sorted = sorted.filter((space) =>
-          space.name.toLowerCase().includes(searched.toLowerCase()),
+          space.name.toLowerCase().includes(searchQuery.toLowerCase()),
         );
       }
 
@@ -65,7 +65,7 @@ export default function SpaceList({
     };
 
     sortAndPaginateSpaces();
-  }, [allSpacesList, orderBy, order, searched, pagination]);
+  }, [allSpacesList, orderBy, order, searchQuery, pagination]);
 
   const handleRequestSort = (property) => {
     const isAsc = orderBy === property && order === "asc";
@@ -75,7 +75,7 @@ export default function SpaceList({
 
   const handleSearch = (e) => {
     const searchText = e.target.value;
-    setSearched(searchText);
+    setSearchQuery(searchText);
     setPagination({ from: 0, to: pageSize });
     if (searchText === "") {
       setCurrentPage(1);
@@ -86,7 +86,10 @@ export default function SpaceList({
     const from = (p - 1) * pageSize;
     const to = (p - 1) * pageSize + pageSize;
     setPagination({ from, to });
-    setCurrentPage(p);
+
+    if (searchQuery !== "") {
+      setCurrentPage(1);
+    }
   };
 
   // STYLE
@@ -99,7 +102,7 @@ export default function SpaceList({
       <TextField
         type="text"
         label="Search spaces"
-        value={searched}
+        value={searchQuery}
         onChange={handleSearch}
         fullWidth
         variant="outlined"
@@ -109,10 +112,10 @@ export default function SpaceList({
             <InputAdornment position="end">
               <IconButton
                 onClick={() => {
-                  setSearched("");
+                  setSearchQuery("");
                   setCurrentPage(1);
                 }}
-                sx={{ visibility: searched ? "visible" : "hidden" }}
+                sx={{ visibility: searchQuery ? "visible" : "hidden" }}
               >
                 <ClearIcon />
               </IconButton>
