@@ -178,7 +178,7 @@ export default function SingleSubjectDialog({
               <DialogContent variant="sibaDialogContent2">
                 <Grid item xs={12} sm={6}>
                   <Typography variant="singleDialogSubtitle">
-                    Required square meters:&nbsp;
+                    Required m2 (0 to ignore):&nbsp;
                   </Typography>
                 </Grid>
                 <Grid item xs={12} sm={6}>

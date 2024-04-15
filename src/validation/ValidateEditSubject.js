@@ -95,10 +95,10 @@ export async function validate(values, allocRoundId) {
       vF_regNumberCountPlus.errorMessageFunction("Session count");
   }
 
-  if (!values.area) {
+  if (values.area === undefined || values.area === null) {
     errors.area = requiredFieldErrorMessageFunction("Area");
-  } else if (values.area <= 0) {
-    errors.area = "The required area cannot be 0";
+  } else if (values.area < 0) {
+    errors.area = "The required area cannot be less than 0";
   } else if (!vF_regNumberDecimalOnePlus.regExp.test(values.area)) {
     errors.area = vF_regNumberDecimalOnePlus.errorMessageFunction("Area");
   }
