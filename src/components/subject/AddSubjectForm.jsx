@@ -203,7 +203,7 @@ export default function AddSubjectForm({
               fullWidth
               error={formik.touched.area && Boolean(formik.errors.area)}
               name="area"
-              label="Required square meters"
+              label="Required m2 (0 to ignore)"
               value={formik.values.area}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}

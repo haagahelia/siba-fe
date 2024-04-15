@@ -137,7 +137,7 @@ export default function EditSubjectForm({
                     formik.touched.area && formik.errors.area ? true : false
                   }
                   name="area"
-                  label="Required square meters"
+                  label="Required m2 (0 to ignore)"
                   defaultValue={formik.initialValues?.area}
                   variant="outlined"
                   onChange={formik.handleChange("area")}

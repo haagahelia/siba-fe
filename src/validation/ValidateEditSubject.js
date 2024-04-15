@@ -11,7 +11,7 @@ import {
 export async function validate(values, allocRoundId) {
   const errors = {};
 
-  const getSubjectNames = async function (allocRoundId) {
+  const getSubjectNames = async (allocRoundId) => {
     const { httpStatus, data } = await dao.fetchSubjectNames(allocRoundId);
     if (httpStatus === 200) {
       const subjectList = data;
@@ -95,10 +95,10 @@ export async function validate(values, allocRoundId) {
       vF_regNumberCountPlus.errorMessageFunction("Session count");
   }
 
-  if (!values.area) {
+  if (values.area === undefined || values.area === null) {
     errors.area = requiredFieldErrorMessageFunction("Area");
-  } else if (values.area <= 0) {
-    errors.area = "The required area cannot be 0";
+  } else if (values.area < 0) {
+    errors.area = "The required area cannot be less than 0";
   } else if (!vF_regNumberDecimalOnePlus.regExp.test(values.area)) {
     errors.area = vF_regNumberDecimalOnePlus.errorMessageFunction("Area");
   }
