@@ -8,4 +8,8 @@ services:
       dockerfile: Dockerfile.nginx
     container_name: siba_fe_nginx_container
     ports:
-      - '${PORT}:8080'
+      - "${PORT}:8080"
+      - "443:443"
+    volumes:
+      - "${SSL_CERT_PATH}:/etc/ssl/certs/siba-https.crt"
+      - "${SSL_KEY_PATH}:/etc/ssl/private/siba-https.key"
