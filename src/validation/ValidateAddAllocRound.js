@@ -12,7 +12,7 @@ export async function validate(values) {
   trimAllPropertyValueStrings(values);
 
   let allocRoundList = [];
-  const getAllocRoundNames = async function () {
+  const getAllocRoundNames = async () => {
     const { data } = await dao.fetchAllAllocRounds();
     allocRoundList = data;
     // Check if user enter an existed allocation round name

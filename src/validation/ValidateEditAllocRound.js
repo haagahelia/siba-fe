@@ -11,7 +11,7 @@ export async function validate(values) {
 
   let allocRoundList = [];
 
-  const getAllocRoundNames = async function () {
+  const getAllocRoundNames = async () => {
     const { data } = await dao.fetchAllAllocRounds();
     allocRoundList = data;
     let id;

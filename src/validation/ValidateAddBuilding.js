@@ -10,7 +10,7 @@ export async function validate(values) {
   trimAllPropertyValueStrings(values);
   const errors = {};
 
-  const isDuplicatedBuildingName = async function (name) {
+  const isDuplicatedBuildingName = async (name) => {
     const { data } = await dao.fetchAllBuildings();
     let buildingList = [];
     buildingList = data;
