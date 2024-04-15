@@ -1,10 +1,10 @@
+import { DialogContent } from "@mui/material";
 import Grid from "@mui/material/Grid";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import Typography from "@mui/material/Typography";
 import DeleteUserPlanner from "./DeleteUserPlanner";
-import { DialogContent } from "@mui/material";
 
 export default function UserDepartmentList({
   departmentListByUserId,

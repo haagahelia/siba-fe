@@ -8,20 +8,14 @@ import { CopyAllocRound } from "./CopyAllocRound";
 // const baseUrl = BASEURL;
 
 export default function AddAllocRound() {
-  
   const location = useLocation();
   const allAllocRoundsList = location.state?.allAllocRoundsList;
 
   return (
     <>
-      <AddEmptyAllocRound
-        allAllocRoundsList={allAllocRoundsList}
-      />
-      
-      <CopyAllocRound
-        allAllocRoundsList={allAllocRoundsList}
-      />
+      <AddEmptyAllocRound allAllocRoundsList={allAllocRoundsList} />
 
+      <CopyAllocRound allAllocRoundsList={allAllocRoundsList} />
     </>
   );
 }

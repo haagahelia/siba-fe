@@ -22,16 +22,14 @@ export default function RoomList({ rooms }) {
           <Grid2 xs={8} variant="resultsDropdown">
             {" "}
             <Typography>
-            <Link
+              <Link
                 style={theme.components.Links}
                 to={`/space/${room.id}`}
               >{`${room.name}`}</Link>
             </Typography>
           </Grid2>
           <Grid2 xs={4} variant="resultsDropdown">
-            <Typography>
-              {room.allocatedHours} h
-            </Typography>
+            <Typography>{room.allocatedHours} h</Typography>
           </Grid2>
         </Grid2>
       ))}

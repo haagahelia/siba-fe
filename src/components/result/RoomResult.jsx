@@ -44,7 +44,7 @@ export default function RoomResult() {
   };
 
   useEffect(() => {
-    document.title = 'Room Results';
+    document.title = "Room Results";
   }, []);
 
   return (
@@ -63,15 +63,15 @@ export default function RoomResult() {
       >
         <div style={theme.components.IndexRooms.luentoluokkaindex} />
         <Typography variant="roomIndex"> Lecture class </Typography>
-        
+
         <div style={theme.components.IndexRooms.studioindex} />
         <Typography variant="roomIndex"> Studio </Typography>
-        
+
         <div style={theme.components.IndexRooms.esitystilaindex} />
         <Typography variant="roomIndex"> Performance space </Typography>
-        
+
         <div style={theme.components.IndexRooms.musiikkiluokkaindex} />
-          <Typography variant="roomIndex"> Music class </Typography>
+        <Typography variant="roomIndex"> Music class </Typography>
       </Box>
 
       <RoomsWithTimesList rooms={rooms} />

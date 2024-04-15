@@ -37,10 +37,7 @@ const SpaceTemplate = () => {
         alertOptions={alertOptions}
         setAlertOpen={setAlertOpen}
       />
-      <Button
-        onClick={downloadSpaceTemplate}
-        variant="addComponentFormButton"
-      >
+      <Button onClick={downloadSpaceTemplate} variant="addComponentFormButton">
         Download template
       </Button>
     </>

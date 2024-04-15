@@ -12,10 +12,10 @@ import Modal from "@mui/material/Modal";
 import Typography from "@mui/material/Typography";
 import Grid2 from "@mui/material/Unstable_Grid2";
 import ProgressBar from "@ramonak/react-progress-bar";
+import { margins } from "../../styles/theme";
 import AllocRoundControlPanel from "../allocRound/AllocRoundControlPanel";
 import CollapsedRow from "./CollapsedRow";
 import SubjectResult from "./SubjectResult";
-import { margins } from "../../styles/theme";
 
 // component for displaying the subject groups of the allocation result shows:
 // the name of the subject groups
@@ -49,7 +49,7 @@ export default function ProgramResult() {
     await progStore.fetchNames(allocRoundContext.allocRoundId);
     const names = progStore.getNames();
     Logger.debug(
-      `getProgramData: successfully fetched ${names.length} program names.`
+      `getProgramData: successfully fetched ${names.length} program names.`,
     );
     setProgs(names);
   };
@@ -109,10 +109,9 @@ export default function ProgramResult() {
             onClick={handleClose}
             onKeyDown={handleClose}
           >
-            {/* biome-ignore lint/a11y/noSvgWithoutTitle:
-                hidden from assistive tech */}
             <svg
               xmlns="http://www.w3.org/2000/svg"
+              title="i icon"
               viewBox="0 0 24 24"
               fill="none"
               strokeWidth={1.5}
@@ -161,8 +160,8 @@ export default function ProgramResult() {
             progress >= 100
               ? theme.palette.progressBarGreen.main
               : progress < 80
-              ? theme.palette.progressBarRed.main
-              : theme.palette.progressBarYellow.main;
+                ? theme.palette.progressBarRed.main
+                : theme.palette.progressBarYellow.main;
           const textColor =
             progress === 0
               ? theme.palette.progressBarTextZero.main
