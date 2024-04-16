@@ -11,5 +11,6 @@ services:
       - "${PORT}:8080"
       - "443:443"
     volumes:
-      - "${SSL_CERT_PATH}:/etc/ssl/certs/fullchain.pem"
-      - "${SSL_KEY_PATH}:/etc/ssl/private/privkey.pem"
+      - "${SSL_CERT_PATH}:/etc/nginx/ssl/fullchain.pem"
+      - "${SSL_KEY_PATH}:/etc/nginx/ssl/privkey.pem"
+      - "${WEBROOT_PATH}:/usr/share/nginx/html"
