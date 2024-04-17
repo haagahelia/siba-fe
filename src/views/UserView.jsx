@@ -85,7 +85,7 @@ export default function UserView() {
         {roles.admin === "1" && (
           <AddUser getAllUsers={getAllUsers} allUsersList={allUsersList} />
         )}
-        <Grid container rowSpacing={1}>
+        <Grid container rowSpacing={2}>
           <Card variant="outlined">
             <CardContent>
               <CardHeader title="Users" variant="pageHeader" />

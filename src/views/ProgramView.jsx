@@ -85,7 +85,7 @@ export default function ProgramView() {
             allProgramsList={allProgramsList}
           />
         )}
-        <Grid container rowSpacing={1}>
+        <Grid container rowSpacing={2}>
           <Card variant="outlined">
             <CardContent>
               <CardHeader title="Programs" variant="pageHeader" />

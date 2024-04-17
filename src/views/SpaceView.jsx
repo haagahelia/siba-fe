@@ -120,7 +120,7 @@ export default function SpaceView() {
         {roles.admin === "1" && (
           <AddSpace getAllSpaces={getAllSpaces} allSpacesList={allSpacesList} />
         )}
-        <Grid container rowSpacing={1}>
+        <Grid container rowSpacing={2}>
           <Card variant="outlined">
             <CardContent>
               <CardHeader title="Spaces" variant="pageHeader" />

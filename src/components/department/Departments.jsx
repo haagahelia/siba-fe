@@ -74,7 +74,7 @@ export default function Departments() {
         {roles.admin === "1" && (
           <AddDepartment getAllDepartments={getAllDepartments} />
         )}
-        <Grid container rowSpacing={0.5}>
+        <Grid container rowSpacing={2}>
           <Card variant="outlined">
             <CardContent>
               <CardHeader title="Departments" variant="pageHeader" />
