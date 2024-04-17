@@ -7,7 +7,9 @@ import TextField from "@mui/material/TextField";
 import React, { useState } from "react";
 
 export default function CopyAllocRoundForm({ formik, allAllocRoundsList }) {
-  const [selectedAllocation, setSelectedAllocation] = useState("");
+  const [selectedAllocation, setSelectedAllocation] = useState(
+    allAllocRoundsList.length > 0 ? allAllocRoundsList[0].id : "",
+  );
 
   const handleAllocationChange = (event) => {
     const selectedAllocationId = event.target.value;

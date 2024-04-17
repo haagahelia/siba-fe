@@ -56,6 +56,7 @@ export const CopyAllocRound = ({ allAllocRoundsList }) => {
 
   const handleCopyAllocRoundSubmit = async (event) => {
     event.preventDefault();
+    formik.handleSubmit();
     const { name, description, copiedAllocRoundId } = formik.values;
 
     Logger.debug(
