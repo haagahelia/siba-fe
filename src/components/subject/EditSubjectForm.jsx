@@ -213,7 +213,7 @@ export default function EditSubjectForm({
                 setOpen(false);
               }}
             >
-              Continue
+              Submit
             </Button>
           </DialogActions>
         </form>

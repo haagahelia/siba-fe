@@ -256,7 +256,7 @@ export default function EditSpaceForm({
               variant="contained"
               onClick={() => setOpen(false)}
             >
-              Continue
+              Submit
             </Button>
           </DialogActions>
         </form>

@@ -52,15 +52,15 @@ export default function EditAllocRoundForm({ formik }) {
             >
               Cancel
             </Button>
-            <Button // theme button green
+            <Button // theme button yellow
               type="submit"
               variant="contained"
-              className="greenButton"
+              className="editButton"
               onClick={() => {
                 setOpen(false);
               }}
             >
-              Continue
+              Submit
             </Button>
           </DialogActions>
         </form>
