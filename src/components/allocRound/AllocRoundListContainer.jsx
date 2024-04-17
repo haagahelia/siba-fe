@@ -14,7 +14,7 @@ export default function AllocRoundListContainer({
   return (
     <div>
       <Container maxWidth="xl">
-        <Grid container rowSpacing={1}>
+        <Grid container rowSpacing={2}>
           <Card variant="outlined">
             <CardContent>
               <AllocRoundList

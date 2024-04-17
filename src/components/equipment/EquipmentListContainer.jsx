@@ -24,7 +24,7 @@ export default function EquipmentListContainer({
         setOpen={setOpen}
         getAllEquipments={getAllEquipments}
       />
-      <Grid container rowSpacing={1}>
+      <Grid container rowSpacing={2}>
         <Card variant="outlined">
           <CardContent>
             <EquipmentList

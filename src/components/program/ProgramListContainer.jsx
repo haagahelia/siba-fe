@@ -24,7 +24,7 @@ export default function ProgramListContainer({
         getAllPrograms={getAllPrograms}
       />
 
-      <Grid container spacing={2}>
+      <Grid container rowSpacing={2}>
         <Card variant="outlined">
           <CardContent>
             <ProgramList
