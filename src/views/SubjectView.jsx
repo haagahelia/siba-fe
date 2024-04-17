@@ -179,18 +179,18 @@ export default function SubjectView() {
         )}
         <Grid container rowSpacing={1}>
           <Card variant="outlined">
-            <CardHeader
-              title={
-                <>
-                  Lessons in allocation -
-                  <span className="allocRoundHeader">
-                    {` ${allocRoundContext.allocRoundId} : ${allocRoundContext.allocRoundName}`}
-                  </span>
-                </>
-              }
-              variant="pageHeader"
-            />
             <CardContent>
+              <CardHeader
+                title={
+                  <>
+                    Lessons in allocation -
+                    <span className="allocRoundHeader">
+                      {` ${allocRoundContext.allocRoundId} : ${allocRoundContext.allocRoundName}`}
+                    </span>
+                  </>
+                }
+                variant="pageHeader"
+              />
               <SubjectListContainer
                 shownSubject={shownSubject}
                 setShownSubject={setShownSubject2}

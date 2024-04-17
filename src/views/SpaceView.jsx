@@ -122,8 +122,8 @@ export default function SpaceView() {
         )}
         <Grid container rowSpacing={1}>
           <Card variant="outlined">
-            <CardHeader title="Spaces" variant="pageHeader" />
             <CardContent>
+              <CardHeader title="Spaces" variant="pageHeader" />
               <SpaceListContainer
                 shownSpace={shownSpace}
                 setShownSpace={setShownSpace}

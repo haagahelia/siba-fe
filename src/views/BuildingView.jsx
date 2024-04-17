@@ -74,8 +74,8 @@ export default function BuildingView() {
         )}
         <Grid container rowSpacing={1}>
           <Card variant="outlined">
-            <CardHeader title="Buildings" variant="pageHeader" />
             <CardContent>
+              <CardHeader title="Buildings" variant="pageHeader" />
               <BuildingListContainer
                 getAllBuildings={getAllBuildings}
                 allBuildingsList={allBuildingsList}

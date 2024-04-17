@@ -74,8 +74,8 @@ export default function SpaceTypeView() {
         )}
         <Grid container rowSpacing={1}>
           <Card variant="outlined">
-            <CardHeader title="Space Types" variant="pageHeader" />
             <CardContent>
+              <CardHeader title="Space Types" variant="pageHeader" />
               <SpaceTypeListContainer
                 getAllSpaceTypes={getAllSpaceTypes}
                 allSpaceTypesList={allSpaceTypesList}
