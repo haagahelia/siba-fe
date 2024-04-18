@@ -72,7 +72,7 @@ export default function Equipments() {
         {roles.admin === "1" && (
           <AddEquipment getAllEquipments={getAllEquipments} />
         )}
-        <Grid container rowSpacing={0.5}>
+        <Grid container rowSpacing={2}>
           <Card variant="outlined">
             <CardContent>
               <CardHeader title="Equipment" variant="pageHeader" />

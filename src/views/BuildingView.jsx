@@ -72,10 +72,10 @@ export default function BuildingView() {
         {roles.admin === "1" && (
           <AddBuildingContainer getAllBuildings={getAllBuildings} />
         )}
-        <Grid container rowSpacing={1}>
+        <Grid container rowSpacing={2}>
           <Card variant="outlined">
-            <CardHeader title="Buildings" variant="pageHeader" />
             <CardContent>
+              <CardHeader title="Buildings" variant="pageHeader" />
               <BuildingListContainer
                 getAllBuildings={getAllBuildings}
                 allBuildingsList={allBuildingsList}

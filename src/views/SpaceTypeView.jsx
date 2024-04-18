@@ -72,10 +72,10 @@ export default function SpaceTypeView() {
         {roles.admin === "1" && (
           <AddSpaceTypeContainer getAllSpaceTypes={getAllSpaceTypes} />
         )}
-        <Grid container rowSpacing={1}>
+        <Grid container rowSpacing={2}>
           <Card variant="outlined">
-            <CardHeader title="Space Types" variant="pageHeader" />
             <CardContent>
+              <CardHeader title="Space Types" variant="pageHeader" />
               <SpaceTypeListContainer
                 getAllSpaceTypes={getAllSpaceTypes}
                 allSpaceTypesList={allSpaceTypesList}

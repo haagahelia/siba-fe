@@ -26,7 +26,7 @@ export default function SubjectListContainer({
         userPrograms={userPrograms}
       />
 
-      <Grid container spacing={2}>
+      <Grid container rowSpacing={2}>
         <Card variant="outlined">
           <CardContent>
             <SubjectList

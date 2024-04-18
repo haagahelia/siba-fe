@@ -94,7 +94,7 @@ export default function SettingsView() {
         {roles.admin === "1" && (
           <AddSettingContainer getAllSettings={getAllSettings} />
         )}
-        <Grid container rowSpacing={0.5}>
+        <Grid container rowSpacing={2}>
           <Card variant="outlined">
             <CardContent>
               <CardHeader

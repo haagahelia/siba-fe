@@ -10,7 +10,7 @@ export default function UserListContainer({
 }) {
   return (
     <div>
-      <Grid container rowSpacing={1}>
+      <Grid container rowSpacing={2}>
         <Card variant="outlined">
           <CardContent>
             <UserList

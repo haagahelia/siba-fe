@@ -11,7 +11,7 @@ export default function BuildingListContainer({
 }) {
   return (
     <Container maxWidth="xl">
-      <Grid container spacing={1}>
+      <Grid container rowSpacing={2}>
         <Card variant="outlined">
           <CardContent>
             <BuildingList
