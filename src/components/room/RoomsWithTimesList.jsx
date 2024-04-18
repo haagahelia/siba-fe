@@ -2,7 +2,7 @@ import useTheme from "@mui/material/styles/useTheme";
 import { Fragment } from "react";
 import { Link } from "react-router-dom";
 
-import Grid2 from "@mui/material/Unstable_Grid2";
+import Grid from "@mui/material/Grid";
 import ProgressBar from "@ramonak/react-progress-bar";
 import CollapsedRowB from "../result/CollapsedRowB";
 
@@ -10,8 +10,7 @@ export default function RoomsWithTimesList({ rooms }) {
   const theme = useTheme();
 
   return (
-    <Grid2
-      key="container for list"
+    <Grid
       container
       rowSpacing={3}
       columnSpacing={{ xs: 1, sm: 2, md: 3 }}
@@ -33,8 +32,9 @@ export default function RoomsWithTimesList({ rooms }) {
 
         return (
           <Fragment key={room.id}>
-            <Grid2
-              xs={3}
+            <Grid
+              item
+              xs={6}
               style={
                 room.spaceTypeId === 5001
                   ? theme.components.AllocRoom.studio
@@ -45,12 +45,11 @@ export default function RoomsWithTimesList({ rooms }) {
                       : theme.components.AllocRoom.musiikkiluokka
               }
             >
-              <Link
-                style={theme.components.Links}
-                to={`/space/${room.id}`}
-              >{`${room.name}`}</Link>
-            </Grid2>
-            <Grid2 xs={3} key={`${room.id}-b`}>
+              <Link style={theme.components.Links} to={`/space/${room.id}`}>
+                {`${room.name}`}
+              </Link>
+            </Grid>
+            <Grid item xs={6} key={`${room.id}-b`}>
               <ProgressBar
                 labelAlignment="left"
                 baseBgColor={theme.palette.progressBarBackground.main}
@@ -60,10 +59,10 @@ export default function RoomsWithTimesList({ rooms }) {
                 completed={Math.round(progress)}
               />
               <CollapsedRowB id={room.id} />
-            </Grid2>
+            </Grid>
           </Fragment>
         );
       })}
-    </Grid2>
+    </Grid>
   );
 }
