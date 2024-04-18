@@ -59,7 +59,7 @@ export default function EditSpaceTypeForm({ formik }) {
                 setOpen(false);
               }}
             >
-              Continue
+              Submit
             </Button>
           </DialogActions>
         </form>

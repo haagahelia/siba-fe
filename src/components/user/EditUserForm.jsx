@@ -102,7 +102,7 @@ export default function EditUserForm({ formik }) {
                 setOpen(false);
               }}
             >
-              Continue
+              Submit
             </Button>
           </DialogActions>
         </form>
