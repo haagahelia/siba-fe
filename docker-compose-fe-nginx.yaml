@@ -8,8 +8,8 @@ services:
       dockerfile: Dockerfile.nginx
     container_name: siba_fe_nginx_container
     ports:
-      - "${PORT}:8080"
-      - "443:443"
+      - "${PORT}:80"
+      - "${SSL_PORT}:443"
     volumes:
       - "${SSL_CERT_PATH}:/etc/nginx/ssl/fullchain.pem"
       - "${SSL_KEY_PATH}:/etc/nginx/ssl/privkey.pem"
