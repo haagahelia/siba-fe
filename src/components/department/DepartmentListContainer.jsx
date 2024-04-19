@@ -25,22 +25,16 @@ export default function DepartmentListContainer({
         setOpen={setOpen}
         getAllDepartments={getAllDepartments}
       />
-      <Grid container rowSpacing={2}>
-        <Card variant="outlined">
-          <CardContent>
-            <DepartmentList
-              getAllDepartments={getAllDepartments}
-              departmentList={departmentList}
-              paginateDepartment={paginateDepartment}
-              setPaginateDepartment={setPaginateDepartment}
-              pagination={pagination}
-              setPagination={setPagination}
-              totalCount={totalCount}
-              rowsPerPage={rowsPerPage}
-            />
-          </CardContent>
-        </Card>
-      </Grid>
+      <DepartmentList
+        getAllDepartments={getAllDepartments}
+        departmentList={departmentList}
+        paginateDepartment={paginateDepartment}
+        setPaginateDepartment={setPaginateDepartment}
+        pagination={pagination}
+        setPagination={setPagination}
+        totalCount={totalCount}
+        rowsPerPage={rowsPerPage}
+      />
     </div>
   );
 }
