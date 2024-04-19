@@ -6,12 +6,14 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardHeader from "@mui/material/CardHeader";
+import Grid from "@mui/material/Grid";
 import IconButton from "@mui/material/IconButton";
 import dao from "../../ajax/dao";
 import ValidateAddUser from "../../validation/ValidateAddUser";
 import AlertBox from "../common/AlertBox";
 import ConfirmationDialog from "../common/ConfirmationDialog";
 import AddUserForm from "./AddUserForm";
+import ImportUserContainer from "./ImportUserContainer";
 
 export default function AddUser({ getAllUsers }) {
   const [isCardExpanded, setIsCardExpanded] = useState(false);
@@ -19,7 +21,7 @@ export default function AddUser({ getAllUsers }) {
   const [alertOpen, setAlertOpen] = useState(false);
   const [alertOptions, setAlertOptions] = useState({
     title: "This is title",
-    message: "This is an error alert — check it out!",
+    message: "This is an error alert - check it out!",
     severity: "error",
   });
   const [dialogOpen, setDialogOpen] = useState(false);
@@ -35,7 +37,7 @@ export default function AddUser({ getAllUsers }) {
     isPlanner: 0,
     isStatist: 0,
   });
-
+  const [userList, setUserList] = useState([]);
   useEffect(() => {
     getAllUsers();
   }, []);
@@ -116,11 +118,18 @@ export default function AddUser({ getAllUsers }) {
             }
           />
           {isCardExpanded && (
-            <AddUserForm
-              formik={formik}
-              submitValues={formik.values}
-              setInitialUser={setInitialUser}
-            />
+            <>
+              <Grid padding={2}>
+                <AddUserForm
+                  formik={formik}
+                  submitValues={formik.values}
+                  setInitialUser={setInitialUser}
+                />
+              </Grid>
+              <Grid padding={2}>
+                <ImportUserContainer getAllUsers={getAllUsers} />
+              </Grid>
+            </>
           )}
         </CardContent>
       </Card>
