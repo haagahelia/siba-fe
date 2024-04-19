@@ -97,7 +97,18 @@ Frontend side installation instructions
    docker-compose -f docker-compose-fe-dev.yaml up -d
    ```
 
-4. OR run this command to launch the application using Nginx web server. This is more suitable for production environment.
+4. OR do the following to launch the application using Nginx web server. This is more suitable for production environment.
+
+   This version redirects insecure HTTP connections to HTTPS. There is a self-signed SSL certificate for testing purposes. Check directory `ssl/test-certs`. Note that the backend probably won't work if the frontend uses HTTPS and the backend uses HTTP.
+
+   Add these environment variables to the .env file
+   ```sh
+   SSL_PORT=443
+   SSL_CERT_PATH=./ssl/test-cert/fullchain.pem
+   SSL_KEY_PATH=./ssl/test-cert/privkey.pem
+   ```
+
+   Run this command to launch
    ```sh
    docker-compose -f docker-compose-fe-nginx.yaml up -d
    ```
@@ -105,6 +116,7 @@ Frontend side installation instructions
    The container overwrites default Nginx configuration file with the `nginx.conf` file found at the project root. It contains directives to make the React application work properly.
 
 5. Access the application e.g. http://localhost:5173. Replace the port with the port you set in step 2.
+   With HTTPS: https://localhost if `SSL_PORT` was set to 443.
 
 6. Stop and remove the started container depending on which command you ran:
    ```sh
@@ -113,6 +125,18 @@ Frontend side installation instructions
    OR
    ```sh
    docker-compose -f docker-compose-fe-nginx.yaml down
+   ```
+
+   You can also stop and remove the container with Docker commands such as:
+   ```sh
+   docker stop <container name or id>
+   docker rm <container name or id>
+   ```
+   Alternatively you can also use Docker Desktop.
+
+   Use this command to see all containers to find the name or id:
+   ```sh
+   docker ps -a
    ```
 
 <p align="right">(<a href="#top">back to top</a>)</p>
