@@ -1,4 +1,6 @@
+import CardHeader from "@mui/material/CardHeader";
 import { useContext, useEffect, useState } from "react";
+import { AppContext } from "../../AppContext";
 import {
   ajaxRequestErrorHandler,
   getFunctionName,
@@ -6,13 +8,10 @@ import {
 import dao from "../../ajax/dao";
 import { useRoleLoggedIn } from "../../hooks/useRoleLoggedIn";
 import Logger from "../../logger/logger";
-
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
-import CardHeader from "@mui/material/CardHeader";
-import Container from "@mui/material/Container";
-import Grid from "@mui/material/Grid";
-import { AppContext } from "../../AppContext";
+import {
+  CommonContainer,
+  CommonContentContainer,
+} from "../common/CommonContainers";
 import AddDepartment from "./AddDepartment";
 import DepartmentListContainer from "./DepartmentListContainer";
 
@@ -70,28 +69,24 @@ export default function Departments() {
 
   return (
     <div>
-      <Container maxWidth="100%">
+      <CommonContainer>
         {roles.admin === "1" && (
           <AddDepartment getAllDepartments={getAllDepartments} />
         )}
-        <Grid container rowSpacing={2}>
-          <Card variant="outlined">
-            <CardContent>
-              <CardHeader title="Departments" variant="pageHeader" />
-              <DepartmentListContainer
-                getAllDepartments={getAllDepartments}
-                departmentList={departmentList}
-                paginateDepartment={paginateDepartment}
-                setPaginateDepartment={setPaginateDepartment}
-                pagination={pagination}
-                setPagination={setPagination}
-                totalCount={totalCount}
-                rowsPerPage={rowsPerPage}
-              />
-            </CardContent>
-          </Card>
-        </Grid>
-      </Container>
+        <CommonContentContainer>
+          <CardHeader title="Departments" variant="pageHeader" />
+          <DepartmentListContainer
+            getAllDepartments={getAllDepartments}
+            departmentList={departmentList}
+            paginateDepartment={paginateDepartment}
+            setPaginateDepartment={setPaginateDepartment}
+            pagination={pagination}
+            setPagination={setPagination}
+            totalCount={totalCount}
+            rowsPerPage={rowsPerPage}
+          />
+        </CommonContentContainer>
+      </CommonContainer>
     </div>
   );
 }

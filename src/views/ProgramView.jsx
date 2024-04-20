@@ -1,3 +1,4 @@
+import CardHeader from "@mui/material/CardHeader";
 // The programs Page
 import { useContext, useEffect, useState } from "react";
 import { AppContext } from "../AppContext";
@@ -6,17 +7,15 @@ import {
   getFunctionName,
 } from "../ajax/ajaxRequestErrorHandler";
 import dao from "../ajax/dao";
-import { useRoleLoggedIn } from "../hooks/useRoleLoggedIn";
-import Logger from "../logger/logger";
-
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
-import CardHeader from "@mui/material/CardHeader";
-import Container from "@mui/material/Container";
-import Grid from "@mui/material/Grid";
 import AlertBox from "../components/common/AlertBox";
+import {
+  CommonContainer,
+  CommonContentContainer,
+} from "../components/common/CommonContainers";
 import AddProgramContainer from "../components/program/AddProgramContainer";
 import ProgramListContainer from "../components/program/ProgramListContainer";
+import { useRoleLoggedIn } from "../hooks/useRoleLoggedIn";
+import Logger from "../logger/logger";
 
 export default function ProgramView() {
   Logger.logPrefix = "ProgramView";
@@ -78,31 +77,27 @@ export default function ProgramView() {
         alertOptions={alertOptions}
         setAlertOpen={setAlertOpen}
       />
-      <Container maxWidth="100%">
+      <CommonContainer>
         {(roles.admin === "1" || roles.planner === "1") && (
           <AddProgramContainer
             getAllPrograms={getAllPrograms}
             allProgramsList={allProgramsList}
           />
         )}
-        <Grid container rowSpacing={2}>
-          <Card variant="outlined">
-            <CardContent>
-              <CardHeader title="Programs" variant="pageHeader" />
-              <ProgramListContainer
-                getAllPrograms={getAllPrograms}
-                allProgramsList={allProgramsList}
-                paginatePrograms={paginatePrograms}
-                setPaginatePrograms={setPaginatePrograms}
-                pagination={pagination}
-                setPagination={setPagination}
-                open={open}
-                setOpen={setOpen}
-              />
-            </CardContent>
-          </Card>
-        </Grid>
-      </Container>
+        <CommonContentContainer>
+          <CardHeader title="Programs" variant="pageHeader" />
+          <ProgramListContainer
+            getAllPrograms={getAllPrograms}
+            allProgramsList={allProgramsList}
+            paginatePrograms={paginatePrograms}
+            setPaginatePrograms={setPaginatePrograms}
+            pagination={pagination}
+            setPagination={setPagination}
+            open={open}
+            setOpen={setOpen}
+          />
+        </CommonContentContainer>
+      </CommonContainer>
     </div>
   );
 }

@@ -1,19 +1,17 @@
-import { useFormik } from "formik";
-import { useState } from "react";
-import dao from "../../ajax/dao";
-import { validate } from "../../validation/ValidateAddDepartment";
-
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Button from "@mui/material/Button";
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
 import CardHeader from "@mui/material/CardHeader";
 import Grid from "@mui/material/Grid";
 import IconButton from "@mui/material/IconButton";
 import TextField from "@mui/material/TextField";
+import { useFormik } from "formik";
+import { useState } from "react";
+import dao from "../../ajax/dao";
+import { validate } from "../../validation/ValidateAddDepartment";
 import { capitalizeFirstLetter } from "../../validation/ValidationUtilities";
 import AlertBox from "../common/AlertBox";
+import { CommonContentContainer } from "../common/CommonContainers";
 import ConfirmationDialog from "../common/ConfirmationDialog";
 import DepartmentTemplate from "./DepartmentTemplate";
 import ImportDepartmentContainer from "./ImportDepartmentContainer";
@@ -93,95 +91,93 @@ export default function AddDepartment({ getAllDepartments }) {
         submit={addDepartment}
         submitValues={formik.values}
       />
-      <Card variant="outlined">
-        <CardContent>
-          <CardHeader
-            title="Add Department"
-            onClick={() => setIsCardExpanded(!isCardExpanded)}
-            variant="pageHeader"
-            action={
-              <IconButton
-                onClick={() => setIsCardExpanded(!isCardExpanded)}
-                aria-expanded={isCardExpanded}
-                aria-label="show more"
-              >
-                {isCardExpanded ? <ExpandLessIcon /> : <ExpandMoreIcon />}
-              </IconButton>
-            }
-          />
-          {isCardExpanded && (
-            <form onSubmit={formik.handleSubmit}>
-              <Grid container spacing={2}>
-                <Grid item xs={12} sm={12} md={4} lg={4}>
-                  <TextField
-                    fullWidth
-                    error={
-                      formik.touched.name && formik.errors.name ? true : false
-                    }
-                    name="name"
-                    placeholder="Name..."
-                    label="Department name"
-                    variant="outlined"
-                    value={formik.values.name}
-                    onChange={formik.handleChange("name")}
-                    onBlur={formik.handleBlur("name")}
-                    helperText={
-                      formik.touched.name && formik.errors.name
-                        ? formik.errors.name
-                        : null
-                    }
-                    InputLabelProps={{
-                      shrink: true,
-                    }}
+      <CommonContentContainer>
+        <CardHeader
+          title="Add Department"
+          onClick={() => setIsCardExpanded(!isCardExpanded)}
+          variant="pageHeader"
+          action={
+            <IconButton
+              onClick={() => setIsCardExpanded(!isCardExpanded)}
+              aria-expanded={isCardExpanded}
+              aria-label="show more"
+            >
+              {isCardExpanded ? <ExpandLessIcon /> : <ExpandMoreIcon />}
+            </IconButton>
+          }
+        />
+        {isCardExpanded && (
+          <form onSubmit={formik.handleSubmit}>
+            <Grid container spacing={2}>
+              <Grid item xs={12} sm={12} md={4} lg={4}>
+                <TextField
+                  fullWidth
+                  error={
+                    formik.touched.name && formik.errors.name ? true : false
+                  }
+                  name="name"
+                  placeholder="Name..."
+                  label="Department name"
+                  variant="outlined"
+                  value={formik.values.name}
+                  onChange={formik.handleChange("name")}
+                  onBlur={formik.handleBlur("name")}
+                  helperText={
+                    formik.touched.name && formik.errors.name
+                      ? formik.errors.name
+                      : null
+                  }
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                />
+              </Grid>
+              <Grid item xs={12} sm={12} md={8} lg={8}>
+                <TextField
+                  fullWidth
+                  error={
+                    formik.touched.description && formik.errors.description
+                      ? true
+                      : false
+                  }
+                  name="description"
+                  label="Description"
+                  placeholder="Some description..."
+                  variant="outlined"
+                  value={formik.values.description}
+                  onChange={formik.handleChange("description")}
+                  onBlur={formik.handleBlur("description")}
+                  helperText={
+                    formik.touched.description && formik.errors.description
+                      ? formik.errors.description
+                      : null
+                  }
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <Button
+                  type="submit"
+                  variant="addComponentFormButton"
+                  onClick={() => {
+                    setInitialDepartment(formik.values);
+                  }}
+                >
+                  Add Department
+                </Button>
+                <Grid padding={2}>
+                  <ImportDepartmentContainer
+                    getAllDepartments={getAllDepartments}
                   />
-                </Grid>
-                <Grid item xs={12} sm={12} md={8} lg={8}>
-                  <TextField
-                    fullWidth
-                    error={
-                      formik.touched.description && formik.errors.description
-                        ? true
-                        : false
-                    }
-                    name="description"
-                    label="Description"
-                    placeholder="Some description..."
-                    variant="outlined"
-                    value={formik.values.description}
-                    onChange={formik.handleChange("description")}
-                    onBlur={formik.handleBlur("description")}
-                    helperText={
-                      formik.touched.description && formik.errors.description
-                        ? formik.errors.description
-                        : null
-                    }
-                    InputLabelProps={{
-                      shrink: true,
-                    }}
-                  />
-                </Grid>
-                <Grid item xs={12}>
-                  <Button
-                    type="submit"
-                    variant="addComponentFormButton"
-                    onClick={() => {
-                      setInitialDepartment(formik.values);
-                    }}
-                  >
-                    Add Department
-                  </Button>
-                  <Grid padding={2}>
-                    <ImportDepartmentContainer
-                      getAllDepartments={getAllDepartments}
-                    />
-                    <DepartmentTemplate />
-                  </Grid>
+                  <DepartmentTemplate />
                 </Grid>
               </Grid>
-            </form>
-          )}
-        </CardContent>
-      </Card>
+            </Grid>
+          </form>
+        )}
+      </CommonContentContainer>
     </>
   );
 }
