@@ -54,7 +54,7 @@ export const AddEmptyAllocRound = ({ allAllocRoundsList }) => {
     },
   });
 
-  const resetFormm = () => {
+  const resetForm = () => {
     setInitialAllocRound({
       name: "",
       description: "",
@@ -84,7 +84,7 @@ export const AddEmptyAllocRound = ({ allAllocRoundsList }) => {
       message: `${submitValues.name} added successfully.`,
     });
     setAlertOpen(true);
-    resetFormm();
+    resetForm();
     // getAllAllocRounds();
   };
   return (

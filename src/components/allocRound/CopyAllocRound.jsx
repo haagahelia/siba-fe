@@ -27,7 +27,8 @@ export const CopyAllocRound = ({ allAllocRoundsList }) => {
   const [initialAllocRound, setInitialEmptyAllocRound] = useState({
     name: "",
     description: "",
-    copiedAllocRoundId: "",
+    copiedAllocRoundId:
+      allAllocRoundsList.length > 0 ? allAllocRoundsList[0].id : "",
   });
 
   const formik = useFormik({
@@ -54,10 +55,10 @@ export const CopyAllocRound = ({ allAllocRoundsList }) => {
     });
   };
 
-  const handleCopyAllocRoundSubmit = async (event) => {
-    event.preventDefault();
-    formik.handleSubmit();
-    const { name, description, copiedAllocRoundId } = formik.values;
+  const handleCopyAllocRoundSubmit = async (submitValues) => {
+    const name = submitValues.name;
+    const description = submitValues.description;
+    const copiedAllocRoundId = submitValues.copiedAllocRoundId;
 
     Logger.debug(
       `Trying to create a copy of alloc round with: ${name},${description},${copiedAllocRoundId},${userId}`,

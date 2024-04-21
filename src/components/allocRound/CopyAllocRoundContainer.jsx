@@ -15,7 +15,7 @@ export default function CopyAllocRoundContainer({
 
   return (
     <div>
-      <form onSubmit={handleCopyAllocRoundSubmit}>
+      <form onSubmit={formik.handleSubmit}>
         <Grid container variant="sibaGridAddForm" column={8}>
           <CopyAllocRoundForm
             formik={formik}
