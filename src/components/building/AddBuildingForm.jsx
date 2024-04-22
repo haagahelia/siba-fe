@@ -12,7 +12,7 @@ export default function AddBuildingForm({
       <Grid container spacing={2}>
         <BuildingInputFields formik={formik} />
       </Grid>
-      <Grid item xs={3} padding={2}>
+      <Grid item xs={12} padding={2}>
         <Button
           type="submit"
           variant="addComponentFormButton"

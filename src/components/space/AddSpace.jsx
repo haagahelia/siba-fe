@@ -21,6 +21,7 @@ import Select from "@mui/material/Select";
 import TextField from "@mui/material/TextField";
 import { capitalizeFirstLetter } from "../../validation/ValidationUtilities";
 import AlertBox from "../common/AlertBox";
+import { CommonContentContainer } from "../common/CommonContainers";
 import ConfirmationDialog from "../common/ConfirmationDialog";
 import AddSpaceDialogConfirmation from "./AddSpaceDialogConfirmation";
 import ImportSpaceContainer from "./ImportSpaceContainer";
@@ -179,283 +180,280 @@ export default function AddSpace({ getAllSpaces }) {
         submit={addSingleSpace}
         submitValues={space}
       />
-      <Card variant="outlined">
-        <CardContent>
-          <CardHeader
-            title="Add Space"
-            onClick={() => setIsCardExpanded(!isCardExpanded)}
-            variant="pageHeader"
-            action={
-              <IconButton
-                onClick={() => setIsCardExpanded(!isCardExpanded)}
-                aria-expanded={isCardExpanded}
-                aria-label="expand/collapse"
-              >
-                {isCardExpanded ? <ExpandLessIcon /> : <ExpandMoreIcon />}
-              </IconButton>
-            }
-          />
-          {isCardExpanded && (
-            <Grid container spacing={2}>
-              <form onSubmit={formik.handleSubmit}>
-                <Grid container spacing={2}>
-                  <Grid item xs={12} sm={6} md={4}>
-                    <TextField
-                      fullWidth
-                      name="name"
-                      error={
-                        formik.touched.name && formik.errors.name ? true : false
-                      }
-                      label="Name"
-                      placeholder="Name..."
-                      value={formik.values.name}
-                      onChange={formik.handleChange("name")}
-                      onBlur={formik.handleBlur("name")}
-                      helperText={
-                        formik.touched.name && formik.errors.name
-                          ? formik.errors.name
-                          : null
-                      }
-                      InputLabelProps={{
-                        shrink: true,
-                      }}
-                    />
-                  </Grid>
-                  <Grid item xs={12} sm={6} md={4}>
-                    <TextField
-                      fullWidth
-                      error={formik.touched.area && Boolean(formik.errors.area)}
-                      name="area"
-                      label="Area"
+      <CommonContentContainer>
+        <CardHeader
+          title="Add Space"
+          onClick={() => setIsCardExpanded(!isCardExpanded)}
+          variant="pageHeader"
+          action={
+            <IconButton
+              onClick={() => setIsCardExpanded(!isCardExpanded)}
+              aria-expanded={isCardExpanded}
+              aria-label="expand/collapse"
+            >
+              {isCardExpanded ? <ExpandLessIcon /> : <ExpandMoreIcon />}
+            </IconButton>
+          }
+        />
+        {isCardExpanded && (
+          <Grid container spacing={2}>
+            <form onSubmit={formik.handleSubmit}>
+              <Grid container spacing={2}>
+                <Grid item xs={12} sm={6} md={4}>
+                  <TextField
+                    fullWidth
+                    name="name"
+                    error={
+                      formik.touched.name && formik.errors.name ? true : false
+                    }
+                    label="Name"
+                    placeholder="Name..."
+                    value={formik.values.name}
+                    onChange={formik.handleChange("name")}
+                    onBlur={formik.handleBlur("name")}
+                    helperText={
+                      formik.touched.name && formik.errors.name
+                        ? formik.errors.name
+                        : null
+                    }
+                    InputLabelProps={{
+                      shrink: true,
+                    }}
+                  />
+                </Grid>
+                <Grid item xs={12} sm={6} md={4}>
+                  <TextField
+                    fullWidth
+                    error={formik.touched.area && Boolean(formik.errors.area)}
+                    name="area"
+                    label="Area"
+                    type="number"
+                    placeholder="0"
+                    variant="outlined"
+                    value={formik.values.area}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    helperText={formik.touched.area && formik.errors.area}
+                    InputLabelProps={{
+                      shrink: true,
+                    }}
+                  />
+                </Grid>
+                <Grid item xs={12} sm={6} md={4}>
+                  <TextField
+                    fullWidth
+                    error={formik.touched.info && Boolean(formik.errors.info)}
+                    name="info"
+                    label="Info"
+                    placeholder="Some info..."
+                    variant="outlined"
+                    value={formik.values.info}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    helperText={formik.touched.info && formik.errors.info}
+                    InputLabelProps={{
+                      shrink: true,
+                    }}
+                  />
+                </Grid>
+                <Grid item xs={12} sm={6} md={4}>
+                  <TextField
+                    fullWidth
+                    error={
+                      formik.touched.personLimit &&
+                      Boolean(formik.errors.personLimit)
+                    }
+                    name="personLimit"
+                    label="Person limit"
+                    type="number"
+                    variant="outlined"
+                    value={formik.values.personLimit}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    helperText={
+                      formik.touched.personLimit && formik.errors.personLimit
+                    }
+                  />
+                </Grid>
+                <Grid item xs={12} sm={6} md={4}>
+                  <FormControl fullWidth>
+                    <InputLabel>Building</InputLabel>
+                    <Select
+                      name="buildingId"
                       type="number"
-                      placeholder="0"
-                      variant="outlined"
-                      value={formik.values.area}
+                      label="Building"
+                      value={formik.values.buildingId}
                       onChange={formik.handleChange}
                       onBlur={formik.handleBlur}
-                      helperText={formik.touched.area && formik.errors.area}
-                      InputLabelProps={{
-                        shrink: true,
-                      }}
-                    />
-                  </Grid>
-                  <Grid item xs={12} sm={6} md={4}>
-                    <TextField
-                      fullWidth
-                      error={formik.touched.info && Boolean(formik.errors.info)}
-                      name="info"
-                      label="Info"
-                      placeholder="Some info..."
-                      variant="outlined"
-                      value={formik.values.info}
-                      onChange={formik.handleChange}
-                      onBlur={formik.handleBlur}
-                      helperText={formik.touched.info && formik.errors.info}
-                      InputLabelProps={{
-                        shrink: true,
-                      }}
-                    />
-                  </Grid>
-                  <Grid item xs={12} sm={6} md={4}>
-                    <TextField
-                      fullWidth
                       error={
-                        formik.touched.personLimit &&
-                        Boolean(formik.errors.personLimit)
+                        formik.touched.buildingId &&
+                        Boolean(formik.errors.buildingId)
                       }
-                      name="personLimit"
-                      label="Person limit"
+                    >
+                      {buildingSelectList.map((building) => (
+                        <MenuItem key={building.id} value={building.id}>
+                          {building.name}
+                        </MenuItem>
+                      ))}
+                    </Select>
+                    {formik.touched.buildingId && formik.errors.buildingId && (
+                      <FormHelperText error>
+                        {formik.errors.buildingId}
+                      </FormHelperText>
+                    )}
+                  </FormControl>
+                </Grid>
+                <Grid item xs={12} sm={6} md={4}>
+                  <TextField
+                    fullWidth
+                    label="Available from"
+                    type="time"
+                    name="availableFrom"
+                    variant="outlined"
+                    value={formik.values.availableFrom}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    error={
+                      formik.touched.availableFrom &&
+                      Boolean(formik.errors.availableFrom)
+                    }
+                    helperText={
+                      formik.touched.availableFrom &&
+                      formik.errors.availableFrom
+                    }
+                  />
+                </Grid>
+                <Grid item xs={12} sm={6} md={4}>
+                  <TextField
+                    fullWidth
+                    label="Available to"
+                    type="time"
+                    name="availableTo"
+                    variant="outlined"
+                    value={formik.values.availableTo}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    error={
+                      formik.touched.availableTo &&
+                      Boolean(formik.errors.availableTo)
+                    }
+                    helperText={
+                      formik.touched.availableTo && formik.errors.availableTo
+                    }
+                  />
+                </Grid>
+                <Grid item xs={12} sm={6} md={4}>
+                  <TextField
+                    fullWidth
+                    label="Classes from"
+                    type="time"
+                    name="classesFrom"
+                    variant="outlined"
+                    value={formik.values.classesFrom}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    error={
+                      formik.touched.classesFrom &&
+                      Boolean(formik.errors.classesFrom)
+                    }
+                    helperText={
+                      formik.touched.classesFrom && formik.errors.classesFrom
+                    }
+                  />
+                </Grid>
+                <Grid item xs={12} sm={6} md={4}>
+                  <TextField
+                    fullWidth
+                    label="Classes to"
+                    type="time"
+                    name="classesTo"
+                    variant="outlined"
+                    value={formik.values.classesTo}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    error={
+                      formik.touched.classesTo &&
+                      Boolean(formik.errors.classesTo)
+                    }
+                    helperText={
+                      formik.touched.classesTo && formik.errors.classesTo
+                    }
+                  />
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <FormControl fullWidth>
+                    <InputLabel>In use?</InputLabel>
+                    <Select
+                      name="inUse"
+                      label="In use?"
+                      value={formik.values.inUse}
+                      onChange={formik.handleChange}
+                      onBlur={formik.handleBlur}
+                      error={
+                        formik.touched.inUse && Boolean(formik.errors.inUse)
+                      }
+                    >
+                      <MenuItem value="1">Yes</MenuItem>
+                      <MenuItem value="0">No</MenuItem>
+                    </Select>
+                    {formik.touched.inUse && formik.errors.inUse && (
+                      <FormHelperText error>
+                        {formik.errors.inUse}
+                      </FormHelperText>
+                    )}
+                  </FormControl>
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <FormControl fullWidth>
+                    <InputLabel>Space type</InputLabel>
+                    <Select
+                      name="spaceTypeId"
+                      label="Space type"
                       type="number"
-                      variant="outlined"
-                      value={formik.values.personLimit}
-                      onChange={formik.handleChange}
-                      onBlur={formik.handleBlur}
-                      helperText={
-                        formik.touched.personLimit && formik.errors.personLimit
-                      }
-                    />
-                  </Grid>
-                  <Grid item xs={12} sm={6} md={4}>
-                    <FormControl fullWidth>
-                      <InputLabel>Building</InputLabel>
-                      <Select
-                        name="buildingId"
-                        type="number"
-                        label="Building"
-                        value={formik.values.buildingId}
-                        onChange={formik.handleChange}
-                        onBlur={formik.handleBlur}
-                        error={
-                          formik.touched.buildingId &&
-                          Boolean(formik.errors.buildingId)
-                        }
-                      >
-                        {buildingSelectList.map((building) => (
-                          <MenuItem key={building.id} value={building.id}>
-                            {building.name}
-                          </MenuItem>
-                        ))}
-                      </Select>
-                      {formik.touched.buildingId &&
-                        formik.errors.buildingId && (
-                          <FormHelperText error>
-                            {formik.errors.buildingId}
-                          </FormHelperText>
-                        )}
-                    </FormControl>
-                  </Grid>
-                  <Grid item xs={12} sm={6} md={4}>
-                    <TextField
-                      fullWidth
-                      label="Available from"
-                      type="time"
-                      name="availableFrom"
-                      variant="outlined"
-                      value={formik.values.availableFrom}
+                      value={formik.values.spaceTypeId}
                       onChange={formik.handleChange}
                       onBlur={formik.handleBlur}
                       error={
-                        formik.touched.availableFrom &&
-                        Boolean(formik.errors.availableFrom)
+                        formik.touched.spaceTypeId &&
+                        Boolean(formik.errors.spaceTypeId)
                       }
-                      helperText={
-                        formik.touched.availableFrom &&
-                        formik.errors.availableFrom
-                      }
-                    />
-                  </Grid>
-                  <Grid item xs={12} sm={6} md={4}>
-                    <TextField
-                      fullWidth
-                      label="Available to"
-                      type="time"
-                      name="availableTo"
-                      variant="outlined"
-                      value={formik.values.availableTo}
-                      onChange={formik.handleChange}
-                      onBlur={formik.handleBlur}
-                      error={
-                        formik.touched.availableTo &&
-                        Boolean(formik.errors.availableTo)
-                      }
-                      helperText={
-                        formik.touched.availableTo && formik.errors.availableTo
-                      }
-                    />
-                  </Grid>
-                  <Grid item xs={12} sm={6} md={4}>
-                    <TextField
-                      fullWidth
-                      label="Classes from"
-                      type="time"
-                      name="classesFrom"
-                      variant="outlined"
-                      value={formik.values.classesFrom}
-                      onChange={formik.handleChange}
-                      onBlur={formik.handleBlur}
-                      error={
-                        formik.touched.classesFrom &&
-                        Boolean(formik.errors.classesFrom)
-                      }
-                      helperText={
-                        formik.touched.classesFrom && formik.errors.classesFrom
-                      }
-                    />
-                  </Grid>
-                  <Grid item xs={12} sm={6} md={4}>
-                    <TextField
-                      fullWidth
-                      label="Classes to"
-                      type="time"
-                      name="classesTo"
-                      variant="outlined"
-                      value={formik.values.classesTo}
-                      onChange={formik.handleChange}
-                      onBlur={formik.handleBlur}
-                      error={
-                        formik.touched.classesTo &&
-                        Boolean(formik.errors.classesTo)
-                      }
-                      helperText={
-                        formik.touched.classesTo && formik.errors.classesTo
-                      }
-                    />
-                  </Grid>
-                  <Grid item xs={12} sm={6}>
-                    <FormControl fullWidth>
-                      <InputLabel>In use?</InputLabel>
-                      <Select
-                        name="inUse"
-                        label="In use?"
-                        value={formik.values.inUse}
-                        onChange={formik.handleChange}
-                        onBlur={formik.handleBlur}
-                        error={
-                          formik.touched.inUse && Boolean(formik.errors.inUse)
-                        }
-                      >
-                        <MenuItem value="1">Yes</MenuItem>
-                        <MenuItem value="0">No</MenuItem>
-                      </Select>
-                      {formik.touched.inUse && formik.errors.inUse && (
+                    >
+                      {spaceTypeSelectList.map((spaceType) => (
+                        <MenuItem key={spaceType.id} value={spaceType.id}>
+                          {spaceType.name} ({spaceType.acronym})
+                        </MenuItem>
+                      ))}
+                    </Select>
+                    {formik.touched.spaceTypeId &&
+                      formik.errors.spaceTypeId && (
                         <FormHelperText error>
-                          {formik.errors.inUse}
+                          {formik.errors.spaceTypeId}
                         </FormHelperText>
                       )}
-                    </FormControl>
-                  </Grid>
-                  <Grid item xs={12} sm={6}>
-                    <FormControl fullWidth>
-                      <InputLabel>Space type</InputLabel>
-                      <Select
-                        name="spaceTypeId"
-                        label="Space type"
-                        type="number"
-                        value={formik.values.spaceTypeId}
-                        onChange={formik.handleChange}
-                        onBlur={formik.handleBlur}
-                        error={
-                          formik.touched.spaceTypeId &&
-                          Boolean(formik.errors.spaceTypeId)
-                        }
-                      >
-                        {spaceTypeSelectList.map((spaceType) => (
-                          <MenuItem key={spaceType.id} value={spaceType.id}>
-                            {spaceType.name} ({spaceType.acronym})
-                          </MenuItem>
-                        ))}
-                      </Select>
-                      {formik.touched.spaceTypeId &&
-                        formik.errors.spaceTypeId && (
-                          <FormHelperText error>
-                            {formik.errors.spaceTypeId}
-                          </FormHelperText>
-                        )}
-                    </FormControl>
-                  </Grid>
-                  <Grid item xs={12} padding={2}>
-                    <Button
-                      type="submit"
-                      variant="addComponentFormButton"
-                      onClick={() => {
-                        setSpace(formik.values);
-                      }}
-                    >
-                      Add Space
-                    </Button>
-                  </Grid>
+                  </FormControl>
                 </Grid>
-              </form>
-              <ImportSpaceContainer
-                getAllSpaces={getAllSpaces}
-                buildingSelectList={buildingSelectList}
-                spaceTypeSelectList={spaceTypeSelectList}
-              />
-              <SpaceTemplate />
-            </Grid>
-          )}
-        </CardContent>
-      </Card>
+                <Grid item xs={12} padding={2}>
+                  <Button
+                    type="submit"
+                    variant="addComponentFormButton"
+                    onClick={() => {
+                      setSpace(formik.values);
+                    }}
+                  >
+                    Add Space
+                  </Button>
+                </Grid>
+              </Grid>
+            </form>
+            <ImportSpaceContainer
+              getAllSpaces={getAllSpaces}
+              buildingSelectList={buildingSelectList}
+              spaceTypeSelectList={spaceTypeSelectList}
+            />
+            <SpaceTemplate />
+          </Grid>
+        )}
+      </CommonContentContainer>
     </>
   );
 }

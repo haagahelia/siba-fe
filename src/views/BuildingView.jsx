@@ -1,7 +1,4 @@
-import { CardContent, CardHeader } from "@mui/material";
-import Card from "@mui/material/Card";
-import Container from "@mui/material/Container";
-import Grid from "@mui/material/Grid";
+import { CardHeader } from "@mui/material";
 import { useContext, useEffect, useState } from "react";
 import { AppContext } from "../AppContext";
 import {
@@ -13,6 +10,10 @@ import AddBuildingContainer from "../components/building/AddBuildingContainer";
 import BuildingListContainer from "../components/building/BuildingListContainer";
 import BuildingPagination from "../components/building/BuildingListPagination";
 import AlertBox from "../components/common/AlertBox";
+import {
+  CommonContainer,
+  CommonContentContainer,
+} from "../components/common/CommonContainers";
 import { useRoleLoggedIn } from "../hooks/useRoleLoggedIn";
 import Logger from "../logger/logger";
 
@@ -68,31 +69,27 @@ export default function BuildingView() {
         alertOptions={alertOptions}
         setAlertOpen={setAlertOpen}
       />
-      <Container maxWidth="xl">
+      <CommonContainer>
         {roles.admin === "1" && (
           <AddBuildingContainer getAllBuildings={getAllBuildings} />
         )}
-        <Grid container rowSpacing={2}>
-          <Card variant="outlined">
-            <CardContent>
-              <CardHeader title="Buildings" variant="pageHeader" />
-              <BuildingListContainer
-                getAllBuildings={getAllBuildings}
-                allBuildingsList={allBuildingsList}
-                paginateBuildings={paginateBuildings}
-              />
-              <BuildingPagination
-                pagination={pagination}
-                setPagination={setPagination}
-                allBuildingsList={allBuildingsList}
-                paginateBuildings={paginateBuildings}
-                setPaginateBuildings={setPaginateBuildings}
-                pageSize={pageSize}
-              />
-            </CardContent>
-          </Card>
-        </Grid>
-      </Container>
+        <CommonContentContainer>
+          <CardHeader title="Buildings" variant="pageHeader" />
+          <BuildingListContainer
+            getAllBuildings={getAllBuildings}
+            allBuildingsList={allBuildingsList}
+            paginateBuildings={paginateBuildings}
+          />
+          <BuildingPagination
+            pagination={pagination}
+            setPagination={setPagination}
+            allBuildingsList={allBuildingsList}
+            paginateBuildings={paginateBuildings}
+            setPaginateBuildings={setPaginateBuildings}
+            pageSize={pageSize}
+          />
+        </CommonContentContainer>
+      </CommonContainer>
     </div>
   );
 }
