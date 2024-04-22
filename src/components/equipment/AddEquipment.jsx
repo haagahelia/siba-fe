@@ -12,6 +12,7 @@ import Grid from "@mui/material/Grid";
 import IconButton from "@mui/material/IconButton";
 import { capitalizeFirstLetter } from "../../validation/ValidationUtilities";
 import AlertBox from "../common/AlertBox";
+import { CommonContentContainer } from "../common/CommonContainers";
 import ConfirmationDialog from "../common/ConfirmationDialog";
 import AddEquipmentForm from "./AddEquipmentForm";
 import EquipmentTemplate from "./EquipmentTemplate";
@@ -102,37 +103,35 @@ export default function AddEquipment({ getAllEquipments }) {
         submit={addSingleEquipment}
         submitValues={formik.values}
       />
-      <Card variant="outlined">
-        <CardContent>
-          <CardHeader
-            title="Add Equipment"
-            onClick={() => setIsCardExpanded(!isCardExpanded)}
-            variant="pageHeader"
-            action={
-              <IconButton
-                onClick={() => setIsCardExpanded(!isCardExpanded)}
-                aria-expanded={isCardExpanded}
-                aria-label="expand/collapse"
-              >
-                {isCardExpanded ? <ExpandLessIcon /> : <ExpandMoreIcon />}
-              </IconButton>
-            }
-          />
-          {isCardExpanded && (
-            <>
-              <AddEquipmentForm
-                formik={formik}
-                submitValues={formik.values}
-                setEquipment={setEquipment}
-              />
-              <Grid item xs={12}>
-                <ImportEquipmentContainer getAllEquipments={getAllEquipments} />
-                <EquipmentTemplate />
-              </Grid>
-            </>
-          )}
-        </CardContent>
-      </Card>
+      <CommonContentContainer>
+        <CardHeader
+          title="Add Equipment"
+          onClick={() => setIsCardExpanded(!isCardExpanded)}
+          variant="pageHeader"
+          action={
+            <IconButton
+              onClick={() => setIsCardExpanded(!isCardExpanded)}
+              aria-expanded={isCardExpanded}
+              aria-label="expand/collapse"
+            >
+              {isCardExpanded ? <ExpandLessIcon /> : <ExpandMoreIcon />}
+            </IconButton>
+          }
+        />
+        {isCardExpanded && (
+          <>
+            <AddEquipmentForm
+              formik={formik}
+              submitValues={formik.values}
+              setEquipment={setEquipment}
+            />
+            <Grid item xs={12}>
+              <ImportEquipmentContainer getAllEquipments={getAllEquipments} />
+              <EquipmentTemplate />
+            </Grid>
+          </>
+        )}
+      </CommonContentContainer>
     </>
   );
 }
