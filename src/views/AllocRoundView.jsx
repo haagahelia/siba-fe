@@ -11,6 +11,10 @@ import dao from "../ajax/dao";
 import AllocRoundListContainer from "../components/allocRound/AllocRoundListContainer";
 import AllocRoundPagination from "../components/allocRound/AllocRoundPagination";
 import AlertBox from "../components/common/AlertBox";
+import {
+  CommonContainer,
+  CommonContentContainer,
+} from "../components/common/CommonContainers";
 import { useRoleLoggedIn } from "../hooks/useRoleLoggedIn";
 import Logger from "../logger/logger";
 
@@ -78,39 +82,35 @@ export default function AllocRoundView() {
         setAlertOpen={setAlertOpen}
       />
 
-      <Container maxWidth="100%">
-        <Grid container rowSpacing={1}>
-          <Card variant="outlined">
-            <CardContent>
-              <CardHeader title="Allocation Rounds" variant="pageHeader" />
-              {roles.admin === "1" && (
-                <Button
-                  variant="componentAddButton"
-                  onClick={() =>
-                    navigate("addAllocRound", { state: { allAllocRoundsList } })
-                  }
-                >
-                  + Add
-                </Button>
-              )}
-              <AllocRoundListContainer
-                getAllAllocRounds={getAllAllocRounds}
-                allAllocRoundsList={allAllocRoundsList}
-                paginateAllocRounds={paginateAllocRounds}
-                incrementDataModifiedCounter={incrementDataModifiedCounter}
-              />
-              <AllocRoundPagination
-                pagination={pagination}
-                setPagination={setPagination}
-                allAllocRoundsList={allAllocRoundsList}
-                paginateAllocRounds={paginateAllocRounds}
-                setPaginateAllocRounds={setpaginateAllocRounds}
-                pageSize={pageSize}
-              />
-            </CardContent>
-          </Card>
-        </Grid>
-      </Container>
+      <CommonContainer>
+        <CommonContentContainer>
+          <CardHeader title="Allocation Rounds" variant="pageHeader" />
+          {roles.admin === "1" && (
+            <Button
+              variant="componentAddButton"
+              onClick={() =>
+                navigate("addAllocRound", { state: { allAllocRoundsList } })
+              }
+            >
+              + Add
+            </Button>
+          )}
+          <AllocRoundListContainer
+            getAllAllocRounds={getAllAllocRounds}
+            allAllocRoundsList={allAllocRoundsList}
+            paginateAllocRounds={paginateAllocRounds}
+            incrementDataModifiedCounter={incrementDataModifiedCounter}
+          />
+          <AllocRoundPagination
+            pagination={pagination}
+            setPagination={setPagination}
+            allAllocRoundsList={allAllocRoundsList}
+            paginateAllocRounds={paginateAllocRounds}
+            setPaginateAllocRounds={setpaginateAllocRounds}
+            pageSize={pageSize}
+          />
+        </CommonContentContainer>
+      </CommonContainer>
     </div>
   );
 }

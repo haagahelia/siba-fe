@@ -8,6 +8,7 @@ import dao from "../../ajax/dao";
 import Logger from "../../logger/logger";
 import { validate } from "../../validation/ValidateAddAllocRound";
 import AlertBox from "../common/AlertBox";
+import { CommonContentContainer } from "../common/CommonContainers";
 import ConfirmationDialog from "../common/ConfirmationDialog";
 import CopyAllocRoundContainer from "./CopyAllocRoundContainer";
 
@@ -104,18 +105,16 @@ export const CopyAllocRound = ({ allAllocRoundsList }) => {
         submit={handleCopyAllocRoundSubmit}
         submitValues={formik.values}
       />
-      <Card variant="outlined">
-        <CardContent>
-          <CardHeader title="... OR Copy existing allocation round as separate copy" />
-          <CopyAllocRoundContainer
-            formik={formik}
-            submitValues={formik.values}
-            setInitialAllocRound={setInitialEmptyAllocRound}
-            allAllocRoundsList={allAllocRoundsList}
-            handleCopyAllocRoundSubmit={handleCopyAllocRoundSubmit}
-          />
-        </CardContent>
-      </Card>
+      <CommonContentContainer>
+        <CardHeader title="... OR Copy existing allocation round as separate copy" />
+        <CopyAllocRoundContainer
+          formik={formik}
+          submitValues={formik.values}
+          setInitialAllocRound={setInitialEmptyAllocRound}
+          allAllocRoundsList={allAllocRoundsList}
+          handleCopyAllocRoundSubmit={handleCopyAllocRoundSubmit}
+        />
+      </CommonContentContainer>
     </>
   );
 };
