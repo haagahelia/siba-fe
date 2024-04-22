@@ -32,8 +32,8 @@ export default function ProgramList({
   const [order, setOrder] = useState("asc");
   const [orderBy, setOrderBy] = useState("name");
   const [searchQuery, setSearched] = useState("");
-
   const [currentPage, setCurrentPage] = useState(1);
+  const [searchToBeHandled, setSearchToBeHandled] = useState(false);
 
   useEffect(() => {
     const sortAndPaginatePrograms = () => {
@@ -83,9 +83,8 @@ export default function ProgramList({
 
     // Reset pagination when search criteria change
     setPagination({ from: 0, to: pageSize });
-    if (searchText === "") {
-      setCurrentPage(1);
-    }
+    setSearchToBeHandled(true);
+    setCurrentPage(1);
   };
 
   const handleChangePage = (e, p) => {
@@ -93,8 +92,11 @@ export default function ProgramList({
     const to = (p - 1) * pageSize + pageSize;
     setPagination({ from, to });
 
-    if (searchQuery !== "") {
-      setCurrentPage(1);
+    if (searchToBeHandled) {
+      setSearchToBeHandled(false);
+      setCurrentPage(p);
+    } else {
+      setCurrentPage(p);
     }
   };
 

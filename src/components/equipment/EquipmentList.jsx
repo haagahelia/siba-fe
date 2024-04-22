@@ -29,8 +29,8 @@ export default function EquipmentList({
   const [order, setOrder] = useState("asc");
   const [orderBy, setOrderBy] = useState("Id");
   const [searchQuery, setSearchQuery] = useState("");
-
   const [currentPage, setCurrentPage] = useState(1);
+  const [searchToBeHandled, setSearchToBeHandled] = useState(false);
 
   useEffect(() => {
     const sortAndPaginateEquipment = () => {
@@ -67,13 +67,6 @@ export default function EquipmentList({
     sortAndPaginateEquipment();
   }, [equipmentList, orderBy, order, searchQuery, pagination]);
 
-  const handleChangePage = (e, p) => {
-    const from = (p - 1) * rowsPerPage;
-    const to = (p - 1) * rowsPerPage + rowsPerPage;
-    setPagination({ from, to });
-    setCurrentPage(p);
-  };
-
   const handleRequestSort = useCallback(
     (property) => {
       const isAsc = orderBy === property && order === "asc";
@@ -87,8 +80,19 @@ export default function EquipmentList({
     const searchText = e.target.value;
     setSearchQuery(searchText);
     setPagination({ from: 0, to: rowsPerPage });
-    if (searchText === "") {
-      setCurrentPage(1);
+    setSearchToBeHandled(true);
+    setCurrentPage(1);
+  };
+
+  const handleChangePage = (e, p) => {
+    const from = (p - 1) * rowsPerPage;
+    const to = (p - 1) * rowsPerPage + rowsPerPage;
+    setPagination({ from, to });
+    if (searchToBeHandled) {
+      setSearchToBeHandled(false);
+      setCurrentPage(p);
+    } else {
+      setCurrentPage(p);
     }
   };
 
