@@ -36,6 +36,7 @@ export default function SpaceList({
     from: 0,
     to: pageSize,
   });
+  const [searchToBeHandled, setSearchToBeHandled] = useState(false);
 
   useEffect(() => {
     const sortAndPaginateSpaces = () => {
@@ -77,9 +78,8 @@ export default function SpaceList({
     const searchText = e.target.value;
     setSearchQuery(searchText);
     setPagination({ from: 0, to: pageSize });
-    if (searchText === "") {
-      setCurrentPage(1);
-    }
+    setSearchToBeHandled(true);
+    setCurrentPage(1);
   };
 
   const handleChangePage = (e, p) => {
@@ -87,9 +87,17 @@ export default function SpaceList({
     const to = (p - 1) * pageSize + pageSize;
     setPagination({ from, to });
 
-    if (searchQuery !== "") {
-      setCurrentPage(1);
+    if (searchToBeHandled) {
+      setSearchToBeHandled(false);
+      setCurrentPage(p);
+    } else {
+      setCurrentPage(p);
     }
+  };
+
+  const cancelSearch = () => {
+    setSearchQuery("");
+    setCurrentPage(1);
   };
 
   // STYLE
@@ -111,11 +119,9 @@ export default function SpaceList({
           endAdornment: (
             <InputAdornment position="end">
               <IconButton
-                onClick={() => {
-                  setSearchQuery("");
-                  setCurrentPage(1);
-                }}
+                onClick={cancelSearch}
                 sx={{ visibility: searchQuery ? "visible" : "hidden" }}
+                variant="clearFilterButton"
               >
                 <ClearIcon />
               </IconButton>
