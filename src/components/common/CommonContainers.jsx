@@ -4,7 +4,7 @@ import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 
 const CommonContainer = ({ children }) => {
-  return <Container maxWidth="xl">{children}</Container>;
+  return <Container maxWidth="100%">{children}</Container>;
 };
 
 const CommonContentContainer = ({ children }) => {

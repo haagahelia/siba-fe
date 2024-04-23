@@ -1,3 +1,4 @@
+import CardHeader from "@mui/material/CardHeader";
 // The User List Page
 import { useContext, useEffect, useState } from "react";
 import { AppContext } from "../AppContext";
@@ -6,19 +7,17 @@ import {
   getFunctionName,
 } from "../ajax/ajaxRequestErrorHandler";
 import dao from "../ajax/dao";
-import Logger from "../logger/logger";
-
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
-import CardHeader from "@mui/material/CardHeader";
-import Container from "@mui/material/Container";
-import Grid from "@mui/material/Grid";
 import AlertBox from "../components/common/AlertBox";
+import {
+  CommonContainer,
+  CommonContentContainer,
+} from "../components/common/CommonContainers";
 import AddUser from "../components/user/AddUser";
 import UserFiltering from "../components/user/UserFiltering";
 import UserListContainer from "../components/user/UserListContainer";
 import UserPagination from "../components/user/UserPagination";
 import { useRoleLoggedIn } from "../hooks/useRoleLoggedIn";
+import Logger from "../logger/logger";
 
 export default function UserView() {
   Logger.logPrefix = "UserView";
@@ -81,40 +80,36 @@ export default function UserView() {
         alertOptions={alertOptions}
         setAlertOpen={setAlertOpen}
       />
-      <Container maxWidth="100%">
+      <CommonContainer>
         {roles.admin === "1" && (
           <AddUser getAllUsers={getAllUsers} allUsersList={allUsersList} />
         )}
-        <Grid container rowSpacing={2}>
-          <Card variant="outlined">
-            <CardContent>
-              <CardHeader title="Users" variant="pageHeader" />
-              <UserFiltering
-                allUsersList={allUsersList}
-                setAllUsersList={setAllUsersList}
-                paginateUsers={paginateUsers}
-                setPaginateUsers={setPaginateUsers}
-                pagination={pagination}
-              />
-              <UserListContainer
-                getAllUsers={getAllUsers}
-                allUsersList={allUsersList}
-                paginateUsers={paginateUsers}
-                open={open}
-                setOpen={setOpen}
-              />
-              <UserPagination
-                pagination={pagination}
-                setPagination={setPagination}
-                allUsersList={allUsersList}
-                paginateUsers={paginateUsers}
-                setPaginateUsers={setPaginateUsers}
-                pageSize={pageSize}
-              />
-            </CardContent>
-          </Card>
-        </Grid>
-      </Container>
+        <CommonContentContainer>
+          <CardHeader title="Users" variant="pageHeader" />
+          <UserFiltering
+            allUsersList={allUsersList}
+            setAllUsersList={setAllUsersList}
+            paginateUsers={paginateUsers}
+            setPaginateUsers={setPaginateUsers}
+            pagination={pagination}
+          />
+          <UserListContainer
+            getAllUsers={getAllUsers}
+            allUsersList={allUsersList}
+            paginateUsers={paginateUsers}
+            open={open}
+            setOpen={setOpen}
+          />
+          <UserPagination
+            pagination={pagination}
+            setPagination={setPagination}
+            allUsersList={allUsersList}
+            paginateUsers={paginateUsers}
+            setPaginateUsers={setPaginateUsers}
+            pageSize={pageSize}
+          />
+        </CommonContentContainer>
+      </CommonContainer>
     </div>
   );
 }

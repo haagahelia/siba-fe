@@ -517,7 +517,7 @@ export const createAppTheme = (currentPalette) =>
               fontSize: "1.25rem",
               fontWeight: "bold",
               height: "40px",
-              marginTop: margins.small,
+              margin: margins.small,
               width: "125px",
 
               "&:hover": {

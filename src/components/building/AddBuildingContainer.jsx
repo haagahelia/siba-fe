@@ -5,13 +5,12 @@ import { validate } from "../../validation/ValidateAddBuilding";
 
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
 import CardHeader from "@mui/material/CardHeader";
 import IconButton from "@mui/material/IconButton";
 import Logger from "../../logger/logger";
 import { capitalizeFirstLetter } from "../../validation/ValidationUtilities";
 import AlertBox from "../common/AlertBox";
+import { CommonContentContainer } from "../common/CommonContainers";
 import ConfirmationDialog from "../common/ConfirmationDialog";
 import AddBuildingForm from "./AddBuildingForm";
 import BuildingTemplate from "./BuildingTemplate";
@@ -103,35 +102,33 @@ export default function AddBuildingContainer({ getAllBuildings }) {
         submit={addBuilding}
         submitValues={formik.values}
       />
-      <Card variant="outlined">
-        <CardContent>
-          <CardHeader
-            title="Add Building"
-            onClick={() => setIsCardExpanded(!isCardExpanded)}
-            variant="pageHeader"
-            action={
-              <IconButton
-                onClick={() => setIsCardExpanded(!isCardExpanded)}
-                aria-expanded={isCardExpanded}
-                aria-label="expand/collapse"
-              >
-                {isCardExpanded ? <ExpandLessIcon /> : <ExpandMoreIcon />}
-              </IconButton>
-            }
-          />
-          {isCardExpanded && (
-            <>
-              <AddBuildingForm
-                formik={formik}
-                submitValues={formik.values}
-                setInitialBuilding={setInitialBuilding}
-              />
-              <ImportBuildingContainer getAllBuildings={getAllBuildings} />
-              <BuildingTemplate />
-            </>
-          )}
-        </CardContent>
-      </Card>
+      <CommonContentContainer>
+        <CardHeader
+          title="Add Building"
+          onClick={() => setIsCardExpanded(!isCardExpanded)}
+          variant="pageHeader"
+          action={
+            <IconButton
+              onClick={() => setIsCardExpanded(!isCardExpanded)}
+              aria-expanded={isCardExpanded}
+              aria-label="expand/collapse"
+            >
+              {isCardExpanded ? <ExpandLessIcon /> : <ExpandMoreIcon />}
+            </IconButton>
+          }
+        />
+        {isCardExpanded && (
+          <>
+            <AddBuildingForm
+              formik={formik}
+              submitValues={formik.values}
+              setInitialBuilding={setInitialBuilding}
+            />
+            <ImportBuildingContainer getAllBuildings={getAllBuildings} />
+            <BuildingTemplate />
+          </>
+        )}
+      </CommonContentContainer>
     </>
   );
 }

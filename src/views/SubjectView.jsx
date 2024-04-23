@@ -10,12 +10,12 @@ import dao from "../ajax/dao";
 import { useRoleLoggedIn } from "../hooks/useRoleLoggedIn";
 import Logger from "../logger/logger";
 
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
 import CardHeader from "@mui/material/CardHeader";
-import Container from "@mui/material/Container";
-import Grid from "@mui/material/Grid";
 import AlertBox from "../components/common/AlertBox";
+import {
+  CommonContainer,
+  CommonContentContainer,
+} from "../components/common/CommonContainers";
 import AddSubjectContainer from "../components/subject/AddSubjectContainer";
 import SubjectFiltering from "../components/subject/SubjectFiltering";
 import SubjectListContainer from "../components/subject/SubjectListContainer";
@@ -170,43 +170,39 @@ export default function SubjectView() {
         alertOptions={alertOptions}
         setAlertOpen={setAlertOpen}
       />
-      <Container maxWidth="100%">
+      <CommonContainer>
         {(roles.admin === "1" || roles.planner === "1") && (
           <AddSubjectContainer
             getAllSubjects={getAllSubjects}
             allSubjectsList={allSubjectsList}
           />
         )}
-        <Grid container rowSpacing={2}>
-          <Card variant="outlined">
-            <CardContent>
-              <CardHeader
-                title={
-                  <>
-                    Lessons in allocation -
-                    <span className="allocRoundHeader">
-                      {` ${allocRoundContext.allocRoundId} : ${allocRoundContext.allocRoundName}`}
-                    </span>
-                  </>
-                }
-                variant="pageHeader"
-              />
-              <SubjectListContainer
-                shownSubject={shownSubject}
-                setShownSubject={setShownSubject2}
-                getAllSubjects={getAllSubjects}
-                allSubjectsList={allSubjectsList}
-                paginateSubjects={paginateSubjects}
-                setPaginateSubjects={setPaginateSubjects}
-                pageSize={pageSize}
-                open={open}
-                setOpen={setOpen}
-                userPrograms={userPrograms}
-              />
-            </CardContent>
-          </Card>
-        </Grid>
-      </Container>
+        <CommonContentContainer>
+          <CardHeader
+            title={
+              <>
+                Lessons in allocation -
+                <span className="allocRoundHeader">
+                  {` ${allocRoundContext.allocRoundId} : ${allocRoundContext.allocRoundName}`}
+                </span>
+              </>
+            }
+            variant="pageHeader"
+          />
+          <SubjectListContainer
+            shownSubject={shownSubject}
+            setShownSubject={setShownSubject2}
+            getAllSubjects={getAllSubjects}
+            allSubjectsList={allSubjectsList}
+            paginateSubjects={paginateSubjects}
+            setPaginateSubjects={setPaginateSubjects}
+            pageSize={pageSize}
+            open={open}
+            setOpen={setOpen}
+            userPrograms={userPrograms}
+          />
+        </CommonContentContainer>
+      </CommonContainer>
     </div>
   );
 }

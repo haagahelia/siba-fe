@@ -17,6 +17,7 @@ import CardContent from "@mui/material/CardContent";
 import CardHeader from "@mui/material/CardHeader";
 import IconButton from "@mui/material/IconButton";
 import AlertBox from "../common/AlertBox";
+import { CommonContentContainer } from "../common/CommonContainers";
 import ConfirmationDialog from "../common/ConfirmationDialog";
 import AddSubjectForm from "./AddSubjectForm";
 import ImportSubjectContainer from "./ImportSubjectContainer";
@@ -201,48 +202,46 @@ export default function AddSubjectContainer({
         submit={addSubject}
         submitValues={formik.values}
       />
-      <Card variant="outlined">
-        <CardContent>
-          <CardHeader
-            title={
-              <>
-                Add Lesson to allocation -
-                <span className="allocRoundHeader">
-                  {` ${allocRoundContext.allocRoundId} : ${allocRoundContext.allocRoundName}`}
-                </span>
-              </>
-            }
-            variant="pageHeader"
-            action={
-              <IconButton
-                onClick={() => setIsCardExpanded(!isCardExpanded)}
-                aria-expanded={isCardExpanded}
-                aria-label="expand/collapse"
-              >
-                {isCardExpanded ? <ExpandLessIcon /> : <ExpandMoreIcon />}
-              </IconButton>
-            }
-          />
-          {isCardExpanded && (
+      <CommonContentContainer>
+        <CardHeader
+          title={
             <>
-              {/* The extra program selection dropdown has been removed */}
-              <AddSubjectForm
-                handleChange={handleChange}
-                programSelectList={programSelectList}
-                formik={formik}
-                submitValues={formik.values}
-                setInitialSubject={setInitialSubject}
-                spaceTypeSelectList={spaceTypeSelectList}
-              />
-              <ImportSubjectContainer
-                getAllSubjects={getAllSubjects}
-                spaceTypeSelectList={spaceTypeSelectList}
-              />
-              <SubjectTemplate />
+              Add Lesson to allocation -
+              <span className="allocRoundHeader">
+                {` ${allocRoundContext.allocRoundId} : ${allocRoundContext.allocRoundName}`}
+              </span>
             </>
-          )}
-        </CardContent>
-      </Card>
+          }
+          variant="pageHeader"
+          action={
+            <IconButton
+              onClick={() => setIsCardExpanded(!isCardExpanded)}
+              aria-expanded={isCardExpanded}
+              aria-label="expand/collapse"
+            >
+              {isCardExpanded ? <ExpandLessIcon /> : <ExpandMoreIcon />}
+            </IconButton>
+          }
+        />
+        {isCardExpanded && (
+          <>
+            {/* The extra program selection dropdown has been removed */}
+            <AddSubjectForm
+              handleChange={handleChange}
+              programSelectList={programSelectList}
+              formik={formik}
+              submitValues={formik.values}
+              setInitialSubject={setInitialSubject}
+              spaceTypeSelectList={spaceTypeSelectList}
+            />
+            <ImportSubjectContainer
+              getAllSubjects={getAllSubjects}
+              spaceTypeSelectList={spaceTypeSelectList}
+            />
+            <SubjectTemplate />
+          </>
+        )}
+      </CommonContentContainer>
     </div>
   );
 }
