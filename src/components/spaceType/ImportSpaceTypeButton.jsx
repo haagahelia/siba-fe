@@ -24,7 +24,8 @@ export default function ImportSpaceTypeButton({
   const processSpaceType = async (spaceType, spaceTypeSet) => {
     const newSpaceType = {
       name: spaceType.name ? capitalizeFirstLetter(spaceType.name) : "",
-      acronym: spaceType.acronym ? toUpperCase(spaceType.acronym) : "",
+      // to upper case add---
+      acronym: spaceType.acronym ? spaceType.acronym.toUpperCase() : "",
       description: spaceType.description ? spaceType.description : "",
     };
 
@@ -46,7 +47,6 @@ export default function ImportSpaceTypeButton({
       validateResult.name ||
       validateResult.acronym ||
       validateResult.description;
-
     return spaceType.FailedReason ? spaceType : newSpaceType;
   };
 
