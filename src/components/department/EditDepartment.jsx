@@ -10,6 +10,7 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
+import Tooltip from "@mui/material/Tooltip";
 import Logger from "../../logger/logger";
 import { capitalizeFirstLetter } from "../../validation/ValidationUtilities";
 import AlertBox from "../common/AlertBox";
@@ -170,15 +171,25 @@ export default function EditDepartment({
             >
               Cancel
             </Button>
-            <Button
-              type="submit"
-              variant="contained"
-              onClick={() => {
-                setEditOpen(false);
-              }}
+            <Tooltip
+              title={
+                formik.dirty ? "" : "Please change values to enable submit"
+              }
+              placement="top"
             >
-              Submit
-            </Button>
+              <span>
+                <Button
+                  type="submit"
+                  variant="contained"
+                  disabled={!formik.dirty}
+                  onClick={() => {
+                    setEditOpen(false);
+                  }}
+                >
+                  Submit
+                </Button>
+              </span>
+            </Tooltip>
           </DialogActions>
         </form>
       </Dialog>

@@ -21,6 +21,13 @@ export const postNewUser = async (newUser: User): Promise<boolean> => {
   return response.ok;
 };
 
+// create new multi users
+export const addNewUsers = async (newUser: []): Promise<boolean> => {
+  const response = await create(`${baseUrl}/user/multi`, newUser);
+  return response.ok;
+};
+
+// ---------
 export const loginUser = async (
   user: User,
 ): Promise<ResponseFiner<UserLoggedIn>> => {

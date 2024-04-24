@@ -1,6 +1,3 @@
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
-import Grid from "@mui/material/Grid";
 import UserList from "./UserList";
 
 export default function UserListContainer({
@@ -10,17 +7,11 @@ export default function UserListContainer({
 }) {
   return (
     <div>
-      <Grid container rowSpacing={1}>
-        <Card variant="outlined">
-          <CardContent>
-            <UserList
-              getAllUsers={getAllUsers}
-              allUsersList={allUsersList}
-              paginateUsers={paginateUsers}
-            />
-          </CardContent>
-        </Card>
-      </Grid>
+      <UserList
+        getAllUsers={getAllUsers}
+        allUsersList={allUsersList}
+        paginateUsers={paginateUsers}
+      />
     </div>
   );
 }

@@ -1,7 +1,5 @@
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
 import CardHeader from "@mui/material/CardHeader";
 import IconButton from "@mui/material/IconButton";
 import { useFormik } from "formik";
@@ -9,6 +7,7 @@ import { useState } from "react";
 import dao from "../../ajax/dao";
 import { validate } from "../../validation/ValidateAddEditSetting";
 import AlertBox from "../common/AlertBox";
+import { CommonContentContainer } from "../common/CommonContainers";
 import ConfirmationDialog from "../common/ConfirmationDialog";
 import AddSettingForm from "./AddSettingForm";
 
@@ -111,31 +110,29 @@ export default function AddSettingContainer({ getAllSettings }) {
         submit={addSetting}
         submitValues={formik.values}
       />
-      <Card variant="outlined">
-        <CardContent>
-          <CardHeader
-            title="Add Setting"
-            onClick={() => setIsCardExpanded(!isCardExpanded)}
-            variant="pageHeader"
-            action={
-              <IconButton
-                onClick={() => setIsCardExpanded(!isCardExpanded)}
-                aria-expanded={isCardExpanded}
-                aria-label="expand/collapse"
-              >
-                {isCardExpanded ? <ExpandLessIcon /> : <ExpandMoreIcon />}
-              </IconButton>
-            }
+      <CommonContentContainer>
+        <CardHeader
+          title="Add Setting"
+          onClick={() => setIsCardExpanded(!isCardExpanded)}
+          variant="pageHeader"
+          action={
+            <IconButton
+              onClick={() => setIsCardExpanded(!isCardExpanded)}
+              aria-expanded={isCardExpanded}
+              aria-label="expand/collapse"
+            >
+              {isCardExpanded ? <ExpandLessIcon /> : <ExpandMoreIcon />}
+            </IconButton>
+          }
+        />
+        {isCardExpanded && (
+          <AddSettingForm
+            formik={formik}
+            submitValues={formik.values}
+            setInitialSetting={setInitialSetting}
           />
-          {isCardExpanded && (
-            <AddSettingForm
-              formik={formik}
-              submitValues={formik.values}
-              setInitialSetting={setInitialSetting}
-            />
-          )}
-        </CardContent>
-      </Card>
+        )}
+      </CommonContentContainer>
     </>
   );
 }

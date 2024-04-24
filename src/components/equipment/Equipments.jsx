@@ -14,6 +14,10 @@ import CardHeader from "@mui/material/CardHeader";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import { AppContext } from "../../AppContext";
+import {
+  CommonContainer,
+  CommonContentContainer,
+} from "../common/CommonContainers";
 import AddEquipment from "./AddEquipment";
 import EquipmentListContainer from "./EquipmentListContainer";
 
@@ -68,28 +72,24 @@ export default function Equipments() {
 
   return (
     <div>
-      <Container maxWidth="100%">
+      <CommonContainer>
         {roles.admin === "1" && (
           <AddEquipment getAllEquipments={getAllEquipments} />
         )}
-        <Grid container rowSpacing={0.5}>
-          <Card variant="outlined">
-            <CardContent>
-              <CardHeader title="Equipment" variant="pageHeader" />
-              <EquipmentListContainer
-                getAllEquipments={getAllEquipments}
-                equipmentList={equipmentList}
-                paginateEquipment={paginateEquipment}
-                setPaginateEquipment={setPaginateEquipment}
-                pagination={pagination}
-                setPagination={setPagination}
-                totalCount={totalCount}
-                rowsPerPage={rowsPerPage}
-              />
-            </CardContent>
-          </Card>
-        </Grid>
-      </Container>
+        <CommonContentContainer>
+          <CardHeader title="Equipment" variant="pageHeader" />
+          <EquipmentListContainer
+            getAllEquipments={getAllEquipments}
+            equipmentList={equipmentList}
+            paginateEquipment={paginateEquipment}
+            setPaginateEquipment={setPaginateEquipment}
+            pagination={pagination}
+            setPagination={setPagination}
+            totalCount={totalCount}
+            rowsPerPage={rowsPerPage}
+          />
+        </CommonContentContainer>
+      </CommonContainer>
     </div>
   );
 }

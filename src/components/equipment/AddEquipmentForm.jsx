@@ -12,7 +12,7 @@ export default function AddEquipmentForm({
       <Grid container spacing={2}>
         <AddEquipmentInputFields formik={formik} />
       </Grid>
-      <Grid item xs={3} padding={2}>
+      <Grid item xs={12} padding={2}>
         <Button
           type="submit"
           variant="addComponentFormButton"

@@ -70,7 +70,7 @@ export default function EditBuildingForm({ formik }) {
               Cancel
             </Button>
             <Button type="submit" variant="contained" onClick={handleSubmit}>
-              Continue
+              Submit
             </Button>
           </DialogActions>
         </form>

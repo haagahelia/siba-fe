@@ -36,6 +36,7 @@ export default function SubjectList({
     from: 0,
     to: pageSize,
   });
+  const [searchToBeHandled, setSearchToBeHandled] = useState(false);
 
   useEffect(() => {
     const sortAndPaginateSubjects = () => {
@@ -113,16 +114,26 @@ export default function SubjectList({
     const searchText = e.target.value;
     setSearched(searchText);
     setPagination({ from: 0, to: pageSize });
-    if (searchText === "") {
-      setCurrentPage(1);
-    }
+    setSearchToBeHandled(true);
+    setCurrentPage(1);
   };
 
   const handleChangePage = (e, p) => {
     const from = (p - 1) * pageSize;
     const to = (p - 1) * pageSize + pageSize;
     setPagination({ from, to });
-    setCurrentPage(p);
+
+    if (searchToBeHandled) {
+      setSearchToBeHandled(false);
+      setCurrentPage(p);
+    } else {
+      setCurrentPage(p);
+    }
+  };
+
+  const cancelSearch = () => {
+    setSearched("");
+    setCurrentPage(1);
   };
 
   // STYLE
@@ -130,6 +141,7 @@ export default function SubjectList({
     overflow: "auto",
     borderCollapse: "collapse",
   }));
+
   return (
     <div>
       <TextField
@@ -144,10 +156,7 @@ export default function SubjectList({
           endAdornment: (
             <InputAdornment position="end">
               <IconButton
-                onClick={() => {
-                  setSearched("");
-                  setCurrentPage(1);
-                }}
+                onClick={cancelSearch}
                 sx={{ visibility: searched ? "visible" : "hidden" }}
               >
                 <ClearIcon />

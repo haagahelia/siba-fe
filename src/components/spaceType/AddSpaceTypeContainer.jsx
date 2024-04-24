@@ -12,6 +12,7 @@ import IconButton from "@mui/material/IconButton";
 import Logger from "../../logger/logger";
 import { capitalizeFirstLetter } from "../../validation/ValidationUtilities";
 import AlertBox from "../common/AlertBox";
+import { CommonContentContainer } from "../common/CommonContainers";
 import ConfirmationDialog from "../common/ConfirmationDialog";
 import AddSpaceTypeForm from "./AddSpaceTypeForm";
 import ImportSpaceTypeContainer from "./ImportSpaceTypeContainer";
@@ -105,35 +106,33 @@ export default function AddSpaceTypeContainer({ getAllSpaceTypes }) {
         submit={addSpaceType}
         submitValues={formik.values}
       />
-      <Card variant="outlined">
-        <CardContent>
-          <CardHeader
-            title="Add Space Type"
-            onClick={() => setIsCardExpanded(!isCardExpanded)}
-            variant="pageHeader"
-            action={
-              <IconButton
-                onClick={() => setIsCardExpanded(!isCardExpanded)}
-                aria-expanded={isCardExpanded}
-                aria-label="expand/collapse"
-              >
-                {isCardExpanded ? <ExpandLessIcon /> : <ExpandMoreIcon />}
-              </IconButton>
-            }
-          />
-          {isCardExpanded && (
-            <>
-              <AddSpaceTypeForm
-                formik={formik}
-                submitValues={formik.values}
-                setInitialSpaceType={setInitialSpaceType}
-              />
-              <ImportSpaceTypeContainer getAllSpaceTypes={getAllSpaceTypes} />
-              <SpaceTypeTemplate />
-            </>
-          )}
-        </CardContent>
-      </Card>
+      <CommonContentContainer>
+        <CardHeader
+          title="Add Space Type"
+          onClick={() => setIsCardExpanded(!isCardExpanded)}
+          variant="pageHeader"
+          action={
+            <IconButton
+              onClick={() => setIsCardExpanded(!isCardExpanded)}
+              aria-expanded={isCardExpanded}
+              aria-label="expand/collapse"
+            >
+              {isCardExpanded ? <ExpandLessIcon /> : <ExpandMoreIcon />}
+            </IconButton>
+          }
+        />
+        {isCardExpanded && (
+          <>
+            <AddSpaceTypeForm
+              formik={formik}
+              submitValues={formik.values}
+              setInitialSpaceType={setInitialSpaceType}
+            />
+            <ImportSpaceTypeContainer getAllSpaceTypes={getAllSpaceTypes} />
+            <SpaceTypeTemplate />
+          </>
+        )}
+      </CommonContentContainer>
     </>
   );
 }

@@ -37,7 +37,7 @@ export default function EditSpaceContainer({
     onSubmit: (values) => {
       setDialogOptions({
         title: `Are you sure you want to edit ${values.name}?`,
-        content: `Press continue to save ${values.name}'s new information. `,
+        content: `Press continue to save ${values.name} new information. `,
       });
       setDialogOpen(true);
       return;

@@ -1,23 +1,22 @@
+import CardHeader from "@mui/material/CardHeader";
 // The Settings Page
 import { useContext, useEffect, useState } from "react";
+import { AppContext } from "../AppContext";
 import {
   ajaxRequestErrorHandler,
   getFunctionName,
 } from "../ajax/ajaxRequestErrorHandler";
 import dao from "../ajax/dao";
-import { useRoleLoggedIn } from "../hooks/useRoleLoggedIn";
-import Logger from "../logger/logger";
-
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
-import CardHeader from "@mui/material/CardHeader";
-import Container from "@mui/material/Container";
-import Grid from "@mui/material/Grid";
-import { AppContext } from "../AppContext";
 import AlertBox from "../components/common/AlertBox";
+import {
+  CommonContainer,
+  CommonContentContainer,
+} from "../components/common/CommonContainers";
 import AddSettingContainer from "../components/settings/AddSettingContainer";
 import SettingsListContainer from "../components/settings/SettingsListContainer";
 import SettingsPagination from "../components/settings/SettingsPagination";
+import { useRoleLoggedIn } from "../hooks/useRoleLoggedIn";
+import Logger from "../logger/logger";
 import { handleSettings } from "../setting/handleSettings";
 
 export default function SettingsView() {
@@ -90,40 +89,36 @@ export default function SettingsView() {
         alertOptions={alertOptions}
         setAlertOpen={setAlertOpen}
       />
-      <Container maxWidth="100%">
+      <CommonContainer>
         {roles.admin === "1" && (
           <AddSettingContainer getAllSettings={getAllSettings} />
         )}
-        <Grid container rowSpacing={0.5}>
-          <Card variant="outlined">
-            <CardContent>
-              <CardHeader
-                title="Settings"
-                onClick={() => setIsCardExpanded(!isCardExpanded)}
-                variant="pageHeader"
+        <CommonContentContainer>
+          <CardHeader
+            title="Settings"
+            onClick={() => setIsCardExpanded(!isCardExpanded)}
+            variant="pageHeader"
+          />
+          {isCardExpanded && (
+            <>
+              <SettingsListContainer
+                getAllSettings={getAllSettings}
+                incrementDataModifiedCounter={incrementDataModifiedCounter}
+                allSettings={settings}
+                paginateSettings={paginateSettings}
               />
-              {isCardExpanded && (
-                <>
-                  <SettingsListContainer
-                    getAllSettings={getAllSettings}
-                    incrementDataModifiedCounter={incrementDataModifiedCounter}
-                    allSettings={settings}
-                    paginateSettings={paginateSettings}
-                  />
-                  <SettingsPagination
-                    pagination={pagination}
-                    setPagination={setPagination}
-                    allSettingsList={settings}
-                    paginateSettings={paginateSettings}
-                    setPaginateSettings={setPaginateSettings}
-                    pageSize={pageSize}
-                  />
-                </>
-              )}
-            </CardContent>
-          </Card>
-        </Grid>
-      </Container>
+              <SettingsPagination
+                pagination={pagination}
+                setPagination={setPagination}
+                allSettingsList={settings}
+                paginateSettings={paginateSettings}
+                setPaginateSettings={setPaginateSettings}
+                pageSize={pageSize}
+              />
+            </>
+          )}
+        </CommonContentContainer>
+      </CommonContainer>
     </div>
   );
 }

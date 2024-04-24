@@ -1,8 +1,5 @@
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import { Typography } from "@mui/material";
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
 import CardHeader from "@mui/material/CardHeader";
 import IconButton from "@mui/material/IconButton";
 import { useFormik } from "formik";
@@ -19,6 +16,7 @@ import Logger from "../../logger/logger";
 import { validate } from "../../validation/ValidateAddProgram";
 import { capitalizeFirstLetter } from "../../validation/ValidationUtilities";
 import AlertBox from "../common/AlertBox";
+import { CommonContentContainer } from "../common/CommonContainers";
 import ConfirmationDialog from "../common/ConfirmationDialog";
 import AddProgramForm from "./AddProgramForm";
 import ImportProgramContainer from "./ImportProgramContainer";
@@ -172,40 +170,38 @@ export default function AddProgramContainer({
         submit={addProgram}
         submitValues={formik.values}
       />
-      <Card variant="outlined">
-        <CardContent>
-          <CardHeader
-            title="Add Program"
-            variant="pageHeader"
-            action={
-              <IconButton
-                onClick={() => setIsCardExpanded(!isCardExpanded)}
-                aria-expanded={isCardExpanded}
-                aria-label="expand/collapse"
-              >
-                {isCardExpanded ? <ExpandLessIcon /> : <ExpandMoreIcon />}
-              </IconButton>
-            }
-          />
-          {isCardExpanded && (
-            <>
-              <AddProgramForm
-                handleChange={handleChange}
-                formik={formik}
-                submitValues={formik.values}
-                setInitialProgram={setInitialProgram}
-                allProgramsList={allProgramsList}
-                departmentSelectList={departmentSelectList}
-              />
-              <ImportProgramContainer
-                getAllPrograms={getAllPrograms}
-                departmentSelectList={departmentSelectList}
-              />
-              <ProgramTemplate />
-            </>
-          )}
-        </CardContent>
-      </Card>
+      <CommonContentContainer>
+        <CardHeader
+          title="Add Program"
+          variant="pageHeader"
+          action={
+            <IconButton
+              onClick={() => setIsCardExpanded(!isCardExpanded)}
+              aria-expanded={isCardExpanded}
+              aria-label="expand/collapse"
+            >
+              {isCardExpanded ? <ExpandLessIcon /> : <ExpandMoreIcon />}
+            </IconButton>
+          }
+        />
+        {isCardExpanded && (
+          <>
+            <AddProgramForm
+              handleChange={handleChange}
+              formik={formik}
+              submitValues={formik.values}
+              setInitialProgram={setInitialProgram}
+              allProgramsList={allProgramsList}
+              departmentSelectList={departmentSelectList}
+            />
+            <ImportProgramContainer
+              getAllPrograms={getAllPrograms}
+              departmentSelectList={departmentSelectList}
+            />
+            <ProgramTemplate />
+          </>
+        )}
+      </CommonContentContainer>
     </div>
   );
 }

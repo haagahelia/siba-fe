@@ -16,6 +16,10 @@ import CardHeader from "@mui/material/CardHeader";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import AlertBox from "../components/common/AlertBox";
+import {
+  CommonContainer,
+  CommonContentContainer,
+} from "../components/common/CommonContainers";
 import AddSpace from "../components/space/AddSpace";
 import SpaceListContainer from "../components/space/SpaceListContainer";
 
@@ -116,28 +120,24 @@ export default function SpaceView() {
         alertOptions={alertOptions}
         setAlertOpen={setAlertOpen}
       />
-      <Container maxWidth="xl">
+      <CommonContainer>
         {roles.admin === "1" && (
           <AddSpace getAllSpaces={getAllSpaces} allSpacesList={allSpacesList} />
         )}
-        <Grid container rowSpacing={1}>
-          <Card variant="outlined">
-            <CardHeader title="Spaces" variant="pageHeader" />
-            <CardContent>
-              <SpaceListContainer
-                shownSpace={shownSpace}
-                setShownSpace={setShownSpace}
-                getAllSpaces={getAllSpaces}
-                allSpacesList={allSpacesList}
-                paginateSpaces={paginateSpaces}
-                setPaginateSpaces={setPaginateSpaces}
-                open={open}
-                setOpen={setOpen}
-              />
-            </CardContent>
-          </Card>
-        </Grid>
-      </Container>
+        <CommonContentContainer>
+          <CardHeader title="Spaces" variant="pageHeader" />
+          <SpaceListContainer
+            shownSpace={shownSpace}
+            setShownSpace={setShownSpace}
+            getAllSpaces={getAllSpaces}
+            allSpacesList={allSpacesList}
+            paginateSpaces={paginateSpaces}
+            setPaginateSpaces={setPaginateSpaces}
+            open={open}
+            setOpen={setOpen}
+          />
+        </CommonContentContainer>
+      </CommonContainer>
     </div>
   );
 }

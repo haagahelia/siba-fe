@@ -1,5 +1,3 @@
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
 import CardHeader from "@mui/material/CardHeader";
 import { useFormik } from "formik";
 import React, { useState } from "react";
@@ -9,6 +7,7 @@ import AlertBox from "../common/AlertBox";
 import ConfirmationDialog from "../common/ConfirmationDialog";
 
 import { capitalizeFirstLetter } from "../../validation/ValidationUtilities";
+import { CommonContentContainer } from "../common/CommonContainers";
 import AddAllocRoundForm from "./AddAllocRoundForm";
 
 export const AddEmptyAllocRound = ({ allAllocRoundsList }) => {
@@ -54,7 +53,7 @@ export const AddEmptyAllocRound = ({ allAllocRoundsList }) => {
     },
   });
 
-  const resetFormm = () => {
+  const resetForm = () => {
     setInitialAllocRound({
       name: "",
       description: "",
@@ -84,7 +83,7 @@ export const AddEmptyAllocRound = ({ allAllocRoundsList }) => {
       message: `${submitValues.name} added successfully.`,
     });
     setAlertOpen(true);
-    resetFormm();
+    resetForm();
     // getAllAllocRounds();
   };
   return (
@@ -101,18 +100,16 @@ export const AddEmptyAllocRound = ({ allAllocRoundsList }) => {
         submit={addAllocRound}
         submitValues={formik.values}
       />
-      <Card variant="outlined">
-        <CardContent>
-          <CardHeader title="Add a new empty allocation round ..." />
-          <AddAllocRoundForm
-            handleChange={handleChange}
-            formik={formik}
-            submitValues={formik.values}
-            setInitialAllocRound={setInitialAllocRound}
-            allAllocRoundsList={allAllocRoundsList}
-          />
-        </CardContent>
-      </Card>
+      <CommonContentContainer>
+        <CardHeader title="Add a new empty allocation round ..." />
+        <AddAllocRoundForm
+          handleChange={handleChange}
+          formik={formik}
+          submitValues={formik.values}
+          setInitialAllocRound={setInitialAllocRound}
+          allAllocRoundsList={allAllocRoundsList}
+        />
+      </CommonContentContainer>
     </>
   );
 };
