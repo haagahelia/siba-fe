@@ -50,6 +50,7 @@ export default function RoomsWithTimesList({ rooms }) {
                 to={`/space/${room.id}`}
               >{`${room.name}`}</Link>
             </Grid2>
+
             <Grid2 xs={3} key={`${room.id}-b`}>
               <ProgressBar
                 labelAlignment="left"

@@ -18,10 +18,11 @@ export default function DeleteSpace({ singleSpace, getAllSpaces, setOpen }) {
     content: "Something here",
   });
   const [deleteSpaceData, setDeleteSpaceData] = useState(null);
-  const [allocspcaeCount, setAllocspaceCount] = useState(0);
+  const [allocspaceCount, setAllocspaceCount] = useState(0);
   const [hasAssociatedAllocations, setHasAssociatedAllocations] =
     useState(false);
-  const [firstFiveAllocNames, setFirstFiveAllocNames] = useState([]);
+  const [allocRoundsAssociatedWithSpace, setallocRoundsAssociatedWithSpace] =
+    useState([]);
 
   // fetch no. of allocations associated with the space
 
@@ -31,7 +32,7 @@ export default function DeleteSpace({ singleSpace, getAllSpaces, setOpen }) {
       return "Error fetching number of allocations";
     }
     const allocCount = response.data[0];
-    const count = allocCount["count(`allocRoundId`)"];
+    const count = allocCount.count; /*  ["count(`allocRoundId`)"]  ["count"] */
     setAllocspaceCount(count);
     setHasAssociatedAllocations(count > 0);
     return count;
@@ -52,8 +53,10 @@ export default function DeleteSpace({ singleSpace, getAllSpaces, setOpen }) {
   }, [singleSpace]);
 
   // fetches fisrt five allocation names associated with the space by id
-  const getFirstFiveAllocNames = async () => {
-    const response = await dao.fetchFirstFiveAllocNames(singleSpace.id);
+  const getallocRoundsAssociatedWithSpace = async () => {
+    const response = await dao.fetchAllocRoundsAssociatedWithSpace(
+      singleSpace.id,
+    );
     if (response.httpStatus !== 200) {
       return "Error fetching first five allocation names";
     }
@@ -66,9 +69,9 @@ export default function DeleteSpace({ singleSpace, getAllSpaces, setOpen }) {
       Logger.debug(
         `Rendering SingleSpaceDialog for space: ${JSON.stringify(singleSpace)}`,
       );
-      getFirstFiveAllocNames(singleSpace.id)
+      getallocRoundsAssociatedWithSpace(singleSpace.id)
         .then((data) => {
-          setFirstFiveAllocNames(data);
+          setallocRoundsAssociatedWithSpace(data);
         })
         .catch((error) => {
           console.error(error);
@@ -136,12 +139,14 @@ export default function DeleteSpace({ singleSpace, getAllSpaces, setOpen }) {
         </Button>
       ) : (
         <Tooltip
-          title={`Associated allocations: ${firstFiveAllocNames.join(", ")}
-         ${allocspcaeCount > 5 ? ", ..." : ""}`}
+          title={`Associated allocations: ${allocRoundsAssociatedWithSpace.join(
+            ", ",
+          )}
+         ${allocspaceCount > 5 ? ", ..." : ""}`}
           placement="top"
         >
           <span>
-            {`This space has associated ${allocspcaeCount} allocations`}
+            {`This space has associated ${allocspaceCount} allocations`}
             <br />
             <Button
               variant="contained"
