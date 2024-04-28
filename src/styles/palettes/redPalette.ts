@@ -109,20 +109,22 @@ export const redPalette: PaletteContract = {
   activeLinkBackgroundColor: {
     main: accentOrange,
   },
+  /*
   AllocRoom: {
     studio: {
-      color: salmonPink,
+      color: indicatorRed,
     },
     luentoluokka: {
-      color: darkOrange,
+      color: indicatorYellowLight,
     },
     esitystila: {
-      color: pumpkinOrange,
+      color: indicatorGreen,
     },
     musiikkiluokka: {
-      color: brightRed,
+      color: indicatorYellowLight,
     },
   },
+  */
   backgroundDarker: { default: softPink },
   borderColor: {
     main: mediumBrown,

@@ -50,7 +50,7 @@ export interface PaletteContract {
 
   // own colors
   activeLinkBackgroundColor: PaletteColor;
-  AllocRoom: Record<string, { color: string }>;
+  /* AllocRoom: Record<string, { color: string }>; */
   backgroundDarker: DefaultColor;
   borderColor: {
     main: string;

@@ -16,11 +16,30 @@ export const getSettings = async () => {
 export const handleSettings = (settings, appContext) => {
   Logger.debug("Handling settings");
 
-  const itemsPerPage = settings.find(
-    (setting) => setting?.variable?.toLowerCase() === "items-per-page",
+  const itemsPerPageVariable = settings.find(
+    (setting) =>
+      setting?.variable?.toLowerCase() === "items-per-page".toLowerCase(),
   );
-  if (itemsPerPage) {
-    appContext.settings.itemsPerPage = itemsPerPage.numberValue;
+  if (itemsPerPageVariable) {
+    appContext.settings.itemsPerPage = itemsPerPageVariable.numberValue;
     Logger.debug("items-per-page setting found");
+  }
+
+  const spaceUnderUsageVariable = settings.find(
+    (setting) =>
+      setting?.variable?.toLowerCase() === "spaceUnderUsage".toLowerCase(),
+  );
+  if (spaceUnderUsageVariable) {
+    appContext.settings.spaceUnderUsage = spaceUnderUsageVariable.numberValue;
+    Logger.debug("spaceUnderUsage setting found");
+  }
+
+  const spaceOverUsageVariable = settings.find(
+    (setting) =>
+      setting?.variable?.toLowerCase() === "spaceOverUsage".toLowerCase(),
+  );
+  if (spaceOverUsageVariable) {
+    appContext.settings.spaceOverUsage = spaceOverUsageVariable.numberValue;
+    Logger.debug("spaceOverUsage setting found");
   }
 };

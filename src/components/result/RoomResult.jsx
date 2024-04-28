@@ -53,26 +53,6 @@ export default function RoomResult() {
       <Typography className="mt6" variant="pageHeader">
         Spaces (Huoneet)
       </Typography>
-      <Box
-        sx={{
-          display: "flex",
-          justifyContent: "flex-start",
-          alignSelf: "flex-end",
-          gap: 2,
-        }}
-      >
-        <div style={theme.components.IndexRooms.luentoluokkaindex} />
-        <Typography variant="roomIndex"> Lecture class </Typography>
-
-        <div style={theme.components.IndexRooms.studioindex} />
-        <Typography variant="roomIndex"> Studio </Typography>
-
-        <div style={theme.components.IndexRooms.esitystilaindex} />
-        <Typography variant="roomIndex"> Performance space </Typography>
-
-        <div style={theme.components.IndexRooms.musiikkiluokkaindex} />
-        <Typography variant="roomIndex"> Music class </Typography>
-      </Box>
 
       <RoomsWithTimesList rooms={rooms} />
     </div>

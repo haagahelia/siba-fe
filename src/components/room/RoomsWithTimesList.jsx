@@ -1,13 +1,17 @@
 import useTheme from "@mui/material/styles/useTheme";
-import { Fragment } from "react";
+import { Fragment, useContext } from "react";
 import { Link } from "react-router-dom";
 
 import Grid from "@mui/material/Grid";
 import ProgressBar from "@ramonak/react-progress-bar";
+import { AppContext } from "../../AppContext";
 import CollapsedRowB from "../result/CollapsedRowB";
 
 export default function RoomsWithTimesList({ rooms }) {
   const theme = useTheme();
+
+  const spaceUnderUsage = useContext(AppContext).settings.spaceUnderUsage;
+  const spaceOverUsage = useContext(AppContext).settings.spaceOverUsage;
 
   return (
     <Grid
@@ -19,12 +23,16 @@ export default function RoomsWithTimesList({ rooms }) {
     >
       {rooms.map((room) => {
         const progress = (room.allocatedHours / room.requiredHours) * 100;
+
         const progressColor =
           progress > 100
             ? theme.palette.progressBarRed.main
-            : progress < 80
+            : progress > spaceOverUsage
               ? theme.palette.progressBarYellow.main
-              : theme.palette.progressBarGreen.main;
+              : progress < spaceUnderUsage
+                ? theme.palette.progressBarYellow.main
+                : theme.palette.progressBarGreen.main;
+
         const progressBarTextColor =
           progress === 0
             ? theme.palette.progressBarTextZero.main
@@ -32,19 +40,7 @@ export default function RoomsWithTimesList({ rooms }) {
 
         return (
           <Fragment key={room.id}>
-            <Grid
-              item
-              xs={6}
-              style={
-                room.spaceTypeId === 5001
-                  ? theme.components.AllocRoom.studio
-                  : room.spaceTypeId === 5002
-                    ? theme.components.AllocRoom.luentoluokka
-                    : room.spaceTypeId === 5003
-                      ? theme.components.AllocRoom.esitystila
-                      : theme.components.AllocRoom.musiikkiluokka
-              }
-            >
+            <Grid item xs={6}>
               <Link style={theme.components.Links} to={`/space/${room.id}`}>
                 {`${room.name}`}
               </Link>
