@@ -423,6 +423,8 @@ export const createAppTheme = (currentPalette) =>
           },
         },
       },
+
+      /*
       AllocRoom: {
         studio: {
           color: currentPalette.AllocRoom.studio.color,
@@ -437,10 +439,14 @@ export const createAppTheme = (currentPalette) =>
           color: currentPalette.AllocRoom.musiikkiluokka.color,
         },
       },
+      */
+
       RoomResultsContainer: {
         margin: margins.auto,
         width: "80%",
       },
+
+      /*
       IndexRooms: {
         studioindex: {
           ...indexRoomCommon,
@@ -463,6 +469,9 @@ export const createAppTheme = (currentPalette) =>
           borderColor: currentPalette.borderColorDark.main,
         },
       },
+
+      */
+
       Links: {
         textDecoration: "none",
         color: currentPalette.fontColorDefault.default,

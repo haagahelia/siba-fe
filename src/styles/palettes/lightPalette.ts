@@ -82,20 +82,22 @@ export const lightPalette: PaletteContract = {
   activeLinkBackgroundColor: {
     main: accentOrange,
   },
+  /*
   AllocRoom: {
     studio: {
       color: indicatorRed,
     },
     luentoluokka: {
-      color: indicatorYellowDark,
+      color: indicatorYellowLight,
     },
     esitystila: {
       color: indicatorGreen,
     },
     musiikkiluokka: {
-      color: indicatorYellowDark,
+      color: indicatorYellowLight,
     },
   },
+  */
   backgroundDarker: { default: white }, // Changed to use darkGrey
   borderColor: {
     main: lightGrey,

@@ -105,20 +105,22 @@ export const yellowPalette: PaletteContract = {
   activeLinkBackgroundColor: {
     main: accentOrange,
   },
+  /*
   AllocRoom: {
     studio: {
-      color: paleLime,
+      color: indicatorRed,
     },
     luentoluokka: {
-      color: saffronMango,
+      color: indicatorYellowLight,
     },
     esitystila: {
-      color: tangerineYellow,
+      color: indicatorGreen,
     },
     musiikkiluokka: {
-      color: buddhaGold,
+      color: indicatorYellowLight,
     },
   },
+  */
   backgroundDarker: { default: eggWhite },
   borderColor: {
     main: mediumBrown,

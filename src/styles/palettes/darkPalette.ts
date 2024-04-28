@@ -82,6 +82,8 @@ export const darkPalette: PaletteContract = {
   activeLinkBackgroundColor: {
     main: accentOrange,
   },
+
+  /*
   AllocRoom: {
     studio: {
       color: indicatorRed,
@@ -96,6 +98,8 @@ export const darkPalette: PaletteContract = {
       color: indicatorYellowLight,
     },
   },
+  */
+
   backgroundDarker: {
     default: mediumGrey,
   },

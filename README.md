@@ -167,7 +167,7 @@ Frontend side installation instructions
 
 7. In the Room section, the user can open the room-specific dropdown lists, where you can see what classes are in the rooms and how many hours they are used
 
-8. The rooms are separated by color code, by class type. E.g. Studio, Performance spaces, Lecture classes and music classes
+8. The spaces are separated by space type. E.g. Studio, Performance spaces, Lecture classes and music classes
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
