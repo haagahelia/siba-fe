@@ -9,7 +9,8 @@
     "host": "vite --host",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "precommit": "sh ./pre-commit"
+    "precommit": "sh ./pre-commit",
+    "test-selenium": "node tests/crudlTest.cjs"
   },
   "pre-commit": [
     "precommit"
