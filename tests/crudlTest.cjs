@@ -3,12 +3,14 @@ const { Builder, By, until, Browser } = require("selenium-webdriver");
 require("dotenv").config();
 
 (async function example() {
-  const baseUrl = `http://localhost:${process.env.PORT}`;
   const driver = await new Builder().forBrowser(Browser.FIREFOX).build();
+  const baseUrl = `http://localhost:${process.env.PORT}`;
+  const timeoutMilliseconds = 10000;
+
   try {
     await driver.get(`${baseUrl}/login`);
     const title = await driver.getTitle();
-    await driver.manage().setTimeouts({ implicit: 500 });
+    await driver.manage().setTimeouts({ implicit: timeoutMilliseconds });
 
     // Login
     const loginEmail = await driver.findElement(By.id("loginEmail"));
@@ -20,13 +22,13 @@ require("dotenv").config();
     const submitButton = await driver.findElement(By.id("loginButton"));
     await submitButton.click();
 
-    await driver.wait(until.urlIs(`${baseUrl}/subject`), 5000);
+    await driver.wait(until.urlIs(`${baseUrl}/department`), timeoutMilliseconds);
 
-    //test login
+    // Test login
     const currentUrl = await driver.getCurrentUrl();
     assert.equal(
       currentUrl,
-      `${baseUrl}/subject`,
+      `${baseUrl}/department`,
       "URL is as expected",
     );
 
@@ -37,7 +39,12 @@ require("dotenv").config();
     const logOut = await driver.findElement(By.linkText("Log Out"));
     await logOut.click();
 
-    //Test log out
+    const logOutContinue = await driver.findElement(By.id("confirmation-dialog-continue-button"));
+    await logOutContinue.click();
+
+    await driver.wait(until.urlIs(`${baseUrl}/login`), timeoutMilliseconds);
+
+    // Test log out
     const currentLogOutUrl = await driver.getCurrentUrl();
     assert.equal(
       currentLogOutUrl,

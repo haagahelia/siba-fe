@@ -27,6 +27,7 @@
     "@mui/material": "^5.14.18",
     "@ramonak/react-progress-bar": "^5.0.3",
     "axios": "^1.6.2",
+    "dotenv": "^16.4.5",
     "esbuild": "^0.19.6",
     "exceljs": "^4.4.0",
     "file-saver": "^2.0.5",
