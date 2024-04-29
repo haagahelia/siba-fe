@@ -4,6 +4,7 @@ import Typography from "@mui/material/Typography";
 import { useState } from "react";
 import { processFile } from "../../importDataFunctions/processFile";
 import AlertBox from "../common/AlertBox";
+import ExportUserButton from "./ExportUserButton";
 import ImportUserButton from "./ImportUserButton";
 
 export default function ImportUserContainer({ getAllUsers }) {
@@ -60,6 +61,9 @@ export default function ImportUserContainer({ getAllUsers }) {
             getAllUsers={getAllUsers}
             fileOptions={fileOptions}
           />
+        </Grid>
+        <Grid item>
+          <ExportUserButton userFailedToImport={userFailedToImport} />
         </Grid>
       </Grid>
     </>

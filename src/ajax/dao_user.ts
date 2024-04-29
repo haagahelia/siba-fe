@@ -1,6 +1,6 @@
 import Logger from "../logger/logger";
 import { ResponseFiner, User, UserLoggedIn } from "../types";
-import { create, get, remove, update } from "./request";
+import { create, download, get, remove, update } from "./request";
 
 const baseUrl = import.meta.env.VITE_BE_SERVER_BASE_URL;
 
@@ -62,4 +62,9 @@ export const deleteSingleUser = async (userId: number): Promise<boolean> => {
   const response = await remove(`${baseUrl}/user/${userId}`);
   // const data = await response.json();
   return response.ok;
+};
+
+// download user template
+export const downloadUserTemplate = async (): Promise<ResponseFiner<User>> => {
+  return download<User>("user", baseUrl);
 };

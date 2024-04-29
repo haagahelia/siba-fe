@@ -53,7 +53,7 @@ export default function ImportUserButton({
         setAlertOpen={setAlertOpen}
       />
       <Button variant="contained" color="primary" onClick={handleClick}>
-        Import User
+        Import Data
       </Button>
     </>
   );
