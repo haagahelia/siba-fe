@@ -1,10 +1,12 @@
 const assert = require("node:assert");
-const { Builder, By, until } = require("selenium-webdriver");
+const { Builder, By, until, Browser } = require("selenium-webdriver");
+require("dotenv").config();
 
 (async function example() {
-  const driver = await new Builder().forBrowser("chrome").build();
+  const baseUrl = `http://localhost:${process.env.PORT}`;
+  const driver = await new Builder().forBrowser(Browser.FIREFOX).build();
   try {
-    await driver.get("http://localhost:8753/login");
+    await driver.get(`${baseUrl}/login`);
     const title = await driver.getTitle();
     await driver.manage().setTimeouts({ implicit: 500 });
 
@@ -18,13 +20,13 @@ const { Builder, By, until } = require("selenium-webdriver");
     const submitButton = await driver.findElement(By.id("loginButton"));
     await submitButton.click();
 
-    await driver.wait(until.urlIs("http://localhost:8753/subject"), 5000);
+    await driver.wait(until.urlIs(`${baseUrl}/subject`), 5000);
 
     //test login
     const currentUrl = await driver.getCurrentUrl();
     assert.equal(
       currentUrl,
-      "http://localhost:8753/subject",
+      `${baseUrl}/subject`,
       "URL is as expected",
     );
 
@@ -39,7 +41,7 @@ const { Builder, By, until } = require("selenium-webdriver");
     const currentLogOutUrl = await driver.getCurrentUrl();
     assert.equal(
       currentLogOutUrl,
-      "http://localhost:8753/login",
+      `${baseUrl}/login`,
       "URL is as expected",
     );
   } finally {
