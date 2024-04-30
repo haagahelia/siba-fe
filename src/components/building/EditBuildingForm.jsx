@@ -1,3 +1,4 @@
+import { Tooltip } from "@mui/material";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
@@ -69,9 +70,23 @@ export default function EditBuildingForm({ formik }) {
             >
               Cancel
             </Button>
-            <Button type="submit" variant="contained" onClick={handleSubmit}>
-              Submit
-            </Button>
+            <Tooltip
+              title={
+                formik.dirty ? "" : "Please change values to enable submit"
+              }
+              placement="top"
+            >
+              <span>
+                <Button
+                  type="submit"
+                  variant="contained"
+                  disabled={!formik.dirty}
+                  onClick={handleSubmit}
+                >
+                  Submit
+                </Button>
+              </span>
+            </Tooltip>
           </DialogActions>
         </form>
       </Dialog>
