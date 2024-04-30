@@ -1,5 +1,6 @@
 import { useState } from "react";
 
+import { Tooltip } from "@mui/material";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
@@ -52,16 +53,25 @@ export default function EditAllocRoundForm({ formik }) {
             >
               Cancel
             </Button>
-            <Button // theme button yellow
-              type="submit"
-              variant="contained"
-              className="editButton"
-              onClick={() => {
-                setOpen(false);
-              }}
+            <Tooltip
+              title={
+                formik.dirty ? "" : "Please change values to enable submit"
+              }
+              placement="top"
             >
-              Submit
-            </Button>
+              <span>
+                <Button // theme button yellow
+                  type="submit"
+                  variant="contained"
+                  disabled={!formik.dirty}
+                  onClick={() => {
+                    setOpen(false);
+                  }}
+                >
+                  Submit
+                </Button>
+              </span>
+            </Tooltip>
           </DialogActions>
         </form>
       </Dialog>

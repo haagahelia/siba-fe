@@ -5,6 +5,7 @@ import { useRoleLoggedIn } from "../../hooks/useRoleLoggedIn";
 import Logger from "../../logger/logger";
 import { validate } from "../../validation/ValidateEditProgram";
 
+import { Tooltip } from "@mui/material";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
@@ -201,9 +202,22 @@ export default function EditProgram({
             >
               Cancel
             </Button>
-            <Button type="submit" variant="contained">
-              Submit
-            </Button>
+            <Tooltip
+              title={
+                formik.dirty ? "" : "Please change values to enable submit"
+              }
+              placement="top"
+            >
+              <span>
+                <Button
+                  type="submit"
+                  variant="contained"
+                  disabled={!formik.dirty}
+                >
+                  Submit
+                </Button>
+              </span>
+            </Tooltip>
           </DialogActions>
         </form>
       </Dialog>

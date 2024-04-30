@@ -12,6 +12,7 @@ import Grid from "@mui/material/Grid";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import TextField from "@mui/material/TextField";
+import Tooltip from "@mui/material/Tooltip";
 
 export default function EditSpaceForm({
   buildingSelectList,
@@ -251,13 +252,23 @@ export default function EditSpaceForm({
             >
               Cancel
             </Button>
-            <Button
-              type="submit"
-              variant="contained"
-              onClick={() => setOpen(false)}
+            <Tooltip
+              title={
+                formik.dirty ? "" : "Please change values to enable submit"
+              }
+              placement="top"
             >
-              Submit
-            </Button>
+              <span>
+                <Button
+                  type="submit"
+                  variant="contained"
+                  disabled={!formik.dirty}
+                  onClick={() => setOpen(false)}
+                >
+                  Submit
+                </Button>
+              </span>
+            </Tooltip>
           </DialogActions>
         </form>
       </Dialog>

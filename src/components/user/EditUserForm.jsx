@@ -1,3 +1,4 @@
+import { Tooltip } from "@mui/material";
 import Button from "@mui/material/Button";
 import Checkbox from "@mui/material/Checkbox";
 import Dialog from "@mui/material/Dialog";
@@ -95,15 +96,25 @@ export default function EditUserForm({ formik }) {
             >
               Cancel
             </Button>
-            <Button
-              type="submit"
-              variant="contained"
-              onClick={() => {
-                setOpen(false);
-              }}
+            <Tooltip
+              title={
+                formik.dirty ? "" : "Please change values to enable submit"
+              }
+              placement="top"
             >
-              Submit
-            </Button>
+              <span>
+                <Button
+                  type="submit"
+                  variant="contained"
+                  disabled={!formik.dirty}
+                  onClick={() => {
+                    setOpen(false);
+                  }}
+                >
+                  Submit
+                </Button>
+              </span>
+            </Tooltip>
           </DialogActions>
         </form>
       </Dialog>
