@@ -13,6 +13,7 @@ import { CommonContentContainer } from "../common/CommonContainers";
 import ConfirmationDialog from "../common/ConfirmationDialog";
 import AddUserForm from "./AddUserForm";
 import ImportUserContainer from "./ImportUserContainer";
+import UserTemplate from "./UserTemplate";
 
 export default function AddUser({ getAllUsers }) {
   const [isCardExpanded, setIsCardExpanded] = useState(false);
@@ -126,6 +127,7 @@ export default function AddUser({ getAllUsers }) {
             </Grid>
             <Grid padding={2}>
               <ImportUserContainer getAllUsers={getAllUsers} />
+              <UserTemplate />
             </Grid>
           </>
         )}
