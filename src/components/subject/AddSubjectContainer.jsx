@@ -58,6 +58,7 @@ export default function AddSubjectContainer({
     area: 0,
     programId: 3009,
     spaceTypeId: 5004,
+    isNoisy: 0,
   });
 
   const resetForm = () => {
@@ -70,6 +71,7 @@ export default function AddSubjectContainer({
       area: 0,
       programId: 3009,
       spaceTypeId: 5004,
+      isNoisy: 0,
     });
   };
 
@@ -147,6 +149,7 @@ export default function AddSubjectContainer({
       programId: submitValues.programId,
       spaceTypeId: submitValues.spaceTypeId ? submitValues.spaceTypeId : null,
       allocRoundId: allocRoundContext.allocRoundId,
+      isNoisy: submitValues.isNoisy,
     };
 
     const result = await dao.postNewSubject(newSubject);
@@ -185,6 +188,7 @@ export default function AddSubjectContainer({
       area: selected.area,
       programId: selected.programId,
       spaceTypeId: selected.spaceTypeId,
+      isNoisy: selected.isNoisy,
     });
   };
 

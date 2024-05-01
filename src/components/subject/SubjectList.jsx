@@ -84,6 +84,10 @@ export default function SubjectList({
             return order === "asc"
               ? a.spaceTypeName.localeCompare(b.spaceTypeName, "fi-FI")
               : b.spaceTypeName.localeCompare(a.spaceTypeName, "fi-FI");
+          case "isNoisy":
+            return order === "asc"
+              ? a.isNoisy.localeCompare(b.isNoisy, "fi-FI")
+              : b.isNoisy.localeCompare(a.isNoisy, "fi-FI");
           default:
             return 0;
         }
@@ -246,6 +250,15 @@ export default function SubjectList({
                     Space type
                   </TableSortLabel>
                 </TableCell>
+                <TableCell>
+                  <TableSortLabel
+                    active={orderBy === "isNoisy"}
+                    direction={order}
+                    onClick={() => handleRequestSort("isNoisy")}
+                  >
+                    isNoisy
+                  </TableSortLabel>
+                </TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -281,6 +294,7 @@ export default function SubjectList({
                   <TableCell>{value.sessionCount}</TableCell>
                   <TableCell>{value.programName}</TableCell>
                   <TableCell>{value.spaceTypeName}</TableCell>
+                  <TableCell>{value.isNoisy}</TableCell>
                 </TableRow>
               ))}
             </TableBody>
