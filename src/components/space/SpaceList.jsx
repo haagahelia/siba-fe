@@ -48,6 +48,10 @@ export default function SpaceList({
               : b.name.localeCompare(a.name, "fi-FI");
           case "area":
             return order === "asc" ? a.area - b.area : b.area - a.area;
+          case "spaceTypeAcronym":
+            return order === "asc"
+              ? a.spaceTypeAcronym.localeCompare(b.spaceTypeAcronym, "fi-FI")
+              : b.spaceTypeAcronym.localeCompare(a.spaceTypeAcronym, "fi-FI");
           default:
             return 0;
         }
@@ -153,6 +157,15 @@ export default function SpaceList({
                 </TableCell>
                 <TableCell>
                   <TableSortLabel
+                    active={orderBy === "spaceTypeAcronym"}
+                    direction={order}
+                    onClick={() => handleRequestSort("spaceTypeAcronym")}
+                  >
+                    Space Type
+                  </TableSortLabel>
+                </TableCell>
+                <TableCell>
+                  <TableSortLabel
                     active={orderBy === "area"}
                     direction={order}
                     onClick={() => handleRequestSort("area")}
@@ -177,6 +190,7 @@ export default function SpaceList({
                     </IconButton>
                   </TableCell>
                   <TableCell>{value.name}</TableCell>
+                  <TableCell>{value.spaceTypeAcronym}</TableCell>
                   <TableCell>{value.area}</TableCell>
                 </TableRow>
               ))}

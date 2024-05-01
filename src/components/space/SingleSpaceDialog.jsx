@@ -249,6 +249,19 @@ export default function SingleSpaceDialog({
               <DialogContent variant="sibaDialogContent2">
                 <Grid item xs={12} sm={6}>
                   <Typography variant="singleDialogSubtitle">
+                    Space Type Acronym:&nbsp;
+                  </Typography>
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <Typography variant="singleDialogSubtitle">
+                    {singleSpace?.spaceTypeAcronym}{" "}
+                  </Typography>
+                </Grid>
+              </DialogContent>
+
+              <DialogContent variant="sibaDialogContent2">
+                <Grid item xs={12} sm={6}>
+                  <Typography variant="singleDialogSubtitle">
                     Building:&nbsp;
                   </Typography>
                 </Grid>
