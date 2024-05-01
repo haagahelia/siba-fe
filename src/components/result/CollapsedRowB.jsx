@@ -27,7 +27,15 @@ export default function CollapsedRowB({ id }) {
   useEffect(() => {
     const getSubjects = async () => {
       await resultRoomsStore.fetchRoomSubs(id, allocRoundContext.allocRoundId);
-      setSubjects(resultRoomsStore.roomSubs);
+      const fetchedSubjects = resultRoomsStore.roomSubs;
+      // Sort totalTime in descending order
+      const sortedSubjects = fetchedSubjects.sort((a, b) => {
+        if (b.totalTime !== a.totalTime) {
+          return b.totalTime - a.totalTime;
+        }
+        return a.name.localeCompare(b.name);
+      });
+      setSubjects(sortedSubjects);
     };
 
     if (expand) {
