@@ -139,6 +139,28 @@ Frontend side installation instructions
    docker ps -a
    ```
 
+### How to run Selenium tests
+
+1. Make sure the frontend and backend are running and working.
+
+2. Open a new terminal tab/window and change directory to the frontend project root.
+
+3. Decide which browser you want to use. Firefox is used by default. It can be changed with SELENIUM_BROWSER environment variable. If you want to use another browser then edit your .env file and add:
+   ```sh
+   SELENIUM_BROWSER=chrome
+   ```
+
+   This configures the tests to run in the Chrome browser. Other browsers can also be used. More info here: https://www.npmjs.com/package/selenium-webdriver
+
+4. Run the following command
+   ```sh
+   npm run test-selenium
+   ```
+
+   You should see a browser window opening where you can see the automated tests running.
+
+   If you get errors and cannot run the tests, you might need to install a webdriver for the browser you want to use. https://www.npmjs.com/package/selenium-webdriver
+
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 ## Using the system
