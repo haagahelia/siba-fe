@@ -36,11 +36,34 @@ async function pause(milliseconds) {
     await driver.wait(until.urlIs(`${baseUrl}/department`), timeoutMilliseconds);
 
     // Test login
-    const currentUrl = await driver.getCurrentUrl();
+    let currentUrl = await driver.getCurrentUrl();
     assert.equal(
       currentUrl,
       `${baseUrl}/department`,
-      "URL is as expected",
+      "URL is not as expected",
+    );
+
+    // Test navigation
+    await pause(pauseMilliseconds);
+    const roomResultsLink = await driver.findElement(By.linkText("Room Results"));
+    await roomResultsLink.click();
+
+    currentUrl = await driver.getCurrentUrl();
+    assert.equal(
+      currentUrl,
+      `${baseUrl}/roomresult`,
+      "URL is not as expected",
+    );
+
+    await pause(pauseMilliseconds);
+    const allocationLink = await driver.findElement(By.linkText("Allocation"));
+    await allocationLink.click();
+
+    currentUrl = await driver.getCurrentUrl();
+    assert.equal(
+      currentUrl,
+      `${baseUrl}/allocation`,
+      "URL is not as expected",
     );
 
     // Log Out
@@ -59,11 +82,11 @@ async function pause(milliseconds) {
     await driver.wait(until.urlIs(`${baseUrl}/login`), timeoutMilliseconds);
 
     // Test log out
-    const currentLogOutUrl = await driver.getCurrentUrl();
+    currentUrl = await driver.getCurrentUrl();
     assert.equal(
-      currentLogOutUrl,
+      currentUrl,
       `${baseUrl}/login`,
-      "URL is as expected",
+      "URL is not as expected",
     );
   } finally {
     // Uncomment the following line to close the browser after the test
