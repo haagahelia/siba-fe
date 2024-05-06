@@ -25,7 +25,7 @@ export default function RoomList({ rooms }) {
               <Link
                 style={theme.components.Links}
                 to={`/space/${room.id}`}
-              >{`${room.name}`}</Link>
+              >{`${room.name} (${room.spaceTypeAcronym})`}</Link>
             </Typography>
           </Grid2>
           <Grid2 xs={4} variant="resultsDropdown">

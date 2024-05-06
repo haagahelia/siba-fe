@@ -42,7 +42,7 @@ export default function RoomsWithTimesList({ rooms }) {
           <Fragment key={room.id}>
             <Grid item xs={6}>
               <Link style={theme.components.Links} to={`/space/${room.id}`}>
-                {`${room.name}`}
+                {`${room.name} (${room.spaceTypeAcronym})`}
               </Link>
             </Grid>
             <Grid item xs={6} key={`${room.id}-b`}>

@@ -176,7 +176,9 @@ export default function SpaceList({
                       <InfoIcon />
                     </IconButton>
                   </TableCell>
-                  <TableCell>{value.name}</TableCell>
+                  <TableCell>
+                    {value.name} ({value.spaceTypeAcronym})
+                  </TableCell>
                   <TableCell>{value.area}</TableCell>
                 </TableRow>
               ))}
