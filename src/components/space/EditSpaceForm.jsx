@@ -238,6 +238,30 @@ export default function EditSpaceForm({
                 </FormControl>
               </Grid>
 
+              <Grid item xs={12} sm={6} md={4}>
+                <FormControl sx={{ minWidth: 200 }}>
+                  <InputLabel id="isLowNoise-label">Low noise</InputLabel>
+                  <Select
+                    labelId="isLowNoise-label"
+                    error={
+                      formik.touched.isLowNoise && formik.errors.isLowNoise
+                        ? true
+                        : false
+                    }
+                    name="isLowNoise"
+                    onChange={formik.handleChange("isLowNoise")}
+                    value={formik.values?.isLowNoise}
+                    onBlur={formik.handleBlur("isLowNoise")}
+                  >
+                    <MenuItem value="1">Yes</MenuItem>
+                    <MenuItem value="0">No</MenuItem>
+                  </Select>
+                  <FormHelperText>
+                    {formik.touched.isLowNoise && formik.errors.isLowNoise}
+                  </FormHelperText>
+                </FormControl>
+              </Grid>
+
               <Grid item xs={12} sm={6} md={4} />
             </Grid>
           </DialogContent>

@@ -57,6 +57,7 @@ export default function EditSpaceContainer({
       classesFrom: values.classesFrom,
       classesTo: values.classesTo,
       inUse: Number(values.inUse),
+      isLowNoise: Number(values.isLowNoise),
       spaceTypeId: values.spaceTypeId ? values.spaceTypeId : null,
       id: values.id,
     };

@@ -24,6 +24,7 @@ export async function validate(values) {
     classesFrom,
     classesTo,
     inUse,
+    isLowNoise,
   } = values;
 
   const getSpaceNames = async () => {
@@ -122,11 +123,17 @@ export async function validate(values) {
     errors.classesTo =
       "Classes to must be equal to or earlier than Available to";
   }
-  if (inUse === undefined && inUse === null) {
-    errors.inUse = requiredFieldErrorMessageFunction("In use?");
+  if (inUse === undefined || inUse === null) {
+    errors.inUse = requiredFieldErrorMessageFunction("In use");
   } else if (!["0", "1", 0, 1].includes(inUse)) {
     //!["yes", "no", "0", "1", 0, 1, false, true].includes(inUse)) {
-    errors.inUse = "'In use' value must be either: '0' or '1' \n";
+    errors.inUse = "'In use' must be either yes or no";
+  }
+
+  if (isLowNoise === undefined || isLowNoise === null) {
+    errors.isLowNoise = requiredFieldErrorMessageFunction("Low noise");
+  } else if (!["0", "1", 0, 1].includes(isLowNoise)) {
+    errors.isLowNoise = "'Low noise' must be either yes or no";
   }
 
   // Add more space-related validation here as needed
