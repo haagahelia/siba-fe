@@ -44,6 +44,7 @@ export default function AddSpace({ getAllSpaces }) {
     classesFrom: "",
     classesTo: "",
     inUse: "",
+    isLowNoise: "",
     spaceTypeId: "",
   });
 
@@ -67,7 +68,7 @@ export default function AddSpace({ getAllSpaces }) {
     onSubmit: (values) => {
       setDialogOptions({
         title: `Are you sure you want to add ${values.name}?`,
-        content: `By clicking continue, ${values.name} will be added to the building list`,
+        content: `By clicking continue, ${values.name} will be added to the spaces list`,
       });
       setDialogOpen(true);
 
@@ -96,6 +97,7 @@ export default function AddSpace({ getAllSpaces }) {
         classesFrom: "",
         classesTo: "",
         inUse: "",
+        isLowNoise: "",
         spaceTypeId: "",
       });
       setAlertOptions({
@@ -399,6 +401,30 @@ export default function AddSpace({ getAllSpaces }) {
                     {formik.touched.inUse && formik.errors.inUse && (
                       <FormHelperText error>
                         {formik.errors.inUse}
+                      </FormHelperText>
+                    )}
+                  </FormControl>
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <FormControl fullWidth>
+                    <InputLabel>Low noise?</InputLabel>
+                    <Select
+                      name="isLowNoise"
+                      label="Low noise?"
+                      value={formik.values.isLowNoise}
+                      onChange={formik.handleChange}
+                      onBlur={formik.handleBlur}
+                      error={
+                        formik.touched.isLowNoise &&
+                        Boolean(formik.errors.isLowNoise)
+                      }
+                    >
+                      <MenuItem value="1">Yes</MenuItem>
+                      <MenuItem value="0">No</MenuItem>
+                    </Select>
+                    {formik.touched.isLowNoise && formik.errors.isLowNoise && (
+                      <FormHelperText error>
+                        {formik.errors.isLowNoise}
                       </FormHelperText>
                     )}
                   </FormControl>

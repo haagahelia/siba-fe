@@ -34,6 +34,7 @@ export default function AddSpaceDialogConfirmation({
         classesFrom: "",
         classesTo: "",
         inUse: "",
+        isLowNoise: "",
         spaceTypeId: "",
       });
       getAllSpaces();
