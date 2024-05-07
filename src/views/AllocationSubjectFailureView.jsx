@@ -182,10 +182,10 @@ export default function AllocationSubjectFailureView() {
           <Table sx={{ minWidth: 650 }} aria-label="simple table">
             <TableHead>
               <TableRow>
-                <TableCell>The name of the lesson</TableCell>
-                <TableCell>Number of people</TableCell>
-                <TableCell>Space requirement (m&#178;)</TableCell>
-                <TableCell>Space type</TableCell>
+                <TableCell>The Name of the Lesson</TableCell>
+                <TableCell>Number of People</TableCell>
+                <TableCell>Space Requirement (m&#178;)</TableCell>
+                <TableCell>Space Type</TableCell>
               </TableRow>
             </TableHead>
             <TableBody id="setcursor">
