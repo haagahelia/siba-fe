@@ -34,7 +34,7 @@ export default function AddSpace({ getAllSpaces }) {
   const [open, setOpen] = useState(false);
   const [space, setSpace] = useState({
     name: "",
-    area: "",
+    area: "0",
     info: "",
     personLimit: "0",
     buildingId: "401",
@@ -43,9 +43,9 @@ export default function AddSpace({ getAllSpaces }) {
     availableTo: "",
     classesFrom: "",
     classesTo: "",
-    inUse: "",
-    isLowNoise: "",
-    spaceTypeId: "",
+    inUse: "1",
+    isLowNoise: "0",
+    spaceTypeId: "5001",
   });
 
   const [alertOpen, setAlertOpen] = useState(false);
@@ -90,15 +90,17 @@ export default function AddSpace({ getAllSpaces }) {
       setSpace({
         name: "",
         area: "0",
+        info: "",
         personLimit: "0",
         buildingId: "401",
+        buildingName: "Musiikkitalo",
         availableFrom: "",
         availableTo: "",
         classesFrom: "",
         classesTo: "",
-        inUse: "",
-        isLowNoise: "",
-        spaceTypeId: "",
+        inUse: "1",
+        isLowNoise: "0",
+        spaceTypeId: "5001",
       });
       setAlertOptions({
         severity: "success",
