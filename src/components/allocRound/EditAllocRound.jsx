@@ -47,6 +47,7 @@ export default function EditAllocRound({
     const capitalName = capitalizeFirstLetter(values.name);
     const editedAllocRound = {
       name: capitalName,
+      isReadOnly: values.isReadOnly,
       description: values.description,
       lastModified: values.lastModified,
       id: values.id,

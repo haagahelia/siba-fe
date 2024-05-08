@@ -1,7 +1,8 @@
+import { Checkbox, FormControlLabel } from "@mui/material";
 import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
 
-export default function AllocRoundInputFields({ formik }) {
+export default function AllocRoundInputFields({ formik, actionType }) {
   return (
     <>
       <Grid item xs={12}>
@@ -20,6 +21,26 @@ export default function AllocRoundInputFields({ formik }) {
           }
         />
       </Grid>
+      {actionType === "edit" && (
+        <Grid item xs={12}>
+          <FormControlLabel
+            control={<Checkbox />}
+            label="Modifiable"
+            labelPlacement="start"
+            className="formCheckBoxButtons"
+            name="isReadOnly"
+            checked={formik.values.isReadOnly === 0}
+            onChange={(event) =>
+              formik.handleChange({
+                target: {
+                  name: "isReadOnly",
+                  value: event.target.checked ? 0 : 1,
+                },
+              })
+            }
+          />
+        </Grid>
+      )}
       <Grid item xs={12}>
         <TextField
           error={

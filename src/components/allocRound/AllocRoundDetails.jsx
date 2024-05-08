@@ -53,12 +53,14 @@ export default function AllocRoundDetails({
         </IconButton>
         <DialogContent>
           <DialogActions>
-            <DeleteAllocRound
-              singleAllocRound={singleAllocRound}
-              getAllAllocRounds={getAllAllocRounds}
-              incrementDataModifiedCounter={incrementDataModifiedCounter}
-              setOpen={setOpen}
-            />
+            {!singleAllocRound?.isReadOnly && (
+              <DeleteAllocRound
+                singleAllocRound={singleAllocRound}
+                getAllAllocRounds={getAllAllocRounds}
+                incrementDataModifiedCounter={incrementDataModifiedCounter}
+                setOpen={setOpen}
+              />
+            )}
             <EditAllocRound
               singleAllocRound={singleAllocRound}
               getAllAllocRounds={getAllAllocRounds}
@@ -88,6 +90,18 @@ export default function AllocRoundDetails({
               <DialogContent variant="sibaDialogContent2">
                 <Grid item xs={12} sm={6}>
                   <Typography variant="singleDialogSubtitle">
+                    Modifiable:&nbsp;
+                  </Typography>
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <Typography variant="singleDialogSubtitle">
+                    {singleAllocRound?.isReadOnly ? "❌" : "✅"}
+                  </Typography>
+                </Grid>
+              </DialogContent>
+              <DialogContent variant="sibaDialogContent2">
+                <Grid item xs={12} sm={6}>
+                  <Typography variant="singleDialogSubtitle">
                     Description:&nbsp;
                   </Typography>
                 </Grid>
@@ -97,7 +111,6 @@ export default function AllocRoundDetails({
                   </Typography>
                 </Grid>
               </DialogContent>
-
               <DialogContent variant="sibaDialogContent2">
                 <Grid item xs={12} sm={6}>
                   <Typography variant="singleDialogSubtitle">
