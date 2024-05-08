@@ -14,11 +14,11 @@ export default function ProgramListContainer({
 
   return (
     <div>
-      <SingleProgramDialog
+      {/*  <SingleProgramDialog
         open={open}
         setOpen={setOpen}
         getAllPrograms={getAllPrograms}
-      />
+      />  */}
 
       <ProgramList
         getAllPrograms={getAllPrograms}
