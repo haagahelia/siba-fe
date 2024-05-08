@@ -120,6 +120,9 @@ export default function EditProgram({
     });
     setEditOpen(false);
     setAlertOpen(true);
+    values.departmentName = departmentSelectList.find(
+      (item) => item.id === values.departmentId,
+    ).name;
     setSingleProgram(formik.values);
     getAllPrograms();
   }
