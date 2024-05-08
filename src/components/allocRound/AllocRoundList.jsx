@@ -50,6 +50,10 @@ export default function AllocRoundList({
         return order === "asc"
           ? a.name.localeCompare(b.name, "fi-FI")
           : b.name.localeCompare(a.name, "fi-FI");
+      case "ReadOnly":
+        return order === "asc"
+          ? b.isReadOnly - a.isReadOnly
+          : a.isReadOnly - b.isReadOnly;
       case "Description":
         return order === "asc"
           ? a.description.localeCompare(b.description, "fi-FI")
@@ -140,6 +144,15 @@ export default function AllocRoundList({
               </TableCell>
               <TableCell>
                 <TableSortLabel
+                  active={orderBy === "ReadOnly"}
+                  direction={order}
+                  onClick={() => handleRequestSort("ReadOnly")}
+                >
+                  Modifiable
+                </TableSortLabel>
+              </TableCell>
+              <TableCell>
+                <TableSortLabel
                   active={orderBy === "Description"}
                   direction={order}
                   onClick={() => handleRequestSort("Description")}
@@ -187,6 +200,7 @@ export default function AllocRoundList({
                     : value.id}
                 </TableCell>
                 <TableCell>{value.name}</TableCell>
+                <TableCell>{value.isReadOnly ? "❌" : "✅"}</TableCell>
                 <TableCell>{value.description}</TableCell>
                 <TableCell>{value.date}</TableCell>
                 <TableCell>{value.lastModified}</TableCell>

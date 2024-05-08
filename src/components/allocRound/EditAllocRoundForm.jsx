@@ -8,6 +8,7 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import Grid from "@mui/material/Grid";
 import AllocRoundInputFields from "./AllocRoundInputFields";
+import AllocRoundReadOnlyField from "./AllocRoundReadOnlyField";
 
 export default function EditAllocRoundForm({ formik }) {
   const [open, setOpen] = useState(false);
@@ -38,7 +39,12 @@ export default function EditAllocRoundForm({ formik }) {
               spacing={3}
               column={7}
             >
-              <AllocRoundInputFields formik={formik} />
+              {!formik.initialValues?.isReadOnly && (
+                <AllocRoundInputFields formik={formik} actionType={"edit"} />
+              )}
+              {formik.initialValues?.isReadOnly === 1 && (
+                <AllocRoundReadOnlyField formik={formik} />
+              )}
             </Grid>
           </DialogContent>
           <DialogActions sx={{ justifyContent: "space-evenly" }}>

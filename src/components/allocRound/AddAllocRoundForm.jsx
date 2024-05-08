@@ -15,7 +15,7 @@ export default function AddAllocRoundForm({
     <div>
       <form onSubmit={formik.handleSubmit}>
         <Grid container variant="sibaGridAddForm" column={8}>
-          <AllocRoundInputFields formik={formik} />
+          <AllocRoundInputFields formik={formik} actionType={"add"} />
         </Grid>
         <Grid container item xs={12} justifyContent="space-between" padding={2}>
           <Button
