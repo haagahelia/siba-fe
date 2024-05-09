@@ -40,21 +40,18 @@ export default function ProgramFiltering({
       placeholder="Search programs"
       type="text"
       variant="outlined"
-      fullWidth
-      size="medium"
+      className="search"
       value={searched}
       onChange={(e) => requestSearch(e)}
       InputProps={{
         endAdornment: (
-          <InputAdornment position="end">
-            <IconButton
-              onClick={cancelSearch}
-              sx={{ visibility: searched ? "visible" : "hidden" }}
-              variant="clearFilterButton"
-            >
-              <ClearIcon />
-            </IconButton>
-          </InputAdornment>
+          <IconButton
+            onClick={cancelSearch}
+            sx={{ visibility: searched ? "visible" : "hidden" }}
+            variant="clearFilterButton"
+          >
+            <ClearIcon />
+          </IconButton>
         ),
       }}
     />

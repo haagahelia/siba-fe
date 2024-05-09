@@ -37,10 +37,9 @@ export default function UserFiltering({
       placeholder="Search users"
       type="text"
       variant="outlined"
-      fullWidth
-      size="medium"
       value={searched}
       onChange={(e) => requestSearch(e)}
+      className="search"
       InputProps={{
         endAdornment: (
           <IconButton

@@ -149,19 +149,17 @@ export default function SubjectList({
         label="Search subjects"
         value={searched}
         onChange={handleSearch}
-        fullWidth
         variant="outlined"
-        size="medium"
+        className="search"
         InputProps={{
           endAdornment: (
-            <InputAdornment position="end">
-              <IconButton
-                onClick={cancelSearch}
-                sx={{ visibility: searched ? "visible" : "hidden" }}
-              >
-                <ClearIcon />
-              </IconButton>
-            </InputAdornment>
+            <IconButton
+              onClick={cancelSearch}
+              sx={{ visibility: searched ? "visible" : "hidden" }}
+              variant="clearFilterButton"
+            >
+              <ClearIcon />
+            </IconButton>
           ),
         }}
       />

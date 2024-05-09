@@ -155,6 +155,7 @@ export const createAppTheme = (currentPalette) =>
             },
             "& .MuiOutlinedInput-root": {
               color: currentPalette.fontColorDefault.default,
+              paddingRight: lessPadding,
               "& fieldset": {
                 borderColor: currentPalette.borderColor.main,
               },
@@ -170,6 +171,10 @@ export const createAppTheme = (currentPalette) =>
                   opacity: 1,
                 },
               },
+            },
+            "&.search": {
+              marginBottom: margins.none,
+              width: "100%",
             },
           },
         },

@@ -106,6 +106,7 @@ export default function AllocRoundList({
         variant="outlined"
         value={searchQuery}
         onChange={handleSearch}
+        className="search"
         InputProps={{
           endAdornment: (
             <IconButton
@@ -117,7 +118,6 @@ export default function AllocRoundList({
             </IconButton>
           ),
         }}
-        style={{ marginBottom: 16, width: "100%" }}
       />
       <Box component={Paper}>
         <Table>
