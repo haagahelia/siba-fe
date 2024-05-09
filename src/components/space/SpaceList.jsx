@@ -112,20 +112,17 @@ export default function SpaceList({
         label="Search spaces"
         value={searchQuery}
         onChange={handleSearch}
-        fullWidth
         variant="outlined"
-        size="medium"
+        className="search"
         InputProps={{
           endAdornment: (
-            <InputAdornment position="end">
-              <IconButton
-                onClick={cancelSearch}
-                sx={{ visibility: searchQuery ? "visible" : "hidden" }}
-                variant="clearFilterButton"
-              >
-                <ClearIcon />
-              </IconButton>
-            </InputAdornment>
+            <IconButton
+              onClick={cancelSearch}
+              sx={{ visibility: searchQuery ? "visible" : "hidden" }}
+              variant="clearFilterButton"
+            >
+              <ClearIcon />
+            </IconButton>
           ),
         }}
       />
