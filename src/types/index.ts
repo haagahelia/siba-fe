@@ -84,6 +84,7 @@ export interface SpaceEquipment {
 export interface AllocRound {
   id: number;
   name: string;
+  isReadOnly: boolean;
   description: string;
   lastModified: string;
 }
