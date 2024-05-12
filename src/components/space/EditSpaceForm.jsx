@@ -21,6 +21,11 @@ export default function EditSpaceForm({
 }) {
   const [open, setOpen] = useState(false);
 
+  console.log("inital: ");
+  console.log(formik.initialValues);
+  console.log("changed: ");
+  console.log(formik.values);
+
   return (
     <div>
       <Button
@@ -67,7 +72,14 @@ export default function EditSpaceForm({
                   label="Area (in square meters)"
                   variant="outlined"
                   value={formik.values?.area}
-                  onChange={formik.handleChange("area")}
+                  onChange={(e) => {
+                    if (e.target.value.endsWith(".")) {
+                      formik.setFieldValue("area", e.target.value);
+                      return;
+                    }
+                    const value = parseFloat(e.target.value);
+                    formik.setFieldValue("area", value);
+                  }}
                   onBlur={formik.handleBlur("area")}
                   helperText={formik.touched.area && formik.errors.area}
                 />
@@ -97,7 +109,10 @@ export default function EditSpaceForm({
                   label="Maximum Persons Allowed"
                   variant="outlined"
                   value={formik.values?.personLimit}
-                  onChange={formik.handleChange("personLimit")}
+                  onChange={(e) => {
+                    const value = Number(e.target.value);
+                    formik.setFieldValue("personLimit", value);
+                  }}
                   onBlur={formik.handleBlur("personLimit")}
                   helperText={
                     formik.touched.personLimit && formik.errors.personLimit
@@ -225,7 +240,10 @@ export default function EditSpaceForm({
                       formik.touched.inUse && formik.errors.inUse ? true : false
                     }
                     name="inUse"
-                    onChange={formik.handleChange("inUse")}
+                    onChange={(e) => {
+                      const value = Number(e.target.value);
+                      formik.setFieldValue("inUse", value);
+                    }}
                     value={formik.values?.inUse}
                     onBlur={formik.handleBlur("inUse")}
                   >
@@ -249,7 +267,10 @@ export default function EditSpaceForm({
                         : false
                     }
                     name="isLowNoise"
-                    onChange={formik.handleChange("isLowNoise")}
+                    onChange={(e) => {
+                      const value = Number(e.target.value);
+                      formik.setFieldValue("isLowNoise", value);
+                    }}
                     value={formik.values?.isLowNoise}
                     onBlur={formik.handleBlur("isLowNoise")}
                   >
