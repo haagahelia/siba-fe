@@ -1,4 +1,3 @@
-// The Room Results Page
 import useTheme from "@mui/material/styles/useTheme";
 import { useContext, useEffect, useState } from "react";
 import { AllocRoundContext } from "../../AppContext";
@@ -7,11 +6,9 @@ import Logger from "../../logger/logger";
 
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
+import Chart from "chart.js/auto";
 import AllocRoundControlPanel from "../allocRound/AllocRoundControlPanel";
 import RoomsWithTimesList from "../room/RoomsWithTimesList";
-
-// a component for displaying allocation results
-// shows: 1. the name of the room 2. utilization rate 3. classes using the room
 
 export default function RoomResult() {
   Logger.logPrefix = "RoomResult";
@@ -22,6 +19,7 @@ export default function RoomResult() {
 
   const [rooms, setRooms] = useState([]);
   const [resetCounter, setResetCounter] = useState(0);
+  const [showBarChart, setShowBarChart] = useState(false);
 
   const roomStore = resultRoomsStore;
 
@@ -47,13 +45,115 @@ export default function RoomResult() {
     document.title = "Room Results";
   }, []);
 
+  const toggleBarChart = () => {
+    setShowBarChart(!showBarChart);
+  };
+
+  useEffect(() => {
+    if (showBarChart) {
+      renderBarChart();
+    }
+  }, [showBarChart]);
+
+  const renderBarChart = () => {
+    const labels = rooms.map((room) => room.name);
+    const data = rooms.map((room) => room.allocatedHours);
+
+    const generateRandomColor = () => {
+      const r = Math.floor(Math.random() * 256);
+      const g = Math.floor(Math.random() * 256);
+      const b = Math.floor(Math.random() * 256);
+      return `rgba(${r}, ${g}, ${b}, 0.5)`;
+    };
+
+    const colors = data.map(() => generateRandomColor());
+
+    const tick = document.getElementById("barChart").getContext("2d");
+    new Chart(tick, {
+      type: "bar",
+      data: {
+        labels: labels,
+        datasets: [
+          {
+            label: "Allocated Hours",
+            data: data,
+            backgroundColor: colors,
+            borderColor: theme.palette.primary.main,
+            borderWidth: 2,
+          },
+        ],
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        tooltips: {
+          enabled: true,
+          mode: "index",
+          intersect: false,
+          backgroundColor: theme.palette.background.paper,
+          titleFontSize: 16,
+          bodyFontSize: 14,
+        },
+        scales: {
+          y: {
+            beginAtZero: true,
+            title: {
+              display: true,
+              text: "Allocated Hours",
+              font: {
+                size: 14,
+              },
+            },
+          },
+          x: {
+            title: {
+              display: true,
+              text: "Rooms",
+              font: {
+                size: 14,
+              },
+            },
+          },
+        },
+        plugins: {
+          legend: {
+            display: true,
+            labels: {
+              color: theme.palette.text.primary,
+              font: {
+                size: 12,
+              },
+            },
+          },
+        },
+      },
+    });
+  };
+
   return (
     <div style={theme.components.RoomResultsContainer}>
-      <AllocRoundControlPanel incrementResetCounter={incrementResetCounter} />
+      <AllocRoundControlPanel
+        incrementResetCounter={incrementResetCounter}
+        toggleBarChart={toggleBarChart}
+        showBarChart={showBarChart}
+      />
       <Typography className="mt6" variant="pageHeader">
         Spaces (Huoneet)
       </Typography>
-
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "flex-start",
+          alignSelf: "flex-end",
+          gap: 2,
+        }}
+      ></Box>
+      {/* bargraph container */}
+      {showBarChart && (
+        <div style={{ width: "1000px", height: "600px", margin: "30px auto" }}>
+          <canvas id="barChart" />
+        </div>
+      )}
       <RoomsWithTimesList rooms={rooms} />
     </div>
   );

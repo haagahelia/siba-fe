@@ -12,7 +12,11 @@ import { getPlannerData } from "../../importDataFunctions/getPlannerData";
 import { getReportData } from "../../importDataFunctions/getReportData";
 import AlertBox from "../common/AlertBox";
 
-export default function AllocRoundControlPanel({ incrementResetCounter }) {
+export default function AllocRoundControlPanel({
+  incrementResetCounter,
+  toggleBarChart,
+  showBarChart,
+}) {
   const { allocRoundContext } = useContext(AllocRoundContext);
   const { roles } = useRoleLoggedIn();
   // console.log("appContext 123: " + appContext);
@@ -149,6 +153,14 @@ export default function AllocRoundControlPanel({ incrementResetCounter }) {
         }}
       >
         Full report <DownloadIcon />
+      </Button>
+      <Button
+        type="submit"
+        variant="outlined"
+        className="secondaryButton"
+        onClick={toggleBarChart}
+      >
+        {showBarChart ? "Hide Bar Chart" : "Show Bar Chart"}
       </Button>
     </Typography>
   );
