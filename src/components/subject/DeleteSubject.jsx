@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import dao from "../../ajax/dao";
 
 import Button from "@mui/material/Button";
@@ -21,6 +21,27 @@ export default function DeleteSubject({
     content: "Something here",
   });
   const [deleteSubjectData, setDeleteSubjectData] = useState(null);
+  const [allocRound, setAllocRound] = useState(null);
+
+  // Fetch alloc round by id to make sure is not read only:
+  useEffect(() => {
+    if (singleSubject?.id) {
+      dao.fetchAllocRoundById(singleSubject.allocRoundId).then((response) => {
+        if (!response.success) {
+          Logger.error("Error fetching allocation rounds");
+          setAlertOptions({
+            severity: "error",
+            title: "Error",
+            message:
+              "Oops! Something went wrong on the server. No allocation found",
+          });
+          setAlertOpen(true);
+          return;
+        }
+        setAllocRound(response.data[0]);
+      });
+    }
+  }, [singleSubject]);
 
   const deleteSubject = async (subjectData) => {
     const result = await dao.deleteSingleSubject(subjectData.id);
@@ -72,13 +93,23 @@ export default function DeleteSubject({
         submit={deleteSubject}
         submitValues={deleteSubjectData}
       />
-      <Button
-        variant="contained"
-        className="redButton"
-        onClick={() => submitDelete(singleSubject)}
-      >
-        Delete
-      </Button>
+      {allocRound?.isReadOnly === 0 ? (
+        <Button
+          variant="contained"
+          className="redButton"
+          onClick={() => submitDelete(singleSubject)}
+        >
+          Delete
+        </Button>
+      ) : (
+        <Button
+          variant="contained"
+          disabled
+          className="redButton disabledButton"
+        >
+          Allocation Round is Read Only
+        </Button>
+      )}
     </div>
   );
 }

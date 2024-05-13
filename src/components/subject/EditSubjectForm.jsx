@@ -69,7 +69,10 @@ export default function EditSubjectForm({
                   label="Group size"
                   defaultValue={formik.initialValues?.groupSize}
                   variant="outlined"
-                  onChange={formik.handleChange("groupSize")}
+                  onChange={(e) => {
+                    const value = Number(e.target.value);
+                    formik.setFieldValue("groupSize", value);
+                  }}
                   onBlur={formik.handleBlur("groupSize")}
                   helperText={
                     formik.touched.groupSize && formik.errors.groupSize
@@ -89,7 +92,10 @@ export default function EditSubjectForm({
                   label="Group count"
                   defaultValue={formik.initialValues?.groupCount}
                   variant="outlined"
-                  onChange={formik.handleChange("groupCount")}
+                  onChange={(e) => {
+                    const value = Number(e.target.value);
+                    formik.setFieldValue("groupCount", value);
+                  }}
                   onBlur={formik.handleBlur("groupCount")}
                   helperText={
                     formik.touched.groupCount && formik.errors.groupCount
@@ -125,7 +131,10 @@ export default function EditSubjectForm({
                   label="Number of sessions per week"
                   defaultValue={formik.initialValues?.sessionCount}
                   variant="outlined"
-                  onChange={formik.handleChange("sessionCount")}
+                  onChange={(e) => {
+                    const value = Number(e.target.value);
+                    formik.setFieldValue("sessionCount", value);
+                  }}
                   onBlur={formik.handleBlur("sessionCount")}
                   helperText={
                     formik.touched.sessionCount && formik.errors.sessionCount
@@ -141,7 +150,14 @@ export default function EditSubjectForm({
                   label="Required m2 (0 to ignore)"
                   defaultValue={formik.initialValues?.area}
                   variant="outlined"
-                  onChange={formik.handleChange("area")}
+                  onChange={(e) => {
+                    if (e.target.value.endsWith(".")) {
+                      formik.setFieldValue("area", e.target.value);
+                      return;
+                    }
+                    const value = parseFloat(e.target.value);
+                    formik.setFieldValue("area", value);
+                  }}
                   onBlur={formik.handleBlur("area")}
                   helperText={formik.touched.area && formik.errors.area}
                 />

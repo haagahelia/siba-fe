@@ -1,4 +1,3 @@
-// The Program Results Page
 import useTheme from "@mui/material/styles/useTheme";
 import { Fragment, useContext, useEffect, useState } from "react";
 import { AllocRoundContext } from "../../AppContext";
@@ -16,12 +15,6 @@ import { margins } from "../../styles/theme";
 import AllocRoundControlPanel from "../allocRound/AllocRoundControlPanel";
 import CollapsedRow from "./CollapsedRow";
 import SubjectResult from "./SubjectResult";
-
-// component for displaying the subject groups of the allocation result shows:
-// the name of the subject groups
-// the hours needed by the subject group divided by the hours allocated to it %%
-// the name of the subject group rooms in the dropdown
-// popup button that shows the lessons of the subject group
 
 export default function ProgramResult() {
   Logger.logPrefix = "ProgramResult";
@@ -47,7 +40,22 @@ export default function ProgramResult() {
   const getProgramData = async () => {
     Logger.debug("getProgramData: fetching program names.");
     await progStore.fetchNames(allocRoundContext.allocRoundId);
-    const names = progStore.getNames();
+    let names = progStore.getNames();
+
+    // Sort names array based on allocation (utilization) and then alphabetically
+    names = names.sort((a, b) => {
+      const progressA = calculateProsent(a.subjects);
+      const progressB = calculateProsent(b.subjects);
+
+      // First, compare based on allocation (utilization)
+      if (progressA !== progressB) {
+        return progressB - progressA; // Sort in descending order of allocation (utilization)
+      }
+
+      // If allocation is the same, sort alphabetically
+      return a.name.localeCompare(b.name);
+    });
+
     Logger.debug(
       `getProgramData: successfully fetched ${names.length} program names.`,
     );
@@ -171,7 +179,10 @@ export default function ProgramResult() {
             <Fragment key={prog.id}>
               <Grid2 xs={1.5}>
                 <InfoOutlinedIcon
-                  sx={{ fontSize: 20, color: theme.palette.infoIcon.main }}
+                  sx={{
+                    fontSize: 20,
+                    color: theme.palette.infoIcon.main,
+                  }}
                   onClick={() => handleOpen(prog)}
                 />
               </Grid2>

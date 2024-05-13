@@ -9,8 +9,6 @@ import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { FormHelperText } from "@mui/material";
 import Button from "@mui/material/Button";
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
 import CardHeader from "@mui/material/CardHeader";
 import FormControl from "@mui/material/FormControl";
 import Grid from "@mui/material/Grid";
@@ -23,29 +21,29 @@ import { capitalizeFirstLetter } from "../../validation/ValidationUtilities";
 import AlertBox from "../common/AlertBox";
 import { CommonContentContainer } from "../common/CommonContainers";
 import ConfirmationDialog from "../common/ConfirmationDialog";
-import AddSpaceDialogConfirmation from "./AddSpaceDialogConfirmation";
 import ImportSpaceContainer from "./ImportSpaceContainer";
 import SpaceTemplate from "./SpaceTemplate";
+
+const defaultSpace = {
+  name: "",
+  area: "0",
+  info: "",
+  personLimit: "0",
+  buildingId: "401",
+  buildingName: "Musiikkitalo",
+  availableFrom: "",
+  availableTo: "",
+  classesFrom: "",
+  classesTo: "",
+  inUse: "1",
+  isLowNoise: "0",
+  spaceTypeId: "5001",
+};
 
 export default function AddSpace({ getAllSpaces }) {
   // State for checking if Add Equipment card is expanded
   const [isCardExpanded, setIsCardExpanded] = useState(false);
-
-  const [open, setOpen] = useState(false);
-  const [space, setSpace] = useState({
-    name: "",
-    area: "",
-    info: "",
-    personLimit: "0",
-    buildingId: "401",
-    buildingName: "Musiikkitalo",
-    availableFrom: "",
-    availableTo: "",
-    classesFrom: "",
-    classesTo: "",
-    inUse: "",
-    spaceTypeId: "",
-  });
+  const [space, setSpace] = useState(defaultSpace);
 
   const [alertOpen, setAlertOpen] = useState(false);
   const [alertOptions, setAlertOptions] = useState({
@@ -67,11 +65,9 @@ export default function AddSpace({ getAllSpaces }) {
     onSubmit: (values) => {
       setDialogOptions({
         title: `Are you sure you want to add ${values.name}?`,
-        content: `By clicking continue, ${values.name} will be added to the building list`,
+        content: `By clicking continue, ${values.name} will be added to the spaces list`,
       });
       setDialogOpen(true);
-
-      return;
     },
   });
 
@@ -84,28 +80,16 @@ export default function AddSpace({ getAllSpaces }) {
         title: "Error",
         message: "Something went wrong - please try again later.",
       });
-      setAlertOpen(true);
     } else {
-      setSpace({
-        name: "",
-        area: "0",
-        personLimit: "0",
-        buildingId: "401",
-        availableFrom: "",
-        availableTo: "",
-        classesFrom: "",
-        classesTo: "",
-        inUse: "",
-        spaceTypeId: "",
-      });
+      setSpace(defaultSpace);
       setAlertOptions({
         severity: "success",
         title: "Success!",
         message: `${spaceData.name} added successfully.`,
       });
-      setAlertOpen(true);
-      getAllSpaces();
     }
+    setAlertOpen(true);
+    getAllSpaces();
   };
 
   /*
@@ -399,6 +383,30 @@ export default function AddSpace({ getAllSpaces }) {
                     {formik.touched.inUse && formik.errors.inUse && (
                       <FormHelperText error>
                         {formik.errors.inUse}
+                      </FormHelperText>
+                    )}
+                  </FormControl>
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <FormControl fullWidth>
+                    <InputLabel>Low noise?</InputLabel>
+                    <Select
+                      name="isLowNoise"
+                      label="Low noise?"
+                      value={formik.values.isLowNoise}
+                      onChange={formik.handleChange}
+                      onBlur={formik.handleBlur}
+                      error={
+                        formik.touched.isLowNoise &&
+                        Boolean(formik.errors.isLowNoise)
+                      }
+                    >
+                      <MenuItem value="1">Yes</MenuItem>
+                      <MenuItem value="0">No</MenuItem>
+                    </Select>
+                    {formik.touched.isLowNoise && formik.errors.isLowNoise && (
+                      <FormHelperText error>
+                        {formik.errors.isLowNoise}
                       </FormHelperText>
                     )}
                   </FormControl>

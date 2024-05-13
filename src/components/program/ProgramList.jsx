@@ -118,22 +118,20 @@ export default function ProgramList({
         label="Search programs"
         value={searchQuery}
         onChange={handleSearch}
-        fullWidth
         variant="outlined"
-        size="medium"
+        className="search"
         InputProps={{
           endAdornment: (
-            <InputAdornment position="end">
-              <IconButton
-                onClick={() => {
-                  setSearched("");
-                  setCurrentPage(1);
-                }}
-                sx={{ visibility: searchQuery ? "visible" : "hidden" }}
-              >
-                <ClearIcon />
-              </IconButton>
-            </InputAdornment>
+            <IconButton
+              onClick={() => {
+                setSearched("");
+                setCurrentPage(1);
+              }}
+              sx={{ visibility: searchQuery ? "visible" : "hidden" }}
+              variant="clearFilterButton"
+            >
+              <ClearIcon />
+            </IconButton>
           ),
         }}
       />

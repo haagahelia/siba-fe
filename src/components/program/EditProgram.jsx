@@ -1,10 +1,3 @@
-import { useFormik } from "formik";
-import { useEffect, useState } from "react";
-import dao from "../../ajax/dao";
-import { useRoleLoggedIn } from "../../hooks/useRoleLoggedIn";
-import Logger from "../../logger/logger";
-import { validate } from "../../validation/ValidateEditProgram";
-
 import { Tooltip } from "@mui/material";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
@@ -18,6 +11,13 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import TextField from "@mui/material/TextField";
+import { useFormik } from "formik";
+import { useContext, useEffect, useState } from "react";
+import { AppContext } from "../../AppContext";
+import dao from "../../ajax/dao";
+import { useRoleLoggedIn } from "../../hooks/useRoleLoggedIn";
+import Logger from "../../logger/logger";
+import { validate } from "../../validation/ValidateEditProgram";
 import AlertBox from "../common/AlertBox";
 import ConfirmationDialog from "../common/ConfirmationDialog";
 
@@ -43,6 +43,7 @@ export default function EditProgram({
   const [departmentSelectList, setDepartmentSelectList] = useState([]);
 
   const { roles } = useRoleLoggedIn();
+  const { userId } = useContext(AppContext);
 
   const getDepartmentForSelect = async () => {
     try {
@@ -119,6 +120,9 @@ export default function EditProgram({
     });
     setEditOpen(false);
     setAlertOpen(true);
+    values.departmentName = departmentSelectList.find(
+      (item) => item.id === values.departmentId,
+    ).name;
     setSingleProgram(formik.values);
     getAllPrograms();
   }

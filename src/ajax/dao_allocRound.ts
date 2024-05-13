@@ -10,6 +10,15 @@ export const fetchAllAllocRounds = async (): Promise<Response<AllocRound>> => {
   return { success: response.ok, data: allocrounds };
 };
 
+// fetching allocRound by ID:
+export const fetchAllocRoundById = async (
+  allocRoundId: number,
+): PromiseConstructor<Response<AllocRound>> => {
+  const response = await get(`${baseUrl}/allocRound/${allocRoundId}`);
+  const allocRound: AllocRound = await response.json();
+  return { success: response.ok, data: allocRound };
+};
+
 // creating new allocRound
 export const postNewAllocRound = async (
   newAllocRound: AllocRound,

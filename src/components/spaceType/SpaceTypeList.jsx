@@ -77,6 +77,7 @@ export default function SpaceTypeList({
         variant="outlined"
         value={searchQuery}
         onChange={handleSearch}
+        className="search"
         InputProps={{
           endAdornment: (
             <IconButton
@@ -88,7 +89,6 @@ export default function SpaceTypeList({
             </IconButton>
           ),
         }}
-        style={{ marginBottom: 16, width: "100%" }}
       />
       <Paper>
         <TableContainer>

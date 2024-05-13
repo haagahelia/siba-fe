@@ -236,6 +236,19 @@ export default function SingleSpaceDialog({
               <DialogContent variant="sibaDialogContent2">
                 <Grid item xs={12} sm={6}>
                   <Typography variant="singleDialogSubtitle">
+                    Low Noise:&nbsp;
+                  </Typography>
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <Typography variant="singleDialogSubtitle">
+                    {singleSpace?.isLowNoise ? "Yes" : "No"}
+                  </Typography>
+                </Grid>
+              </DialogContent>
+
+              <DialogContent variant="sibaDialogContent2">
+                <Grid item xs={12} sm={6}>
+                  <Typography variant="singleDialogSubtitle">
                     Space Type:&nbsp;
                   </Typography>
                 </Grid>

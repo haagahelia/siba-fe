@@ -31,6 +31,7 @@ export default function ConfirmationDialog({
             Cancel
           </Button>
           <Button
+            id="confirmation-dialog-continue-button"
             autoFocus
             variant="contained"
             onClick={async () => {

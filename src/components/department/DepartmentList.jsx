@@ -118,6 +118,7 @@ export default function DepartmentList({
         variant="outlined"
         value={searchQuery}
         onChange={handleSearch}
+        className="search"
         InputProps={{
           endAdornment: (
             <IconButton
@@ -129,7 +130,6 @@ export default function DepartmentList({
             </IconButton>
           ),
         }}
-        style={{ marginBottom: 16, width: "100%" }}
       />
       <Box>
         <Paper>
