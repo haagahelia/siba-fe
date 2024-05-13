@@ -13,9 +13,9 @@ export const fetchAllAllocRounds = async (): Promise<Response<AllocRound>> => {
 // fetching allocRound by ID:
 export const fetchAllocRoundById = async (
   allocRoundId: number,
-): PromiseConstructor<Response<AllocRound>> => {
+): Promise<Response<AllocRound>> => {
   const response = await get(`${baseUrl}/allocRound/${allocRoundId}`);
-  const allocRound: AllocRound = await response.json();
+  const allocRound: AllocRound[] = await response.json();
   return { success: response.ok, data: allocRound };
 };
 
