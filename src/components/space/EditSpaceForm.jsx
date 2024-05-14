@@ -21,10 +21,16 @@ export default function EditSpaceForm({
 }) {
   const [open, setOpen] = useState(false);
 
-  console.log("inital: ");
-  console.log(formik.initialValues);
-  console.log("changed: ");
-  console.log(formik.values);
+  const compareValues = () => {
+    for (const key in formik.initialValues) {
+      if (
+        formik.values[key].toString() !== formik.initialValues[key].toString()
+      ) {
+        return false;
+      }
+    }
+    return true;
+  };
 
   return (
     <div>
@@ -73,11 +79,7 @@ export default function EditSpaceForm({
                   variant="outlined"
                   value={formik.values?.area}
                   onChange={(e) => {
-                    if (e.target.value.endsWith(".")) {
-                      formik.setFieldValue("area", e.target.value);
-                      return;
-                    }
-                    const value = parseFloat(e.target.value);
+                    const value = e.target.value.replace(",", ".");
                     formik.setFieldValue("area", value);
                   }}
                   onBlur={formik.handleBlur("area")}
@@ -299,7 +301,7 @@ export default function EditSpaceForm({
             </Button>
             <Tooltip
               title={
-                formik.dirty ? "" : "Please change values to enable submit"
+                !compareValues() ? "" : "Please change values to enable submit"
               }
               placement="top"
             >
@@ -307,7 +309,7 @@ export default function EditSpaceForm({
                 <Button
                   type="submit"
                   variant="contained"
-                  disabled={!formik.dirty}
+                  disabled={compareValues()}
                   onClick={() => setOpen(false)}
                 >
                   Submit

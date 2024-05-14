@@ -22,6 +22,17 @@ export default function EditSubjectForm({
 }) {
   const [open, setOpen] = useState(false);
 
+  const compareValues = () => {
+    for (const key in formik.initialValues) {
+      if (
+        formik.values[key].toString() !== formik.initialValues[key].toString()
+      ) {
+        return false;
+      }
+    }
+    return true;
+  };
+
   return (
     <div>
       <Button
@@ -151,11 +162,7 @@ export default function EditSubjectForm({
                   defaultValue={formik.initialValues?.area}
                   variant="outlined"
                   onChange={(e) => {
-                    if (e.target.value.endsWith(".")) {
-                      formik.setFieldValue("area", e.target.value);
-                      return;
-                    }
-                    const value = parseFloat(e.target.value);
+                    const value = e.target.value.replace(",", ".");
                     formik.setFieldValue("area", value);
                   }}
                   onBlur={formik.handleBlur("area")}
@@ -225,7 +232,7 @@ export default function EditSubjectForm({
             </Button>
             <Tooltip
               title={
-                formik.dirty ? "" : "Please change values to enable submit"
+                !compareValues() ? "" : "Please change values to enable submit"
               }
               placement="top"
             >
@@ -233,7 +240,7 @@ export default function EditSubjectForm({
                 <Button
                   type="submit"
                   variant="contained"
-                  disabled={!formik.dirty}
+                  disabled={compareValues()}
                   onClick={() => {
                     setOpen(false);
                   }}
