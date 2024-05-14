@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import { DialogActions } from "@mui/material";
+import { Button, DialogActions } from "@mui/material";
 import DialogContent from "@mui/material/DialogContent";
 import Grid from "@mui/material/Grid";
 import List from "@mui/material/List";
@@ -14,6 +14,7 @@ import DeleteSubEquip from "./DeleteSubEquip";
 import EditSubEquipContainer from "./EditSubEquipContainer";
 
 export default function SubjectEquipmentList({
+  allocRound,
   equipListBySubId,
   getEquipmentsBySubId,
   userPrograms,
@@ -40,7 +41,8 @@ export default function SubjectEquipmentList({
                 <ListItem>
                   {(roles.admin === "1" ||
                     (roles.planner === "1" &&
-                      checkForUserPrograms(singleSubject, userPrograms))) && (
+                      checkForUserPrograms(singleSubject, userPrograms))) &&
+                  allocRound?.isReadOnly === 0 ? (
                     <DialogActions>
                       <EditSubEquipContainer
                         subId={value.subjectId}
@@ -57,6 +59,16 @@ export default function SubjectEquipmentList({
                         getEquipmentsBySubId={getEquipmentsBySubId}
                         subId={value.subjectId}
                       />
+                    </DialogActions>
+                  ) : (
+                    <DialogActions>
+                      <Button
+                        variant="contained"
+                        disabled
+                        className="redButton disabledButton"
+                      >
+                        Allocation Round is Read Only
+                      </Button>
                     </DialogActions>
                   )}
                   <DialogContent>

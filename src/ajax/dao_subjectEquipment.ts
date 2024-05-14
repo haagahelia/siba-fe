@@ -20,8 +20,7 @@ export const postNewSubjectEquipment = async (
     `${baseUrl}/subjectequipment/post`,
     newSubjectEquipment,
   );
-  const data = await response.json();
-  return data;
+  return response.ok;
 };
 
 // updating SubjectEquipment
