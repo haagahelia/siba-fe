@@ -79,7 +79,7 @@ export async function validate(values, allocRoundId) {
       vF_regNumberCountPlus.errorMessageFunction("Session count");
   }
 
-  if (values.area === undefined || values.area === null) {
+  if (values.area === undefined || values.area === null || values.area === "") {
     errors.area = requiredFieldErrorMessageFunction("Area");
   } else if (values.area < 0) {
     errors.area = "The required area cannot be less than 0";
