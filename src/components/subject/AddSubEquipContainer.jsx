@@ -7,6 +7,7 @@ import {
 import dao from "../../ajax/dao";
 import { validate } from "../../validation/ValidateAddSubjectEquipment";
 
+import Logger from "../../logger/logger";
 import AlertBox from "../common/AlertBox";
 import ConfirmationDialog from "../common/ConfirmationDialog";
 import AddSubEquipForm from "./AddSubEquipForm";

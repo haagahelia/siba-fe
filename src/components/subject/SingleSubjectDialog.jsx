@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import dao from "../../ajax/dao";
 
 import CloseIcon from "@mui/icons-material/Close";
+import { Button } from "@mui/material";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
@@ -33,7 +34,7 @@ export default function SingleSubjectDialog({
     message: "This is an error alert — check it out!",
     severity: "error",
   });
-
+  const [allocRound, setAllocRound] = useState(null);
   const [programs, setPrograms] = useState([]);
 
   const { roles } = useRoleLoggedIn();
@@ -55,12 +56,27 @@ export default function SingleSubjectDialog({
   };
 
   useEffect(() => {
-    // console.log(`singleSubject?.id${singleSubject?.id}`);
-    // console.log(`singleSubject?.name${singleSubject?.name}`);
     if (singleSubject && typeof singleSubject?.id === "number") {
-      // console.log(`getEquipmentsBySubId(${singleSubject.id})`);
       setPrograms(checkForUserPrograms(singleSubject, userPrograms));
       getEquipmentsBySubId(singleSubject.id);
+    }
+
+    // Fetch alloc round by id to make sure is not read only:
+    if (singleSubject?.id) {
+      dao.fetchAllocRoundById(singleSubject.allocRoundId).then((response) => {
+        if (!response.success) {
+          Logger.error("Error fetching allocation rounds");
+          setAlertOptions({
+            severity: "error",
+            title: "Error",
+            message:
+              "Oops! Something went wrong on the server. No allocation found",
+          });
+          setAlertOpen(true);
+          return;
+        }
+        setAllocRound(response.data[0]);
+      });
     }
   }, [singleSubject]);
 
@@ -97,20 +113,32 @@ export default function SingleSubjectDialog({
         <DialogContent>
           {(roles.admin === "1" || (roles.planner === "1" && programs)) && (
             <DialogActions>
-              <DeleteSubject
-                singleSubject={singleSubject}
-                getAllSubjects={getAllSubjects}
-                setOpen={setOpen}
-              />
-              <EditSubjectContainer
-                singleSubject={singleSubject}
-                getAllSubjects={getAllSubjects}
-                setSingleSubject={setSingleSubject}
-              />
-              <AddSubEquipContainer
-                singleSubject={singleSubject}
-                equipmentsBySubId={getEquipmentsBySubId}
-              />
+              {allocRound?.isReadOnly === 0 ? (
+                <>
+                  <DeleteSubject
+                    singleSubject={singleSubject}
+                    getAllSubjects={getAllSubjects}
+                    setOpen={setOpen}
+                  />
+                  <EditSubjectContainer
+                    singleSubject={singleSubject}
+                    getAllSubjects={getAllSubjects}
+                    setSingleSubject={setSingleSubject}
+                  />
+                  <AddSubEquipContainer
+                    singleSubject={singleSubject}
+                    equipmentsBySubId={getEquipmentsBySubId}
+                  />
+                </>
+              ) : (
+                <Button
+                  variant="contained"
+                  disabled
+                  className="redButton disabledButton"
+                >
+                  Allocation Round is Read Only
+                </Button>
+              )}
             </DialogActions>
           )}
           <DialogContent>
@@ -215,6 +243,7 @@ export default function SingleSubjectDialog({
             <DialogContent>
               <Typography variant="boldTitle2">Equipment needs:</Typography>
               <SubjectEquipmentList
+                allocRound={allocRound}
                 equipListBySubId={equipListBySubId}
                 getEquipmentsBySubId={getEquipmentsBySubId}
                 singleSubject={singleSubject}
