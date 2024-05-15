@@ -22,8 +22,6 @@ export default async function ValidateAddSpace(values) {
     classesTo,
     inUse,
     isLowNoise,
-    spaceTypeId,
-    buildingId,
   } = values;
 
   const isDuplicatedSpaceNameAndBuildingName = async () => {
@@ -129,14 +127,6 @@ export default async function ValidateAddSpace(values) {
     errors.isLowNoise = requiredFieldErrorMessageFunction("Low noise");
   } else if (!["0", "1", 0, 1].includes(isLowNoise)) {
     errors.isLowNoise = "'Low noise' must be either yes or no";
-  }
-
-  if (!spaceTypeId) {
-    errors.spaceTypeId = requiredFieldErrorMessageFunction("Space type");
-  }
-
-  if (!buildingId) {
-    errors.buildingId = requiredFieldErrorMessageFunction("Building");
   }
 
   // Additional validation rules can be added as needed for other fields.
