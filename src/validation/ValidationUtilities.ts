@@ -1,5 +1,6 @@
 // Add common validation utilities here
 
+import { DateTime } from "luxon";
 import dao from "../ajax/dao";
 import { Department, Equipment } from "../types";
 
@@ -7,6 +8,25 @@ import { Department, Equipment } from "../types";
 export function capitalizeFirstLetter(input: string) {
   return input[0].toUpperCase() + input.slice(1);
 }
+
+// This can be used to convert times such as 9:00 to 09:00.
+export function normalizeTime(timeValue: string) {
+  let time = DateTime.fromFormat(timeValue, "H:mm");
+  if (!time.isValid) {
+    time = DateTime.fromFormat(timeValue, "HH:mm");
+  }
+  if (!time.isValid) {
+    return timeValue;
+  }
+
+  return time.toFormat("HH:mm");
+}
+
+// This can be used to check for falsy field values in objects.
+export const isNotFalsy = (object: Record<string, string>, field: string) => {
+  const fieldValue = String(object?.[field] ?? "").toLowerCase();
+  return ["yes", "y", "1", "true"].includes(fieldValue);
+};
 
 // Checks if equipment name already exists
 export const isDuplicatedEquipmentName = async (name: string) => {

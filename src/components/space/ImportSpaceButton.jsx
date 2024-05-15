@@ -1,9 +1,12 @@
+import Button from "@mui/material/Button";
 import { useState } from "react";
 import dao from "../../ajax/dao";
 import { importData } from "../../importDataFunctions/importData";
 import ValidateAddSpace from "../../validation/ValidateAddSpace";
-
-import Button from "@mui/material/Button";
+import {
+  isNotFalsy,
+  normalizeTime,
+} from "../../validation/ValidationUtilities";
 import AlertBox from "../common/AlertBox";
 
 export default function ImportSpaceButton({
@@ -44,14 +47,20 @@ export default function ImportSpaceButton({
         info: space.Info ? space.Info : "",
         personLimit: space["Person limit"] ? space["Person limit"] : "",
         buildingName: space.Building ? space.Building : "",
-        availableFrom: space["Available from"] ? space["Available from"] : "",
-        availableTo: space["Available to"] ? space["Available to"] : "",
-        classesFrom: space["Classes from"] ? space["Classes from"] : "",
-        classesTo: space["Classes to"] ? space["Classes to"] : "",
-        inUse:
-          space["Is in use"] !== undefined && space["Is in use"] !== null
-            ? 1
-            : 0,
+        availableFrom: space["Available from"]
+          ? normalizeTime(space["Available from"])
+          : "",
+        availableTo: space["Available to"]
+          ? normalizeTime(space["Available to"])
+          : "",
+        classesFrom: space["Classes from"]
+          ? normalizeTime(space["Classes from"])
+          : "",
+        classesTo: space["Classes to"]
+          ? normalizeTime(space["Classes to"])
+          : "",
+        inUse: isNotFalsy(space, "Is in use") ? 1 : 0,
+        isLowNoise: isNotFalsy(space, "Is low noise") ? 1 : 0,
         spaceType: space["Space type"] ? space["Space type"] : "",
       };
 
@@ -76,7 +85,8 @@ export default function ImportSpaceButton({
           validateResult.availableTo ||
           validateResult.classesFrom ||
           validateResult.classesTo ||
-          validateResult.inUse;
+          validateResult.inUse ||
+          validateResult.isLowNoise;
 
         return space;
       }

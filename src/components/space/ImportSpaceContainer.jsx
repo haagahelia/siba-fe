@@ -25,7 +25,7 @@ export default function ImportSpaceContainer({
   const [spaceToImport, setSpaceToImport] = useState([]);
   const [spaceFailedToImport, setSpaceFailedToImport] = useState([]);
 
-  const handleUploadeFiled = (e) => {
+  const handleUploadedFile = (e) => {
     processFile(
       e,
       setSpaceToImport,
@@ -55,7 +55,7 @@ export default function ImportSpaceContainer({
             variant="sibaInputFileName"
             type="file"
             accept=".xlsx, .xls, .csv"
-            onChange={handleUploadeFiled}
+            onChange={handleUploadedFile}
           />
         </Grid>
         <Grid item>
