@@ -263,11 +263,11 @@ export default function AddSubjectForm({
                 name="isNoisy"
                 label="isNoisy"
                 onChange={formik.handleChange}
-                value={formik.values.spaceTypeId || ""}
+                value={formik.values.isNoisy}
                 onBlur={formik.handleBlur}
               >
-                <MenuItem value={true}>Yes</MenuItem>
-                <MenuItem value={false}>No</MenuItem>
+                <MenuItem value="1">Yes</MenuItem>
+                <MenuItem value="0">No</MenuItem>
               </Select>
             </FormControl>
           </Grid>

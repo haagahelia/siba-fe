@@ -58,7 +58,7 @@ export default function AddSubjectContainer({
     area: 0,
     programId: 3009,
     spaceTypeId: 5004,
-    isNoisy: 0,
+    isNoisy: "0",
   });
 
   const resetForm = () => {
@@ -71,7 +71,7 @@ export default function AddSubjectContainer({
       area: 0,
       programId: 3009,
       spaceTypeId: 5004,
-      isNoisy: 0,
+      isNoisy: "",
     });
   };
 

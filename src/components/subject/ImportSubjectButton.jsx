@@ -59,6 +59,7 @@ export default function ImportSubjectButton({
           : "",
         major: subject.Major ? subject.Major : "",
         roomType: subject["Room type"] ? subject["Room type"] : "",
+        isNoisy: subject.isNoisy.toLowerCase() === "yes" ? 1 : 0,
       };
 
       if (subjectSet.has(newSubject.name)) {
@@ -79,7 +80,8 @@ export default function ImportSubjectButton({
         validateResult.groupCount ||
         validateResult.sessionLength ||
         validateResult.sessionCount ||
-        validateResult.area;
+        validateResult.area ||
+        validateResult.isNoisy;
 
       return subject.FailedReason ? subject : newSubject;
     }

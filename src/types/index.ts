@@ -22,6 +22,7 @@ export interface Subject {
   sessionLength: string;
   spaceTypeId: number;
   spaceTypeName: string;
+  isNoisy: boolean;
 }
 
 export interface SubjectName {
