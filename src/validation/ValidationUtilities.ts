@@ -16,7 +16,7 @@ export function normalizeTime(timeValue: string) {
     time = DateTime.fromFormat(timeValue, "HH:mm");
   }
   if (!time.isValid) {
-    return "";
+    return timeValue;
   }
 
   return time.toFormat("HH:mm");
