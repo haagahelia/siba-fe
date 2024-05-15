@@ -1,11 +1,25 @@
 // Add common validation utilities here
 
+import { DateTime } from "luxon";
 import dao from "../ajax/dao";
 import { Department, Equipment } from "../types";
 
 // Returns a new string with the first letter of input capitalized.
 export function capitalizeFirstLetter(input: string) {
   return input[0].toUpperCase() + input.slice(1);
+}
+
+// This can be used to convert times such as 9:00 to 09:00.
+export function normalizeTime(timeValue: string) {
+  let time = DateTime.fromFormat(timeValue, "H:mm");
+  if (!time.isValid) {
+    time = DateTime.fromFormat(timeValue, "HH:mm");
+  }
+  if (!time.isValid) {
+    return "";
+  }
+
+  return time.toFormat("HH:mm");
 }
 
 // Checks if equipment name already exists

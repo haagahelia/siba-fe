@@ -1,9 +1,9 @@
+import Button from "@mui/material/Button";
 import { useState } from "react";
 import dao from "../../ajax/dao";
 import { importData } from "../../importDataFunctions/importData";
 import ValidateAddSpace from "../../validation/ValidateAddSpace";
-
-import Button from "@mui/material/Button";
+import { normalizeTime } from "../../validation/ValidationUtilities";
 import AlertBox from "../common/AlertBox";
 
 export default function ImportSpaceButton({
@@ -44,10 +44,18 @@ export default function ImportSpaceButton({
         info: space.Info ? space.Info : "",
         personLimit: space["Person limit"] ? space["Person limit"] : "",
         buildingName: space.Building ? space.Building : "",
-        availableFrom: space["Available from"] ? space["Available from"] : "",
-        availableTo: space["Available to"] ? space["Available to"] : "",
-        classesFrom: space["Classes from"] ? space["Classes from"] : "",
-        classesTo: space["Classes to"] ? space["Classes to"] : "",
+        availableFrom: space["Available from"]
+          ? normalizeTime(space["Available from"])
+          : "",
+        availableTo: space["Available to"]
+          ? normalizeTime(space["Available to"])
+          : "",
+        classesFrom: space["Classes from"]
+          ? normalizeTime(space["Classes from"])
+          : "",
+        classesTo: space["Classes to"]
+          ? normalizeTime(space["Classes to"])
+          : "",
         inUse:
           (space["Is in use"] && space["Is in use"] === "yes") ||
           space["Is in use"] === "Yes"

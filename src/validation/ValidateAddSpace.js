@@ -1,3 +1,4 @@
+import { DateTime } from "luxon";
 import dao from "../ajax/dao";
 import {
   requiredFieldErrorMessageFunction,
@@ -23,6 +24,9 @@ export default async function ValidateAddSpace(values) {
     inUse,
     isLowNoise,
   } = values;
+
+  console.log(availableFrom);
+  console.log(availableTo);
 
   const isDuplicatedSpaceNameAndBuildingName = async () => {
     let spaceList = [];
@@ -71,47 +75,61 @@ export default async function ValidateAddSpace(values) {
       vF_regNumberCountPlus.errorMessageFunction("Person limit");
   }
 
-  if (!values.availableFrom) {
+  if (!availableFrom) {
     errors.availableFrom = requiredFieldErrorMessageFunction("Available from");
-  } else if (!vF_regTimetableTime.regExp.test(values.availableFrom)) {
+  } else if (!vF_regTimetableTime.regExp.test(availableFrom)) {
     errors.availableFrom =
       vF_regTimetableTime.errorMessageFunction("Available from");
   }
 
-  if (!values.availableTo) {
+  if (!availableTo) {
     errors.availableTo = requiredFieldErrorMessageFunction("Available to");
-  } else if (!vF_regTimetableTime.regExp.test(values.availableTo)) {
+  } else if (!vF_regTimetableTime.regExp.test(availableTo)) {
     errors.availableTo =
       vF_regTimetableTime.errorMessageFunction("Available to");
   } else if (
-    values.availableFrom &&
-    values.availableTo <= values.availableFrom
+    availableFrom &&
+    DateTime.fromFormat(availableTo, "HH:mm") <=
+      DateTime.fromFormat(availableFrom, "HH:mm")
   ) {
     errors.availableTo = "Available to must be later than Available from";
   }
 
-  if (!values.classesFrom) {
+  if (!classesFrom) {
     errors.classesFrom = requiredFieldErrorMessageFunction("Classes from");
-  } else if (!vF_regTimetableTime.regExp.test(values.classesFrom)) {
+  } else if (!vF_regTimetableTime.regExp.test(classesFrom)) {
     errors.classesFrom =
       vF_regTimetableTime.errorMessageFunction("Classes from");
-  } else if (values.availableTo && values.classesFrom >= values.availableTo) {
+  } else if (
+    availableTo &&
+    DateTime.fromFormat(classesFrom, "HH:mm") >=
+      DateTime.fromFormat(availableTo, "HH:mm")
+  ) {
     errors.classesFrom = "Classes from must be earlier than Available to";
   } else if (
-    values.availableFrom &&
-    values.classesFrom < values.availableFrom
+    availableFrom &&
+    DateTime.fromFormat(classesFrom, "HH:mm") <
+      DateTime.fromFormat(availableFrom, "HH:mm")
   ) {
     errors.classesFrom =
       "Classes from must be equal to or later than Available from";
   }
 
-  if (!values.classesTo) {
+  if (!classesTo) {
     errors.classesTo = requiredFieldErrorMessageFunction("Classes to");
-  } else if (!vF_regTimetableTime.regExp.test(values.classesTo)) {
+  } else if (!vF_regTimetableTime.regExp.test(classesTo)) {
     errors.classesTo = vF_regTimetableTime.errorMessageFunction("Classes to");
-  } else if (values.classesFrom && values.classesTo <= values.classesFrom) {
+  } else if (
+    classesFrom &&
+    DateTime.fromFormat(classesTo, "HH:mm") <=
+      DateTime.fromFormat(classesFrom, "HH:mm")
+  ) {
     errors.classesTo = "Classes to must be later than Classes from";
-  } else if (values.availableTo && values.classesTo > values.availableTo) {
+  } else if (
+    availableTo &&
+    DateTime.fromFormat(classesTo, "HH:mm") >
+      DateTime.fromFormat(availableTo, "HH:mm")
+  ) {
     errors.classesTo =
       "Classes to must be equal to or earlier than Available to";
   }
