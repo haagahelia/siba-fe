@@ -216,6 +216,21 @@ export default function EditSubjectForm({
                   </Select>
                 </FormControl>
               </Grid>
+              <Grid item xs={12}>
+                <FormControl sx={{ minWidth: 200 }}>
+                  <InputLabel>is Noisy</InputLabel>
+                  <Select
+                    name="isNoisy"
+                    defaultValue={formik.initialValues?.isNoisy}
+                    onChange={formik.handleChange("isNoisy")}
+                    onBlur={formik.handleBlur("isNoisy")}
+                  >
+                    return (<MenuItem value="1">Yes</MenuItem>
+                    <MenuItem value="0">No</MenuItem>
+                    );
+                  </Select>
+                </FormControl>
+              </Grid>
             </Grid>
           </DialogContent>
           <DialogActions>

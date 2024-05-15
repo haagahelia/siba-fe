@@ -239,6 +239,18 @@ export default function SingleSubjectDialog({
                   </Typography>
                 </Grid>
               </DialogContent>
+              <DialogContent variant="sibaDialogContent2">
+                <Grid item xs={12} sm={6}>
+                  <Typography variant="singleDialogSubtitle">
+                    is Noisy:&nbsp;
+                  </Typography>
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <Typography variant="singleDialogSubtitle">
+                    {singleSubject?.isNoisy ? "Yes" : "No"}
+                  </Typography>
+                </Grid>
+              </DialogContent>
             </Grid>
             <DialogContent>
               <Typography variant="boldTitle2">Equipment needs:</Typography>

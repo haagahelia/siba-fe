@@ -256,6 +256,21 @@ export default function AddSubjectForm({
               </Select>
             </FormControl>
           </Grid>
+          <Grid item xs={12} sm={12} md={6} lg={3}>
+            <FormControl fullWidth>
+              <InputLabel>isNoisy</InputLabel>
+              <Select
+                name="isNoisy"
+                label="isNoisy"
+                onChange={formik.handleChange}
+                value={formik.values.isNoisy}
+                onBlur={formik.handleBlur}
+              >
+                <MenuItem value="1">Yes</MenuItem>
+                <MenuItem value="0">No</MenuItem>
+              </Select>
+            </FormControl>
+          </Grid>
         </Grid>
         <Grid padding={2}>
           <Button

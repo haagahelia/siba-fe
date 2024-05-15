@@ -84,11 +84,16 @@ export default function SubjectList({
             return order === "asc"
               ? a.spaceTypeName.localeCompare(b.spaceTypeName, "fi-FI")
               : b.spaceTypeName.localeCompare(a.spaceTypeName, "fi-FI");
+          case "isNoisy":
+            return order === "asc"
+              ? a.isNoisy - b.isNoisy
+              : b.isNoisy - a.isNoisy;
           default:
             return 0;
         }
       });
-
+      // sort booleans (is noisy) values
+      const compareBooleans = (a, b) => (a === b ? 0 : a ? 1 : -1);
       // Apply search filter to both name and departmentName
       if (searched !== "") {
         sorted = sorted.filter((subject) =>
@@ -141,6 +146,8 @@ export default function SubjectList({
     overflow: "auto",
     borderCollapse: "collapse",
   }));
+  // is noisy boolean showing stringy values
+  const booleanToYesNo = (value) => (value ? "Yes" : "No");
 
   return (
     <div>
@@ -246,6 +253,15 @@ export default function SubjectList({
                     Space type
                   </TableSortLabel>
                 </TableCell>
+                <TableCell>
+                  <TableSortLabel
+                    active={orderBy === "isNoisy"}
+                    direction={order}
+                    onClick={() => handleRequestSort("isNoisy")}
+                  >
+                    isNoisy
+                  </TableSortLabel>
+                </TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -281,6 +297,7 @@ export default function SubjectList({
                   <TableCell>{value.sessionCount}</TableCell>
                   <TableCell>{value.programName}</TableCell>
                   <TableCell>{value.spaceTypeName}</TableCell>
+                  <TableCell>{booleanToYesNo(value.isNoisy)}</TableCell>
                 </TableRow>
               ))}
             </TableBody>

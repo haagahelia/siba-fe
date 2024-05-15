@@ -65,6 +65,7 @@ export default function EditSubjectContainer({
       area: values.area,
       programId: values.programId,
       spaceTypeId: values.spaceTypeId ? values.spaceTypeId : null,
+      isNoisy: values.isNoisy,
       allocRoundId: allocRoundContext.allocRoundId,
     };
     const result = await dao.editSubject(editedSubject);

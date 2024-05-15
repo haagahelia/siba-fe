@@ -2,6 +2,7 @@ import dao from "../ajax/dao";
 import Logger from "../logger/logger";
 import {
   requiredFieldErrorMessageFunction,
+  trimAllPropertyValueStrings,
   vF_regName,
   vF_regNumberCountPlus,
   vF_regNumberDecimalOnePlus,
@@ -9,6 +10,7 @@ import {
 } from "./Validate_GenericRegexps";
 
 export async function validate(values, allocRoundId) {
+  trimAllPropertyValueStrings(values);
   const errors = {};
 
   let subjectList = [];
@@ -19,9 +21,14 @@ export async function validate(values, allocRoundId) {
       subjectList = data;
       // Here it is considered that the user does not enter
       // the name of an already existing lesson.
-      const result = subjectList.some(
-        (names) => names.name.toLowerCase() === values.name.toLowerCase(),
-      );
+      const result = subjectList.some((program) => {
+        return (
+          program.name
+            .trim()
+            .toLowerCase()
+            .localeCompare(values.name.trim().toLowerCase()) === 0
+        );
+      });
       return result;
     } else {
       Logger.error(`getSubjectNames failed, http status code: ${httpStatus}`);
@@ -31,7 +38,7 @@ export async function validate(values, allocRoundId) {
   if (!values.name) {
     errors.name = requiredFieldErrorMessageFunction("Name");
   } else if (await getSubjectNames(allocRoundId)) {
-    errors.name = "The name already exists";
+    errors.name = `This imported name already exists: ${values.name}`;
   } else if (values.name.length < 2 || values.name.length > 255) {
     errors.name = "The name must be 2-255 characters long";
   } else if (!vF_regName.regExp.test(values.name)) {

@@ -25,10 +25,9 @@ export default function SingleProgramDialog({
 
   const { roles } = useRoleLoggedIn();
   const { userId } = useContext(AppContext);
-  const [departmentList, setDepartmentList] = useState([
-    { id: 101, name: "Jazz" }, // Hard-coded???
-  ]);
+  const [departmentList, setDepartmentList] = useState([]);
   const [numberOfLessons, setNumberOfLessons] = useState(null);
+  const [isPlannerOfDepartment, setIsPlannerOfDepartment] = useState(false);
 
   const fetchNumberOfLessons = async () => {
     const response = await dao.getNumberOfLessons(singleProgram?.id);
@@ -61,6 +60,13 @@ export default function SingleProgramDialog({
       const response = await dao.fetchDepartmentplannerByUserId(userId);
       if (response.success) {
         setDepartmentList(response.data);
+        // check planner
+        setIsPlannerOfDepartment(
+          roles.planner === "1" &&
+            departmentList.some(
+              (dept) => dept.id === singleProgram?.departmentId,
+            ),
+        );
       } else {
         Logger.error("Error fetching planner Departments.");
       }
@@ -70,10 +76,6 @@ export default function SingleProgramDialog({
   useEffect(() => {
     getDepartmentIdForDialog();
   }, []);
-
-  const isPlannerOfDepartment =
-    roles.planner === "1" &&
-    departmentList.some((dept) => dept.id === singleProgram?.departmentId);
 
   return (
     <Dialog
@@ -101,6 +103,12 @@ export default function SingleProgramDialog({
         }}
       >
         <Typography variant="singleDialogSubtitle">
+          {`${
+            isPlannerOfDepartment
+              ? "You are planner for this department!"
+              : "Not planner for this department!"
+          }`}
+          <br />
           {numberOfLessons !== null
             ? numberOfLessons === 0
               ? "There are no lessons in this program."
@@ -130,7 +138,7 @@ export default function SingleProgramDialog({
       )}
       <DialogContent>
         <Grid container variant="sibaGridSingleItemDisplay" column={14}>
-          {/* 
+          {/*
           <DialogContent variant="sibaDialogContent2">
             <Grid item xs={12} sm={6}>
               <Typography variant="singleDialogSubtitle">id:</Typography>
