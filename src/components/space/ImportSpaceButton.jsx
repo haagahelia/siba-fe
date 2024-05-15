@@ -3,7 +3,10 @@ import { useState } from "react";
 import dao from "../../ajax/dao";
 import { importData } from "../../importDataFunctions/importData";
 import ValidateAddSpace from "../../validation/ValidateAddSpace";
-import { normalizeTime } from "../../validation/ValidationUtilities";
+import {
+  isNotFalsy,
+  normalizeTime,
+} from "../../validation/ValidationUtilities";
 import AlertBox from "../common/AlertBox";
 
 export default function ImportSpaceButton({
@@ -31,16 +34,6 @@ export default function ImportSpaceButton({
     spaceTypeSelectList.some((spaceType) =>
       spaceType.name.includes(space["Space type"]),
     );
-
-  const isNotFalsy = (space, field) => {
-    const fieldValue = space[field] ? String(space[field]).toLowerCase() : "";
-    return (
-      fieldValue === "yes" ||
-      fieldValue === "y" ||
-      fieldValue === "1" ||
-      fieldValue === "true"
-    );
-  };
 
   const processSpace = async (space, spaceSet) => {
     if (!isBuildingNameCorrect(space)) {

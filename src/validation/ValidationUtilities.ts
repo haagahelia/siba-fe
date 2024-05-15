@@ -22,6 +22,12 @@ export function normalizeTime(timeValue: string) {
   return time.toFormat("HH:mm");
 }
 
+// This can be used to check for falsy field values in objects.
+export const isNotFalsy = (object: Record<string, string>, field: string) => {
+  const fieldValue = String(object?.[field] ?? "").toLowerCase();
+  return ["yes", "y", "1", "true"].includes(fieldValue);
+};
+
 // Checks if equipment name already exists
 export const isDuplicatedEquipmentName = async (name: string) => {
   const { data } = await dao.fetchEquipmentData();

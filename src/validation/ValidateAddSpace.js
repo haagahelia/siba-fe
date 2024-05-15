@@ -25,9 +25,6 @@ export default async function ValidateAddSpace(values) {
     isLowNoise,
   } = values;
 
-  console.log(availableFrom);
-  console.log(availableTo);
-
   const isDuplicatedSpaceNameAndBuildingName = async () => {
     let spaceList = [];
     const { data } = await dao.fetchSpaceNamesInBuilding();
