@@ -32,6 +32,16 @@ export default function ImportSpaceButton({
       spaceType.name.includes(space["Space type"]),
     );
 
+  const isNotFalsy = (space, field) => {
+    const fieldValue = space[field] ? String(space[field]).toLowerCase() : "";
+    return (
+      fieldValue === "yes" ||
+      fieldValue === "y" ||
+      fieldValue === "1" ||
+      fieldValue === "true"
+    );
+  };
+
   const processSpace = async (space, spaceSet) => {
     if (!isBuildingNameCorrect(space)) {
       space.FailedReason = "Non-existent building";
@@ -56,16 +66,8 @@ export default function ImportSpaceButton({
         classesTo: space["Classes to"]
           ? normalizeTime(space["Classes to"])
           : "",
-        inUse:
-          (space["Is in use"] && space["Is in use"] === "yes") ||
-          space["Is in use"] === "Yes"
-            ? 1
-            : 0,
-        isLowNoise:
-          (space["Is low noise"] && space["Is low noise"] === "yes") ||
-          space["Is low noise"] === "Yes"
-            ? 1
-            : 0,
+        inUse: isNotFalsy(space, "Is in use") ? 1 : 0,
+        isLowNoise: isNotFalsy(space, "Is low noise") ? 1 : 0,
         spaceType: space["Space type"] ? space["Space type"] : "",
       };
 
