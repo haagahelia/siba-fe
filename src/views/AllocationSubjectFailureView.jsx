@@ -241,10 +241,14 @@ export default function AllocationSubjectFailureView() {
                     Space type (Required:{" "}
                     {getNameForId(spaceNamesArray, unAllocSubject.spaceTypeId)})
                   </TableCell>
-                  <TableCell>
-                    Low Noise:
-                    {unAllocSubject.isNoisy === 1 ? " Not allowed" : " OK"}
-                  </TableCell>
+                  {unAllocSubject.isNoisy === 1 ? (
+                    <TableCell>
+                      Low Noise:
+                      {unAllocSubject.isNoisy === 1 ? " Not allowed" : ""}
+                    </TableCell>
+                  ) : (
+                    ""
+                  )}
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -308,21 +312,25 @@ export default function AllocationSubjectFailureView() {
                           </TableCell>
                         )}
                       </Tooltip>
-                      <Tooltip
-                        disableFocusListener
-                        title={`Low Noise: ${row.isLowNoise} 
+                      {unAllocSubject.isNoisy === 1 ? (
+                        <Tooltip
+                          disableFocusListener
+                          title={`Low Noise: ${row.isLowNoise} 
                         (${unAllocSubject.isNoisy === 1 ? " 0" : " Any"})`}
-                      >
-                        {unAllocSubject.isNoisy && row.isLowNoise === 1 ? (
-                          <TableCell>
-                            <CloseIcon className="redIcon" />
-                          </TableCell>
-                        ) : (
-                          <TableCell>
-                            <CheckIcon className="greenIcon" />
-                          </TableCell>
-                        )}
-                      </Tooltip>
+                        >
+                          {unAllocSubject.isNoisy && row.isLowNoise === 1 ? (
+                            <TableCell>
+                              <CloseIcon className="redIcon" />
+                            </TableCell>
+                          ) : (
+                            <TableCell>
+                              <CheckIcon className="greenIcon" />
+                            </TableCell>
+                          )}
+                        </Tooltip>
+                      ) : (
+                        ""
+                      )}
                     </TableRow>
                   ))
                 ) : (
