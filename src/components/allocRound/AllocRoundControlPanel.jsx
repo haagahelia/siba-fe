@@ -2,9 +2,10 @@ import DownloadIcon from "@mui/icons-material/Download";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { saveAs } from "file-saver";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { AllocRoundContext } from "../../AppContext";
+import dao from "../../ajax/dao";
 import allocationPost from "../../data/ResultAllocationStore";
 import { useRoleLoggedIn } from "../../hooks/useRoleLoggedIn.js";
 import { getFullReport } from "../../importDataFunctions/getFullReport";
@@ -28,6 +29,7 @@ export default function AllocRoundControlPanel({
   });
 
   const [isClicked, setIsClicked] = useState(true);
+  const [allocRound, setAllocRound] = useState(null);
   const sheetcolumns = [
     { header: "Successful", key: "Successful", width: 12, height: 20 },
     { header: "Allocation ID", key: "allocId", width: 12, height: 20 },
@@ -62,6 +64,28 @@ export default function AllocRoundControlPanel({
     }, 3000);
   };
 
+  useEffect(() => {
+    // Fetch alloc round by id to make sure is not read only:
+    if (allocRoundContext?.allocRoundId) {
+      dao
+        .fetchAllocRoundById(allocRoundContext.allocRoundId)
+        .then((response) => {
+          if (!response.success) {
+            Logger.error("Error fetching allocation rounds");
+            setAlertOptions({
+              severity: "error",
+              title: "Error",
+              message:
+                "Oops! Something went wrong on the server. No allocation found",
+            });
+            setAlertOpen(true);
+            return;
+          }
+          setAllocRound(response.data[0]);
+        });
+    }
+  }, [allocRoundContext]);
+
   return (
     <Typography component="div" variant="allocRoundControlPanel">
       <AlertBox
@@ -70,32 +94,47 @@ export default function AllocRoundControlPanel({
         setAlertOpen={setAlertOpen}
       />
       Allocation {allocRoundContext.allocRoundId}&nbsp;:&nbsp;
-      {allocRoundContext.allocRoundName} &nbsp; - &nbsp;After 'Start' or 'Reset'
-      wait for a few seconds
+      {allocRoundContext.allocRoundName}&nbsp;{" "}
+      {allocRound?.isReadOnly === 0 && "-"} &nbsp;
+      {allocRound?.isReadOnly === 0 &&
+        `After 'Start' or 'Reset'
+      wait for a few seconds`}
       <br />
-      <Button
-        type="submit"
-        variant="contained"
-        onClick={() => {
-          allocationPost.startAlloc(allocRoundContext.allocRoundId);
-          setDelayedClickedToggle();
-        }}
-        disabled={isClicked}
-      >
-        Start Allocation
-      </Button>
-      <Button
-        type="submit"
-        variant="contained"
-        className={`redButton ${!isClicked ? "disabledButton" : ""}`}
-        onClick={() => {
-          allocationPost.resetAlloc(allocRoundContext.allocRoundId);
-          setDelayedClickedToggle();
-        }}
-        disabled={!isClicked}
-      >
-        Reset Allocation
-      </Button>
+      {allocRound?.isReadOnly === 0 ? (
+        <>
+          <Button
+            type="submit"
+            variant="contained"
+            onClick={() => {
+              allocationPost.startAlloc(allocRoundContext.allocRoundId);
+              setDelayedClickedToggle();
+            }}
+            disabled={isClicked}
+          >
+            Start Allocation
+          </Button>
+          <Button
+            type="submit"
+            variant="contained"
+            className={`redButton ${!isClicked ? "disabledButton" : ""}`}
+            onClick={() => {
+              allocationPost.resetAlloc(allocRoundContext.allocRoundId);
+              setDelayedClickedToggle();
+            }}
+            disabled={!isClicked}
+          >
+            Reset Allocation
+          </Button>
+        </>
+      ) : (
+        <Button
+          variant="contained"
+          className="redButton disabledButton"
+          disabled
+        >
+          Alloc Round is Read Only
+        </Button>
+      )}
       <Link
         to={isClicked ? `/alloc-fail/${allocRoundContext.allocRoundId}` : ""}
         disabled={!isClicked}

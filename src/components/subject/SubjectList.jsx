@@ -25,6 +25,7 @@ export default function SubjectList({
   setPaginateSubjects,
   pageSize,
   userPrograms,
+  allocRound,
 }) {
   const [open, setOpen] = useState(false);
   const [singleSubject, setSingleSubject] = useState(null);
@@ -177,6 +178,7 @@ export default function SubjectList({
         singleSubject={singleSubject}
         setSingleSubject={setSingleSubject}
         userPrograms={userPrograms}
+        allocRound={allocRound}
       />
       <Paper>
         <TableContainer>

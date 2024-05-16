@@ -44,6 +44,7 @@ export default function SubjectView() {
     message: "This is an error alert — check it out!",
     severity: "error",
   });
+  const [allocRound, setAllocRound] = useState(null);
 
   Logger.debug("Initial state set.");
 
@@ -163,6 +164,28 @@ export default function SubjectView() {
     foo();
   }, []);
 
+  useEffect(() => {
+    // Fetch alloc round by id to make sure is not read only:
+    if (allocRoundContext?.allocRoundId) {
+      dao
+        .fetchAllocRoundById(allocRoundContext.allocRoundId)
+        .then((response) => {
+          if (!response.success) {
+            Logger.error("Error fetching allocation rounds");
+            setAlertOptions({
+              severity: "error",
+              title: "Error",
+              message:
+                "Oops! Something went wrong on the server. No allocation found",
+            });
+            setAlertOpen(true);
+            return;
+          }
+          setAllocRound(response.data[0]);
+        });
+    }
+  }, [allocRoundContext]);
+
   return (
     <div>
       <AlertBox
@@ -175,6 +198,7 @@ export default function SubjectView() {
           <AddSubjectContainer
             getAllSubjects={getAllSubjects}
             allSubjectsList={allSubjectsList}
+            allocRound={allocRound}
           />
         )}
         <CommonContentContainer>
@@ -200,6 +224,7 @@ export default function SubjectView() {
             open={open}
             setOpen={setOpen}
             userPrograms={userPrograms}
+            allocRound={allocRound}
           />
         </CommonContentContainer>
       </CommonContainer>

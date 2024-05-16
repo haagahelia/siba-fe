@@ -26,6 +26,7 @@ export default function SingleSubjectDialog({
   getAllSubjects,
   setSingleSubject,
   userPrograms,
+  allocRound,
 }) {
   const [equipListBySubId, setEquipListBySubId] = useState([]);
   const [alertOpen, setAlertOpen] = useState(false);
@@ -34,7 +35,6 @@ export default function SingleSubjectDialog({
     message: "This is an error alert — check it out!",
     severity: "error",
   });
-  const [allocRound, setAllocRound] = useState(null);
   const [programs, setPrograms] = useState([]);
 
   const { roles } = useRoleLoggedIn();
@@ -59,24 +59,6 @@ export default function SingleSubjectDialog({
     if (singleSubject && typeof singleSubject?.id === "number") {
       setPrograms(checkForUserPrograms(singleSubject, userPrograms));
       getEquipmentsBySubId(singleSubject.id);
-    }
-
-    // Fetch alloc round by id to make sure is not read only:
-    if (singleSubject?.id) {
-      dao.fetchAllocRoundById(singleSubject.allocRoundId).then((response) => {
-        if (!response.success) {
-          Logger.error("Error fetching allocation rounds");
-          setAlertOptions({
-            severity: "error",
-            title: "Error",
-            message:
-              "Oops! Something went wrong on the server. No allocation found",
-          });
-          setAlertOpen(true);
-          return;
-        }
-        setAllocRound(response.data[0]);
-      });
     }
   }, [singleSubject]);
 
