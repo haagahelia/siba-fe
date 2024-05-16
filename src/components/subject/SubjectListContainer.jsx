@@ -11,6 +11,7 @@ export default function SubjectListContainer({
   open,
   setOpen,
   userPrograms,
+  allocRound,
 }) {
   return (
     <div>
@@ -20,6 +21,7 @@ export default function SubjectListContainer({
         getAllSubjects={getAllSubjects}
         singleSubject={shownSubject ? shownSubject : null}
         userPrograms={userPrograms}
+        allocRound={allocRound}
       />
       <SubjectList
         shownSubject={shownSubject}
@@ -29,6 +31,7 @@ export default function SubjectListContainer({
         setPaginateSubjects={setPaginateSubjects}
         pageSize={pageSize}
         userPrograms={userPrograms}
+        allocRound={allocRound}
       />
     </div>
   );

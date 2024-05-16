@@ -26,6 +26,7 @@ import SubjectTemplate from "./SubjectTemplate";
 export default function AddSubjectContainer({
   getAllSubjects,
   allSubjectsList,
+  allocRound,
 }) {
   const { allocRoundContext } = useContext(AllocRoundContext);
   // State for checking if Add Lesson card is expanded
@@ -209,22 +210,28 @@ export default function AddSubjectContainer({
       <CommonContentContainer>
         <CardHeader
           title={
-            <>
-              Add Lesson to allocation -
-              <span className="allocRoundHeader">
-                {` ${allocRoundContext.allocRoundId} : ${allocRoundContext.allocRoundName}`}
-              </span>
-            </>
+            allocRound?.isReadOnly === 0 ? (
+              <>
+                Add Lesson to allocation -
+                <span className="allocRoundHeader">
+                  {` ${allocRoundContext.allocRoundId} : ${allocRoundContext.allocRoundName}`}
+                </span>
+              </>
+            ) : (
+              <>Allocation Round is not modifiable</>
+            )
           }
           variant="pageHeader"
           action={
-            <IconButton
-              onClick={() => setIsCardExpanded(!isCardExpanded)}
-              aria-expanded={isCardExpanded}
-              aria-label="expand/collapse"
-            >
-              {isCardExpanded ? <ExpandLessIcon /> : <ExpandMoreIcon />}
-            </IconButton>
+            allocRound?.isReadOnly === 0 && (
+              <IconButton
+                onClick={() => setIsCardExpanded(!isCardExpanded)}
+                aria-expanded={isCardExpanded}
+                aria-label="expand/collapse"
+              >
+                {isCardExpanded ? <ExpandLessIcon /> : <ExpandMoreIcon />}
+              </IconButton>
+            )
           }
         />
         {isCardExpanded && (
