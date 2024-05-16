@@ -136,6 +136,7 @@ export interface UnallocableSubject {
   groupSize: number;
   area: number;
   spaceType: string;
+  isNoisy: boolean;
 }
 
 export interface SubjectRoom {
