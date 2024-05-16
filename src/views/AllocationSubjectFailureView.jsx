@@ -311,7 +311,7 @@ export default function AllocationSubjectFailureView() {
                       <Tooltip
                         disableFocusListener
                         title={`Low Noise: ${row.isLowNoise} 
-                        (${unAllocSubject.isNoisy === 1 ? " 0" : " 1"})`}
+                        (${unAllocSubject.isNoisy === 1 ? " 0" : " Any"})`}
                       >
                         {unAllocSubject.isNoisy && row.isLowNoise === 1 ? (
                           <TableCell>
