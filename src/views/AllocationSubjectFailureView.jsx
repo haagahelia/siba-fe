@@ -198,6 +198,7 @@ export default function AllocationSubjectFailureView() {
                   <TableCell>{row.groupSize}</TableCell>
                   <TableCell>{row.area}</TableCell>
                   <TableCell>{row.spaceType}</TableCell>
+                  <TableCell>{row.isLowNoise}</TableCell>
                 </TableRow>
               ))}
             </TableBody>
@@ -239,6 +240,10 @@ export default function AllocationSubjectFailureView() {
                   <TableCell>
                     Space type (Required:{" "}
                     {getNameForId(spaceNamesArray, unAllocSubject.spaceTypeId)})
+                  </TableCell>
+                  <TableCell>
+                    Low Noise:
+                    {unAllocSubject.isNoisy === 1 ? " Not allowed" : " OK"}
                   </TableCell>
                 </TableRow>
               </TableHead>
@@ -294,6 +299,21 @@ export default function AllocationSubjectFailureView() {
                         )})`}
                       >
                         {row.spaceTypeOk === 0 ? (
+                          <TableCell>
+                            <CloseIcon className="redIcon" />
+                          </TableCell>
+                        ) : (
+                          <TableCell>
+                            <CheckIcon className="greenIcon" />
+                          </TableCell>
+                        )}
+                      </Tooltip>
+                      <Tooltip
+                        disableFocusListener
+                        title={`Low Noise: ${row.isLowNoise} 
+                        (${unAllocSubject.isNoisy === 1 ? " 0" : " 1"})`}
+                      >
+                        {unAllocSubject.isNoisy && row.isLowNoise === 1 ? (
                           <TableCell>
                             <CloseIcon className="redIcon" />
                           </TableCell>
