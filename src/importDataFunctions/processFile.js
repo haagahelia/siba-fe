@@ -23,8 +23,8 @@ const fileToArray = (file, setDataToImport) => {
     complete: (result) => {
       for (const row of result.data) {
         if (Object.prototype.hasOwnProperty.call(row, "department")) {
-          row.department = row.department.replace(/,/g, "|");
-          row.department = row.department.replace("| ", "|");
+          row.department = row.department.replace(/,/g, "¤");
+          row.department = row.department.replace("| ", "¤");
         }
       }
       setDataToImport(result.data);
