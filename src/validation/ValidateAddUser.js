@@ -1,7 +1,11 @@
 import dao from "../ajax/dao";
-import { requiredFieldErrorMessageFunction } from "./Validate_GenericRegexps";
+import {
+  requiredFieldErrorMessageFunction,
+  trimAllPropertyValueStrings,
+} from "./Validate_GenericRegexps";
 
 export default async function ValidateAddUser(values) {
+  trimAllPropertyValueStrings(values);
   const errors = {};
   const { email, password, isAdmin, isPlanner, isStatist } = values;
   const validateEmailFormat = (email) => {

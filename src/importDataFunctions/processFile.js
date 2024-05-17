@@ -22,9 +22,8 @@ const fileToArray = (file, setDataToImport) => {
     dynamicTyping: true,
     complete: (result) => {
       for (const row of result.data) {
-        if (Object.prototype.hasOwnProperty.call(row, "department")) {
-          row.department = row.department.replace(/,/g, "¤");
-          row.department = row.department.replace("| ", "¤");
+        if (row?.departmentNames) {
+          row.departmentNames = row.departmentNames.replace(/,/g, "¤");
         }
       }
       setDataToImport(result.data);

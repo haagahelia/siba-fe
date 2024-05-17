@@ -23,10 +23,10 @@ export default function ImportUserButton({
     const newUser = {
       email: user.email ? user.email : "",
       password: user.password ? user.password : "",
-      isAdmin: user.admin ? user.admin : 0,
-      isPlanner: user.planner ? user.planner : 0,
-      isStatist: user.statist ? user.statist : 0,
-      department: user.department ? user.department : "",
+      isAdmin: user.isAdmin ? user.isAdmin : 0,
+      isPlanner: user.isPlanner ? user.isPlanner : 0,
+      isStatist: user.isStatist ? user.isStatist : 0,
+      departmentNames: user.departmentNames ? user.departmentNames : "",
     };
 
     const validateResult = await ValidateAddUser(newUser);
@@ -37,7 +37,7 @@ export default function ImportUserButton({
       validateResult.isPlanner ||
       validateResult.isStatist ||
       validateResult.password ||
-      validateResult.department;
+      validateResult.departmentNames;
 
     if (user.FailedReason) {
       return user.FailedReason ? user : newUser;
