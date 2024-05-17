@@ -2,6 +2,7 @@ import Button from "@mui/material/Button";
 import { useState } from "react";
 import dao from "../../ajax/dao";
 import { importData } from "../../importDataFunctions/importData";
+import ValidateAddUser from "../../validation/ValidateAddUser";
 import AlertBox from "../common/AlertBox";
 
 export default function ImportUserButton({
@@ -27,6 +28,21 @@ export default function ImportUserButton({
       isStatist: user.statist ? user.statist : 0,
       department: user.department ? user.department : "",
     };
+
+    const validateResult = await ValidateAddUser(newUser);
+
+    user.FailedReason =
+      validateResult.email ||
+      validateResult.isAdmin ||
+      validateResult.isPlanner ||
+      validateResult.isStatist ||
+      validateResult.password ||
+      validateResult.department;
+
+    if (user.FailedReason) {
+      return user.FailedReason ? user : newUser;
+    }
+
     userSet.add(newUser.email);
     return newUser;
   };

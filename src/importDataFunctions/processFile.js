@@ -21,6 +21,12 @@ const fileToArray = (file, setDataToImport) => {
     skipEmptyLines: "greedy",
     dynamicTyping: true,
     complete: (result) => {
+      for (const row of result.data) {
+        if (Object.prototype.hasOwnProperty.call(row, "department")) {
+          row.department = row.department.replace(/,/g, "¤");
+          row.department = row.department.replace("| ", "¤");
+        }
+      }
       setDataToImport(result.data);
       Logger.debug("data from file", result.data);
     },
