@@ -13,8 +13,6 @@ import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import AlertBox from "../components/common/AlertBox";
 
-const baseUrl = import.meta.env.VITE_BE_SERVER_BASE_URL;
-
 export default function ForgetPasswordView() {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
@@ -26,19 +24,10 @@ export default function ForgetPasswordView() {
   });
 
   const handleReset = async () => {
-    const response = await fetch(`${baseUrl}/user/forget-password`, {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ email: email }),
-    });
+    const response = await dao.forgetPassword(email)
 
     if (response.ok) {
-      const data = await response.json();
-      const { id, token } = data;
-      navigate(`/reset-password/${id}/${token}`);
+      navigate("/reset-password");
     } else if (response.status === 400) {
       setAlertOptions({
         severity: "info",
@@ -48,7 +37,6 @@ export default function ForgetPasswordView() {
       setAlertOpen(true);
     } else {
       ajaxRequestErrorHandler(
-        httpStatus,
         getFunctionName(2),
         setAlertOptions,
         setAlertOpen,

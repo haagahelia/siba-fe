@@ -68,3 +68,16 @@ export const deleteSingleUser = async (userId: number): Promise<boolean> => {
 export const downloadUserTemplate = async (): Promise<ResponseFiner<User>> => {
   return download<User>("user", baseUrl);
 };
+
+
+//reset user password
+export const resetPassword = async (password: User): Promise<boolean> => {
+  const response = await create(`${baseUrl}/user/reset-password`, password);
+  return response.ok;
+};
+
+//user forget password email handle
+export const forgetPassword = async (email: User): Promise<boolean> => {
+  const response = await create(`${baseUrl}/user/reset-password`, email);
+  return response.ok;
+};

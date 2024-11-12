@@ -176,9 +176,7 @@ export default function NavBar() {
     },
     {
       name: "Change Password",
-      href: `/reset-password/${localStorage.getItem(
-        "userId",
-      )}/${localStorage.getItem("sessionToken")}`,
+      href: "/reset-password",
       forRoles: ["admin", "planner", "statist"],
       showForCurrentUser: false,
     },

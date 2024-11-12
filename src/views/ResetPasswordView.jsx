@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import {
   ajaxRequestErrorHandler,
   getFunctionName,
@@ -12,11 +12,11 @@ import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import AlertBox from "../components/common/AlertBox";
+import dao from "../ajax/dao";
 
-const baseUrl = import.meta.env.VITE_BE_SERVER_BASE_URL;
+
 
 export default function ResetPasswordView() {
-  const { id, token } = useParams();
   const navigate = useNavigate();
   const [password, setPassword] = useState("");
   const [rePassword, setRePassword] = useState("");
@@ -38,17 +38,7 @@ export default function ResetPasswordView() {
       return;
     }
 
-    const response = await fetch(
-      `${baseUrl}/user/reset-password/${id}/${token}`,
-      {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ password: password }),
-      },
-    );
+    const response = await dao.resetPassword(password);
 
     if (response.status === 200) {
       setAlertOptions({
@@ -59,7 +49,6 @@ export default function ResetPasswordView() {
       setAlertOpen(true);
     } else {
       ajaxRequestErrorHandler(
-        httpStatus,
         getFunctionName(2),
         setAlertOptions,
         setAlertOpen,

@@ -44,7 +44,8 @@
     "react-csv": "^2.2.2",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.19.0",
-    "selenium-webdriver": "^4.15.0"
+    "selenium-webdriver": "^4.15.0",
+    "siba-fe": "file:"
   },
   "devDependencies": {
     "@biomejs/biome": "1.5.3",
