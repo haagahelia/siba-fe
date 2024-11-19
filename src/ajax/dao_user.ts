@@ -1,5 +1,11 @@
 import Logger from "../logger/logger";
-import { ResponseFiner, User, UserLoggedIn } from "../types";
+import {
+  ForgotPasswordResponse,
+  ResetPasswordResponse,
+  ResponseFiner,
+  User,
+  UserLoggedIn,
+} from "../types";
 import { create, download, get, remove, update } from "./request";
 
 const baseUrl = import.meta.env.VITE_BE_SERVER_BASE_URL;
@@ -67,4 +73,54 @@ export const deleteSingleUser = async (userId: number): Promise<boolean> => {
 // download user template
 export const downloadUserTemplate = async (): Promise<ResponseFiner<User>> => {
   return download<User>("user", baseUrl);
+};
+
+// Forgot password
+export const forgotPassword = async (
+  email: string,
+): Promise<ResponseFiner<ForgotPasswordResponse>> => {
+  const response = await create(`${baseUrl}/user/forget-password`, { email });
+  if (response.status === 200) {
+    const data: ForgotPasswordResponse = await response.json();
+    return {
+      httpStatus: response.status,
+      data: [data],
+    };
+  }
+  return {
+    httpStatus: response.status,
+    data: [{ id: "", token: "" }],
+  };
+};
+
+// Reset password
+export const resetPassword = async (
+  id: string,
+  token: string,
+  password: string,
+): Promise<ResponseFiner<ResetPasswordResponse>> => {
+  const response = await create(
+    `${baseUrl}/user/reset-password/${id}/${token}`,
+    { password },
+  );
+  if (response.status === 200) {
+    return {
+      httpStatus: response.status,
+      data: [
+        {
+          success: true,
+          message: "Password reset successfully",
+        },
+      ],
+    };
+  }
+  return {
+    httpStatus: response.status,
+    data: [
+      {
+        success: false,
+        message: "Password reset failed",
+      },
+    ],
+  };
 };
