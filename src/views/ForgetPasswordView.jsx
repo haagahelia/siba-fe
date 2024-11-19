@@ -11,9 +11,8 @@ import CardContent from "@mui/material/CardContent";
 import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
+import dao from "../ajax/dao";
 import AlertBox from "../components/common/AlertBox";
-
-const baseUrl = import.meta.env.VITE_BE_SERVER_BASE_URL;
 
 export default function ForgetPasswordView() {
   const navigate = useNavigate();
@@ -26,14 +25,7 @@ export default function ForgetPasswordView() {
   });
 
   const handleReset = async () => {
-    const response = await fetch(`${baseUrl}/user/forget-password`, {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ email: email }),
-    });
+    const response = await dao.forgotPassword(email);
 
     if (response.ok) {
       const data = await response.json();

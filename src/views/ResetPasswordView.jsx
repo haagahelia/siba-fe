@@ -11,9 +11,8 @@ import CardContent from "@mui/material/CardContent";
 import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
+import dao from "../ajax/dao";
 import AlertBox from "../components/common/AlertBox";
-
-const baseUrl = import.meta.env.VITE_BE_SERVER_BASE_URL;
 
 export default function ResetPasswordView() {
   const { id, token } = useParams();
@@ -38,17 +37,7 @@ export default function ResetPasswordView() {
       return;
     }
 
-    const response = await fetch(
-      `${baseUrl}/user/reset-password/${id}/${token}`,
-      {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ password: password }),
-      },
-    );
+    const response = await dao.resetPassword(id, token, password);
 
     if (response.status === 200) {
       setAlertOptions({
