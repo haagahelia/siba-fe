@@ -7,6 +7,7 @@ import ConfirmationDialog from "../common/ConfirmationDialog";
 
 export default function DeleteBuilding({
   singleBuilding,
+  setSingleBuilding,
   getAllBuildings,
   setOpen,
 }) {
@@ -62,6 +63,7 @@ export default function DeleteBuilding({
       }, 4000);
 
       getAllBuildings();
+      setSingleBuilding(null);
     }
   };
 

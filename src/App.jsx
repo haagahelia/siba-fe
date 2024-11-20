@@ -1,5 +1,4 @@
 import "./App.css";
-import { AllocRoundContext } from "./AppContext.js";
 import { useThemeSwitcher } from "./hooks/useThemeSwitcher";
 
 import Button from "@mui/material/Button";
@@ -28,11 +27,7 @@ export default function App() {
     <div className="App">
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <AllocRoundContext.Provider
-          value={{ allocRoundContext, setAllocRoundContext }}
-        >
-          <Nav />
-        </AllocRoundContext.Provider>
+        <Nav />
         <Button variant="themeToggle" onClick={toggleTheme}>
           <ThemeIcon theme={theme} />
         </Button>

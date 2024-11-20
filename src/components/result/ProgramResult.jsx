@@ -2,7 +2,7 @@ import useTheme from "@mui/material/styles/useTheme";
 import { Fragment, useContext, useEffect, useState } from "react";
 import { AllocRoundContext } from "../../AppContext";
 import resultProgramStore from "../../data/ResultProgramStore";
-import testData from "../../data/testData";
+/* import testData from "../../data/testData"; */
 import Logger from "../../logger/logger";
 
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
@@ -146,7 +146,7 @@ export default function ProgramResult() {
           </Typography>
           <SubjectResult
             data={subProg.subjects}
-            dropdownData={testData.rooms}
+            // dropdownData={testData.rooms} // remains from first versions fake data
           />
         </Box>
       </Modal>

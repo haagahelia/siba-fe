@@ -32,7 +32,9 @@ export default function EditBuildingContainer({
     initialValues: {
       ...singleBuilding,
       description:
-        singleBuilding.description === null ? "" : singleBuilding.description,
+        singleBuilding?.description === undefined
+          ? ""
+          : singleBuilding.description,
     },
     validate,
     onSubmit: (values) => {
