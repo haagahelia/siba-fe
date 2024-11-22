@@ -42,7 +42,7 @@ export default function EditSubjectContainer({
     // if the initial values change
     enableReinitialize: true,
     initialValues: singleSubject,
-    validate: (values) => validate(values, allocRoundContext.allocRoundId),
+    validate: (values) => validate(values, allocRoundContext?.allocRoundId),
     onSubmit: (values) => {
       setDialogOptions({
         title: `Are you sure you want to edit ${values.name}?`,
@@ -66,7 +66,7 @@ export default function EditSubjectContainer({
       programId: values.programId,
       spaceTypeId: values.spaceTypeId ? values.spaceTypeId : null,
       isNoisy: values.isNoisy,
-      allocRoundId: allocRoundContext.allocRoundId,
+      allocRoundId: allocRoundContext?.allocRoundId,
     };
     const result = await dao.editSubject(editedSubject);
     if (!result) {

@@ -25,7 +25,7 @@ export default function ImportSubjectButton({
   });
 
   const { allocRoundContext } = useContext(AllocRoundContext);
-  Logger.debug("allocRoundId", allocRoundContext.allocRoundId);
+  Logger.debug("allocRoundId", allocRoundContext?.allocRoundId);
 
   const isProgramAuthorized = (subject) => {
     return progNameList.includes(subject.Major);
@@ -70,7 +70,7 @@ export default function ImportSubjectButton({
 
       const validateResult = await validate(
         newSubject,
-        allocRoundContext.allocRoundId,
+        allocRoundContext?.allocRoundId,
       );
 
       subject.FailedReason =
@@ -98,7 +98,7 @@ export default function ImportSubjectButton({
       (importedSubjectList) =>
         dao.postNewSubjects(
           importedSubjectList,
-          allocRoundContext.allocRoundId,
+          allocRoundContext?.allocRoundId,
         ),
       setAlertOpen,
       setAlertOptions,

@@ -195,7 +195,7 @@ export default function AllocRoundList({
                   </IconButton>
                 </TableCell>
                 <TableCell>
-                  {value.id === allocRoundContext.allocRoundId
+                  {value.id === allocRoundContext?.allocRoundId
                     ? `${value.id}✅`
                     : value.id}
                 </TableCell>

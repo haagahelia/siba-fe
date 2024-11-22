@@ -29,7 +29,7 @@ export default function RoomResult() {
 
   const getRoomsData = async () => {
     Logger.debug("getRoomsData: fetching room data from server.");
-    await roomStore.fetchRooms(allocRoundContext.allocRoundId);
+    await roomStore.fetchRooms(allocRoundContext?.allocRoundId);
     Logger.debug(
       `getRoomsData: successfully fetched ${roomStore.rooms.length} rooms.`,
     );

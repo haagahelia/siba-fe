@@ -80,7 +80,7 @@ export default function AddSubjectContainer({
     enableReinitialize: true,
     initialValues: initialSubject,
     validate: (values) => {
-      return validate(values, allocRoundContext.allocRoundId);
+      return validate(values, allocRoundContext?.allocRoundId);
     },
     onSubmit: (values) => {
       setDialogOptions({
@@ -149,7 +149,7 @@ export default function AddSubjectContainer({
       area: submitValues.area,
       programId: submitValues.programId,
       spaceTypeId: submitValues.spaceTypeId ? submitValues.spaceTypeId : null,
-      allocRoundId: allocRoundContext.allocRoundId,
+      allocRoundId: allocRoundContext?.allocRoundId,
       isNoisy: submitValues.isNoisy,
     };
 
@@ -214,7 +214,7 @@ export default function AddSubjectContainer({
               <>
                 Add Lesson to allocation -
                 <span className="allocRoundHeader">
-                  {` ${allocRoundContext.allocRoundId} : ${allocRoundContext.allocRoundName}`}
+                  {` ${allocRoundContext?.allocRoundId} : ${allocRoundContext?.allocRoundName}`}
                 </span>
               </>
             ) : (

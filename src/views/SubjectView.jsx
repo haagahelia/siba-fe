@@ -56,10 +56,10 @@ export default function SubjectView() {
     Logger.debug(
       "getAllSubjects: fetching all subjects in allocRound, from server.",
     );
-    Logger.debug(`allocRoundId: ${allocRoundContext.allocRoundId}`);
+    Logger.debug(`allocRoundId: ${allocRoundContext?.allocRoundId}`);
 
     const { httpStatus, data } = await dao.fetchAllSubjects(
-      allocRoundContext.allocRoundId,
+      allocRoundContext?.allocRoundId,
     );
     if (httpStatus !== 200) {
       ajaxRequestErrorHandler(
@@ -168,7 +168,7 @@ export default function SubjectView() {
     // Fetch alloc round by id to make sure is not read only:
     if (allocRoundContext?.allocRoundId) {
       dao
-        .fetchAllocRoundById(allocRoundContext.allocRoundId)
+        .fetchAllocRoundById(allocRoundContext?.allocRoundId)
         .then((response) => {
           if (!response.success) {
             Logger.error("Error fetching allocation rounds");
@@ -207,7 +207,7 @@ export default function SubjectView() {
               <>
                 Lessons in allocation -
                 <span className="allocRoundHeader">
-                  {` ${allocRoundContext.allocRoundId} : ${allocRoundContext.allocRoundName}`}
+                  {` ${allocRoundContext?.allocRoundId} : ${allocRoundContext?.allocRoundName}`}
                 </span>
               </>
             }

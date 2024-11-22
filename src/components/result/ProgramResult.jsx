@@ -42,7 +42,7 @@ export default function ProgramResult() {
 
   const getProgramData = async () => {
     Logger.debug("getProgramData: fetching program names.");
-    await progStore.fetchNames(allocRoundContext.allocRoundId);
+    await progStore.fetchNames(allocRoundContext?.allocRoundId);
     let names = progStore.getNames();
 
     // Sort names array based on allocation (utilization) and then alphabetically

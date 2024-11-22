@@ -48,7 +48,7 @@ export default function DeleteAllocRound({
   };
 
   const submitDelete = (data) => {
-    if (data.id === allocRoundContext.allocRoundId) {
+    if (data.id === allocRoundContext?.allocRoundId) {
       // Prevent deleting a selected allocation round
       setAlertOptions({
         severity: "error",
