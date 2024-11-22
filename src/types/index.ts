@@ -130,6 +130,16 @@ export interface UserLoggedIn extends User {
   token: string;
 }
 
+export interface ForgotPasswordResponse {
+  id: string;
+  token: string;
+}
+
+export interface ResetPasswordResponse {
+  success: boolean;
+  message: string;
+}
+
 export interface UnallocableSubject {
   subjectId: number;
   name: string;
