@@ -10,6 +10,8 @@ import { capitalizeFirstLetter } from "../../validation/ValidationUtilities";
 import { CommonContentContainer } from "../common/CommonContainers";
 import AddAllocRoundForm from "./AddAllocRoundForm";
 
+import { AppContext } from "../../AppContext";
+
 export const AddEmptyAllocRound = ({ allAllocRoundsList }) => {
   const [alertOpen, setAlertOpen] = useState(false);
   const [alertOptions, setAlertOptions] = useState({
@@ -26,6 +28,7 @@ export const AddEmptyAllocRound = ({ allAllocRoundsList }) => {
     name: "",
     description: "",
   });
+  const appContext = React.useContext(AppContext);
 
   // Here is a list of lessons
   // When you choose a lesson, the information goes to the form's initialvalues
@@ -65,6 +68,7 @@ export const AddEmptyAllocRound = ({ allAllocRoundsList }) => {
     const newAllocRound = {
       name: capitalName,
       description: submitValues.description,
+      userId: appContext.userId,
     };
 
     const result = await dao.postNewAllocRound(newAllocRound);
