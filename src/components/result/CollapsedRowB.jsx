@@ -26,7 +26,7 @@ export default function CollapsedRowB({ id }) {
 
   useEffect(() => {
     const getSubjects = async () => {
-      await resultRoomsStore.fetchRoomSubs(id, allocRoundContext.allocRoundId);
+      await resultRoomsStore.fetchRoomSubs(id, allocRoundContext?.allocRoundId);
       const fetchedSubjects = resultRoomsStore.roomSubs;
       // Sort totalTime in descending order
       const sortedSubjects = fetchedSubjects.sort((a, b) => {
@@ -41,7 +41,7 @@ export default function CollapsedRowB({ id }) {
     if (expand) {
       getSubjects();
     }
-  }, [expand, id, allocRoundContext.allocRoundId]);
+  }, [expand, id, allocRoundContext?.allocRoundId]);
 
   return (
     <Grid2 container>

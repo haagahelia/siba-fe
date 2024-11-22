@@ -1,5 +1,5 @@
 import useTheme from "@mui/material/styles/useTheme";
-import { Fragment, useContext, useEffect, useState } from "react";
+import { Fragment, useContext, useEffect, useRef, useState } from "react";
 import { AllocRoundContext } from "../../AppContext";
 import resultProgramStore from "../../data/ResultProgramStore";
 /* import testData from "../../data/testData"; */
@@ -11,6 +11,7 @@ import Modal from "@mui/material/Modal";
 import Typography from "@mui/material/Typography";
 import Grid2 from "@mui/material/Unstable_Grid2";
 import ProgressBar from "@ramonak/react-progress-bar";
+import Chart from "chart.js/auto";
 import { margins } from "../../styles/theme";
 import AllocRoundControlPanel from "../allocRound/AllocRoundControlPanel";
 import CollapsedRow from "./CollapsedRow";
@@ -27,6 +28,8 @@ export default function ProgramResult() {
   const [resetCounter, setResetCounter] = useState(0);
   const [subProg, setSubProg] = useState({});
   const [open, setOpen] = useState(false);
+  const [showBarChart, setShowBarChart] = useState(false);
+  const chartRef = useRef(null);
 
   const progStore = resultProgramStore;
 
@@ -39,7 +42,7 @@ export default function ProgramResult() {
 
   const getProgramData = async () => {
     Logger.debug("getProgramData: fetching program names.");
-    await progStore.fetchNames(allocRoundContext.allocRoundId);
+    await progStore.fetchNames(allocRoundContext?.allocRoundId);
     let names = progStore.getNames();
 
     // Sort names array based on allocation (utilization) and then alphabetically
@@ -89,12 +92,110 @@ export default function ProgramResult() {
     document.title = "Program Results";
   }, []);
 
+  useEffect(() => {
+    if (showBarChart) {
+      renderBarChart();
+    }
+  }, [showBarChart]);
+
+  const toggleBarChart = () => {
+    setShowBarChart(!showBarChart);
+  };
+
+  const renderBarChart = () => {
+    const labels = progs.map((prog) => prog.name);
+    const data = progs.map((prog) => calculateProsent(prog.subjects));
+
+    const generateRandomColor = () => {
+      const r = Math.floor(Math.random() * 256);
+      const g = Math.floor(Math.random() * 256);
+      const b = Math.floor(Math.random() * 256);
+      return `rgba(${r}, ${g}, ${b}, 0.5)`;
+    };
+
+    const colors = data.map(() => generateRandomColor());
+
+    const ctx = document.getElementById("barChart").getContext("2d");
+    // Destroying previous chart instance if it exists
+    if (chartRef.current) {
+      chartRef.current.destroy();
+    }
+    chartRef.current = new Chart(ctx, {
+      type: "bar",
+      data: {
+        labels: labels,
+        datasets: [
+          {
+            label: "Utilization (%)",
+            data: data,
+            backgroundColor: colors,
+            borderColor: theme.palette.primary.main,
+            borderWidth: 2,
+          },
+        ],
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        tooltips: {
+          enabled: true,
+          mode: "index",
+          intersect: false,
+          backgroundColor: theme.palette.background.paper,
+          titleFontSize: 16,
+          bodyFontSize: 14,
+        },
+        scales: {
+          y: {
+            beginAtZero: true,
+            title: {
+              display: true,
+              text: "Allocation %",
+              font: {
+                size: 14,
+              },
+            },
+          },
+          x: {
+            title: {
+              display: true,
+              text: "Programs",
+              font: {
+                size: 14,
+              },
+            },
+          },
+        },
+        plugins: {
+          legend: {
+            display: true,
+            labels: {
+              color: theme.palette.text.primary,
+              font: {
+                size: 12,
+              },
+            },
+          },
+        },
+      },
+    });
+  };
+
   return (
     <>
-      <AllocRoundControlPanel incrementResetCounter={incrementResetCounter} />
+      <AllocRoundControlPanel
+        incrementResetCounter={incrementResetCounter}
+        toggleBarChart={toggleBarChart}
+        showBarChart={showBarChart}
+      />
       <Typography className="m-1" variant="pageHeader">
         Programs (Aineryhmät)
       </Typography>
+      {showBarChart && (
+        <div style={{ width: "1000px", height: "600px", margin: "30px auto" }}>
+          <canvas id="barChart" />
+        </div>
+      )}
       <Modal open={open} onClose={handleClose} sx={{ overflow: "scroll" }}>
         <Box
           sx={{
@@ -137,6 +238,7 @@ export default function ProgramResult() {
               />
             </svg>
           </div>
+
           <Typography
             sx={{
               textAlign: "center",

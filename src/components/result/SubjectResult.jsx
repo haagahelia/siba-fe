@@ -73,7 +73,7 @@ function CollapsedRow(id) {
 
   const getRoomsData = async () => {
     // console.log(id);
-    await resultRoomsStore.fetchSubRooms(id, allocRoundContext.allocRoundId);
+    await resultRoomsStore.fetchSubRooms(id, allocRoundContext?.allocRoundId);
     setRooms(resultRoomsStore.subRooms);
   };
 
