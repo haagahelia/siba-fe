@@ -1,8 +1,6 @@
 import { createContext } from "react";
 
 export const AppContext = createContext({
-  // allocRoundId: 10004,
-  // allocRoundName: "N/A", // Now using AllocRoundContext
   userId: null,
   userEmail: null,
   sessionToken: null,
@@ -11,6 +9,6 @@ export const AppContext = createContext({
 });
 
 export const AllocRoundContext = createContext({
-  allocRoundId: 10004,
-  allocRoundName: "Demo",
+  allocRoundId: 0,
+  allocRoundName: "Pick Allocation!",
 });
