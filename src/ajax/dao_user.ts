@@ -69,15 +69,27 @@ export const downloadUserTemplate = async (): Promise<ResponseFiner<User>> => {
   return download<User>("user", baseUrl);
 };
 
-
 //reset user password
-export const resetPassword = async (password: User): Promise<boolean> => {
-  const response = await create(`${baseUrl}/user/reset-password`, password);
+export const resetPassword = async (
+  id: number,
+  password: string,
+): Promise<boolean> => {
+  const response = await create(`${baseUrl}/user/reset-password/${id}`, {
+    password,
+  });
   return response.ok;
 };
 
 //user forget password email handle
-export const forgetPassword = async (email: User): Promise<boolean> => {
-  const response = await create(`${baseUrl}/user/reset-password`, email);
-  return response.ok;
+export const forgetPassword = async (
+  email: string,
+): Promise<ResponseFiner<User>> => {
+  const response = await create(`${baseUrl}/user/forget-password`, { email });
+
+  if (response.status === 200) {
+    const data = await response.json();
+    return { httpStatus: response.status, data: [data] };
+  } else {
+    return { httpStatus: response.status, data: [] };
+  }
 };

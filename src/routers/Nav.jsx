@@ -547,7 +547,7 @@ export default function NavBar() {
               <Route path="*" element={<NotFoundView />} />
               <Route path="/forget-password" element={<ForgetPasswordView />} />
               <Route
-                path="/reset-password/:id/:token"
+                path="/reset-password/:id"
                 element={<ResetPasswordView />}
               />
             </Routes>

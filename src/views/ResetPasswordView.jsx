@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import {
   ajaxRequestErrorHandler,
   getFunctionName,
@@ -11,10 +11,8 @@ import CardContent from "@mui/material/CardContent";
 import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
-import AlertBox from "../components/common/AlertBox";
 import dao from "../ajax/dao";
-
-
+import AlertBox from "../components/common/AlertBox";
 
 export default function ResetPasswordView() {
   const navigate = useNavigate();
@@ -26,6 +24,8 @@ export default function ResetPasswordView() {
     severity: "error",
     title: "Error",
   });
+  const { id } = useParams();
+  console.log("User ID from URL:", id);
 
   const handleReset = async () => {
     if (password !== rePassword) {
@@ -38,9 +38,8 @@ export default function ResetPasswordView() {
       return;
     }
 
-    const response = await dao.resetPassword(password);
-
-    if (response.status === 200) {
+    const response = await dao.resetPassword(id, password);
+    if (response) {
       setAlertOptions({
         severity: "success",
         title: "Success",

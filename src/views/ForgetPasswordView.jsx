@@ -11,6 +11,7 @@ import CardContent from "@mui/material/CardContent";
 import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
+import dao from "../ajax/dao";
 import AlertBox from "../components/common/AlertBox";
 
 export default function ForgetPasswordView() {
@@ -24,23 +25,28 @@ export default function ForgetPasswordView() {
   });
 
   const handleReset = async () => {
-    const response = await dao.forgetPassword(email)
+    try {
+      const response = await dao.forgetPassword(email);
 
-    if (response.ok) {
-      navigate("/reset-password");
-    } else if (response.status === 400) {
-      setAlertOptions({
-        severity: "info",
-        title: "Info",
-        message: "Email not registered yet!",
-      });
-      setAlertOpen(true);
-    } else {
-      ajaxRequestErrorHandler(
-        getFunctionName(2),
-        setAlertOptions,
-        setAlertOpen,
-      );
+      if (response.httpStatus === 200) {
+        const { id } = response.data[0];
+        navigate(`/reset-password/${id}`);
+      } else if (response.httpStatus === 400) {
+        setAlertOptions({
+          severity: "info",
+          title: "Info",
+          message: "Email not registered yet!",
+        });
+        setAlertOpen(true);
+      } else {
+        ajaxRequestErrorHandler(
+          getFunctionName(2),
+          setAlertOptions,
+          setAlertOpen,
+        );
+      }
+    } catch (error) {
+      console.error("Error during password reset:", error);
     }
   };
 
@@ -63,7 +69,7 @@ export default function ForgetPasswordView() {
               placeholder="email"
             />
           </Grid>
-          <Button onClick={handleReset}>Send</Button>
+          <Button onClick={() => handleReset(email)}>Send</Button>
         </CardContent>
       </Card>
     </div>
