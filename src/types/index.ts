@@ -83,11 +83,12 @@ export interface SpaceEquipment {
 }
 
 export interface AllocRound {
-  id: number;
+  id?: number; // optional for new allocRound
   name: string;
   isReadOnly: boolean;
   description: string;
-  lastModified: string;
+  lastModified?: string; // optional for new allocRound
+  userId: number;
 }
 export interface CopyAllocRound {
   name: string;
@@ -128,6 +129,16 @@ export interface User {
 
 export interface UserLoggedIn extends User {
   token: string;
+}
+
+export interface ForgotPasswordResponse {
+  id: string;
+  token: string;
+}
+
+export interface ResetPasswordResponse {
+  success: boolean;
+  message: string;
 }
 
 export interface UnallocableSubject {

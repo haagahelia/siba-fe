@@ -68,7 +68,7 @@ export default function AllocRoundControlPanel({
     // Fetch alloc round by id to make sure is not read only:
     if (allocRoundContext?.allocRoundId) {
       dao
-        .fetchAllocRoundById(allocRoundContext.allocRoundId)
+        .fetchAllocRoundById(allocRoundContext?.allocRoundId)
         .then((response) => {
           if (!response.success) {
             Logger.error("Error fetching allocation rounds");
@@ -93,8 +93,8 @@ export default function AllocRoundControlPanel({
         alertOptions={alertOptions}
         setAlertOpen={setAlertOpen}
       />
-      Allocation {allocRoundContext.allocRoundId}&nbsp;:&nbsp;
-      {allocRoundContext.allocRoundName}&nbsp;{" "}
+      Allocation {allocRoundContext?.allocRoundId}&nbsp;:&nbsp;
+      {allocRoundContext?.allocRoundName}&nbsp;{" "}
       {allocRound?.isReadOnly === 0 && "-"} &nbsp;
       {allocRound?.isReadOnly === 0 &&
         `After 'Start' or 'Reset'
@@ -106,7 +106,7 @@ export default function AllocRoundControlPanel({
             type="submit"
             variant="contained"
             onClick={() => {
-              allocationPost.startAlloc(allocRoundContext.allocRoundId);
+              allocationPost.startAlloc(allocRoundContext?.allocRoundId);
               setDelayedClickedToggle();
             }}
             disabled={isClicked}
@@ -118,7 +118,7 @@ export default function AllocRoundControlPanel({
             variant="contained"
             className={`redButton ${!isClicked ? "disabledButton" : ""}`}
             onClick={() => {
-              allocationPost.resetAlloc(allocRoundContext.allocRoundId);
+              allocationPost.resetAlloc(allocRoundContext?.allocRoundId);
               setDelayedClickedToggle();
             }}
             disabled={!isClicked}
@@ -136,7 +136,7 @@ export default function AllocRoundControlPanel({
         </Button>
       )}
       <Link
-        to={isClicked ? `/alloc-fail/${allocRoundContext.allocRoundId}` : ""}
+        to={isClicked ? `/alloc-fail/${allocRoundContext?.allocRoundId}` : ""}
         disabled={!isClicked}
       >
         <Button
@@ -155,7 +155,7 @@ export default function AllocRoundControlPanel({
         disabled={!isClicked}
         onClick={() => {
           getReportData(
-            allocRoundContext.allocRoundId,
+            allocRoundContext?.allocRoundId,
             sheetcolumns,
             saveAs,
             setAlertOptions,
@@ -173,7 +173,7 @@ export default function AllocRoundControlPanel({
         disabled={!isClicked}
         onClick={() => {
           getPlannerData(
-            allocRoundContext.allocRoundId,
+            allocRoundContext?.allocRoundId,
             sheetcolumns,
             saveAs,
             setAlertOptions,

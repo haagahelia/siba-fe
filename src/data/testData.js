@@ -1,3 +1,7 @@
+// EXTRA File, fake data for initial app dev
+// Not used anymore
+
+/*
 const testData = {
   rooms: [
     {
@@ -383,3 +387,4 @@ const testData = {
 };
 
 export default testData;
+*/

@@ -56,7 +56,7 @@ export default function ResetPasswordView() {
   };
 
   useEffect(() => {
-    document.title = "Reset Password";
+    document.title = "Reset Password (not secure, just demo)";
   }, []);
 
   return (
@@ -68,7 +68,7 @@ export default function ResetPasswordView() {
       />
       <Card variant="outlined">
         <CardContent>
-          <Typography>Please enter your new password here.</Typography>
+          <Typography>Please enter your new password here.  (not secure, just demo)</Typography>
           <Grid>
             <TextField
               value={password}
@@ -85,7 +85,7 @@ export default function ResetPasswordView() {
               placeholder="Type Password again"
             />
           </Grid>
-          <Button onClick={handleReset}>Reset Password</Button>
+          <Button onClick={handleReset}>Reset Password  (not secure, just demo)</Button>
         </CardContent>
       </Card>
     </div>

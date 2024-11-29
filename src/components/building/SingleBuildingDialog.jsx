@@ -38,13 +38,14 @@ export default function SingleBuildingDialog({
         <DialogActions>
           <DeleteBuilding
             singleBuilding={singleBuilding}
+            setSingleBuilding={setSingleBuilding}
             getAllBuildings={getAllBuildings}
             setOpen={setOpen}
           />
           <EditBuildingContainer
             singleBuilding={singleBuilding}
-            getAllBuildings={getAllBuildings}
             setSingleBuilding={setSingleBuilding}
+            getAllBuildings={getAllBuildings}
           />
         </DialogActions>
       )}

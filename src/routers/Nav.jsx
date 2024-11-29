@@ -501,8 +501,8 @@ export default function NavBar() {
                     {renderNavLinks()}
                     <Typography variant="navAllocInfo">
                       {`${
-                        allocRoundContext.allocRoundId
-                      } : ${allocRoundContext.allocRoundName.substring(0, 16)}`}
+                        allocRoundContext?.allocRoundId
+                      } : ${allocRoundContext?.allocRoundName.substring(0, 16)}`}
                     </Typography>
                   </List>
                 </Box>

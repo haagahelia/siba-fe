@@ -1,5 +1,11 @@
 import Logger from "../logger/logger";
-import { ResponseFiner, User, UserLoggedIn } from "../types";
+import {
+  ForgotPasswordResponse,
+  ResetPasswordResponse,
+  ResponseFiner,
+  User,
+  UserLoggedIn,
+} from "../types";
 import { create, download, get, remove, update } from "./request";
 
 const baseUrl = import.meta.env.VITE_BE_SERVER_BASE_URL;

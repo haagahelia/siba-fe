@@ -60,7 +60,7 @@ export default function ForgetPasswordView() {
       <Card variant="outlined">
         <CardContent>
           <Typography>
-            Please enter your registered email to reset your password.
+            Please enter your registered email to reset your password.  (not secure, just demo)
           </Typography>
           <Grid>
             <TextField
