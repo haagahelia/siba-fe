@@ -1,4 +1,4 @@
-import { createContext } from "react";
+import { createContext, useState } from "react";
 
 export const AppContext = createContext({
   // allocRoundId: 10004,
@@ -11,6 +11,22 @@ export const AppContext = createContext({
 });
 
 export const AllocRoundContext = createContext({
-  allocRoundId: 10004,
-  allocRoundName: "Demo",
+  allocRoundId: 0,
+  allocRoundName: "Pick Allocation!",
 });
+
+export const AllocRoundProvider = ({ children }) => {
+  const [allocRoundContext, setAllocRoundContext] = useState({
+    allocRoundId: Number(localStorage.getItem("allocRoundId")) || 0,
+    allocRoundName:
+      localStorage.getItem("allocRoundName") || "Pick Allocation!",
+  });
+
+  return (
+    <AllocRoundContext.Provider
+      value={{ ...allocRoundContext, setAllocRoundContext }}
+    >
+      {children}
+    </AllocRoundContext.Provider>
+  );
+};
