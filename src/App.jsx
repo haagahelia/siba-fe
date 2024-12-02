@@ -2,7 +2,7 @@ import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import ThemeProvider from "@mui/material/styles/ThemeProvider";
 import "./App.css";
-import { AllocRoundProvider } from "./AppContext.js";
+import { AllocRoundProvider } from "./AppContext.jsx";
 import { useThemeSwitcher } from "./hooks/useThemeSwitcher";
 import Nav from "./routers/Nav";
 import { ThemeIcon } from "./styles/themeIcons";
