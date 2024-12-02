@@ -17,7 +17,7 @@ import Toolbar from "@mui/material/Toolbar";
 import { useContext, useEffect, useState } from "react";
 import { BrowserRouter, NavLink, Route, Routes } from "react-router-dom";
 import { AppContext } from "../AppContext";
-import { AllocRoundContext } from "../AppContext.js";
+import { AllocRoundContext } from "../AppContext";
 import dao from "../ajax/dao";
 import AddAllocRound from "../components/allocRound/AddAllocRound";
 import AlertBox from "../components/common/AlertBox.jsx";

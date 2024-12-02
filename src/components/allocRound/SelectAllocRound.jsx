@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import { AppContext } from "../../AppContext";
-import { AllocRoundContext } from "../../AppContext.js";
+import { AllocRoundContext } from "../../AppContext";
 
 import Button from "@mui/material/Button";
 import AlertBox from "../common/AlertBox";
