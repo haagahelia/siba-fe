@@ -10,7 +10,7 @@
     "build": "tsc && vite build",
     "preview": "vite preview",
     "precommit": "sh ./pre-commit",
-    "test-selenium": "node tests/crudlTest.cjs"
+    "test-selenium": "node tests/crudlTest.js"
   },
   "pre-commit": [
     "precommit"

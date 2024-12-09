@@ -1,6 +1,8 @@
-const assert = require("node:assert");
-const { Builder, By, until, Browser } = require("selenium-webdriver");
-require("dotenv").config();
+import { strict as assert } from 'node:assert';
+import { Builder, By, until, Browser } from "selenium-webdriver";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 async function pause(milliseconds) {
   return new Promise(resolve => setTimeout(resolve, milliseconds));
@@ -12,8 +14,8 @@ async function pause(milliseconds) {
 (async function example() {
   const driver = await new Builder().forBrowser(Browser.FIREFOX).build();
   const baseUrl = `http://localhost:${process.env.PORT}`;
-  const timeoutMilliseconds = 10000;
-  const pauseMilliseconds = 3000;
+  const timeoutMilliseconds = 6000;
+  const pauseMilliseconds = 4000;
 
   try {
     await driver.get(`${baseUrl}/login`);
@@ -35,7 +37,7 @@ async function pause(milliseconds) {
 
     await driver.wait(until.urlIs(`${baseUrl}/department`), timeoutMilliseconds);
 
-    // Test login
+    // Test the login
     let currentUrl = await driver.getCurrentUrl();
     assert.equal(
       currentUrl,
@@ -43,7 +45,7 @@ async function pause(milliseconds) {
       "URL is not as expected",
     );
 
-    // Test navigation
+    // Test the navigation
     await pause(pauseMilliseconds);
     const roomResultsLink = await driver.findElement(By.linkText("Room Results"));
     await roomResultsLink.click();
@@ -81,7 +83,7 @@ async function pause(milliseconds) {
 
     await driver.wait(until.urlIs(`${baseUrl}/login`), timeoutMilliseconds);
 
-    // Test log out
+    // Test the log out
     currentUrl = await driver.getCurrentUrl();
     assert.equal(
       currentUrl,
