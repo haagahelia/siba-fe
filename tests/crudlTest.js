@@ -1,3 +1,7 @@
+/* Example how you could write end-to-end tests
+with the Selenium browser test driver imitating
+user actions and then assertions for them */
+
 import { strict as assert } from 'node:assert';
 import { Builder, By, until, Browser } from "selenium-webdriver";
 import dotenv from "dotenv";
