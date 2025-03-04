@@ -504,7 +504,10 @@ export default function NavBar() {
                     <Typography variant="navAllocInfo">
                       {`${
                         allocRoundContext?.allocRoundId
-                      } : ${allocRoundContext?.allocRoundName.substring(0, 16)}`}
+                      } : ${allocRoundContext?.allocRoundName.substring(
+                        0,
+                        16,
+                      )}`}
                     </Typography>
                   </List>
                 </Box>

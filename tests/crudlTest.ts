@@ -2,14 +2,14 @@
 with the Selenium browser test driver imitating
 user actions and then assertions for them */
 
-import { strict as assert } from 'node:assert';
-import { Builder, By, until, Browser } from "selenium-webdriver";
+import { strict as assert } from "node:assert";
 import dotenv from "dotenv";
+import { Browser, Builder, By, until } from "selenium-webdriver";
 
 dotenv.config();
 
 async function pause(milliseconds) {
-  return new Promise(resolve => setTimeout(resolve, milliseconds));
+  return new Promise((resolve) => setTimeout(resolve, milliseconds));
 }
 
 // The pauses are used for better demonstration
@@ -30,7 +30,7 @@ async function pause(milliseconds) {
     await pause(pauseMilliseconds);
     const loginEmail = await driver.findElement(By.id("loginEmail"));
     await loginEmail.sendKeys("admin");
-    
+
     await pause(pauseMilliseconds);
     const loginPassword = await driver.findElement(By.id("loginPassword"));
     await loginPassword.sendKeys("admin");
@@ -39,38 +39,31 @@ async function pause(milliseconds) {
     const submitButton = await driver.findElement(By.id("loginButton"));
     await submitButton.click();
 
-    await driver.wait(until.urlIs(`${baseUrl}/department`), timeoutMilliseconds);
+    await driver.wait(
+      until.urlIs(`${baseUrl}/department`),
+      timeoutMilliseconds,
+    );
 
     // Test the login
     let currentUrl = await driver.getCurrentUrl();
-    assert.equal(
-      currentUrl,
-      `${baseUrl}/department`,
-      "URL is not as expected",
-    );
+    assert.equal(currentUrl, `${baseUrl}/department`, "URL is not as expected");
 
     // Test the navigation
     await pause(pauseMilliseconds);
-    const roomResultsLink = await driver.findElement(By.linkText("Room Results"));
+    const roomResultsLink = await driver.findElement(
+      By.linkText("Room Results"),
+    );
     await roomResultsLink.click();
 
     currentUrl = await driver.getCurrentUrl();
-    assert.equal(
-      currentUrl,
-      `${baseUrl}/roomresult`,
-      "URL is not as expected",
-    );
+    assert.equal(currentUrl, `${baseUrl}/roomresult`, "URL is not as expected");
 
     await pause(pauseMilliseconds);
     const allocationLink = await driver.findElement(By.linkText("Allocation"));
     await allocationLink.click();
 
     currentUrl = await driver.getCurrentUrl();
-    assert.equal(
-      currentUrl,
-      `${baseUrl}/allocation`,
-      "URL is not as expected",
-    );
+    assert.equal(currentUrl, `${baseUrl}/allocation`, "URL is not as expected");
 
     // Log Out
     await pause(pauseMilliseconds);
@@ -82,18 +75,16 @@ async function pause(milliseconds) {
     await logOut.click();
 
     await pause(pauseMilliseconds);
-    const logOutContinue = await driver.findElement(By.id("confirmation-dialog-continue-button"));
+    const logOutContinue = await driver.findElement(
+      By.id("confirmation-dialog-continue-button"),
+    );
     await logOutContinue.click();
 
     await driver.wait(until.urlIs(`${baseUrl}/login`), timeoutMilliseconds);
 
     // Test the log out
     currentUrl = await driver.getCurrentUrl();
-    assert.equal(
-      currentUrl,
-      `${baseUrl}/login`,
-      "URL is not as expected",
-    );
+    assert.equal(currentUrl, `${baseUrl}/login`, "URL is not as expected");
   } finally {
     // Uncomment the following line to close the browser after the test
     await driver.quit();

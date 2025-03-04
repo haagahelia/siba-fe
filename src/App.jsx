@@ -1,10 +1,10 @@
-import "./App.css";
-import { useThemeSwitcher } from "./hooks/useThemeSwitcher";
-import { AllocRoundContext } from "./AppContext.js";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import ThemeProvider from "@mui/material/styles/ThemeProvider";
 import { useEffect, useState } from "react";
+import "./App.css";
+import { AllocRoundContext } from "./AppContext.js";
+import { useThemeSwitcher } from "./hooks/useThemeSwitcher";
 import Nav from "./routers/Nav";
 import { ThemeIcon } from "./styles/themeIcons";
 

@@ -56,6 +56,7 @@ export default function RoomResult() {
   }, [showBarChart]);
 
   const renderBarChart = () => {
+    counter = 0;
     const labels = rooms.map((room) => room.name);
     const data = rooms.map((room) => room.allocatedHours);
 
@@ -147,7 +148,7 @@ export default function RoomResult() {
           alignSelf: "flex-end",
           gap: 2,
         }}
-      ></Box>
+      />
       {/* bargraph container */}
       {showBarChart && (
         <div style={{ width: "1000px", height: "600px", margin: "30px auto" }}>
