@@ -65,7 +65,7 @@ export default function EquipmentList({
     };
 
     sortAndPaginateEquipment();
-  }, [equipmentList, orderBy, order, searchQuery, pagination]);
+  }, [equipmentList, orderBy, order, searchQuery]);
 
   const handleRequestSort = useCallback(
     (property) => {

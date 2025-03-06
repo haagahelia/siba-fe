@@ -68,7 +68,7 @@ export default function AddEquipment({ getAllEquipments }) {
       name: capitalizeFirstLetter(submitValues.name),
       description: submitValues.description,
       isMovable: submitValues.isMovable,
-      priority: submitValues.priority,
+      priority: Number(submitValues.priority),
     };
     const success = await dao.postNewEquipment(newEquipment);
     if (!success) {
