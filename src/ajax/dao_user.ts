@@ -75,52 +75,27 @@ export const downloadUserTemplate = async (): Promise<ResponseFiner<User>> => {
   return download<User>("user", baseUrl);
 };
 
-// Forgot password
-export const forgotPassword = async (
-  email: string,
-): Promise<ResponseFiner<ForgotPasswordResponse>> => {
-  const response = await create(`${baseUrl}/user/forget-password`, { email });
-  if (response.status === 200) {
-    const data: ForgotPasswordResponse = await response.json();
-    return {
-      httpStatus: response.status,
-      data: [data],
-    };
-  }
-  return {
-    httpStatus: response.status,
-    data: [{ id: "", token: "" }],
-  };
+//reset user password
+export const resetPassword = async (
+  id: number,
+  password: string,
+): Promise<boolean> => {
+  const response = await create(`${baseUrl}/user/reset-password/${id}`, {
+    password,
+  });
+  return response.ok;
 };
 
-// Reset password
-export const resetPassword = async (
-  id: string,
-  token: string,
-  password: string,
-): Promise<ResponseFiner<ResetPasswordResponse>> => {
-  const response = await create(
-    `${baseUrl}/user/reset-password/${id}/${token}`,
-    { password },
-  );
+//user forget password email handle
+export const forgetPassword = async (
+  email: string,
+): Promise<ResponseFiner<User>> => {
+  const response = await create(`${baseUrl}/user/forget-password`, { email });
+
   if (response.status === 200) {
-    return {
-      httpStatus: response.status,
-      data: [
-        {
-          success: true,
-          message: "Password reset successfully",
-        },
-      ],
-    };
+    const data = await response.json();
+    return { httpStatus: response.status, data: [data] };
+  } else {
+    return { httpStatus: response.status, data: [] };
   }
-  return {
-    httpStatus: response.status,
-    data: [
-      {
-        success: false,
-        message: "Password reset failed",
-      },
-    ],
-  };
 };

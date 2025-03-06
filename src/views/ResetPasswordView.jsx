@@ -15,7 +15,6 @@ import dao from "../ajax/dao";
 import AlertBox from "../components/common/AlertBox";
 
 export default function ResetPasswordView() {
-  const { id, token } = useParams();
   const navigate = useNavigate();
   const [password, setPassword] = useState("");
   const [rePassword, setRePassword] = useState("");
@@ -25,6 +24,8 @@ export default function ResetPasswordView() {
     severity: "error",
     title: "Error",
   });
+  const { id } = useParams();
+  console.log("User ID from URL:", id);
 
   const handleReset = async () => {
     if (password !== rePassword) {
@@ -37,9 +38,8 @@ export default function ResetPasswordView() {
       return;
     }
 
-    const response = await dao.resetPassword(id, token, password);
-
-    if (response.status === 200) {
+    const response = await dao.resetPassword(id, password);
+    if (response) {
       setAlertOptions({
         severity: "success",
         title: "Success",
@@ -48,7 +48,6 @@ export default function ResetPasswordView() {
       setAlertOpen(true);
     } else {
       ajaxRequestErrorHandler(
-        httpStatus,
         getFunctionName(2),
         setAlertOptions,
         setAlertOpen,
