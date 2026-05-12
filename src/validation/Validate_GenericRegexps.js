@@ -69,12 +69,12 @@ export const vF_regNumberCountPlus = {
 };
 
 export const vF_regNumberDecimalOnePlus = {
-  regExp: new RegExp(/^[0-9]*(.[0-9])?$/), // 0.1-99999999.9
-  hint: "0.1-99999999.9",
+  regExp: new RegExp(/^[0-9]+(\.[0-9]{1,2})?$/), // 0-99999999.99
+  hint: "0-99999999.99",
   errorMessageFunction: (fieldName) =>
     genericErrorMessageFunction(
       fieldName,
-      "has to follow format: 0.1-99999999.9",
+      "has to follow format: 0-99999999.99",
     ),
 };
 
